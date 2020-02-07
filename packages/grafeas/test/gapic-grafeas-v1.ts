@@ -89,6 +89,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IGetOccurrenceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -111,6 +112,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IGetOccurrenceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -135,6 +137,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IDeleteOccurrenceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -157,6 +160,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IDeleteOccurrenceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -181,6 +185,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.ICreateOccurrenceRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -203,6 +208,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.ICreateOccurrenceRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -227,6 +233,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IBatchCreateOccurrencesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -249,6 +256,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IBatchCreateOccurrencesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -273,6 +281,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IUpdateOccurrenceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -295,6 +304,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IUpdateOccurrenceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -319,6 +329,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IGetOccurrenceNoteRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -341,6 +352,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IGetOccurrenceNoteRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -365,6 +377,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IGetNoteRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -387,6 +400,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IGetNoteRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -411,6 +425,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IDeleteNoteRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -433,6 +448,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IDeleteNoteRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -457,6 +473,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.ICreateNoteRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -479,6 +496,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.ICreateNoteRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -503,6 +521,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IBatchCreateNotesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -525,6 +544,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IBatchCreateNotesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -549,6 +569,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IUpdateNoteRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -571,6 +592,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IUpdateNoteRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -595,6 +617,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IListOccurrencesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -621,8 +644,9 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IListOccurrencesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listOccurrences = (
         actualRequest: {},
@@ -641,7 +665,7 @@ describe('v1.GrafeasClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listNotes', () => {
@@ -652,6 +676,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IListNotesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -678,8 +703,9 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IListNotesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listNotes = (
         actualRequest: {},
@@ -698,7 +724,7 @@ describe('v1.GrafeasClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listNoteOccurrences', () => {
@@ -709,6 +735,7 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IListNoteOccurrencesRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -735,8 +762,9 @@ describe('v1.GrafeasClient', () => {
       });
       // Mock request
       const request: protosTypes.grafeas.v1.IListNoteOccurrencesRequest = {};
+      request.name = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listNoteOccurrences = (
         actualRequest: {},
@@ -755,7 +783,7 @@ describe('v1.GrafeasClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

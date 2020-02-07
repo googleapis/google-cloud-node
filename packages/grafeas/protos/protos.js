@@ -48,463 +48,6 @@
              */
             var v1 = {};
     
-            /**
-             * NoteKind enum.
-             * @name grafeas.v1.NoteKind
-             * @enum {string}
-             * @property {number} NOTE_KIND_UNSPECIFIED=0 NOTE_KIND_UNSPECIFIED value
-             * @property {number} VULNERABILITY=1 VULNERABILITY value
-             * @property {number} BUILD=2 BUILD value
-             * @property {number} IMAGE=3 IMAGE value
-             * @property {number} PACKAGE=4 PACKAGE value
-             * @property {number} DEPLOYMENT=5 DEPLOYMENT value
-             * @property {number} DISCOVERY=6 DISCOVERY value
-             * @property {number} ATTESTATION=7 ATTESTATION value
-             * @property {number} UPGRADE=8 UPGRADE value
-             */
-            v1.NoteKind = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "NOTE_KIND_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "VULNERABILITY"] = 1;
-                values[valuesById[2] = "BUILD"] = 2;
-                values[valuesById[3] = "IMAGE"] = 3;
-                values[valuesById[4] = "PACKAGE"] = 4;
-                values[valuesById[5] = "DEPLOYMENT"] = 5;
-                values[valuesById[6] = "DISCOVERY"] = 6;
-                values[valuesById[7] = "ATTESTATION"] = 7;
-                values[valuesById[8] = "UPGRADE"] = 8;
-                return values;
-            })();
-    
-            v1.RelatedUrl = (function() {
-    
-                /**
-                 * Properties of a RelatedUrl.
-                 * @memberof grafeas.v1
-                 * @interface IRelatedUrl
-                 * @property {string|null} [url] RelatedUrl url
-                 * @property {string|null} [label] RelatedUrl label
-                 */
-    
-                /**
-                 * Constructs a new RelatedUrl.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a RelatedUrl.
-                 * @implements IRelatedUrl
-                 * @constructor
-                 * @param {grafeas.v1.IRelatedUrl=} [properties] Properties to set
-                 */
-                function RelatedUrl(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * RelatedUrl url.
-                 * @member {string} url
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @instance
-                 */
-                RelatedUrl.prototype.url = "";
-    
-                /**
-                 * RelatedUrl label.
-                 * @member {string} label
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @instance
-                 */
-                RelatedUrl.prototype.label = "";
-    
-                /**
-                 * Creates a new RelatedUrl instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @static
-                 * @param {grafeas.v1.IRelatedUrl=} [properties] Properties to set
-                 * @returns {grafeas.v1.RelatedUrl} RelatedUrl instance
-                 */
-                RelatedUrl.create = function create(properties) {
-                    return new RelatedUrl(properties);
-                };
-    
-                /**
-                 * Encodes the specified RelatedUrl message. Does not implicitly {@link grafeas.v1.RelatedUrl.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @static
-                 * @param {grafeas.v1.IRelatedUrl} message RelatedUrl message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                RelatedUrl.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.url != null && message.hasOwnProperty("url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
-                    if (message.label != null && message.hasOwnProperty("label"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.label);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified RelatedUrl message, length delimited. Does not implicitly {@link grafeas.v1.RelatedUrl.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @static
-                 * @param {grafeas.v1.IRelatedUrl} message RelatedUrl message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                RelatedUrl.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a RelatedUrl message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.RelatedUrl} RelatedUrl
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                RelatedUrl.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.RelatedUrl();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.url = reader.string();
-                            break;
-                        case 2:
-                            message.label = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a RelatedUrl message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.RelatedUrl} RelatedUrl
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                RelatedUrl.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a RelatedUrl message.
-                 * @function verify
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                RelatedUrl.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.url != null && message.hasOwnProperty("url"))
-                        if (!$util.isString(message.url))
-                            return "url: string expected";
-                    if (message.label != null && message.hasOwnProperty("label"))
-                        if (!$util.isString(message.label))
-                            return "label: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a RelatedUrl message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.RelatedUrl} RelatedUrl
-                 */
-                RelatedUrl.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.RelatedUrl)
-                        return object;
-                    var message = new $root.grafeas.v1.RelatedUrl();
-                    if (object.url != null)
-                        message.url = String(object.url);
-                    if (object.label != null)
-                        message.label = String(object.label);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a RelatedUrl message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @static
-                 * @param {grafeas.v1.RelatedUrl} message RelatedUrl
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                RelatedUrl.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.url = "";
-                        object.label = "";
-                    }
-                    if (message.url != null && message.hasOwnProperty("url"))
-                        object.url = message.url;
-                    if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = message.label;
-                    return object;
-                };
-    
-                /**
-                 * Converts this RelatedUrl to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.RelatedUrl
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                RelatedUrl.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return RelatedUrl;
-            })();
-    
-            v1.Signature = (function() {
-    
-                /**
-                 * Properties of a Signature.
-                 * @memberof grafeas.v1
-                 * @interface ISignature
-                 * @property {Uint8Array|null} [signature] Signature signature
-                 * @property {string|null} [publicKeyId] Signature publicKeyId
-                 */
-    
-                /**
-                 * Constructs a new Signature.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a Signature.
-                 * @implements ISignature
-                 * @constructor
-                 * @param {grafeas.v1.ISignature=} [properties] Properties to set
-                 */
-                function Signature(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Signature signature.
-                 * @member {Uint8Array} signature
-                 * @memberof grafeas.v1.Signature
-                 * @instance
-                 */
-                Signature.prototype.signature = $util.newBuffer([]);
-    
-                /**
-                 * Signature publicKeyId.
-                 * @member {string} publicKeyId
-                 * @memberof grafeas.v1.Signature
-                 * @instance
-                 */
-                Signature.prototype.publicKeyId = "";
-    
-                /**
-                 * Creates a new Signature instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.Signature
-                 * @static
-                 * @param {grafeas.v1.ISignature=} [properties] Properties to set
-                 * @returns {grafeas.v1.Signature} Signature instance
-                 */
-                Signature.create = function create(properties) {
-                    return new Signature(properties);
-                };
-    
-                /**
-                 * Encodes the specified Signature message. Does not implicitly {@link grafeas.v1.Signature.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.Signature
-                 * @static
-                 * @param {grafeas.v1.ISignature} message Signature message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Signature.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.signature != null && message.hasOwnProperty("signature"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.signature);
-                    if (message.publicKeyId != null && message.hasOwnProperty("publicKeyId"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.publicKeyId);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Signature message, length delimited. Does not implicitly {@link grafeas.v1.Signature.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.Signature
-                 * @static
-                 * @param {grafeas.v1.ISignature} message Signature message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Signature.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Signature message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.Signature
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.Signature} Signature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Signature.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Signature();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.signature = reader.bytes();
-                            break;
-                        case 2:
-                            message.publicKeyId = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Signature message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.Signature
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.Signature} Signature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Signature.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Signature message.
-                 * @function verify
-                 * @memberof grafeas.v1.Signature
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Signature.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.signature != null && message.hasOwnProperty("signature"))
-                        if (!(message.signature && typeof message.signature.length === "number" || $util.isString(message.signature)))
-                            return "signature: buffer expected";
-                    if (message.publicKeyId != null && message.hasOwnProperty("publicKeyId"))
-                        if (!$util.isString(message.publicKeyId))
-                            return "publicKeyId: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Signature message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.Signature
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.Signature} Signature
-                 */
-                Signature.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.Signature)
-                        return object;
-                    var message = new $root.grafeas.v1.Signature();
-                    if (object.signature != null)
-                        if (typeof object.signature === "string")
-                            $util.base64.decode(object.signature, message.signature = $util.newBuffer($util.base64.length(object.signature)), 0);
-                        else if (object.signature.length)
-                            message.signature = object.signature;
-                    if (object.publicKeyId != null)
-                        message.publicKeyId = String(object.publicKeyId);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Signature message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.Signature
-                 * @static
-                 * @param {grafeas.v1.Signature} message Signature
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Signature.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if (options.bytes === String)
-                            object.signature = "";
-                        else {
-                            object.signature = [];
-                            if (options.bytes !== Array)
-                                object.signature = $util.newBuffer(object.signature);
-                        }
-                        object.publicKeyId = "";
-                    }
-                    if (message.signature != null && message.hasOwnProperty("signature"))
-                        object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
-                    if (message.publicKeyId != null && message.hasOwnProperty("publicKeyId"))
-                        object.publicKeyId = message.publicKeyId;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Signature to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.Signature
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Signature.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Signature;
-            })();
-    
             v1.AttestationNote = (function() {
     
                 /**
@@ -1122,6 +665,865 @@
                 };
     
                 return AttestationOccurrence;
+            })();
+    
+            /**
+             * NoteKind enum.
+             * @name grafeas.v1.NoteKind
+             * @enum {string}
+             * @property {number} NOTE_KIND_UNSPECIFIED=0 NOTE_KIND_UNSPECIFIED value
+             * @property {number} VULNERABILITY=1 VULNERABILITY value
+             * @property {number} BUILD=2 BUILD value
+             * @property {number} IMAGE=3 IMAGE value
+             * @property {number} PACKAGE=4 PACKAGE value
+             * @property {number} DEPLOYMENT=5 DEPLOYMENT value
+             * @property {number} DISCOVERY=6 DISCOVERY value
+             * @property {number} ATTESTATION=7 ATTESTATION value
+             * @property {number} UPGRADE=8 UPGRADE value
+             */
+            v1.NoteKind = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "NOTE_KIND_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "VULNERABILITY"] = 1;
+                values[valuesById[2] = "BUILD"] = 2;
+                values[valuesById[3] = "IMAGE"] = 3;
+                values[valuesById[4] = "PACKAGE"] = 4;
+                values[valuesById[5] = "DEPLOYMENT"] = 5;
+                values[valuesById[6] = "DISCOVERY"] = 6;
+                values[valuesById[7] = "ATTESTATION"] = 7;
+                values[valuesById[8] = "UPGRADE"] = 8;
+                return values;
+            })();
+    
+            v1.RelatedUrl = (function() {
+    
+                /**
+                 * Properties of a RelatedUrl.
+                 * @memberof grafeas.v1
+                 * @interface IRelatedUrl
+                 * @property {string|null} [url] RelatedUrl url
+                 * @property {string|null} [label] RelatedUrl label
+                 */
+    
+                /**
+                 * Constructs a new RelatedUrl.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a RelatedUrl.
+                 * @implements IRelatedUrl
+                 * @constructor
+                 * @param {grafeas.v1.IRelatedUrl=} [properties] Properties to set
+                 */
+                function RelatedUrl(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * RelatedUrl url.
+                 * @member {string} url
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @instance
+                 */
+                RelatedUrl.prototype.url = "";
+    
+                /**
+                 * RelatedUrl label.
+                 * @member {string} label
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @instance
+                 */
+                RelatedUrl.prototype.label = "";
+    
+                /**
+                 * Creates a new RelatedUrl instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @static
+                 * @param {grafeas.v1.IRelatedUrl=} [properties] Properties to set
+                 * @returns {grafeas.v1.RelatedUrl} RelatedUrl instance
+                 */
+                RelatedUrl.create = function create(properties) {
+                    return new RelatedUrl(properties);
+                };
+    
+                /**
+                 * Encodes the specified RelatedUrl message. Does not implicitly {@link grafeas.v1.RelatedUrl.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @static
+                 * @param {grafeas.v1.IRelatedUrl} message RelatedUrl message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                RelatedUrl.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.url != null && message.hasOwnProperty("url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                    if (message.label != null && message.hasOwnProperty("label"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.label);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified RelatedUrl message, length delimited. Does not implicitly {@link grafeas.v1.RelatedUrl.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @static
+                 * @param {grafeas.v1.IRelatedUrl} message RelatedUrl message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                RelatedUrl.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a RelatedUrl message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.RelatedUrl} RelatedUrl
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                RelatedUrl.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.RelatedUrl();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.url = reader.string();
+                            break;
+                        case 2:
+                            message.label = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a RelatedUrl message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.RelatedUrl} RelatedUrl
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                RelatedUrl.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a RelatedUrl message.
+                 * @function verify
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                RelatedUrl.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.url != null && message.hasOwnProperty("url"))
+                        if (!$util.isString(message.url))
+                            return "url: string expected";
+                    if (message.label != null && message.hasOwnProperty("label"))
+                        if (!$util.isString(message.label))
+                            return "label: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a RelatedUrl message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.RelatedUrl} RelatedUrl
+                 */
+                RelatedUrl.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.RelatedUrl)
+                        return object;
+                    var message = new $root.grafeas.v1.RelatedUrl();
+                    if (object.url != null)
+                        message.url = String(object.url);
+                    if (object.label != null)
+                        message.label = String(object.label);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a RelatedUrl message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @static
+                 * @param {grafeas.v1.RelatedUrl} message RelatedUrl
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                RelatedUrl.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.url = "";
+                        object.label = "";
+                    }
+                    if (message.url != null && message.hasOwnProperty("url"))
+                        object.url = message.url;
+                    if (message.label != null && message.hasOwnProperty("label"))
+                        object.label = message.label;
+                    return object;
+                };
+    
+                /**
+                 * Converts this RelatedUrl to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.RelatedUrl
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                RelatedUrl.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return RelatedUrl;
+            })();
+    
+            v1.Signature = (function() {
+    
+                /**
+                 * Properties of a Signature.
+                 * @memberof grafeas.v1
+                 * @interface ISignature
+                 * @property {Uint8Array|null} [signature] Signature signature
+                 * @property {string|null} [publicKeyId] Signature publicKeyId
+                 */
+    
+                /**
+                 * Constructs a new Signature.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Signature.
+                 * @implements ISignature
+                 * @constructor
+                 * @param {grafeas.v1.ISignature=} [properties] Properties to set
+                 */
+                function Signature(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Signature signature.
+                 * @member {Uint8Array} signature
+                 * @memberof grafeas.v1.Signature
+                 * @instance
+                 */
+                Signature.prototype.signature = $util.newBuffer([]);
+    
+                /**
+                 * Signature publicKeyId.
+                 * @member {string} publicKeyId
+                 * @memberof grafeas.v1.Signature
+                 * @instance
+                 */
+                Signature.prototype.publicKeyId = "";
+    
+                /**
+                 * Creates a new Signature instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Signature
+                 * @static
+                 * @param {grafeas.v1.ISignature=} [properties] Properties to set
+                 * @returns {grafeas.v1.Signature} Signature instance
+                 */
+                Signature.create = function create(properties) {
+                    return new Signature(properties);
+                };
+    
+                /**
+                 * Encodes the specified Signature message. Does not implicitly {@link grafeas.v1.Signature.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Signature
+                 * @static
+                 * @param {grafeas.v1.ISignature} message Signature message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Signature.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.signature != null && message.hasOwnProperty("signature"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.signature);
+                    if (message.publicKeyId != null && message.hasOwnProperty("publicKeyId"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.publicKeyId);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Signature message, length delimited. Does not implicitly {@link grafeas.v1.Signature.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Signature
+                 * @static
+                 * @param {grafeas.v1.ISignature} message Signature message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Signature.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Signature message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Signature
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Signature} Signature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Signature.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Signature();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.signature = reader.bytes();
+                            break;
+                        case 2:
+                            message.publicKeyId = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Signature message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Signature
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Signature} Signature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Signature.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Signature message.
+                 * @function verify
+                 * @memberof grafeas.v1.Signature
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Signature.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.signature != null && message.hasOwnProperty("signature"))
+                        if (!(message.signature && typeof message.signature.length === "number" || $util.isString(message.signature)))
+                            return "signature: buffer expected";
+                    if (message.publicKeyId != null && message.hasOwnProperty("publicKeyId"))
+                        if (!$util.isString(message.publicKeyId))
+                            return "publicKeyId: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Signature message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Signature
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Signature} Signature
+                 */
+                Signature.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Signature)
+                        return object;
+                    var message = new $root.grafeas.v1.Signature();
+                    if (object.signature != null)
+                        if (typeof object.signature === "string")
+                            $util.base64.decode(object.signature, message.signature = $util.newBuffer($util.base64.length(object.signature)), 0);
+                        else if (object.signature.length)
+                            message.signature = object.signature;
+                    if (object.publicKeyId != null)
+                        message.publicKeyId = String(object.publicKeyId);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Signature message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Signature
+                 * @static
+                 * @param {grafeas.v1.Signature} message Signature
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Signature.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if (options.bytes === String)
+                            object.signature = "";
+                        else {
+                            object.signature = [];
+                            if (options.bytes !== Array)
+                                object.signature = $util.newBuffer(object.signature);
+                        }
+                        object.publicKeyId = "";
+                    }
+                    if (message.signature != null && message.hasOwnProperty("signature"))
+                        object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
+                    if (message.publicKeyId != null && message.hasOwnProperty("publicKeyId"))
+                        object.publicKeyId = message.publicKeyId;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Signature to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Signature
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Signature.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Signature;
+            })();
+    
+            v1.BuildNote = (function() {
+    
+                /**
+                 * Properties of a BuildNote.
+                 * @memberof grafeas.v1
+                 * @interface IBuildNote
+                 * @property {string|null} [builderVersion] BuildNote builderVersion
+                 */
+    
+                /**
+                 * Constructs a new BuildNote.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a BuildNote.
+                 * @implements IBuildNote
+                 * @constructor
+                 * @param {grafeas.v1.IBuildNote=} [properties] Properties to set
+                 */
+                function BuildNote(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BuildNote builderVersion.
+                 * @member {string} builderVersion
+                 * @memberof grafeas.v1.BuildNote
+                 * @instance
+                 */
+                BuildNote.prototype.builderVersion = "";
+    
+                /**
+                 * Creates a new BuildNote instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.BuildNote
+                 * @static
+                 * @param {grafeas.v1.IBuildNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.BuildNote} BuildNote instance
+                 */
+                BuildNote.create = function create(properties) {
+                    return new BuildNote(properties);
+                };
+    
+                /**
+                 * Encodes the specified BuildNote message. Does not implicitly {@link grafeas.v1.BuildNote.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.BuildNote
+                 * @static
+                 * @param {grafeas.v1.IBuildNote} message BuildNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BuildNote.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.builderVersion != null && message.hasOwnProperty("builderVersion"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.builderVersion);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BuildNote message, length delimited. Does not implicitly {@link grafeas.v1.BuildNote.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.BuildNote
+                 * @static
+                 * @param {grafeas.v1.IBuildNote} message BuildNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BuildNote.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BuildNote message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.BuildNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.BuildNote} BuildNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BuildNote.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BuildNote();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.builderVersion = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BuildNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.BuildNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.BuildNote} BuildNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BuildNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BuildNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.BuildNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BuildNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.builderVersion != null && message.hasOwnProperty("builderVersion"))
+                        if (!$util.isString(message.builderVersion))
+                            return "builderVersion: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BuildNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.BuildNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.BuildNote} BuildNote
+                 */
+                BuildNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.BuildNote)
+                        return object;
+                    var message = new $root.grafeas.v1.BuildNote();
+                    if (object.builderVersion != null)
+                        message.builderVersion = String(object.builderVersion);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BuildNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.BuildNote
+                 * @static
+                 * @param {grafeas.v1.BuildNote} message BuildNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BuildNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.builderVersion = "";
+                    if (message.builderVersion != null && message.hasOwnProperty("builderVersion"))
+                        object.builderVersion = message.builderVersion;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BuildNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.BuildNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BuildNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return BuildNote;
+            })();
+    
+            v1.BuildOccurrence = (function() {
+    
+                /**
+                 * Properties of a BuildOccurrence.
+                 * @memberof grafeas.v1
+                 * @interface IBuildOccurrence
+                 * @property {grafeas.v1.IBuildProvenance|null} [provenance] BuildOccurrence provenance
+                 * @property {string|null} [provenanceBytes] BuildOccurrence provenanceBytes
+                 */
+    
+                /**
+                 * Constructs a new BuildOccurrence.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a BuildOccurrence.
+                 * @implements IBuildOccurrence
+                 * @constructor
+                 * @param {grafeas.v1.IBuildOccurrence=} [properties] Properties to set
+                 */
+                function BuildOccurrence(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BuildOccurrence provenance.
+                 * @member {grafeas.v1.IBuildProvenance|null|undefined} provenance
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @instance
+                 */
+                BuildOccurrence.prototype.provenance = null;
+    
+                /**
+                 * BuildOccurrence provenanceBytes.
+                 * @member {string} provenanceBytes
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @instance
+                 */
+                BuildOccurrence.prototype.provenanceBytes = "";
+    
+                /**
+                 * Creates a new BuildOccurrence instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @static
+                 * @param {grafeas.v1.IBuildOccurrence=} [properties] Properties to set
+                 * @returns {grafeas.v1.BuildOccurrence} BuildOccurrence instance
+                 */
+                BuildOccurrence.create = function create(properties) {
+                    return new BuildOccurrence(properties);
+                };
+    
+                /**
+                 * Encodes the specified BuildOccurrence message. Does not implicitly {@link grafeas.v1.BuildOccurrence.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @static
+                 * @param {grafeas.v1.IBuildOccurrence} message BuildOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BuildOccurrence.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.provenance != null && message.hasOwnProperty("provenance"))
+                        $root.grafeas.v1.BuildProvenance.encode(message.provenance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.provenanceBytes != null && message.hasOwnProperty("provenanceBytes"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.provenanceBytes);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BuildOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.BuildOccurrence.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @static
+                 * @param {grafeas.v1.IBuildOccurrence} message BuildOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BuildOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BuildOccurrence message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.BuildOccurrence} BuildOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BuildOccurrence.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BuildOccurrence();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.provenance = $root.grafeas.v1.BuildProvenance.decode(reader, reader.uint32());
+                            break;
+                        case 2:
+                            message.provenanceBytes = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BuildOccurrence message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.BuildOccurrence} BuildOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BuildOccurrence.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BuildOccurrence message.
+                 * @function verify
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BuildOccurrence.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.provenance != null && message.hasOwnProperty("provenance")) {
+                        var error = $root.grafeas.v1.BuildProvenance.verify(message.provenance);
+                        if (error)
+                            return "provenance." + error;
+                    }
+                    if (message.provenanceBytes != null && message.hasOwnProperty("provenanceBytes"))
+                        if (!$util.isString(message.provenanceBytes))
+                            return "provenanceBytes: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BuildOccurrence message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.BuildOccurrence} BuildOccurrence
+                 */
+                BuildOccurrence.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.BuildOccurrence)
+                        return object;
+                    var message = new $root.grafeas.v1.BuildOccurrence();
+                    if (object.provenance != null) {
+                        if (typeof object.provenance !== "object")
+                            throw TypeError(".grafeas.v1.BuildOccurrence.provenance: object expected");
+                        message.provenance = $root.grafeas.v1.BuildProvenance.fromObject(object.provenance);
+                    }
+                    if (object.provenanceBytes != null)
+                        message.provenanceBytes = String(object.provenanceBytes);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BuildOccurrence message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @static
+                 * @param {grafeas.v1.BuildOccurrence} message BuildOccurrence
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BuildOccurrence.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.provenance = null;
+                        object.provenanceBytes = "";
+                    }
+                    if (message.provenance != null && message.hasOwnProperty("provenance"))
+                        object.provenance = $root.grafeas.v1.BuildProvenance.toObject(message.provenance, options);
+                    if (message.provenanceBytes != null && message.hasOwnProperty("provenanceBytes"))
+                        object.provenanceBytes = message.provenanceBytes;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BuildOccurrence to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BuildOccurrence.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return BuildOccurrence;
             })();
     
             v1.BuildProvenance = (function() {
@@ -4781,597 +5183,6 @@
                 return ProjectRepoId;
             })();
     
-            v1.DeploymentNote = (function() {
-    
-                /**
-                 * Properties of a DeploymentNote.
-                 * @memberof grafeas.v1
-                 * @interface IDeploymentNote
-                 * @property {Array.<string>|null} [resourceUri] DeploymentNote resourceUri
-                 */
-    
-                /**
-                 * Constructs a new DeploymentNote.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a DeploymentNote.
-                 * @implements IDeploymentNote
-                 * @constructor
-                 * @param {grafeas.v1.IDeploymentNote=} [properties] Properties to set
-                 */
-                function DeploymentNote(properties) {
-                    this.resourceUri = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * DeploymentNote resourceUri.
-                 * @member {Array.<string>} resourceUri
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @instance
-                 */
-                DeploymentNote.prototype.resourceUri = $util.emptyArray;
-    
-                /**
-                 * Creates a new DeploymentNote instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @static
-                 * @param {grafeas.v1.IDeploymentNote=} [properties] Properties to set
-                 * @returns {grafeas.v1.DeploymentNote} DeploymentNote instance
-                 */
-                DeploymentNote.create = function create(properties) {
-                    return new DeploymentNote(properties);
-                };
-    
-                /**
-                 * Encodes the specified DeploymentNote message. Does not implicitly {@link grafeas.v1.DeploymentNote.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @static
-                 * @param {grafeas.v1.IDeploymentNote} message DeploymentNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                DeploymentNote.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.resourceUri != null && message.resourceUri.length)
-                        for (var i = 0; i < message.resourceUri.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceUri[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified DeploymentNote message, length delimited. Does not implicitly {@link grafeas.v1.DeploymentNote.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @static
-                 * @param {grafeas.v1.IDeploymentNote} message DeploymentNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                DeploymentNote.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a DeploymentNote message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.DeploymentNote} DeploymentNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                DeploymentNote.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.DeploymentNote();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.resourceUri && message.resourceUri.length))
-                                message.resourceUri = [];
-                            message.resourceUri.push(reader.string());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a DeploymentNote message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.DeploymentNote} DeploymentNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                DeploymentNote.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a DeploymentNote message.
-                 * @function verify
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                DeploymentNote.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.resourceUri != null && message.hasOwnProperty("resourceUri")) {
-                        if (!Array.isArray(message.resourceUri))
-                            return "resourceUri: array expected";
-                        for (var i = 0; i < message.resourceUri.length; ++i)
-                            if (!$util.isString(message.resourceUri[i]))
-                                return "resourceUri: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a DeploymentNote message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.DeploymentNote} DeploymentNote
-                 */
-                DeploymentNote.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.DeploymentNote)
-                        return object;
-                    var message = new $root.grafeas.v1.DeploymentNote();
-                    if (object.resourceUri) {
-                        if (!Array.isArray(object.resourceUri))
-                            throw TypeError(".grafeas.v1.DeploymentNote.resourceUri: array expected");
-                        message.resourceUri = [];
-                        for (var i = 0; i < object.resourceUri.length; ++i)
-                            message.resourceUri[i] = String(object.resourceUri[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a DeploymentNote message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @static
-                 * @param {grafeas.v1.DeploymentNote} message DeploymentNote
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                DeploymentNote.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.resourceUri = [];
-                    if (message.resourceUri && message.resourceUri.length) {
-                        object.resourceUri = [];
-                        for (var j = 0; j < message.resourceUri.length; ++j)
-                            object.resourceUri[j] = message.resourceUri[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this DeploymentNote to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.DeploymentNote
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                DeploymentNote.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return DeploymentNote;
-            })();
-    
-            v1.DeploymentOccurrence = (function() {
-    
-                /**
-                 * Properties of a DeploymentOccurrence.
-                 * @memberof grafeas.v1
-                 * @interface IDeploymentOccurrence
-                 * @property {string|null} [userEmail] DeploymentOccurrence userEmail
-                 * @property {google.protobuf.ITimestamp|null} [deployTime] DeploymentOccurrence deployTime
-                 * @property {google.protobuf.ITimestamp|null} [undeployTime] DeploymentOccurrence undeployTime
-                 * @property {string|null} [config] DeploymentOccurrence config
-                 * @property {string|null} [address] DeploymentOccurrence address
-                 * @property {Array.<string>|null} [resourceUri] DeploymentOccurrence resourceUri
-                 * @property {grafeas.v1.DeploymentOccurrence.Platform|null} [platform] DeploymentOccurrence platform
-                 */
-    
-                /**
-                 * Constructs a new DeploymentOccurrence.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a DeploymentOccurrence.
-                 * @implements IDeploymentOccurrence
-                 * @constructor
-                 * @param {grafeas.v1.IDeploymentOccurrence=} [properties] Properties to set
-                 */
-                function DeploymentOccurrence(properties) {
-                    this.resourceUri = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * DeploymentOccurrence userEmail.
-                 * @member {string} userEmail
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @instance
-                 */
-                DeploymentOccurrence.prototype.userEmail = "";
-    
-                /**
-                 * DeploymentOccurrence deployTime.
-                 * @member {google.protobuf.ITimestamp|null|undefined} deployTime
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @instance
-                 */
-                DeploymentOccurrence.prototype.deployTime = null;
-    
-                /**
-                 * DeploymentOccurrence undeployTime.
-                 * @member {google.protobuf.ITimestamp|null|undefined} undeployTime
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @instance
-                 */
-                DeploymentOccurrence.prototype.undeployTime = null;
-    
-                /**
-                 * DeploymentOccurrence config.
-                 * @member {string} config
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @instance
-                 */
-                DeploymentOccurrence.prototype.config = "";
-    
-                /**
-                 * DeploymentOccurrence address.
-                 * @member {string} address
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @instance
-                 */
-                DeploymentOccurrence.prototype.address = "";
-    
-                /**
-                 * DeploymentOccurrence resourceUri.
-                 * @member {Array.<string>} resourceUri
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @instance
-                 */
-                DeploymentOccurrence.prototype.resourceUri = $util.emptyArray;
-    
-                /**
-                 * DeploymentOccurrence platform.
-                 * @member {grafeas.v1.DeploymentOccurrence.Platform} platform
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @instance
-                 */
-                DeploymentOccurrence.prototype.platform = 0;
-    
-                /**
-                 * Creates a new DeploymentOccurrence instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @static
-                 * @param {grafeas.v1.IDeploymentOccurrence=} [properties] Properties to set
-                 * @returns {grafeas.v1.DeploymentOccurrence} DeploymentOccurrence instance
-                 */
-                DeploymentOccurrence.create = function create(properties) {
-                    return new DeploymentOccurrence(properties);
-                };
-    
-                /**
-                 * Encodes the specified DeploymentOccurrence message. Does not implicitly {@link grafeas.v1.DeploymentOccurrence.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @static
-                 * @param {grafeas.v1.IDeploymentOccurrence} message DeploymentOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                DeploymentOccurrence.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.userEmail != null && message.hasOwnProperty("userEmail"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.userEmail);
-                    if (message.deployTime != null && message.hasOwnProperty("deployTime"))
-                        $root.google.protobuf.Timestamp.encode(message.deployTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.undeployTime != null && message.hasOwnProperty("undeployTime"))
-                        $root.google.protobuf.Timestamp.encode(message.undeployTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.config != null && message.hasOwnProperty("config"))
-                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.config);
-                    if (message.address != null && message.hasOwnProperty("address"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.address);
-                    if (message.resourceUri != null && message.resourceUri.length)
-                        for (var i = 0; i < message.resourceUri.length; ++i)
-                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.resourceUri[i]);
-                    if (message.platform != null && message.hasOwnProperty("platform"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.platform);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified DeploymentOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.DeploymentOccurrence.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @static
-                 * @param {grafeas.v1.IDeploymentOccurrence} message DeploymentOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                DeploymentOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a DeploymentOccurrence message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.DeploymentOccurrence} DeploymentOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                DeploymentOccurrence.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.DeploymentOccurrence();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.userEmail = reader.string();
-                            break;
-                        case 2:
-                            message.deployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                            break;
-                        case 3:
-                            message.undeployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                            break;
-                        case 4:
-                            message.config = reader.string();
-                            break;
-                        case 5:
-                            message.address = reader.string();
-                            break;
-                        case 6:
-                            if (!(message.resourceUri && message.resourceUri.length))
-                                message.resourceUri = [];
-                            message.resourceUri.push(reader.string());
-                            break;
-                        case 7:
-                            message.platform = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a DeploymentOccurrence message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.DeploymentOccurrence} DeploymentOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                DeploymentOccurrence.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a DeploymentOccurrence message.
-                 * @function verify
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                DeploymentOccurrence.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.userEmail != null && message.hasOwnProperty("userEmail"))
-                        if (!$util.isString(message.userEmail))
-                            return "userEmail: string expected";
-                    if (message.deployTime != null && message.hasOwnProperty("deployTime")) {
-                        var error = $root.google.protobuf.Timestamp.verify(message.deployTime);
-                        if (error)
-                            return "deployTime." + error;
-                    }
-                    if (message.undeployTime != null && message.hasOwnProperty("undeployTime")) {
-                        var error = $root.google.protobuf.Timestamp.verify(message.undeployTime);
-                        if (error)
-                            return "undeployTime." + error;
-                    }
-                    if (message.config != null && message.hasOwnProperty("config"))
-                        if (!$util.isString(message.config))
-                            return "config: string expected";
-                    if (message.address != null && message.hasOwnProperty("address"))
-                        if (!$util.isString(message.address))
-                            return "address: string expected";
-                    if (message.resourceUri != null && message.hasOwnProperty("resourceUri")) {
-                        if (!Array.isArray(message.resourceUri))
-                            return "resourceUri: array expected";
-                        for (var i = 0; i < message.resourceUri.length; ++i)
-                            if (!$util.isString(message.resourceUri[i]))
-                                return "resourceUri: string[] expected";
-                    }
-                    if (message.platform != null && message.hasOwnProperty("platform"))
-                        switch (message.platform) {
-                        default:
-                            return "platform: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            break;
-                        }
-                    return null;
-                };
-    
-                /**
-                 * Creates a DeploymentOccurrence message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.DeploymentOccurrence} DeploymentOccurrence
-                 */
-                DeploymentOccurrence.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.DeploymentOccurrence)
-                        return object;
-                    var message = new $root.grafeas.v1.DeploymentOccurrence();
-                    if (object.userEmail != null)
-                        message.userEmail = String(object.userEmail);
-                    if (object.deployTime != null) {
-                        if (typeof object.deployTime !== "object")
-                            throw TypeError(".grafeas.v1.DeploymentOccurrence.deployTime: object expected");
-                        message.deployTime = $root.google.protobuf.Timestamp.fromObject(object.deployTime);
-                    }
-                    if (object.undeployTime != null) {
-                        if (typeof object.undeployTime !== "object")
-                            throw TypeError(".grafeas.v1.DeploymentOccurrence.undeployTime: object expected");
-                        message.undeployTime = $root.google.protobuf.Timestamp.fromObject(object.undeployTime);
-                    }
-                    if (object.config != null)
-                        message.config = String(object.config);
-                    if (object.address != null)
-                        message.address = String(object.address);
-                    if (object.resourceUri) {
-                        if (!Array.isArray(object.resourceUri))
-                            throw TypeError(".grafeas.v1.DeploymentOccurrence.resourceUri: array expected");
-                        message.resourceUri = [];
-                        for (var i = 0; i < object.resourceUri.length; ++i)
-                            message.resourceUri[i] = String(object.resourceUri[i]);
-                    }
-                    switch (object.platform) {
-                    case "PLATFORM_UNSPECIFIED":
-                    case 0:
-                        message.platform = 0;
-                        break;
-                    case "GKE":
-                    case 1:
-                        message.platform = 1;
-                        break;
-                    case "FLEX":
-                    case 2:
-                        message.platform = 2;
-                        break;
-                    case "CUSTOM":
-                    case 3:
-                        message.platform = 3;
-                        break;
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a DeploymentOccurrence message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @static
-                 * @param {grafeas.v1.DeploymentOccurrence} message DeploymentOccurrence
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                DeploymentOccurrence.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.resourceUri = [];
-                    if (options.defaults) {
-                        object.userEmail = "";
-                        object.deployTime = null;
-                        object.undeployTime = null;
-                        object.config = "";
-                        object.address = "";
-                        object.platform = options.enums === String ? "PLATFORM_UNSPECIFIED" : 0;
-                    }
-                    if (message.userEmail != null && message.hasOwnProperty("userEmail"))
-                        object.userEmail = message.userEmail;
-                    if (message.deployTime != null && message.hasOwnProperty("deployTime"))
-                        object.deployTime = $root.google.protobuf.Timestamp.toObject(message.deployTime, options);
-                    if (message.undeployTime != null && message.hasOwnProperty("undeployTime"))
-                        object.undeployTime = $root.google.protobuf.Timestamp.toObject(message.undeployTime, options);
-                    if (message.config != null && message.hasOwnProperty("config"))
-                        object.config = message.config;
-                    if (message.address != null && message.hasOwnProperty("address"))
-                        object.address = message.address;
-                    if (message.resourceUri && message.resourceUri.length) {
-                        object.resourceUri = [];
-                        for (var j = 0; j < message.resourceUri.length; ++j)
-                            object.resourceUri[j] = message.resourceUri[j];
-                    }
-                    if (message.platform != null && message.hasOwnProperty("platform"))
-                        object.platform = options.enums === String ? $root.grafeas.v1.DeploymentOccurrence.Platform[message.platform] : message.platform;
-                    return object;
-                };
-    
-                /**
-                 * Converts this DeploymentOccurrence to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.DeploymentOccurrence
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                DeploymentOccurrence.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Platform enum.
-                 * @name grafeas.v1.DeploymentOccurrence.Platform
-                 * @enum {string}
-                 * @property {number} PLATFORM_UNSPECIFIED=0 PLATFORM_UNSPECIFIED value
-                 * @property {number} GKE=1 GKE value
-                 * @property {number} FLEX=2 FLEX value
-                 * @property {number} CUSTOM=3 CUSTOM value
-                 */
-                DeploymentOccurrence.Platform = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "PLATFORM_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "GKE"] = 1;
-                    values[valuesById[2] = "FLEX"] = 2;
-                    values[valuesById[3] = "CUSTOM"] = 3;
-                    return values;
-                })();
-    
-                return DeploymentOccurrence;
-            })();
-    
             v1.CVSSv3 = (function() {
     
                 /**
@@ -6058,45 +5869,25 @@
                 return CVSSv3;
             })();
     
-            /**
-             * Architecture enum.
-             * @name grafeas.v1.Architecture
-             * @enum {string}
-             * @property {number} ARCHITECTURE_UNSPECIFIED=0 ARCHITECTURE_UNSPECIFIED value
-             * @property {number} X86=1 X86 value
-             * @property {number} X64=2 X64 value
-             */
-            v1.Architecture = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "ARCHITECTURE_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "X86"] = 1;
-                values[valuesById[2] = "X64"] = 2;
-                return values;
-            })();
-    
-            v1.Distribution = (function() {
+            v1.DeploymentNote = (function() {
     
                 /**
-                 * Properties of a Distribution.
+                 * Properties of a DeploymentNote.
                  * @memberof grafeas.v1
-                 * @interface IDistribution
-                 * @property {string|null} [cpeUri] Distribution cpeUri
-                 * @property {grafeas.v1.Architecture|null} [architecture] Distribution architecture
-                 * @property {grafeas.v1.IVersion|null} [latestVersion] Distribution latestVersion
-                 * @property {string|null} [maintainer] Distribution maintainer
-                 * @property {string|null} [url] Distribution url
-                 * @property {string|null} [description] Distribution description
+                 * @interface IDeploymentNote
+                 * @property {Array.<string>|null} [resourceUri] DeploymentNote resourceUri
                  */
     
                 /**
-                 * Constructs a new Distribution.
+                 * Constructs a new DeploymentNote.
                  * @memberof grafeas.v1
-                 * @classdesc Represents a Distribution.
-                 * @implements IDistribution
+                 * @classdesc Represents a DeploymentNote.
+                 * @implements IDeploymentNote
                  * @constructor
-                 * @param {grafeas.v1.IDistribution=} [properties] Properties to set
+                 * @param {grafeas.v1.IDeploymentNote=} [properties] Properties to set
                  */
-                function Distribution(properties) {
+                function DeploymentNote(properties) {
+                    this.resourceUri = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -6104,140 +5895,365 @@
                 }
     
                 /**
-                 * Distribution cpeUri.
-                 * @member {string} cpeUri
-                 * @memberof grafeas.v1.Distribution
+                 * DeploymentNote resourceUri.
+                 * @member {Array.<string>} resourceUri
+                 * @memberof grafeas.v1.DeploymentNote
                  * @instance
                  */
-                Distribution.prototype.cpeUri = "";
+                DeploymentNote.prototype.resourceUri = $util.emptyArray;
     
                 /**
-                 * Distribution architecture.
-                 * @member {grafeas.v1.Architecture} architecture
-                 * @memberof grafeas.v1.Distribution
-                 * @instance
-                 */
-                Distribution.prototype.architecture = 0;
-    
-                /**
-                 * Distribution latestVersion.
-                 * @member {grafeas.v1.IVersion|null|undefined} latestVersion
-                 * @memberof grafeas.v1.Distribution
-                 * @instance
-                 */
-                Distribution.prototype.latestVersion = null;
-    
-                /**
-                 * Distribution maintainer.
-                 * @member {string} maintainer
-                 * @memberof grafeas.v1.Distribution
-                 * @instance
-                 */
-                Distribution.prototype.maintainer = "";
-    
-                /**
-                 * Distribution url.
-                 * @member {string} url
-                 * @memberof grafeas.v1.Distribution
-                 * @instance
-                 */
-                Distribution.prototype.url = "";
-    
-                /**
-                 * Distribution description.
-                 * @member {string} description
-                 * @memberof grafeas.v1.Distribution
-                 * @instance
-                 */
-                Distribution.prototype.description = "";
-    
-                /**
-                 * Creates a new Distribution instance using the specified properties.
+                 * Creates a new DeploymentNote instance using the specified properties.
                  * @function create
-                 * @memberof grafeas.v1.Distribution
+                 * @memberof grafeas.v1.DeploymentNote
                  * @static
-                 * @param {grafeas.v1.IDistribution=} [properties] Properties to set
-                 * @returns {grafeas.v1.Distribution} Distribution instance
+                 * @param {grafeas.v1.IDeploymentNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.DeploymentNote} DeploymentNote instance
                  */
-                Distribution.create = function create(properties) {
-                    return new Distribution(properties);
+                DeploymentNote.create = function create(properties) {
+                    return new DeploymentNote(properties);
                 };
     
                 /**
-                 * Encodes the specified Distribution message. Does not implicitly {@link grafeas.v1.Distribution.verify|verify} messages.
+                 * Encodes the specified DeploymentNote message. Does not implicitly {@link grafeas.v1.DeploymentNote.verify|verify} messages.
                  * @function encode
-                 * @memberof grafeas.v1.Distribution
+                 * @memberof grafeas.v1.DeploymentNote
                  * @static
-                 * @param {grafeas.v1.IDistribution} message Distribution message or plain object to encode
+                 * @param {grafeas.v1.IDeploymentNote} message DeploymentNote message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Distribution.encode = function encode(message, writer) {
+                DeploymentNote.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
-                    if (message.architecture != null && message.hasOwnProperty("architecture"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.architecture);
-                    if (message.latestVersion != null && message.hasOwnProperty("latestVersion"))
-                        $root.grafeas.v1.Version.encode(message.latestVersion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.maintainer != null && message.hasOwnProperty("maintainer"))
-                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.maintainer);
-                    if (message.url != null && message.hasOwnProperty("url"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.url);
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                    if (message.resourceUri != null && message.resourceUri.length)
+                        for (var i = 0; i < message.resourceUri.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceUri[i]);
                     return writer;
                 };
     
                 /**
-                 * Encodes the specified Distribution message, length delimited. Does not implicitly {@link grafeas.v1.Distribution.verify|verify} messages.
+                 * Encodes the specified DeploymentNote message, length delimited. Does not implicitly {@link grafeas.v1.DeploymentNote.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof grafeas.v1.Distribution
+                 * @memberof grafeas.v1.DeploymentNote
                  * @static
-                 * @param {grafeas.v1.IDistribution} message Distribution message or plain object to encode
+                 * @param {grafeas.v1.IDeploymentNote} message DeploymentNote message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Distribution.encodeDelimited = function encodeDelimited(message, writer) {
+                DeploymentNote.encodeDelimited = function encodeDelimited(message, writer) {
                     return this.encode(message, writer).ldelim();
                 };
     
                 /**
-                 * Decodes a Distribution message from the specified reader or buffer.
+                 * Decodes a DeploymentNote message from the specified reader or buffer.
                  * @function decode
-                 * @memberof grafeas.v1.Distribution
+                 * @memberof grafeas.v1.DeploymentNote
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.Distribution} Distribution
+                 * @returns {grafeas.v1.DeploymentNote} DeploymentNote
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Distribution.decode = function decode(reader, length) {
+                DeploymentNote.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Distribution();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.DeploymentNote();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
-                            message.cpeUri = reader.string();
+                            if (!(message.resourceUri && message.resourceUri.length))
+                                message.resourceUri = [];
+                            message.resourceUri.push(reader.string());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DeploymentNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.DeploymentNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.DeploymentNote} DeploymentNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeploymentNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DeploymentNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.DeploymentNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DeploymentNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.resourceUri != null && message.hasOwnProperty("resourceUri")) {
+                        if (!Array.isArray(message.resourceUri))
+                            return "resourceUri: array expected";
+                        for (var i = 0; i < message.resourceUri.length; ++i)
+                            if (!$util.isString(message.resourceUri[i]))
+                                return "resourceUri: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a DeploymentNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.DeploymentNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.DeploymentNote} DeploymentNote
+                 */
+                DeploymentNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.DeploymentNote)
+                        return object;
+                    var message = new $root.grafeas.v1.DeploymentNote();
+                    if (object.resourceUri) {
+                        if (!Array.isArray(object.resourceUri))
+                            throw TypeError(".grafeas.v1.DeploymentNote.resourceUri: array expected");
+                        message.resourceUri = [];
+                        for (var i = 0; i < object.resourceUri.length; ++i)
+                            message.resourceUri[i] = String(object.resourceUri[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DeploymentNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.DeploymentNote
+                 * @static
+                 * @param {grafeas.v1.DeploymentNote} message DeploymentNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DeploymentNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.resourceUri = [];
+                    if (message.resourceUri && message.resourceUri.length) {
+                        object.resourceUri = [];
+                        for (var j = 0; j < message.resourceUri.length; ++j)
+                            object.resourceUri[j] = message.resourceUri[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this DeploymentNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.DeploymentNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DeploymentNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return DeploymentNote;
+            })();
+    
+            v1.DeploymentOccurrence = (function() {
+    
+                /**
+                 * Properties of a DeploymentOccurrence.
+                 * @memberof grafeas.v1
+                 * @interface IDeploymentOccurrence
+                 * @property {string|null} [userEmail] DeploymentOccurrence userEmail
+                 * @property {google.protobuf.ITimestamp|null} [deployTime] DeploymentOccurrence deployTime
+                 * @property {google.protobuf.ITimestamp|null} [undeployTime] DeploymentOccurrence undeployTime
+                 * @property {string|null} [config] DeploymentOccurrence config
+                 * @property {string|null} [address] DeploymentOccurrence address
+                 * @property {Array.<string>|null} [resourceUri] DeploymentOccurrence resourceUri
+                 * @property {grafeas.v1.DeploymentOccurrence.Platform|null} [platform] DeploymentOccurrence platform
+                 */
+    
+                /**
+                 * Constructs a new DeploymentOccurrence.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a DeploymentOccurrence.
+                 * @implements IDeploymentOccurrence
+                 * @constructor
+                 * @param {grafeas.v1.IDeploymentOccurrence=} [properties] Properties to set
+                 */
+                function DeploymentOccurrence(properties) {
+                    this.resourceUri = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DeploymentOccurrence userEmail.
+                 * @member {string} userEmail
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @instance
+                 */
+                DeploymentOccurrence.prototype.userEmail = "";
+    
+                /**
+                 * DeploymentOccurrence deployTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} deployTime
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @instance
+                 */
+                DeploymentOccurrence.prototype.deployTime = null;
+    
+                /**
+                 * DeploymentOccurrence undeployTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} undeployTime
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @instance
+                 */
+                DeploymentOccurrence.prototype.undeployTime = null;
+    
+                /**
+                 * DeploymentOccurrence config.
+                 * @member {string} config
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @instance
+                 */
+                DeploymentOccurrence.prototype.config = "";
+    
+                /**
+                 * DeploymentOccurrence address.
+                 * @member {string} address
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @instance
+                 */
+                DeploymentOccurrence.prototype.address = "";
+    
+                /**
+                 * DeploymentOccurrence resourceUri.
+                 * @member {Array.<string>} resourceUri
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @instance
+                 */
+                DeploymentOccurrence.prototype.resourceUri = $util.emptyArray;
+    
+                /**
+                 * DeploymentOccurrence platform.
+                 * @member {grafeas.v1.DeploymentOccurrence.Platform} platform
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @instance
+                 */
+                DeploymentOccurrence.prototype.platform = 0;
+    
+                /**
+                 * Creates a new DeploymentOccurrence instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @static
+                 * @param {grafeas.v1.IDeploymentOccurrence=} [properties] Properties to set
+                 * @returns {grafeas.v1.DeploymentOccurrence} DeploymentOccurrence instance
+                 */
+                DeploymentOccurrence.create = function create(properties) {
+                    return new DeploymentOccurrence(properties);
+                };
+    
+                /**
+                 * Encodes the specified DeploymentOccurrence message. Does not implicitly {@link grafeas.v1.DeploymentOccurrence.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @static
+                 * @param {grafeas.v1.IDeploymentOccurrence} message DeploymentOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeploymentOccurrence.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.userEmail != null && message.hasOwnProperty("userEmail"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.userEmail);
+                    if (message.deployTime != null && message.hasOwnProperty("deployTime"))
+                        $root.google.protobuf.Timestamp.encode(message.deployTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.undeployTime != null && message.hasOwnProperty("undeployTime"))
+                        $root.google.protobuf.Timestamp.encode(message.undeployTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.config);
+                    if (message.address != null && message.hasOwnProperty("address"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.address);
+                    if (message.resourceUri != null && message.resourceUri.length)
+                        for (var i = 0; i < message.resourceUri.length; ++i)
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.resourceUri[i]);
+                    if (message.platform != null && message.hasOwnProperty("platform"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.platform);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DeploymentOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.DeploymentOccurrence.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @static
+                 * @param {grafeas.v1.IDeploymentOccurrence} message DeploymentOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeploymentOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DeploymentOccurrence message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.DeploymentOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.DeploymentOccurrence} DeploymentOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeploymentOccurrence.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.DeploymentOccurrence();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.userEmail = reader.string();
                             break;
                         case 2:
-                            message.architecture = reader.int32();
+                            message.deployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                             break;
                         case 3:
-                            message.latestVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                            message.undeployTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                             break;
                         case 4:
-                            message.maintainer = reader.string();
+                            message.config = reader.string();
                             break;
                         case 5:
-                            message.url = reader.string();
+                            message.address = reader.string();
                             break;
                         case 6:
-                            message.description = reader.string();
+                            if (!(message.resourceUri && message.resourceUri.length))
+                                message.resourceUri = [];
+                            message.resourceUri.push(reader.string());
+                            break;
+                        case 7:
+                            message.platform = reader.int32();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -6248,3314 +6264,200 @@
                 };
     
                 /**
-                 * Decodes a Distribution message from the specified reader or buffer, length delimited.
+                 * Decodes a DeploymentOccurrence message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof grafeas.v1.Distribution
+                 * @memberof grafeas.v1.DeploymentOccurrence
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.Distribution} Distribution
+                 * @returns {grafeas.v1.DeploymentOccurrence} DeploymentOccurrence
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Distribution.decodeDelimited = function decodeDelimited(reader) {
+                DeploymentOccurrence.decodeDelimited = function decodeDelimited(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
                 };
     
                 /**
-                 * Verifies a Distribution message.
+                 * Verifies a DeploymentOccurrence message.
                  * @function verify
-                 * @memberof grafeas.v1.Distribution
+                 * @memberof grafeas.v1.DeploymentOccurrence
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Distribution.verify = function verify(message) {
+                DeploymentOccurrence.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        if (!$util.isString(message.cpeUri))
-                            return "cpeUri: string expected";
-                    if (message.architecture != null && message.hasOwnProperty("architecture"))
-                        switch (message.architecture) {
-                        default:
-                            return "architecture: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.latestVersion != null && message.hasOwnProperty("latestVersion")) {
-                        var error = $root.grafeas.v1.Version.verify(message.latestVersion);
+                    if (message.userEmail != null && message.hasOwnProperty("userEmail"))
+                        if (!$util.isString(message.userEmail))
+                            return "userEmail: string expected";
+                    if (message.deployTime != null && message.hasOwnProperty("deployTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.deployTime);
                         if (error)
-                            return "latestVersion." + error;
+                            return "deployTime." + error;
                     }
-                    if (message.maintainer != null && message.hasOwnProperty("maintainer"))
-                        if (!$util.isString(message.maintainer))
-                            return "maintainer: string expected";
-                    if (message.url != null && message.hasOwnProperty("url"))
-                        if (!$util.isString(message.url))
-                            return "url: string expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Distribution message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.Distribution
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.Distribution} Distribution
-                 */
-                Distribution.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.Distribution)
-                        return object;
-                    var message = new $root.grafeas.v1.Distribution();
-                    if (object.cpeUri != null)
-                        message.cpeUri = String(object.cpeUri);
-                    switch (object.architecture) {
-                    case "ARCHITECTURE_UNSPECIFIED":
-                    case 0:
-                        message.architecture = 0;
-                        break;
-                    case "X86":
-                    case 1:
-                        message.architecture = 1;
-                        break;
-                    case "X64":
-                    case 2:
-                        message.architecture = 2;
-                        break;
-                    }
-                    if (object.latestVersion != null) {
-                        if (typeof object.latestVersion !== "object")
-                            throw TypeError(".grafeas.v1.Distribution.latestVersion: object expected");
-                        message.latestVersion = $root.grafeas.v1.Version.fromObject(object.latestVersion);
-                    }
-                    if (object.maintainer != null)
-                        message.maintainer = String(object.maintainer);
-                    if (object.url != null)
-                        message.url = String(object.url);
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Distribution message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.Distribution
-                 * @static
-                 * @param {grafeas.v1.Distribution} message Distribution
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Distribution.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.cpeUri = "";
-                        object.architecture = options.enums === String ? "ARCHITECTURE_UNSPECIFIED" : 0;
-                        object.latestVersion = null;
-                        object.maintainer = "";
-                        object.url = "";
-                        object.description = "";
-                    }
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        object.cpeUri = message.cpeUri;
-                    if (message.architecture != null && message.hasOwnProperty("architecture"))
-                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
-                    if (message.latestVersion != null && message.hasOwnProperty("latestVersion"))
-                        object.latestVersion = $root.grafeas.v1.Version.toObject(message.latestVersion, options);
-                    if (message.maintainer != null && message.hasOwnProperty("maintainer"))
-                        object.maintainer = message.maintainer;
-                    if (message.url != null && message.hasOwnProperty("url"))
-                        object.url = message.url;
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Distribution to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.Distribution
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Distribution.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Distribution;
-            })();
-    
-            v1.Location = (function() {
-    
-                /**
-                 * Properties of a Location.
-                 * @memberof grafeas.v1
-                 * @interface ILocation
-                 * @property {string|null} [cpeUri] Location cpeUri
-                 * @property {grafeas.v1.IVersion|null} [version] Location version
-                 * @property {string|null} [path] Location path
-                 */
-    
-                /**
-                 * Constructs a new Location.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a Location.
-                 * @implements ILocation
-                 * @constructor
-                 * @param {grafeas.v1.ILocation=} [properties] Properties to set
-                 */
-                function Location(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Location cpeUri.
-                 * @member {string} cpeUri
-                 * @memberof grafeas.v1.Location
-                 * @instance
-                 */
-                Location.prototype.cpeUri = "";
-    
-                /**
-                 * Location version.
-                 * @member {grafeas.v1.IVersion|null|undefined} version
-                 * @memberof grafeas.v1.Location
-                 * @instance
-                 */
-                Location.prototype.version = null;
-    
-                /**
-                 * Location path.
-                 * @member {string} path
-                 * @memberof grafeas.v1.Location
-                 * @instance
-                 */
-                Location.prototype.path = "";
-    
-                /**
-                 * Creates a new Location instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.Location
-                 * @static
-                 * @param {grafeas.v1.ILocation=} [properties] Properties to set
-                 * @returns {grafeas.v1.Location} Location instance
-                 */
-                Location.create = function create(properties) {
-                    return new Location(properties);
-                };
-    
-                /**
-                 * Encodes the specified Location message. Does not implicitly {@link grafeas.v1.Location.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.Location
-                 * @static
-                 * @param {grafeas.v1.ILocation} message Location message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Location.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
-                    if (message.version != null && message.hasOwnProperty("version"))
-                        $root.grafeas.v1.Version.encode(message.version, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.path != null && message.hasOwnProperty("path"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Location message, length delimited. Does not implicitly {@link grafeas.v1.Location.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.Location
-                 * @static
-                 * @param {grafeas.v1.ILocation} message Location message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Location.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Location message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.Location
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.Location} Location
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Location.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Location();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.cpeUri = reader.string();
-                            break;
-                        case 2:
-                            message.version = $root.grafeas.v1.Version.decode(reader, reader.uint32());
-                            break;
-                        case 3:
-                            message.path = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Location message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.Location
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.Location} Location
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Location.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Location message.
-                 * @function verify
-                 * @memberof grafeas.v1.Location
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Location.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        if (!$util.isString(message.cpeUri))
-                            return "cpeUri: string expected";
-                    if (message.version != null && message.hasOwnProperty("version")) {
-                        var error = $root.grafeas.v1.Version.verify(message.version);
+                    if (message.undeployTime != null && message.hasOwnProperty("undeployTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.undeployTime);
                         if (error)
-                            return "version." + error;
+                            return "undeployTime." + error;
                     }
-                    if (message.path != null && message.hasOwnProperty("path"))
-                        if (!$util.isString(message.path))
-                            return "path: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Location message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.Location
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.Location} Location
-                 */
-                Location.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.Location)
-                        return object;
-                    var message = new $root.grafeas.v1.Location();
-                    if (object.cpeUri != null)
-                        message.cpeUri = String(object.cpeUri);
-                    if (object.version != null) {
-                        if (typeof object.version !== "object")
-                            throw TypeError(".grafeas.v1.Location.version: object expected");
-                        message.version = $root.grafeas.v1.Version.fromObject(object.version);
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        if (!$util.isString(message.config))
+                            return "config: string expected";
+                    if (message.address != null && message.hasOwnProperty("address"))
+                        if (!$util.isString(message.address))
+                            return "address: string expected";
+                    if (message.resourceUri != null && message.hasOwnProperty("resourceUri")) {
+                        if (!Array.isArray(message.resourceUri))
+                            return "resourceUri: array expected";
+                        for (var i = 0; i < message.resourceUri.length; ++i)
+                            if (!$util.isString(message.resourceUri[i]))
+                                return "resourceUri: string[] expected";
                     }
-                    if (object.path != null)
-                        message.path = String(object.path);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Location message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.Location
-                 * @static
-                 * @param {grafeas.v1.Location} message Location
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Location.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.cpeUri = "";
-                        object.version = null;
-                        object.path = "";
-                    }
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        object.cpeUri = message.cpeUri;
-                    if (message.version != null && message.hasOwnProperty("version"))
-                        object.version = $root.grafeas.v1.Version.toObject(message.version, options);
-                    if (message.path != null && message.hasOwnProperty("path"))
-                        object.path = message.path;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Location to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.Location
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Location.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Location;
-            })();
-    
-            v1.PackageNote = (function() {
-    
-                /**
-                 * Properties of a PackageNote.
-                 * @memberof grafeas.v1
-                 * @interface IPackageNote
-                 * @property {string|null} [name] PackageNote name
-                 * @property {Array.<grafeas.v1.IDistribution>|null} [distribution] PackageNote distribution
-                 */
-    
-                /**
-                 * Constructs a new PackageNote.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a PackageNote.
-                 * @implements IPackageNote
-                 * @constructor
-                 * @param {grafeas.v1.IPackageNote=} [properties] Properties to set
-                 */
-                function PackageNote(properties) {
-                    this.distribution = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * PackageNote name.
-                 * @member {string} name
-                 * @memberof grafeas.v1.PackageNote
-                 * @instance
-                 */
-                PackageNote.prototype.name = "";
-    
-                /**
-                 * PackageNote distribution.
-                 * @member {Array.<grafeas.v1.IDistribution>} distribution
-                 * @memberof grafeas.v1.PackageNote
-                 * @instance
-                 */
-                PackageNote.prototype.distribution = $util.emptyArray;
-    
-                /**
-                 * Creates a new PackageNote instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.PackageNote
-                 * @static
-                 * @param {grafeas.v1.IPackageNote=} [properties] Properties to set
-                 * @returns {grafeas.v1.PackageNote} PackageNote instance
-                 */
-                PackageNote.create = function create(properties) {
-                    return new PackageNote(properties);
-                };
-    
-                /**
-                 * Encodes the specified PackageNote message. Does not implicitly {@link grafeas.v1.PackageNote.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.PackageNote
-                 * @static
-                 * @param {grafeas.v1.IPackageNote} message PackageNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                PackageNote.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.distribution != null && message.distribution.length)
-                        for (var i = 0; i < message.distribution.length; ++i)
-                            $root.grafeas.v1.Distribution.encode(message.distribution[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified PackageNote message, length delimited. Does not implicitly {@link grafeas.v1.PackageNote.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.PackageNote
-                 * @static
-                 * @param {grafeas.v1.IPackageNote} message PackageNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                PackageNote.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a PackageNote message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.PackageNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.PackageNote} PackageNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                PackageNote.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.PackageNote();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.distribution && message.distribution.length))
-                                message.distribution = [];
-                            message.distribution.push($root.grafeas.v1.Distribution.decode(reader, reader.uint32()));
-                            break;
+                    if (message.platform != null && message.hasOwnProperty("platform"))
+                        switch (message.platform) {
                         default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a PackageNote message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.PackageNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.PackageNote} PackageNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                PackageNote.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a PackageNote message.
-                 * @function verify
-                 * @memberof grafeas.v1.PackageNote
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                PackageNote.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    if (message.distribution != null && message.hasOwnProperty("distribution")) {
-                        if (!Array.isArray(message.distribution))
-                            return "distribution: array expected";
-                        for (var i = 0; i < message.distribution.length; ++i) {
-                            var error = $root.grafeas.v1.Distribution.verify(message.distribution[i]);
-                            if (error)
-                                return "distribution." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a PackageNote message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.PackageNote
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.PackageNote} PackageNote
-                 */
-                PackageNote.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.PackageNote)
-                        return object;
-                    var message = new $root.grafeas.v1.PackageNote();
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.distribution) {
-                        if (!Array.isArray(object.distribution))
-                            throw TypeError(".grafeas.v1.PackageNote.distribution: array expected");
-                        message.distribution = [];
-                        for (var i = 0; i < object.distribution.length; ++i) {
-                            if (typeof object.distribution[i] !== "object")
-                                throw TypeError(".grafeas.v1.PackageNote.distribution: object expected");
-                            message.distribution[i] = $root.grafeas.v1.Distribution.fromObject(object.distribution[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a PackageNote message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.PackageNote
-                 * @static
-                 * @param {grafeas.v1.PackageNote} message PackageNote
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                PackageNote.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.distribution = [];
-                    if (options.defaults)
-                        object.name = "";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        object.name = message.name;
-                    if (message.distribution && message.distribution.length) {
-                        object.distribution = [];
-                        for (var j = 0; j < message.distribution.length; ++j)
-                            object.distribution[j] = $root.grafeas.v1.Distribution.toObject(message.distribution[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this PackageNote to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.PackageNote
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                PackageNote.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return PackageNote;
-            })();
-    
-            v1.PackageOccurrence = (function() {
-    
-                /**
-                 * Properties of a PackageOccurrence.
-                 * @memberof grafeas.v1
-                 * @interface IPackageOccurrence
-                 * @property {string|null} [name] PackageOccurrence name
-                 * @property {Array.<grafeas.v1.ILocation>|null} [location] PackageOccurrence location
-                 */
-    
-                /**
-                 * Constructs a new PackageOccurrence.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a PackageOccurrence.
-                 * @implements IPackageOccurrence
-                 * @constructor
-                 * @param {grafeas.v1.IPackageOccurrence=} [properties] Properties to set
-                 */
-                function PackageOccurrence(properties) {
-                    this.location = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * PackageOccurrence name.
-                 * @member {string} name
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @instance
-                 */
-                PackageOccurrence.prototype.name = "";
-    
-                /**
-                 * PackageOccurrence location.
-                 * @member {Array.<grafeas.v1.ILocation>} location
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @instance
-                 */
-                PackageOccurrence.prototype.location = $util.emptyArray;
-    
-                /**
-                 * Creates a new PackageOccurrence instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @static
-                 * @param {grafeas.v1.IPackageOccurrence=} [properties] Properties to set
-                 * @returns {grafeas.v1.PackageOccurrence} PackageOccurrence instance
-                 */
-                PackageOccurrence.create = function create(properties) {
-                    return new PackageOccurrence(properties);
-                };
-    
-                /**
-                 * Encodes the specified PackageOccurrence message. Does not implicitly {@link grafeas.v1.PackageOccurrence.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @static
-                 * @param {grafeas.v1.IPackageOccurrence} message PackageOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                PackageOccurrence.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.location != null && message.location.length)
-                        for (var i = 0; i < message.location.length; ++i)
-                            $root.grafeas.v1.Location.encode(message.location[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified PackageOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.PackageOccurrence.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @static
-                 * @param {grafeas.v1.IPackageOccurrence} message PackageOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                PackageOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a PackageOccurrence message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.PackageOccurrence} PackageOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                PackageOccurrence.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.PackageOccurrence();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.location && message.location.length))
-                                message.location = [];
-                            message.location.push($root.grafeas.v1.Location.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a PackageOccurrence message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.PackageOccurrence} PackageOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                PackageOccurrence.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a PackageOccurrence message.
-                 * @function verify
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                PackageOccurrence.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    if (message.location != null && message.hasOwnProperty("location")) {
-                        if (!Array.isArray(message.location))
-                            return "location: array expected";
-                        for (var i = 0; i < message.location.length; ++i) {
-                            var error = $root.grafeas.v1.Location.verify(message.location[i]);
-                            if (error)
-                                return "location." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a PackageOccurrence message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.PackageOccurrence} PackageOccurrence
-                 */
-                PackageOccurrence.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.PackageOccurrence)
-                        return object;
-                    var message = new $root.grafeas.v1.PackageOccurrence();
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.location) {
-                        if (!Array.isArray(object.location))
-                            throw TypeError(".grafeas.v1.PackageOccurrence.location: array expected");
-                        message.location = [];
-                        for (var i = 0; i < object.location.length; ++i) {
-                            if (typeof object.location[i] !== "object")
-                                throw TypeError(".grafeas.v1.PackageOccurrence.location: object expected");
-                            message.location[i] = $root.grafeas.v1.Location.fromObject(object.location[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a PackageOccurrence message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @static
-                 * @param {grafeas.v1.PackageOccurrence} message PackageOccurrence
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                PackageOccurrence.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.location = [];
-                    if (options.defaults)
-                        object.name = "";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        object.name = message.name;
-                    if (message.location && message.location.length) {
-                        object.location = [];
-                        for (var j = 0; j < message.location.length; ++j)
-                            object.location[j] = $root.grafeas.v1.Location.toObject(message.location[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this PackageOccurrence to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.PackageOccurrence
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                PackageOccurrence.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return PackageOccurrence;
-            })();
-    
-            v1.Version = (function() {
-    
-                /**
-                 * Properties of a Version.
-                 * @memberof grafeas.v1
-                 * @interface IVersion
-                 * @property {number|null} [epoch] Version epoch
-                 * @property {string|null} [name] Version name
-                 * @property {string|null} [revision] Version revision
-                 * @property {grafeas.v1.Version.VersionKind|null} [kind] Version kind
-                 * @property {string|null} [fullName] Version fullName
-                 */
-    
-                /**
-                 * Constructs a new Version.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a Version.
-                 * @implements IVersion
-                 * @constructor
-                 * @param {grafeas.v1.IVersion=} [properties] Properties to set
-                 */
-                function Version(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Version epoch.
-                 * @member {number} epoch
-                 * @memberof grafeas.v1.Version
-                 * @instance
-                 */
-                Version.prototype.epoch = 0;
-    
-                /**
-                 * Version name.
-                 * @member {string} name
-                 * @memberof grafeas.v1.Version
-                 * @instance
-                 */
-                Version.prototype.name = "";
-    
-                /**
-                 * Version revision.
-                 * @member {string} revision
-                 * @memberof grafeas.v1.Version
-                 * @instance
-                 */
-                Version.prototype.revision = "";
-    
-                /**
-                 * Version kind.
-                 * @member {grafeas.v1.Version.VersionKind} kind
-                 * @memberof grafeas.v1.Version
-                 * @instance
-                 */
-                Version.prototype.kind = 0;
-    
-                /**
-                 * Version fullName.
-                 * @member {string} fullName
-                 * @memberof grafeas.v1.Version
-                 * @instance
-                 */
-                Version.prototype.fullName = "";
-    
-                /**
-                 * Creates a new Version instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.Version
-                 * @static
-                 * @param {grafeas.v1.IVersion=} [properties] Properties to set
-                 * @returns {grafeas.v1.Version} Version instance
-                 */
-                Version.create = function create(properties) {
-                    return new Version(properties);
-                };
-    
-                /**
-                 * Encodes the specified Version message. Does not implicitly {@link grafeas.v1.Version.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.Version
-                 * @static
-                 * @param {grafeas.v1.IVersion} message Version message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Version.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.epoch != null && message.hasOwnProperty("epoch"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.epoch);
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                    if (message.revision != null && message.hasOwnProperty("revision"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.revision);
-                    if (message.kind != null && message.hasOwnProperty("kind"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.kind);
-                    if (message.fullName != null && message.hasOwnProperty("fullName"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.fullName);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Version message, length delimited. Does not implicitly {@link grafeas.v1.Version.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.Version
-                 * @static
-                 * @param {grafeas.v1.IVersion} message Version message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Version.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Version message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.Version
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.Version} Version
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Version.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Version();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.epoch = reader.int32();
-                            break;
-                        case 2:
-                            message.name = reader.string();
-                            break;
-                        case 3:
-                            message.revision = reader.string();
-                            break;
-                        case 4:
-                            message.kind = reader.int32();
-                            break;
-                        case 5:
-                            message.fullName = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Version message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.Version
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.Version} Version
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Version.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Version message.
-                 * @function verify
-                 * @memberof grafeas.v1.Version
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Version.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.epoch != null && message.hasOwnProperty("epoch"))
-                        if (!$util.isInteger(message.epoch))
-                            return "epoch: integer expected";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    if (message.revision != null && message.hasOwnProperty("revision"))
-                        if (!$util.isString(message.revision))
-                            return "revision: string expected";
-                    if (message.kind != null && message.hasOwnProperty("kind"))
-                        switch (message.kind) {
-                        default:
-                            return "kind: enum value expected";
+                            return "platform: enum value expected";
                         case 0:
                         case 1:
                         case 2:
                         case 3:
                             break;
                         }
-                    if (message.fullName != null && message.hasOwnProperty("fullName"))
-                        if (!$util.isString(message.fullName))
-                            return "fullName: string expected";
                     return null;
                 };
     
                 /**
-                 * Creates a Version message from a plain object. Also converts values to their respective internal types.
+                 * Creates a DeploymentOccurrence message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof grafeas.v1.Version
+                 * @memberof grafeas.v1.DeploymentOccurrence
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.Version} Version
+                 * @returns {grafeas.v1.DeploymentOccurrence} DeploymentOccurrence
                  */
-                Version.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.Version)
+                DeploymentOccurrence.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.DeploymentOccurrence)
                         return object;
-                    var message = new $root.grafeas.v1.Version();
-                    if (object.epoch != null)
-                        message.epoch = object.epoch | 0;
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.revision != null)
-                        message.revision = String(object.revision);
-                    switch (object.kind) {
-                    case "VERSION_KIND_UNSPECIFIED":
+                    var message = new $root.grafeas.v1.DeploymentOccurrence();
+                    if (object.userEmail != null)
+                        message.userEmail = String(object.userEmail);
+                    if (object.deployTime != null) {
+                        if (typeof object.deployTime !== "object")
+                            throw TypeError(".grafeas.v1.DeploymentOccurrence.deployTime: object expected");
+                        message.deployTime = $root.google.protobuf.Timestamp.fromObject(object.deployTime);
+                    }
+                    if (object.undeployTime != null) {
+                        if (typeof object.undeployTime !== "object")
+                            throw TypeError(".grafeas.v1.DeploymentOccurrence.undeployTime: object expected");
+                        message.undeployTime = $root.google.protobuf.Timestamp.fromObject(object.undeployTime);
+                    }
+                    if (object.config != null)
+                        message.config = String(object.config);
+                    if (object.address != null)
+                        message.address = String(object.address);
+                    if (object.resourceUri) {
+                        if (!Array.isArray(object.resourceUri))
+                            throw TypeError(".grafeas.v1.DeploymentOccurrence.resourceUri: array expected");
+                        message.resourceUri = [];
+                        for (var i = 0; i < object.resourceUri.length; ++i)
+                            message.resourceUri[i] = String(object.resourceUri[i]);
+                    }
+                    switch (object.platform) {
+                    case "PLATFORM_UNSPECIFIED":
                     case 0:
-                        message.kind = 0;
+                        message.platform = 0;
                         break;
-                    case "NORMAL":
+                    case "GKE":
                     case 1:
-                        message.kind = 1;
+                        message.platform = 1;
                         break;
-                    case "MINIMUM":
+                    case "FLEX":
                     case 2:
-                        message.kind = 2;
+                        message.platform = 2;
                         break;
-                    case "MAXIMUM":
+                    case "CUSTOM":
                     case 3:
-                        message.kind = 3;
+                        message.platform = 3;
                         break;
                     }
-                    if (object.fullName != null)
-                        message.fullName = String(object.fullName);
                     return message;
                 };
     
                 /**
-                 * Creates a plain object from a Version message. Also converts values to other types if specified.
+                 * Creates a plain object from a DeploymentOccurrence message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof grafeas.v1.Version
+                 * @memberof grafeas.v1.DeploymentOccurrence
                  * @static
-                 * @param {grafeas.v1.Version} message Version
+                 * @param {grafeas.v1.DeploymentOccurrence} message DeploymentOccurrence
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Version.toObject = function toObject(message, options) {
+                DeploymentOccurrence.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.resourceUri = [];
                     if (options.defaults) {
-                        object.epoch = 0;
-                        object.name = "";
-                        object.revision = "";
-                        object.kind = options.enums === String ? "VERSION_KIND_UNSPECIFIED" : 0;
-                        object.fullName = "";
+                        object.userEmail = "";
+                        object.deployTime = null;
+                        object.undeployTime = null;
+                        object.config = "";
+                        object.address = "";
+                        object.platform = options.enums === String ? "PLATFORM_UNSPECIFIED" : 0;
                     }
-                    if (message.epoch != null && message.hasOwnProperty("epoch"))
-                        object.epoch = message.epoch;
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        object.name = message.name;
-                    if (message.revision != null && message.hasOwnProperty("revision"))
-                        object.revision = message.revision;
-                    if (message.kind != null && message.hasOwnProperty("kind"))
-                        object.kind = options.enums === String ? $root.grafeas.v1.Version.VersionKind[message.kind] : message.kind;
-                    if (message.fullName != null && message.hasOwnProperty("fullName"))
-                        object.fullName = message.fullName;
+                    if (message.userEmail != null && message.hasOwnProperty("userEmail"))
+                        object.userEmail = message.userEmail;
+                    if (message.deployTime != null && message.hasOwnProperty("deployTime"))
+                        object.deployTime = $root.google.protobuf.Timestamp.toObject(message.deployTime, options);
+                    if (message.undeployTime != null && message.hasOwnProperty("undeployTime"))
+                        object.undeployTime = $root.google.protobuf.Timestamp.toObject(message.undeployTime, options);
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        object.config = message.config;
+                    if (message.address != null && message.hasOwnProperty("address"))
+                        object.address = message.address;
+                    if (message.resourceUri && message.resourceUri.length) {
+                        object.resourceUri = [];
+                        for (var j = 0; j < message.resourceUri.length; ++j)
+                            object.resourceUri[j] = message.resourceUri[j];
+                    }
+                    if (message.platform != null && message.hasOwnProperty("platform"))
+                        object.platform = options.enums === String ? $root.grafeas.v1.DeploymentOccurrence.Platform[message.platform] : message.platform;
                     return object;
                 };
     
                 /**
-                 * Converts this Version to JSON.
+                 * Converts this DeploymentOccurrence to JSON.
                  * @function toJSON
-                 * @memberof grafeas.v1.Version
+                 * @memberof grafeas.v1.DeploymentOccurrence
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Version.prototype.toJSON = function toJSON() {
+                DeploymentOccurrence.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
                 /**
-                 * VersionKind enum.
-                 * @name grafeas.v1.Version.VersionKind
+                 * Platform enum.
+                 * @name grafeas.v1.DeploymentOccurrence.Platform
                  * @enum {string}
-                 * @property {number} VERSION_KIND_UNSPECIFIED=0 VERSION_KIND_UNSPECIFIED value
-                 * @property {number} NORMAL=1 NORMAL value
-                 * @property {number} MINIMUM=2 MINIMUM value
-                 * @property {number} MAXIMUM=3 MAXIMUM value
+                 * @property {number} PLATFORM_UNSPECIFIED=0 PLATFORM_UNSPECIFIED value
+                 * @property {number} GKE=1 GKE value
+                 * @property {number} FLEX=2 FLEX value
+                 * @property {number} CUSTOM=3 CUSTOM value
                  */
-                Version.VersionKind = (function() {
+                DeploymentOccurrence.Platform = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "VERSION_KIND_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "NORMAL"] = 1;
-                    values[valuesById[2] = "MINIMUM"] = 2;
-                    values[valuesById[3] = "MAXIMUM"] = 3;
+                    values[valuesById[0] = "PLATFORM_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "GKE"] = 1;
+                    values[valuesById[2] = "FLEX"] = 2;
+                    values[valuesById[3] = "CUSTOM"] = 3;
                     return values;
                 })();
     
-                return Version;
-            })();
-    
-            /**
-             * Severity enum.
-             * @name grafeas.v1.Severity
-             * @enum {string}
-             * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
-             * @property {number} MINIMAL=1 MINIMAL value
-             * @property {number} LOW=2 LOW value
-             * @property {number} MEDIUM=3 MEDIUM value
-             * @property {number} HIGH=4 HIGH value
-             * @property {number} CRITICAL=5 CRITICAL value
-             */
-            v1.Severity = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "MINIMAL"] = 1;
-                values[valuesById[2] = "LOW"] = 2;
-                values[valuesById[3] = "MEDIUM"] = 3;
-                values[valuesById[4] = "HIGH"] = 4;
-                values[valuesById[5] = "CRITICAL"] = 5;
-                return values;
-            })();
-    
-            v1.VulnerabilityNote = (function() {
-    
-                /**
-                 * Properties of a VulnerabilityNote.
-                 * @memberof grafeas.v1
-                 * @interface IVulnerabilityNote
-                 * @property {number|null} [cvssScore] VulnerabilityNote cvssScore
-                 * @property {grafeas.v1.Severity|null} [severity] VulnerabilityNote severity
-                 * @property {Array.<grafeas.v1.VulnerabilityNote.IDetail>|null} [details] VulnerabilityNote details
-                 * @property {grafeas.v1.ICVSSv3|null} [cvssV3] VulnerabilityNote cvssV3
-                 * @property {Array.<grafeas.v1.VulnerabilityNote.IWindowsDetail>|null} [windowsDetails] VulnerabilityNote windowsDetails
-                 * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] VulnerabilityNote sourceUpdateTime
-                 */
-    
-                /**
-                 * Constructs a new VulnerabilityNote.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a VulnerabilityNote.
-                 * @implements IVulnerabilityNote
-                 * @constructor
-                 * @param {grafeas.v1.IVulnerabilityNote=} [properties] Properties to set
-                 */
-                function VulnerabilityNote(properties) {
-                    this.details = [];
-                    this.windowsDetails = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * VulnerabilityNote cvssScore.
-                 * @member {number} cvssScore
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @instance
-                 */
-                VulnerabilityNote.prototype.cvssScore = 0;
-    
-                /**
-                 * VulnerabilityNote severity.
-                 * @member {grafeas.v1.Severity} severity
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @instance
-                 */
-                VulnerabilityNote.prototype.severity = 0;
-    
-                /**
-                 * VulnerabilityNote details.
-                 * @member {Array.<grafeas.v1.VulnerabilityNote.IDetail>} details
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @instance
-                 */
-                VulnerabilityNote.prototype.details = $util.emptyArray;
-    
-                /**
-                 * VulnerabilityNote cvssV3.
-                 * @member {grafeas.v1.ICVSSv3|null|undefined} cvssV3
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @instance
-                 */
-                VulnerabilityNote.prototype.cvssV3 = null;
-    
-                /**
-                 * VulnerabilityNote windowsDetails.
-                 * @member {Array.<grafeas.v1.VulnerabilityNote.IWindowsDetail>} windowsDetails
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @instance
-                 */
-                VulnerabilityNote.prototype.windowsDetails = $util.emptyArray;
-    
-                /**
-                 * VulnerabilityNote sourceUpdateTime.
-                 * @member {google.protobuf.ITimestamp|null|undefined} sourceUpdateTime
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @instance
-                 */
-                VulnerabilityNote.prototype.sourceUpdateTime = null;
-    
-                /**
-                 * Creates a new VulnerabilityNote instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @static
-                 * @param {grafeas.v1.IVulnerabilityNote=} [properties] Properties to set
-                 * @returns {grafeas.v1.VulnerabilityNote} VulnerabilityNote instance
-                 */
-                VulnerabilityNote.create = function create(properties) {
-                    return new VulnerabilityNote(properties);
-                };
-    
-                /**
-                 * Encodes the specified VulnerabilityNote message. Does not implicitly {@link grafeas.v1.VulnerabilityNote.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @static
-                 * @param {grafeas.v1.IVulnerabilityNote} message VulnerabilityNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                VulnerabilityNote.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
-                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.cvssScore);
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
-                    if (message.details != null && message.details.length)
-                        for (var i = 0; i < message.details.length; ++i)
-                            $root.grafeas.v1.VulnerabilityNote.Detail.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.cvssV3 != null && message.hasOwnProperty("cvssV3"))
-                        $root.grafeas.v1.CVSSv3.encode(message.cvssV3, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                    if (message.windowsDetails != null && message.windowsDetails.length)
-                        for (var i = 0; i < message.windowsDetails.length; ++i)
-                            $root.grafeas.v1.VulnerabilityNote.WindowsDetail.encode(message.windowsDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
-                        $root.google.protobuf.Timestamp.encode(message.sourceUpdateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified VulnerabilityNote message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityNote.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @static
-                 * @param {grafeas.v1.IVulnerabilityNote} message VulnerabilityNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                VulnerabilityNote.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a VulnerabilityNote message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.VulnerabilityNote} VulnerabilityNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                VulnerabilityNote.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityNote();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.cvssScore = reader.float();
-                            break;
-                        case 2:
-                            message.severity = reader.int32();
-                            break;
-                        case 3:
-                            if (!(message.details && message.details.length))
-                                message.details = [];
-                            message.details.push($root.grafeas.v1.VulnerabilityNote.Detail.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            message.cvssV3 = $root.grafeas.v1.CVSSv3.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            if (!(message.windowsDetails && message.windowsDetails.length))
-                                message.windowsDetails = [];
-                            message.windowsDetails.push($root.grafeas.v1.VulnerabilityNote.WindowsDetail.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            message.sourceUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a VulnerabilityNote message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.VulnerabilityNote} VulnerabilityNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                VulnerabilityNote.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a VulnerabilityNote message.
-                 * @function verify
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                VulnerabilityNote.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
-                        if (typeof message.cvssScore !== "number")
-                            return "cvssScore: number expected";
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        switch (message.severity) {
-                        default:
-                            return "severity: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                            break;
-                        }
-                    if (message.details != null && message.hasOwnProperty("details")) {
-                        if (!Array.isArray(message.details))
-                            return "details: array expected";
-                        for (var i = 0; i < message.details.length; ++i) {
-                            var error = $root.grafeas.v1.VulnerabilityNote.Detail.verify(message.details[i]);
-                            if (error)
-                                return "details." + error;
-                        }
-                    }
-                    if (message.cvssV3 != null && message.hasOwnProperty("cvssV3")) {
-                        var error = $root.grafeas.v1.CVSSv3.verify(message.cvssV3);
-                        if (error)
-                            return "cvssV3." + error;
-                    }
-                    if (message.windowsDetails != null && message.hasOwnProperty("windowsDetails")) {
-                        if (!Array.isArray(message.windowsDetails))
-                            return "windowsDetails: array expected";
-                        for (var i = 0; i < message.windowsDetails.length; ++i) {
-                            var error = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.verify(message.windowsDetails[i]);
-                            if (error)
-                                return "windowsDetails." + error;
-                        }
-                    }
-                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime")) {
-                        var error = $root.google.protobuf.Timestamp.verify(message.sourceUpdateTime);
-                        if (error)
-                            return "sourceUpdateTime." + error;
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a VulnerabilityNote message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.VulnerabilityNote} VulnerabilityNote
-                 */
-                VulnerabilityNote.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.VulnerabilityNote)
-                        return object;
-                    var message = new $root.grafeas.v1.VulnerabilityNote();
-                    if (object.cvssScore != null)
-                        message.cvssScore = Number(object.cvssScore);
-                    switch (object.severity) {
-                    case "SEVERITY_UNSPECIFIED":
-                    case 0:
-                        message.severity = 0;
-                        break;
-                    case "MINIMAL":
-                    case 1:
-                        message.severity = 1;
-                        break;
-                    case "LOW":
-                    case 2:
-                        message.severity = 2;
-                        break;
-                    case "MEDIUM":
-                    case 3:
-                        message.severity = 3;
-                        break;
-                    case "HIGH":
-                    case 4:
-                        message.severity = 4;
-                        break;
-                    case "CRITICAL":
-                    case 5:
-                        message.severity = 5;
-                        break;
-                    }
-                    if (object.details) {
-                        if (!Array.isArray(object.details))
-                            throw TypeError(".grafeas.v1.VulnerabilityNote.details: array expected");
-                        message.details = [];
-                        for (var i = 0; i < object.details.length; ++i) {
-                            if (typeof object.details[i] !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityNote.details: object expected");
-                            message.details[i] = $root.grafeas.v1.VulnerabilityNote.Detail.fromObject(object.details[i]);
-                        }
-                    }
-                    if (object.cvssV3 != null) {
-                        if (typeof object.cvssV3 !== "object")
-                            throw TypeError(".grafeas.v1.VulnerabilityNote.cvssV3: object expected");
-                        message.cvssV3 = $root.grafeas.v1.CVSSv3.fromObject(object.cvssV3);
-                    }
-                    if (object.windowsDetails) {
-                        if (!Array.isArray(object.windowsDetails))
-                            throw TypeError(".grafeas.v1.VulnerabilityNote.windowsDetails: array expected");
-                        message.windowsDetails = [];
-                        for (var i = 0; i < object.windowsDetails.length; ++i) {
-                            if (typeof object.windowsDetails[i] !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityNote.windowsDetails: object expected");
-                            message.windowsDetails[i] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.fromObject(object.windowsDetails[i]);
-                        }
-                    }
-                    if (object.sourceUpdateTime != null) {
-                        if (typeof object.sourceUpdateTime !== "object")
-                            throw TypeError(".grafeas.v1.VulnerabilityNote.sourceUpdateTime: object expected");
-                        message.sourceUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.sourceUpdateTime);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a VulnerabilityNote message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @static
-                 * @param {grafeas.v1.VulnerabilityNote} message VulnerabilityNote
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                VulnerabilityNote.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.details = [];
-                        object.windowsDetails = [];
-                    }
-                    if (options.defaults) {
-                        object.cvssScore = 0;
-                        object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
-                        object.cvssV3 = null;
-                        object.sourceUpdateTime = null;
-                    }
-                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
-                        object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] : message.severity;
-                    if (message.details && message.details.length) {
-                        object.details = [];
-                        for (var j = 0; j < message.details.length; ++j)
-                            object.details[j] = $root.grafeas.v1.VulnerabilityNote.Detail.toObject(message.details[j], options);
-                    }
-                    if (message.cvssV3 != null && message.hasOwnProperty("cvssV3"))
-                        object.cvssV3 = $root.grafeas.v1.CVSSv3.toObject(message.cvssV3, options);
-                    if (message.windowsDetails && message.windowsDetails.length) {
-                        object.windowsDetails = [];
-                        for (var j = 0; j < message.windowsDetails.length; ++j)
-                            object.windowsDetails[j] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.toObject(message.windowsDetails[j], options);
-                    }
-                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
-                        object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
-                    return object;
-                };
-    
-                /**
-                 * Converts this VulnerabilityNote to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.VulnerabilityNote
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                VulnerabilityNote.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                VulnerabilityNote.Detail = (function() {
-    
-                    /**
-                     * Properties of a Detail.
-                     * @memberof grafeas.v1.VulnerabilityNote
-                     * @interface IDetail
-                     * @property {string|null} [severityName] Detail severityName
-                     * @property {string|null} [description] Detail description
-                     * @property {string|null} [packageType] Detail packageType
-                     * @property {string|null} [affectedCpeUri] Detail affectedCpeUri
-                     * @property {string|null} [affectedPackage] Detail affectedPackage
-                     * @property {grafeas.v1.IVersion|null} [affectedVersionStart] Detail affectedVersionStart
-                     * @property {grafeas.v1.IVersion|null} [affectedVersionEnd] Detail affectedVersionEnd
-                     * @property {string|null} [fixedCpeUri] Detail fixedCpeUri
-                     * @property {string|null} [fixedPackage] Detail fixedPackage
-                     * @property {grafeas.v1.IVersion|null} [fixedVersion] Detail fixedVersion
-                     * @property {boolean|null} [isObsolete] Detail isObsolete
-                     * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] Detail sourceUpdateTime
-                     */
-    
-                    /**
-                     * Constructs a new Detail.
-                     * @memberof grafeas.v1.VulnerabilityNote
-                     * @classdesc Represents a Detail.
-                     * @implements IDetail
-                     * @constructor
-                     * @param {grafeas.v1.VulnerabilityNote.IDetail=} [properties] Properties to set
-                     */
-                    function Detail(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Detail severityName.
-                     * @member {string} severityName
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.severityName = "";
-    
-                    /**
-                     * Detail description.
-                     * @member {string} description
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.description = "";
-    
-                    /**
-                     * Detail packageType.
-                     * @member {string} packageType
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.packageType = "";
-    
-                    /**
-                     * Detail affectedCpeUri.
-                     * @member {string} affectedCpeUri
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.affectedCpeUri = "";
-    
-                    /**
-                     * Detail affectedPackage.
-                     * @member {string} affectedPackage
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.affectedPackage = "";
-    
-                    /**
-                     * Detail affectedVersionStart.
-                     * @member {grafeas.v1.IVersion|null|undefined} affectedVersionStart
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.affectedVersionStart = null;
-    
-                    /**
-                     * Detail affectedVersionEnd.
-                     * @member {grafeas.v1.IVersion|null|undefined} affectedVersionEnd
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.affectedVersionEnd = null;
-    
-                    /**
-                     * Detail fixedCpeUri.
-                     * @member {string} fixedCpeUri
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.fixedCpeUri = "";
-    
-                    /**
-                     * Detail fixedPackage.
-                     * @member {string} fixedPackage
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.fixedPackage = "";
-    
-                    /**
-                     * Detail fixedVersion.
-                     * @member {grafeas.v1.IVersion|null|undefined} fixedVersion
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.fixedVersion = null;
-    
-                    /**
-                     * Detail isObsolete.
-                     * @member {boolean} isObsolete
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.isObsolete = false;
-    
-                    /**
-                     * Detail sourceUpdateTime.
-                     * @member {google.protobuf.ITimestamp|null|undefined} sourceUpdateTime
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     */
-                    Detail.prototype.sourceUpdateTime = null;
-    
-                    /**
-                     * Creates a new Detail instance using the specified properties.
-                     * @function create
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityNote.IDetail=} [properties] Properties to set
-                     * @returns {grafeas.v1.VulnerabilityNote.Detail} Detail instance
-                     */
-                    Detail.create = function create(properties) {
-                        return new Detail(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Detail message. Does not implicitly {@link grafeas.v1.VulnerabilityNote.Detail.verify|verify} messages.
-                     * @function encode
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityNote.IDetail} message Detail message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Detail.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.severityName != null && message.hasOwnProperty("severityName"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.severityName);
-                        if (message.description != null && message.hasOwnProperty("description"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
-                        if (message.packageType != null && message.hasOwnProperty("packageType"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.packageType);
-                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
-                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.affectedCpeUri);
-                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
-                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.affectedPackage);
-                        if (message.affectedVersionStart != null && message.hasOwnProperty("affectedVersionStart"))
-                            $root.grafeas.v1.Version.encode(message.affectedVersionStart, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                        if (message.affectedVersionEnd != null && message.hasOwnProperty("affectedVersionEnd"))
-                            $root.grafeas.v1.Version.encode(message.affectedVersionEnd, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
-                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.fixedCpeUri);
-                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
-                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.fixedPackage);
-                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion"))
-                            $root.grafeas.v1.Version.encode(message.fixedVersion, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                        if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
-                            writer.uint32(/* id 11, wireType 0 =*/88).bool(message.isObsolete);
-                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
-                            $root.google.protobuf.Timestamp.encode(message.sourceUpdateTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Detail message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityNote.Detail.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityNote.IDetail} message Detail message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Detail.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Detail message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {grafeas.v1.VulnerabilityNote.Detail} Detail
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Detail.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityNote.Detail();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.severityName = reader.string();
-                                break;
-                            case 2:
-                                message.description = reader.string();
-                                break;
-                            case 3:
-                                message.packageType = reader.string();
-                                break;
-                            case 4:
-                                message.affectedCpeUri = reader.string();
-                                break;
-                            case 5:
-                                message.affectedPackage = reader.string();
-                                break;
-                            case 6:
-                                message.affectedVersionStart = $root.grafeas.v1.Version.decode(reader, reader.uint32());
-                                break;
-                            case 7:
-                                message.affectedVersionEnd = $root.grafeas.v1.Version.decode(reader, reader.uint32());
-                                break;
-                            case 8:
-                                message.fixedCpeUri = reader.string();
-                                break;
-                            case 9:
-                                message.fixedPackage = reader.string();
-                                break;
-                            case 10:
-                                message.fixedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
-                                break;
-                            case 11:
-                                message.isObsolete = reader.bool();
-                                break;
-                            case 12:
-                                message.sourceUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Detail message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {grafeas.v1.VulnerabilityNote.Detail} Detail
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Detail.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Detail message.
-                     * @function verify
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Detail.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.severityName != null && message.hasOwnProperty("severityName"))
-                            if (!$util.isString(message.severityName))
-                                return "severityName: string expected";
-                        if (message.description != null && message.hasOwnProperty("description"))
-                            if (!$util.isString(message.description))
-                                return "description: string expected";
-                        if (message.packageType != null && message.hasOwnProperty("packageType"))
-                            if (!$util.isString(message.packageType))
-                                return "packageType: string expected";
-                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
-                            if (!$util.isString(message.affectedCpeUri))
-                                return "affectedCpeUri: string expected";
-                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
-                            if (!$util.isString(message.affectedPackage))
-                                return "affectedPackage: string expected";
-                        if (message.affectedVersionStart != null && message.hasOwnProperty("affectedVersionStart")) {
-                            var error = $root.grafeas.v1.Version.verify(message.affectedVersionStart);
-                            if (error)
-                                return "affectedVersionStart." + error;
-                        }
-                        if (message.affectedVersionEnd != null && message.hasOwnProperty("affectedVersionEnd")) {
-                            var error = $root.grafeas.v1.Version.verify(message.affectedVersionEnd);
-                            if (error)
-                                return "affectedVersionEnd." + error;
-                        }
-                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
-                            if (!$util.isString(message.fixedCpeUri))
-                                return "fixedCpeUri: string expected";
-                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
-                            if (!$util.isString(message.fixedPackage))
-                                return "fixedPackage: string expected";
-                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion")) {
-                            var error = $root.grafeas.v1.Version.verify(message.fixedVersion);
-                            if (error)
-                                return "fixedVersion." + error;
-                        }
-                        if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
-                            if (typeof message.isObsolete !== "boolean")
-                                return "isObsolete: boolean expected";
-                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.sourceUpdateTime);
-                            if (error)
-                                return "sourceUpdateTime." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Detail message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {grafeas.v1.VulnerabilityNote.Detail} Detail
-                     */
-                    Detail.fromObject = function fromObject(object) {
-                        if (object instanceof $root.grafeas.v1.VulnerabilityNote.Detail)
-                            return object;
-                        var message = new $root.grafeas.v1.VulnerabilityNote.Detail();
-                        if (object.severityName != null)
-                            message.severityName = String(object.severityName);
-                        if (object.description != null)
-                            message.description = String(object.description);
-                        if (object.packageType != null)
-                            message.packageType = String(object.packageType);
-                        if (object.affectedCpeUri != null)
-                            message.affectedCpeUri = String(object.affectedCpeUri);
-                        if (object.affectedPackage != null)
-                            message.affectedPackage = String(object.affectedPackage);
-                        if (object.affectedVersionStart != null) {
-                            if (typeof object.affectedVersionStart !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.affectedVersionStart: object expected");
-                            message.affectedVersionStart = $root.grafeas.v1.Version.fromObject(object.affectedVersionStart);
-                        }
-                        if (object.affectedVersionEnd != null) {
-                            if (typeof object.affectedVersionEnd !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.affectedVersionEnd: object expected");
-                            message.affectedVersionEnd = $root.grafeas.v1.Version.fromObject(object.affectedVersionEnd);
-                        }
-                        if (object.fixedCpeUri != null)
-                            message.fixedCpeUri = String(object.fixedCpeUri);
-                        if (object.fixedPackage != null)
-                            message.fixedPackage = String(object.fixedPackage);
-                        if (object.fixedVersion != null) {
-                            if (typeof object.fixedVersion !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.fixedVersion: object expected");
-                            message.fixedVersion = $root.grafeas.v1.Version.fromObject(object.fixedVersion);
-                        }
-                        if (object.isObsolete != null)
-                            message.isObsolete = Boolean(object.isObsolete);
-                        if (object.sourceUpdateTime != null) {
-                            if (typeof object.sourceUpdateTime !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.sourceUpdateTime: object expected");
-                            message.sourceUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.sourceUpdateTime);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Detail message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityNote.Detail} message Detail
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Detail.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.severityName = "";
-                            object.description = "";
-                            object.packageType = "";
-                            object.affectedCpeUri = "";
-                            object.affectedPackage = "";
-                            object.affectedVersionStart = null;
-                            object.affectedVersionEnd = null;
-                            object.fixedCpeUri = "";
-                            object.fixedPackage = "";
-                            object.fixedVersion = null;
-                            object.isObsolete = false;
-                            object.sourceUpdateTime = null;
-                        }
-                        if (message.severityName != null && message.hasOwnProperty("severityName"))
-                            object.severityName = message.severityName;
-                        if (message.description != null && message.hasOwnProperty("description"))
-                            object.description = message.description;
-                        if (message.packageType != null && message.hasOwnProperty("packageType"))
-                            object.packageType = message.packageType;
-                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
-                            object.affectedCpeUri = message.affectedCpeUri;
-                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
-                            object.affectedPackage = message.affectedPackage;
-                        if (message.affectedVersionStart != null && message.hasOwnProperty("affectedVersionStart"))
-                            object.affectedVersionStart = $root.grafeas.v1.Version.toObject(message.affectedVersionStart, options);
-                        if (message.affectedVersionEnd != null && message.hasOwnProperty("affectedVersionEnd"))
-                            object.affectedVersionEnd = $root.grafeas.v1.Version.toObject(message.affectedVersionEnd, options);
-                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
-                            object.fixedCpeUri = message.fixedCpeUri;
-                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
-                            object.fixedPackage = message.fixedPackage;
-                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion"))
-                            object.fixedVersion = $root.grafeas.v1.Version.toObject(message.fixedVersion, options);
-                        if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
-                            object.isObsolete = message.isObsolete;
-                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
-                            object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Detail to JSON.
-                     * @function toJSON
-                     * @memberof grafeas.v1.VulnerabilityNote.Detail
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Detail.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return Detail;
-                })();
-    
-                VulnerabilityNote.WindowsDetail = (function() {
-    
-                    /**
-                     * Properties of a WindowsDetail.
-                     * @memberof grafeas.v1.VulnerabilityNote
-                     * @interface IWindowsDetail
-                     * @property {string|null} [cpeUri] WindowsDetail cpeUri
-                     * @property {string|null} [name] WindowsDetail name
-                     * @property {string|null} [description] WindowsDetail description
-                     * @property {Array.<grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase>|null} [fixingKbs] WindowsDetail fixingKbs
-                     */
-    
-                    /**
-                     * Constructs a new WindowsDetail.
-                     * @memberof grafeas.v1.VulnerabilityNote
-                     * @classdesc Represents a WindowsDetail.
-                     * @implements IWindowsDetail
-                     * @constructor
-                     * @param {grafeas.v1.VulnerabilityNote.IWindowsDetail=} [properties] Properties to set
-                     */
-                    function WindowsDetail(properties) {
-                        this.fixingKbs = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * WindowsDetail cpeUri.
-                     * @member {string} cpeUri
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @instance
-                     */
-                    WindowsDetail.prototype.cpeUri = "";
-    
-                    /**
-                     * WindowsDetail name.
-                     * @member {string} name
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @instance
-                     */
-                    WindowsDetail.prototype.name = "";
-    
-                    /**
-                     * WindowsDetail description.
-                     * @member {string} description
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @instance
-                     */
-                    WindowsDetail.prototype.description = "";
-    
-                    /**
-                     * WindowsDetail fixingKbs.
-                     * @member {Array.<grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase>} fixingKbs
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @instance
-                     */
-                    WindowsDetail.prototype.fixingKbs = $util.emptyArray;
-    
-                    /**
-                     * Creates a new WindowsDetail instance using the specified properties.
-                     * @function create
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityNote.IWindowsDetail=} [properties] Properties to set
-                     * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail} WindowsDetail instance
-                     */
-                    WindowsDetail.create = function create(properties) {
-                        return new WindowsDetail(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified WindowsDetail message. Does not implicitly {@link grafeas.v1.VulnerabilityNote.WindowsDetail.verify|verify} messages.
-                     * @function encode
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityNote.IWindowsDetail} message WindowsDetail message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    WindowsDetail.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                        if (message.description != null && message.hasOwnProperty("description"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
-                        if (message.fixingKbs != null && message.fixingKbs.length)
-                            for (var i = 0; i < message.fixingKbs.length; ++i)
-                                $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.encode(message.fixingKbs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified WindowsDetail message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityNote.WindowsDetail.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityNote.IWindowsDetail} message WindowsDetail message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    WindowsDetail.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a WindowsDetail message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail} WindowsDetail
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    WindowsDetail.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityNote.WindowsDetail();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.cpeUri = reader.string();
-                                break;
-                            case 2:
-                                message.name = reader.string();
-                                break;
-                            case 3:
-                                message.description = reader.string();
-                                break;
-                            case 4:
-                                if (!(message.fixingKbs && message.fixingKbs.length))
-                                    message.fixingKbs = [];
-                                message.fixingKbs.push($root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.decode(reader, reader.uint32()));
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a WindowsDetail message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail} WindowsDetail
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    WindowsDetail.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a WindowsDetail message.
-                     * @function verify
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    WindowsDetail.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                            if (!$util.isString(message.cpeUri))
-                                return "cpeUri: string expected";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            if (!$util.isString(message.name))
-                                return "name: string expected";
-                        if (message.description != null && message.hasOwnProperty("description"))
-                            if (!$util.isString(message.description))
-                                return "description: string expected";
-                        if (message.fixingKbs != null && message.hasOwnProperty("fixingKbs")) {
-                            if (!Array.isArray(message.fixingKbs))
-                                return "fixingKbs: array expected";
-                            for (var i = 0; i < message.fixingKbs.length; ++i) {
-                                var error = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.verify(message.fixingKbs[i]);
-                                if (error)
-                                    return "fixingKbs." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a WindowsDetail message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail} WindowsDetail
-                     */
-                    WindowsDetail.fromObject = function fromObject(object) {
-                        if (object instanceof $root.grafeas.v1.VulnerabilityNote.WindowsDetail)
-                            return object;
-                        var message = new $root.grafeas.v1.VulnerabilityNote.WindowsDetail();
-                        if (object.cpeUri != null)
-                            message.cpeUri = String(object.cpeUri);
-                        if (object.name != null)
-                            message.name = String(object.name);
-                        if (object.description != null)
-                            message.description = String(object.description);
-                        if (object.fixingKbs) {
-                            if (!Array.isArray(object.fixingKbs))
-                                throw TypeError(".grafeas.v1.VulnerabilityNote.WindowsDetail.fixingKbs: array expected");
-                            message.fixingKbs = [];
-                            for (var i = 0; i < object.fixingKbs.length; ++i) {
-                                if (typeof object.fixingKbs[i] !== "object")
-                                    throw TypeError(".grafeas.v1.VulnerabilityNote.WindowsDetail.fixingKbs: object expected");
-                                message.fixingKbs[i] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.fromObject(object.fixingKbs[i]);
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a WindowsDetail message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityNote.WindowsDetail} message WindowsDetail
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    WindowsDetail.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.fixingKbs = [];
-                        if (options.defaults) {
-                            object.cpeUri = "";
-                            object.name = "";
-                            object.description = "";
-                        }
-                        if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                            object.cpeUri = message.cpeUri;
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            object.name = message.name;
-                        if (message.description != null && message.hasOwnProperty("description"))
-                            object.description = message.description;
-                        if (message.fixingKbs && message.fixingKbs.length) {
-                            object.fixingKbs = [];
-                            for (var j = 0; j < message.fixingKbs.length; ++j)
-                                object.fixingKbs[j] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.toObject(message.fixingKbs[j], options);
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this WindowsDetail to JSON.
-                     * @function toJSON
-                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    WindowsDetail.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    WindowsDetail.KnowledgeBase = (function() {
-    
-                        /**
-                         * Properties of a KnowledgeBase.
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                         * @interface IKnowledgeBase
-                         * @property {string|null} [name] KnowledgeBase name
-                         * @property {string|null} [url] KnowledgeBase url
-                         */
-    
-                        /**
-                         * Constructs a new KnowledgeBase.
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
-                         * @classdesc Represents a KnowledgeBase.
-                         * @implements IKnowledgeBase
-                         * @constructor
-                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase=} [properties] Properties to set
-                         */
-                        function KnowledgeBase(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * KnowledgeBase name.
-                         * @member {string} name
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @instance
-                         */
-                        KnowledgeBase.prototype.name = "";
-    
-                        /**
-                         * KnowledgeBase url.
-                         * @member {string} url
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @instance
-                         */
-                        KnowledgeBase.prototype.url = "";
-    
-                        /**
-                         * Creates a new KnowledgeBase instance using the specified properties.
-                         * @function create
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @static
-                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase=} [properties] Properties to set
-                         * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} KnowledgeBase instance
-                         */
-                        KnowledgeBase.create = function create(properties) {
-                            return new KnowledgeBase(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified KnowledgeBase message. Does not implicitly {@link grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.verify|verify} messages.
-                         * @function encode
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @static
-                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase} message KnowledgeBase message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        KnowledgeBase.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.url != null && message.hasOwnProperty("url"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified KnowledgeBase message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @static
-                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase} message KnowledgeBase message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        KnowledgeBase.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a KnowledgeBase message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} KnowledgeBase
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        KnowledgeBase.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.url = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a KnowledgeBase message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} KnowledgeBase
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        KnowledgeBase.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a KnowledgeBase message.
-                         * @function verify
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        KnowledgeBase.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.url != null && message.hasOwnProperty("url"))
-                                if (!$util.isString(message.url))
-                                    return "url: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a KnowledgeBase message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} KnowledgeBase
-                         */
-                        KnowledgeBase.fromObject = function fromObject(object) {
-                            if (object instanceof $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase)
-                                return object;
-                            var message = new $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.url != null)
-                                message.url = String(object.url);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a KnowledgeBase message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @static
-                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} message KnowledgeBase
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        KnowledgeBase.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.url = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.url != null && message.hasOwnProperty("url"))
-                                object.url = message.url;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this KnowledgeBase to JSON.
-                         * @function toJSON
-                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        KnowledgeBase.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return KnowledgeBase;
-                    })();
-    
-                    return WindowsDetail;
-                })();
-    
-                return VulnerabilityNote;
-            })();
-    
-            v1.VulnerabilityOccurrence = (function() {
-    
-                /**
-                 * Properties of a VulnerabilityOccurrence.
-                 * @memberof grafeas.v1
-                 * @interface IVulnerabilityOccurrence
-                 * @property {string|null} [type] VulnerabilityOccurrence type
-                 * @property {grafeas.v1.Severity|null} [severity] VulnerabilityOccurrence severity
-                 * @property {number|null} [cvssScore] VulnerabilityOccurrence cvssScore
-                 * @property {Array.<grafeas.v1.VulnerabilityOccurrence.IPackageIssue>|null} [packageIssue] VulnerabilityOccurrence packageIssue
-                 * @property {string|null} [shortDescription] VulnerabilityOccurrence shortDescription
-                 * @property {string|null} [longDescription] VulnerabilityOccurrence longDescription
-                 * @property {Array.<grafeas.v1.IRelatedUrl>|null} [relatedUrls] VulnerabilityOccurrence relatedUrls
-                 * @property {grafeas.v1.Severity|null} [effectiveSeverity] VulnerabilityOccurrence effectiveSeverity
-                 * @property {boolean|null} [fixAvailable] VulnerabilityOccurrence fixAvailable
-                 */
-    
-                /**
-                 * Constructs a new VulnerabilityOccurrence.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a VulnerabilityOccurrence.
-                 * @implements IVulnerabilityOccurrence
-                 * @constructor
-                 * @param {grafeas.v1.IVulnerabilityOccurrence=} [properties] Properties to set
-                 */
-                function VulnerabilityOccurrence(properties) {
-                    this.packageIssue = [];
-                    this.relatedUrls = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * VulnerabilityOccurrence type.
-                 * @member {string} type
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.type = "";
-    
-                /**
-                 * VulnerabilityOccurrence severity.
-                 * @member {grafeas.v1.Severity} severity
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.severity = 0;
-    
-                /**
-                 * VulnerabilityOccurrence cvssScore.
-                 * @member {number} cvssScore
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.cvssScore = 0;
-    
-                /**
-                 * VulnerabilityOccurrence packageIssue.
-                 * @member {Array.<grafeas.v1.VulnerabilityOccurrence.IPackageIssue>} packageIssue
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.packageIssue = $util.emptyArray;
-    
-                /**
-                 * VulnerabilityOccurrence shortDescription.
-                 * @member {string} shortDescription
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.shortDescription = "";
-    
-                /**
-                 * VulnerabilityOccurrence longDescription.
-                 * @member {string} longDescription
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.longDescription = "";
-    
-                /**
-                 * VulnerabilityOccurrence relatedUrls.
-                 * @member {Array.<grafeas.v1.IRelatedUrl>} relatedUrls
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.relatedUrls = $util.emptyArray;
-    
-                /**
-                 * VulnerabilityOccurrence effectiveSeverity.
-                 * @member {grafeas.v1.Severity} effectiveSeverity
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.effectiveSeverity = 0;
-    
-                /**
-                 * VulnerabilityOccurrence fixAvailable.
-                 * @member {boolean} fixAvailable
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 */
-                VulnerabilityOccurrence.prototype.fixAvailable = false;
-    
-                /**
-                 * Creates a new VulnerabilityOccurrence instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @static
-                 * @param {grafeas.v1.IVulnerabilityOccurrence=} [properties] Properties to set
-                 * @returns {grafeas.v1.VulnerabilityOccurrence} VulnerabilityOccurrence instance
-                 */
-                VulnerabilityOccurrence.create = function create(properties) {
-                    return new VulnerabilityOccurrence(properties);
-                };
-    
-                /**
-                 * Encodes the specified VulnerabilityOccurrence message. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @static
-                 * @param {grafeas.v1.IVulnerabilityOccurrence} message VulnerabilityOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                VulnerabilityOccurrence.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
-                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
-                        writer.uint32(/* id 3, wireType 5 =*/29).float(message.cvssScore);
-                    if (message.packageIssue != null && message.packageIssue.length)
-                        for (var i = 0; i < message.packageIssue.length; ++i)
-                            $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.encode(message.packageIssue[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                    if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.shortDescription);
-                    if (message.longDescription != null && message.hasOwnProperty("longDescription"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.longDescription);
-                    if (message.relatedUrls != null && message.relatedUrls.length)
-                        for (var i = 0; i < message.relatedUrls.length; ++i)
-                            $root.grafeas.v1.RelatedUrl.encode(message.relatedUrls[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                    if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
-                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.effectiveSeverity);
-                    if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
-                        writer.uint32(/* id 9, wireType 0 =*/72).bool(message.fixAvailable);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified VulnerabilityOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @static
-                 * @param {grafeas.v1.IVulnerabilityOccurrence} message VulnerabilityOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                VulnerabilityOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a VulnerabilityOccurrence message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.VulnerabilityOccurrence} VulnerabilityOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                VulnerabilityOccurrence.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityOccurrence();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.severity = reader.int32();
-                            break;
-                        case 3:
-                            message.cvssScore = reader.float();
-                            break;
-                        case 4:
-                            if (!(message.packageIssue && message.packageIssue.length))
-                                message.packageIssue = [];
-                            message.packageIssue.push($root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            message.shortDescription = reader.string();
-                            break;
-                        case 6:
-                            message.longDescription = reader.string();
-                            break;
-                        case 7:
-                            if (!(message.relatedUrls && message.relatedUrls.length))
-                                message.relatedUrls = [];
-                            message.relatedUrls.push($root.grafeas.v1.RelatedUrl.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            message.effectiveSeverity = reader.int32();
-                            break;
-                        case 9:
-                            message.fixAvailable = reader.bool();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a VulnerabilityOccurrence message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.VulnerabilityOccurrence} VulnerabilityOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                VulnerabilityOccurrence.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a VulnerabilityOccurrence message.
-                 * @function verify
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                VulnerabilityOccurrence.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        switch (message.severity) {
-                        default:
-                            return "severity: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                            break;
-                        }
-                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
-                        if (typeof message.cvssScore !== "number")
-                            return "cvssScore: number expected";
-                    if (message.packageIssue != null && message.hasOwnProperty("packageIssue")) {
-                        if (!Array.isArray(message.packageIssue))
-                            return "packageIssue: array expected";
-                        for (var i = 0; i < message.packageIssue.length; ++i) {
-                            var error = $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.verify(message.packageIssue[i]);
-                            if (error)
-                                return "packageIssue." + error;
-                        }
-                    }
-                    if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
-                        if (!$util.isString(message.shortDescription))
-                            return "shortDescription: string expected";
-                    if (message.longDescription != null && message.hasOwnProperty("longDescription"))
-                        if (!$util.isString(message.longDescription))
-                            return "longDescription: string expected";
-                    if (message.relatedUrls != null && message.hasOwnProperty("relatedUrls")) {
-                        if (!Array.isArray(message.relatedUrls))
-                            return "relatedUrls: array expected";
-                        for (var i = 0; i < message.relatedUrls.length; ++i) {
-                            var error = $root.grafeas.v1.RelatedUrl.verify(message.relatedUrls[i]);
-                            if (error)
-                                return "relatedUrls." + error;
-                        }
-                    }
-                    if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
-                        switch (message.effectiveSeverity) {
-                        default:
-                            return "effectiveSeverity: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                            break;
-                        }
-                    if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
-                        if (typeof message.fixAvailable !== "boolean")
-                            return "fixAvailable: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a VulnerabilityOccurrence message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.VulnerabilityOccurrence} VulnerabilityOccurrence
-                 */
-                VulnerabilityOccurrence.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.VulnerabilityOccurrence)
-                        return object;
-                    var message = new $root.grafeas.v1.VulnerabilityOccurrence();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    switch (object.severity) {
-                    case "SEVERITY_UNSPECIFIED":
-                    case 0:
-                        message.severity = 0;
-                        break;
-                    case "MINIMAL":
-                    case 1:
-                        message.severity = 1;
-                        break;
-                    case "LOW":
-                    case 2:
-                        message.severity = 2;
-                        break;
-                    case "MEDIUM":
-                    case 3:
-                        message.severity = 3;
-                        break;
-                    case "HIGH":
-                    case 4:
-                        message.severity = 4;
-                        break;
-                    case "CRITICAL":
-                    case 5:
-                        message.severity = 5;
-                        break;
-                    }
-                    if (object.cvssScore != null)
-                        message.cvssScore = Number(object.cvssScore);
-                    if (object.packageIssue) {
-                        if (!Array.isArray(object.packageIssue))
-                            throw TypeError(".grafeas.v1.VulnerabilityOccurrence.packageIssue: array expected");
-                        message.packageIssue = [];
-                        for (var i = 0; i < object.packageIssue.length; ++i) {
-                            if (typeof object.packageIssue[i] !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.packageIssue: object expected");
-                            message.packageIssue[i] = $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.fromObject(object.packageIssue[i]);
-                        }
-                    }
-                    if (object.shortDescription != null)
-                        message.shortDescription = String(object.shortDescription);
-                    if (object.longDescription != null)
-                        message.longDescription = String(object.longDescription);
-                    if (object.relatedUrls) {
-                        if (!Array.isArray(object.relatedUrls))
-                            throw TypeError(".grafeas.v1.VulnerabilityOccurrence.relatedUrls: array expected");
-                        message.relatedUrls = [];
-                        for (var i = 0; i < object.relatedUrls.length; ++i) {
-                            if (typeof object.relatedUrls[i] !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.relatedUrls: object expected");
-                            message.relatedUrls[i] = $root.grafeas.v1.RelatedUrl.fromObject(object.relatedUrls[i]);
-                        }
-                    }
-                    switch (object.effectiveSeverity) {
-                    case "SEVERITY_UNSPECIFIED":
-                    case 0:
-                        message.effectiveSeverity = 0;
-                        break;
-                    case "MINIMAL":
-                    case 1:
-                        message.effectiveSeverity = 1;
-                        break;
-                    case "LOW":
-                    case 2:
-                        message.effectiveSeverity = 2;
-                        break;
-                    case "MEDIUM":
-                    case 3:
-                        message.effectiveSeverity = 3;
-                        break;
-                    case "HIGH":
-                    case 4:
-                        message.effectiveSeverity = 4;
-                        break;
-                    case "CRITICAL":
-                    case 5:
-                        message.effectiveSeverity = 5;
-                        break;
-                    }
-                    if (object.fixAvailable != null)
-                        message.fixAvailable = Boolean(object.fixAvailable);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a VulnerabilityOccurrence message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @static
-                 * @param {grafeas.v1.VulnerabilityOccurrence} message VulnerabilityOccurrence
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                VulnerabilityOccurrence.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.packageIssue = [];
-                        object.relatedUrls = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
-                        object.cvssScore = 0;
-                        object.shortDescription = "";
-                        object.longDescription = "";
-                        object.effectiveSeverity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
-                        object.fixAvailable = false;
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] : message.severity;
-                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
-                        object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
-                    if (message.packageIssue && message.packageIssue.length) {
-                        object.packageIssue = [];
-                        for (var j = 0; j < message.packageIssue.length; ++j)
-                            object.packageIssue[j] = $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.toObject(message.packageIssue[j], options);
-                    }
-                    if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
-                        object.shortDescription = message.shortDescription;
-                    if (message.longDescription != null && message.hasOwnProperty("longDescription"))
-                        object.longDescription = message.longDescription;
-                    if (message.relatedUrls && message.relatedUrls.length) {
-                        object.relatedUrls = [];
-                        for (var j = 0; j < message.relatedUrls.length; ++j)
-                            object.relatedUrls[j] = $root.grafeas.v1.RelatedUrl.toObject(message.relatedUrls[j], options);
-                    }
-                    if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
-                        object.effectiveSeverity = options.enums === String ? $root.grafeas.v1.Severity[message.effectiveSeverity] : message.effectiveSeverity;
-                    if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
-                        object.fixAvailable = message.fixAvailable;
-                    return object;
-                };
-    
-                /**
-                 * Converts this VulnerabilityOccurrence to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.VulnerabilityOccurrence
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                VulnerabilityOccurrence.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                VulnerabilityOccurrence.PackageIssue = (function() {
-    
-                    /**
-                     * Properties of a PackageIssue.
-                     * @memberof grafeas.v1.VulnerabilityOccurrence
-                     * @interface IPackageIssue
-                     * @property {string|null} [affectedCpeUri] PackageIssue affectedCpeUri
-                     * @property {string|null} [affectedPackage] PackageIssue affectedPackage
-                     * @property {grafeas.v1.IVersion|null} [affectedVersion] PackageIssue affectedVersion
-                     * @property {string|null} [fixedCpeUri] PackageIssue fixedCpeUri
-                     * @property {string|null} [fixedPackage] PackageIssue fixedPackage
-                     * @property {grafeas.v1.IVersion|null} [fixedVersion] PackageIssue fixedVersion
-                     * @property {boolean|null} [fixAvailable] PackageIssue fixAvailable
-                     */
-    
-                    /**
-                     * Constructs a new PackageIssue.
-                     * @memberof grafeas.v1.VulnerabilityOccurrence
-                     * @classdesc Represents a PackageIssue.
-                     * @implements IPackageIssue
-                     * @constructor
-                     * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue=} [properties] Properties to set
-                     */
-                    function PackageIssue(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * PackageIssue affectedCpeUri.
-                     * @member {string} affectedCpeUri
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @instance
-                     */
-                    PackageIssue.prototype.affectedCpeUri = "";
-    
-                    /**
-                     * PackageIssue affectedPackage.
-                     * @member {string} affectedPackage
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @instance
-                     */
-                    PackageIssue.prototype.affectedPackage = "";
-    
-                    /**
-                     * PackageIssue affectedVersion.
-                     * @member {grafeas.v1.IVersion|null|undefined} affectedVersion
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @instance
-                     */
-                    PackageIssue.prototype.affectedVersion = null;
-    
-                    /**
-                     * PackageIssue fixedCpeUri.
-                     * @member {string} fixedCpeUri
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @instance
-                     */
-                    PackageIssue.prototype.fixedCpeUri = "";
-    
-                    /**
-                     * PackageIssue fixedPackage.
-                     * @member {string} fixedPackage
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @instance
-                     */
-                    PackageIssue.prototype.fixedPackage = "";
-    
-                    /**
-                     * PackageIssue fixedVersion.
-                     * @member {grafeas.v1.IVersion|null|undefined} fixedVersion
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @instance
-                     */
-                    PackageIssue.prototype.fixedVersion = null;
-    
-                    /**
-                     * PackageIssue fixAvailable.
-                     * @member {boolean} fixAvailable
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @instance
-                     */
-                    PackageIssue.prototype.fixAvailable = false;
-    
-                    /**
-                     * Creates a new PackageIssue instance using the specified properties.
-                     * @function create
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue=} [properties] Properties to set
-                     * @returns {grafeas.v1.VulnerabilityOccurrence.PackageIssue} PackageIssue instance
-                     */
-                    PackageIssue.create = function create(properties) {
-                        return new PackageIssue(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified PackageIssue message. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.PackageIssue.verify|verify} messages.
-                     * @function encode
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue} message PackageIssue message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PackageIssue.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.affectedCpeUri);
-                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.affectedPackage);
-                        if (message.affectedVersion != null && message.hasOwnProperty("affectedVersion"))
-                            $root.grafeas.v1.Version.encode(message.affectedVersion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
-                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.fixedCpeUri);
-                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
-                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.fixedPackage);
-                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion"))
-                            $root.grafeas.v1.Version.encode(message.fixedVersion, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                        if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
-                            writer.uint32(/* id 7, wireType 0 =*/56).bool(message.fixAvailable);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified PackageIssue message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.PackageIssue.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue} message PackageIssue message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PackageIssue.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a PackageIssue message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {grafeas.v1.VulnerabilityOccurrence.PackageIssue} PackageIssue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PackageIssue.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.affectedCpeUri = reader.string();
-                                break;
-                            case 2:
-                                message.affectedPackage = reader.string();
-                                break;
-                            case 3:
-                                message.affectedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.fixedCpeUri = reader.string();
-                                break;
-                            case 5:
-                                message.fixedPackage = reader.string();
-                                break;
-                            case 6:
-                                message.fixedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
-                                break;
-                            case 7:
-                                message.fixAvailable = reader.bool();
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a PackageIssue message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {grafeas.v1.VulnerabilityOccurrence.PackageIssue} PackageIssue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PackageIssue.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a PackageIssue message.
-                     * @function verify
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    PackageIssue.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
-                            if (!$util.isString(message.affectedCpeUri))
-                                return "affectedCpeUri: string expected";
-                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
-                            if (!$util.isString(message.affectedPackage))
-                                return "affectedPackage: string expected";
-                        if (message.affectedVersion != null && message.hasOwnProperty("affectedVersion")) {
-                            var error = $root.grafeas.v1.Version.verify(message.affectedVersion);
-                            if (error)
-                                return "affectedVersion." + error;
-                        }
-                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
-                            if (!$util.isString(message.fixedCpeUri))
-                                return "fixedCpeUri: string expected";
-                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
-                            if (!$util.isString(message.fixedPackage))
-                                return "fixedPackage: string expected";
-                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion")) {
-                            var error = $root.grafeas.v1.Version.verify(message.fixedVersion);
-                            if (error)
-                                return "fixedVersion." + error;
-                        }
-                        if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
-                            if (typeof message.fixAvailable !== "boolean")
-                                return "fixAvailable: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a PackageIssue message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {grafeas.v1.VulnerabilityOccurrence.PackageIssue} PackageIssue
-                     */
-                    PackageIssue.fromObject = function fromObject(object) {
-                        if (object instanceof $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue)
-                            return object;
-                        var message = new $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue();
-                        if (object.affectedCpeUri != null)
-                            message.affectedCpeUri = String(object.affectedCpeUri);
-                        if (object.affectedPackage != null)
-                            message.affectedPackage = String(object.affectedPackage);
-                        if (object.affectedVersion != null) {
-                            if (typeof object.affectedVersion !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.PackageIssue.affectedVersion: object expected");
-                            message.affectedVersion = $root.grafeas.v1.Version.fromObject(object.affectedVersion);
-                        }
-                        if (object.fixedCpeUri != null)
-                            message.fixedCpeUri = String(object.fixedCpeUri);
-                        if (object.fixedPackage != null)
-                            message.fixedPackage = String(object.fixedPackage);
-                        if (object.fixedVersion != null) {
-                            if (typeof object.fixedVersion !== "object")
-                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.PackageIssue.fixedVersion: object expected");
-                            message.fixedVersion = $root.grafeas.v1.Version.fromObject(object.fixedVersion);
-                        }
-                        if (object.fixAvailable != null)
-                            message.fixAvailable = Boolean(object.fixAvailable);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a PackageIssue message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @static
-                     * @param {grafeas.v1.VulnerabilityOccurrence.PackageIssue} message PackageIssue
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    PackageIssue.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.affectedCpeUri = "";
-                            object.affectedPackage = "";
-                            object.affectedVersion = null;
-                            object.fixedCpeUri = "";
-                            object.fixedPackage = "";
-                            object.fixedVersion = null;
-                            object.fixAvailable = false;
-                        }
-                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
-                            object.affectedCpeUri = message.affectedCpeUri;
-                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
-                            object.affectedPackage = message.affectedPackage;
-                        if (message.affectedVersion != null && message.hasOwnProperty("affectedVersion"))
-                            object.affectedVersion = $root.grafeas.v1.Version.toObject(message.affectedVersion, options);
-                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
-                            object.fixedCpeUri = message.fixedCpeUri;
-                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
-                            object.fixedPackage = message.fixedPackage;
-                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion"))
-                            object.fixedVersion = $root.grafeas.v1.Version.toObject(message.fixedVersion, options);
-                        if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
-                            object.fixAvailable = message.fixAvailable;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this PackageIssue to JSON.
-                     * @function toJSON
-                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    PackageIssue.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return PackageIssue;
-                })();
-    
-                return VulnerabilityOccurrence;
+                return DeploymentOccurrence;
             })();
     
             v1.DiscoveryNote = (function() {
@@ -10166,2978 +7068,6 @@
                 })();
     
                 return DiscoveryOccurrence;
-            })();
-    
-            v1.Layer = (function() {
-    
-                /**
-                 * Properties of a Layer.
-                 * @memberof grafeas.v1
-                 * @interface ILayer
-                 * @property {string|null} [directive] Layer directive
-                 * @property {string|null} ["arguments"] Layer arguments
-                 */
-    
-                /**
-                 * Constructs a new Layer.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a Layer.
-                 * @implements ILayer
-                 * @constructor
-                 * @param {grafeas.v1.ILayer=} [properties] Properties to set
-                 */
-                function Layer(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Layer directive.
-                 * @member {string} directive
-                 * @memberof grafeas.v1.Layer
-                 * @instance
-                 */
-                Layer.prototype.directive = "";
-    
-                /**
-                 * Layer arguments.
-                 * @member {string} arguments
-                 * @memberof grafeas.v1.Layer
-                 * @instance
-                 */
-                Layer.prototype["arguments"] = "";
-    
-                /**
-                 * Creates a new Layer instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.Layer
-                 * @static
-                 * @param {grafeas.v1.ILayer=} [properties] Properties to set
-                 * @returns {grafeas.v1.Layer} Layer instance
-                 */
-                Layer.create = function create(properties) {
-                    return new Layer(properties);
-                };
-    
-                /**
-                 * Encodes the specified Layer message. Does not implicitly {@link grafeas.v1.Layer.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.Layer
-                 * @static
-                 * @param {grafeas.v1.ILayer} message Layer message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Layer.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.directive != null && message.hasOwnProperty("directive"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.directive);
-                    if (message["arguments"] != null && message.hasOwnProperty("arguments"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message["arguments"]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Layer message, length delimited. Does not implicitly {@link grafeas.v1.Layer.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.Layer
-                 * @static
-                 * @param {grafeas.v1.ILayer} message Layer message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Layer.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Layer message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.Layer
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.Layer} Layer
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Layer.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Layer();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.directive = reader.string();
-                            break;
-                        case 2:
-                            message["arguments"] = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Layer message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.Layer
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.Layer} Layer
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Layer.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Layer message.
-                 * @function verify
-                 * @memberof grafeas.v1.Layer
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Layer.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.directive != null && message.hasOwnProperty("directive"))
-                        if (!$util.isString(message.directive))
-                            return "directive: string expected";
-                    if (message["arguments"] != null && message.hasOwnProperty("arguments"))
-                        if (!$util.isString(message["arguments"]))
-                            return "arguments: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Layer message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.Layer
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.Layer} Layer
-                 */
-                Layer.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.Layer)
-                        return object;
-                    var message = new $root.grafeas.v1.Layer();
-                    if (object.directive != null)
-                        message.directive = String(object.directive);
-                    if (object["arguments"] != null)
-                        message["arguments"] = String(object["arguments"]);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Layer message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.Layer
-                 * @static
-                 * @param {grafeas.v1.Layer} message Layer
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Layer.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.directive = "";
-                        object["arguments"] = "";
-                    }
-                    if (message.directive != null && message.hasOwnProperty("directive"))
-                        object.directive = message.directive;
-                    if (message["arguments"] != null && message.hasOwnProperty("arguments"))
-                        object["arguments"] = message["arguments"];
-                    return object;
-                };
-    
-                /**
-                 * Converts this Layer to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.Layer
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Layer.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Layer;
-            })();
-    
-            v1.Fingerprint = (function() {
-    
-                /**
-                 * Properties of a Fingerprint.
-                 * @memberof grafeas.v1
-                 * @interface IFingerprint
-                 * @property {string|null} [v1Name] Fingerprint v1Name
-                 * @property {Array.<string>|null} [v2Blob] Fingerprint v2Blob
-                 * @property {string|null} [v2Name] Fingerprint v2Name
-                 */
-    
-                /**
-                 * Constructs a new Fingerprint.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a Fingerprint.
-                 * @implements IFingerprint
-                 * @constructor
-                 * @param {grafeas.v1.IFingerprint=} [properties] Properties to set
-                 */
-                function Fingerprint(properties) {
-                    this.v2Blob = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Fingerprint v1Name.
-                 * @member {string} v1Name
-                 * @memberof grafeas.v1.Fingerprint
-                 * @instance
-                 */
-                Fingerprint.prototype.v1Name = "";
-    
-                /**
-                 * Fingerprint v2Blob.
-                 * @member {Array.<string>} v2Blob
-                 * @memberof grafeas.v1.Fingerprint
-                 * @instance
-                 */
-                Fingerprint.prototype.v2Blob = $util.emptyArray;
-    
-                /**
-                 * Fingerprint v2Name.
-                 * @member {string} v2Name
-                 * @memberof grafeas.v1.Fingerprint
-                 * @instance
-                 */
-                Fingerprint.prototype.v2Name = "";
-    
-                /**
-                 * Creates a new Fingerprint instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.Fingerprint
-                 * @static
-                 * @param {grafeas.v1.IFingerprint=} [properties] Properties to set
-                 * @returns {grafeas.v1.Fingerprint} Fingerprint instance
-                 */
-                Fingerprint.create = function create(properties) {
-                    return new Fingerprint(properties);
-                };
-    
-                /**
-                 * Encodes the specified Fingerprint message. Does not implicitly {@link grafeas.v1.Fingerprint.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.Fingerprint
-                 * @static
-                 * @param {grafeas.v1.IFingerprint} message Fingerprint message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Fingerprint.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.v1Name != null && message.hasOwnProperty("v1Name"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.v1Name);
-                    if (message.v2Blob != null && message.v2Blob.length)
-                        for (var i = 0; i < message.v2Blob.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.v2Blob[i]);
-                    if (message.v2Name != null && message.hasOwnProperty("v2Name"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.v2Name);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Fingerprint message, length delimited. Does not implicitly {@link grafeas.v1.Fingerprint.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.Fingerprint
-                 * @static
-                 * @param {grafeas.v1.IFingerprint} message Fingerprint message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Fingerprint.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Fingerprint message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.Fingerprint
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.Fingerprint} Fingerprint
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Fingerprint.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Fingerprint();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.v1Name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.v2Blob && message.v2Blob.length))
-                                message.v2Blob = [];
-                            message.v2Blob.push(reader.string());
-                            break;
-                        case 3:
-                            message.v2Name = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Fingerprint message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.Fingerprint
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.Fingerprint} Fingerprint
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Fingerprint.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Fingerprint message.
-                 * @function verify
-                 * @memberof grafeas.v1.Fingerprint
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Fingerprint.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.v1Name != null && message.hasOwnProperty("v1Name"))
-                        if (!$util.isString(message.v1Name))
-                            return "v1Name: string expected";
-                    if (message.v2Blob != null && message.hasOwnProperty("v2Blob")) {
-                        if (!Array.isArray(message.v2Blob))
-                            return "v2Blob: array expected";
-                        for (var i = 0; i < message.v2Blob.length; ++i)
-                            if (!$util.isString(message.v2Blob[i]))
-                                return "v2Blob: string[] expected";
-                    }
-                    if (message.v2Name != null && message.hasOwnProperty("v2Name"))
-                        if (!$util.isString(message.v2Name))
-                            return "v2Name: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Fingerprint message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.Fingerprint
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.Fingerprint} Fingerprint
-                 */
-                Fingerprint.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.Fingerprint)
-                        return object;
-                    var message = new $root.grafeas.v1.Fingerprint();
-                    if (object.v1Name != null)
-                        message.v1Name = String(object.v1Name);
-                    if (object.v2Blob) {
-                        if (!Array.isArray(object.v2Blob))
-                            throw TypeError(".grafeas.v1.Fingerprint.v2Blob: array expected");
-                        message.v2Blob = [];
-                        for (var i = 0; i < object.v2Blob.length; ++i)
-                            message.v2Blob[i] = String(object.v2Blob[i]);
-                    }
-                    if (object.v2Name != null)
-                        message.v2Name = String(object.v2Name);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Fingerprint message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.Fingerprint
-                 * @static
-                 * @param {grafeas.v1.Fingerprint} message Fingerprint
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Fingerprint.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.v2Blob = [];
-                    if (options.defaults) {
-                        object.v1Name = "";
-                        object.v2Name = "";
-                    }
-                    if (message.v1Name != null && message.hasOwnProperty("v1Name"))
-                        object.v1Name = message.v1Name;
-                    if (message.v2Blob && message.v2Blob.length) {
-                        object.v2Blob = [];
-                        for (var j = 0; j < message.v2Blob.length; ++j)
-                            object.v2Blob[j] = message.v2Blob[j];
-                    }
-                    if (message.v2Name != null && message.hasOwnProperty("v2Name"))
-                        object.v2Name = message.v2Name;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Fingerprint to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.Fingerprint
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Fingerprint.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Fingerprint;
-            })();
-    
-            v1.ImageNote = (function() {
-    
-                /**
-                 * Properties of an ImageNote.
-                 * @memberof grafeas.v1
-                 * @interface IImageNote
-                 * @property {string|null} [resourceUrl] ImageNote resourceUrl
-                 * @property {grafeas.v1.IFingerprint|null} [fingerprint] ImageNote fingerprint
-                 */
-    
-                /**
-                 * Constructs a new ImageNote.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents an ImageNote.
-                 * @implements IImageNote
-                 * @constructor
-                 * @param {grafeas.v1.IImageNote=} [properties] Properties to set
-                 */
-                function ImageNote(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ImageNote resourceUrl.
-                 * @member {string} resourceUrl
-                 * @memberof grafeas.v1.ImageNote
-                 * @instance
-                 */
-                ImageNote.prototype.resourceUrl = "";
-    
-                /**
-                 * ImageNote fingerprint.
-                 * @member {grafeas.v1.IFingerprint|null|undefined} fingerprint
-                 * @memberof grafeas.v1.ImageNote
-                 * @instance
-                 */
-                ImageNote.prototype.fingerprint = null;
-    
-                /**
-                 * Creates a new ImageNote instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.ImageNote
-                 * @static
-                 * @param {grafeas.v1.IImageNote=} [properties] Properties to set
-                 * @returns {grafeas.v1.ImageNote} ImageNote instance
-                 */
-                ImageNote.create = function create(properties) {
-                    return new ImageNote(properties);
-                };
-    
-                /**
-                 * Encodes the specified ImageNote message. Does not implicitly {@link grafeas.v1.ImageNote.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.ImageNote
-                 * @static
-                 * @param {grafeas.v1.IImageNote} message ImageNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ImageNote.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.resourceUrl != null && message.hasOwnProperty("resourceUrl"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceUrl);
-                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
-                        $root.grafeas.v1.Fingerprint.encode(message.fingerprint, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ImageNote message, length delimited. Does not implicitly {@link grafeas.v1.ImageNote.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.ImageNote
-                 * @static
-                 * @param {grafeas.v1.IImageNote} message ImageNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ImageNote.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an ImageNote message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.ImageNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.ImageNote} ImageNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ImageNote.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.ImageNote();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.resourceUrl = reader.string();
-                            break;
-                        case 2:
-                            message.fingerprint = $root.grafeas.v1.Fingerprint.decode(reader, reader.uint32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an ImageNote message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.ImageNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.ImageNote} ImageNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ImageNote.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an ImageNote message.
-                 * @function verify
-                 * @memberof grafeas.v1.ImageNote
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ImageNote.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.resourceUrl != null && message.hasOwnProperty("resourceUrl"))
-                        if (!$util.isString(message.resourceUrl))
-                            return "resourceUrl: string expected";
-                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint")) {
-                        var error = $root.grafeas.v1.Fingerprint.verify(message.fingerprint);
-                        if (error)
-                            return "fingerprint." + error;
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates an ImageNote message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.ImageNote
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.ImageNote} ImageNote
-                 */
-                ImageNote.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.ImageNote)
-                        return object;
-                    var message = new $root.grafeas.v1.ImageNote();
-                    if (object.resourceUrl != null)
-                        message.resourceUrl = String(object.resourceUrl);
-                    if (object.fingerprint != null) {
-                        if (typeof object.fingerprint !== "object")
-                            throw TypeError(".grafeas.v1.ImageNote.fingerprint: object expected");
-                        message.fingerprint = $root.grafeas.v1.Fingerprint.fromObject(object.fingerprint);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an ImageNote message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.ImageNote
-                 * @static
-                 * @param {grafeas.v1.ImageNote} message ImageNote
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ImageNote.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.resourceUrl = "";
-                        object.fingerprint = null;
-                    }
-                    if (message.resourceUrl != null && message.hasOwnProperty("resourceUrl"))
-                        object.resourceUrl = message.resourceUrl;
-                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
-                        object.fingerprint = $root.grafeas.v1.Fingerprint.toObject(message.fingerprint, options);
-                    return object;
-                };
-    
-                /**
-                 * Converts this ImageNote to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.ImageNote
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ImageNote.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ImageNote;
-            })();
-    
-            v1.ImageOccurrence = (function() {
-    
-                /**
-                 * Properties of an ImageOccurrence.
-                 * @memberof grafeas.v1
-                 * @interface IImageOccurrence
-                 * @property {grafeas.v1.IFingerprint|null} [fingerprint] ImageOccurrence fingerprint
-                 * @property {number|null} [distance] ImageOccurrence distance
-                 * @property {Array.<grafeas.v1.ILayer>|null} [layerInfo] ImageOccurrence layerInfo
-                 * @property {string|null} [baseResourceUrl] ImageOccurrence baseResourceUrl
-                 */
-    
-                /**
-                 * Constructs a new ImageOccurrence.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents an ImageOccurrence.
-                 * @implements IImageOccurrence
-                 * @constructor
-                 * @param {grafeas.v1.IImageOccurrence=} [properties] Properties to set
-                 */
-                function ImageOccurrence(properties) {
-                    this.layerInfo = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ImageOccurrence fingerprint.
-                 * @member {grafeas.v1.IFingerprint|null|undefined} fingerprint
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @instance
-                 */
-                ImageOccurrence.prototype.fingerprint = null;
-    
-                /**
-                 * ImageOccurrence distance.
-                 * @member {number} distance
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @instance
-                 */
-                ImageOccurrence.prototype.distance = 0;
-    
-                /**
-                 * ImageOccurrence layerInfo.
-                 * @member {Array.<grafeas.v1.ILayer>} layerInfo
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @instance
-                 */
-                ImageOccurrence.prototype.layerInfo = $util.emptyArray;
-    
-                /**
-                 * ImageOccurrence baseResourceUrl.
-                 * @member {string} baseResourceUrl
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @instance
-                 */
-                ImageOccurrence.prototype.baseResourceUrl = "";
-    
-                /**
-                 * Creates a new ImageOccurrence instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @static
-                 * @param {grafeas.v1.IImageOccurrence=} [properties] Properties to set
-                 * @returns {grafeas.v1.ImageOccurrence} ImageOccurrence instance
-                 */
-                ImageOccurrence.create = function create(properties) {
-                    return new ImageOccurrence(properties);
-                };
-    
-                /**
-                 * Encodes the specified ImageOccurrence message. Does not implicitly {@link grafeas.v1.ImageOccurrence.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @static
-                 * @param {grafeas.v1.IImageOccurrence} message ImageOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ImageOccurrence.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
-                        $root.grafeas.v1.Fingerprint.encode(message.fingerprint, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.distance != null && message.hasOwnProperty("distance"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.distance);
-                    if (message.layerInfo != null && message.layerInfo.length)
-                        for (var i = 0; i < message.layerInfo.length; ++i)
-                            $root.grafeas.v1.Layer.encode(message.layerInfo[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.baseResourceUrl != null && message.hasOwnProperty("baseResourceUrl"))
-                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.baseResourceUrl);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ImageOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.ImageOccurrence.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @static
-                 * @param {grafeas.v1.IImageOccurrence} message ImageOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ImageOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an ImageOccurrence message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.ImageOccurrence} ImageOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ImageOccurrence.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.ImageOccurrence();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.fingerprint = $root.grafeas.v1.Fingerprint.decode(reader, reader.uint32());
-                            break;
-                        case 2:
-                            message.distance = reader.int32();
-                            break;
-                        case 3:
-                            if (!(message.layerInfo && message.layerInfo.length))
-                                message.layerInfo = [];
-                            message.layerInfo.push($root.grafeas.v1.Layer.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            message.baseResourceUrl = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an ImageOccurrence message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.ImageOccurrence} ImageOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ImageOccurrence.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an ImageOccurrence message.
-                 * @function verify
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ImageOccurrence.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint")) {
-                        var error = $root.grafeas.v1.Fingerprint.verify(message.fingerprint);
-                        if (error)
-                            return "fingerprint." + error;
-                    }
-                    if (message.distance != null && message.hasOwnProperty("distance"))
-                        if (!$util.isInteger(message.distance))
-                            return "distance: integer expected";
-                    if (message.layerInfo != null && message.hasOwnProperty("layerInfo")) {
-                        if (!Array.isArray(message.layerInfo))
-                            return "layerInfo: array expected";
-                        for (var i = 0; i < message.layerInfo.length; ++i) {
-                            var error = $root.grafeas.v1.Layer.verify(message.layerInfo[i]);
-                            if (error)
-                                return "layerInfo." + error;
-                        }
-                    }
-                    if (message.baseResourceUrl != null && message.hasOwnProperty("baseResourceUrl"))
-                        if (!$util.isString(message.baseResourceUrl))
-                            return "baseResourceUrl: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an ImageOccurrence message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.ImageOccurrence} ImageOccurrence
-                 */
-                ImageOccurrence.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.ImageOccurrence)
-                        return object;
-                    var message = new $root.grafeas.v1.ImageOccurrence();
-                    if (object.fingerprint != null) {
-                        if (typeof object.fingerprint !== "object")
-                            throw TypeError(".grafeas.v1.ImageOccurrence.fingerprint: object expected");
-                        message.fingerprint = $root.grafeas.v1.Fingerprint.fromObject(object.fingerprint);
-                    }
-                    if (object.distance != null)
-                        message.distance = object.distance | 0;
-                    if (object.layerInfo) {
-                        if (!Array.isArray(object.layerInfo))
-                            throw TypeError(".grafeas.v1.ImageOccurrence.layerInfo: array expected");
-                        message.layerInfo = [];
-                        for (var i = 0; i < object.layerInfo.length; ++i) {
-                            if (typeof object.layerInfo[i] !== "object")
-                                throw TypeError(".grafeas.v1.ImageOccurrence.layerInfo: object expected");
-                            message.layerInfo[i] = $root.grafeas.v1.Layer.fromObject(object.layerInfo[i]);
-                        }
-                    }
-                    if (object.baseResourceUrl != null)
-                        message.baseResourceUrl = String(object.baseResourceUrl);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an ImageOccurrence message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @static
-                 * @param {grafeas.v1.ImageOccurrence} message ImageOccurrence
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ImageOccurrence.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.layerInfo = [];
-                    if (options.defaults) {
-                        object.fingerprint = null;
-                        object.distance = 0;
-                        object.baseResourceUrl = "";
-                    }
-                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
-                        object.fingerprint = $root.grafeas.v1.Fingerprint.toObject(message.fingerprint, options);
-                    if (message.distance != null && message.hasOwnProperty("distance"))
-                        object.distance = message.distance;
-                    if (message.layerInfo && message.layerInfo.length) {
-                        object.layerInfo = [];
-                        for (var j = 0; j < message.layerInfo.length; ++j)
-                            object.layerInfo[j] = $root.grafeas.v1.Layer.toObject(message.layerInfo[j], options);
-                    }
-                    if (message.baseResourceUrl != null && message.hasOwnProperty("baseResourceUrl"))
-                        object.baseResourceUrl = message.baseResourceUrl;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ImageOccurrence to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.ImageOccurrence
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ImageOccurrence.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ImageOccurrence;
-            })();
-    
-            v1.BuildNote = (function() {
-    
-                /**
-                 * Properties of a BuildNote.
-                 * @memberof grafeas.v1
-                 * @interface IBuildNote
-                 * @property {string|null} [builderVersion] BuildNote builderVersion
-                 */
-    
-                /**
-                 * Constructs a new BuildNote.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a BuildNote.
-                 * @implements IBuildNote
-                 * @constructor
-                 * @param {grafeas.v1.IBuildNote=} [properties] Properties to set
-                 */
-                function BuildNote(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * BuildNote builderVersion.
-                 * @member {string} builderVersion
-                 * @memberof grafeas.v1.BuildNote
-                 * @instance
-                 */
-                BuildNote.prototype.builderVersion = "";
-    
-                /**
-                 * Creates a new BuildNote instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.BuildNote
-                 * @static
-                 * @param {grafeas.v1.IBuildNote=} [properties] Properties to set
-                 * @returns {grafeas.v1.BuildNote} BuildNote instance
-                 */
-                BuildNote.create = function create(properties) {
-                    return new BuildNote(properties);
-                };
-    
-                /**
-                 * Encodes the specified BuildNote message. Does not implicitly {@link grafeas.v1.BuildNote.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.BuildNote
-                 * @static
-                 * @param {grafeas.v1.IBuildNote} message BuildNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                BuildNote.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.builderVersion != null && message.hasOwnProperty("builderVersion"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.builderVersion);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified BuildNote message, length delimited. Does not implicitly {@link grafeas.v1.BuildNote.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.BuildNote
-                 * @static
-                 * @param {grafeas.v1.IBuildNote} message BuildNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                BuildNote.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a BuildNote message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.BuildNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.BuildNote} BuildNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                BuildNote.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BuildNote();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.builderVersion = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a BuildNote message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.BuildNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.BuildNote} BuildNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                BuildNote.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a BuildNote message.
-                 * @function verify
-                 * @memberof grafeas.v1.BuildNote
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                BuildNote.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.builderVersion != null && message.hasOwnProperty("builderVersion"))
-                        if (!$util.isString(message.builderVersion))
-                            return "builderVersion: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a BuildNote message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.BuildNote
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.BuildNote} BuildNote
-                 */
-                BuildNote.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.BuildNote)
-                        return object;
-                    var message = new $root.grafeas.v1.BuildNote();
-                    if (object.builderVersion != null)
-                        message.builderVersion = String(object.builderVersion);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a BuildNote message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.BuildNote
-                 * @static
-                 * @param {grafeas.v1.BuildNote} message BuildNote
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                BuildNote.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults)
-                        object.builderVersion = "";
-                    if (message.builderVersion != null && message.hasOwnProperty("builderVersion"))
-                        object.builderVersion = message.builderVersion;
-                    return object;
-                };
-    
-                /**
-                 * Converts this BuildNote to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.BuildNote
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                BuildNote.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return BuildNote;
-            })();
-    
-            v1.BuildOccurrence = (function() {
-    
-                /**
-                 * Properties of a BuildOccurrence.
-                 * @memberof grafeas.v1
-                 * @interface IBuildOccurrence
-                 * @property {grafeas.v1.IBuildProvenance|null} [provenance] BuildOccurrence provenance
-                 * @property {string|null} [provenanceBytes] BuildOccurrence provenanceBytes
-                 */
-    
-                /**
-                 * Constructs a new BuildOccurrence.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a BuildOccurrence.
-                 * @implements IBuildOccurrence
-                 * @constructor
-                 * @param {grafeas.v1.IBuildOccurrence=} [properties] Properties to set
-                 */
-                function BuildOccurrence(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * BuildOccurrence provenance.
-                 * @member {grafeas.v1.IBuildProvenance|null|undefined} provenance
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @instance
-                 */
-                BuildOccurrence.prototype.provenance = null;
-    
-                /**
-                 * BuildOccurrence provenanceBytes.
-                 * @member {string} provenanceBytes
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @instance
-                 */
-                BuildOccurrence.prototype.provenanceBytes = "";
-    
-                /**
-                 * Creates a new BuildOccurrence instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @static
-                 * @param {grafeas.v1.IBuildOccurrence=} [properties] Properties to set
-                 * @returns {grafeas.v1.BuildOccurrence} BuildOccurrence instance
-                 */
-                BuildOccurrence.create = function create(properties) {
-                    return new BuildOccurrence(properties);
-                };
-    
-                /**
-                 * Encodes the specified BuildOccurrence message. Does not implicitly {@link grafeas.v1.BuildOccurrence.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @static
-                 * @param {grafeas.v1.IBuildOccurrence} message BuildOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                BuildOccurrence.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.provenance != null && message.hasOwnProperty("provenance"))
-                        $root.grafeas.v1.BuildProvenance.encode(message.provenance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.provenanceBytes != null && message.hasOwnProperty("provenanceBytes"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.provenanceBytes);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified BuildOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.BuildOccurrence.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @static
-                 * @param {grafeas.v1.IBuildOccurrence} message BuildOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                BuildOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a BuildOccurrence message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.BuildOccurrence} BuildOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                BuildOccurrence.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BuildOccurrence();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.provenance = $root.grafeas.v1.BuildProvenance.decode(reader, reader.uint32());
-                            break;
-                        case 2:
-                            message.provenanceBytes = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a BuildOccurrence message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.BuildOccurrence} BuildOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                BuildOccurrence.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a BuildOccurrence message.
-                 * @function verify
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                BuildOccurrence.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.provenance != null && message.hasOwnProperty("provenance")) {
-                        var error = $root.grafeas.v1.BuildProvenance.verify(message.provenance);
-                        if (error)
-                            return "provenance." + error;
-                    }
-                    if (message.provenanceBytes != null && message.hasOwnProperty("provenanceBytes"))
-                        if (!$util.isString(message.provenanceBytes))
-                            return "provenanceBytes: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a BuildOccurrence message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.BuildOccurrence} BuildOccurrence
-                 */
-                BuildOccurrence.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.BuildOccurrence)
-                        return object;
-                    var message = new $root.grafeas.v1.BuildOccurrence();
-                    if (object.provenance != null) {
-                        if (typeof object.provenance !== "object")
-                            throw TypeError(".grafeas.v1.BuildOccurrence.provenance: object expected");
-                        message.provenance = $root.grafeas.v1.BuildProvenance.fromObject(object.provenance);
-                    }
-                    if (object.provenanceBytes != null)
-                        message.provenanceBytes = String(object.provenanceBytes);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a BuildOccurrence message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @static
-                 * @param {grafeas.v1.BuildOccurrence} message BuildOccurrence
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                BuildOccurrence.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.provenance = null;
-                        object.provenanceBytes = "";
-                    }
-                    if (message.provenance != null && message.hasOwnProperty("provenance"))
-                        object.provenance = $root.grafeas.v1.BuildProvenance.toObject(message.provenance, options);
-                    if (message.provenanceBytes != null && message.hasOwnProperty("provenanceBytes"))
-                        object.provenanceBytes = message.provenanceBytes;
-                    return object;
-                };
-    
-                /**
-                 * Converts this BuildOccurrence to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.BuildOccurrence
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                BuildOccurrence.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return BuildOccurrence;
-            })();
-    
-            v1.UpgradeNote = (function() {
-    
-                /**
-                 * Properties of an UpgradeNote.
-                 * @memberof grafeas.v1
-                 * @interface IUpgradeNote
-                 * @property {string|null} ["package"] UpgradeNote package
-                 * @property {grafeas.v1.IVersion|null} [version] UpgradeNote version
-                 * @property {Array.<grafeas.v1.IUpgradeDistribution>|null} [distributions] UpgradeNote distributions
-                 * @property {grafeas.v1.IWindowsUpdate|null} [windowsUpdate] UpgradeNote windowsUpdate
-                 */
-    
-                /**
-                 * Constructs a new UpgradeNote.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents an UpgradeNote.
-                 * @implements IUpgradeNote
-                 * @constructor
-                 * @param {grafeas.v1.IUpgradeNote=} [properties] Properties to set
-                 */
-                function UpgradeNote(properties) {
-                    this.distributions = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * UpgradeNote package.
-                 * @member {string} package
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @instance
-                 */
-                UpgradeNote.prototype["package"] = "";
-    
-                /**
-                 * UpgradeNote version.
-                 * @member {grafeas.v1.IVersion|null|undefined} version
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @instance
-                 */
-                UpgradeNote.prototype.version = null;
-    
-                /**
-                 * UpgradeNote distributions.
-                 * @member {Array.<grafeas.v1.IUpgradeDistribution>} distributions
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @instance
-                 */
-                UpgradeNote.prototype.distributions = $util.emptyArray;
-    
-                /**
-                 * UpgradeNote windowsUpdate.
-                 * @member {grafeas.v1.IWindowsUpdate|null|undefined} windowsUpdate
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @instance
-                 */
-                UpgradeNote.prototype.windowsUpdate = null;
-    
-                /**
-                 * Creates a new UpgradeNote instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @static
-                 * @param {grafeas.v1.IUpgradeNote=} [properties] Properties to set
-                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote instance
-                 */
-                UpgradeNote.create = function create(properties) {
-                    return new UpgradeNote(properties);
-                };
-    
-                /**
-                 * Encodes the specified UpgradeNote message. Does not implicitly {@link grafeas.v1.UpgradeNote.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @static
-                 * @param {grafeas.v1.IUpgradeNote} message UpgradeNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                UpgradeNote.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message["package"] != null && message.hasOwnProperty("package"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message["package"]);
-                    if (message.version != null && message.hasOwnProperty("version"))
-                        $root.grafeas.v1.Version.encode(message.version, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.distributions != null && message.distributions.length)
-                        for (var i = 0; i < message.distributions.length; ++i)
-                            $root.grafeas.v1.UpgradeDistribution.encode(message.distributions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
-                        $root.grafeas.v1.WindowsUpdate.encode(message.windowsUpdate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified UpgradeNote message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeNote.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @static
-                 * @param {grafeas.v1.IUpgradeNote} message UpgradeNote message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                UpgradeNote.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an UpgradeNote message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                UpgradeNote.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeNote();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message["package"] = reader.string();
-                            break;
-                        case 2:
-                            message.version = $root.grafeas.v1.Version.decode(reader, reader.uint32());
-                            break;
-                        case 3:
-                            if (!(message.distributions && message.distributions.length))
-                                message.distributions = [];
-                            message.distributions.push($root.grafeas.v1.UpgradeDistribution.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.decode(reader, reader.uint32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an UpgradeNote message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                UpgradeNote.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an UpgradeNote message.
-                 * @function verify
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                UpgradeNote.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message["package"] != null && message.hasOwnProperty("package"))
-                        if (!$util.isString(message["package"]))
-                            return "package: string expected";
-                    if (message.version != null && message.hasOwnProperty("version")) {
-                        var error = $root.grafeas.v1.Version.verify(message.version);
-                        if (error)
-                            return "version." + error;
-                    }
-                    if (message.distributions != null && message.hasOwnProperty("distributions")) {
-                        if (!Array.isArray(message.distributions))
-                            return "distributions: array expected";
-                        for (var i = 0; i < message.distributions.length; ++i) {
-                            var error = $root.grafeas.v1.UpgradeDistribution.verify(message.distributions[i]);
-                            if (error)
-                                return "distributions." + error;
-                        }
-                    }
-                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate")) {
-                        var error = $root.grafeas.v1.WindowsUpdate.verify(message.windowsUpdate);
-                        if (error)
-                            return "windowsUpdate." + error;
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates an UpgradeNote message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
-                 */
-                UpgradeNote.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.UpgradeNote)
-                        return object;
-                    var message = new $root.grafeas.v1.UpgradeNote();
-                    if (object["package"] != null)
-                        message["package"] = String(object["package"]);
-                    if (object.version != null) {
-                        if (typeof object.version !== "object")
-                            throw TypeError(".grafeas.v1.UpgradeNote.version: object expected");
-                        message.version = $root.grafeas.v1.Version.fromObject(object.version);
-                    }
-                    if (object.distributions) {
-                        if (!Array.isArray(object.distributions))
-                            throw TypeError(".grafeas.v1.UpgradeNote.distributions: array expected");
-                        message.distributions = [];
-                        for (var i = 0; i < object.distributions.length; ++i) {
-                            if (typeof object.distributions[i] !== "object")
-                                throw TypeError(".grafeas.v1.UpgradeNote.distributions: object expected");
-                            message.distributions[i] = $root.grafeas.v1.UpgradeDistribution.fromObject(object.distributions[i]);
-                        }
-                    }
-                    if (object.windowsUpdate != null) {
-                        if (typeof object.windowsUpdate !== "object")
-                            throw TypeError(".grafeas.v1.UpgradeNote.windowsUpdate: object expected");
-                        message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.fromObject(object.windowsUpdate);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an UpgradeNote message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @static
-                 * @param {grafeas.v1.UpgradeNote} message UpgradeNote
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                UpgradeNote.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.distributions = [];
-                    if (options.defaults) {
-                        object["package"] = "";
-                        object.version = null;
-                        object.windowsUpdate = null;
-                    }
-                    if (message["package"] != null && message.hasOwnProperty("package"))
-                        object["package"] = message["package"];
-                    if (message.version != null && message.hasOwnProperty("version"))
-                        object.version = $root.grafeas.v1.Version.toObject(message.version, options);
-                    if (message.distributions && message.distributions.length) {
-                        object.distributions = [];
-                        for (var j = 0; j < message.distributions.length; ++j)
-                            object.distributions[j] = $root.grafeas.v1.UpgradeDistribution.toObject(message.distributions[j], options);
-                    }
-                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
-                        object.windowsUpdate = $root.grafeas.v1.WindowsUpdate.toObject(message.windowsUpdate, options);
-                    return object;
-                };
-    
-                /**
-                 * Converts this UpgradeNote to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.UpgradeNote
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                UpgradeNote.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return UpgradeNote;
-            })();
-    
-            v1.UpgradeDistribution = (function() {
-    
-                /**
-                 * Properties of an UpgradeDistribution.
-                 * @memberof grafeas.v1
-                 * @interface IUpgradeDistribution
-                 * @property {string|null} [cpeUri] UpgradeDistribution cpeUri
-                 * @property {string|null} [classification] UpgradeDistribution classification
-                 * @property {string|null} [severity] UpgradeDistribution severity
-                 * @property {Array.<string>|null} [cve] UpgradeDistribution cve
-                 */
-    
-                /**
-                 * Constructs a new UpgradeDistribution.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents an UpgradeDistribution.
-                 * @implements IUpgradeDistribution
-                 * @constructor
-                 * @param {grafeas.v1.IUpgradeDistribution=} [properties] Properties to set
-                 */
-                function UpgradeDistribution(properties) {
-                    this.cve = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * UpgradeDistribution cpeUri.
-                 * @member {string} cpeUri
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @instance
-                 */
-                UpgradeDistribution.prototype.cpeUri = "";
-    
-                /**
-                 * UpgradeDistribution classification.
-                 * @member {string} classification
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @instance
-                 */
-                UpgradeDistribution.prototype.classification = "";
-    
-                /**
-                 * UpgradeDistribution severity.
-                 * @member {string} severity
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @instance
-                 */
-                UpgradeDistribution.prototype.severity = "";
-    
-                /**
-                 * UpgradeDistribution cve.
-                 * @member {Array.<string>} cve
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @instance
-                 */
-                UpgradeDistribution.prototype.cve = $util.emptyArray;
-    
-                /**
-                 * Creates a new UpgradeDistribution instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @static
-                 * @param {grafeas.v1.IUpgradeDistribution=} [properties] Properties to set
-                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution instance
-                 */
-                UpgradeDistribution.create = function create(properties) {
-                    return new UpgradeDistribution(properties);
-                };
-    
-                /**
-                 * Encodes the specified UpgradeDistribution message. Does not implicitly {@link grafeas.v1.UpgradeDistribution.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @static
-                 * @param {grafeas.v1.IUpgradeDistribution} message UpgradeDistribution message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                UpgradeDistribution.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
-                    if (message.classification != null && message.hasOwnProperty("classification"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.classification);
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.severity);
-                    if (message.cve != null && message.cve.length)
-                        for (var i = 0; i < message.cve.length; ++i)
-                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.cve[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified UpgradeDistribution message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeDistribution.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @static
-                 * @param {grafeas.v1.IUpgradeDistribution} message UpgradeDistribution message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                UpgradeDistribution.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an UpgradeDistribution message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                UpgradeDistribution.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeDistribution();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.cpeUri = reader.string();
-                            break;
-                        case 2:
-                            message.classification = reader.string();
-                            break;
-                        case 3:
-                            message.severity = reader.string();
-                            break;
-                        case 4:
-                            if (!(message.cve && message.cve.length))
-                                message.cve = [];
-                            message.cve.push(reader.string());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an UpgradeDistribution message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                UpgradeDistribution.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an UpgradeDistribution message.
-                 * @function verify
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                UpgradeDistribution.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        if (!$util.isString(message.cpeUri))
-                            return "cpeUri: string expected";
-                    if (message.classification != null && message.hasOwnProperty("classification"))
-                        if (!$util.isString(message.classification))
-                            return "classification: string expected";
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        if (!$util.isString(message.severity))
-                            return "severity: string expected";
-                    if (message.cve != null && message.hasOwnProperty("cve")) {
-                        if (!Array.isArray(message.cve))
-                            return "cve: array expected";
-                        for (var i = 0; i < message.cve.length; ++i)
-                            if (!$util.isString(message.cve[i]))
-                                return "cve: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates an UpgradeDistribution message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
-                 */
-                UpgradeDistribution.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.UpgradeDistribution)
-                        return object;
-                    var message = new $root.grafeas.v1.UpgradeDistribution();
-                    if (object.cpeUri != null)
-                        message.cpeUri = String(object.cpeUri);
-                    if (object.classification != null)
-                        message.classification = String(object.classification);
-                    if (object.severity != null)
-                        message.severity = String(object.severity);
-                    if (object.cve) {
-                        if (!Array.isArray(object.cve))
-                            throw TypeError(".grafeas.v1.UpgradeDistribution.cve: array expected");
-                        message.cve = [];
-                        for (var i = 0; i < object.cve.length; ++i)
-                            message.cve[i] = String(object.cve[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an UpgradeDistribution message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @static
-                 * @param {grafeas.v1.UpgradeDistribution} message UpgradeDistribution
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                UpgradeDistribution.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.cve = [];
-                    if (options.defaults) {
-                        object.cpeUri = "";
-                        object.classification = "";
-                        object.severity = "";
-                    }
-                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
-                        object.cpeUri = message.cpeUri;
-                    if (message.classification != null && message.hasOwnProperty("classification"))
-                        object.classification = message.classification;
-                    if (message.severity != null && message.hasOwnProperty("severity"))
-                        object.severity = message.severity;
-                    if (message.cve && message.cve.length) {
-                        object.cve = [];
-                        for (var j = 0; j < message.cve.length; ++j)
-                            object.cve[j] = message.cve[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this UpgradeDistribution to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.UpgradeDistribution
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                UpgradeDistribution.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return UpgradeDistribution;
-            })();
-    
-            v1.WindowsUpdate = (function() {
-    
-                /**
-                 * Properties of a WindowsUpdate.
-                 * @memberof grafeas.v1
-                 * @interface IWindowsUpdate
-                 * @property {grafeas.v1.WindowsUpdate.IIdentity|null} [identity] WindowsUpdate identity
-                 * @property {string|null} [title] WindowsUpdate title
-                 * @property {string|null} [description] WindowsUpdate description
-                 * @property {Array.<grafeas.v1.WindowsUpdate.ICategory>|null} [categories] WindowsUpdate categories
-                 * @property {Array.<string>|null} [kbArticleIds] WindowsUpdate kbArticleIds
-                 * @property {string|null} [supportUrl] WindowsUpdate supportUrl
-                 * @property {google.protobuf.ITimestamp|null} [lastPublishedTimestamp] WindowsUpdate lastPublishedTimestamp
-                 */
-    
-                /**
-                 * Constructs a new WindowsUpdate.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents a WindowsUpdate.
-                 * @implements IWindowsUpdate
-                 * @constructor
-                 * @param {grafeas.v1.IWindowsUpdate=} [properties] Properties to set
-                 */
-                function WindowsUpdate(properties) {
-                    this.categories = [];
-                    this.kbArticleIds = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * WindowsUpdate identity.
-                 * @member {grafeas.v1.WindowsUpdate.IIdentity|null|undefined} identity
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @instance
-                 */
-                WindowsUpdate.prototype.identity = null;
-    
-                /**
-                 * WindowsUpdate title.
-                 * @member {string} title
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @instance
-                 */
-                WindowsUpdate.prototype.title = "";
-    
-                /**
-                 * WindowsUpdate description.
-                 * @member {string} description
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @instance
-                 */
-                WindowsUpdate.prototype.description = "";
-    
-                /**
-                 * WindowsUpdate categories.
-                 * @member {Array.<grafeas.v1.WindowsUpdate.ICategory>} categories
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @instance
-                 */
-                WindowsUpdate.prototype.categories = $util.emptyArray;
-    
-                /**
-                 * WindowsUpdate kbArticleIds.
-                 * @member {Array.<string>} kbArticleIds
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @instance
-                 */
-                WindowsUpdate.prototype.kbArticleIds = $util.emptyArray;
-    
-                /**
-                 * WindowsUpdate supportUrl.
-                 * @member {string} supportUrl
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @instance
-                 */
-                WindowsUpdate.prototype.supportUrl = "";
-    
-                /**
-                 * WindowsUpdate lastPublishedTimestamp.
-                 * @member {google.protobuf.ITimestamp|null|undefined} lastPublishedTimestamp
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @instance
-                 */
-                WindowsUpdate.prototype.lastPublishedTimestamp = null;
-    
-                /**
-                 * Creates a new WindowsUpdate instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @static
-                 * @param {grafeas.v1.IWindowsUpdate=} [properties] Properties to set
-                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate instance
-                 */
-                WindowsUpdate.create = function create(properties) {
-                    return new WindowsUpdate(properties);
-                };
-    
-                /**
-                 * Encodes the specified WindowsUpdate message. Does not implicitly {@link grafeas.v1.WindowsUpdate.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @static
-                 * @param {grafeas.v1.IWindowsUpdate} message WindowsUpdate message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                WindowsUpdate.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.identity != null && message.hasOwnProperty("identity"))
-                        $root.grafeas.v1.WindowsUpdate.Identity.encode(message.identity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.title != null && message.hasOwnProperty("title"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
-                    if (message.categories != null && message.categories.length)
-                        for (var i = 0; i < message.categories.length; ++i)
-                            $root.grafeas.v1.WindowsUpdate.Category.encode(message.categories[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                    if (message.kbArticleIds != null && message.kbArticleIds.length)
-                        for (var i = 0; i < message.kbArticleIds.length; ++i)
-                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.kbArticleIds[i]);
-                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.supportUrl);
-                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp"))
-                        $root.google.protobuf.Timestamp.encode(message.lastPublishedTimestamp, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified WindowsUpdate message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @static
-                 * @param {grafeas.v1.IWindowsUpdate} message WindowsUpdate message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                WindowsUpdate.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a WindowsUpdate message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                WindowsUpdate.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.identity = $root.grafeas.v1.WindowsUpdate.Identity.decode(reader, reader.uint32());
-                            break;
-                        case 2:
-                            message.title = reader.string();
-                            break;
-                        case 3:
-                            message.description = reader.string();
-                            break;
-                        case 4:
-                            if (!(message.categories && message.categories.length))
-                                message.categories = [];
-                            message.categories.push($root.grafeas.v1.WindowsUpdate.Category.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.kbArticleIds && message.kbArticleIds.length))
-                                message.kbArticleIds = [];
-                            message.kbArticleIds.push(reader.string());
-                            break;
-                        case 6:
-                            message.supportUrl = reader.string();
-                            break;
-                        case 7:
-                            message.lastPublishedTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a WindowsUpdate message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                WindowsUpdate.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a WindowsUpdate message.
-                 * @function verify
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                WindowsUpdate.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.identity != null && message.hasOwnProperty("identity")) {
-                        var error = $root.grafeas.v1.WindowsUpdate.Identity.verify(message.identity);
-                        if (error)
-                            return "identity." + error;
-                    }
-                    if (message.title != null && message.hasOwnProperty("title"))
-                        if (!$util.isString(message.title))
-                            return "title: string expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    if (message.categories != null && message.hasOwnProperty("categories")) {
-                        if (!Array.isArray(message.categories))
-                            return "categories: array expected";
-                        for (var i = 0; i < message.categories.length; ++i) {
-                            var error = $root.grafeas.v1.WindowsUpdate.Category.verify(message.categories[i]);
-                            if (error)
-                                return "categories." + error;
-                        }
-                    }
-                    if (message.kbArticleIds != null && message.hasOwnProperty("kbArticleIds")) {
-                        if (!Array.isArray(message.kbArticleIds))
-                            return "kbArticleIds: array expected";
-                        for (var i = 0; i < message.kbArticleIds.length; ++i)
-                            if (!$util.isString(message.kbArticleIds[i]))
-                                return "kbArticleIds: string[] expected";
-                    }
-                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
-                        if (!$util.isString(message.supportUrl))
-                            return "supportUrl: string expected";
-                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp")) {
-                        var error = $root.google.protobuf.Timestamp.verify(message.lastPublishedTimestamp);
-                        if (error)
-                            return "lastPublishedTimestamp." + error;
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a WindowsUpdate message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
-                 */
-                WindowsUpdate.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.WindowsUpdate)
-                        return object;
-                    var message = new $root.grafeas.v1.WindowsUpdate();
-                    if (object.identity != null) {
-                        if (typeof object.identity !== "object")
-                            throw TypeError(".grafeas.v1.WindowsUpdate.identity: object expected");
-                        message.identity = $root.grafeas.v1.WindowsUpdate.Identity.fromObject(object.identity);
-                    }
-                    if (object.title != null)
-                        message.title = String(object.title);
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    if (object.categories) {
-                        if (!Array.isArray(object.categories))
-                            throw TypeError(".grafeas.v1.WindowsUpdate.categories: array expected");
-                        message.categories = [];
-                        for (var i = 0; i < object.categories.length; ++i) {
-                            if (typeof object.categories[i] !== "object")
-                                throw TypeError(".grafeas.v1.WindowsUpdate.categories: object expected");
-                            message.categories[i] = $root.grafeas.v1.WindowsUpdate.Category.fromObject(object.categories[i]);
-                        }
-                    }
-                    if (object.kbArticleIds) {
-                        if (!Array.isArray(object.kbArticleIds))
-                            throw TypeError(".grafeas.v1.WindowsUpdate.kbArticleIds: array expected");
-                        message.kbArticleIds = [];
-                        for (var i = 0; i < object.kbArticleIds.length; ++i)
-                            message.kbArticleIds[i] = String(object.kbArticleIds[i]);
-                    }
-                    if (object.supportUrl != null)
-                        message.supportUrl = String(object.supportUrl);
-                    if (object.lastPublishedTimestamp != null) {
-                        if (typeof object.lastPublishedTimestamp !== "object")
-                            throw TypeError(".grafeas.v1.WindowsUpdate.lastPublishedTimestamp: object expected");
-                        message.lastPublishedTimestamp = $root.google.protobuf.Timestamp.fromObject(object.lastPublishedTimestamp);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a WindowsUpdate message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @static
-                 * @param {grafeas.v1.WindowsUpdate} message WindowsUpdate
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                WindowsUpdate.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.categories = [];
-                        object.kbArticleIds = [];
-                    }
-                    if (options.defaults) {
-                        object.identity = null;
-                        object.title = "";
-                        object.description = "";
-                        object.supportUrl = "";
-                        object.lastPublishedTimestamp = null;
-                    }
-                    if (message.identity != null && message.hasOwnProperty("identity"))
-                        object.identity = $root.grafeas.v1.WindowsUpdate.Identity.toObject(message.identity, options);
-                    if (message.title != null && message.hasOwnProperty("title"))
-                        object.title = message.title;
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    if (message.categories && message.categories.length) {
-                        object.categories = [];
-                        for (var j = 0; j < message.categories.length; ++j)
-                            object.categories[j] = $root.grafeas.v1.WindowsUpdate.Category.toObject(message.categories[j], options);
-                    }
-                    if (message.kbArticleIds && message.kbArticleIds.length) {
-                        object.kbArticleIds = [];
-                        for (var j = 0; j < message.kbArticleIds.length; ++j)
-                            object.kbArticleIds[j] = message.kbArticleIds[j];
-                    }
-                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
-                        object.supportUrl = message.supportUrl;
-                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp"))
-                        object.lastPublishedTimestamp = $root.google.protobuf.Timestamp.toObject(message.lastPublishedTimestamp, options);
-                    return object;
-                };
-    
-                /**
-                 * Converts this WindowsUpdate to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.WindowsUpdate
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                WindowsUpdate.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                WindowsUpdate.Identity = (function() {
-    
-                    /**
-                     * Properties of an Identity.
-                     * @memberof grafeas.v1.WindowsUpdate
-                     * @interface IIdentity
-                     * @property {string|null} [updateId] Identity updateId
-                     * @property {number|null} [revision] Identity revision
-                     */
-    
-                    /**
-                     * Constructs a new Identity.
-                     * @memberof grafeas.v1.WindowsUpdate
-                     * @classdesc Represents an Identity.
-                     * @implements IIdentity
-                     * @constructor
-                     * @param {grafeas.v1.WindowsUpdate.IIdentity=} [properties] Properties to set
-                     */
-                    function Identity(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Identity updateId.
-                     * @member {string} updateId
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @instance
-                     */
-                    Identity.prototype.updateId = "";
-    
-                    /**
-                     * Identity revision.
-                     * @member {number} revision
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @instance
-                     */
-                    Identity.prototype.revision = 0;
-    
-                    /**
-                     * Creates a new Identity instance using the specified properties.
-                     * @function create
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @static
-                     * @param {grafeas.v1.WindowsUpdate.IIdentity=} [properties] Properties to set
-                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity instance
-                     */
-                    Identity.create = function create(properties) {
-                        return new Identity(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Identity message. Does not implicitly {@link grafeas.v1.WindowsUpdate.Identity.verify|verify} messages.
-                     * @function encode
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @static
-                     * @param {grafeas.v1.WindowsUpdate.IIdentity} message Identity message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Identity.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.updateId != null && message.hasOwnProperty("updateId"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.updateId);
-                        if (message.revision != null && message.hasOwnProperty("revision"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.revision);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Identity message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.Identity.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @static
-                     * @param {grafeas.v1.WindowsUpdate.IIdentity} message Identity message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Identity.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an Identity message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Identity.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate.Identity();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.updateId = reader.string();
-                                break;
-                            case 2:
-                                message.revision = reader.int32();
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an Identity message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Identity.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an Identity message.
-                     * @function verify
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Identity.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.updateId != null && message.hasOwnProperty("updateId"))
-                            if (!$util.isString(message.updateId))
-                                return "updateId: string expected";
-                        if (message.revision != null && message.hasOwnProperty("revision"))
-                            if (!$util.isInteger(message.revision))
-                                return "revision: integer expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an Identity message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
-                     */
-                    Identity.fromObject = function fromObject(object) {
-                        if (object instanceof $root.grafeas.v1.WindowsUpdate.Identity)
-                            return object;
-                        var message = new $root.grafeas.v1.WindowsUpdate.Identity();
-                        if (object.updateId != null)
-                            message.updateId = String(object.updateId);
-                        if (object.revision != null)
-                            message.revision = object.revision | 0;
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an Identity message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @static
-                     * @param {grafeas.v1.WindowsUpdate.Identity} message Identity
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Identity.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.updateId = "";
-                            object.revision = 0;
-                        }
-                        if (message.updateId != null && message.hasOwnProperty("updateId"))
-                            object.updateId = message.updateId;
-                        if (message.revision != null && message.hasOwnProperty("revision"))
-                            object.revision = message.revision;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Identity to JSON.
-                     * @function toJSON
-                     * @memberof grafeas.v1.WindowsUpdate.Identity
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Identity.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return Identity;
-                })();
-    
-                WindowsUpdate.Category = (function() {
-    
-                    /**
-                     * Properties of a Category.
-                     * @memberof grafeas.v1.WindowsUpdate
-                     * @interface ICategory
-                     * @property {string|null} [categoryId] Category categoryId
-                     * @property {string|null} [name] Category name
-                     */
-    
-                    /**
-                     * Constructs a new Category.
-                     * @memberof grafeas.v1.WindowsUpdate
-                     * @classdesc Represents a Category.
-                     * @implements ICategory
-                     * @constructor
-                     * @param {grafeas.v1.WindowsUpdate.ICategory=} [properties] Properties to set
-                     */
-                    function Category(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Category categoryId.
-                     * @member {string} categoryId
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @instance
-                     */
-                    Category.prototype.categoryId = "";
-    
-                    /**
-                     * Category name.
-                     * @member {string} name
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @instance
-                     */
-                    Category.prototype.name = "";
-    
-                    /**
-                     * Creates a new Category instance using the specified properties.
-                     * @function create
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @static
-                     * @param {grafeas.v1.WindowsUpdate.ICategory=} [properties] Properties to set
-                     * @returns {grafeas.v1.WindowsUpdate.Category} Category instance
-                     */
-                    Category.create = function create(properties) {
-                        return new Category(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Category message. Does not implicitly {@link grafeas.v1.WindowsUpdate.Category.verify|verify} messages.
-                     * @function encode
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @static
-                     * @param {grafeas.v1.WindowsUpdate.ICategory} message Category message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Category.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.categoryId);
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Category message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.Category.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @static
-                     * @param {grafeas.v1.WindowsUpdate.ICategory} message Category message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Category.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Category message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Category.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate.Category();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.categoryId = reader.string();
-                                break;
-                            case 2:
-                                message.name = reader.string();
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Category message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Category.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Category message.
-                     * @function verify
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Category.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
-                            if (!$util.isString(message.categoryId))
-                                return "categoryId: string expected";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            if (!$util.isString(message.name))
-                                return "name: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Category message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
-                     */
-                    Category.fromObject = function fromObject(object) {
-                        if (object instanceof $root.grafeas.v1.WindowsUpdate.Category)
-                            return object;
-                        var message = new $root.grafeas.v1.WindowsUpdate.Category();
-                        if (object.categoryId != null)
-                            message.categoryId = String(object.categoryId);
-                        if (object.name != null)
-                            message.name = String(object.name);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Category message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @static
-                     * @param {grafeas.v1.WindowsUpdate.Category} message Category
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Category.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.categoryId = "";
-                            object.name = "";
-                        }
-                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
-                            object.categoryId = message.categoryId;
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            object.name = message.name;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Category to JSON.
-                     * @function toJSON
-                     * @memberof grafeas.v1.WindowsUpdate.Category
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Category.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return Category;
-                })();
-    
-                return WindowsUpdate;
-            })();
-    
-            v1.UpgradeOccurrence = (function() {
-    
-                /**
-                 * Properties of an UpgradeOccurrence.
-                 * @memberof grafeas.v1
-                 * @interface IUpgradeOccurrence
-                 * @property {string|null} ["package"] UpgradeOccurrence package
-                 * @property {grafeas.v1.IVersion|null} [parsedVersion] UpgradeOccurrence parsedVersion
-                 * @property {grafeas.v1.IUpgradeDistribution|null} [distribution] UpgradeOccurrence distribution
-                 * @property {grafeas.v1.IWindowsUpdate|null} [windowsUpdate] UpgradeOccurrence windowsUpdate
-                 */
-    
-                /**
-                 * Constructs a new UpgradeOccurrence.
-                 * @memberof grafeas.v1
-                 * @classdesc Represents an UpgradeOccurrence.
-                 * @implements IUpgradeOccurrence
-                 * @constructor
-                 * @param {grafeas.v1.IUpgradeOccurrence=} [properties] Properties to set
-                 */
-                function UpgradeOccurrence(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * UpgradeOccurrence package.
-                 * @member {string} package
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @instance
-                 */
-                UpgradeOccurrence.prototype["package"] = "";
-    
-                /**
-                 * UpgradeOccurrence parsedVersion.
-                 * @member {grafeas.v1.IVersion|null|undefined} parsedVersion
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @instance
-                 */
-                UpgradeOccurrence.prototype.parsedVersion = null;
-    
-                /**
-                 * UpgradeOccurrence distribution.
-                 * @member {grafeas.v1.IUpgradeDistribution|null|undefined} distribution
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @instance
-                 */
-                UpgradeOccurrence.prototype.distribution = null;
-    
-                /**
-                 * UpgradeOccurrence windowsUpdate.
-                 * @member {grafeas.v1.IWindowsUpdate|null|undefined} windowsUpdate
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @instance
-                 */
-                UpgradeOccurrence.prototype.windowsUpdate = null;
-    
-                /**
-                 * Creates a new UpgradeOccurrence instance using the specified properties.
-                 * @function create
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @static
-                 * @param {grafeas.v1.IUpgradeOccurrence=} [properties] Properties to set
-                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence instance
-                 */
-                UpgradeOccurrence.create = function create(properties) {
-                    return new UpgradeOccurrence(properties);
-                };
-    
-                /**
-                 * Encodes the specified UpgradeOccurrence message. Does not implicitly {@link grafeas.v1.UpgradeOccurrence.verify|verify} messages.
-                 * @function encode
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @static
-                 * @param {grafeas.v1.IUpgradeOccurrence} message UpgradeOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                UpgradeOccurrence.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message["package"] != null && message.hasOwnProperty("package"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message["package"]);
-                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion"))
-                        $root.grafeas.v1.Version.encode(message.parsedVersion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.distribution != null && message.hasOwnProperty("distribution"))
-                        $root.grafeas.v1.UpgradeDistribution.encode(message.distribution, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
-                        $root.grafeas.v1.WindowsUpdate.encode(message.windowsUpdate, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified UpgradeOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeOccurrence.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @static
-                 * @param {grafeas.v1.IUpgradeOccurrence} message UpgradeOccurrence message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                UpgradeOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an UpgradeOccurrence message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                UpgradeOccurrence.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeOccurrence();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message["package"] = reader.string();
-                            break;
-                        case 3:
-                            message.parsedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
-                            break;
-                        case 4:
-                            message.distribution = $root.grafeas.v1.UpgradeDistribution.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.decode(reader, reader.uint32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an UpgradeOccurrence message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                UpgradeOccurrence.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an UpgradeOccurrence message.
-                 * @function verify
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                UpgradeOccurrence.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message["package"] != null && message.hasOwnProperty("package"))
-                        if (!$util.isString(message["package"]))
-                            return "package: string expected";
-                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion")) {
-                        var error = $root.grafeas.v1.Version.verify(message.parsedVersion);
-                        if (error)
-                            return "parsedVersion." + error;
-                    }
-                    if (message.distribution != null && message.hasOwnProperty("distribution")) {
-                        var error = $root.grafeas.v1.UpgradeDistribution.verify(message.distribution);
-                        if (error)
-                            return "distribution." + error;
-                    }
-                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate")) {
-                        var error = $root.grafeas.v1.WindowsUpdate.verify(message.windowsUpdate);
-                        if (error)
-                            return "windowsUpdate." + error;
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates an UpgradeOccurrence message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
-                 */
-                UpgradeOccurrence.fromObject = function fromObject(object) {
-                    if (object instanceof $root.grafeas.v1.UpgradeOccurrence)
-                        return object;
-                    var message = new $root.grafeas.v1.UpgradeOccurrence();
-                    if (object["package"] != null)
-                        message["package"] = String(object["package"]);
-                    if (object.parsedVersion != null) {
-                        if (typeof object.parsedVersion !== "object")
-                            throw TypeError(".grafeas.v1.UpgradeOccurrence.parsedVersion: object expected");
-                        message.parsedVersion = $root.grafeas.v1.Version.fromObject(object.parsedVersion);
-                    }
-                    if (object.distribution != null) {
-                        if (typeof object.distribution !== "object")
-                            throw TypeError(".grafeas.v1.UpgradeOccurrence.distribution: object expected");
-                        message.distribution = $root.grafeas.v1.UpgradeDistribution.fromObject(object.distribution);
-                    }
-                    if (object.windowsUpdate != null) {
-                        if (typeof object.windowsUpdate !== "object")
-                            throw TypeError(".grafeas.v1.UpgradeOccurrence.windowsUpdate: object expected");
-                        message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.fromObject(object.windowsUpdate);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an UpgradeOccurrence message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @static
-                 * @param {grafeas.v1.UpgradeOccurrence} message UpgradeOccurrence
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                UpgradeOccurrence.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object["package"] = "";
-                        object.parsedVersion = null;
-                        object.distribution = null;
-                        object.windowsUpdate = null;
-                    }
-                    if (message["package"] != null && message.hasOwnProperty("package"))
-                        object["package"] = message["package"];
-                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion"))
-                        object.parsedVersion = $root.grafeas.v1.Version.toObject(message.parsedVersion, options);
-                    if (message.distribution != null && message.hasOwnProperty("distribution"))
-                        object.distribution = $root.grafeas.v1.UpgradeDistribution.toObject(message.distribution, options);
-                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
-                        object.windowsUpdate = $root.grafeas.v1.WindowsUpdate.toObject(message.windowsUpdate, options);
-                    return object;
-                };
-    
-                /**
-                 * Converts this UpgradeOccurrence to JSON.
-                 * @function toJSON
-                 * @memberof grafeas.v1.UpgradeOccurrence
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                UpgradeOccurrence.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return UpgradeOccurrence;
             })();
     
             v1.Grafeas = (function() {
@@ -19260,6 +13190,6076 @@
                 };
     
                 return BatchCreateOccurrencesResponse;
+            })();
+    
+            v1.Layer = (function() {
+    
+                /**
+                 * Properties of a Layer.
+                 * @memberof grafeas.v1
+                 * @interface ILayer
+                 * @property {string|null} [directive] Layer directive
+                 * @property {string|null} ["arguments"] Layer arguments
+                 */
+    
+                /**
+                 * Constructs a new Layer.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Layer.
+                 * @implements ILayer
+                 * @constructor
+                 * @param {grafeas.v1.ILayer=} [properties] Properties to set
+                 */
+                function Layer(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Layer directive.
+                 * @member {string} directive
+                 * @memberof grafeas.v1.Layer
+                 * @instance
+                 */
+                Layer.prototype.directive = "";
+    
+                /**
+                 * Layer arguments.
+                 * @member {string} arguments
+                 * @memberof grafeas.v1.Layer
+                 * @instance
+                 */
+                Layer.prototype["arguments"] = "";
+    
+                /**
+                 * Creates a new Layer instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Layer
+                 * @static
+                 * @param {grafeas.v1.ILayer=} [properties] Properties to set
+                 * @returns {grafeas.v1.Layer} Layer instance
+                 */
+                Layer.create = function create(properties) {
+                    return new Layer(properties);
+                };
+    
+                /**
+                 * Encodes the specified Layer message. Does not implicitly {@link grafeas.v1.Layer.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Layer
+                 * @static
+                 * @param {grafeas.v1.ILayer} message Layer message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Layer.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.directive != null && message.hasOwnProperty("directive"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.directive);
+                    if (message["arguments"] != null && message.hasOwnProperty("arguments"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message["arguments"]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Layer message, length delimited. Does not implicitly {@link grafeas.v1.Layer.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Layer
+                 * @static
+                 * @param {grafeas.v1.ILayer} message Layer message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Layer.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Layer message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Layer
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Layer} Layer
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Layer.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Layer();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.directive = reader.string();
+                            break;
+                        case 2:
+                            message["arguments"] = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Layer message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Layer
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Layer} Layer
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Layer.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Layer message.
+                 * @function verify
+                 * @memberof grafeas.v1.Layer
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Layer.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.directive != null && message.hasOwnProperty("directive"))
+                        if (!$util.isString(message.directive))
+                            return "directive: string expected";
+                    if (message["arguments"] != null && message.hasOwnProperty("arguments"))
+                        if (!$util.isString(message["arguments"]))
+                            return "arguments: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Layer message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Layer
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Layer} Layer
+                 */
+                Layer.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Layer)
+                        return object;
+                    var message = new $root.grafeas.v1.Layer();
+                    if (object.directive != null)
+                        message.directive = String(object.directive);
+                    if (object["arguments"] != null)
+                        message["arguments"] = String(object["arguments"]);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Layer message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Layer
+                 * @static
+                 * @param {grafeas.v1.Layer} message Layer
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Layer.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.directive = "";
+                        object["arguments"] = "";
+                    }
+                    if (message.directive != null && message.hasOwnProperty("directive"))
+                        object.directive = message.directive;
+                    if (message["arguments"] != null && message.hasOwnProperty("arguments"))
+                        object["arguments"] = message["arguments"];
+                    return object;
+                };
+    
+                /**
+                 * Converts this Layer to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Layer
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Layer.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Layer;
+            })();
+    
+            v1.Fingerprint = (function() {
+    
+                /**
+                 * Properties of a Fingerprint.
+                 * @memberof grafeas.v1
+                 * @interface IFingerprint
+                 * @property {string|null} [v1Name] Fingerprint v1Name
+                 * @property {Array.<string>|null} [v2Blob] Fingerprint v2Blob
+                 * @property {string|null} [v2Name] Fingerprint v2Name
+                 */
+    
+                /**
+                 * Constructs a new Fingerprint.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Fingerprint.
+                 * @implements IFingerprint
+                 * @constructor
+                 * @param {grafeas.v1.IFingerprint=} [properties] Properties to set
+                 */
+                function Fingerprint(properties) {
+                    this.v2Blob = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Fingerprint v1Name.
+                 * @member {string} v1Name
+                 * @memberof grafeas.v1.Fingerprint
+                 * @instance
+                 */
+                Fingerprint.prototype.v1Name = "";
+    
+                /**
+                 * Fingerprint v2Blob.
+                 * @member {Array.<string>} v2Blob
+                 * @memberof grafeas.v1.Fingerprint
+                 * @instance
+                 */
+                Fingerprint.prototype.v2Blob = $util.emptyArray;
+    
+                /**
+                 * Fingerprint v2Name.
+                 * @member {string} v2Name
+                 * @memberof grafeas.v1.Fingerprint
+                 * @instance
+                 */
+                Fingerprint.prototype.v2Name = "";
+    
+                /**
+                 * Creates a new Fingerprint instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Fingerprint
+                 * @static
+                 * @param {grafeas.v1.IFingerprint=} [properties] Properties to set
+                 * @returns {grafeas.v1.Fingerprint} Fingerprint instance
+                 */
+                Fingerprint.create = function create(properties) {
+                    return new Fingerprint(properties);
+                };
+    
+                /**
+                 * Encodes the specified Fingerprint message. Does not implicitly {@link grafeas.v1.Fingerprint.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Fingerprint
+                 * @static
+                 * @param {grafeas.v1.IFingerprint} message Fingerprint message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Fingerprint.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.v1Name != null && message.hasOwnProperty("v1Name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.v1Name);
+                    if (message.v2Blob != null && message.v2Blob.length)
+                        for (var i = 0; i < message.v2Blob.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.v2Blob[i]);
+                    if (message.v2Name != null && message.hasOwnProperty("v2Name"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.v2Name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Fingerprint message, length delimited. Does not implicitly {@link grafeas.v1.Fingerprint.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Fingerprint
+                 * @static
+                 * @param {grafeas.v1.IFingerprint} message Fingerprint message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Fingerprint.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Fingerprint message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Fingerprint
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Fingerprint} Fingerprint
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Fingerprint.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Fingerprint();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.v1Name = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.v2Blob && message.v2Blob.length))
+                                message.v2Blob = [];
+                            message.v2Blob.push(reader.string());
+                            break;
+                        case 3:
+                            message.v2Name = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Fingerprint message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Fingerprint
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Fingerprint} Fingerprint
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Fingerprint.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Fingerprint message.
+                 * @function verify
+                 * @memberof grafeas.v1.Fingerprint
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Fingerprint.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.v1Name != null && message.hasOwnProperty("v1Name"))
+                        if (!$util.isString(message.v1Name))
+                            return "v1Name: string expected";
+                    if (message.v2Blob != null && message.hasOwnProperty("v2Blob")) {
+                        if (!Array.isArray(message.v2Blob))
+                            return "v2Blob: array expected";
+                        for (var i = 0; i < message.v2Blob.length; ++i)
+                            if (!$util.isString(message.v2Blob[i]))
+                                return "v2Blob: string[] expected";
+                    }
+                    if (message.v2Name != null && message.hasOwnProperty("v2Name"))
+                        if (!$util.isString(message.v2Name))
+                            return "v2Name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Fingerprint message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Fingerprint
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Fingerprint} Fingerprint
+                 */
+                Fingerprint.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Fingerprint)
+                        return object;
+                    var message = new $root.grafeas.v1.Fingerprint();
+                    if (object.v1Name != null)
+                        message.v1Name = String(object.v1Name);
+                    if (object.v2Blob) {
+                        if (!Array.isArray(object.v2Blob))
+                            throw TypeError(".grafeas.v1.Fingerprint.v2Blob: array expected");
+                        message.v2Blob = [];
+                        for (var i = 0; i < object.v2Blob.length; ++i)
+                            message.v2Blob[i] = String(object.v2Blob[i]);
+                    }
+                    if (object.v2Name != null)
+                        message.v2Name = String(object.v2Name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Fingerprint message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Fingerprint
+                 * @static
+                 * @param {grafeas.v1.Fingerprint} message Fingerprint
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Fingerprint.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.v2Blob = [];
+                    if (options.defaults) {
+                        object.v1Name = "";
+                        object.v2Name = "";
+                    }
+                    if (message.v1Name != null && message.hasOwnProperty("v1Name"))
+                        object.v1Name = message.v1Name;
+                    if (message.v2Blob && message.v2Blob.length) {
+                        object.v2Blob = [];
+                        for (var j = 0; j < message.v2Blob.length; ++j)
+                            object.v2Blob[j] = message.v2Blob[j];
+                    }
+                    if (message.v2Name != null && message.hasOwnProperty("v2Name"))
+                        object.v2Name = message.v2Name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Fingerprint to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Fingerprint
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Fingerprint.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Fingerprint;
+            })();
+    
+            v1.ImageNote = (function() {
+    
+                /**
+                 * Properties of an ImageNote.
+                 * @memberof grafeas.v1
+                 * @interface IImageNote
+                 * @property {string|null} [resourceUrl] ImageNote resourceUrl
+                 * @property {grafeas.v1.IFingerprint|null} [fingerprint] ImageNote fingerprint
+                 */
+    
+                /**
+                 * Constructs a new ImageNote.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an ImageNote.
+                 * @implements IImageNote
+                 * @constructor
+                 * @param {grafeas.v1.IImageNote=} [properties] Properties to set
+                 */
+                function ImageNote(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ImageNote resourceUrl.
+                 * @member {string} resourceUrl
+                 * @memberof grafeas.v1.ImageNote
+                 * @instance
+                 */
+                ImageNote.prototype.resourceUrl = "";
+    
+                /**
+                 * ImageNote fingerprint.
+                 * @member {grafeas.v1.IFingerprint|null|undefined} fingerprint
+                 * @memberof grafeas.v1.ImageNote
+                 * @instance
+                 */
+                ImageNote.prototype.fingerprint = null;
+    
+                /**
+                 * Creates a new ImageNote instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.ImageNote
+                 * @static
+                 * @param {grafeas.v1.IImageNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.ImageNote} ImageNote instance
+                 */
+                ImageNote.create = function create(properties) {
+                    return new ImageNote(properties);
+                };
+    
+                /**
+                 * Encodes the specified ImageNote message. Does not implicitly {@link grafeas.v1.ImageNote.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.ImageNote
+                 * @static
+                 * @param {grafeas.v1.IImageNote} message ImageNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ImageNote.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.resourceUrl != null && message.hasOwnProperty("resourceUrl"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceUrl);
+                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
+                        $root.grafeas.v1.Fingerprint.encode(message.fingerprint, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ImageNote message, length delimited. Does not implicitly {@link grafeas.v1.ImageNote.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.ImageNote
+                 * @static
+                 * @param {grafeas.v1.IImageNote} message ImageNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ImageNote.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an ImageNote message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.ImageNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.ImageNote} ImageNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ImageNote.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.ImageNote();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.resourceUrl = reader.string();
+                            break;
+                        case 2:
+                            message.fingerprint = $root.grafeas.v1.Fingerprint.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an ImageNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.ImageNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.ImageNote} ImageNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ImageNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an ImageNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.ImageNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ImageNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.resourceUrl != null && message.hasOwnProperty("resourceUrl"))
+                        if (!$util.isString(message.resourceUrl))
+                            return "resourceUrl: string expected";
+                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint")) {
+                        var error = $root.grafeas.v1.Fingerprint.verify(message.fingerprint);
+                        if (error)
+                            return "fingerprint." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an ImageNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.ImageNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.ImageNote} ImageNote
+                 */
+                ImageNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.ImageNote)
+                        return object;
+                    var message = new $root.grafeas.v1.ImageNote();
+                    if (object.resourceUrl != null)
+                        message.resourceUrl = String(object.resourceUrl);
+                    if (object.fingerprint != null) {
+                        if (typeof object.fingerprint !== "object")
+                            throw TypeError(".grafeas.v1.ImageNote.fingerprint: object expected");
+                        message.fingerprint = $root.grafeas.v1.Fingerprint.fromObject(object.fingerprint);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an ImageNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.ImageNote
+                 * @static
+                 * @param {grafeas.v1.ImageNote} message ImageNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ImageNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.resourceUrl = "";
+                        object.fingerprint = null;
+                    }
+                    if (message.resourceUrl != null && message.hasOwnProperty("resourceUrl"))
+                        object.resourceUrl = message.resourceUrl;
+                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
+                        object.fingerprint = $root.grafeas.v1.Fingerprint.toObject(message.fingerprint, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this ImageNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.ImageNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ImageNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ImageNote;
+            })();
+    
+            v1.ImageOccurrence = (function() {
+    
+                /**
+                 * Properties of an ImageOccurrence.
+                 * @memberof grafeas.v1
+                 * @interface IImageOccurrence
+                 * @property {grafeas.v1.IFingerprint|null} [fingerprint] ImageOccurrence fingerprint
+                 * @property {number|null} [distance] ImageOccurrence distance
+                 * @property {Array.<grafeas.v1.ILayer>|null} [layerInfo] ImageOccurrence layerInfo
+                 * @property {string|null} [baseResourceUrl] ImageOccurrence baseResourceUrl
+                 */
+    
+                /**
+                 * Constructs a new ImageOccurrence.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an ImageOccurrence.
+                 * @implements IImageOccurrence
+                 * @constructor
+                 * @param {grafeas.v1.IImageOccurrence=} [properties] Properties to set
+                 */
+                function ImageOccurrence(properties) {
+                    this.layerInfo = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ImageOccurrence fingerprint.
+                 * @member {grafeas.v1.IFingerprint|null|undefined} fingerprint
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @instance
+                 */
+                ImageOccurrence.prototype.fingerprint = null;
+    
+                /**
+                 * ImageOccurrence distance.
+                 * @member {number} distance
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @instance
+                 */
+                ImageOccurrence.prototype.distance = 0;
+    
+                /**
+                 * ImageOccurrence layerInfo.
+                 * @member {Array.<grafeas.v1.ILayer>} layerInfo
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @instance
+                 */
+                ImageOccurrence.prototype.layerInfo = $util.emptyArray;
+    
+                /**
+                 * ImageOccurrence baseResourceUrl.
+                 * @member {string} baseResourceUrl
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @instance
+                 */
+                ImageOccurrence.prototype.baseResourceUrl = "";
+    
+                /**
+                 * Creates a new ImageOccurrence instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @static
+                 * @param {grafeas.v1.IImageOccurrence=} [properties] Properties to set
+                 * @returns {grafeas.v1.ImageOccurrence} ImageOccurrence instance
+                 */
+                ImageOccurrence.create = function create(properties) {
+                    return new ImageOccurrence(properties);
+                };
+    
+                /**
+                 * Encodes the specified ImageOccurrence message. Does not implicitly {@link grafeas.v1.ImageOccurrence.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @static
+                 * @param {grafeas.v1.IImageOccurrence} message ImageOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ImageOccurrence.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
+                        $root.grafeas.v1.Fingerprint.encode(message.fingerprint, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.distance != null && message.hasOwnProperty("distance"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.distance);
+                    if (message.layerInfo != null && message.layerInfo.length)
+                        for (var i = 0; i < message.layerInfo.length; ++i)
+                            $root.grafeas.v1.Layer.encode(message.layerInfo[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.baseResourceUrl != null && message.hasOwnProperty("baseResourceUrl"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.baseResourceUrl);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ImageOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.ImageOccurrence.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @static
+                 * @param {grafeas.v1.IImageOccurrence} message ImageOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ImageOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an ImageOccurrence message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.ImageOccurrence} ImageOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ImageOccurrence.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.ImageOccurrence();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.fingerprint = $root.grafeas.v1.Fingerprint.decode(reader, reader.uint32());
+                            break;
+                        case 2:
+                            message.distance = reader.int32();
+                            break;
+                        case 3:
+                            if (!(message.layerInfo && message.layerInfo.length))
+                                message.layerInfo = [];
+                            message.layerInfo.push($root.grafeas.v1.Layer.decode(reader, reader.uint32()));
+                            break;
+                        case 4:
+                            message.baseResourceUrl = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an ImageOccurrence message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.ImageOccurrence} ImageOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ImageOccurrence.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an ImageOccurrence message.
+                 * @function verify
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ImageOccurrence.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint")) {
+                        var error = $root.grafeas.v1.Fingerprint.verify(message.fingerprint);
+                        if (error)
+                            return "fingerprint." + error;
+                    }
+                    if (message.distance != null && message.hasOwnProperty("distance"))
+                        if (!$util.isInteger(message.distance))
+                            return "distance: integer expected";
+                    if (message.layerInfo != null && message.hasOwnProperty("layerInfo")) {
+                        if (!Array.isArray(message.layerInfo))
+                            return "layerInfo: array expected";
+                        for (var i = 0; i < message.layerInfo.length; ++i) {
+                            var error = $root.grafeas.v1.Layer.verify(message.layerInfo[i]);
+                            if (error)
+                                return "layerInfo." + error;
+                        }
+                    }
+                    if (message.baseResourceUrl != null && message.hasOwnProperty("baseResourceUrl"))
+                        if (!$util.isString(message.baseResourceUrl))
+                            return "baseResourceUrl: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an ImageOccurrence message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.ImageOccurrence} ImageOccurrence
+                 */
+                ImageOccurrence.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.ImageOccurrence)
+                        return object;
+                    var message = new $root.grafeas.v1.ImageOccurrence();
+                    if (object.fingerprint != null) {
+                        if (typeof object.fingerprint !== "object")
+                            throw TypeError(".grafeas.v1.ImageOccurrence.fingerprint: object expected");
+                        message.fingerprint = $root.grafeas.v1.Fingerprint.fromObject(object.fingerprint);
+                    }
+                    if (object.distance != null)
+                        message.distance = object.distance | 0;
+                    if (object.layerInfo) {
+                        if (!Array.isArray(object.layerInfo))
+                            throw TypeError(".grafeas.v1.ImageOccurrence.layerInfo: array expected");
+                        message.layerInfo = [];
+                        for (var i = 0; i < object.layerInfo.length; ++i) {
+                            if (typeof object.layerInfo[i] !== "object")
+                                throw TypeError(".grafeas.v1.ImageOccurrence.layerInfo: object expected");
+                            message.layerInfo[i] = $root.grafeas.v1.Layer.fromObject(object.layerInfo[i]);
+                        }
+                    }
+                    if (object.baseResourceUrl != null)
+                        message.baseResourceUrl = String(object.baseResourceUrl);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an ImageOccurrence message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @static
+                 * @param {grafeas.v1.ImageOccurrence} message ImageOccurrence
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ImageOccurrence.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.layerInfo = [];
+                    if (options.defaults) {
+                        object.fingerprint = null;
+                        object.distance = 0;
+                        object.baseResourceUrl = "";
+                    }
+                    if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
+                        object.fingerprint = $root.grafeas.v1.Fingerprint.toObject(message.fingerprint, options);
+                    if (message.distance != null && message.hasOwnProperty("distance"))
+                        object.distance = message.distance;
+                    if (message.layerInfo && message.layerInfo.length) {
+                        object.layerInfo = [];
+                        for (var j = 0; j < message.layerInfo.length; ++j)
+                            object.layerInfo[j] = $root.grafeas.v1.Layer.toObject(message.layerInfo[j], options);
+                    }
+                    if (message.baseResourceUrl != null && message.hasOwnProperty("baseResourceUrl"))
+                        object.baseResourceUrl = message.baseResourceUrl;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ImageOccurrence to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.ImageOccurrence
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ImageOccurrence.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ImageOccurrence;
+            })();
+    
+            /**
+             * Architecture enum.
+             * @name grafeas.v1.Architecture
+             * @enum {string}
+             * @property {number} ARCHITECTURE_UNSPECIFIED=0 ARCHITECTURE_UNSPECIFIED value
+             * @property {number} X86=1 X86 value
+             * @property {number} X64=2 X64 value
+             */
+            v1.Architecture = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "ARCHITECTURE_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "X86"] = 1;
+                values[valuesById[2] = "X64"] = 2;
+                return values;
+            })();
+    
+            v1.Distribution = (function() {
+    
+                /**
+                 * Properties of a Distribution.
+                 * @memberof grafeas.v1
+                 * @interface IDistribution
+                 * @property {string|null} [cpeUri] Distribution cpeUri
+                 * @property {grafeas.v1.Architecture|null} [architecture] Distribution architecture
+                 * @property {grafeas.v1.IVersion|null} [latestVersion] Distribution latestVersion
+                 * @property {string|null} [maintainer] Distribution maintainer
+                 * @property {string|null} [url] Distribution url
+                 * @property {string|null} [description] Distribution description
+                 */
+    
+                /**
+                 * Constructs a new Distribution.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Distribution.
+                 * @implements IDistribution
+                 * @constructor
+                 * @param {grafeas.v1.IDistribution=} [properties] Properties to set
+                 */
+                function Distribution(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Distribution cpeUri.
+                 * @member {string} cpeUri
+                 * @memberof grafeas.v1.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.cpeUri = "";
+    
+                /**
+                 * Distribution architecture.
+                 * @member {grafeas.v1.Architecture} architecture
+                 * @memberof grafeas.v1.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.architecture = 0;
+    
+                /**
+                 * Distribution latestVersion.
+                 * @member {grafeas.v1.IVersion|null|undefined} latestVersion
+                 * @memberof grafeas.v1.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.latestVersion = null;
+    
+                /**
+                 * Distribution maintainer.
+                 * @member {string} maintainer
+                 * @memberof grafeas.v1.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.maintainer = "";
+    
+                /**
+                 * Distribution url.
+                 * @member {string} url
+                 * @memberof grafeas.v1.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.url = "";
+    
+                /**
+                 * Distribution description.
+                 * @member {string} description
+                 * @memberof grafeas.v1.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.description = "";
+    
+                /**
+                 * Creates a new Distribution instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Distribution
+                 * @static
+                 * @param {grafeas.v1.IDistribution=} [properties] Properties to set
+                 * @returns {grafeas.v1.Distribution} Distribution instance
+                 */
+                Distribution.create = function create(properties) {
+                    return new Distribution(properties);
+                };
+    
+                /**
+                 * Encodes the specified Distribution message. Does not implicitly {@link grafeas.v1.Distribution.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Distribution
+                 * @static
+                 * @param {grafeas.v1.IDistribution} message Distribution message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Distribution.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
+                    if (message.architecture != null && message.hasOwnProperty("architecture"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.architecture);
+                    if (message.latestVersion != null && message.hasOwnProperty("latestVersion"))
+                        $root.grafeas.v1.Version.encode(message.latestVersion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.maintainer != null && message.hasOwnProperty("maintainer"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.maintainer);
+                    if (message.url != null && message.hasOwnProperty("url"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.url);
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Distribution message, length delimited. Does not implicitly {@link grafeas.v1.Distribution.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Distribution
+                 * @static
+                 * @param {grafeas.v1.IDistribution} message Distribution message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Distribution.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Distribution message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Distribution
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Distribution} Distribution
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Distribution.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Distribution();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.cpeUri = reader.string();
+                            break;
+                        case 2:
+                            message.architecture = reader.int32();
+                            break;
+                        case 3:
+                            message.latestVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                            break;
+                        case 4:
+                            message.maintainer = reader.string();
+                            break;
+                        case 5:
+                            message.url = reader.string();
+                            break;
+                        case 6:
+                            message.description = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Distribution message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Distribution
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Distribution} Distribution
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Distribution.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Distribution message.
+                 * @function verify
+                 * @memberof grafeas.v1.Distribution
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Distribution.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        if (!$util.isString(message.cpeUri))
+                            return "cpeUri: string expected";
+                    if (message.architecture != null && message.hasOwnProperty("architecture"))
+                        switch (message.architecture) {
+                        default:
+                            return "architecture: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.latestVersion != null && message.hasOwnProperty("latestVersion")) {
+                        var error = $root.grafeas.v1.Version.verify(message.latestVersion);
+                        if (error)
+                            return "latestVersion." + error;
+                    }
+                    if (message.maintainer != null && message.hasOwnProperty("maintainer"))
+                        if (!$util.isString(message.maintainer))
+                            return "maintainer: string expected";
+                    if (message.url != null && message.hasOwnProperty("url"))
+                        if (!$util.isString(message.url))
+                            return "url: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Distribution message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Distribution
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Distribution} Distribution
+                 */
+                Distribution.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Distribution)
+                        return object;
+                    var message = new $root.grafeas.v1.Distribution();
+                    if (object.cpeUri != null)
+                        message.cpeUri = String(object.cpeUri);
+                    switch (object.architecture) {
+                    case "ARCHITECTURE_UNSPECIFIED":
+                    case 0:
+                        message.architecture = 0;
+                        break;
+                    case "X86":
+                    case 1:
+                        message.architecture = 1;
+                        break;
+                    case "X64":
+                    case 2:
+                        message.architecture = 2;
+                        break;
+                    }
+                    if (object.latestVersion != null) {
+                        if (typeof object.latestVersion !== "object")
+                            throw TypeError(".grafeas.v1.Distribution.latestVersion: object expected");
+                        message.latestVersion = $root.grafeas.v1.Version.fromObject(object.latestVersion);
+                    }
+                    if (object.maintainer != null)
+                        message.maintainer = String(object.maintainer);
+                    if (object.url != null)
+                        message.url = String(object.url);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Distribution message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Distribution
+                 * @static
+                 * @param {grafeas.v1.Distribution} message Distribution
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Distribution.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.cpeUri = "";
+                        object.architecture = options.enums === String ? "ARCHITECTURE_UNSPECIFIED" : 0;
+                        object.latestVersion = null;
+                        object.maintainer = "";
+                        object.url = "";
+                        object.description = "";
+                    }
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        object.cpeUri = message.cpeUri;
+                    if (message.architecture != null && message.hasOwnProperty("architecture"))
+                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
+                    if (message.latestVersion != null && message.hasOwnProperty("latestVersion"))
+                        object.latestVersion = $root.grafeas.v1.Version.toObject(message.latestVersion, options);
+                    if (message.maintainer != null && message.hasOwnProperty("maintainer"))
+                        object.maintainer = message.maintainer;
+                    if (message.url != null && message.hasOwnProperty("url"))
+                        object.url = message.url;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Distribution to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Distribution
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Distribution.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Distribution;
+            })();
+    
+            v1.Location = (function() {
+    
+                /**
+                 * Properties of a Location.
+                 * @memberof grafeas.v1
+                 * @interface ILocation
+                 * @property {string|null} [cpeUri] Location cpeUri
+                 * @property {grafeas.v1.IVersion|null} [version] Location version
+                 * @property {string|null} [path] Location path
+                 */
+    
+                /**
+                 * Constructs a new Location.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Location.
+                 * @implements ILocation
+                 * @constructor
+                 * @param {grafeas.v1.ILocation=} [properties] Properties to set
+                 */
+                function Location(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Location cpeUri.
+                 * @member {string} cpeUri
+                 * @memberof grafeas.v1.Location
+                 * @instance
+                 */
+                Location.prototype.cpeUri = "";
+    
+                /**
+                 * Location version.
+                 * @member {grafeas.v1.IVersion|null|undefined} version
+                 * @memberof grafeas.v1.Location
+                 * @instance
+                 */
+                Location.prototype.version = null;
+    
+                /**
+                 * Location path.
+                 * @member {string} path
+                 * @memberof grafeas.v1.Location
+                 * @instance
+                 */
+                Location.prototype.path = "";
+    
+                /**
+                 * Creates a new Location instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Location
+                 * @static
+                 * @param {grafeas.v1.ILocation=} [properties] Properties to set
+                 * @returns {grafeas.v1.Location} Location instance
+                 */
+                Location.create = function create(properties) {
+                    return new Location(properties);
+                };
+    
+                /**
+                 * Encodes the specified Location message. Does not implicitly {@link grafeas.v1.Location.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Location
+                 * @static
+                 * @param {grafeas.v1.ILocation} message Location message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Location.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        $root.grafeas.v1.Version.encode(message.version, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.path != null && message.hasOwnProperty("path"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Location message, length delimited. Does not implicitly {@link grafeas.v1.Location.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Location
+                 * @static
+                 * @param {grafeas.v1.ILocation} message Location message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Location.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Location message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Location
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Location} Location
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Location.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Location();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.cpeUri = reader.string();
+                            break;
+                        case 2:
+                            message.version = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                            break;
+                        case 3:
+                            message.path = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Location message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Location
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Location} Location
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Location.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Location message.
+                 * @function verify
+                 * @memberof grafeas.v1.Location
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Location.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        if (!$util.isString(message.cpeUri))
+                            return "cpeUri: string expected";
+                    if (message.version != null && message.hasOwnProperty("version")) {
+                        var error = $root.grafeas.v1.Version.verify(message.version);
+                        if (error)
+                            return "version." + error;
+                    }
+                    if (message.path != null && message.hasOwnProperty("path"))
+                        if (!$util.isString(message.path))
+                            return "path: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Location message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Location
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Location} Location
+                 */
+                Location.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Location)
+                        return object;
+                    var message = new $root.grafeas.v1.Location();
+                    if (object.cpeUri != null)
+                        message.cpeUri = String(object.cpeUri);
+                    if (object.version != null) {
+                        if (typeof object.version !== "object")
+                            throw TypeError(".grafeas.v1.Location.version: object expected");
+                        message.version = $root.grafeas.v1.Version.fromObject(object.version);
+                    }
+                    if (object.path != null)
+                        message.path = String(object.path);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Location message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Location
+                 * @static
+                 * @param {grafeas.v1.Location} message Location
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Location.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.cpeUri = "";
+                        object.version = null;
+                        object.path = "";
+                    }
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        object.cpeUri = message.cpeUri;
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = $root.grafeas.v1.Version.toObject(message.version, options);
+                    if (message.path != null && message.hasOwnProperty("path"))
+                        object.path = message.path;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Location to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Location
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Location.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Location;
+            })();
+    
+            v1.PackageNote = (function() {
+    
+                /**
+                 * Properties of a PackageNote.
+                 * @memberof grafeas.v1
+                 * @interface IPackageNote
+                 * @property {string|null} [name] PackageNote name
+                 * @property {Array.<grafeas.v1.IDistribution>|null} [distribution] PackageNote distribution
+                 */
+    
+                /**
+                 * Constructs a new PackageNote.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a PackageNote.
+                 * @implements IPackageNote
+                 * @constructor
+                 * @param {grafeas.v1.IPackageNote=} [properties] Properties to set
+                 */
+                function PackageNote(properties) {
+                    this.distribution = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * PackageNote name.
+                 * @member {string} name
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.name = "";
+    
+                /**
+                 * PackageNote distribution.
+                 * @member {Array.<grafeas.v1.IDistribution>} distribution
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 */
+                PackageNote.prototype.distribution = $util.emptyArray;
+    
+                /**
+                 * Creates a new PackageNote instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.PackageNote
+                 * @static
+                 * @param {grafeas.v1.IPackageNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.PackageNote} PackageNote instance
+                 */
+                PackageNote.create = function create(properties) {
+                    return new PackageNote(properties);
+                };
+    
+                /**
+                 * Encodes the specified PackageNote message. Does not implicitly {@link grafeas.v1.PackageNote.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.PackageNote
+                 * @static
+                 * @param {grafeas.v1.IPackageNote} message PackageNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                PackageNote.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.distribution != null && message.distribution.length)
+                        for (var i = 0; i < message.distribution.length; ++i)
+                            $root.grafeas.v1.Distribution.encode(message.distribution[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified PackageNote message, length delimited. Does not implicitly {@link grafeas.v1.PackageNote.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.PackageNote
+                 * @static
+                 * @param {grafeas.v1.IPackageNote} message PackageNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                PackageNote.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a PackageNote message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.PackageNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.PackageNote} PackageNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                PackageNote.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.PackageNote();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 10:
+                            if (!(message.distribution && message.distribution.length))
+                                message.distribution = [];
+                            message.distribution.push($root.grafeas.v1.Distribution.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a PackageNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.PackageNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.PackageNote} PackageNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                PackageNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a PackageNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.PackageNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                PackageNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.distribution != null && message.hasOwnProperty("distribution")) {
+                        if (!Array.isArray(message.distribution))
+                            return "distribution: array expected";
+                        for (var i = 0; i < message.distribution.length; ++i) {
+                            var error = $root.grafeas.v1.Distribution.verify(message.distribution[i]);
+                            if (error)
+                                return "distribution." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a PackageNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.PackageNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.PackageNote} PackageNote
+                 */
+                PackageNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.PackageNote)
+                        return object;
+                    var message = new $root.grafeas.v1.PackageNote();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.distribution) {
+                        if (!Array.isArray(object.distribution))
+                            throw TypeError(".grafeas.v1.PackageNote.distribution: array expected");
+                        message.distribution = [];
+                        for (var i = 0; i < object.distribution.length; ++i) {
+                            if (typeof object.distribution[i] !== "object")
+                                throw TypeError(".grafeas.v1.PackageNote.distribution: object expected");
+                            message.distribution[i] = $root.grafeas.v1.Distribution.fromObject(object.distribution[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a PackageNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.PackageNote
+                 * @static
+                 * @param {grafeas.v1.PackageNote} message PackageNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                PackageNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.distribution = [];
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.distribution && message.distribution.length) {
+                        object.distribution = [];
+                        for (var j = 0; j < message.distribution.length; ++j)
+                            object.distribution[j] = $root.grafeas.v1.Distribution.toObject(message.distribution[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this PackageNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.PackageNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                PackageNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return PackageNote;
+            })();
+    
+            v1.PackageOccurrence = (function() {
+    
+                /**
+                 * Properties of a PackageOccurrence.
+                 * @memberof grafeas.v1
+                 * @interface IPackageOccurrence
+                 * @property {string|null} [name] PackageOccurrence name
+                 * @property {Array.<grafeas.v1.ILocation>|null} [location] PackageOccurrence location
+                 */
+    
+                /**
+                 * Constructs a new PackageOccurrence.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a PackageOccurrence.
+                 * @implements IPackageOccurrence
+                 * @constructor
+                 * @param {grafeas.v1.IPackageOccurrence=} [properties] Properties to set
+                 */
+                function PackageOccurrence(properties) {
+                    this.location = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * PackageOccurrence name.
+                 * @member {string} name
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @instance
+                 */
+                PackageOccurrence.prototype.name = "";
+    
+                /**
+                 * PackageOccurrence location.
+                 * @member {Array.<grafeas.v1.ILocation>} location
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @instance
+                 */
+                PackageOccurrence.prototype.location = $util.emptyArray;
+    
+                /**
+                 * Creates a new PackageOccurrence instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @static
+                 * @param {grafeas.v1.IPackageOccurrence=} [properties] Properties to set
+                 * @returns {grafeas.v1.PackageOccurrence} PackageOccurrence instance
+                 */
+                PackageOccurrence.create = function create(properties) {
+                    return new PackageOccurrence(properties);
+                };
+    
+                /**
+                 * Encodes the specified PackageOccurrence message. Does not implicitly {@link grafeas.v1.PackageOccurrence.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @static
+                 * @param {grafeas.v1.IPackageOccurrence} message PackageOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                PackageOccurrence.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.location != null && message.location.length)
+                        for (var i = 0; i < message.location.length; ++i)
+                            $root.grafeas.v1.Location.encode(message.location[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified PackageOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.PackageOccurrence.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @static
+                 * @param {grafeas.v1.IPackageOccurrence} message PackageOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                PackageOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a PackageOccurrence message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.PackageOccurrence} PackageOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                PackageOccurrence.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.PackageOccurrence();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.location && message.location.length))
+                                message.location = [];
+                            message.location.push($root.grafeas.v1.Location.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a PackageOccurrence message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.PackageOccurrence} PackageOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                PackageOccurrence.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a PackageOccurrence message.
+                 * @function verify
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                PackageOccurrence.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.location != null && message.hasOwnProperty("location")) {
+                        if (!Array.isArray(message.location))
+                            return "location: array expected";
+                        for (var i = 0; i < message.location.length; ++i) {
+                            var error = $root.grafeas.v1.Location.verify(message.location[i]);
+                            if (error)
+                                return "location." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a PackageOccurrence message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.PackageOccurrence} PackageOccurrence
+                 */
+                PackageOccurrence.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.PackageOccurrence)
+                        return object;
+                    var message = new $root.grafeas.v1.PackageOccurrence();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.location) {
+                        if (!Array.isArray(object.location))
+                            throw TypeError(".grafeas.v1.PackageOccurrence.location: array expected");
+                        message.location = [];
+                        for (var i = 0; i < object.location.length; ++i) {
+                            if (typeof object.location[i] !== "object")
+                                throw TypeError(".grafeas.v1.PackageOccurrence.location: object expected");
+                            message.location[i] = $root.grafeas.v1.Location.fromObject(object.location[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a PackageOccurrence message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @static
+                 * @param {grafeas.v1.PackageOccurrence} message PackageOccurrence
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                PackageOccurrence.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.location = [];
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.location && message.location.length) {
+                        object.location = [];
+                        for (var j = 0; j < message.location.length; ++j)
+                            object.location[j] = $root.grafeas.v1.Location.toObject(message.location[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this PackageOccurrence to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.PackageOccurrence
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                PackageOccurrence.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return PackageOccurrence;
+            })();
+    
+            v1.Version = (function() {
+    
+                /**
+                 * Properties of a Version.
+                 * @memberof grafeas.v1
+                 * @interface IVersion
+                 * @property {number|null} [epoch] Version epoch
+                 * @property {string|null} [name] Version name
+                 * @property {string|null} [revision] Version revision
+                 * @property {grafeas.v1.Version.VersionKind|null} [kind] Version kind
+                 * @property {string|null} [fullName] Version fullName
+                 */
+    
+                /**
+                 * Constructs a new Version.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Version.
+                 * @implements IVersion
+                 * @constructor
+                 * @param {grafeas.v1.IVersion=} [properties] Properties to set
+                 */
+                function Version(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Version epoch.
+                 * @member {number} epoch
+                 * @memberof grafeas.v1.Version
+                 * @instance
+                 */
+                Version.prototype.epoch = 0;
+    
+                /**
+                 * Version name.
+                 * @member {string} name
+                 * @memberof grafeas.v1.Version
+                 * @instance
+                 */
+                Version.prototype.name = "";
+    
+                /**
+                 * Version revision.
+                 * @member {string} revision
+                 * @memberof grafeas.v1.Version
+                 * @instance
+                 */
+                Version.prototype.revision = "";
+    
+                /**
+                 * Version kind.
+                 * @member {grafeas.v1.Version.VersionKind} kind
+                 * @memberof grafeas.v1.Version
+                 * @instance
+                 */
+                Version.prototype.kind = 0;
+    
+                /**
+                 * Version fullName.
+                 * @member {string} fullName
+                 * @memberof grafeas.v1.Version
+                 * @instance
+                 */
+                Version.prototype.fullName = "";
+    
+                /**
+                 * Creates a new Version instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Version
+                 * @static
+                 * @param {grafeas.v1.IVersion=} [properties] Properties to set
+                 * @returns {grafeas.v1.Version} Version instance
+                 */
+                Version.create = function create(properties) {
+                    return new Version(properties);
+                };
+    
+                /**
+                 * Encodes the specified Version message. Does not implicitly {@link grafeas.v1.Version.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Version
+                 * @static
+                 * @param {grafeas.v1.IVersion} message Version message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Version.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.epoch != null && message.hasOwnProperty("epoch"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.epoch);
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                    if (message.revision != null && message.hasOwnProperty("revision"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.revision);
+                    if (message.kind != null && message.hasOwnProperty("kind"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.kind);
+                    if (message.fullName != null && message.hasOwnProperty("fullName"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.fullName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Version message, length delimited. Does not implicitly {@link grafeas.v1.Version.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Version
+                 * @static
+                 * @param {grafeas.v1.IVersion} message Version message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Version.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Version message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Version
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Version} Version
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Version.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Version();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.epoch = reader.int32();
+                            break;
+                        case 2:
+                            message.name = reader.string();
+                            break;
+                        case 3:
+                            message.revision = reader.string();
+                            break;
+                        case 4:
+                            message.kind = reader.int32();
+                            break;
+                        case 5:
+                            message.fullName = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Version message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Version
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Version} Version
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Version.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Version message.
+                 * @function verify
+                 * @memberof grafeas.v1.Version
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Version.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.epoch != null && message.hasOwnProperty("epoch"))
+                        if (!$util.isInteger(message.epoch))
+                            return "epoch: integer expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.revision != null && message.hasOwnProperty("revision"))
+                        if (!$util.isString(message.revision))
+                            return "revision: string expected";
+                    if (message.kind != null && message.hasOwnProperty("kind"))
+                        switch (message.kind) {
+                        default:
+                            return "kind: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.fullName != null && message.hasOwnProperty("fullName"))
+                        if (!$util.isString(message.fullName))
+                            return "fullName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Version message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Version
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Version} Version
+                 */
+                Version.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Version)
+                        return object;
+                    var message = new $root.grafeas.v1.Version();
+                    if (object.epoch != null)
+                        message.epoch = object.epoch | 0;
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.revision != null)
+                        message.revision = String(object.revision);
+                    switch (object.kind) {
+                    case "VERSION_KIND_UNSPECIFIED":
+                    case 0:
+                        message.kind = 0;
+                        break;
+                    case "NORMAL":
+                    case 1:
+                        message.kind = 1;
+                        break;
+                    case "MINIMUM":
+                    case 2:
+                        message.kind = 2;
+                        break;
+                    case "MAXIMUM":
+                    case 3:
+                        message.kind = 3;
+                        break;
+                    }
+                    if (object.fullName != null)
+                        message.fullName = String(object.fullName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Version message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Version
+                 * @static
+                 * @param {grafeas.v1.Version} message Version
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Version.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.epoch = 0;
+                        object.name = "";
+                        object.revision = "";
+                        object.kind = options.enums === String ? "VERSION_KIND_UNSPECIFIED" : 0;
+                        object.fullName = "";
+                    }
+                    if (message.epoch != null && message.hasOwnProperty("epoch"))
+                        object.epoch = message.epoch;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.revision != null && message.hasOwnProperty("revision"))
+                        object.revision = message.revision;
+                    if (message.kind != null && message.hasOwnProperty("kind"))
+                        object.kind = options.enums === String ? $root.grafeas.v1.Version.VersionKind[message.kind] : message.kind;
+                    if (message.fullName != null && message.hasOwnProperty("fullName"))
+                        object.fullName = message.fullName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Version to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Version
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Version.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * VersionKind enum.
+                 * @name grafeas.v1.Version.VersionKind
+                 * @enum {string}
+                 * @property {number} VERSION_KIND_UNSPECIFIED=0 VERSION_KIND_UNSPECIFIED value
+                 * @property {number} NORMAL=1 NORMAL value
+                 * @property {number} MINIMUM=2 MINIMUM value
+                 * @property {number} MAXIMUM=3 MAXIMUM value
+                 */
+                Version.VersionKind = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "VERSION_KIND_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "NORMAL"] = 1;
+                    values[valuesById[2] = "MINIMUM"] = 2;
+                    values[valuesById[3] = "MAXIMUM"] = 3;
+                    return values;
+                })();
+    
+                return Version;
+            })();
+    
+            v1.UpgradeNote = (function() {
+    
+                /**
+                 * Properties of an UpgradeNote.
+                 * @memberof grafeas.v1
+                 * @interface IUpgradeNote
+                 * @property {string|null} ["package"] UpgradeNote package
+                 * @property {grafeas.v1.IVersion|null} [version] UpgradeNote version
+                 * @property {Array.<grafeas.v1.IUpgradeDistribution>|null} [distributions] UpgradeNote distributions
+                 * @property {grafeas.v1.IWindowsUpdate|null} [windowsUpdate] UpgradeNote windowsUpdate
+                 */
+    
+                /**
+                 * Constructs a new UpgradeNote.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an UpgradeNote.
+                 * @implements IUpgradeNote
+                 * @constructor
+                 * @param {grafeas.v1.IUpgradeNote=} [properties] Properties to set
+                 */
+                function UpgradeNote(properties) {
+                    this.distributions = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UpgradeNote package.
+                 * @member {string} package
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 */
+                UpgradeNote.prototype["package"] = "";
+    
+                /**
+                 * UpgradeNote version.
+                 * @member {grafeas.v1.IVersion|null|undefined} version
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 */
+                UpgradeNote.prototype.version = null;
+    
+                /**
+                 * UpgradeNote distributions.
+                 * @member {Array.<grafeas.v1.IUpgradeDistribution>} distributions
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 */
+                UpgradeNote.prototype.distributions = $util.emptyArray;
+    
+                /**
+                 * UpgradeNote windowsUpdate.
+                 * @member {grafeas.v1.IWindowsUpdate|null|undefined} windowsUpdate
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 */
+                UpgradeNote.prototype.windowsUpdate = null;
+    
+                /**
+                 * Creates a new UpgradeNote instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {grafeas.v1.IUpgradeNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote instance
+                 */
+                UpgradeNote.create = function create(properties) {
+                    return new UpgradeNote(properties);
+                };
+    
+                /**
+                 * Encodes the specified UpgradeNote message. Does not implicitly {@link grafeas.v1.UpgradeNote.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {grafeas.v1.IUpgradeNote} message UpgradeNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeNote.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message["package"]);
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        $root.grafeas.v1.Version.encode(message.version, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.distributions != null && message.distributions.length)
+                        for (var i = 0; i < message.distributions.length; ++i)
+                            $root.grafeas.v1.UpgradeDistribution.encode(message.distributions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
+                        $root.grafeas.v1.WindowsUpdate.encode(message.windowsUpdate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UpgradeNote message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeNote.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {grafeas.v1.IUpgradeNote} message UpgradeNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeNote.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an UpgradeNote message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeNote.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeNote();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message["package"] = reader.string();
+                            break;
+                        case 2:
+                            message.version = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                            break;
+                        case 3:
+                            if (!(message.distributions && message.distributions.length))
+                                message.distributions = [];
+                            message.distributions.push($root.grafeas.v1.UpgradeDistribution.decode(reader, reader.uint32()));
+                            break;
+                        case 4:
+                            message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an UpgradeNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an UpgradeNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpgradeNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        if (!$util.isString(message["package"]))
+                            return "package: string expected";
+                    if (message.version != null && message.hasOwnProperty("version")) {
+                        var error = $root.grafeas.v1.Version.verify(message.version);
+                        if (error)
+                            return "version." + error;
+                    }
+                    if (message.distributions != null && message.hasOwnProperty("distributions")) {
+                        if (!Array.isArray(message.distributions))
+                            return "distributions: array expected";
+                        for (var i = 0; i < message.distributions.length; ++i) {
+                            var error = $root.grafeas.v1.UpgradeDistribution.verify(message.distributions[i]);
+                            if (error)
+                                return "distributions." + error;
+                        }
+                    }
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate")) {
+                        var error = $root.grafeas.v1.WindowsUpdate.verify(message.windowsUpdate);
+                        if (error)
+                            return "windowsUpdate." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an UpgradeNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
+                 */
+                UpgradeNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.UpgradeNote)
+                        return object;
+                    var message = new $root.grafeas.v1.UpgradeNote();
+                    if (object["package"] != null)
+                        message["package"] = String(object["package"]);
+                    if (object.version != null) {
+                        if (typeof object.version !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeNote.version: object expected");
+                        message.version = $root.grafeas.v1.Version.fromObject(object.version);
+                    }
+                    if (object.distributions) {
+                        if (!Array.isArray(object.distributions))
+                            throw TypeError(".grafeas.v1.UpgradeNote.distributions: array expected");
+                        message.distributions = [];
+                        for (var i = 0; i < object.distributions.length; ++i) {
+                            if (typeof object.distributions[i] !== "object")
+                                throw TypeError(".grafeas.v1.UpgradeNote.distributions: object expected");
+                            message.distributions[i] = $root.grafeas.v1.UpgradeDistribution.fromObject(object.distributions[i]);
+                        }
+                    }
+                    if (object.windowsUpdate != null) {
+                        if (typeof object.windowsUpdate !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeNote.windowsUpdate: object expected");
+                        message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.fromObject(object.windowsUpdate);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an UpgradeNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {grafeas.v1.UpgradeNote} message UpgradeNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpgradeNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.distributions = [];
+                    if (options.defaults) {
+                        object["package"] = "";
+                        object.version = null;
+                        object.windowsUpdate = null;
+                    }
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        object["package"] = message["package"];
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = $root.grafeas.v1.Version.toObject(message.version, options);
+                    if (message.distributions && message.distributions.length) {
+                        object.distributions = [];
+                        for (var j = 0; j < message.distributions.length; ++j)
+                            object.distributions[j] = $root.grafeas.v1.UpgradeDistribution.toObject(message.distributions[j], options);
+                    }
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
+                        object.windowsUpdate = $root.grafeas.v1.WindowsUpdate.toObject(message.windowsUpdate, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this UpgradeNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpgradeNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return UpgradeNote;
+            })();
+    
+            v1.UpgradeDistribution = (function() {
+    
+                /**
+                 * Properties of an UpgradeDistribution.
+                 * @memberof grafeas.v1
+                 * @interface IUpgradeDistribution
+                 * @property {string|null} [cpeUri] UpgradeDistribution cpeUri
+                 * @property {string|null} [classification] UpgradeDistribution classification
+                 * @property {string|null} [severity] UpgradeDistribution severity
+                 * @property {Array.<string>|null} [cve] UpgradeDistribution cve
+                 */
+    
+                /**
+                 * Constructs a new UpgradeDistribution.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an UpgradeDistribution.
+                 * @implements IUpgradeDistribution
+                 * @constructor
+                 * @param {grafeas.v1.IUpgradeDistribution=} [properties] Properties to set
+                 */
+                function UpgradeDistribution(properties) {
+                    this.cve = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UpgradeDistribution cpeUri.
+                 * @member {string} cpeUri
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 */
+                UpgradeDistribution.prototype.cpeUri = "";
+    
+                /**
+                 * UpgradeDistribution classification.
+                 * @member {string} classification
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 */
+                UpgradeDistribution.prototype.classification = "";
+    
+                /**
+                 * UpgradeDistribution severity.
+                 * @member {string} severity
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 */
+                UpgradeDistribution.prototype.severity = "";
+    
+                /**
+                 * UpgradeDistribution cve.
+                 * @member {Array.<string>} cve
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 */
+                UpgradeDistribution.prototype.cve = $util.emptyArray;
+    
+                /**
+                 * Creates a new UpgradeDistribution instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {grafeas.v1.IUpgradeDistribution=} [properties] Properties to set
+                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution instance
+                 */
+                UpgradeDistribution.create = function create(properties) {
+                    return new UpgradeDistribution(properties);
+                };
+    
+                /**
+                 * Encodes the specified UpgradeDistribution message. Does not implicitly {@link grafeas.v1.UpgradeDistribution.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {grafeas.v1.IUpgradeDistribution} message UpgradeDistribution message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeDistribution.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
+                    if (message.classification != null && message.hasOwnProperty("classification"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.classification);
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.severity);
+                    if (message.cve != null && message.cve.length)
+                        for (var i = 0; i < message.cve.length; ++i)
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.cve[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UpgradeDistribution message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeDistribution.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {grafeas.v1.IUpgradeDistribution} message UpgradeDistribution message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeDistribution.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an UpgradeDistribution message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeDistribution.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeDistribution();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.cpeUri = reader.string();
+                            break;
+                        case 2:
+                            message.classification = reader.string();
+                            break;
+                        case 3:
+                            message.severity = reader.string();
+                            break;
+                        case 4:
+                            if (!(message.cve && message.cve.length))
+                                message.cve = [];
+                            message.cve.push(reader.string());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an UpgradeDistribution message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeDistribution.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an UpgradeDistribution message.
+                 * @function verify
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpgradeDistribution.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        if (!$util.isString(message.cpeUri))
+                            return "cpeUri: string expected";
+                    if (message.classification != null && message.hasOwnProperty("classification"))
+                        if (!$util.isString(message.classification))
+                            return "classification: string expected";
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        if (!$util.isString(message.severity))
+                            return "severity: string expected";
+                    if (message.cve != null && message.hasOwnProperty("cve")) {
+                        if (!Array.isArray(message.cve))
+                            return "cve: array expected";
+                        for (var i = 0; i < message.cve.length; ++i)
+                            if (!$util.isString(message.cve[i]))
+                                return "cve: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an UpgradeDistribution message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
+                 */
+                UpgradeDistribution.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.UpgradeDistribution)
+                        return object;
+                    var message = new $root.grafeas.v1.UpgradeDistribution();
+                    if (object.cpeUri != null)
+                        message.cpeUri = String(object.cpeUri);
+                    if (object.classification != null)
+                        message.classification = String(object.classification);
+                    if (object.severity != null)
+                        message.severity = String(object.severity);
+                    if (object.cve) {
+                        if (!Array.isArray(object.cve))
+                            throw TypeError(".grafeas.v1.UpgradeDistribution.cve: array expected");
+                        message.cve = [];
+                        for (var i = 0; i < object.cve.length; ++i)
+                            message.cve[i] = String(object.cve[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an UpgradeDistribution message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {grafeas.v1.UpgradeDistribution} message UpgradeDistribution
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpgradeDistribution.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.cve = [];
+                    if (options.defaults) {
+                        object.cpeUri = "";
+                        object.classification = "";
+                        object.severity = "";
+                    }
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        object.cpeUri = message.cpeUri;
+                    if (message.classification != null && message.hasOwnProperty("classification"))
+                        object.classification = message.classification;
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        object.severity = message.severity;
+                    if (message.cve && message.cve.length) {
+                        object.cve = [];
+                        for (var j = 0; j < message.cve.length; ++j)
+                            object.cve[j] = message.cve[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this UpgradeDistribution to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpgradeDistribution.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return UpgradeDistribution;
+            })();
+    
+            v1.WindowsUpdate = (function() {
+    
+                /**
+                 * Properties of a WindowsUpdate.
+                 * @memberof grafeas.v1
+                 * @interface IWindowsUpdate
+                 * @property {grafeas.v1.WindowsUpdate.IIdentity|null} [identity] WindowsUpdate identity
+                 * @property {string|null} [title] WindowsUpdate title
+                 * @property {string|null} [description] WindowsUpdate description
+                 * @property {Array.<grafeas.v1.WindowsUpdate.ICategory>|null} [categories] WindowsUpdate categories
+                 * @property {Array.<string>|null} [kbArticleIds] WindowsUpdate kbArticleIds
+                 * @property {string|null} [supportUrl] WindowsUpdate supportUrl
+                 * @property {google.protobuf.ITimestamp|null} [lastPublishedTimestamp] WindowsUpdate lastPublishedTimestamp
+                 */
+    
+                /**
+                 * Constructs a new WindowsUpdate.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a WindowsUpdate.
+                 * @implements IWindowsUpdate
+                 * @constructor
+                 * @param {grafeas.v1.IWindowsUpdate=} [properties] Properties to set
+                 */
+                function WindowsUpdate(properties) {
+                    this.categories = [];
+                    this.kbArticleIds = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * WindowsUpdate identity.
+                 * @member {grafeas.v1.WindowsUpdate.IIdentity|null|undefined} identity
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.identity = null;
+    
+                /**
+                 * WindowsUpdate title.
+                 * @member {string} title
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.title = "";
+    
+                /**
+                 * WindowsUpdate description.
+                 * @member {string} description
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.description = "";
+    
+                /**
+                 * WindowsUpdate categories.
+                 * @member {Array.<grafeas.v1.WindowsUpdate.ICategory>} categories
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.categories = $util.emptyArray;
+    
+                /**
+                 * WindowsUpdate kbArticleIds.
+                 * @member {Array.<string>} kbArticleIds
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.kbArticleIds = $util.emptyArray;
+    
+                /**
+                 * WindowsUpdate supportUrl.
+                 * @member {string} supportUrl
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.supportUrl = "";
+    
+                /**
+                 * WindowsUpdate lastPublishedTimestamp.
+                 * @member {google.protobuf.ITimestamp|null|undefined} lastPublishedTimestamp
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.lastPublishedTimestamp = null;
+    
+                /**
+                 * Creates a new WindowsUpdate instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {grafeas.v1.IWindowsUpdate=} [properties] Properties to set
+                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate instance
+                 */
+                WindowsUpdate.create = function create(properties) {
+                    return new WindowsUpdate(properties);
+                };
+    
+                /**
+                 * Encodes the specified WindowsUpdate message. Does not implicitly {@link grafeas.v1.WindowsUpdate.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {grafeas.v1.IWindowsUpdate} message WindowsUpdate message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WindowsUpdate.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.identity != null && message.hasOwnProperty("identity"))
+                        $root.grafeas.v1.WindowsUpdate.Identity.encode(message.identity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                    if (message.categories != null && message.categories.length)
+                        for (var i = 0; i < message.categories.length; ++i)
+                            $root.grafeas.v1.WindowsUpdate.Category.encode(message.categories[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.kbArticleIds != null && message.kbArticleIds.length)
+                        for (var i = 0; i < message.kbArticleIds.length; ++i)
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.kbArticleIds[i]);
+                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.supportUrl);
+                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp"))
+                        $root.google.protobuf.Timestamp.encode(message.lastPublishedTimestamp, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified WindowsUpdate message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {grafeas.v1.IWindowsUpdate} message WindowsUpdate message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WindowsUpdate.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a WindowsUpdate message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WindowsUpdate.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.identity = $root.grafeas.v1.WindowsUpdate.Identity.decode(reader, reader.uint32());
+                            break;
+                        case 2:
+                            message.title = reader.string();
+                            break;
+                        case 3:
+                            message.description = reader.string();
+                            break;
+                        case 4:
+                            if (!(message.categories && message.categories.length))
+                                message.categories = [];
+                            message.categories.push($root.grafeas.v1.WindowsUpdate.Category.decode(reader, reader.uint32()));
+                            break;
+                        case 5:
+                            if (!(message.kbArticleIds && message.kbArticleIds.length))
+                                message.kbArticleIds = [];
+                            message.kbArticleIds.push(reader.string());
+                            break;
+                        case 6:
+                            message.supportUrl = reader.string();
+                            break;
+                        case 7:
+                            message.lastPublishedTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a WindowsUpdate message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WindowsUpdate.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a WindowsUpdate message.
+                 * @function verify
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                WindowsUpdate.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.identity != null && message.hasOwnProperty("identity")) {
+                        var error = $root.grafeas.v1.WindowsUpdate.Identity.verify(message.identity);
+                        if (error)
+                            return "identity." + error;
+                    }
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        if (!$util.isString(message.title))
+                            return "title: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.categories != null && message.hasOwnProperty("categories")) {
+                        if (!Array.isArray(message.categories))
+                            return "categories: array expected";
+                        for (var i = 0; i < message.categories.length; ++i) {
+                            var error = $root.grafeas.v1.WindowsUpdate.Category.verify(message.categories[i]);
+                            if (error)
+                                return "categories." + error;
+                        }
+                    }
+                    if (message.kbArticleIds != null && message.hasOwnProperty("kbArticleIds")) {
+                        if (!Array.isArray(message.kbArticleIds))
+                            return "kbArticleIds: array expected";
+                        for (var i = 0; i < message.kbArticleIds.length; ++i)
+                            if (!$util.isString(message.kbArticleIds[i]))
+                                return "kbArticleIds: string[] expected";
+                    }
+                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
+                        if (!$util.isString(message.supportUrl))
+                            return "supportUrl: string expected";
+                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.lastPublishedTimestamp);
+                        if (error)
+                            return "lastPublishedTimestamp." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a WindowsUpdate message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
+                 */
+                WindowsUpdate.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.WindowsUpdate)
+                        return object;
+                    var message = new $root.grafeas.v1.WindowsUpdate();
+                    if (object.identity != null) {
+                        if (typeof object.identity !== "object")
+                            throw TypeError(".grafeas.v1.WindowsUpdate.identity: object expected");
+                        message.identity = $root.grafeas.v1.WindowsUpdate.Identity.fromObject(object.identity);
+                    }
+                    if (object.title != null)
+                        message.title = String(object.title);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.categories) {
+                        if (!Array.isArray(object.categories))
+                            throw TypeError(".grafeas.v1.WindowsUpdate.categories: array expected");
+                        message.categories = [];
+                        for (var i = 0; i < object.categories.length; ++i) {
+                            if (typeof object.categories[i] !== "object")
+                                throw TypeError(".grafeas.v1.WindowsUpdate.categories: object expected");
+                            message.categories[i] = $root.grafeas.v1.WindowsUpdate.Category.fromObject(object.categories[i]);
+                        }
+                    }
+                    if (object.kbArticleIds) {
+                        if (!Array.isArray(object.kbArticleIds))
+                            throw TypeError(".grafeas.v1.WindowsUpdate.kbArticleIds: array expected");
+                        message.kbArticleIds = [];
+                        for (var i = 0; i < object.kbArticleIds.length; ++i)
+                            message.kbArticleIds[i] = String(object.kbArticleIds[i]);
+                    }
+                    if (object.supportUrl != null)
+                        message.supportUrl = String(object.supportUrl);
+                    if (object.lastPublishedTimestamp != null) {
+                        if (typeof object.lastPublishedTimestamp !== "object")
+                            throw TypeError(".grafeas.v1.WindowsUpdate.lastPublishedTimestamp: object expected");
+                        message.lastPublishedTimestamp = $root.google.protobuf.Timestamp.fromObject(object.lastPublishedTimestamp);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a WindowsUpdate message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {grafeas.v1.WindowsUpdate} message WindowsUpdate
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                WindowsUpdate.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.categories = [];
+                        object.kbArticleIds = [];
+                    }
+                    if (options.defaults) {
+                        object.identity = null;
+                        object.title = "";
+                        object.description = "";
+                        object.supportUrl = "";
+                        object.lastPublishedTimestamp = null;
+                    }
+                    if (message.identity != null && message.hasOwnProperty("identity"))
+                        object.identity = $root.grafeas.v1.WindowsUpdate.Identity.toObject(message.identity, options);
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        object.title = message.title;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.categories && message.categories.length) {
+                        object.categories = [];
+                        for (var j = 0; j < message.categories.length; ++j)
+                            object.categories[j] = $root.grafeas.v1.WindowsUpdate.Category.toObject(message.categories[j], options);
+                    }
+                    if (message.kbArticleIds && message.kbArticleIds.length) {
+                        object.kbArticleIds = [];
+                        for (var j = 0; j < message.kbArticleIds.length; ++j)
+                            object.kbArticleIds[j] = message.kbArticleIds[j];
+                    }
+                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
+                        object.supportUrl = message.supportUrl;
+                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp"))
+                        object.lastPublishedTimestamp = $root.google.protobuf.Timestamp.toObject(message.lastPublishedTimestamp, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this WindowsUpdate to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                WindowsUpdate.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                WindowsUpdate.Identity = (function() {
+    
+                    /**
+                     * Properties of an Identity.
+                     * @memberof grafeas.v1.WindowsUpdate
+                     * @interface IIdentity
+                     * @property {string|null} [updateId] Identity updateId
+                     * @property {number|null} [revision] Identity revision
+                     */
+    
+                    /**
+                     * Constructs a new Identity.
+                     * @memberof grafeas.v1.WindowsUpdate
+                     * @classdesc Represents an Identity.
+                     * @implements IIdentity
+                     * @constructor
+                     * @param {grafeas.v1.WindowsUpdate.IIdentity=} [properties] Properties to set
+                     */
+                    function Identity(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Identity updateId.
+                     * @member {string} updateId
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @instance
+                     */
+                    Identity.prototype.updateId = "";
+    
+                    /**
+                     * Identity revision.
+                     * @member {number} revision
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @instance
+                     */
+                    Identity.prototype.revision = 0;
+    
+                    /**
+                     * Creates a new Identity instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.IIdentity=} [properties] Properties to set
+                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity instance
+                     */
+                    Identity.create = function create(properties) {
+                        return new Identity(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Identity message. Does not implicitly {@link grafeas.v1.WindowsUpdate.Identity.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.IIdentity} message Identity message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Identity.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.updateId != null && message.hasOwnProperty("updateId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.updateId);
+                        if (message.revision != null && message.hasOwnProperty("revision"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.revision);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Identity message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.Identity.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.IIdentity} message Identity message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Identity.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Identity message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Identity.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate.Identity();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.updateId = reader.string();
+                                break;
+                            case 2:
+                                message.revision = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Identity message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Identity.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Identity message.
+                     * @function verify
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Identity.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.updateId != null && message.hasOwnProperty("updateId"))
+                            if (!$util.isString(message.updateId))
+                                return "updateId: string expected";
+                        if (message.revision != null && message.hasOwnProperty("revision"))
+                            if (!$util.isInteger(message.revision))
+                                return "revision: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Identity message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
+                     */
+                    Identity.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.WindowsUpdate.Identity)
+                            return object;
+                        var message = new $root.grafeas.v1.WindowsUpdate.Identity();
+                        if (object.updateId != null)
+                            message.updateId = String(object.updateId);
+                        if (object.revision != null)
+                            message.revision = object.revision | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Identity message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.Identity} message Identity
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Identity.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.updateId = "";
+                            object.revision = 0;
+                        }
+                        if (message.updateId != null && message.hasOwnProperty("updateId"))
+                            object.updateId = message.updateId;
+                        if (message.revision != null && message.hasOwnProperty("revision"))
+                            object.revision = message.revision;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Identity to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Identity.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Identity;
+                })();
+    
+                WindowsUpdate.Category = (function() {
+    
+                    /**
+                     * Properties of a Category.
+                     * @memberof grafeas.v1.WindowsUpdate
+                     * @interface ICategory
+                     * @property {string|null} [categoryId] Category categoryId
+                     * @property {string|null} [name] Category name
+                     */
+    
+                    /**
+                     * Constructs a new Category.
+                     * @memberof grafeas.v1.WindowsUpdate
+                     * @classdesc Represents a Category.
+                     * @implements ICategory
+                     * @constructor
+                     * @param {grafeas.v1.WindowsUpdate.ICategory=} [properties] Properties to set
+                     */
+                    function Category(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Category categoryId.
+                     * @member {string} categoryId
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @instance
+                     */
+                    Category.prototype.categoryId = "";
+    
+                    /**
+                     * Category name.
+                     * @member {string} name
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @instance
+                     */
+                    Category.prototype.name = "";
+    
+                    /**
+                     * Creates a new Category instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.ICategory=} [properties] Properties to set
+                     * @returns {grafeas.v1.WindowsUpdate.Category} Category instance
+                     */
+                    Category.create = function create(properties) {
+                        return new Category(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Category message. Does not implicitly {@link grafeas.v1.WindowsUpdate.Category.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.ICategory} message Category message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Category.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.categoryId);
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Category message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.Category.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.ICategory} message Category message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Category.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Category message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Category.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate.Category();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.categoryId = reader.string();
+                                break;
+                            case 2:
+                                message.name = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Category message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Category.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Category message.
+                     * @function verify
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Category.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
+                            if (!$util.isString(message.categoryId))
+                                return "categoryId: string expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Category message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
+                     */
+                    Category.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.WindowsUpdate.Category)
+                            return object;
+                        var message = new $root.grafeas.v1.WindowsUpdate.Category();
+                        if (object.categoryId != null)
+                            message.categoryId = String(object.categoryId);
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Category message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.Category} message Category
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Category.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.categoryId = "";
+                            object.name = "";
+                        }
+                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
+                            object.categoryId = message.categoryId;
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Category to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Category.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Category;
+                })();
+    
+                return WindowsUpdate;
+            })();
+    
+            v1.UpgradeOccurrence = (function() {
+    
+                /**
+                 * Properties of an UpgradeOccurrence.
+                 * @memberof grafeas.v1
+                 * @interface IUpgradeOccurrence
+                 * @property {string|null} ["package"] UpgradeOccurrence package
+                 * @property {grafeas.v1.IVersion|null} [parsedVersion] UpgradeOccurrence parsedVersion
+                 * @property {grafeas.v1.IUpgradeDistribution|null} [distribution] UpgradeOccurrence distribution
+                 * @property {grafeas.v1.IWindowsUpdate|null} [windowsUpdate] UpgradeOccurrence windowsUpdate
+                 */
+    
+                /**
+                 * Constructs a new UpgradeOccurrence.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an UpgradeOccurrence.
+                 * @implements IUpgradeOccurrence
+                 * @constructor
+                 * @param {grafeas.v1.IUpgradeOccurrence=} [properties] Properties to set
+                 */
+                function UpgradeOccurrence(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UpgradeOccurrence package.
+                 * @member {string} package
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 */
+                UpgradeOccurrence.prototype["package"] = "";
+    
+                /**
+                 * UpgradeOccurrence parsedVersion.
+                 * @member {grafeas.v1.IVersion|null|undefined} parsedVersion
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 */
+                UpgradeOccurrence.prototype.parsedVersion = null;
+    
+                /**
+                 * UpgradeOccurrence distribution.
+                 * @member {grafeas.v1.IUpgradeDistribution|null|undefined} distribution
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 */
+                UpgradeOccurrence.prototype.distribution = null;
+    
+                /**
+                 * UpgradeOccurrence windowsUpdate.
+                 * @member {grafeas.v1.IWindowsUpdate|null|undefined} windowsUpdate
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 */
+                UpgradeOccurrence.prototype.windowsUpdate = null;
+    
+                /**
+                 * Creates a new UpgradeOccurrence instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {grafeas.v1.IUpgradeOccurrence=} [properties] Properties to set
+                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence instance
+                 */
+                UpgradeOccurrence.create = function create(properties) {
+                    return new UpgradeOccurrence(properties);
+                };
+    
+                /**
+                 * Encodes the specified UpgradeOccurrence message. Does not implicitly {@link grafeas.v1.UpgradeOccurrence.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {grafeas.v1.IUpgradeOccurrence} message UpgradeOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeOccurrence.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message["package"]);
+                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion"))
+                        $root.grafeas.v1.Version.encode(message.parsedVersion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.distribution != null && message.hasOwnProperty("distribution"))
+                        $root.grafeas.v1.UpgradeDistribution.encode(message.distribution, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
+                        $root.grafeas.v1.WindowsUpdate.encode(message.windowsUpdate, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UpgradeOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeOccurrence.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {grafeas.v1.IUpgradeOccurrence} message UpgradeOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an UpgradeOccurrence message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeOccurrence.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeOccurrence();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message["package"] = reader.string();
+                            break;
+                        case 3:
+                            message.parsedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                            break;
+                        case 4:
+                            message.distribution = $root.grafeas.v1.UpgradeDistribution.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an UpgradeOccurrence message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeOccurrence.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an UpgradeOccurrence message.
+                 * @function verify
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpgradeOccurrence.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        if (!$util.isString(message["package"]))
+                            return "package: string expected";
+                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion")) {
+                        var error = $root.grafeas.v1.Version.verify(message.parsedVersion);
+                        if (error)
+                            return "parsedVersion." + error;
+                    }
+                    if (message.distribution != null && message.hasOwnProperty("distribution")) {
+                        var error = $root.grafeas.v1.UpgradeDistribution.verify(message.distribution);
+                        if (error)
+                            return "distribution." + error;
+                    }
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate")) {
+                        var error = $root.grafeas.v1.WindowsUpdate.verify(message.windowsUpdate);
+                        if (error)
+                            return "windowsUpdate." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an UpgradeOccurrence message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
+                 */
+                UpgradeOccurrence.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.UpgradeOccurrence)
+                        return object;
+                    var message = new $root.grafeas.v1.UpgradeOccurrence();
+                    if (object["package"] != null)
+                        message["package"] = String(object["package"]);
+                    if (object.parsedVersion != null) {
+                        if (typeof object.parsedVersion !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeOccurrence.parsedVersion: object expected");
+                        message.parsedVersion = $root.grafeas.v1.Version.fromObject(object.parsedVersion);
+                    }
+                    if (object.distribution != null) {
+                        if (typeof object.distribution !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeOccurrence.distribution: object expected");
+                        message.distribution = $root.grafeas.v1.UpgradeDistribution.fromObject(object.distribution);
+                    }
+                    if (object.windowsUpdate != null) {
+                        if (typeof object.windowsUpdate !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeOccurrence.windowsUpdate: object expected");
+                        message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.fromObject(object.windowsUpdate);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an UpgradeOccurrence message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {grafeas.v1.UpgradeOccurrence} message UpgradeOccurrence
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpgradeOccurrence.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object["package"] = "";
+                        object.parsedVersion = null;
+                        object.distribution = null;
+                        object.windowsUpdate = null;
+                    }
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        object["package"] = message["package"];
+                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion"))
+                        object.parsedVersion = $root.grafeas.v1.Version.toObject(message.parsedVersion, options);
+                    if (message.distribution != null && message.hasOwnProperty("distribution"))
+                        object.distribution = $root.grafeas.v1.UpgradeDistribution.toObject(message.distribution, options);
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
+                        object.windowsUpdate = $root.grafeas.v1.WindowsUpdate.toObject(message.windowsUpdate, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this UpgradeOccurrence to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpgradeOccurrence.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return UpgradeOccurrence;
+            })();
+    
+            /**
+             * Severity enum.
+             * @name grafeas.v1.Severity
+             * @enum {string}
+             * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+             * @property {number} MINIMAL=1 MINIMAL value
+             * @property {number} LOW=2 LOW value
+             * @property {number} MEDIUM=3 MEDIUM value
+             * @property {number} HIGH=4 HIGH value
+             * @property {number} CRITICAL=5 CRITICAL value
+             */
+            v1.Severity = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "MINIMAL"] = 1;
+                values[valuesById[2] = "LOW"] = 2;
+                values[valuesById[3] = "MEDIUM"] = 3;
+                values[valuesById[4] = "HIGH"] = 4;
+                values[valuesById[5] = "CRITICAL"] = 5;
+                return values;
+            })();
+    
+            v1.VulnerabilityNote = (function() {
+    
+                /**
+                 * Properties of a VulnerabilityNote.
+                 * @memberof grafeas.v1
+                 * @interface IVulnerabilityNote
+                 * @property {number|null} [cvssScore] VulnerabilityNote cvssScore
+                 * @property {grafeas.v1.Severity|null} [severity] VulnerabilityNote severity
+                 * @property {Array.<grafeas.v1.VulnerabilityNote.IDetail>|null} [details] VulnerabilityNote details
+                 * @property {grafeas.v1.ICVSSv3|null} [cvssV3] VulnerabilityNote cvssV3
+                 * @property {Array.<grafeas.v1.VulnerabilityNote.IWindowsDetail>|null} [windowsDetails] VulnerabilityNote windowsDetails
+                 * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] VulnerabilityNote sourceUpdateTime
+                 */
+    
+                /**
+                 * Constructs a new VulnerabilityNote.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a VulnerabilityNote.
+                 * @implements IVulnerabilityNote
+                 * @constructor
+                 * @param {grafeas.v1.IVulnerabilityNote=} [properties] Properties to set
+                 */
+                function VulnerabilityNote(properties) {
+                    this.details = [];
+                    this.windowsDetails = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * VulnerabilityNote cvssScore.
+                 * @member {number} cvssScore
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.cvssScore = 0;
+    
+                /**
+                 * VulnerabilityNote severity.
+                 * @member {grafeas.v1.Severity} severity
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.severity = 0;
+    
+                /**
+                 * VulnerabilityNote details.
+                 * @member {Array.<grafeas.v1.VulnerabilityNote.IDetail>} details
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.details = $util.emptyArray;
+    
+                /**
+                 * VulnerabilityNote cvssV3.
+                 * @member {grafeas.v1.ICVSSv3|null|undefined} cvssV3
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.cvssV3 = null;
+    
+                /**
+                 * VulnerabilityNote windowsDetails.
+                 * @member {Array.<grafeas.v1.VulnerabilityNote.IWindowsDetail>} windowsDetails
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.windowsDetails = $util.emptyArray;
+    
+                /**
+                 * VulnerabilityNote sourceUpdateTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} sourceUpdateTime
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.sourceUpdateTime = null;
+    
+                /**
+                 * Creates a new VulnerabilityNote instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.VulnerabilityNote} VulnerabilityNote instance
+                 */
+                VulnerabilityNote.create = function create(properties) {
+                    return new VulnerabilityNote(properties);
+                };
+    
+                /**
+                 * Encodes the specified VulnerabilityNote message. Does not implicitly {@link grafeas.v1.VulnerabilityNote.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityNote} message VulnerabilityNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                VulnerabilityNote.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
+                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.cvssScore);
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.grafeas.v1.VulnerabilityNote.Detail.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.cvssV3 != null && message.hasOwnProperty("cvssV3"))
+                        $root.grafeas.v1.CVSSv3.encode(message.cvssV3, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.windowsDetails != null && message.windowsDetails.length)
+                        for (var i = 0; i < message.windowsDetails.length; ++i)
+                            $root.grafeas.v1.VulnerabilityNote.WindowsDetail.encode(message.windowsDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
+                        $root.google.protobuf.Timestamp.encode(message.sourceUpdateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified VulnerabilityNote message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityNote.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityNote} message VulnerabilityNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                VulnerabilityNote.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a VulnerabilityNote message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.VulnerabilityNote} VulnerabilityNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                VulnerabilityNote.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityNote();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.cvssScore = reader.float();
+                            break;
+                        case 2:
+                            message.severity = reader.int32();
+                            break;
+                        case 3:
+                            if (!(message.details && message.details.length))
+                                message.details = [];
+                            message.details.push($root.grafeas.v1.VulnerabilityNote.Detail.decode(reader, reader.uint32()));
+                            break;
+                        case 4:
+                            message.cvssV3 = $root.grafeas.v1.CVSSv3.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            if (!(message.windowsDetails && message.windowsDetails.length))
+                                message.windowsDetails = [];
+                            message.windowsDetails.push($root.grafeas.v1.VulnerabilityNote.WindowsDetail.decode(reader, reader.uint32()));
+                            break;
+                        case 6:
+                            message.sourceUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a VulnerabilityNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.VulnerabilityNote} VulnerabilityNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                VulnerabilityNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a VulnerabilityNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                VulnerabilityNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
+                        if (typeof message.cvssScore !== "number")
+                            return "cvssScore: number expected";
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        switch (message.severity) {
+                        default:
+                            return "severity: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                            break;
+                        }
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.grafeas.v1.VulnerabilityNote.Detail.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    if (message.cvssV3 != null && message.hasOwnProperty("cvssV3")) {
+                        var error = $root.grafeas.v1.CVSSv3.verify(message.cvssV3);
+                        if (error)
+                            return "cvssV3." + error;
+                    }
+                    if (message.windowsDetails != null && message.hasOwnProperty("windowsDetails")) {
+                        if (!Array.isArray(message.windowsDetails))
+                            return "windowsDetails: array expected";
+                        for (var i = 0; i < message.windowsDetails.length; ++i) {
+                            var error = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.verify(message.windowsDetails[i]);
+                            if (error)
+                                return "windowsDetails." + error;
+                        }
+                    }
+                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.sourceUpdateTime);
+                        if (error)
+                            return "sourceUpdateTime." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a VulnerabilityNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.VulnerabilityNote} VulnerabilityNote
+                 */
+                VulnerabilityNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.VulnerabilityNote)
+                        return object;
+                    var message = new $root.grafeas.v1.VulnerabilityNote();
+                    if (object.cvssScore != null)
+                        message.cvssScore = Number(object.cvssScore);
+                    switch (object.severity) {
+                    case "SEVERITY_UNSPECIFIED":
+                    case 0:
+                        message.severity = 0;
+                        break;
+                    case "MINIMAL":
+                    case 1:
+                        message.severity = 1;
+                        break;
+                    case "LOW":
+                    case 2:
+                        message.severity = 2;
+                        break;
+                    case "MEDIUM":
+                    case 3:
+                        message.severity = 3;
+                        break;
+                    case "HIGH":
+                    case 4:
+                        message.severity = 4;
+                        break;
+                    case "CRITICAL":
+                    case 5:
+                        message.severity = 5;
+                        break;
+                    }
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".grafeas.v1.VulnerabilityNote.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityNote.details: object expected");
+                            message.details[i] = $root.grafeas.v1.VulnerabilityNote.Detail.fromObject(object.details[i]);
+                        }
+                    }
+                    if (object.cvssV3 != null) {
+                        if (typeof object.cvssV3 !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityNote.cvssV3: object expected");
+                        message.cvssV3 = $root.grafeas.v1.CVSSv3.fromObject(object.cvssV3);
+                    }
+                    if (object.windowsDetails) {
+                        if (!Array.isArray(object.windowsDetails))
+                            throw TypeError(".grafeas.v1.VulnerabilityNote.windowsDetails: array expected");
+                        message.windowsDetails = [];
+                        for (var i = 0; i < object.windowsDetails.length; ++i) {
+                            if (typeof object.windowsDetails[i] !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityNote.windowsDetails: object expected");
+                            message.windowsDetails[i] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.fromObject(object.windowsDetails[i]);
+                        }
+                    }
+                    if (object.sourceUpdateTime != null) {
+                        if (typeof object.sourceUpdateTime !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityNote.sourceUpdateTime: object expected");
+                        message.sourceUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.sourceUpdateTime);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a VulnerabilityNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @static
+                 * @param {grafeas.v1.VulnerabilityNote} message VulnerabilityNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                VulnerabilityNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.details = [];
+                        object.windowsDetails = [];
+                    }
+                    if (options.defaults) {
+                        object.cvssScore = 0;
+                        object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                        object.cvssV3 = null;
+                        object.sourceUpdateTime = null;
+                    }
+                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
+                        object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] : message.severity;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.grafeas.v1.VulnerabilityNote.Detail.toObject(message.details[j], options);
+                    }
+                    if (message.cvssV3 != null && message.hasOwnProperty("cvssV3"))
+                        object.cvssV3 = $root.grafeas.v1.CVSSv3.toObject(message.cvssV3, options);
+                    if (message.windowsDetails && message.windowsDetails.length) {
+                        object.windowsDetails = [];
+                        for (var j = 0; j < message.windowsDetails.length; ++j)
+                            object.windowsDetails[j] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.toObject(message.windowsDetails[j], options);
+                    }
+                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
+                        object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this VulnerabilityNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                VulnerabilityNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                VulnerabilityNote.Detail = (function() {
+    
+                    /**
+                     * Properties of a Detail.
+                     * @memberof grafeas.v1.VulnerabilityNote
+                     * @interface IDetail
+                     * @property {string|null} [severityName] Detail severityName
+                     * @property {string|null} [description] Detail description
+                     * @property {string|null} [packageType] Detail packageType
+                     * @property {string|null} [affectedCpeUri] Detail affectedCpeUri
+                     * @property {string|null} [affectedPackage] Detail affectedPackage
+                     * @property {grafeas.v1.IVersion|null} [affectedVersionStart] Detail affectedVersionStart
+                     * @property {grafeas.v1.IVersion|null} [affectedVersionEnd] Detail affectedVersionEnd
+                     * @property {string|null} [fixedCpeUri] Detail fixedCpeUri
+                     * @property {string|null} [fixedPackage] Detail fixedPackage
+                     * @property {grafeas.v1.IVersion|null} [fixedVersion] Detail fixedVersion
+                     * @property {boolean|null} [isObsolete] Detail isObsolete
+                     * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] Detail sourceUpdateTime
+                     */
+    
+                    /**
+                     * Constructs a new Detail.
+                     * @memberof grafeas.v1.VulnerabilityNote
+                     * @classdesc Represents a Detail.
+                     * @implements IDetail
+                     * @constructor
+                     * @param {grafeas.v1.VulnerabilityNote.IDetail=} [properties] Properties to set
+                     */
+                    function Detail(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Detail severityName.
+                     * @member {string} severityName
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.severityName = "";
+    
+                    /**
+                     * Detail description.
+                     * @member {string} description
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.description = "";
+    
+                    /**
+                     * Detail packageType.
+                     * @member {string} packageType
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.packageType = "";
+    
+                    /**
+                     * Detail affectedCpeUri.
+                     * @member {string} affectedCpeUri
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.affectedCpeUri = "";
+    
+                    /**
+                     * Detail affectedPackage.
+                     * @member {string} affectedPackage
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.affectedPackage = "";
+    
+                    /**
+                     * Detail affectedVersionStart.
+                     * @member {grafeas.v1.IVersion|null|undefined} affectedVersionStart
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.affectedVersionStart = null;
+    
+                    /**
+                     * Detail affectedVersionEnd.
+                     * @member {grafeas.v1.IVersion|null|undefined} affectedVersionEnd
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.affectedVersionEnd = null;
+    
+                    /**
+                     * Detail fixedCpeUri.
+                     * @member {string} fixedCpeUri
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.fixedCpeUri = "";
+    
+                    /**
+                     * Detail fixedPackage.
+                     * @member {string} fixedPackage
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.fixedPackage = "";
+    
+                    /**
+                     * Detail fixedVersion.
+                     * @member {grafeas.v1.IVersion|null|undefined} fixedVersion
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.fixedVersion = null;
+    
+                    /**
+                     * Detail isObsolete.
+                     * @member {boolean} isObsolete
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.isObsolete = false;
+    
+                    /**
+                     * Detail sourceUpdateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} sourceUpdateTime
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.sourceUpdateTime = null;
+    
+                    /**
+                     * Creates a new Detail instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityNote.IDetail=} [properties] Properties to set
+                     * @returns {grafeas.v1.VulnerabilityNote.Detail} Detail instance
+                     */
+                    Detail.create = function create(properties) {
+                        return new Detail(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Detail message. Does not implicitly {@link grafeas.v1.VulnerabilityNote.Detail.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityNote.IDetail} message Detail message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Detail.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.severityName != null && message.hasOwnProperty("severityName"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.severityName);
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                        if (message.packageType != null && message.hasOwnProperty("packageType"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.packageType);
+                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.affectedCpeUri);
+                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.affectedPackage);
+                        if (message.affectedVersionStart != null && message.hasOwnProperty("affectedVersionStart"))
+                            $root.grafeas.v1.Version.encode(message.affectedVersionStart, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.affectedVersionEnd != null && message.hasOwnProperty("affectedVersionEnd"))
+                            $root.grafeas.v1.Version.encode(message.affectedVersionEnd, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.fixedCpeUri);
+                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.fixedPackage);
+                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion"))
+                            $root.grafeas.v1.Version.encode(message.fixedVersion, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
+                            writer.uint32(/* id 11, wireType 0 =*/88).bool(message.isObsolete);
+                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.sourceUpdateTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Detail message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityNote.Detail.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityNote.IDetail} message Detail message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Detail.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Detail message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.VulnerabilityNote.Detail} Detail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Detail.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityNote.Detail();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.severityName = reader.string();
+                                break;
+                            case 2:
+                                message.description = reader.string();
+                                break;
+                            case 3:
+                                message.packageType = reader.string();
+                                break;
+                            case 4:
+                                message.affectedCpeUri = reader.string();
+                                break;
+                            case 5:
+                                message.affectedPackage = reader.string();
+                                break;
+                            case 6:
+                                message.affectedVersionStart = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                                break;
+                            case 7:
+                                message.affectedVersionEnd = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                                break;
+                            case 8:
+                                message.fixedCpeUri = reader.string();
+                                break;
+                            case 9:
+                                message.fixedPackage = reader.string();
+                                break;
+                            case 10:
+                                message.fixedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                                break;
+                            case 11:
+                                message.isObsolete = reader.bool();
+                                break;
+                            case 12:
+                                message.sourceUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Detail message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.VulnerabilityNote.Detail} Detail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Detail.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Detail message.
+                     * @function verify
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Detail.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.severityName != null && message.hasOwnProperty("severityName"))
+                            if (!$util.isString(message.severityName))
+                                return "severityName: string expected";
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
+                        if (message.packageType != null && message.hasOwnProperty("packageType"))
+                            if (!$util.isString(message.packageType))
+                                return "packageType: string expected";
+                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
+                            if (!$util.isString(message.affectedCpeUri))
+                                return "affectedCpeUri: string expected";
+                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
+                            if (!$util.isString(message.affectedPackage))
+                                return "affectedPackage: string expected";
+                        if (message.affectedVersionStart != null && message.hasOwnProperty("affectedVersionStart")) {
+                            var error = $root.grafeas.v1.Version.verify(message.affectedVersionStart);
+                            if (error)
+                                return "affectedVersionStart." + error;
+                        }
+                        if (message.affectedVersionEnd != null && message.hasOwnProperty("affectedVersionEnd")) {
+                            var error = $root.grafeas.v1.Version.verify(message.affectedVersionEnd);
+                            if (error)
+                                return "affectedVersionEnd." + error;
+                        }
+                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
+                            if (!$util.isString(message.fixedCpeUri))
+                                return "fixedCpeUri: string expected";
+                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
+                            if (!$util.isString(message.fixedPackage))
+                                return "fixedPackage: string expected";
+                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion")) {
+                            var error = $root.grafeas.v1.Version.verify(message.fixedVersion);
+                            if (error)
+                                return "fixedVersion." + error;
+                        }
+                        if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
+                            if (typeof message.isObsolete !== "boolean")
+                                return "isObsolete: boolean expected";
+                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.sourceUpdateTime);
+                            if (error)
+                                return "sourceUpdateTime." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Detail message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.VulnerabilityNote.Detail} Detail
+                     */
+                    Detail.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.VulnerabilityNote.Detail)
+                            return object;
+                        var message = new $root.grafeas.v1.VulnerabilityNote.Detail();
+                        if (object.severityName != null)
+                            message.severityName = String(object.severityName);
+                        if (object.description != null)
+                            message.description = String(object.description);
+                        if (object.packageType != null)
+                            message.packageType = String(object.packageType);
+                        if (object.affectedCpeUri != null)
+                            message.affectedCpeUri = String(object.affectedCpeUri);
+                        if (object.affectedPackage != null)
+                            message.affectedPackage = String(object.affectedPackage);
+                        if (object.affectedVersionStart != null) {
+                            if (typeof object.affectedVersionStart !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.affectedVersionStart: object expected");
+                            message.affectedVersionStart = $root.grafeas.v1.Version.fromObject(object.affectedVersionStart);
+                        }
+                        if (object.affectedVersionEnd != null) {
+                            if (typeof object.affectedVersionEnd !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.affectedVersionEnd: object expected");
+                            message.affectedVersionEnd = $root.grafeas.v1.Version.fromObject(object.affectedVersionEnd);
+                        }
+                        if (object.fixedCpeUri != null)
+                            message.fixedCpeUri = String(object.fixedCpeUri);
+                        if (object.fixedPackage != null)
+                            message.fixedPackage = String(object.fixedPackage);
+                        if (object.fixedVersion != null) {
+                            if (typeof object.fixedVersion !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.fixedVersion: object expected");
+                            message.fixedVersion = $root.grafeas.v1.Version.fromObject(object.fixedVersion);
+                        }
+                        if (object.isObsolete != null)
+                            message.isObsolete = Boolean(object.isObsolete);
+                        if (object.sourceUpdateTime != null) {
+                            if (typeof object.sourceUpdateTime !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.sourceUpdateTime: object expected");
+                            message.sourceUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.sourceUpdateTime);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Detail message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityNote.Detail} message Detail
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Detail.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.severityName = "";
+                            object.description = "";
+                            object.packageType = "";
+                            object.affectedCpeUri = "";
+                            object.affectedPackage = "";
+                            object.affectedVersionStart = null;
+                            object.affectedVersionEnd = null;
+                            object.fixedCpeUri = "";
+                            object.fixedPackage = "";
+                            object.fixedVersion = null;
+                            object.isObsolete = false;
+                            object.sourceUpdateTime = null;
+                        }
+                        if (message.severityName != null && message.hasOwnProperty("severityName"))
+                            object.severityName = message.severityName;
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            object.description = message.description;
+                        if (message.packageType != null && message.hasOwnProperty("packageType"))
+                            object.packageType = message.packageType;
+                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
+                            object.affectedCpeUri = message.affectedCpeUri;
+                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
+                            object.affectedPackage = message.affectedPackage;
+                        if (message.affectedVersionStart != null && message.hasOwnProperty("affectedVersionStart"))
+                            object.affectedVersionStart = $root.grafeas.v1.Version.toObject(message.affectedVersionStart, options);
+                        if (message.affectedVersionEnd != null && message.hasOwnProperty("affectedVersionEnd"))
+                            object.affectedVersionEnd = $root.grafeas.v1.Version.toObject(message.affectedVersionEnd, options);
+                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
+                            object.fixedCpeUri = message.fixedCpeUri;
+                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
+                            object.fixedPackage = message.fixedPackage;
+                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion"))
+                            object.fixedVersion = $root.grafeas.v1.Version.toObject(message.fixedVersion, options);
+                        if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
+                            object.isObsolete = message.isObsolete;
+                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
+                            object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Detail to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Detail.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Detail;
+                })();
+    
+                VulnerabilityNote.WindowsDetail = (function() {
+    
+                    /**
+                     * Properties of a WindowsDetail.
+                     * @memberof grafeas.v1.VulnerabilityNote
+                     * @interface IWindowsDetail
+                     * @property {string|null} [cpeUri] WindowsDetail cpeUri
+                     * @property {string|null} [name] WindowsDetail name
+                     * @property {string|null} [description] WindowsDetail description
+                     * @property {Array.<grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase>|null} [fixingKbs] WindowsDetail fixingKbs
+                     */
+    
+                    /**
+                     * Constructs a new WindowsDetail.
+                     * @memberof grafeas.v1.VulnerabilityNote
+                     * @classdesc Represents a WindowsDetail.
+                     * @implements IWindowsDetail
+                     * @constructor
+                     * @param {grafeas.v1.VulnerabilityNote.IWindowsDetail=} [properties] Properties to set
+                     */
+                    function WindowsDetail(properties) {
+                        this.fixingKbs = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * WindowsDetail cpeUri.
+                     * @member {string} cpeUri
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @instance
+                     */
+                    WindowsDetail.prototype.cpeUri = "";
+    
+                    /**
+                     * WindowsDetail name.
+                     * @member {string} name
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @instance
+                     */
+                    WindowsDetail.prototype.name = "";
+    
+                    /**
+                     * WindowsDetail description.
+                     * @member {string} description
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @instance
+                     */
+                    WindowsDetail.prototype.description = "";
+    
+                    /**
+                     * WindowsDetail fixingKbs.
+                     * @member {Array.<grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase>} fixingKbs
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @instance
+                     */
+                    WindowsDetail.prototype.fixingKbs = $util.emptyArray;
+    
+                    /**
+                     * Creates a new WindowsDetail instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityNote.IWindowsDetail=} [properties] Properties to set
+                     * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail} WindowsDetail instance
+                     */
+                    WindowsDetail.create = function create(properties) {
+                        return new WindowsDetail(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified WindowsDetail message. Does not implicitly {@link grafeas.v1.VulnerabilityNote.WindowsDetail.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityNote.IWindowsDetail} message WindowsDetail message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    WindowsDetail.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                        if (message.fixingKbs != null && message.fixingKbs.length)
+                            for (var i = 0; i < message.fixingKbs.length; ++i)
+                                $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.encode(message.fixingKbs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified WindowsDetail message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityNote.WindowsDetail.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityNote.IWindowsDetail} message WindowsDetail message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    WindowsDetail.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a WindowsDetail message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail} WindowsDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    WindowsDetail.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityNote.WindowsDetail();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.cpeUri = reader.string();
+                                break;
+                            case 2:
+                                message.name = reader.string();
+                                break;
+                            case 3:
+                                message.description = reader.string();
+                                break;
+                            case 4:
+                                if (!(message.fixingKbs && message.fixingKbs.length))
+                                    message.fixingKbs = [];
+                                message.fixingKbs.push($root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a WindowsDetail message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail} WindowsDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    WindowsDetail.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a WindowsDetail message.
+                     * @function verify
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    WindowsDetail.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                            if (!$util.isString(message.cpeUri))
+                                return "cpeUri: string expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
+                        if (message.fixingKbs != null && message.hasOwnProperty("fixingKbs")) {
+                            if (!Array.isArray(message.fixingKbs))
+                                return "fixingKbs: array expected";
+                            for (var i = 0; i < message.fixingKbs.length; ++i) {
+                                var error = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.verify(message.fixingKbs[i]);
+                                if (error)
+                                    return "fixingKbs." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a WindowsDetail message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail} WindowsDetail
+                     */
+                    WindowsDetail.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.VulnerabilityNote.WindowsDetail)
+                            return object;
+                        var message = new $root.grafeas.v1.VulnerabilityNote.WindowsDetail();
+                        if (object.cpeUri != null)
+                            message.cpeUri = String(object.cpeUri);
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.description != null)
+                            message.description = String(object.description);
+                        if (object.fixingKbs) {
+                            if (!Array.isArray(object.fixingKbs))
+                                throw TypeError(".grafeas.v1.VulnerabilityNote.WindowsDetail.fixingKbs: array expected");
+                            message.fixingKbs = [];
+                            for (var i = 0; i < object.fixingKbs.length; ++i) {
+                                if (typeof object.fixingKbs[i] !== "object")
+                                    throw TypeError(".grafeas.v1.VulnerabilityNote.WindowsDetail.fixingKbs: object expected");
+                                message.fixingKbs[i] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.fromObject(object.fixingKbs[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a WindowsDetail message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityNote.WindowsDetail} message WindowsDetail
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    WindowsDetail.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.fixingKbs = [];
+                        if (options.defaults) {
+                            object.cpeUri = "";
+                            object.name = "";
+                            object.description = "";
+                        }
+                        if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                            object.cpeUri = message.cpeUri;
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            object.description = message.description;
+                        if (message.fixingKbs && message.fixingKbs.length) {
+                            object.fixingKbs = [];
+                            for (var j = 0; j < message.fixingKbs.length; ++j)
+                                object.fixingKbs[j] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.toObject(message.fixingKbs[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this WindowsDetail to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    WindowsDetail.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    WindowsDetail.KnowledgeBase = (function() {
+    
+                        /**
+                         * Properties of a KnowledgeBase.
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                         * @interface IKnowledgeBase
+                         * @property {string|null} [name] KnowledgeBase name
+                         * @property {string|null} [url] KnowledgeBase url
+                         */
+    
+                        /**
+                         * Constructs a new KnowledgeBase.
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail
+                         * @classdesc Represents a KnowledgeBase.
+                         * @implements IKnowledgeBase
+                         * @constructor
+                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase=} [properties] Properties to set
+                         */
+                        function KnowledgeBase(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KnowledgeBase name.
+                         * @member {string} name
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @instance
+                         */
+                        KnowledgeBase.prototype.name = "";
+    
+                        /**
+                         * KnowledgeBase url.
+                         * @member {string} url
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @instance
+                         */
+                        KnowledgeBase.prototype.url = "";
+    
+                        /**
+                         * Creates a new KnowledgeBase instance using the specified properties.
+                         * @function create
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase=} [properties] Properties to set
+                         * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} KnowledgeBase instance
+                         */
+                        KnowledgeBase.create = function create(properties) {
+                            return new KnowledgeBase(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KnowledgeBase message. Does not implicitly {@link grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.verify|verify} messages.
+                         * @function encode
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase} message KnowledgeBase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KnowledgeBase.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KnowledgeBase message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.IKnowledgeBase} message KnowledgeBase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KnowledgeBase.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KnowledgeBase message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} KnowledgeBase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KnowledgeBase.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.url = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KnowledgeBase message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} KnowledgeBase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KnowledgeBase.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KnowledgeBase message.
+                         * @function verify
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KnowledgeBase.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KnowledgeBase message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} KnowledgeBase
+                         */
+                        KnowledgeBase.fromObject = function fromObject(object) {
+                            if (object instanceof $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase)
+                                return object;
+                            var message = new $root.grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KnowledgeBase message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase} message KnowledgeBase
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KnowledgeBase.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.url = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KnowledgeBase to JSON.
+                         * @function toJSON
+                         * @memberof grafeas.v1.VulnerabilityNote.WindowsDetail.KnowledgeBase
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KnowledgeBase.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return KnowledgeBase;
+                    })();
+    
+                    return WindowsDetail;
+                })();
+    
+                return VulnerabilityNote;
+            })();
+    
+            v1.VulnerabilityOccurrence = (function() {
+    
+                /**
+                 * Properties of a VulnerabilityOccurrence.
+                 * @memberof grafeas.v1
+                 * @interface IVulnerabilityOccurrence
+                 * @property {string|null} [type] VulnerabilityOccurrence type
+                 * @property {grafeas.v1.Severity|null} [severity] VulnerabilityOccurrence severity
+                 * @property {number|null} [cvssScore] VulnerabilityOccurrence cvssScore
+                 * @property {Array.<grafeas.v1.VulnerabilityOccurrence.IPackageIssue>|null} [packageIssue] VulnerabilityOccurrence packageIssue
+                 * @property {string|null} [shortDescription] VulnerabilityOccurrence shortDescription
+                 * @property {string|null} [longDescription] VulnerabilityOccurrence longDescription
+                 * @property {Array.<grafeas.v1.IRelatedUrl>|null} [relatedUrls] VulnerabilityOccurrence relatedUrls
+                 * @property {grafeas.v1.Severity|null} [effectiveSeverity] VulnerabilityOccurrence effectiveSeverity
+                 * @property {boolean|null} [fixAvailable] VulnerabilityOccurrence fixAvailable
+                 */
+    
+                /**
+                 * Constructs a new VulnerabilityOccurrence.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a VulnerabilityOccurrence.
+                 * @implements IVulnerabilityOccurrence
+                 * @constructor
+                 * @param {grafeas.v1.IVulnerabilityOccurrence=} [properties] Properties to set
+                 */
+                function VulnerabilityOccurrence(properties) {
+                    this.packageIssue = [];
+                    this.relatedUrls = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * VulnerabilityOccurrence type.
+                 * @member {string} type
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.type = "";
+    
+                /**
+                 * VulnerabilityOccurrence severity.
+                 * @member {grafeas.v1.Severity} severity
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.severity = 0;
+    
+                /**
+                 * VulnerabilityOccurrence cvssScore.
+                 * @member {number} cvssScore
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.cvssScore = 0;
+    
+                /**
+                 * VulnerabilityOccurrence packageIssue.
+                 * @member {Array.<grafeas.v1.VulnerabilityOccurrence.IPackageIssue>} packageIssue
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.packageIssue = $util.emptyArray;
+    
+                /**
+                 * VulnerabilityOccurrence shortDescription.
+                 * @member {string} shortDescription
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.shortDescription = "";
+    
+                /**
+                 * VulnerabilityOccurrence longDescription.
+                 * @member {string} longDescription
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.longDescription = "";
+    
+                /**
+                 * VulnerabilityOccurrence relatedUrls.
+                 * @member {Array.<grafeas.v1.IRelatedUrl>} relatedUrls
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.relatedUrls = $util.emptyArray;
+    
+                /**
+                 * VulnerabilityOccurrence effectiveSeverity.
+                 * @member {grafeas.v1.Severity} effectiveSeverity
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.effectiveSeverity = 0;
+    
+                /**
+                 * VulnerabilityOccurrence fixAvailable.
+                 * @member {boolean} fixAvailable
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.fixAvailable = false;
+    
+                /**
+                 * Creates a new VulnerabilityOccurrence instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityOccurrence=} [properties] Properties to set
+                 * @returns {grafeas.v1.VulnerabilityOccurrence} VulnerabilityOccurrence instance
+                 */
+                VulnerabilityOccurrence.create = function create(properties) {
+                    return new VulnerabilityOccurrence(properties);
+                };
+    
+                /**
+                 * Encodes the specified VulnerabilityOccurrence message. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityOccurrence} message VulnerabilityOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                VulnerabilityOccurrence.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
+                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
+                        writer.uint32(/* id 3, wireType 5 =*/29).float(message.cvssScore);
+                    if (message.packageIssue != null && message.packageIssue.length)
+                        for (var i = 0; i < message.packageIssue.length; ++i)
+                            $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.encode(message.packageIssue[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.shortDescription);
+                    if (message.longDescription != null && message.hasOwnProperty("longDescription"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.longDescription);
+                    if (message.relatedUrls != null && message.relatedUrls.length)
+                        for (var i = 0; i < message.relatedUrls.length; ++i)
+                            $root.grafeas.v1.RelatedUrl.encode(message.relatedUrls[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.effectiveSeverity);
+                    if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
+                        writer.uint32(/* id 9, wireType 0 =*/72).bool(message.fixAvailable);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified VulnerabilityOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityOccurrence} message VulnerabilityOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                VulnerabilityOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a VulnerabilityOccurrence message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.VulnerabilityOccurrence} VulnerabilityOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                VulnerabilityOccurrence.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityOccurrence();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.severity = reader.int32();
+                            break;
+                        case 3:
+                            message.cvssScore = reader.float();
+                            break;
+                        case 4:
+                            if (!(message.packageIssue && message.packageIssue.length))
+                                message.packageIssue = [];
+                            message.packageIssue.push($root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.decode(reader, reader.uint32()));
+                            break;
+                        case 5:
+                            message.shortDescription = reader.string();
+                            break;
+                        case 6:
+                            message.longDescription = reader.string();
+                            break;
+                        case 7:
+                            if (!(message.relatedUrls && message.relatedUrls.length))
+                                message.relatedUrls = [];
+                            message.relatedUrls.push($root.grafeas.v1.RelatedUrl.decode(reader, reader.uint32()));
+                            break;
+                        case 8:
+                            message.effectiveSeverity = reader.int32();
+                            break;
+                        case 9:
+                            message.fixAvailable = reader.bool();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a VulnerabilityOccurrence message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.VulnerabilityOccurrence} VulnerabilityOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                VulnerabilityOccurrence.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a VulnerabilityOccurrence message.
+                 * @function verify
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                VulnerabilityOccurrence.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        switch (message.severity) {
+                        default:
+                            return "severity: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                            break;
+                        }
+                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
+                        if (typeof message.cvssScore !== "number")
+                            return "cvssScore: number expected";
+                    if (message.packageIssue != null && message.hasOwnProperty("packageIssue")) {
+                        if (!Array.isArray(message.packageIssue))
+                            return "packageIssue: array expected";
+                        for (var i = 0; i < message.packageIssue.length; ++i) {
+                            var error = $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.verify(message.packageIssue[i]);
+                            if (error)
+                                return "packageIssue." + error;
+                        }
+                    }
+                    if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
+                        if (!$util.isString(message.shortDescription))
+                            return "shortDescription: string expected";
+                    if (message.longDescription != null && message.hasOwnProperty("longDescription"))
+                        if (!$util.isString(message.longDescription))
+                            return "longDescription: string expected";
+                    if (message.relatedUrls != null && message.hasOwnProperty("relatedUrls")) {
+                        if (!Array.isArray(message.relatedUrls))
+                            return "relatedUrls: array expected";
+                        for (var i = 0; i < message.relatedUrls.length; ++i) {
+                            var error = $root.grafeas.v1.RelatedUrl.verify(message.relatedUrls[i]);
+                            if (error)
+                                return "relatedUrls." + error;
+                        }
+                    }
+                    if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
+                        switch (message.effectiveSeverity) {
+                        default:
+                            return "effectiveSeverity: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                            break;
+                        }
+                    if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
+                        if (typeof message.fixAvailable !== "boolean")
+                            return "fixAvailable: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a VulnerabilityOccurrence message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.VulnerabilityOccurrence} VulnerabilityOccurrence
+                 */
+                VulnerabilityOccurrence.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.VulnerabilityOccurrence)
+                        return object;
+                    var message = new $root.grafeas.v1.VulnerabilityOccurrence();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    switch (object.severity) {
+                    case "SEVERITY_UNSPECIFIED":
+                    case 0:
+                        message.severity = 0;
+                        break;
+                    case "MINIMAL":
+                    case 1:
+                        message.severity = 1;
+                        break;
+                    case "LOW":
+                    case 2:
+                        message.severity = 2;
+                        break;
+                    case "MEDIUM":
+                    case 3:
+                        message.severity = 3;
+                        break;
+                    case "HIGH":
+                    case 4:
+                        message.severity = 4;
+                        break;
+                    case "CRITICAL":
+                    case 5:
+                        message.severity = 5;
+                        break;
+                    }
+                    if (object.cvssScore != null)
+                        message.cvssScore = Number(object.cvssScore);
+                    if (object.packageIssue) {
+                        if (!Array.isArray(object.packageIssue))
+                            throw TypeError(".grafeas.v1.VulnerabilityOccurrence.packageIssue: array expected");
+                        message.packageIssue = [];
+                        for (var i = 0; i < object.packageIssue.length; ++i) {
+                            if (typeof object.packageIssue[i] !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.packageIssue: object expected");
+                            message.packageIssue[i] = $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.fromObject(object.packageIssue[i]);
+                        }
+                    }
+                    if (object.shortDescription != null)
+                        message.shortDescription = String(object.shortDescription);
+                    if (object.longDescription != null)
+                        message.longDescription = String(object.longDescription);
+                    if (object.relatedUrls) {
+                        if (!Array.isArray(object.relatedUrls))
+                            throw TypeError(".grafeas.v1.VulnerabilityOccurrence.relatedUrls: array expected");
+                        message.relatedUrls = [];
+                        for (var i = 0; i < object.relatedUrls.length; ++i) {
+                            if (typeof object.relatedUrls[i] !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.relatedUrls: object expected");
+                            message.relatedUrls[i] = $root.grafeas.v1.RelatedUrl.fromObject(object.relatedUrls[i]);
+                        }
+                    }
+                    switch (object.effectiveSeverity) {
+                    case "SEVERITY_UNSPECIFIED":
+                    case 0:
+                        message.effectiveSeverity = 0;
+                        break;
+                    case "MINIMAL":
+                    case 1:
+                        message.effectiveSeverity = 1;
+                        break;
+                    case "LOW":
+                    case 2:
+                        message.effectiveSeverity = 2;
+                        break;
+                    case "MEDIUM":
+                    case 3:
+                        message.effectiveSeverity = 3;
+                        break;
+                    case "HIGH":
+                    case 4:
+                        message.effectiveSeverity = 4;
+                        break;
+                    case "CRITICAL":
+                    case 5:
+                        message.effectiveSeverity = 5;
+                        break;
+                    }
+                    if (object.fixAvailable != null)
+                        message.fixAvailable = Boolean(object.fixAvailable);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a VulnerabilityOccurrence message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @static
+                 * @param {grafeas.v1.VulnerabilityOccurrence} message VulnerabilityOccurrence
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                VulnerabilityOccurrence.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.packageIssue = [];
+                        object.relatedUrls = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                        object.cvssScore = 0;
+                        object.shortDescription = "";
+                        object.longDescription = "";
+                        object.effectiveSeverity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                        object.fixAvailable = false;
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] : message.severity;
+                    if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
+                        object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
+                    if (message.packageIssue && message.packageIssue.length) {
+                        object.packageIssue = [];
+                        for (var j = 0; j < message.packageIssue.length; ++j)
+                            object.packageIssue[j] = $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue.toObject(message.packageIssue[j], options);
+                    }
+                    if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
+                        object.shortDescription = message.shortDescription;
+                    if (message.longDescription != null && message.hasOwnProperty("longDescription"))
+                        object.longDescription = message.longDescription;
+                    if (message.relatedUrls && message.relatedUrls.length) {
+                        object.relatedUrls = [];
+                        for (var j = 0; j < message.relatedUrls.length; ++j)
+                            object.relatedUrls[j] = $root.grafeas.v1.RelatedUrl.toObject(message.relatedUrls[j], options);
+                    }
+                    if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
+                        object.effectiveSeverity = options.enums === String ? $root.grafeas.v1.Severity[message.effectiveSeverity] : message.effectiveSeverity;
+                    if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
+                        object.fixAvailable = message.fixAvailable;
+                    return object;
+                };
+    
+                /**
+                 * Converts this VulnerabilityOccurrence to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                VulnerabilityOccurrence.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                VulnerabilityOccurrence.PackageIssue = (function() {
+    
+                    /**
+                     * Properties of a PackageIssue.
+                     * @memberof grafeas.v1.VulnerabilityOccurrence
+                     * @interface IPackageIssue
+                     * @property {string|null} [affectedCpeUri] PackageIssue affectedCpeUri
+                     * @property {string|null} [affectedPackage] PackageIssue affectedPackage
+                     * @property {grafeas.v1.IVersion|null} [affectedVersion] PackageIssue affectedVersion
+                     * @property {string|null} [fixedCpeUri] PackageIssue fixedCpeUri
+                     * @property {string|null} [fixedPackage] PackageIssue fixedPackage
+                     * @property {grafeas.v1.IVersion|null} [fixedVersion] PackageIssue fixedVersion
+                     * @property {boolean|null} [fixAvailable] PackageIssue fixAvailable
+                     */
+    
+                    /**
+                     * Constructs a new PackageIssue.
+                     * @memberof grafeas.v1.VulnerabilityOccurrence
+                     * @classdesc Represents a PackageIssue.
+                     * @implements IPackageIssue
+                     * @constructor
+                     * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue=} [properties] Properties to set
+                     */
+                    function PackageIssue(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PackageIssue affectedCpeUri.
+                     * @member {string} affectedCpeUri
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     */
+                    PackageIssue.prototype.affectedCpeUri = "";
+    
+                    /**
+                     * PackageIssue affectedPackage.
+                     * @member {string} affectedPackage
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     */
+                    PackageIssue.prototype.affectedPackage = "";
+    
+                    /**
+                     * PackageIssue affectedVersion.
+                     * @member {grafeas.v1.IVersion|null|undefined} affectedVersion
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     */
+                    PackageIssue.prototype.affectedVersion = null;
+    
+                    /**
+                     * PackageIssue fixedCpeUri.
+                     * @member {string} fixedCpeUri
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     */
+                    PackageIssue.prototype.fixedCpeUri = "";
+    
+                    /**
+                     * PackageIssue fixedPackage.
+                     * @member {string} fixedPackage
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     */
+                    PackageIssue.prototype.fixedPackage = "";
+    
+                    /**
+                     * PackageIssue fixedVersion.
+                     * @member {grafeas.v1.IVersion|null|undefined} fixedVersion
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     */
+                    PackageIssue.prototype.fixedVersion = null;
+    
+                    /**
+                     * PackageIssue fixAvailable.
+                     * @member {boolean} fixAvailable
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     */
+                    PackageIssue.prototype.fixAvailable = false;
+    
+                    /**
+                     * Creates a new PackageIssue instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue=} [properties] Properties to set
+                     * @returns {grafeas.v1.VulnerabilityOccurrence.PackageIssue} PackageIssue instance
+                     */
+                    PackageIssue.create = function create(properties) {
+                        return new PackageIssue(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PackageIssue message. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.PackageIssue.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue} message PackageIssue message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PackageIssue.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.affectedCpeUri);
+                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.affectedPackage);
+                        if (message.affectedVersion != null && message.hasOwnProperty("affectedVersion"))
+                            $root.grafeas.v1.Version.encode(message.affectedVersion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.fixedCpeUri);
+                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.fixedPackage);
+                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion"))
+                            $root.grafeas.v1.Version.encode(message.fixedVersion, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
+                            writer.uint32(/* id 7, wireType 0 =*/56).bool(message.fixAvailable);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PackageIssue message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.PackageIssue.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityOccurrence.IPackageIssue} message PackageIssue message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PackageIssue.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PackageIssue message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.VulnerabilityOccurrence.PackageIssue} PackageIssue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PackageIssue.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.affectedCpeUri = reader.string();
+                                break;
+                            case 2:
+                                message.affectedPackage = reader.string();
+                                break;
+                            case 3:
+                                message.affectedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                message.fixedCpeUri = reader.string();
+                                break;
+                            case 5:
+                                message.fixedPackage = reader.string();
+                                break;
+                            case 6:
+                                message.fixedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                                break;
+                            case 7:
+                                message.fixAvailable = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PackageIssue message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.VulnerabilityOccurrence.PackageIssue} PackageIssue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PackageIssue.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PackageIssue message.
+                     * @function verify
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PackageIssue.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
+                            if (!$util.isString(message.affectedCpeUri))
+                                return "affectedCpeUri: string expected";
+                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
+                            if (!$util.isString(message.affectedPackage))
+                                return "affectedPackage: string expected";
+                        if (message.affectedVersion != null && message.hasOwnProperty("affectedVersion")) {
+                            var error = $root.grafeas.v1.Version.verify(message.affectedVersion);
+                            if (error)
+                                return "affectedVersion." + error;
+                        }
+                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
+                            if (!$util.isString(message.fixedCpeUri))
+                                return "fixedCpeUri: string expected";
+                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
+                            if (!$util.isString(message.fixedPackage))
+                                return "fixedPackage: string expected";
+                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion")) {
+                            var error = $root.grafeas.v1.Version.verify(message.fixedVersion);
+                            if (error)
+                                return "fixedVersion." + error;
+                        }
+                        if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
+                            if (typeof message.fixAvailable !== "boolean")
+                                return "fixAvailable: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PackageIssue message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.VulnerabilityOccurrence.PackageIssue} PackageIssue
+                     */
+                    PackageIssue.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue)
+                            return object;
+                        var message = new $root.grafeas.v1.VulnerabilityOccurrence.PackageIssue();
+                        if (object.affectedCpeUri != null)
+                            message.affectedCpeUri = String(object.affectedCpeUri);
+                        if (object.affectedPackage != null)
+                            message.affectedPackage = String(object.affectedPackage);
+                        if (object.affectedVersion != null) {
+                            if (typeof object.affectedVersion !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.PackageIssue.affectedVersion: object expected");
+                            message.affectedVersion = $root.grafeas.v1.Version.fromObject(object.affectedVersion);
+                        }
+                        if (object.fixedCpeUri != null)
+                            message.fixedCpeUri = String(object.fixedCpeUri);
+                        if (object.fixedPackage != null)
+                            message.fixedPackage = String(object.fixedPackage);
+                        if (object.fixedVersion != null) {
+                            if (typeof object.fixedVersion !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.PackageIssue.fixedVersion: object expected");
+                            message.fixedVersion = $root.grafeas.v1.Version.fromObject(object.fixedVersion);
+                        }
+                        if (object.fixAvailable != null)
+                            message.fixAvailable = Boolean(object.fixAvailable);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PackageIssue message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityOccurrence.PackageIssue} message PackageIssue
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PackageIssue.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.affectedCpeUri = "";
+                            object.affectedPackage = "";
+                            object.affectedVersion = null;
+                            object.fixedCpeUri = "";
+                            object.fixedPackage = "";
+                            object.fixedVersion = null;
+                            object.fixAvailable = false;
+                        }
+                        if (message.affectedCpeUri != null && message.hasOwnProperty("affectedCpeUri"))
+                            object.affectedCpeUri = message.affectedCpeUri;
+                        if (message.affectedPackage != null && message.hasOwnProperty("affectedPackage"))
+                            object.affectedPackage = message.affectedPackage;
+                        if (message.affectedVersion != null && message.hasOwnProperty("affectedVersion"))
+                            object.affectedVersion = $root.grafeas.v1.Version.toObject(message.affectedVersion, options);
+                        if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
+                            object.fixedCpeUri = message.fixedCpeUri;
+                        if (message.fixedPackage != null && message.hasOwnProperty("fixedPackage"))
+                            object.fixedPackage = message.fixedPackage;
+                        if (message.fixedVersion != null && message.hasOwnProperty("fixedVersion"))
+                            object.fixedVersion = $root.grafeas.v1.Version.toObject(message.fixedVersion, options);
+                        if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
+                            object.fixAvailable = message.fixAvailable;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PackageIssue to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.PackageIssue
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PackageIssue.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return PackageIssue;
+                })();
+    
+                return VulnerabilityOccurrence;
             })();
     
             return v1;

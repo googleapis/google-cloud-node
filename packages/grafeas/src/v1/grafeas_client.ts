@@ -155,13 +155,13 @@ export class GrafeasClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      notePathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/notes/{note}'
+      ),
       occurrencePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/occurrences/{occurrence}'
       ),
       projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      notePathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/notes/{note}'
-      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1250,9 +1250,17 @@ export class GrafeasClient {
    */
   listOccurrencesStream(
     request?: protosTypes.grafeas.v1.IListOccurrencesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listOccurrences.createStream(
       this._innerApiCalls.listOccurrences as gax.GaxCall,
@@ -1384,9 +1392,17 @@ export class GrafeasClient {
    */
   listNotesStream(
     request?: protosTypes.grafeas.v1.IListNotesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listNotes.createStream(
       this._innerApiCalls.listNotes as gax.GaxCall,
@@ -1518,9 +1534,17 @@ export class GrafeasClient {
    */
   listNoteOccurrencesStream(
     request?: protosTypes.grafeas.v1.IListNoteOccurrencesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listNoteOccurrences.createStream(
       this._innerApiCalls.listNoteOccurrences as gax.GaxCall,
@@ -1531,6 +1555,42 @@ export class GrafeasClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified note resource name string.
+   *
+   * @param {string} project
+   * @param {string} note
+   * @returns {string} Resource name string.
+   */
+  notePath(project: string, note: string) {
+    return this._pathTemplates.notePathTemplate.render({
+      project,
+      note,
+    });
+  }
+
+  /**
+   * Parse the project from Note resource.
+   *
+   * @param {string} noteName
+   *   A fully-qualified path representing Note resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNoteName(noteName: string) {
+    return this._pathTemplates.notePathTemplate.match(noteName).project;
+  }
+
+  /**
+   * Parse the note from Note resource.
+   *
+   * @param {string} noteName
+   *   A fully-qualified path representing Note resource.
+   * @returns {string} A string representing the note.
+   */
+  matchNoteFromNoteName(noteName: string) {
+    return this._pathTemplates.notePathTemplate.match(noteName).note;
+  }
 
   /**
    * Return a fully-qualified occurrence resource name string.
@@ -1591,42 +1651,6 @@ export class GrafeasClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this._pathTemplates.projectPathTemplate.match(projectName).project;
-  }
-
-  /**
-   * Return a fully-qualified note resource name string.
-   *
-   * @param {string} project
-   * @param {string} note
-   * @returns {string} Resource name string.
-   */
-  notePath(project: string, note: string) {
-    return this._pathTemplates.notePathTemplate.render({
-      project,
-      note,
-    });
-  }
-
-  /**
-   * Parse the project from Note resource.
-   *
-   * @param {string} noteName
-   *   A fully-qualified path representing Note resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromNoteName(noteName: string) {
-    return this._pathTemplates.notePathTemplate.match(noteName).project;
-  }
-
-  /**
-   * Parse the note from Note resource.
-   *
-   * @param {string} noteName
-   *   A fully-qualified path representing Note resource.
-   * @returns {string} A string representing the note.
-   */
-  matchNoteFromNoteName(noteName: string) {
-    return this._pathTemplates.notePathTemplate.match(noteName).note;
   }
 
   /**
