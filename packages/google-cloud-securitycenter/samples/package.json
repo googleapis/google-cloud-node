@@ -13,7 +13,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/security-center": "^3.0.0"
+    "@google-cloud/security-center": "^3.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

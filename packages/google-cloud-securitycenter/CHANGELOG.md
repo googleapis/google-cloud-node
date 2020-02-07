@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-security-center/compare/v3.0.0...v3.0.1) (2020-02-07)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([c73e1b6](https://www.github.com/googleapis/nodejs-security-center/commit/c73e1b688367377a2c879d3ad9b000b91588dcd3))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-security-center/compare/v2.3.2...v3.0.0) (2020-02-05)
 
 
