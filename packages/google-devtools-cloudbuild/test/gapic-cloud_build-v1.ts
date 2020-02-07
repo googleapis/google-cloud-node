@@ -826,7 +826,7 @@ describe('v1.CloudBuildClient', () => {
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest = {};
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listBuilds = (
         actualRequest: {},
@@ -845,7 +845,7 @@ describe('v1.CloudBuildClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listBuildTriggers', () => {
@@ -883,7 +883,7 @@ describe('v1.CloudBuildClient', () => {
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest = {};
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listBuildTriggers = (
         actualRequest: {},
@@ -902,7 +902,7 @@ describe('v1.CloudBuildClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

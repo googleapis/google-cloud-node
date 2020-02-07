@@ -1560,9 +1560,10 @@ export class CloudBuildClient {
    */
   listBuildsStream(
     request?: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listBuilds.createStream(
       this._innerApiCalls.listBuilds as gax.GaxCall,
@@ -1681,9 +1682,10 @@ export class CloudBuildClient {
    */
   listBuildTriggersStream(
     request?: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listBuildTriggers.createStream(
       this._innerApiCalls.listBuildTriggers as gax.GaxCall,
