@@ -116,6 +116,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -140,6 +141,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -166,6 +168,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -190,6 +193,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -216,6 +220,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -240,6 +245,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -266,6 +272,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -290,6 +297,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -316,6 +324,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IBatchTranslateTextRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -347,6 +356,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IBatchTranslateTextRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -381,6 +391,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -412,6 +423,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -446,6 +458,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -477,6 +490,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -511,6 +525,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -539,8 +554,9 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listGlossaries = (
         actualRequest: {},
@@ -559,7 +575,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });
