@@ -30,6 +30,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateEntryGroup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetEntryGroup": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
@@ -38,6 +42,10 @@
         "DeleteEntryGroup": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListEntryGroups": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateEntry": {
@@ -63,6 +71,10 @@
         "LookupEntry": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListEntries": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateTagTemplate": {

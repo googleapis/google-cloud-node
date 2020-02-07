@@ -91,6 +91,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -113,6 +114,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -137,6 +139,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -159,6 +162,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -233,6 +237,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -255,6 +260,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -279,6 +285,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -301,6 +308,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -325,6 +333,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -347,6 +356,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -421,6 +431,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -443,6 +454,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -467,6 +479,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -489,6 +502,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -513,6 +527,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -535,6 +550,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -559,6 +575,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -581,6 +598,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -605,6 +623,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -631,8 +650,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listTaxonomies = (
         actualRequest: {},
@@ -651,7 +671,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listPolicyTags', () => {
@@ -662,6 +682,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -688,8 +709,9 @@ describe('v1beta1.PolicyTagManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listPolicyTags = (
         actualRequest: {},
@@ -708,7 +730,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

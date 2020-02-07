@@ -15,6 +15,972 @@
                     "java_outer_classname": "PolicyTagManagerSerializationProto"
                   },
                   "nested": {
+                    "IntegratedSystem": {
+                      "values": {
+                        "INTEGRATED_SYSTEM_UNSPECIFIED": 0,
+                        "BIGQUERY": 1,
+                        "CLOUD_PUBSUB": 2
+                      }
+                    },
+                    "DataCatalog": {
+                      "options": {
+                        "(google.api.default_host)": "datacatalog.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "SearchCatalog": {
+                          "requestType": "SearchCatalogRequest",
+                          "responseType": "SearchCatalogResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/catalog:search",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "scope,query"
+                          }
+                        },
+                        "CreateEntryGroup": {
+                          "requestType": "CreateEntryGroupRequest",
+                          "responseType": "EntryGroup",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/entryGroups",
+                            "(google.api.http).body": "entry_group",
+                            "(google.api.method_signature)": "parent,entry_group_id,entry_group"
+                          }
+                        },
+                        "UpdateEntryGroup": {
+                          "requestType": "UpdateEntryGroupRequest",
+                          "responseType": "EntryGroup",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{entry_group.name=projects/*/locations/*/entryGroups/*}",
+                            "(google.api.http).body": "entry_group",
+                            "(google.api.method_signature)": "entry_group,update_mask"
+                          }
+                        },
+                        "GetEntryGroup": {
+                          "requestType": "GetEntryGroupRequest",
+                          "responseType": "EntryGroup",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*}",
+                            "(google.api.method_signature)": "name,read_mask"
+                          }
+                        },
+                        "DeleteEntryGroup": {
+                          "requestType": "DeleteEntryGroupRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "ListEntryGroups": {
+                          "requestType": "ListEntryGroupsRequest",
+                          "responseType": "ListEntryGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/entryGroups",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "CreateEntry": {
+                          "requestType": "CreateEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*}/entries",
+                            "(google.api.http).body": "entry",
+                            "(google.api.method_signature)": "parent,entry_id,entry"
+                          }
+                        },
+                        "UpdateEntry": {
+                          "requestType": "UpdateEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{entry.name=projects/*/locations/*/entryGroups/*/entries/*}",
+                            "(google.api.http).body": "entry",
+                            "(google.api.method_signature)": "entry,update_mask"
+                          }
+                        },
+                        "DeleteEntry": {
+                          "requestType": "DeleteEntryRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "GetEntry": {
+                          "requestType": "GetEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "LookupEntry": {
+                          "requestType": "LookupEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/entries:lookup"
+                          }
+                        },
+                        "ListEntries": {
+                          "requestType": "ListEntriesRequest",
+                          "responseType": "ListEntriesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*}/entries",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "CreateTagTemplate": {
+                          "requestType": "CreateTagTemplateRequest",
+                          "responseType": "TagTemplate",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/tagTemplates",
+                            "(google.api.http).body": "tag_template",
+                            "(google.api.method_signature)": "parent,tag_template_id,tag_template"
+                          }
+                        },
+                        "GetTagTemplate": {
+                          "requestType": "GetTagTemplateRequest",
+                          "responseType": "TagTemplate",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "UpdateTagTemplate": {
+                          "requestType": "UpdateTagTemplateRequest",
+                          "responseType": "TagTemplate",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{tag_template.name=projects/*/locations/*/tagTemplates/*}",
+                            "(google.api.http).body": "tag_template",
+                            "(google.api.method_signature)": "tag_template,update_mask"
+                          }
+                        },
+                        "DeleteTagTemplate": {
+                          "requestType": "DeleteTagTemplateRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}",
+                            "(google.api.method_signature)": "name,force"
+                          }
+                        },
+                        "CreateTagTemplateField": {
+                          "requestType": "CreateTagTemplateFieldRequest",
+                          "responseType": "TagTemplateField",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/tagTemplates/*}/fields",
+                            "(google.api.http).body": "tag_template_field",
+                            "(google.api.method_signature)": "parent,tag_template_field_id,tag_template_field"
+                          }
+                        },
+                        "UpdateTagTemplateField": {
+                          "requestType": "UpdateTagTemplateFieldRequest",
+                          "responseType": "TagTemplateField",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}",
+                            "(google.api.http).body": "tag_template_field",
+                            "(google.api.method_signature)": "name,tag_template_field,update_mask"
+                          }
+                        },
+                        "RenameTagTemplateField": {
+                          "requestType": "RenameTagTemplateFieldRequest",
+                          "responseType": "TagTemplateField",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}:rename",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,new_tag_template_field_id"
+                          }
+                        },
+                        "DeleteTagTemplateField": {
+                          "requestType": "DeleteTagTemplateFieldRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}",
+                            "(google.api.method_signature)": "name,force"
+                          }
+                        },
+                        "CreateTag": {
+                          "requestType": "CreateTagRequest",
+                          "responseType": "Tag",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags",
+                            "(google.api.http).body": "tag",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*}/tags",
+                            "(google.api.http).additional_bindings.body": "tag",
+                            "(google.api.method_signature)": "parent,tag"
+                          }
+                        },
+                        "UpdateTag": {
+                          "requestType": "UpdateTagRequest",
+                          "responseType": "Tag",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{tag.name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}",
+                            "(google.api.http).body": "tag",
+                            "(google.api.http).additional_bindings.patch": "/v1beta1/{tag.name=projects/*/locations/*/entryGroups/*/tags/*}",
+                            "(google.api.http).additional_bindings.body": "tag",
+                            "(google.api.method_signature)": "tag,update_mask"
+                          }
+                        },
+                        "DeleteTag": {
+                          "requestType": "DeleteTagRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/tags/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "ListTags": {
+                          "requestType": "ListTagsRequest",
+                          "responseType": "ListTagsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*}/tags",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "google.iam.v1.SetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:setIamPolicy",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy",
+                            "(google.api.http).additional_bindings.body": "*"
+                          }
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "google.iam.v1.GetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:getIamPolicy",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*/entries/*}:getIamPolicy",
+                            "(google.api.http).additional_bindings.body": "*"
+                          }
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:testIamPermissions",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*/entries/*}:testIamPermissions",
+                            "(google.api.http).additional_bindings.body": "*"
+                          }
+                        }
+                      }
+                    },
+                    "SearchCatalogRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "Scope",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Scope": {
+                          "fields": {
+                            "includeOrgIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "includeProjectIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "includeGcpPublicDatasets": {
+                              "type": "bool",
+                              "id": 7
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchCatalogResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "SearchCatalogResult",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateEntryGroupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "entryGroupId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entryGroup": {
+                          "type": "EntryGroup",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateEntryGroupRequest": {
+                      "fields": {
+                        "entryGroup": {
+                          "type": "EntryGroup",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetEntryGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteEntryGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEntryGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEntryGroupsResponse": {
+                      "fields": {
+                        "entryGroups": {
+                          "rule": "repeated",
+                          "type": "EntryGroup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateEntryRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "entryId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entry": {
+                          "type": "Entry",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEntryRequest": {
+                      "fields": {
+                        "entry": {
+                          "type": "Entry",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        }
+                      }
+                    },
+                    "GetEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        }
+                      }
+                    },
+                    "LookupEntryRequest": {
+                      "oneofs": {
+                        "targetName": {
+                          "oneof": [
+                            "linkedResource",
+                            "sqlResource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "linkedResource": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sqlResource": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Entry": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/Entry",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}"
+                      },
+                      "oneofs": {
+                        "entryType": {
+                          "oneof": [
+                            "type",
+                            "userSpecifiedType"
+                          ]
+                        },
+                        "system": {
+                          "oneof": [
+                            "integratedSystem",
+                            "userSpecifiedSystem"
+                          ]
+                        },
+                        "typeSpec": {
+                          "oneof": [
+                            "gcsFilesetSpec",
+                            "bigqueryTableSpec",
+                            "bigqueryDateShardedSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "linkedResource": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "type": {
+                          "type": "EntryType",
+                          "id": 2
+                        },
+                        "userSpecifiedType": {
+                          "type": "string",
+                          "id": 16
+                        },
+                        "integratedSystem": {
+                          "type": "IntegratedSystem",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "userSpecifiedSystem": {
+                          "type": "string",
+                          "id": 18
+                        },
+                        "gcsFilesetSpec": {
+                          "type": "GcsFilesetSpec",
+                          "id": 6
+                        },
+                        "bigqueryTableSpec": {
+                          "type": "BigQueryTableSpec",
+                          "id": 12
+                        },
+                        "bigqueryDateShardedSpec": {
+                          "type": "BigQueryDateShardedSpec",
+                          "id": 15
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "schema": {
+                          "type": "Schema",
+                          "id": 5
+                        },
+                        "sourceSystemTimestamps": {
+                          "type": "SystemTimestamps",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "EntryGroup": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/EntryGroup",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataCatalogTimestamps": {
+                          "type": "SystemTimestamps",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTagTemplateRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/TagTemplate"
+                          }
+                        },
+                        "tagTemplateId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tagTemplate": {
+                          "type": "TagTemplate",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EntryType": {
+                      "values": {
+                        "ENTRY_TYPE_UNSPECIFIED": 0,
+                        "TABLE": 2,
+                        "MODEL": 5,
+                        "DATA_STREAM": 3,
+                        "FILESET": 4
+                      }
+                    },
+                    "GetTagTemplateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateTagTemplateRequest": {
+                      "fields": {
+                        "tagTemplate": {
+                          "type": "TagTemplate",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteTagTemplateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTagRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Tag"
+                          }
+                        },
+                        "tag": {
+                          "type": "Tag",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateTagRequest": {
+                      "fields": {
+                        "tag": {
+                          "type": "Tag",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteTagRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Tag"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTagTemplateFieldRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
+                          }
+                        },
+                        "tagTemplateFieldId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tagTemplateField": {
+                          "type": "TagTemplateField",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateTagTemplateFieldRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
+                          }
+                        },
+                        "tagTemplateField": {
+                          "type": "TagTemplateField",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RenameTagTemplateFieldRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
+                          }
+                        },
+                        "newTagTemplateFieldId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTagTemplateFieldRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListTagsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Tag"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListTagsResponse": {
+                      "fields": {
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListEntriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListEntriesResponse": {
+                      "fields": {
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "Entry",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsFilesetSpec": {
+                      "fields": {
+                        "filePatterns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sampleGcsFileSpecs": {
+                          "rule": "repeated",
+                          "type": "GcsFileSpec",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GcsFileSpec": {
+                      "fields": {
+                        "filePath": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "gcsTimestamps": {
+                          "type": "SystemTimestamps",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sizeBytes": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "SystemTimestamps": {
                       "fields": {
                         "createTime": {
@@ -82,6 +1048,321 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchCatalogResult": {
+                      "fields": {
+                        "searchResultType": {
+                          "type": "SearchResultType",
+                          "id": 1
+                        },
+                        "searchResultSubtype": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "relativeResourceName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "linkedResource": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SearchResultType": {
+                      "values": {
+                        "SEARCH_RESULT_TYPE_UNSPECIFIED": 0,
+                        "ENTRY": 1,
+                        "TAG_TEMPLATE": 2,
+                        "ENTRY_GROUP": 3
+                      }
+                    },
+                    "BigQueryTableSpec": {
+                      "oneofs": {
+                        "typeSpec": {
+                          "oneof": [
+                            "viewSpec",
+                            "tableSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tableSourceType": {
+                          "type": "TableSourceType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "viewSpec": {
+                          "type": "ViewSpec",
+                          "id": 2
+                        },
+                        "tableSpec": {
+                          "type": "TableSpec",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TableSourceType": {
+                      "values": {
+                        "TABLE_SOURCE_TYPE_UNSPECIFIED": 0,
+                        "BIGQUERY_VIEW": 2,
+                        "BIGQUERY_TABLE": 5
+                      }
+                    },
+                    "ViewSpec": {
+                      "fields": {
+                        "viewQuery": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TableSpec": {
+                      "fields": {
+                        "groupedEntry": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        }
+                      }
+                    },
+                    "BigQueryDateShardedSpec": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        },
+                        "tablePrefix": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "shardCount": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Tag": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/Tag",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}"
+                      },
+                      "oneofs": {
+                        "scope": {
+                          "oneof": [
+                            "column"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "template": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "templateDisplayName": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "column": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "fields": {
+                          "keyType": "string",
+                          "type": "TagField",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TagField": {
+                      "oneofs": {
+                        "kind": {
+                          "oneof": [
+                            "doubleValue",
+                            "stringValue",
+                            "boolValue",
+                            "timestampValue",
+                            "enumValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "doubleValue": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "stringValue": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "boolValue": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "timestampValue": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "enumValue": {
+                          "type": "EnumValue",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "EnumValue": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TagTemplate": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/TagTemplate",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "fields": {
+                          "keyType": "string",
+                          "type": "TagTemplateField",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TagTemplateField": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/TagTemplateField",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "FieldType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "isRequired": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FieldType": {
+                      "oneofs": {
+                        "typeDecl": {
+                          "oneof": [
+                            "primitiveType",
+                            "enumType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "primitiveType": {
+                          "type": "PrimitiveType",
+                          "id": 1
+                        },
+                        "enumType": {
+                          "type": "EnumType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "EnumType": {
+                          "fields": {
+                            "allowedValues": {
+                              "rule": "repeated",
+                              "type": "EnumValue",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "EnumValue": {
+                              "fields": {
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "PrimitiveType": {
+                          "values": {
+                            "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+                            "DOUBLE": 1,
+                            "STRING": 2,
+                            "BOOL": 3,
+                            "TIMESTAMP": 4
                           }
                         }
                       }
@@ -461,366 +1742,6 @@
                         }
                       }
                     },
-                    "Tag": {
-                      "options": {
-                        "(google.api.resource).type": "datacatalog.googleapis.com/Tag",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}"
-                      },
-                      "oneofs": {
-                        "scope": {
-                          "oneof": [
-                            "column"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "template": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "templateDisplayName": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "column": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "fields": {
-                          "keyType": "string",
-                          "type": "TagField",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "TagField": {
-                      "oneofs": {
-                        "kind": {
-                          "oneof": [
-                            "doubleValue",
-                            "stringValue",
-                            "boolValue",
-                            "timestampValue",
-                            "enumValue"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "displayName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "doubleValue": {
-                          "type": "double",
-                          "id": 2
-                        },
-                        "stringValue": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "boolValue": {
-                          "type": "bool",
-                          "id": 4
-                        },
-                        "timestampValue": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5
-                        },
-                        "enumValue": {
-                          "type": "EnumValue",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "EnumValue": {
-                          "fields": {
-                            "displayName": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TagTemplate": {
-                      "options": {
-                        "(google.api.resource).type": "datacatalog.googleapis.com/TagTemplate",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "fields": {
-                          "keyType": "string",
-                          "type": "TagTemplateField",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "TagTemplateField": {
-                      "options": {
-                        "(google.api.resource).type": "datacatalog.googleapis.com/TagTemplateField",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "type": {
-                          "type": "FieldType",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "isRequired": {
-                          "type": "bool",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "FieldType": {
-                      "oneofs": {
-                        "typeDecl": {
-                          "oneof": [
-                            "primitiveType",
-                            "enumType"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "primitiveType": {
-                          "type": "PrimitiveType",
-                          "id": 1
-                        },
-                        "enumType": {
-                          "type": "EnumType",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "EnumType": {
-                          "fields": {
-                            "allowedValues": {
-                              "rule": "repeated",
-                              "type": "EnumValue",
-                              "id": 1
-                            }
-                          },
-                          "nested": {
-                            "EnumValue": {
-                              "fields": {
-                                "displayName": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "PrimitiveType": {
-                          "values": {
-                            "PRIMITIVE_TYPE_UNSPECIFIED": 0,
-                            "DOUBLE": 1,
-                            "STRING": 2,
-                            "BOOL": 3,
-                            "TIMESTAMP": 4
-                          }
-                        }
-                      }
-                    },
-                    "BigQueryTableSpec": {
-                      "oneofs": {
-                        "typeSpec": {
-                          "oneof": [
-                            "viewSpec",
-                            "tableSpec"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "tableSourceType": {
-                          "type": "TableSourceType",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "viewSpec": {
-                          "type": "ViewSpec",
-                          "id": 2
-                        },
-                        "tableSpec": {
-                          "type": "TableSpec",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TableSourceType": {
-                      "values": {
-                        "TABLE_SOURCE_TYPE_UNSPECIFIED": 0,
-                        "BIGQUERY_VIEW": 2,
-                        "BIGQUERY_TABLE": 5
-                      }
-                    },
-                    "ViewSpec": {
-                      "fields": {
-                        "viewQuery": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "TableSpec": {
-                      "fields": {
-                        "groupedEntry": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
-                          }
-                        }
-                      }
-                    },
-                    "BigQueryDateShardedSpec": {
-                      "fields": {
-                        "dataset": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
-                          }
-                        },
-                        "tablePrefix": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "shardCount": {
-                          "type": "int64",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "SearchCatalogResult": {
-                      "fields": {
-                        "searchResultType": {
-                          "type": "SearchResultType",
-                          "id": 1
-                        },
-                        "searchResultSubtype": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "relativeResourceName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "linkedResource": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "SearchResultType": {
-                      "values": {
-                        "SEARCH_RESULT_TYPE_UNSPECIFIED": 0,
-                        "ENTRY": 1,
-                        "TAG_TEMPLATE": 2,
-                        "ENTRY_GROUP": 3
-                      }
-                    },
-                    "GcsFilesetSpec": {
-                      "fields": {
-                        "filePatterns": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "sampleGcsFileSpecs": {
-                          "rule": "repeated",
-                          "type": "GcsFileSpec",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "GcsFileSpec": {
-                      "fields": {
-                        "filePath": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "gcsTimestamps": {
-                          "type": "SystemTimestamps",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "sizeBytes": {
-                          "type": "int64",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
                     "PolicyTagManagerSerialization": {
                       "options": {
                         "(google.api.default_host)": "datacatalog.googleapis.com",
@@ -968,771 +1889,6 @@
                           "id": 1
                         }
                       }
-                    },
-                    "DataCatalog": {
-                      "options": {
-                        "(google.api.default_host)": "datacatalog.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "SearchCatalog": {
-                          "requestType": "SearchCatalogRequest",
-                          "responseType": "SearchCatalogResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/catalog:search",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "scope,query"
-                          }
-                        },
-                        "CreateEntryGroup": {
-                          "requestType": "CreateEntryGroupRequest",
-                          "responseType": "EntryGroup",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/entryGroups",
-                            "(google.api.http).body": "entry_group",
-                            "(google.api.method_signature)": "parent,entry_group_id,entry_group"
-                          }
-                        },
-                        "GetEntryGroup": {
-                          "requestType": "GetEntryGroupRequest",
-                          "responseType": "EntryGroup",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*}",
-                            "(google.api.method_signature)": "name,read_mask"
-                          }
-                        },
-                        "DeleteEntryGroup": {
-                          "requestType": "DeleteEntryGroupRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "CreateEntry": {
-                          "requestType": "CreateEntryRequest",
-                          "responseType": "Entry",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*}/entries",
-                            "(google.api.http).body": "entry",
-                            "(google.api.method_signature)": "parent,entry_id,entry"
-                          }
-                        },
-                        "UpdateEntry": {
-                          "requestType": "UpdateEntryRequest",
-                          "responseType": "Entry",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{entry.name=projects/*/locations/*/entryGroups/*/entries/*}",
-                            "(google.api.http).body": "entry",
-                            "(google.api.method_signature)": "entry,update_mask"
-                          }
-                        },
-                        "DeleteEntry": {
-                          "requestType": "DeleteEntryRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "GetEntry": {
-                          "requestType": "GetEntryRequest",
-                          "responseType": "Entry",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "LookupEntry": {
-                          "requestType": "LookupEntryRequest",
-                          "responseType": "Entry",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/entries:lookup"
-                          }
-                        },
-                        "CreateTagTemplate": {
-                          "requestType": "CreateTagTemplateRequest",
-                          "responseType": "TagTemplate",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/tagTemplates",
-                            "(google.api.http).body": "tag_template",
-                            "(google.api.method_signature)": "parent,tag_template_id,tag_template"
-                          }
-                        },
-                        "GetTagTemplate": {
-                          "requestType": "GetTagTemplateRequest",
-                          "responseType": "TagTemplate",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "UpdateTagTemplate": {
-                          "requestType": "UpdateTagTemplateRequest",
-                          "responseType": "TagTemplate",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{tag_template.name=projects/*/locations/*/tagTemplates/*}",
-                            "(google.api.http).body": "tag_template",
-                            "(google.api.method_signature)": "tag_template,update_mask"
-                          }
-                        },
-                        "DeleteTagTemplate": {
-                          "requestType": "DeleteTagTemplateRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}",
-                            "(google.api.method_signature)": "name,force"
-                          }
-                        },
-                        "CreateTagTemplateField": {
-                          "requestType": "CreateTagTemplateFieldRequest",
-                          "responseType": "TagTemplateField",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/tagTemplates/*}/fields",
-                            "(google.api.http).body": "tag_template_field",
-                            "(google.api.method_signature)": "parent,tag_template_field_id,tag_template_field"
-                          }
-                        },
-                        "UpdateTagTemplateField": {
-                          "requestType": "UpdateTagTemplateFieldRequest",
-                          "responseType": "TagTemplateField",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}",
-                            "(google.api.http).body": "tag_template_field",
-                            "(google.api.method_signature)": "name,tag_template_field,update_mask"
-                          }
-                        },
-                        "RenameTagTemplateField": {
-                          "requestType": "RenameTagTemplateFieldRequest",
-                          "responseType": "TagTemplateField",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}:rename",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name,new_tag_template_field_id"
-                          }
-                        },
-                        "DeleteTagTemplateField": {
-                          "requestType": "DeleteTagTemplateFieldRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}",
-                            "(google.api.method_signature)": "name,force"
-                          }
-                        },
-                        "CreateTag": {
-                          "requestType": "CreateTagRequest",
-                          "responseType": "Tag",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags",
-                            "(google.api.http).body": "tag",
-                            "(google.api.method_signature)": "parent,tag"
-                          }
-                        },
-                        "UpdateTag": {
-                          "requestType": "UpdateTagRequest",
-                          "responseType": "Tag",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{tag.name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}",
-                            "(google.api.http).body": "tag",
-                            "(google.api.method_signature)": "tag,update_mask"
-                          }
-                        },
-                        "DeleteTag": {
-                          "requestType": "DeleteTagRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "ListTags": {
-                          "requestType": "ListTagsRequest",
-                          "responseType": "ListTagsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags",
-                            "(google.api.method_signature)": "parent"
-                          }
-                        },
-                        "SetIamPolicy": {
-                          "requestType": "google.iam.v1.SetIamPolicyRequest",
-                          "responseType": "google.iam.v1.Policy",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:setIamPolicy",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*/entries/*}:setIamPolicy",
-                            "(google.api.http).additional_bindings.body": "*"
-                          }
-                        },
-                        "GetIamPolicy": {
-                          "requestType": "google.iam.v1.GetIamPolicyRequest",
-                          "responseType": "google.iam.v1.Policy",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:getIamPolicy",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*/entries/*}:getIamPolicy",
-                            "(google.api.http).additional_bindings.body": "*"
-                          }
-                        },
-                        "TestIamPermissions": {
-                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
-                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:testIamPermissions",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*/entries/*}:testIamPermissions",
-                            "(google.api.http).additional_bindings.body": "*"
-                          }
-                        }
-                      }
-                    },
-                    "SearchCatalogRequest": {
-                      "fields": {
-                        "scope": {
-                          "type": "Scope",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "query": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "Scope": {
-                          "fields": {
-                            "includeOrgIds": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            },
-                            "includeProjectIds": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 3
-                            },
-                            "includeGcpPublicDatasets": {
-                              "type": "bool",
-                              "id": 7
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "SearchCatalogResponse": {
-                      "fields": {
-                        "results": {
-                          "rule": "repeated",
-                          "type": "SearchCatalogResult",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "CreateEntryGroupRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/EntryGroup"
-                          }
-                        },
-                        "entryGroupId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "entryGroup": {
-                          "type": "EntryGroup",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetEntryGroupRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
-                          }
-                        },
-                        "readMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteEntryGroupRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
-                          }
-                        }
-                      }
-                    },
-                    "CreateEntryRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
-                          }
-                        },
-                        "entryId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "entry": {
-                          "type": "Entry",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateEntryRequest": {
-                      "fields": {
-                        "entry": {
-                          "type": "Entry",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteEntryRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
-                          }
-                        }
-                      }
-                    },
-                    "GetEntryRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
-                          }
-                        }
-                      }
-                    },
-                    "LookupEntryRequest": {
-                      "oneofs": {
-                        "targetName": {
-                          "oneof": [
-                            "linkedResource",
-                            "sqlResource"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "linkedResource": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "sqlResource": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "Entry": {
-                      "options": {
-                        "(google.api.resource).type": "datacatalog.googleapis.com/Entry",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}"
-                      },
-                      "oneofs": {
-                        "entryType": {
-                          "oneof": [
-                            "type"
-                          ]
-                        },
-                        "typeSpec": {
-                          "oneof": [
-                            "gcsFilesetSpec",
-                            "bigqueryTableSpec",
-                            "bigqueryDateShardedSpec"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
-                          }
-                        },
-                        "linkedResource": {
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "type": {
-                          "type": "EntryType",
-                          "id": 2
-                        },
-                        "gcsFilesetSpec": {
-                          "type": "GcsFilesetSpec",
-                          "id": 6
-                        },
-                        "bigqueryTableSpec": {
-                          "type": "BigQueryTableSpec",
-                          "id": 12
-                        },
-                        "bigqueryDateShardedSpec": {
-                          "type": "BigQueryDateShardedSpec",
-                          "id": 15
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "schema": {
-                          "type": "Schema",
-                          "id": 5
-                        },
-                        "sourceSystemTimestamps": {
-                          "type": "SystemTimestamps",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "EntryGroup": {
-                      "options": {
-                        "(google.api.resource).type": "datacatalog.googleapis.com/EntryGroup",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "dataCatalogTimestamps": {
-                          "type": "SystemTimestamps",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "CreateTagTemplateRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/TagTemplate"
-                          }
-                        },
-                        "tagTemplateId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "tagTemplate": {
-                          "type": "TagTemplate",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "GetTagTemplateRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
-                          }
-                        }
-                      }
-                    },
-                    "EntryType": {
-                      "values": {
-                        "ENTRY_TYPE_UNSPECIFIED": 0,
-                        "TABLE": 2,
-                        "DATA_STREAM": 3,
-                        "FILESET": 4
-                      }
-                    },
-                    "UpdateTagTemplateRequest": {
-                      "fields": {
-                        "tagTemplate": {
-                          "type": "TagTemplate",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteTagTemplateRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
-                          }
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "CreateTagRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Tag"
-                          }
-                        },
-                        "tag": {
-                          "type": "Tag",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateTagRequest": {
-                      "fields": {
-                        "tag": {
-                          "type": "Tag",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteTagRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Tag"
-                          }
-                        }
-                      }
-                    },
-                    "CreateTagTemplateFieldRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
-                          }
-                        },
-                        "tagTemplateFieldId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "tagTemplateField": {
-                          "type": "TagTemplateField",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateTagTemplateFieldRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
-                          }
-                        },
-                        "tagTemplateField": {
-                          "type": "TagTemplateField",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "RenameTagTemplateFieldRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
-                          }
-                        },
-                        "newTagTemplateFieldId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteTagTemplateFieldRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
-                          }
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ListTagsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Tag"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListTagsResponse": {
-                      "fields": {
-                        "tags": {
-                          "rule": "repeated",
-                          "type": "Tag",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
                     }
                   }
                 }
@@ -1750,22 +1906,6 @@
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -1868,6 +2008,22 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
             },
             "resourceReference": {
               "type": "google.api.ResourceReference",

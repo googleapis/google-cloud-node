@@ -143,24 +143,30 @@ export class DataCatalogClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      locationPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+      entryPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
       ),
       entryGroupPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}'
       ),
-      entryPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
+      locationPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
+      policyTagPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/taxonomies/{taxonomy}/policyTags/{policy_tag}'
+      ),
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
+      tagPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}'
       ),
       tagTemplatePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}'
       ),
-      tagPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}'
-      ),
       tagTemplateFieldPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}'
+      ),
+      taxonomyPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/taxonomies/{taxonomy}'
       ),
     };
 
@@ -172,6 +178,16 @@ export class DataCatalogClient {
         'pageToken',
         'nextPageToken',
         'results'
+      ),
+      listEntryGroups: new gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'entryGroups'
+      ),
+      listEntries: new gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'entries'
       ),
       listTags: new gaxModule.PageDescriptor(
         'pageToken',
@@ -210,13 +226,16 @@ export class DataCatalogClient {
     const dataCatalogStubMethods = [
       'searchCatalog',
       'createEntryGroup',
+      'updateEntryGroup',
       'getEntryGroup',
       'deleteEntryGroup',
+      'listEntryGroups',
       'createEntry',
       'updateEntry',
       'deleteEntry',
       'getEntry',
       'lookupEntry',
+      'listEntries',
       'createTagTemplate',
       'getTagTemplate',
       'updateTagTemplate',
@@ -339,9 +358,22 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Alpha feature.
    * Creates an EntryGroup.
-   * The user should enable the Data Catalog API in the project identified by
+   *
+   * An entry group contains logically related entries together with Cloud
+   * Identity and Access Management policies that specify the users who can
+   * create, edit, and view entries within the entry group.
+   *
+   * Data Catalog automatically creates an entry group for BigQuery entries
+   * ("@bigquery") and Pub/Sub topics ("@pubsub"). Users create their own entry
+   * group to contain Cloud Storage fileset entries or custom type entries,
+   * and the IAM policies associated with those entries. Entry groups, like
+   * entries, can be searched.
+   *
+   * A maximum of 10,000 entry groups may be created per organization across all
+   * locations.
+   *
+   * Users should enable the Data Catalog API in the project identified by
    * the `parent` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
@@ -410,6 +442,92 @@ export class DataCatalogClient {
     });
     return this._innerApiCalls.createEntryGroup(request, options, callback);
   }
+  updateEntryGroup(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup,
+      (
+        | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateEntryGroup(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup,
+      | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
+      | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Updates an EntryGroup. The user should enable the Data Catalog API in the
+   * project identified by the `entry_group.name` parameter (see [Data Catalog
+   * Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
+   * information).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.datacatalog.v1beta1.EntryGroup} request.entryGroup
+   *   Required. The updated entry group. "name" field must be set.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The fields to update on the entry group. If absent or empty, all modifiable
+   *   fields are updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  updateEntryGroup(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup,
+          | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
+          | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup,
+      | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
+      | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup,
+      (
+        | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'entry_group.name': request.entryGroup!.name || '',
+    });
+    return this._innerApiCalls.updateEntryGroup(request, options, callback);
+  }
   getEntryGroup(
     request: protosTypes.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest,
     options?: gax.CallOptions
@@ -434,7 +552,6 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Alpha feature.
    * Gets an EntryGroup.
    *
    * @param {Object} request
@@ -518,9 +635,8 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Alpha feature.
    * Deletes an EntryGroup. Only entry groups that do not contain entries can be
-   * deleted. The user should enable the Data Catalog API in the project
+   * deleted. Users should enable the Data Catalog API in the project
    * identified by the `name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
@@ -529,6 +645,8 @@ export class DataCatalogClient {
    * @param {string} request.name
    *   Required. The name of the entry group. For example,
    *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
+   * @param {boolean} [request.force]
+   *   Optional. If true, deletes all entries in the entry group.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -603,11 +721,14 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Alpha feature.
-   * Creates an entry. Currently only entries of 'FILESET' type can be created.
-   * The user should enable the Data Catalog API in the project identified by
+   * Creates an entry. Only entries of 'FILESET' type or user-specified type can
+   * be created.
+   *
+   * Users should enable the Data Catalog API in the project identified by
    * the `parent` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * A maximum of 100,000 entries may be created per entry group.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -697,7 +818,7 @@ export class DataCatalogClient {
   ): void;
   /**
    * Updates an existing entry.
-   * The user should enable the Data Catalog API in the project identified by
+   * Users should enable the Data Catalog API in the project identified by
    * the `entry.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
@@ -718,6 +839,14 @@ export class DataCatalogClient {
    *      * `description`
    *      * `gcs_fileset_spec`
    *      * `gcs_fileset_spec.file_patterns`
+   *   * For entries with `user_specified_type`
+   *      * `schema`
+   *      * `display_name`
+   *      * `description`
+   *      * user_specified_type
+   *      * user_specified_system
+   *      * linked_resource
+   *      * source_system_timestamps
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -792,11 +921,10 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Alpha feature.
    * Deletes an existing entry. Only entries created through
    * [CreateEntry][google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntry]
    * method can be deleted.
-   * The user should enable the Data Catalog API in the project identified by
+   * Users should enable the Data Catalog API in the project identified by
    * the `name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
@@ -884,11 +1012,6 @@ export class DataCatalogClient {
    *   Required. The name of the entry. Example:
    *
    *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
-   *
-   *   Entry groups are logical groupings of entries. Currently, users cannot
-   *   create/modify entry groups. They are created by Data Catalog; they include
-   *   `@bigquery` for all BigQuery entries, and `@pubsub` for all Cloud Pub/Sub
-   *   entries.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -984,7 +1107,7 @@ export class DataCatalogClient {
    *     * ``pubsub.project_id.`topic.id.with.dots` ``
    *     * `bigquery.table.project_id.dataset_id.table_id`
    *     * `bigquery.dataset.project_id.dataset_id`
-   *     * `datacatalog.project_id.location_id.entry_group_id.entry_id`
+   *     * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
    *
    *   `*_id`s shoud satisfy the standard SQL rules for identifiers.
    *   https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
@@ -1063,13 +1186,13 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project and the location this template is in.
+   *   Required. The name of the project and the template location
+   *   [region](https://cloud.google.com/compute/docs/regions-zones/#available).
+   *   NOTE: Currently, only the `us-central1 region` is supported.
+   *
    *   Example:
    *
-   *   * projects/{project_id}/locations/{location}
-   *
-   *   TagTemplate and its child resources may not actually be stored in the
-   *   location in this name.
+   *   * projects/{project_id}/locations/us-central1
    * @param {string} request.tagTemplateId
    *   Required. The id of the tag template to create.
    * @param {google.cloud.datacatalog.v1beta1.TagTemplate} request.tagTemplate
@@ -1233,7 +1356,7 @@ export class DataCatalogClient {
    * Updates a tag template. This method cannot be used to update the fields of
    * a template. The tag template fields are represented as separate resources
    * and should be updated using their own create/update/delete methods.
-   * The user should enable the Data Catalog API in the project identified by
+   * Users should enable the Data Catalog API in the project identified by
    * the `tag_template.name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
@@ -1324,7 +1447,7 @@ export class DataCatalogClient {
   ): void;
   /**
    * Deletes a tag template and all tags using the template.
-   * The user should enable the Data Catalog API in the project identified by
+   * Users should enable the Data Catalog API in the project identified by
    * the `name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
@@ -1421,12 +1544,13 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project this template is in. Example:
+   *   Required. The name of the project and the template location
+   *   [region](https://cloud.google.com/compute/docs/regions-zones/#available).
+   *   NOTE: Currently, only the `us-central1 region` is supported.
    *
-   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
+   *   Example:
    *
-   *   Note that this TagTemplateField may not actually be stored in the location
-   *   in this name.
+   *   * projects/{project_id}/locations/us-central1/tagTemplates/{tag_template_id}
    * @param {string} request.tagTemplateFieldId
    *   Required. The ID of the tag template field to create.
    *   Field ids can contain letters (both uppercase and lowercase), numbers
@@ -1514,7 +1638,7 @@ export class DataCatalogClient {
   ): void;
   /**
    * Updates a field in a tag template. This method cannot be used to update the
-   * field type. The user should enable the Data Catalog API in the project
+   * field type. Users should enable the Data Catalog API in the project
    * identified by the `name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
@@ -1631,7 +1755,8 @@ export class DataCatalogClient {
    *
    *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    * @param {string} request.newTagTemplateFieldId
-   *   Required. The new ID of this tag template field. For example, `my_new_field`.
+   *   Required. The new ID of this tag template field. For example,
+   *   `my_new_field`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1711,7 +1836,7 @@ export class DataCatalogClient {
   ): void;
   /**
    * Deletes a field in a tag template and all uses of that field.
-   * The user should enable the Data Catalog API in the project identified by
+   * Users should enable the Data Catalog API in the project identified by
    * the `name` parameter (see [Data Catalog Resource Project]
    * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).
    *
@@ -1814,8 +1939,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the resource to attach this tag to. Tags can be attached to
-   *   Entries. Example:
+   *   Required. The name of the resource to attach this tag to. Tags can be
+   *   attached to Entries. Example:
    *
    *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
    *
@@ -2317,10 +2442,10 @@ export class DataCatalogClient {
    * the complete resource, only the resource identifier and high level
    * fields. Clients can subsequentally call `Get` methods.
    *
-   * Note that searches do not have full recall. There may be results that match
-   * your query but are not returned, even in subsequent pages of results. These
-   * missing results may vary across repeated calls to search. Do not rely on
-   * this method if you need to guarantee full recall.
+   * Note that Data Catalog search queries do not guarantee full recall. Query
+   * results that match your query may not be returned, even in subsequent
+   * result pages. Also note that results returned (and not returned) can vary
+   * across repeated search queries.
    *
    * See [Data Catalog Search
    * Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more information.
@@ -2330,7 +2455,8 @@ export class DataCatalogClient {
    * @param {google.cloud.datacatalog.v1beta1.SearchCatalogRequest.Scope} request.scope
    *   Required. The scope of this search request.
    * @param {string} request.query
-   *   Required. The query string in search query syntax. The query must be non-empty.
+   *   Required. The query string in search query syntax. The query must be
+   *   non-empty.
    *
    *   Query strings can be simple as "x" or more qualified as:
    *
@@ -2346,8 +2472,8 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   [SearchCatalogResponse.next_page_token][google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token], which
-   *   indicates that this is a continuation of a prior
+   *   [SearchCatalogResponse.next_page_token][google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token],
+   *   which indicates that this is a continuation of a prior
    *   [SearchCatalogRequest][google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog]
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
@@ -2355,9 +2481,7 @@ export class DataCatalogClient {
    *   Specifies the ordering of results, currently supported case-sensitive
    *   choices are:
    *
-   *     * `relevance`, only supports desecending
-   *     * `last_access_timestamp [asc|desc]`, defaults to descending if not
-   *       specified
+   *     * `relevance`, only supports descending
    *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
    *       specified
    *
@@ -2431,7 +2555,8 @@ export class DataCatalogClient {
    * @param {google.cloud.datacatalog.v1beta1.SearchCatalogRequest.Scope} request.scope
    *   Required. The scope of this search request.
    * @param {string} request.query
-   *   Required. The query string in search query syntax. The query must be non-empty.
+   *   Required. The query string in search query syntax. The query must be
+   *   non-empty.
    *
    *   Query strings can be simple as "x" or more qualified as:
    *
@@ -2447,8 +2572,8 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   [SearchCatalogResponse.next_page_token][google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token], which
-   *   indicates that this is a continuation of a prior
+   *   [SearchCatalogResponse.next_page_token][google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token],
+   *   which indicates that this is a continuation of a prior
    *   [SearchCatalogRequest][google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog]
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
@@ -2456,9 +2581,7 @@ export class DataCatalogClient {
    *   Specifies the ordering of results, currently supported case-sensitive
    *   choices are:
    *
-   *     * `relevance`, only supports desecending
-   *     * `last_access_timestamp [asc|desc]`, defaults to descending if not
-   *       specified
+   *     * `relevance`, only supports descending
    *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
    *       specified
    *
@@ -2470,12 +2593,311 @@ export class DataCatalogClient {
    */
   searchCatalogStream(
     request?: protosTypes.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.searchCatalog.createStream(
       this._innerApiCalls.searchCatalog as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+  listEntryGroups(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup[],
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest | null,
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
+    ]
+  >;
+  listEntryGroups(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup[],
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest | null,
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
+    >
+  ): void;
+  /**
+   * Lists entry groups.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the location that contains the entry groups, which
+   *   can be provided in URL format. Example:
+   *
+   *   * projects/{project_id}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return. Default is 10. Max limit
+   *   is 1000. Throws an invalid argument for `page_size > 1000`.
+   * @param {string} [request.pageToken]
+   *   Optional. Token that specifies which page is requested. If empty, the first
+   *   page is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListEntryGroupsRequest]{@link google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListEntryGroupsResponse]{@link google.cloud.datacatalog.v1beta1.ListEntryGroupsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  listEntryGroups(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup[],
+          protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest | null,
+          protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
+        >,
+    callback?: Callback<
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup[],
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest | null,
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
+    >
+  ): Promise<
+    [
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntryGroup[],
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest | null,
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    return this._innerApiCalls.listEntryGroups(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listEntryGroups}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listEntryGroups} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the location that contains the entry groups, which
+   *   can be provided in URL format. Example:
+   *
+   *   * projects/{project_id}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return. Default is 10. Max limit
+   *   is 1000. Throws an invalid argument for `page_size > 1000`.
+   * @param {string} [request.pageToken]
+   *   Optional. Token that specifies which page is requested. If empty, the first
+   *   page is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup} on 'data' event.
+   */
+  listEntryGroupsStream(
+    request?: protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
+    options?: gax.CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    return this._descriptors.page.listEntryGroups.createStream(
+      this._innerApiCalls.listEntryGroups as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+  listEntries(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntry[],
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest | null,
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesResponse
+    ]
+  >;
+  listEntries(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntry[],
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest | null,
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesResponse
+    >
+  ): void;
+  /**
+   * Lists entries.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the entry group that contains the entries, which can
+   *   be provided in URL format. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   * @param {number} request.pageSize
+   *   The maximum number of items to return. Default is 10. Max limit is 1000.
+   *   Throws an invalid argument for `page_size > 1000`.
+   * @param {string} request.pageToken
+   *   Token that specifies which page is requested. If empty, the first page is
+   *   returned.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   The fields to return for each Entry. If not set or empty, all
+   *   fields are returned.
+   *   For example, setting read_mask to contain only one path "name" will cause
+   *   ListEntries to return a list of Entries with only "name" field.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [Entry]{@link google.cloud.datacatalog.v1beta1.Entry} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListEntriesRequest]{@link google.cloud.datacatalog.v1beta1.ListEntriesRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListEntriesResponse]{@link google.cloud.datacatalog.v1beta1.ListEntriesResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  listEntries(
+    request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.datacatalog.v1beta1.IEntry[],
+          protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest | null,
+          protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesResponse
+        >,
+    callback?: Callback<
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntry[],
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest | null,
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesResponse
+    >
+  ): Promise<
+    [
+      protosTypes.google.cloud.datacatalog.v1beta1.IEntry[],
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest | null,
+      protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    return this._innerApiCalls.listEntries(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listEntries}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listEntries} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the entry group that contains the entries, which can
+   *   be provided in URL format. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   * @param {number} request.pageSize
+   *   The maximum number of items to return. Default is 10. Max limit is 1000.
+   *   Throws an invalid argument for `page_size > 1000`.
+   * @param {string} request.pageToken
+   *   Token that specifies which page is requested. If empty, the first page is
+   *   returned.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   The fields to return for each Entry. If not set or empty, all
+   *   fields are returned.
+   *   For example, setting read_mask to contain only one path "name" will cause
+   *   ListEntries to return a list of Entries with only "name" field.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Entry]{@link google.cloud.datacatalog.v1beta1.Entry} on 'data' event.
+   */
+  listEntriesStream(
+    request?: protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
+    options?: gax.CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    return this._descriptors.page.listEntries.createStream(
+      this._innerApiCalls.listEntries as gax.GaxCall,
       request,
       callSettings
     );
@@ -2506,7 +2928,13 @@ export class DataCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the Data Catalog resource to list the tags of. The
-   *   resource could be an [Entry][google.cloud.datacatalog.v1beta1.Entry].
+   *   resource could be an [Entry][google.cloud.datacatalog.v1beta1.Entry] or an
+   *   [EntryGroup][google.cloud.datacatalog.v1beta1.EntryGroup].
+   *
+   *   Examples:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
    * @param {number} request.pageSize
    *   The maximum number of tags to return. Default is 10. Max limit is 1000.
    * @param {string} request.pageToken
@@ -2587,7 +3015,13 @@ export class DataCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the Data Catalog resource to list the tags of. The
-   *   resource could be an [Entry][google.cloud.datacatalog.v1beta1.Entry].
+   *   resource could be an [Entry][google.cloud.datacatalog.v1beta1.Entry] or an
+   *   [EntryGroup][google.cloud.datacatalog.v1beta1.EntryGroup].
+   *
+   *   Examples:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
    * @param {number} request.pageSize
    *   The maximum number of tags to return. Default is 10. Max limit is 1000.
    * @param {string} request.pageToken
@@ -2600,9 +3034,17 @@ export class DataCatalogClient {
    */
   listTagsStream(
     request?: protosTypes.google.cloud.datacatalog.v1beta1.IListTagsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listTags.createStream(
       this._innerApiCalls.listTags as gax.GaxCall,
@@ -2613,118 +3055,6 @@ export class DataCatalogClient {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
-    });
-  }
-
-  /**
-   * Parse the project from Project resource.
-   *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
-  }
-
-  /**
-   * Return a fully-qualified location resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @returns {string} Resource name string.
-   */
-  locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
-    });
-  }
-
-  /**
-   * Parse the project from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
-  }
-
-  /**
-   * Parse the location from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
-  }
-
-  /**
-   * Return a fully-qualified entryGroup resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} entry_group
-   * @returns {string} Resource name string.
-   */
-  entryGroupPath(project: string, location: string, entryGroup: string) {
-    return this._pathTemplates.entryGroupPathTemplate.render({
-      project,
-      location,
-      entry_group: entryGroup,
-    });
-  }
-
-  /**
-   * Parse the project from EntryGroup resource.
-   *
-   * @param {string} entryGroupName
-   *   A fully-qualified path representing EntryGroup resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEntryGroupName(entryGroupName: string) {
-    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .project;
-  }
-
-  /**
-   * Parse the location from EntryGroup resource.
-   *
-   * @param {string} entryGroupName
-   *   A fully-qualified path representing EntryGroup resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromEntryGroupName(entryGroupName: string) {
-    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .location;
-  }
-
-  /**
-   * Parse the entry_group from EntryGroup resource.
-   *
-   * @param {string} entryGroupName
-   *   A fully-qualified path representing EntryGroup resource.
-   * @returns {string} A string representing the entry_group.
-   */
-  matchEntryGroupFromEntryGroupName(entryGroupName: string) {
-    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .entry_group;
-  }
 
   /**
    * Return a fully-qualified entry resource name string.
@@ -2794,55 +3124,186 @@ export class DataCatalogClient {
   }
 
   /**
-   * Return a fully-qualified tagTemplate resource name string.
+   * Return a fully-qualified entryGroup resource name string.
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} tag_template
+   * @param {string} entry_group
    * @returns {string} Resource name string.
    */
-  tagTemplatePath(project: string, location: string, tagTemplate: string) {
-    return this._pathTemplates.tagTemplatePathTemplate.render({
+  entryGroupPath(project: string, location: string, entryGroup: string) {
+    return this._pathTemplates.entryGroupPathTemplate.render({
       project,
       location,
-      tag_template: tagTemplate,
+      entry_group: entryGroup,
     });
   }
 
   /**
-   * Parse the project from TagTemplate resource.
+   * Parse the project from EntryGroup resource.
    *
-   * @param {string} tagTemplateName
-   *   A fully-qualified path representing TagTemplate resource.
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromTagTemplateName(tagTemplateName: string) {
-    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+  matchProjectFromEntryGroupName(entryGroupName: string) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
       .project;
   }
 
   /**
-   * Parse the location from TagTemplate resource.
+   * Parse the location from EntryGroup resource.
    *
-   * @param {string} tagTemplateName
-   *   A fully-qualified path representing TagTemplate resource.
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTagTemplateName(tagTemplateName: string) {
-    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+  matchLocationFromEntryGroupName(entryGroupName: string) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
       .location;
   }
 
   /**
-   * Parse the tag_template from TagTemplate resource.
+   * Parse the entry_group from EntryGroup resource.
    *
-   * @param {string} tagTemplateName
-   *   A fully-qualified path representing TagTemplate resource.
-   * @returns {string} A string representing the tag_template.
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the entry_group.
    */
-  matchTagTemplateFromTagTemplateName(tagTemplateName: string) {
-    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
-      .tag_template;
+  matchEntryGroupFromEntryGroupName(entryGroupName: string) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .entry_group;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this._pathTemplates.locationPathTemplate.render({
+      project,
+      location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this._pathTemplates.locationPathTemplate.match(locationName)
+      .location;
+  }
+
+  /**
+   * Return a fully-qualified policyTag resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} taxonomy
+   * @param {string} policy_tag
+   * @returns {string} Resource name string.
+   */
+  policyTagPath(
+    project: string,
+    location: string,
+    taxonomy: string,
+    policyTag: string
+  ) {
+    return this._pathTemplates.policyTagPathTemplate.render({
+      project,
+      location,
+      taxonomy,
+      policy_tag: policyTag,
+    });
+  }
+
+  /**
+   * Parse the project from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .location;
+  }
+
+  /**
+   * Parse the taxonomy from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the taxonomy.
+   */
+  matchTaxonomyFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .taxonomy;
+  }
+
+  /**
+   * Parse the policy_tag from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the policy_tag.
+   */
+  matchPolicyTagFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .policy_tag;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -2927,6 +3388,58 @@ export class DataCatalogClient {
   }
 
   /**
+   * Return a fully-qualified tagTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tag_template
+   * @returns {string} Resource name string.
+   */
+  tagTemplatePath(project: string, location: string, tagTemplate: string) {
+    return this._pathTemplates.tagTemplatePathTemplate.render({
+      project,
+      location,
+      tag_template: tagTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from TagTemplate resource.
+   *
+   * @param {string} tagTemplateName
+   *   A fully-qualified path representing TagTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTagTemplateName(tagTemplateName: string) {
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+      .project;
+  }
+
+  /**
+   * Parse the location from TagTemplate resource.
+   *
+   * @param {string} tagTemplateName
+   *   A fully-qualified path representing TagTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTagTemplateName(tagTemplateName: string) {
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+      .location;
+  }
+
+  /**
+   * Parse the tag_template from TagTemplate resource.
+   *
+   * @param {string} tagTemplateName
+   *   A fully-qualified path representing TagTemplate resource.
+   * @returns {string} A string representing the tag_template.
+   */
+  matchTagTemplateFromTagTemplateName(tagTemplateName: string) {
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+      .tag_template;
+  }
+
+  /**
    * Return a fully-qualified tagTemplateField resource name string.
    *
    * @param {string} project
@@ -2999,6 +3512,57 @@ export class DataCatalogClient {
     return this._pathTemplates.tagTemplateFieldPathTemplate.match(
       tagTemplateFieldName
     ).field;
+  }
+
+  /**
+   * Return a fully-qualified taxonomy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} taxonomy
+   * @returns {string} Resource name string.
+   */
+  taxonomyPath(project: string, location: string, taxonomy: string) {
+    return this._pathTemplates.taxonomyPathTemplate.render({
+      project,
+      location,
+      taxonomy,
+    });
+  }
+
+  /**
+   * Parse the project from Taxonomy resource.
+   *
+   * @param {string} taxonomyName
+   *   A fully-qualified path representing Taxonomy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTaxonomyName(taxonomyName: string) {
+    return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName).project;
+  }
+
+  /**
+   * Parse the location from Taxonomy resource.
+   *
+   * @param {string} taxonomyName
+   *   A fully-qualified path representing Taxonomy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTaxonomyName(taxonomyName: string) {
+    return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName)
+      .location;
+  }
+
+  /**
+   * Parse the taxonomy from Taxonomy resource.
+   *
+   * @param {string} taxonomyName
+   *   A fully-qualified path representing Taxonomy resource.
+   * @returns {string} A string representing the taxonomy.
+   */
+  matchTaxonomyFromTaxonomyName(taxonomyName: string) {
+    return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName)
+      .taxonomy;
   }
 
   /**

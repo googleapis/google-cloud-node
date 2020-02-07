@@ -99,6 +99,7 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -123,6 +124,7 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -149,6 +151,7 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -173,6 +176,7 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer

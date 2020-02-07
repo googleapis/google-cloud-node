@@ -142,9 +142,27 @@ export class PolicyTagManagerSerializationClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
+      entryPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
+      ),
+      entryGroupPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}'
+      ),
       locationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      policyTagPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/taxonomies/{taxonomy}/policyTags/{policy_tag}'
+      ),
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
+      tagPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}'
+      ),
+      tagTemplatePathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tagTemplates/{tag_template}'
+      ),
+      tagTemplateFieldPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}'
       ),
       taxonomyPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/taxonomies/{taxonomy}'
@@ -446,26 +464,122 @@ export class PolicyTagManagerSerializationClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified entry resource name string.
    *
    * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @param {string} entry
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
+  entryPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entry: string
+  ) {
+    return this._pathTemplates.entryPathTemplate.render({
       project,
+      location,
+      entry_group: entryGroup,
+      entry,
     });
   }
 
   /**
-   * Parse the project from Project resource.
+   * Parse the project from Entry resource.
    *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  matchProjectFromEntryName(entryName: string) {
+    return this._pathTemplates.entryPathTemplate.match(entryName).project;
+  }
+
+  /**
+   * Parse the location from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryName(entryName: string) {
+    return this._pathTemplates.entryPathTemplate.match(entryName).location;
+  }
+
+  /**
+   * Parse the entry_group from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryName(entryName: string) {
+    return this._pathTemplates.entryPathTemplate.match(entryName).entry_group;
+  }
+
+  /**
+   * Parse the entry from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the entry.
+   */
+  matchEntryFromEntryName(entryName: string) {
+    return this._pathTemplates.entryPathTemplate.match(entryName).entry;
+  }
+
+  /**
+   * Return a fully-qualified entryGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @returns {string} Resource name string.
+   */
+  entryGroupPath(project: string, location: string, entryGroup: string) {
+    return this._pathTemplates.entryGroupPathTemplate.render({
+      project,
+      location,
+      entry_group: entryGroup,
+    });
+  }
+
+  /**
+   * Parse the project from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryGroupName(entryGroupName: string) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryGroupName(entryGroupName: string) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .location;
+  }
+
+  /**
+   * Parse the entry_group from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryGroupName(entryGroupName: string) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .entry_group;
   }
 
   /**
@@ -503,6 +617,308 @@ export class PolicyTagManagerSerializationClient {
   matchLocationFromLocationName(locationName: string) {
     return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
+  }
+
+  /**
+   * Return a fully-qualified policyTag resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} taxonomy
+   * @param {string} policy_tag
+   * @returns {string} Resource name string.
+   */
+  policyTagPath(
+    project: string,
+    location: string,
+    taxonomy: string,
+    policyTag: string
+  ) {
+    return this._pathTemplates.policyTagPathTemplate.render({
+      project,
+      location,
+      taxonomy,
+      policy_tag: policyTag,
+    });
+  }
+
+  /**
+   * Parse the project from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .location;
+  }
+
+  /**
+   * Parse the taxonomy from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the taxonomy.
+   */
+  matchTaxonomyFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .taxonomy;
+  }
+
+  /**
+   * Parse the policy_tag from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the policy_tag.
+   */
+  matchPolicyTagFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .policy_tag;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified tag resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @param {string} entry
+   * @param {string} tag
+   * @returns {string} Resource name string.
+   */
+  tagPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entry: string,
+    tag: string
+  ) {
+    return this._pathTemplates.tagPathTemplate.render({
+      project,
+      location,
+      entry_group: entryGroup,
+      entry,
+      tag,
+    });
+  }
+
+  /**
+   * Parse the project from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTagName(tagName: string) {
+    return this._pathTemplates.tagPathTemplate.match(tagName).project;
+  }
+
+  /**
+   * Parse the location from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTagName(tagName: string) {
+    return this._pathTemplates.tagPathTemplate.match(tagName).location;
+  }
+
+  /**
+   * Parse the entry_group from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromTagName(tagName: string) {
+    return this._pathTemplates.tagPathTemplate.match(tagName).entry_group;
+  }
+
+  /**
+   * Parse the entry from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the entry.
+   */
+  matchEntryFromTagName(tagName: string) {
+    return this._pathTemplates.tagPathTemplate.match(tagName).entry;
+  }
+
+  /**
+   * Parse the tag from Tag resource.
+   *
+   * @param {string} tagName
+   *   A fully-qualified path representing Tag resource.
+   * @returns {string} A string representing the tag.
+   */
+  matchTagFromTagName(tagName: string) {
+    return this._pathTemplates.tagPathTemplate.match(tagName).tag;
+  }
+
+  /**
+   * Return a fully-qualified tagTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tag_template
+   * @returns {string} Resource name string.
+   */
+  tagTemplatePath(project: string, location: string, tagTemplate: string) {
+    return this._pathTemplates.tagTemplatePathTemplate.render({
+      project,
+      location,
+      tag_template: tagTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from TagTemplate resource.
+   *
+   * @param {string} tagTemplateName
+   *   A fully-qualified path representing TagTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTagTemplateName(tagTemplateName: string) {
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+      .project;
+  }
+
+  /**
+   * Parse the location from TagTemplate resource.
+   *
+   * @param {string} tagTemplateName
+   *   A fully-qualified path representing TagTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTagTemplateName(tagTemplateName: string) {
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+      .location;
+  }
+
+  /**
+   * Parse the tag_template from TagTemplate resource.
+   *
+   * @param {string} tagTemplateName
+   *   A fully-qualified path representing TagTemplate resource.
+   * @returns {string} A string representing the tag_template.
+   */
+  matchTagTemplateFromTagTemplateName(tagTemplateName: string) {
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+      .tag_template;
+  }
+
+  /**
+   * Return a fully-qualified tagTemplateField resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tag_template
+   * @param {string} field
+   * @returns {string} Resource name string.
+   */
+  tagTemplateFieldPath(
+    project: string,
+    location: string,
+    tagTemplate: string,
+    field: string
+  ) {
+    return this._pathTemplates.tagTemplateFieldPathTemplate.render({
+      project,
+      location,
+      tag_template: tagTemplate,
+      field,
+    });
+  }
+
+  /**
+   * Parse the project from TagTemplateField resource.
+   *
+   * @param {string} tagTemplateFieldName
+   *   A fully-qualified path representing TagTemplateField resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTagTemplateFieldName(tagTemplateFieldName: string) {
+    return this._pathTemplates.tagTemplateFieldPathTemplate.match(
+      tagTemplateFieldName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TagTemplateField resource.
+   *
+   * @param {string} tagTemplateFieldName
+   *   A fully-qualified path representing TagTemplateField resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTagTemplateFieldName(tagTemplateFieldName: string) {
+    return this._pathTemplates.tagTemplateFieldPathTemplate.match(
+      tagTemplateFieldName
+    ).location;
+  }
+
+  /**
+   * Parse the tag_template from TagTemplateField resource.
+   *
+   * @param {string} tagTemplateFieldName
+   *   A fully-qualified path representing TagTemplateField resource.
+   * @returns {string} A string representing the tag_template.
+   */
+  matchTagTemplateFromTagTemplateFieldName(tagTemplateFieldName: string) {
+    return this._pathTemplates.tagTemplateFieldPathTemplate.match(
+      tagTemplateFieldName
+    ).tag_template;
+  }
+
+  /**
+   * Parse the field from TagTemplateField resource.
+   *
+   * @param {string} tagTemplateFieldName
+   *   A fully-qualified path representing TagTemplateField resource.
+   * @returns {string} A string representing the field.
+   */
+  matchFieldFromTagTemplateFieldName(tagTemplateFieldName: string) {
+    return this._pathTemplates.tagTemplateFieldPathTemplate.match(
+      tagTemplateFieldName
+    ).field;
   }
 
   /**
