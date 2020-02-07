@@ -8,11 +8,10 @@
 [![npm version](https://img.shields.io/npm/v/dialogflow.svg)](https://www.npmjs.org/package/dialogflow)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dialogflow/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dialogflow)
 
+### **_IMPORTANT NOTE_**
+**Version 2.0.0 renames `dialogflow` to `@google-cloud/dialogflow` on npm, along with introducing TypeScript types.**
 
-
-
-Dialogflow API client for Node.js
-
+ Dialogflow API client for Node.js
 
 * [Dialogflow API Node.js Client API Reference][client-docs]
 * [Dialogflow API Documentation][product-docs]
