@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/vision",
   "client_documentation": "https://googleapis.dev/nodejs/vision/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559765",
-  "release_level": "beta",
+  "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-vision",
   "distribution_name": "@google-cloud/vision",
