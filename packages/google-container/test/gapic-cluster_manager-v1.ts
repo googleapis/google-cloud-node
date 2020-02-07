@@ -91,6 +91,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IListClustersRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -113,6 +114,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IListClustersRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -137,6 +139,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IGetClusterRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -159,6 +162,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IGetClusterRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -183,6 +187,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ICreateClusterRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -205,6 +210,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ICreateClusterRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -229,6 +235,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateClusterRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -251,6 +258,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateClusterRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -275,6 +283,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateNodePoolRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -297,6 +306,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateNodePoolRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -321,6 +331,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -343,6 +354,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -367,6 +379,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetLoggingServiceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -389,6 +402,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetLoggingServiceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -413,6 +427,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetMonitoringServiceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -435,6 +450,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetMonitoringServiceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -459,6 +475,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetAddonsConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -481,6 +498,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetAddonsConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -505,6 +523,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetLocationsRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -527,6 +546,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetLocationsRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -551,6 +571,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateMasterRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -573,6 +594,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateMasterRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -597,6 +619,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetMasterAuthRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -619,6 +642,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetMasterAuthRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -643,6 +667,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IDeleteClusterRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -665,6 +690,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IDeleteClusterRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -689,6 +715,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IListOperationsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -711,6 +738,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IListOperationsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -735,6 +763,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IGetOperationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -757,6 +786,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IGetOperationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -781,6 +811,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ICancelOperationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -803,6 +834,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ICancelOperationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -827,6 +859,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IGetServerConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -849,6 +882,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IGetServerConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -873,6 +907,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IListNodePoolsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -895,6 +930,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IListNodePoolsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -919,6 +955,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IGetNodePoolRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -941,6 +978,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IGetNodePoolRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -965,6 +1003,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ICreateNodePoolRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -987,6 +1026,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ICreateNodePoolRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1011,6 +1051,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IDeleteNodePoolRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1033,6 +1074,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IDeleteNodePoolRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1057,6 +1099,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1079,6 +1122,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1106,6 +1150,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolManagementRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1128,6 +1173,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolManagementRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1152,6 +1198,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetLabelsRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1174,6 +1221,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetLabelsRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1198,6 +1246,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetLegacyAbacRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1220,6 +1269,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetLegacyAbacRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1244,6 +1294,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IStartIPRotationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1266,6 +1317,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IStartIPRotationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1290,6 +1342,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ICompleteIPRotationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1312,6 +1365,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ICompleteIPRotationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1336,6 +1390,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolSizeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1358,6 +1413,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolSizeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1382,6 +1438,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetNetworkPolicyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1404,6 +1461,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetNetworkPolicyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1428,6 +1486,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetMaintenancePolicyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1450,6 +1509,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.ISetMaintenancePolicyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1474,6 +1534,7 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IListUsableSubnetworksRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1500,8 +1561,9 @@ describe('v1.ClusterManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.container.v1.IListUsableSubnetworksRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listUsableSubnetworks = (
         actualRequest: {},
@@ -1520,7 +1582,7 @@ describe('v1.ClusterManagerClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

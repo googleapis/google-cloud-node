@@ -3108,9 +3108,17 @@ export class ClusterManagerClient {
    */
   listUsableSubnetworksStream(
     request?: protosTypes.google.container.v1.IListUsableSubnetworksRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listUsableSubnetworks.createStream(
       this._innerApiCalls.listUsableSubnetworks as gax.GaxCall,
