@@ -143,10 +143,10 @@ export class CloudTasksClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
       locationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
       queuePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/queues/{queue}'
       ),
@@ -1679,9 +1679,17 @@ export class CloudTasksClient {
    */
   listQueuesStream(
     request?: protosTypes.google.cloud.tasks.v2beta3.IListQueuesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listQueues.createStream(
       this._innerApiCalls.listQueues as gax.GaxCall,
@@ -1871,9 +1879,17 @@ export class CloudTasksClient {
    */
   listTasksStream(
     request?: protosTypes.google.cloud.tasks.v2beta3.IListTasksRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listTasks.createStream(
       this._innerApiCalls.listTasks as gax.GaxCall,
@@ -1884,29 +1900,6 @@ export class CloudTasksClient {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
-    });
-  }
-
-  /**
-   * Parse the project from Project resource.
-   *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
-  }
 
   /**
    * Return a fully-qualified location resource name string.
@@ -1943,6 +1936,29 @@ export class CloudTasksClient {
   matchLocationFromLocationName(locationName: string) {
     return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**

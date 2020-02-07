@@ -89,6 +89,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -111,6 +112,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -135,6 +137,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -157,6 +160,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -231,6 +235,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -253,6 +258,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -277,6 +283,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -299,6 +306,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -323,6 +331,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -345,6 +354,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -369,6 +379,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -391,6 +402,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -415,6 +427,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -437,6 +450,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -461,6 +475,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -483,6 +498,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -507,6 +523,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -529,6 +546,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -553,6 +571,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -575,6 +594,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -599,6 +619,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -621,6 +642,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -645,6 +667,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -667,6 +690,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -691,6 +715,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -713,6 +738,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -737,6 +763,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -759,6 +786,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -783,6 +811,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -805,6 +834,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -829,6 +859,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -851,6 +882,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -875,6 +907,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -897,6 +930,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -921,6 +955,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -947,8 +982,9 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listQueues = (
         actualRequest: {},
@@ -967,7 +1003,7 @@ describe('v2beta2.CloudTasksClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listTasks', () => {
@@ -978,6 +1014,7 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1004,8 +1041,9 @@ describe('v2beta2.CloudTasksClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listTasks = (
         actualRequest: {},
@@ -1024,7 +1062,7 @@ describe('v2beta2.CloudTasksClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });
