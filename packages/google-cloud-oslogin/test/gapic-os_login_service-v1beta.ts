@@ -91,6 +91,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IDeletePosixAccountRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -113,6 +114,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IDeletePosixAccountRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -137,6 +139,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -159,6 +162,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -183,6 +187,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IGetLoginProfileRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -205,6 +210,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IGetLoginProfileRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -229,6 +235,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -251,6 +258,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -275,6 +283,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -297,6 +306,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -321,6 +331,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -343,6 +354,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
