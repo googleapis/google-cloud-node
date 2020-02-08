@@ -1856,7 +1856,7 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.securitycenter.v1p1beta1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1p1beta1",
-                    "ruby_package": "Google::Cloud::SecurityCenter::V1p1Beta1",
+                    "ruby_package": "Google::Cloud::SecurityCenter::V1p1beta1",
                     "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
                     "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
                   },
