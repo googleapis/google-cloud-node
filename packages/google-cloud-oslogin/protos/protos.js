@@ -807,6 +807,1997 @@
                     return common;
                 })();
     
+                oslogin.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.oslogin
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.OsLoginService = (function() {
+    
+                        /**
+                         * Constructs a new OsLoginService service.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents an OsLoginService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function OsLoginService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (OsLoginService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = OsLoginService;
+    
+                        /**
+                         * Creates new OsLoginService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {OsLoginService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        OsLoginService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService#deletePosixAccount}.
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @typedef DeletePosixAccountCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeletePosixAccount.
+                         * @function deletePosixAccount
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IDeletePosixAccountRequest} request DeletePosixAccountRequest message or plain object
+                         * @param {google.cloud.oslogin.v1.OsLoginService.DeletePosixAccountCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.deletePosixAccount = function deletePosixAccount(request, callback) {
+                            return this.rpcCall(deletePosixAccount, $root.google.cloud.oslogin.v1.DeletePosixAccountRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeletePosixAccount" });
+    
+                        /**
+                         * Calls DeletePosixAccount.
+                         * @function deletePosixAccount
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IDeletePosixAccountRequest} request DeletePosixAccountRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService#deleteSshPublicKey}.
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @typedef DeleteSshPublicKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteSshPublicKey.
+                         * @function deleteSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest} request DeleteSshPublicKeyRequest message or plain object
+                         * @param {google.cloud.oslogin.v1.OsLoginService.DeleteSshPublicKeyCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.deleteSshPublicKey = function deleteSshPublicKey(request, callback) {
+                            return this.rpcCall(deleteSshPublicKey, $root.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteSshPublicKey" });
+    
+                        /**
+                         * Calls DeleteSshPublicKey.
+                         * @function deleteSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest} request DeleteSshPublicKeyRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService#getLoginProfile}.
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @typedef GetLoginProfileCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.oslogin.v1.LoginProfile} [response] LoginProfile
+                         */
+    
+                        /**
+                         * Calls GetLoginProfile.
+                         * @function getLoginProfile
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IGetLoginProfileRequest} request GetLoginProfileRequest message or plain object
+                         * @param {google.cloud.oslogin.v1.OsLoginService.GetLoginProfileCallback} callback Node-style callback called with the error, if any, and LoginProfile
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.getLoginProfile = function getLoginProfile(request, callback) {
+                            return this.rpcCall(getLoginProfile, $root.google.cloud.oslogin.v1.GetLoginProfileRequest, $root.google.cloud.oslogin.v1.LoginProfile, request, callback);
+                        }, "name", { value: "GetLoginProfile" });
+    
+                        /**
+                         * Calls GetLoginProfile.
+                         * @function getLoginProfile
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IGetLoginProfileRequest} request GetLoginProfileRequest message or plain object
+                         * @returns {Promise<google.cloud.oslogin.v1.LoginProfile>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService#getSshPublicKey}.
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @typedef GetSshPublicKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.oslogin.common.SshPublicKey} [response] SshPublicKey
+                         */
+    
+                        /**
+                         * Calls GetSshPublicKey.
+                         * @function getSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IGetSshPublicKeyRequest} request GetSshPublicKeyRequest message or plain object
+                         * @param {google.cloud.oslogin.v1.OsLoginService.GetSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SshPublicKey
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.getSshPublicKey = function getSshPublicKey(request, callback) {
+                            return this.rpcCall(getSshPublicKey, $root.google.cloud.oslogin.v1.GetSshPublicKeyRequest, $root.google.cloud.oslogin.common.SshPublicKey, request, callback);
+                        }, "name", { value: "GetSshPublicKey" });
+    
+                        /**
+                         * Calls GetSshPublicKey.
+                         * @function getSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IGetSshPublicKeyRequest} request GetSshPublicKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.oslogin.common.SshPublicKey>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService#importSshPublicKey}.
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @typedef ImportSshPublicKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.oslogin.v1.ImportSshPublicKeyResponse} [response] ImportSshPublicKeyResponse
+                         */
+    
+                        /**
+                         * Calls ImportSshPublicKey.
+                         * @function importSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyRequest} request ImportSshPublicKeyRequest message or plain object
+                         * @param {google.cloud.oslogin.v1.OsLoginService.ImportSshPublicKeyCallback} callback Node-style callback called with the error, if any, and ImportSshPublicKeyResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.importSshPublicKey = function importSshPublicKey(request, callback) {
+                            return this.rpcCall(importSshPublicKey, $root.google.cloud.oslogin.v1.ImportSshPublicKeyRequest, $root.google.cloud.oslogin.v1.ImportSshPublicKeyResponse, request, callback);
+                        }, "name", { value: "ImportSshPublicKey" });
+    
+                        /**
+                         * Calls ImportSshPublicKey.
+                         * @function importSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyRequest} request ImportSshPublicKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.oslogin.v1.ImportSshPublicKeyResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService#updateSshPublicKey}.
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @typedef UpdateSshPublicKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.oslogin.common.SshPublicKey} [response] SshPublicKey
+                         */
+    
+                        /**
+                         * Calls UpdateSshPublicKey.
+                         * @function updateSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest} request UpdateSshPublicKeyRequest message or plain object
+                         * @param {google.cloud.oslogin.v1.OsLoginService.UpdateSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SshPublicKey
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.updateSshPublicKey = function updateSshPublicKey(request, callback) {
+                            return this.rpcCall(updateSshPublicKey, $root.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest, $root.google.cloud.oslogin.common.SshPublicKey, request, callback);
+                        }, "name", { value: "UpdateSshPublicKey" });
+    
+                        /**
+                         * Calls UpdateSshPublicKey.
+                         * @function updateSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest} request UpdateSshPublicKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.oslogin.common.SshPublicKey>} Promise
+                         * @variation 2
+                         */
+    
+                        return OsLoginService;
+                    })();
+    
+                    v1.LoginProfile = (function() {
+    
+                        /**
+                         * Properties of a LoginProfile.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface ILoginProfile
+                         * @property {string|null} [name] LoginProfile name
+                         * @property {Array.<google.cloud.oslogin.common.IPosixAccount>|null} [posixAccounts] LoginProfile posixAccounts
+                         * @property {Object.<string,google.cloud.oslogin.common.ISshPublicKey>|null} [sshPublicKeys] LoginProfile sshPublicKeys
+                         */
+    
+                        /**
+                         * Constructs a new LoginProfile.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents a LoginProfile.
+                         * @implements ILoginProfile
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.ILoginProfile=} [properties] Properties to set
+                         */
+                        function LoginProfile(properties) {
+                            this.posixAccounts = [];
+                            this.sshPublicKeys = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LoginProfile name.
+                         * @member {string} name
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @instance
+                         */
+                        LoginProfile.prototype.name = "";
+    
+                        /**
+                         * LoginProfile posixAccounts.
+                         * @member {Array.<google.cloud.oslogin.common.IPosixAccount>} posixAccounts
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @instance
+                         */
+                        LoginProfile.prototype.posixAccounts = $util.emptyArray;
+    
+                        /**
+                         * LoginProfile sshPublicKeys.
+                         * @member {Object.<string,google.cloud.oslogin.common.ISshPublicKey>} sshPublicKeys
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @instance
+                         */
+                        LoginProfile.prototype.sshPublicKeys = $util.emptyObject;
+    
+                        /**
+                         * Creates a new LoginProfile instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @static
+                         * @param {google.cloud.oslogin.v1.ILoginProfile=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.LoginProfile} LoginProfile instance
+                         */
+                        LoginProfile.create = function create(properties) {
+                            return new LoginProfile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LoginProfile message. Does not implicitly {@link google.cloud.oslogin.v1.LoginProfile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @static
+                         * @param {google.cloud.oslogin.v1.ILoginProfile} message LoginProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LoginProfile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.posixAccounts != null && message.posixAccounts.length)
+                                for (var i = 0; i < message.posixAccounts.length; ++i)
+                                    $root.google.cloud.oslogin.common.PosixAccount.encode(message.posixAccounts[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.sshPublicKeys != null && message.hasOwnProperty("sshPublicKeys"))
+                                for (var keys = Object.keys(message.sshPublicKeys), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKeys[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LoginProfile message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.LoginProfile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @static
+                         * @param {google.cloud.oslogin.v1.ILoginProfile} message LoginProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LoginProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LoginProfile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.LoginProfile} LoginProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LoginProfile.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.LoginProfile(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.posixAccounts && message.posixAccounts.length))
+                                        message.posixAccounts = [];
+                                    message.posixAccounts.push($root.google.cloud.oslogin.common.PosixAccount.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    reader.skip().pos++;
+                                    if (message.sshPublicKeys === $util.emptyObject)
+                                        message.sshPublicKeys = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.sshPublicKeys[key] = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LoginProfile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.LoginProfile} LoginProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LoginProfile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LoginProfile message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LoginProfile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.posixAccounts != null && message.hasOwnProperty("posixAccounts")) {
+                                if (!Array.isArray(message.posixAccounts))
+                                    return "posixAccounts: array expected";
+                                for (var i = 0; i < message.posixAccounts.length; ++i) {
+                                    var error = $root.google.cloud.oslogin.common.PosixAccount.verify(message.posixAccounts[i]);
+                                    if (error)
+                                        return "posixAccounts." + error;
+                                }
+                            }
+                            if (message.sshPublicKeys != null && message.hasOwnProperty("sshPublicKeys")) {
+                                if (!$util.isObject(message.sshPublicKeys))
+                                    return "sshPublicKeys: object expected";
+                                var key = Object.keys(message.sshPublicKeys);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKeys[key[i]]);
+                                    if (error)
+                                        return "sshPublicKeys." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LoginProfile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.LoginProfile} LoginProfile
+                         */
+                        LoginProfile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.LoginProfile)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.LoginProfile();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.posixAccounts) {
+                                if (!Array.isArray(object.posixAccounts))
+                                    throw TypeError(".google.cloud.oslogin.v1.LoginProfile.posixAccounts: array expected");
+                                message.posixAccounts = [];
+                                for (var i = 0; i < object.posixAccounts.length; ++i) {
+                                    if (typeof object.posixAccounts[i] !== "object")
+                                        throw TypeError(".google.cloud.oslogin.v1.LoginProfile.posixAccounts: object expected");
+                                    message.posixAccounts[i] = $root.google.cloud.oslogin.common.PosixAccount.fromObject(object.posixAccounts[i]);
+                                }
+                            }
+                            if (object.sshPublicKeys) {
+                                if (typeof object.sshPublicKeys !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1.LoginProfile.sshPublicKeys: object expected");
+                                message.sshPublicKeys = {};
+                                for (var keys = Object.keys(object.sshPublicKeys), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.sshPublicKeys[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.oslogin.v1.LoginProfile.sshPublicKeys: object expected");
+                                    message.sshPublicKeys[keys[i]] = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKeys[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LoginProfile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @static
+                         * @param {google.cloud.oslogin.v1.LoginProfile} message LoginProfile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LoginProfile.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.posixAccounts = [];
+                            if (options.objects || options.defaults)
+                                object.sshPublicKeys = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.posixAccounts && message.posixAccounts.length) {
+                                object.posixAccounts = [];
+                                for (var j = 0; j < message.posixAccounts.length; ++j)
+                                    object.posixAccounts[j] = $root.google.cloud.oslogin.common.PosixAccount.toObject(message.posixAccounts[j], options);
+                            }
+                            var keys2;
+                            if (message.sshPublicKeys && (keys2 = Object.keys(message.sshPublicKeys)).length) {
+                                object.sshPublicKeys = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.sshPublicKeys[keys2[j]] = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKeys[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LoginProfile to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.LoginProfile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LoginProfile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return LoginProfile;
+                    })();
+    
+                    v1.DeletePosixAccountRequest = (function() {
+    
+                        /**
+                         * Properties of a DeletePosixAccountRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface IDeletePosixAccountRequest
+                         * @property {string|null} [name] DeletePosixAccountRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeletePosixAccountRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents a DeletePosixAccountRequest.
+                         * @implements IDeletePosixAccountRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.IDeletePosixAccountRequest=} [properties] Properties to set
+                         */
+                        function DeletePosixAccountRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeletePosixAccountRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @instance
+                         */
+                        DeletePosixAccountRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeletePosixAccountRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IDeletePosixAccountRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.DeletePosixAccountRequest} DeletePosixAccountRequest instance
+                         */
+                        DeletePosixAccountRequest.create = function create(properties) {
+                            return new DeletePosixAccountRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePosixAccountRequest message. Does not implicitly {@link google.cloud.oslogin.v1.DeletePosixAccountRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IDeletePosixAccountRequest} message DeletePosixAccountRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePosixAccountRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePosixAccountRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.DeletePosixAccountRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IDeletePosixAccountRequest} message DeletePosixAccountRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePosixAccountRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeletePosixAccountRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.DeletePosixAccountRequest} DeletePosixAccountRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePosixAccountRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.DeletePosixAccountRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeletePosixAccountRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.DeletePosixAccountRequest} DeletePosixAccountRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePosixAccountRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeletePosixAccountRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeletePosixAccountRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeletePosixAccountRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.DeletePosixAccountRequest} DeletePosixAccountRequest
+                         */
+                        DeletePosixAccountRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.DeletePosixAccountRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.DeletePosixAccountRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeletePosixAccountRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.DeletePosixAccountRequest} message DeletePosixAccountRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeletePosixAccountRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeletePosixAccountRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.DeletePosixAccountRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeletePosixAccountRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeletePosixAccountRequest;
+                    })();
+    
+                    v1.DeleteSshPublicKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface IDeleteSshPublicKeyRequest
+                         * @property {string|null} [name] DeleteSshPublicKeyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents a DeleteSshPublicKeyRequest.
+                         * @implements IDeleteSshPublicKeyRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest=} [properties] Properties to set
+                         */
+                        function DeleteSshPublicKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSshPublicKeyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @instance
+                         */
+                        DeleteSshPublicKeyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSshPublicKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.DeleteSshPublicKeyRequest} DeleteSshPublicKeyRequest instance
+                         */
+                        DeleteSshPublicKeyRequest.create = function create(properties) {
+                            return new DeleteSshPublicKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1.DeleteSshPublicKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest} message DeleteSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSshPublicKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.DeleteSshPublicKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest} message DeleteSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSshPublicKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.DeleteSshPublicKeyRequest} DeleteSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSshPublicKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.DeleteSshPublicKeyRequest} DeleteSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSshPublicKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSshPublicKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.DeleteSshPublicKeyRequest} DeleteSshPublicKeyRequest
+                         */
+                        DeleteSshPublicKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSshPublicKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.DeleteSshPublicKeyRequest} message DeleteSshPublicKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSshPublicKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSshPublicKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.DeleteSshPublicKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSshPublicKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteSshPublicKeyRequest;
+                    })();
+    
+                    v1.GetLoginProfileRequest = (function() {
+    
+                        /**
+                         * Properties of a GetLoginProfileRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface IGetLoginProfileRequest
+                         * @property {string|null} [name] GetLoginProfileRequest name
+                         * @property {string|null} [projectId] GetLoginProfileRequest projectId
+                         * @property {string|null} [systemId] GetLoginProfileRequest systemId
+                         */
+    
+                        /**
+                         * Constructs a new GetLoginProfileRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents a GetLoginProfileRequest.
+                         * @implements IGetLoginProfileRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.IGetLoginProfileRequest=} [properties] Properties to set
+                         */
+                        function GetLoginProfileRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetLoginProfileRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @instance
+                         */
+                        GetLoginProfileRequest.prototype.name = "";
+    
+                        /**
+                         * GetLoginProfileRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @instance
+                         */
+                        GetLoginProfileRequest.prototype.projectId = "";
+    
+                        /**
+                         * GetLoginProfileRequest systemId.
+                         * @member {string} systemId
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @instance
+                         */
+                        GetLoginProfileRequest.prototype.systemId = "";
+    
+                        /**
+                         * Creates a new GetLoginProfileRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IGetLoginProfileRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.GetLoginProfileRequest} GetLoginProfileRequest instance
+                         */
+                        GetLoginProfileRequest.create = function create(properties) {
+                            return new GetLoginProfileRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetLoginProfileRequest message. Does not implicitly {@link google.cloud.oslogin.v1.GetLoginProfileRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IGetLoginProfileRequest} message GetLoginProfileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetLoginProfileRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                            if (message.systemId != null && message.hasOwnProperty("systemId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.systemId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetLoginProfileRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.GetLoginProfileRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IGetLoginProfileRequest} message GetLoginProfileRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetLoginProfileRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetLoginProfileRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.GetLoginProfileRequest} GetLoginProfileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetLoginProfileRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.GetLoginProfileRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.systemId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetLoginProfileRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.GetLoginProfileRequest} GetLoginProfileRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetLoginProfileRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetLoginProfileRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetLoginProfileRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.systemId != null && message.hasOwnProperty("systemId"))
+                                if (!$util.isString(message.systemId))
+                                    return "systemId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetLoginProfileRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.GetLoginProfileRequest} GetLoginProfileRequest
+                         */
+                        GetLoginProfileRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.GetLoginProfileRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.GetLoginProfileRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.systemId != null)
+                                message.systemId = String(object.systemId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetLoginProfileRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.GetLoginProfileRequest} message GetLoginProfileRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetLoginProfileRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.projectId = "";
+                                object.systemId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.systemId != null && message.hasOwnProperty("systemId"))
+                                object.systemId = message.systemId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetLoginProfileRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.GetLoginProfileRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetLoginProfileRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetLoginProfileRequest;
+                    })();
+    
+                    v1.GetSshPublicKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface IGetSshPublicKeyRequest
+                         * @property {string|null} [name] GetSshPublicKeyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents a GetSshPublicKeyRequest.
+                         * @implements IGetSshPublicKeyRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.IGetSshPublicKeyRequest=} [properties] Properties to set
+                         */
+                        function GetSshPublicKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSshPublicKeyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @instance
+                         */
+                        GetSshPublicKeyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSshPublicKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IGetSshPublicKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.GetSshPublicKeyRequest} GetSshPublicKeyRequest instance
+                         */
+                        GetSshPublicKeyRequest.create = function create(properties) {
+                            return new GetSshPublicKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1.GetSshPublicKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IGetSshPublicKeyRequest} message GetSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSshPublicKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.GetSshPublicKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IGetSshPublicKeyRequest} message GetSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSshPublicKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.GetSshPublicKeyRequest} GetSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSshPublicKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.GetSshPublicKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.GetSshPublicKeyRequest} GetSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSshPublicKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSshPublicKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.GetSshPublicKeyRequest} GetSshPublicKeyRequest
+                         */
+                        GetSshPublicKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.GetSshPublicKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.GetSshPublicKeyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSshPublicKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.GetSshPublicKeyRequest} message GetSshPublicKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSshPublicKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSshPublicKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.GetSshPublicKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSshPublicKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetSshPublicKeyRequest;
+                    })();
+    
+                    v1.ImportSshPublicKeyRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface IImportSshPublicKeyRequest
+                         * @property {string|null} [parent] ImportSshPublicKeyRequest parent
+                         * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] ImportSshPublicKeyRequest sshPublicKey
+                         * @property {string|null} [projectId] ImportSshPublicKeyRequest projectId
+                         */
+    
+                        /**
+                         * Constructs a new ImportSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents an ImportSshPublicKeyRequest.
+                         * @implements IImportSshPublicKeyRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyRequest=} [properties] Properties to set
+                         */
+                        function ImportSshPublicKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportSshPublicKeyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @instance
+                         */
+                        ImportSshPublicKeyRequest.prototype.parent = "";
+    
+                        /**
+                         * ImportSshPublicKeyRequest sshPublicKey.
+                         * @member {google.cloud.oslogin.common.ISshPublicKey|null|undefined} sshPublicKey
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @instance
+                         */
+                        ImportSshPublicKeyRequest.prototype.sshPublicKey = null;
+    
+                        /**
+                         * ImportSshPublicKeyRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @instance
+                         */
+                        ImportSshPublicKeyRequest.prototype.projectId = "";
+    
+                        /**
+                         * Creates a new ImportSshPublicKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.ImportSshPublicKeyRequest} ImportSshPublicKeyRequest instance
+                         */
+                        ImportSshPublicKeyRequest.create = function create(properties) {
+                            return new ImportSshPublicKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1.ImportSshPublicKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyRequest} message ImportSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportSshPublicKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
+                                $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.ImportSshPublicKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyRequest} message ImportSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportSshPublicKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.ImportSshPublicKeyRequest} ImportSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportSshPublicKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.ImportSshPublicKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.projectId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.ImportSshPublicKeyRequest} ImportSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportSshPublicKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportSshPublicKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey")) {
+                                var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKey);
+                                if (error)
+                                    return "sshPublicKey." + error;
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.ImportSshPublicKeyRequest} ImportSshPublicKeyRequest
+                         */
+                        ImportSshPublicKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.ImportSshPublicKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.ImportSshPublicKeyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.sshPublicKey != null) {
+                                if (typeof object.sshPublicKey !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1.ImportSshPublicKeyRequest.sshPublicKey: object expected");
+                                message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKey);
+                            }
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportSshPublicKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.ImportSshPublicKeyRequest} message ImportSshPublicKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportSshPublicKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.sshPublicKey = null;
+                                object.projectId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
+                                object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportSshPublicKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportSshPublicKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportSshPublicKeyRequest;
+                    })();
+    
+                    v1.ImportSshPublicKeyResponse = (function() {
+    
+                        /**
+                         * Properties of an ImportSshPublicKeyResponse.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface IImportSshPublicKeyResponse
+                         * @property {google.cloud.oslogin.v1.ILoginProfile|null} [loginProfile] ImportSshPublicKeyResponse loginProfile
+                         */
+    
+                        /**
+                         * Constructs a new ImportSshPublicKeyResponse.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents an ImportSshPublicKeyResponse.
+                         * @implements IImportSshPublicKeyResponse
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyResponse=} [properties] Properties to set
+                         */
+                        function ImportSshPublicKeyResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportSshPublicKeyResponse loginProfile.
+                         * @member {google.cloud.oslogin.v1.ILoginProfile|null|undefined} loginProfile
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @instance
+                         */
+                        ImportSshPublicKeyResponse.prototype.loginProfile = null;
+    
+                        /**
+                         * Creates a new ImportSshPublicKeyResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyResponse=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.ImportSshPublicKeyResponse} ImportSshPublicKeyResponse instance
+                         */
+                        ImportSshPublicKeyResponse.create = function create(properties) {
+                            return new ImportSshPublicKeyResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportSshPublicKeyResponse message. Does not implicitly {@link google.cloud.oslogin.v1.ImportSshPublicKeyResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyResponse} message ImportSshPublicKeyResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportSshPublicKeyResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.loginProfile != null && message.hasOwnProperty("loginProfile"))
+                                $root.google.cloud.oslogin.v1.LoginProfile.encode(message.loginProfile, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportSshPublicKeyResponse message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.ImportSshPublicKeyResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IImportSshPublicKeyResponse} message ImportSshPublicKeyResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportSshPublicKeyResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportSshPublicKeyResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.ImportSshPublicKeyResponse} ImportSshPublicKeyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportSshPublicKeyResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.ImportSshPublicKeyResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.loginProfile = $root.google.cloud.oslogin.v1.LoginProfile.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportSshPublicKeyResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.ImportSshPublicKeyResponse} ImportSshPublicKeyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportSshPublicKeyResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportSshPublicKeyResponse message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportSshPublicKeyResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.loginProfile != null && message.hasOwnProperty("loginProfile")) {
+                                var error = $root.google.cloud.oslogin.v1.LoginProfile.verify(message.loginProfile);
+                                if (error)
+                                    return "loginProfile." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportSshPublicKeyResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.ImportSshPublicKeyResponse} ImportSshPublicKeyResponse
+                         */
+                        ImportSshPublicKeyResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.ImportSshPublicKeyResponse)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.ImportSshPublicKeyResponse();
+                            if (object.loginProfile != null) {
+                                if (typeof object.loginProfile !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1.ImportSshPublicKeyResponse.loginProfile: object expected");
+                                message.loginProfile = $root.google.cloud.oslogin.v1.LoginProfile.fromObject(object.loginProfile);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportSshPublicKeyResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @static
+                         * @param {google.cloud.oslogin.v1.ImportSshPublicKeyResponse} message ImportSshPublicKeyResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportSshPublicKeyResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.loginProfile = null;
+                            if (message.loginProfile != null && message.hasOwnProperty("loginProfile"))
+                                object.loginProfile = $root.google.cloud.oslogin.v1.LoginProfile.toObject(message.loginProfile, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportSshPublicKeyResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportSshPublicKeyResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportSshPublicKeyResponse;
+                    })();
+    
+                    v1.UpdateSshPublicKeyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface IUpdateSshPublicKeyRequest
+                         * @property {string|null} [name] UpdateSshPublicKeyRequest name
+                         * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] UpdateSshPublicKeyRequest sshPublicKey
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSshPublicKeyRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents an UpdateSshPublicKeyRequest.
+                         * @implements IUpdateSshPublicKeyRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest=} [properties] Properties to set
+                         */
+                        function UpdateSshPublicKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSshPublicKeyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @instance
+                         */
+                        UpdateSshPublicKeyRequest.prototype.name = "";
+    
+                        /**
+                         * UpdateSshPublicKeyRequest sshPublicKey.
+                         * @member {google.cloud.oslogin.common.ISshPublicKey|null|undefined} sshPublicKey
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @instance
+                         */
+                        UpdateSshPublicKeyRequest.prototype.sshPublicKey = null;
+    
+                        /**
+                         * UpdateSshPublicKeyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @instance
+                         */
+                        UpdateSshPublicKeyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateSshPublicKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.UpdateSshPublicKeyRequest} UpdateSshPublicKeyRequest instance
+                         */
+                        UpdateSshPublicKeyRequest.create = function create(properties) {
+                            return new UpdateSshPublicKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1.UpdateSshPublicKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest} message UpdateSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSshPublicKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
+                                $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.UpdateSshPublicKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest} message UpdateSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSshPublicKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.UpdateSshPublicKeyRequest} UpdateSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSshPublicKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.UpdateSshPublicKeyRequest} UpdateSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSshPublicKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSshPublicKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey")) {
+                                var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKey);
+                                if (error)
+                                    return "sshPublicKey." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.UpdateSshPublicKeyRequest} UpdateSshPublicKeyRequest
+                         */
+                        UpdateSshPublicKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.sshPublicKey != null) {
+                                if (typeof object.sshPublicKey !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1.UpdateSshPublicKeyRequest.sshPublicKey: object expected");
+                                message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKey);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1.UpdateSshPublicKeyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSshPublicKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.UpdateSshPublicKeyRequest} message UpdateSshPublicKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSshPublicKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.sshPublicKey = null;
+                                object.updateMask = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
+                                object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSshPublicKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.UpdateSshPublicKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSshPublicKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateSshPublicKeyRequest;
+                    })();
+    
+                    return v1;
+                })();
+    
                 oslogin.v1beta = (function() {
     
                     /**

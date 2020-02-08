@@ -16,11 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta from './v1beta';
-import * as v1 from './v1';
-
-const OsLoginServiceClient = v1.OsLoginServiceClient;
-export {v1beta, v1, OsLoginServiceClient};
-// For compatibility with JavaScript libraries we need to provide this default export:
-// tslint:disable-next-line no-default-export
-export default {v1beta, v1, OsLoginServiceClient};
+export {OsLoginServiceClient} from './os_login_service_client';

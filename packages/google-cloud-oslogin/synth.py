@@ -22,7 +22,7 @@ import subprocess
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v1beta']
+versions = ['v1beta', 'v1']
 for version in versions:
     library = gapic.typescript_library(
         'os-login', 
