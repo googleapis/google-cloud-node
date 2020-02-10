@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.7.2](https://www.github.com/googleapis/nodejs-language/compare/v3.7.1...v3.7.2) (2020-02-10)
+
+
+### Bug Fixes
+
+* adds encodingType to analyzeSyntax* sampless ([#364](https://www.github.com/googleapis/nodejs-language/issues/364)) ([5bb849a](https://www.github.com/googleapis/nodejs-language/commit/5bb849a3a563f4d138e280b87a5b5ae1069e7a00))
+
 ### [3.7.1](https://www.github.com/googleapis/nodejs-language/compare/v3.7.0...v3.7.1) (2020-01-29)
 
 
