@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.4.1...v1.4.2) (2020-02-10)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([e4e78e6](https://www.github.com/googleapis/nodejs-datalabeling/commit/e4e78e69090103a81bea41d6a48040e1803bd924))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.4.0...v1.4.1) (2020-01-31)
 
 
