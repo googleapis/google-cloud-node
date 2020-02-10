@@ -660,7 +660,7 @@ export namespace google {
                     pageToken?: (string|null);
 
                     /** ListCryptoKeysRequest versionView */
-                    versionView?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView|null);
+                    versionView?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView|null);
 
                     /** ListCryptoKeysRequest filter */
                     filter?: (string|null);
@@ -688,7 +688,7 @@ export namespace google {
                     public pageToken: string;
 
                     /** ListCryptoKeysRequest versionView. */
-                    public versionView: google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView;
+                    public versionView: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView);
 
                     /** ListCryptoKeysRequest filter. */
                     public filter: string;
@@ -780,7 +780,7 @@ export namespace google {
                     pageToken?: (string|null);
 
                     /** ListCryptoKeyVersionsRequest view */
-                    view?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView|null);
+                    view?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView|null);
 
                     /** ListCryptoKeyVersionsRequest filter */
                     filter?: (string|null);
@@ -808,7 +808,7 @@ export namespace google {
                     public pageToken: string;
 
                     /** ListCryptoKeyVersionsRequest view. */
-                    public view: google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView;
+                    public view: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView);
 
                     /** ListCryptoKeyVersionsRequest filter. */
                     public filter: string;
@@ -2172,13 +2172,13 @@ export namespace google {
                     parent?: (string|null);
 
                     /** ImportCryptoKeyVersionRequest algorithm */
-                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
+                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
 
                     /** ImportCryptoKeyVersionRequest importJob */
                     importJob?: (string|null);
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey */
-                    rsaAesWrappedKey?: (Uint8Array|null);
+                    rsaAesWrappedKey?: (Uint8Array|string|null);
                 }
 
                 /** Represents an ImportCryptoKeyVersionRequest. */
@@ -2194,13 +2194,13 @@ export namespace google {
                     public parent: string;
 
                     /** ImportCryptoKeyVersionRequest algorithm. */
-                    public algorithm: google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm;
+                    public algorithm: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm);
 
                     /** ImportCryptoKeyVersionRequest importJob. */
                     public importJob: string;
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey. */
-                    public rsaAesWrappedKey: Uint8Array;
+                    public rsaAesWrappedKey: (Uint8Array|string);
 
                     /** ImportCryptoKeyVersionRequest wrappedKeyMaterial. */
                     public wrappedKeyMaterial?: "rsaAesWrappedKey";
@@ -2577,10 +2577,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** EncryptRequest plaintext */
-                    plaintext?: (Uint8Array|null);
+                    plaintext?: (Uint8Array|string|null);
 
                     /** EncryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|null);
+                    additionalAuthenticatedData?: (Uint8Array|string|null);
                 }
 
                 /** Represents an EncryptRequest. */
@@ -2596,10 +2596,10 @@ export namespace google {
                     public name: string;
 
                     /** EncryptRequest plaintext. */
-                    public plaintext: Uint8Array;
+                    public plaintext: (Uint8Array|string);
 
                     /** EncryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: Uint8Array;
+                    public additionalAuthenticatedData: (Uint8Array|string);
 
                     /**
                      * Creates a new EncryptRequest instance using the specified properties.
@@ -2679,10 +2679,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** DecryptRequest ciphertext */
-                    ciphertext?: (Uint8Array|null);
+                    ciphertext?: (Uint8Array|string|null);
 
                     /** DecryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|null);
+                    additionalAuthenticatedData?: (Uint8Array|string|null);
                 }
 
                 /** Represents a DecryptRequest. */
@@ -2698,10 +2698,10 @@ export namespace google {
                     public name: string;
 
                     /** DecryptRequest ciphertext. */
-                    public ciphertext: Uint8Array;
+                    public ciphertext: (Uint8Array|string);
 
                     /** DecryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: Uint8Array;
+                    public additionalAuthenticatedData: (Uint8Array|string);
 
                     /**
                      * Creates a new DecryptRequest instance using the specified properties.
@@ -2877,7 +2877,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** AsymmetricDecryptRequest ciphertext */
-                    ciphertext?: (Uint8Array|null);
+                    ciphertext?: (Uint8Array|string|null);
                 }
 
                 /** Represents an AsymmetricDecryptRequest. */
@@ -2893,7 +2893,7 @@ export namespace google {
                     public name: string;
 
                     /** AsymmetricDecryptRequest ciphertext. */
-                    public ciphertext: Uint8Array;
+                    public ciphertext: (Uint8Array|string);
 
                     /**
                      * Creates a new AsymmetricDecryptRequest instance using the specified properties.
@@ -2970,7 +2970,7 @@ export namespace google {
                 interface IDecryptResponse {
 
                     /** DecryptResponse plaintext */
-                    plaintext?: (Uint8Array|null);
+                    plaintext?: (Uint8Array|string|null);
                 }
 
                 /** Represents a DecryptResponse. */
@@ -2983,7 +2983,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IDecryptResponse);
 
                     /** DecryptResponse plaintext. */
-                    public plaintext: Uint8Array;
+                    public plaintext: (Uint8Array|string);
 
                     /**
                      * Creates a new DecryptResponse instance using the specified properties.
@@ -3063,7 +3063,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** EncryptResponse ciphertext */
-                    ciphertext?: (Uint8Array|null);
+                    ciphertext?: (Uint8Array|string|null);
                 }
 
                 /** Represents an EncryptResponse. */
@@ -3079,7 +3079,7 @@ export namespace google {
                     public name: string;
 
                     /** EncryptResponse ciphertext. */
-                    public ciphertext: Uint8Array;
+                    public ciphertext: (Uint8Array|string);
 
                     /**
                      * Creates a new EncryptResponse instance using the specified properties.
@@ -3156,7 +3156,7 @@ export namespace google {
                 interface IAsymmetricSignResponse {
 
                     /** AsymmetricSignResponse signature */
-                    signature?: (Uint8Array|null);
+                    signature?: (Uint8Array|string|null);
                 }
 
                 /** Represents an AsymmetricSignResponse. */
@@ -3169,7 +3169,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IAsymmetricSignResponse);
 
                     /** AsymmetricSignResponse signature. */
-                    public signature: Uint8Array;
+                    public signature: (Uint8Array|string);
 
                     /**
                      * Creates a new AsymmetricSignResponse instance using the specified properties.
@@ -3246,7 +3246,7 @@ export namespace google {
                 interface IAsymmetricDecryptResponse {
 
                     /** AsymmetricDecryptResponse plaintext */
-                    plaintext?: (Uint8Array|null);
+                    plaintext?: (Uint8Array|string|null);
                 }
 
                 /** Represents an AsymmetricDecryptResponse. */
@@ -3259,7 +3259,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IAsymmetricDecryptResponse);
 
                     /** AsymmetricDecryptResponse plaintext. */
-                    public plaintext: Uint8Array;
+                    public plaintext: (Uint8Array|string);
 
                     /**
                      * Creates a new AsymmetricDecryptResponse instance using the specified properties.
@@ -3612,13 +3612,13 @@ export namespace google {
                 interface IDigest {
 
                     /** Digest sha256 */
-                    sha256?: (Uint8Array|null);
+                    sha256?: (Uint8Array|string|null);
 
                     /** Digest sha384 */
-                    sha384?: (Uint8Array|null);
+                    sha384?: (Uint8Array|string|null);
 
                     /** Digest sha512 */
-                    sha512?: (Uint8Array|null);
+                    sha512?: (Uint8Array|string|null);
                 }
 
                 /** Represents a Digest. */
@@ -3631,13 +3631,13 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IDigest);
 
                     /** Digest sha256. */
-                    public sha256: Uint8Array;
+                    public sha256: (Uint8Array|string);
 
                     /** Digest sha384. */
-                    public sha384: Uint8Array;
+                    public sha384: (Uint8Array|string);
 
                     /** Digest sha512. */
-                    public sha512: Uint8Array;
+                    public sha512: (Uint8Array|string);
 
                     /** Digest digest. */
                     public digest?: ("sha256"|"sha384"|"sha512");
@@ -3909,7 +3909,7 @@ export namespace google {
                     primary?: (google.cloud.kms.v1.ICryptoKeyVersion|null);
 
                     /** CryptoKey purpose */
-                    purpose?: (google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose|null);
+                    purpose?: (google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose|keyof typeof google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose|null);
 
                     /** CryptoKey createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -3943,7 +3943,7 @@ export namespace google {
                     public primary?: (google.cloud.kms.v1.ICryptoKeyVersion|null);
 
                     /** CryptoKey purpose. */
-                    public purpose: google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose;
+                    public purpose: (google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose|keyof typeof google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose);
 
                     /** CryptoKey createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -4049,10 +4049,10 @@ export namespace google {
                 interface ICryptoKeyVersionTemplate {
 
                     /** CryptoKeyVersionTemplate protectionLevel */
-                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|null);
+                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel|null);
 
                     /** CryptoKeyVersionTemplate algorithm */
-                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
+                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
                 }
 
                 /** Represents a CryptoKeyVersionTemplate. */
@@ -4065,10 +4065,10 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.ICryptoKeyVersionTemplate);
 
                     /** CryptoKeyVersionTemplate protectionLevel. */
-                    public protectionLevel: google.cloud.kms.v1.ProtectionLevel;
+                    public protectionLevel: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel);
 
                     /** CryptoKeyVersionTemplate algorithm. */
-                    public algorithm: google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm;
+                    public algorithm: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm);
 
                     /**
                      * Creates a new CryptoKeyVersionTemplate instance using the specified properties.
@@ -4145,10 +4145,10 @@ export namespace google {
                 interface IKeyOperationAttestation {
 
                     /** KeyOperationAttestation format */
-                    format?: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|null);
+                    format?: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|null);
 
                     /** KeyOperationAttestation content */
-                    content?: (Uint8Array|null);
+                    content?: (Uint8Array|string|null);
                 }
 
                 /** Represents a KeyOperationAttestation. */
@@ -4161,10 +4161,10 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IKeyOperationAttestation);
 
                     /** KeyOperationAttestation format. */
-                    public format: google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat;
+                    public format: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat);
 
                     /** KeyOperationAttestation content. */
-                    public content: Uint8Array;
+                    public content: (Uint8Array|string);
 
                     /**
                      * Creates a new KeyOperationAttestation instance using the specified properties.
@@ -4254,13 +4254,13 @@ export namespace google {
                     name?: (string|null);
 
                     /** CryptoKeyVersion state */
-                    state?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState|null);
+                    state?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState|null);
 
                     /** CryptoKeyVersion protectionLevel */
-                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|null);
+                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel|null);
 
                     /** CryptoKeyVersion algorithm */
-                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
+                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
 
                     /** CryptoKeyVersion attestation */
                     attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
@@ -4300,13 +4300,13 @@ export namespace google {
                     public name: string;
 
                     /** CryptoKeyVersion state. */
-                    public state: google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState;
+                    public state: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState);
 
                     /** CryptoKeyVersion protectionLevel. */
-                    public protectionLevel: google.cloud.kms.v1.ProtectionLevel;
+                    public protectionLevel: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel);
 
                     /** CryptoKeyVersion algorithm. */
-                    public algorithm: google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm;
+                    public algorithm: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm);
 
                     /** CryptoKeyVersion attestation. */
                     public attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
@@ -4451,7 +4451,7 @@ export namespace google {
                     pem?: (string|null);
 
                     /** PublicKey algorithm */
-                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
+                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
                 }
 
                 /** Represents a PublicKey. */
@@ -4467,7 +4467,7 @@ export namespace google {
                     public pem: string;
 
                     /** PublicKey algorithm. */
-                    public algorithm: google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm;
+                    public algorithm: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm);
 
                     /**
                      * Creates a new PublicKey instance using the specified properties.
@@ -4547,10 +4547,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** ImportJob importMethod */
-                    importMethod?: (google.cloud.kms.v1.ImportJob.ImportMethod|null);
+                    importMethod?: (google.cloud.kms.v1.ImportJob.ImportMethod|keyof typeof google.cloud.kms.v1.ImportJob.ImportMethod|null);
 
                     /** ImportJob protectionLevel */
-                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|null);
+                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel|null);
 
                     /** ImportJob createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -4565,7 +4565,7 @@ export namespace google {
                     expireEventTime?: (google.protobuf.ITimestamp|null);
 
                     /** ImportJob state */
-                    state?: (google.cloud.kms.v1.ImportJob.ImportJobState|null);
+                    state?: (google.cloud.kms.v1.ImportJob.ImportJobState|keyof typeof google.cloud.kms.v1.ImportJob.ImportJobState|null);
 
                     /** ImportJob publicKey */
                     publicKey?: (google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null);
@@ -4587,10 +4587,10 @@ export namespace google {
                     public name: string;
 
                     /** ImportJob importMethod. */
-                    public importMethod: google.cloud.kms.v1.ImportJob.ImportMethod;
+                    public importMethod: (google.cloud.kms.v1.ImportJob.ImportMethod|keyof typeof google.cloud.kms.v1.ImportJob.ImportMethod);
 
                     /** ImportJob protectionLevel. */
-                    public protectionLevel: google.cloud.kms.v1.ProtectionLevel;
+                    public protectionLevel: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel);
 
                     /** ImportJob createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -4605,7 +4605,7 @@ export namespace google {
                     public expireEventTime?: (google.protobuf.ITimestamp|null);
 
                     /** ImportJob state. */
-                    public state: google.cloud.kms.v1.ImportJob.ImportJobState;
+                    public state: (google.cloud.kms.v1.ImportJob.ImportJobState|keyof typeof google.cloud.kms.v1.ImportJob.ImportJobState);
 
                     /** ImportJob publicKey. */
                     public publicKey?: (google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null);
@@ -5168,7 +5168,7 @@ export namespace google {
             nameField?: (string|null);
 
             /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|null);
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
 
             /** ResourceDescriptor plural */
             plural?: (string|null);
@@ -5196,7 +5196,7 @@ export namespace google {
             public nameField: string;
 
             /** ResourceDescriptor history. */
-            public history: google.api.ResourceDescriptor.History;
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
 
             /** ResourceDescriptor plural. */
             public plural: string;
@@ -6076,10 +6076,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -6116,10 +6116,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -6894,7 +6894,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -6970,7 +6970,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -7219,13 +7219,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -7256,13 +7256,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -7761,7 +7761,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -7786,7 +7786,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7882,16 +7882,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -7913,16 +7913,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -8509,7 +8509,7 @@ export namespace google {
         interface IDuration {
 
             /** Duration seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Duration nanos */
             nanos?: (number|null);
@@ -8525,7 +8525,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IDuration);
 
             /** Duration seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Duration nanos. */
             public nanos: number;
@@ -8605,7 +8605,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -8621,7 +8621,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
@@ -9263,7 +9263,7 @@ export namespace google {
                 bindings?: (google.iam.v1.IBinding[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|null);
+                etag?: (Uint8Array|string|null);
             }
 
             /** Represents a Policy. */
@@ -9282,7 +9282,7 @@ export namespace google {
                 public bindings: google.iam.v1.IBinding[];
 
                 /** Policy etag. */
-                public etag: Uint8Array;
+                public etag: (Uint8Array|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.
@@ -9557,7 +9557,7 @@ export namespace google {
             interface IBindingDelta {
 
                 /** BindingDelta action */
-                action?: (google.iam.v1.BindingDelta.Action|null);
+                action?: (google.iam.v1.BindingDelta.Action|keyof typeof google.iam.v1.BindingDelta.Action|null);
 
                 /** BindingDelta role */
                 role?: (string|null);
@@ -9579,7 +9579,7 @@ export namespace google {
                 constructor(properties?: google.iam.v1.IBindingDelta);
 
                 /** BindingDelta action. */
-                public action: google.iam.v1.BindingDelta.Action;
+                public action: (google.iam.v1.BindingDelta.Action|keyof typeof google.iam.v1.BindingDelta.Action);
 
                 /** BindingDelta role. */
                 public role: string;
@@ -9675,7 +9675,7 @@ export namespace google {
             interface IAuditConfigDelta {
 
                 /** AuditConfigDelta action */
-                action?: (google.iam.v1.AuditConfigDelta.Action|null);
+                action?: (google.iam.v1.AuditConfigDelta.Action|keyof typeof google.iam.v1.AuditConfigDelta.Action|null);
 
                 /** AuditConfigDelta service */
                 service?: (string|null);
@@ -9697,7 +9697,7 @@ export namespace google {
                 constructor(properties?: google.iam.v1.IAuditConfigDelta);
 
                 /** AuditConfigDelta action. */
-                public action: google.iam.v1.AuditConfigDelta.Action;
+                public action: (google.iam.v1.AuditConfigDelta.Action|keyof typeof google.iam.v1.AuditConfigDelta.Action);
 
                 /** AuditConfigDelta service. */
                 public service: string;
