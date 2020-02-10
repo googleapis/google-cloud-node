@@ -1,0 +1,13 @@
+{
+  "name": "game-servers",
+  "name_pretty": "Google Cloud Game Servers",
+  "product_documentation": "https://cloud.google.com/game-servers/",
+  "client_documentation": "https://googleapis.dev/nodejs/game-services/latest",
+  "issue_tracker": "",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-game-servers",
+  "distribution_name": "@google-cloud/game-servers",
+  "api_id": "gameservices.googleapis.com",
+  "requires_billing": true
+}
