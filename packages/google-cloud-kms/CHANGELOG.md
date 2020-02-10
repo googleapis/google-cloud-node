@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [1.6.3](https://www.github.com/googleapis/nodejs-kms/compare/v1.6.2...v1.6.3) (2020-02-10)
+
+
+### Bug Fixes
+
+* proto messages now accept strings for enums ([b5241d9](https://www.github.com/googleapis/nodejs-kms/commit/b5241d9748864344e68f088d92f59a4fb7032afd))
+
 ### [1.6.2](https://www.github.com/googleapis/nodejs-kms/compare/v1.6.1...v1.6.2) (2020-01-09)
 
 
