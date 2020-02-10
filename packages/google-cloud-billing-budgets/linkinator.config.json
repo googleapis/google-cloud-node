@@ -1,3 +1,8 @@
 {
-  "recurse": true
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io"
+  ]
 }

@@ -32,16 +32,12 @@ for version in versions:
     },
     proto_path=f"google/cloud/billing/budgets/{version}",
     version=version)
-  s.copy(library, excludes=[
-    'README.md',
-    'package.json',
-    'webpack.config.js',
-    'linkinator.config.json'])
+  s.copy(library, excludes=['README.md','package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, excludes=[])
+s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
