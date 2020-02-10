@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.0.2...v1.0.3) (2020-02-10)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([5fdd326](https://www.github.com/googleapis/nodejs-billing-budgets/commit/5fdd326b3e56fbaa162f330b805e008591ad1105))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.0.1...v1.0.2) (2020-01-28)
 
 
