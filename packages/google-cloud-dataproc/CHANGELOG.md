@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.5.0...v1.6.0) (2020-02-10)
+
+
+### Features
+
+* AutoscalingPolicyServiceClient added ([82d983a](https://www.github.com/googleapis/nodejs-dataproc/commit/82d983a564a3e1af87de32d9f07f46790152f76d))
+* bump release level to GA ([#304](https://www.github.com/googleapis/nodejs-dataproc/issues/304)) ([4d9edd1](https://www.github.com/googleapis/nodejs-dataproc/commit/4d9edd19bfef9cf0cbed7ae8864252e2247bc853))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.7...v1.5.0) (2020-02-04)
 
 
