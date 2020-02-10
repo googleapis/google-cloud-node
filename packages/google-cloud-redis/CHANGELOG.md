@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.5.1...v1.6.0) (2020-02-10)
+
+
+### Features
+
+* upgradeInstance added in v1beta1; pass x-goog-request-params header for streaming calls ([6c617fe](https://www.github.com/googleapis/nodejs-redis/commit/6c617fe2bf5c8807be010c664adb45024db94b72))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-redis/compare/v1.5.0...v1.5.1) (2020-02-04)
 
 
