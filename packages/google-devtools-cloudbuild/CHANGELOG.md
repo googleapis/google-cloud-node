@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.3](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.3.2...v1.3.3) (2020-02-10)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([365842b](https://www.github.com/googleapis/nodejs-cloudbuild/commit/365842beb7e0ceee9f5861d4172f5de076335902))
+
 ### [1.3.2](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.3.1...v1.3.2) (2020-01-28)
 
 

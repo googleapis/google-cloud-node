@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-cloudbuild",
   "name": "@google-cloud/cloudbuild",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "author": "Google LLC",
   "description": "Cloud Build API client for Node.js",
   "main": "build/src/index.js",
