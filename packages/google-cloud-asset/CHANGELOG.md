@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-asset/compare/v2.0.0...v2.0.1) (2020-02-10)
+
+
+### Bug Fixes
+
+* useless path template methods removed ([af1c939](https://www.github.com/googleapis/nodejs-asset/commit/af1c9398a284e62346758a1ce29f88e5f6692e67))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.6.1...v2.0.0) (2020-01-30)
 
 
