@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.9.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.8.0...v1.9.0) (2020-02-10)
+
+
+### Features
+
+* bump release level to GA ([#530](https://www.github.com/googleapis/nodejs-vision/issues/530)) ([3b091ba](https://www.github.com/googleapis/nodejs-vision/commit/3b091ba7c67864e845d1f399b8052684a2d6030e))
+
+
+### Bug Fixes
+
+* **deps:** update dependency redis to v3 ([#533](https://www.github.com/googleapis/nodejs-vision/issues/533)) ([d9b50cb](https://www.github.com/googleapis/nodejs-vision/commit/d9b50cb2ac56a5eadab72efed59f12189418993c))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.7.2...v1.8.0) (2020-01-02)
 
 
