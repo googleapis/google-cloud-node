@@ -20,6 +20,7 @@
   * [Analyze-streaming-shot-change](#analyze-streaming-shot-change)
   * [Analyze](#analyze)
   * [Analyze.v1p2beta1](#analyze.v1p2beta1)
+  * [Analyze.v1p3beta1](#analyze.v1p3beta1)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -166,6 +167,23 @@ __Usage:__
 
 
 `node samples/analyze.v1p2beta1.js`
+
+
+-----
+
+
+
+
+### Analyze.v1p3beta1
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.v1p3beta1.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze.v1p3beta1.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/analyze.v1p3beta1.js`
 
 
 -----
