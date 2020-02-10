@@ -31,7 +31,7 @@ module.exports = {
   source: {
     excludePattern: '(^|\\/|\\\\)[._]',
     include: [
-      'src'
+      'build/src'
     ],
     includePattern: '\\.js$'
   },
@@ -39,7 +39,7 @@ module.exports = {
     copyright: 'Copyright 2018 Google, LLC.',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'dialogflow',
+    systemName: '@google-cloud/dialogflow',
     theme: 'lumen'
   },
   markdown: {

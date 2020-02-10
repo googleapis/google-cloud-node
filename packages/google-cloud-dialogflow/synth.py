@@ -19,20 +19,24 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v2', 'v2beta1']
 for version in versions:
-    library = gapic.node_library('dialogflow', version, config_path=version + '/artman_dialogflow_' + version + '.yaml')
-    s.copy(library, excludes=['package.json', 'README.md', 'src/index.js'])
+    library = gapic.typescript_library(
+        'dialogflow', version, 
+        generator_args={
+            "grpc-service-config": f"google/cloud/dialogflow/{version}/dialogflow_grpc_service_config.json",
+            "package-name": f"@google-cloud/dialogflow",
+            "main-service": f"dialogflow"
+            },
+        proto_path=f'/google/cloud/dialogflow/{version}',
+        extra_proto_files=["google/cloud/common_resources.proto"]
+        )
+    s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts', 'system-test/fixtures/sample/src'])
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=["README.md", "samples/README.md"])
-
-# dialogflow publishes to npm with no scope.
-s.replace("src/**/*",
-        "@google-cloud\/dialogflow",
-        "dialogflow")
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
