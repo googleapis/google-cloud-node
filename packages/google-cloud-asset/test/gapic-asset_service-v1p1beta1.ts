@@ -102,7 +102,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p1beta1.ISearchResourcesRequest = {};
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.searchResources = (
         actualRequest: {},
@@ -121,7 +121,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('searchIamPolicies', () => {
@@ -159,7 +159,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p1beta1.ISearchIamPoliciesRequest = {};
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.searchIamPolicies = (
         actualRequest: {},
@@ -178,7 +178,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('searchAllResources', () => {
@@ -189,6 +189,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest = {};
+      request.scope = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -215,8 +216,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest = {};
+      request.scope = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.searchAllResources = (
         actualRequest: {},
@@ -235,7 +237,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('searchAllIamPolicies', () => {
@@ -246,6 +248,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest = {};
+      request.scope = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -272,8 +275,9 @@ describe('v1p1beta1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest = {};
+      request.scope = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.searchAllIamPolicies = (
         actualRequest: {},
@@ -292,7 +296,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

@@ -40,7 +40,6 @@ const version = require('../../../package.json').version;
 export class AssetServiceClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
   private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
@@ -136,13 +135,6 @@ export class AssetServiceClient {
     const protos = gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
-
-    // This API contains "path templates"; forward-slash-separated
-    // identifiers to uniquely identify resources within the API.
-    // Create useful helper objects for these.
-    this._pathTemplates = {
-      assetPathTemplate: new gaxModule.PathTemplate('*'),
-    };
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -503,18 +495,6 @@ export class AssetServiceClient {
       parent: request.parent || '',
     });
     return this._innerApiCalls.exportAssets(request, options, callback);
-  }
-  // --------------------
-  // -- Path templates --
-  // --------------------
-
-  /**
-   * Return a fully-qualified asset resource name string.
-   *
-   * @returns {string} Resource name string.
-   */
-  assetPath() {
-    return this._pathTemplates.assetPathTemplate.render({});
   }
 
   /**

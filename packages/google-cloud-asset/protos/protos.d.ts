@@ -26,438 +26,6 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
-                /** Properties of a TemporalAsset. */
-                interface ITemporalAsset {
-
-                    /** TemporalAsset window */
-                    window?: (google.cloud.asset.v1.ITimeWindow|null);
-
-                    /** TemporalAsset deleted */
-                    deleted?: (boolean|null);
-
-                    /** TemporalAsset asset */
-                    asset?: (google.cloud.asset.v1.IAsset|null);
-                }
-
-                /** Represents a TemporalAsset. */
-                class TemporalAsset implements ITemporalAsset {
-
-                    /**
-                     * Constructs a new TemporalAsset.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1.ITemporalAsset);
-
-                    /** TemporalAsset window. */
-                    public window?: (google.cloud.asset.v1.ITimeWindow|null);
-
-                    /** TemporalAsset deleted. */
-                    public deleted: boolean;
-
-                    /** TemporalAsset asset. */
-                    public asset?: (google.cloud.asset.v1.IAsset|null);
-
-                    /**
-                     * Creates a new TemporalAsset instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TemporalAsset instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1.ITemporalAsset): google.cloud.asset.v1.TemporalAsset;
-
-                    /**
-                     * Encodes the specified TemporalAsset message. Does not implicitly {@link google.cloud.asset.v1.TemporalAsset.verify|verify} messages.
-                     * @param message TemporalAsset message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TemporalAsset message, length delimited. Does not implicitly {@link google.cloud.asset.v1.TemporalAsset.verify|verify} messages.
-                     * @param message TemporalAsset message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TemporalAsset message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TemporalAsset
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.TemporalAsset;
-
-                    /**
-                     * Decodes a TemporalAsset message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TemporalAsset
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.TemporalAsset;
-
-                    /**
-                     * Verifies a TemporalAsset message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TemporalAsset message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TemporalAsset
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.TemporalAsset;
-
-                    /**
-                     * Creates a plain object from a TemporalAsset message. Also converts values to other types if specified.
-                     * @param message TemporalAsset
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1.TemporalAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TemporalAsset to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a TimeWindow. */
-                interface ITimeWindow {
-
-                    /** TimeWindow startTime */
-                    startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** TimeWindow endTime */
-                    endTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a TimeWindow. */
-                class TimeWindow implements ITimeWindow {
-
-                    /**
-                     * Constructs a new TimeWindow.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1.ITimeWindow);
-
-                    /** TimeWindow startTime. */
-                    public startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** TimeWindow endTime. */
-                    public endTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new TimeWindow instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TimeWindow instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1.ITimeWindow): google.cloud.asset.v1.TimeWindow;
-
-                    /**
-                     * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.asset.v1.TimeWindow.verify|verify} messages.
-                     * @param message TimeWindow message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.asset.v1.TimeWindow.verify|verify} messages.
-                     * @param message TimeWindow message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TimeWindow message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TimeWindow
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.TimeWindow;
-
-                    /**
-                     * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TimeWindow
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.TimeWindow;
-
-                    /**
-                     * Verifies a TimeWindow message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TimeWindow
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.TimeWindow;
-
-                    /**
-                     * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
-                     * @param message TimeWindow
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TimeWindow to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an Asset. */
-                interface IAsset {
-
-                    /** Asset name */
-                    name?: (string|null);
-
-                    /** Asset assetType */
-                    assetType?: (string|null);
-
-                    /** Asset resource */
-                    resource?: (google.cloud.asset.v1.IResource|null);
-
-                    /** Asset iamPolicy */
-                    iamPolicy?: (google.iam.v1.IPolicy|null);
-
-                    /** Asset ancestors */
-                    ancestors?: (string[]|null);
-                }
-
-                /** Represents an Asset. */
-                class Asset implements IAsset {
-
-                    /**
-                     * Constructs a new Asset.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1.IAsset);
-
-                    /** Asset name. */
-                    public name: string;
-
-                    /** Asset assetType. */
-                    public assetType: string;
-
-                    /** Asset resource. */
-                    public resource?: (google.cloud.asset.v1.IResource|null);
-
-                    /** Asset iamPolicy. */
-                    public iamPolicy?: (google.iam.v1.IPolicy|null);
-
-                    /** Asset ancestors. */
-                    public ancestors: string[];
-
-                    /**
-                     * Creates a new Asset instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Asset instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1.IAsset): google.cloud.asset.v1.Asset;
-
-                    /**
-                     * Encodes the specified Asset message. Does not implicitly {@link google.cloud.asset.v1.Asset.verify|verify} messages.
-                     * @param message Asset message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.asset.v1.Asset.verify|verify} messages.
-                     * @param message Asset message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an Asset message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Asset
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.Asset;
-
-                    /**
-                     * Decodes an Asset message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Asset
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.Asset;
-
-                    /**
-                     * Verifies an Asset message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an Asset message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Asset
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.Asset;
-
-                    /**
-                     * Creates a plain object from an Asset message. Also converts values to other types if specified.
-                     * @param message Asset
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1.Asset, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Asset to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Resource. */
-                interface IResource {
-
-                    /** Resource version */
-                    version?: (string|null);
-
-                    /** Resource discoveryDocumentUri */
-                    discoveryDocumentUri?: (string|null);
-
-                    /** Resource discoveryName */
-                    discoveryName?: (string|null);
-
-                    /** Resource resourceUrl */
-                    resourceUrl?: (string|null);
-
-                    /** Resource parent */
-                    parent?: (string|null);
-
-                    /** Resource data */
-                    data?: (google.protobuf.IStruct|null);
-                }
-
-                /** Represents a Resource. */
-                class Resource implements IResource {
-
-                    /**
-                     * Constructs a new Resource.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1.IResource);
-
-                    /** Resource version. */
-                    public version: string;
-
-                    /** Resource discoveryDocumentUri. */
-                    public discoveryDocumentUri: string;
-
-                    /** Resource discoveryName. */
-                    public discoveryName: string;
-
-                    /** Resource resourceUrl. */
-                    public resourceUrl: string;
-
-                    /** Resource parent. */
-                    public parent: string;
-
-                    /** Resource data. */
-                    public data?: (google.protobuf.IStruct|null);
-
-                    /**
-                     * Creates a new Resource instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Resource instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1.IResource): google.cloud.asset.v1.Resource;
-
-                    /**
-                     * Encodes the specified Resource message. Does not implicitly {@link google.cloud.asset.v1.Resource.verify|verify} messages.
-                     * @param message Resource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.asset.v1.Resource.verify|verify} messages.
-                     * @param message Resource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Resource message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Resource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.Resource;
-
-                    /**
-                     * Decodes a Resource message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Resource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.Resource;
-
-                    /**
-                     * Verifies a Resource message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Resource message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Resource
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.Resource;
-
-                    /**
-                     * Creates a plain object from a Resource message. Also converts values to other types if specified.
-                     * @param message Resource
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Resource to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Represents an AssetService */
                 class AssetService extends $protobuf.rpc.Service {
 
@@ -2200,22 +1768,18 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
-            }
-
-            /** Namespace v1beta1. */
-            namespace v1beta1 {
 
                 /** Properties of a TemporalAsset. */
                 interface ITemporalAsset {
 
                     /** TemporalAsset window */
-                    window?: (google.cloud.asset.v1beta1.ITimeWindow|null);
+                    window?: (google.cloud.asset.v1.ITimeWindow|null);
 
                     /** TemporalAsset deleted */
                     deleted?: (boolean|null);
 
                     /** TemporalAsset asset */
-                    asset?: (google.cloud.asset.v1beta1.IAsset|null);
+                    asset?: (google.cloud.asset.v1.IAsset|null);
                 }
 
                 /** Represents a TemporalAsset. */
@@ -2225,39 +1789,39 @@ export namespace google {
                      * Constructs a new TemporalAsset.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.asset.v1beta1.ITemporalAsset);
+                    constructor(properties?: google.cloud.asset.v1.ITemporalAsset);
 
                     /** TemporalAsset window. */
-                    public window?: (google.cloud.asset.v1beta1.ITimeWindow|null);
+                    public window?: (google.cloud.asset.v1.ITimeWindow|null);
 
                     /** TemporalAsset deleted. */
                     public deleted: boolean;
 
                     /** TemporalAsset asset. */
-                    public asset?: (google.cloud.asset.v1beta1.IAsset|null);
+                    public asset?: (google.cloud.asset.v1.IAsset|null);
 
                     /**
                      * Creates a new TemporalAsset instance using the specified properties.
                      * @param [properties] Properties to set
                      * @returns TemporalAsset instance
                      */
-                    public static create(properties?: google.cloud.asset.v1beta1.ITemporalAsset): google.cloud.asset.v1beta1.TemporalAsset;
+                    public static create(properties?: google.cloud.asset.v1.ITemporalAsset): google.cloud.asset.v1.TemporalAsset;
 
                     /**
-                     * Encodes the specified TemporalAsset message. Does not implicitly {@link google.cloud.asset.v1beta1.TemporalAsset.verify|verify} messages.
+                     * Encodes the specified TemporalAsset message. Does not implicitly {@link google.cloud.asset.v1.TemporalAsset.verify|verify} messages.
                      * @param message TemporalAsset message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.asset.v1beta1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.asset.v1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified TemporalAsset message, length delimited. Does not implicitly {@link google.cloud.asset.v1beta1.TemporalAsset.verify|verify} messages.
+                     * Encodes the specified TemporalAsset message, length delimited. Does not implicitly {@link google.cloud.asset.v1.TemporalAsset.verify|verify} messages.
                      * @param message TemporalAsset message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.asset.v1beta1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.asset.v1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a TemporalAsset message from the specified reader or buffer.
@@ -2267,7 +1831,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1beta1.TemporalAsset;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.TemporalAsset;
 
                     /**
                      * Decodes a TemporalAsset message from the specified reader or buffer, length delimited.
@@ -2276,7 +1840,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1beta1.TemporalAsset;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.TemporalAsset;
 
                     /**
                      * Verifies a TemporalAsset message.
@@ -2290,7 +1854,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns TemporalAsset
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1beta1.TemporalAsset;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.TemporalAsset;
 
                     /**
                      * Creates a plain object from a TemporalAsset message. Also converts values to other types if specified.
@@ -2298,7 +1862,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.asset.v1beta1.TemporalAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.asset.v1.TemporalAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this TemporalAsset to JSON.
@@ -2324,7 +1888,7 @@ export namespace google {
                      * Constructs a new TimeWindow.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.asset.v1beta1.ITimeWindow);
+                    constructor(properties?: google.cloud.asset.v1.ITimeWindow);
 
                     /** TimeWindow startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
@@ -2337,23 +1901,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns TimeWindow instance
                      */
-                    public static create(properties?: google.cloud.asset.v1beta1.ITimeWindow): google.cloud.asset.v1beta1.TimeWindow;
+                    public static create(properties?: google.cloud.asset.v1.ITimeWindow): google.cloud.asset.v1.TimeWindow;
 
                     /**
-                     * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.asset.v1beta1.TimeWindow.verify|verify} messages.
+                     * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.asset.v1.TimeWindow.verify|verify} messages.
                      * @param message TimeWindow message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.asset.v1beta1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.asset.v1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.asset.v1beta1.TimeWindow.verify|verify} messages.
+                     * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.asset.v1.TimeWindow.verify|verify} messages.
                      * @param message TimeWindow message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.asset.v1beta1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.asset.v1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a TimeWindow message from the specified reader or buffer.
@@ -2363,7 +1927,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1beta1.TimeWindow;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.TimeWindow;
 
                     /**
                      * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
@@ -2372,7 +1936,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1beta1.TimeWindow;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.TimeWindow;
 
                     /**
                      * Verifies a TimeWindow message.
@@ -2386,7 +1950,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns TimeWindow
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1beta1.TimeWindow;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.TimeWindow;
 
                     /**
                      * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
@@ -2394,7 +1958,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.asset.v1beta1.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.asset.v1.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this TimeWindow to JSON.
@@ -2413,10 +1977,13 @@ export namespace google {
                     assetType?: (string|null);
 
                     /** Asset resource */
-                    resource?: (google.cloud.asset.v1beta1.IResource|null);
+                    resource?: (google.cloud.asset.v1.IResource|null);
 
                     /** Asset iamPolicy */
                     iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** Asset ancestors */
+                    ancestors?: (string[]|null);
                 }
 
                 /** Represents an Asset. */
@@ -2426,7 +1993,7 @@ export namespace google {
                      * Constructs a new Asset.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.asset.v1beta1.IAsset);
+                    constructor(properties?: google.cloud.asset.v1.IAsset);
 
                     /** Asset name. */
                     public name: string;
@@ -2435,33 +2002,36 @@ export namespace google {
                     public assetType: string;
 
                     /** Asset resource. */
-                    public resource?: (google.cloud.asset.v1beta1.IResource|null);
+                    public resource?: (google.cloud.asset.v1.IResource|null);
 
                     /** Asset iamPolicy. */
                     public iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** Asset ancestors. */
+                    public ancestors: string[];
 
                     /**
                      * Creates a new Asset instance using the specified properties.
                      * @param [properties] Properties to set
                      * @returns Asset instance
                      */
-                    public static create(properties?: google.cloud.asset.v1beta1.IAsset): google.cloud.asset.v1beta1.Asset;
+                    public static create(properties?: google.cloud.asset.v1.IAsset): google.cloud.asset.v1.Asset;
 
                     /**
-                     * Encodes the specified Asset message. Does not implicitly {@link google.cloud.asset.v1beta1.Asset.verify|verify} messages.
+                     * Encodes the specified Asset message. Does not implicitly {@link google.cloud.asset.v1.Asset.verify|verify} messages.
                      * @param message Asset message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.asset.v1beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.asset.v1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.asset.v1beta1.Asset.verify|verify} messages.
+                     * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.asset.v1.Asset.verify|verify} messages.
                      * @param message Asset message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.asset.v1beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes an Asset message from the specified reader or buffer.
@@ -2471,7 +2041,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1beta1.Asset;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.Asset;
 
                     /**
                      * Decodes an Asset message from the specified reader or buffer, length delimited.
@@ -2480,7 +2050,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1beta1.Asset;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.Asset;
 
                     /**
                      * Verifies an Asset message.
@@ -2494,7 +2064,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns Asset
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1beta1.Asset;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.Asset;
 
                     /**
                      * Creates a plain object from an Asset message. Also converts values to other types if specified.
@@ -2502,7 +2072,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.asset.v1beta1.Asset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.asset.v1.Asset, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this Asset to JSON.
@@ -2540,7 +2110,7 @@ export namespace google {
                      * Constructs a new Resource.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.asset.v1beta1.IResource);
+                    constructor(properties?: google.cloud.asset.v1.IResource);
 
                     /** Resource version. */
                     public version: string;
@@ -2565,23 +2135,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns Resource instance
                      */
-                    public static create(properties?: google.cloud.asset.v1beta1.IResource): google.cloud.asset.v1beta1.Resource;
+                    public static create(properties?: google.cloud.asset.v1.IResource): google.cloud.asset.v1.Resource;
 
                     /**
-                     * Encodes the specified Resource message. Does not implicitly {@link google.cloud.asset.v1beta1.Resource.verify|verify} messages.
+                     * Encodes the specified Resource message. Does not implicitly {@link google.cloud.asset.v1.Resource.verify|verify} messages.
                      * @param message Resource message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.asset.v1beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.asset.v1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.asset.v1beta1.Resource.verify|verify} messages.
+                     * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.asset.v1.Resource.verify|verify} messages.
                      * @param message Resource message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.asset.v1beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.asset.v1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a Resource message from the specified reader or buffer.
@@ -2591,7 +2161,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1beta1.Resource;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.Resource;
 
                     /**
                      * Decodes a Resource message from the specified reader or buffer, length delimited.
@@ -2600,7 +2170,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1beta1.Resource;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.Resource;
 
                     /**
                      * Verifies a Resource message.
@@ -2614,7 +2184,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns Resource
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1beta1.Resource;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.Resource;
 
                     /**
                      * Creates a plain object from a Resource message. Also converts values to other types if specified.
@@ -2622,7 +2192,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.asset.v1beta1.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.asset.v1.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this Resource to JSON.
@@ -2630,6 +2200,10 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
+            }
+
+            /** Namespace v1beta1. */
+            namespace v1beta1 {
 
                 /** Represents an AssetService */
                 class AssetService extends $protobuf.rpc.Service {
@@ -3303,232 +2877,436 @@ export namespace google {
                     RESOURCE = 1,
                     IAM_POLICY = 2
                 }
+
+                /** Properties of a TemporalAsset. */
+                interface ITemporalAsset {
+
+                    /** TemporalAsset window */
+                    window?: (google.cloud.asset.v1beta1.ITimeWindow|null);
+
+                    /** TemporalAsset deleted */
+                    deleted?: (boolean|null);
+
+                    /** TemporalAsset asset */
+                    asset?: (google.cloud.asset.v1beta1.IAsset|null);
+                }
+
+                /** Represents a TemporalAsset. */
+                class TemporalAsset implements ITemporalAsset {
+
+                    /**
+                     * Constructs a new TemporalAsset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1beta1.ITemporalAsset);
+
+                    /** TemporalAsset window. */
+                    public window?: (google.cloud.asset.v1beta1.ITimeWindow|null);
+
+                    /** TemporalAsset deleted. */
+                    public deleted: boolean;
+
+                    /** TemporalAsset asset. */
+                    public asset?: (google.cloud.asset.v1beta1.IAsset|null);
+
+                    /**
+                     * Creates a new TemporalAsset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TemporalAsset instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1beta1.ITemporalAsset): google.cloud.asset.v1beta1.TemporalAsset;
+
+                    /**
+                     * Encodes the specified TemporalAsset message. Does not implicitly {@link google.cloud.asset.v1beta1.TemporalAsset.verify|verify} messages.
+                     * @param message TemporalAsset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1beta1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TemporalAsset message, length delimited. Does not implicitly {@link google.cloud.asset.v1beta1.TemporalAsset.verify|verify} messages.
+                     * @param message TemporalAsset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1beta1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TemporalAsset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TemporalAsset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1beta1.TemporalAsset;
+
+                    /**
+                     * Decodes a TemporalAsset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TemporalAsset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1beta1.TemporalAsset;
+
+                    /**
+                     * Verifies a TemporalAsset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TemporalAsset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TemporalAsset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1beta1.TemporalAsset;
+
+                    /**
+                     * Creates a plain object from a TemporalAsset message. Also converts values to other types if specified.
+                     * @param message TemporalAsset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1beta1.TemporalAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TemporalAsset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TimeWindow. */
+                interface ITimeWindow {
+
+                    /** TimeWindow startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TimeWindow endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a TimeWindow. */
+                class TimeWindow implements ITimeWindow {
+
+                    /**
+                     * Constructs a new TimeWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1beta1.ITimeWindow);
+
+                    /** TimeWindow startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TimeWindow endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new TimeWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimeWindow instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1beta1.ITimeWindow): google.cloud.asset.v1beta1.TimeWindow;
+
+                    /**
+                     * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.asset.v1beta1.TimeWindow.verify|verify} messages.
+                     * @param message TimeWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1beta1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.asset.v1beta1.TimeWindow.verify|verify} messages.
+                     * @param message TimeWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1beta1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimeWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimeWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1beta1.TimeWindow;
+
+                    /**
+                     * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimeWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1beta1.TimeWindow;
+
+                    /**
+                     * Verifies a TimeWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimeWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1beta1.TimeWindow;
+
+                    /**
+                     * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
+                     * @param message TimeWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1beta1.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimeWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Asset. */
+                interface IAsset {
+
+                    /** Asset name */
+                    name?: (string|null);
+
+                    /** Asset assetType */
+                    assetType?: (string|null);
+
+                    /** Asset resource */
+                    resource?: (google.cloud.asset.v1beta1.IResource|null);
+
+                    /** Asset iamPolicy */
+                    iamPolicy?: (google.iam.v1.IPolicy|null);
+                }
+
+                /** Represents an Asset. */
+                class Asset implements IAsset {
+
+                    /**
+                     * Constructs a new Asset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1beta1.IAsset);
+
+                    /** Asset name. */
+                    public name: string;
+
+                    /** Asset assetType. */
+                    public assetType: string;
+
+                    /** Asset resource. */
+                    public resource?: (google.cloud.asset.v1beta1.IResource|null);
+
+                    /** Asset iamPolicy. */
+                    public iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /**
+                     * Creates a new Asset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Asset instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1beta1.IAsset): google.cloud.asset.v1beta1.Asset;
+
+                    /**
+                     * Encodes the specified Asset message. Does not implicitly {@link google.cloud.asset.v1beta1.Asset.verify|verify} messages.
+                     * @param message Asset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.asset.v1beta1.Asset.verify|verify} messages.
+                     * @param message Asset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Asset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Asset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1beta1.Asset;
+
+                    /**
+                     * Decodes an Asset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Asset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1beta1.Asset;
+
+                    /**
+                     * Verifies an Asset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Asset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Asset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1beta1.Asset;
+
+                    /**
+                     * Creates a plain object from an Asset message. Also converts values to other types if specified.
+                     * @param message Asset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1beta1.Asset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Asset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Resource. */
+                interface IResource {
+
+                    /** Resource version */
+                    version?: (string|null);
+
+                    /** Resource discoveryDocumentUri */
+                    discoveryDocumentUri?: (string|null);
+
+                    /** Resource discoveryName */
+                    discoveryName?: (string|null);
+
+                    /** Resource resourceUrl */
+                    resourceUrl?: (string|null);
+
+                    /** Resource parent */
+                    parent?: (string|null);
+
+                    /** Resource data */
+                    data?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a Resource. */
+                class Resource implements IResource {
+
+                    /**
+                     * Constructs a new Resource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1beta1.IResource);
+
+                    /** Resource version. */
+                    public version: string;
+
+                    /** Resource discoveryDocumentUri. */
+                    public discoveryDocumentUri: string;
+
+                    /** Resource discoveryName. */
+                    public discoveryName: string;
+
+                    /** Resource resourceUrl. */
+                    public resourceUrl: string;
+
+                    /** Resource parent. */
+                    public parent: string;
+
+                    /** Resource data. */
+                    public data?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new Resource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Resource instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1beta1.IResource): google.cloud.asset.v1beta1.Resource;
+
+                    /**
+                     * Encodes the specified Resource message. Does not implicitly {@link google.cloud.asset.v1beta1.Resource.verify|verify} messages.
+                     * @param message Resource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.asset.v1beta1.Resource.verify|verify} messages.
+                     * @param message Resource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Resource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Resource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1beta1.Resource;
+
+                    /**
+                     * Decodes a Resource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Resource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1beta1.Resource;
+
+                    /**
+                     * Verifies a Resource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Resource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1beta1.Resource;
+
+                    /**
+                     * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                     * @param message Resource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1beta1.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Resource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
             }
 
             /** Namespace v1p1beta1. */
             namespace v1p1beta1 {
-
-                /** Properties of a StandardResourceMetadata. */
-                interface IStandardResourceMetadata {
-
-                    /** StandardResourceMetadata name */
-                    name?: (string|null);
-
-                    /** StandardResourceMetadata assetType */
-                    assetType?: (string|null);
-
-                    /** StandardResourceMetadata project */
-                    project?: (string|null);
-
-                    /** StandardResourceMetadata displayName */
-                    displayName?: (string|null);
-
-                    /** StandardResourceMetadata description */
-                    description?: (string|null);
-
-                    /** StandardResourceMetadata additionalAttributes */
-                    additionalAttributes?: (string[]|null);
-                }
-
-                /** Represents a StandardResourceMetadata. */
-                class StandardResourceMetadata implements IStandardResourceMetadata {
-
-                    /**
-                     * Constructs a new StandardResourceMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1p1beta1.IStandardResourceMetadata);
-
-                    /** StandardResourceMetadata name. */
-                    public name: string;
-
-                    /** StandardResourceMetadata assetType. */
-                    public assetType: string;
-
-                    /** StandardResourceMetadata project. */
-                    public project: string;
-
-                    /** StandardResourceMetadata displayName. */
-                    public displayName: string;
-
-                    /** StandardResourceMetadata description. */
-                    public description: string;
-
-                    /** StandardResourceMetadata additionalAttributes. */
-                    public additionalAttributes: string[];
-
-                    /**
-                     * Creates a new StandardResourceMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StandardResourceMetadata instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1p1beta1.IStandardResourceMetadata): google.cloud.asset.v1p1beta1.StandardResourceMetadata;
-
-                    /**
-                     * Encodes the specified StandardResourceMetadata message. Does not implicitly {@link google.cloud.asset.v1p1beta1.StandardResourceMetadata.verify|verify} messages.
-                     * @param message StandardResourceMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1p1beta1.IStandardResourceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StandardResourceMetadata message, length delimited. Does not implicitly {@link google.cloud.asset.v1p1beta1.StandardResourceMetadata.verify|verify} messages.
-                     * @param message StandardResourceMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1p1beta1.IStandardResourceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StandardResourceMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StandardResourceMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p1beta1.StandardResourceMetadata;
-
-                    /**
-                     * Decodes a StandardResourceMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StandardResourceMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p1beta1.StandardResourceMetadata;
-
-                    /**
-                     * Verifies a StandardResourceMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StandardResourceMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StandardResourceMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p1beta1.StandardResourceMetadata;
-
-                    /**
-                     * Creates a plain object from a StandardResourceMetadata message. Also converts values to other types if specified.
-                     * @param message StandardResourceMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1p1beta1.StandardResourceMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StandardResourceMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an IamPolicySearchResult. */
-                interface IIamPolicySearchResult {
-
-                    /** IamPolicySearchResult resource */
-                    resource?: (string|null);
-
-                    /** IamPolicySearchResult project */
-                    project?: (string|null);
-
-                    /** IamPolicySearchResult policy */
-                    policy?: (google.iam.v1.IPolicy|null);
-                }
-
-                /** Represents an IamPolicySearchResult. */
-                class IamPolicySearchResult implements IIamPolicySearchResult {
-
-                    /**
-                     * Constructs a new IamPolicySearchResult.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1p1beta1.IIamPolicySearchResult);
-
-                    /** IamPolicySearchResult resource. */
-                    public resource: string;
-
-                    /** IamPolicySearchResult project. */
-                    public project: string;
-
-                    /** IamPolicySearchResult policy. */
-                    public policy?: (google.iam.v1.IPolicy|null);
-
-                    /**
-                     * Creates a new IamPolicySearchResult instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns IamPolicySearchResult instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1p1beta1.IIamPolicySearchResult): google.cloud.asset.v1p1beta1.IamPolicySearchResult;
-
-                    /**
-                     * Encodes the specified IamPolicySearchResult message. Does not implicitly {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult.verify|verify} messages.
-                     * @param message IamPolicySearchResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1p1beta1.IIamPolicySearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified IamPolicySearchResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult.verify|verify} messages.
-                     * @param message IamPolicySearchResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1p1beta1.IIamPolicySearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an IamPolicySearchResult message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns IamPolicySearchResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p1beta1.IamPolicySearchResult;
-
-                    /**
-                     * Decodes an IamPolicySearchResult message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns IamPolicySearchResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p1beta1.IamPolicySearchResult;
-
-                    /**
-                     * Verifies an IamPolicySearchResult message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an IamPolicySearchResult message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns IamPolicySearchResult
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p1beta1.IamPolicySearchResult;
-
-                    /**
-                     * Creates a plain object from an IamPolicySearchResult message. Also converts values to other types if specified.
-                     * @param message IamPolicySearchResult
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1p1beta1.IamPolicySearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this IamPolicySearchResult to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
 
                 /** Represents an AssetService */
                 class AssetService extends $protobuf.rpc.Service {
@@ -4465,442 +4243,232 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
+
+                /** Properties of a StandardResourceMetadata. */
+                interface IStandardResourceMetadata {
+
+                    /** StandardResourceMetadata name */
+                    name?: (string|null);
+
+                    /** StandardResourceMetadata assetType */
+                    assetType?: (string|null);
+
+                    /** StandardResourceMetadata project */
+                    project?: (string|null);
+
+                    /** StandardResourceMetadata displayName */
+                    displayName?: (string|null);
+
+                    /** StandardResourceMetadata description */
+                    description?: (string|null);
+
+                    /** StandardResourceMetadata additionalAttributes */
+                    additionalAttributes?: (string[]|null);
+                }
+
+                /** Represents a StandardResourceMetadata. */
+                class StandardResourceMetadata implements IStandardResourceMetadata {
+
+                    /**
+                     * Constructs a new StandardResourceMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p1beta1.IStandardResourceMetadata);
+
+                    /** StandardResourceMetadata name. */
+                    public name: string;
+
+                    /** StandardResourceMetadata assetType. */
+                    public assetType: string;
+
+                    /** StandardResourceMetadata project. */
+                    public project: string;
+
+                    /** StandardResourceMetadata displayName. */
+                    public displayName: string;
+
+                    /** StandardResourceMetadata description. */
+                    public description: string;
+
+                    /** StandardResourceMetadata additionalAttributes. */
+                    public additionalAttributes: string[];
+
+                    /**
+                     * Creates a new StandardResourceMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StandardResourceMetadata instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p1beta1.IStandardResourceMetadata): google.cloud.asset.v1p1beta1.StandardResourceMetadata;
+
+                    /**
+                     * Encodes the specified StandardResourceMetadata message. Does not implicitly {@link google.cloud.asset.v1p1beta1.StandardResourceMetadata.verify|verify} messages.
+                     * @param message StandardResourceMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p1beta1.IStandardResourceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StandardResourceMetadata message, length delimited. Does not implicitly {@link google.cloud.asset.v1p1beta1.StandardResourceMetadata.verify|verify} messages.
+                     * @param message StandardResourceMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p1beta1.IStandardResourceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StandardResourceMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StandardResourceMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p1beta1.StandardResourceMetadata;
+
+                    /**
+                     * Decodes a StandardResourceMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StandardResourceMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p1beta1.StandardResourceMetadata;
+
+                    /**
+                     * Verifies a StandardResourceMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StandardResourceMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StandardResourceMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p1beta1.StandardResourceMetadata;
+
+                    /**
+                     * Creates a plain object from a StandardResourceMetadata message. Also converts values to other types if specified.
+                     * @param message StandardResourceMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p1beta1.StandardResourceMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StandardResourceMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an IamPolicySearchResult. */
+                interface IIamPolicySearchResult {
+
+                    /** IamPolicySearchResult resource */
+                    resource?: (string|null);
+
+                    /** IamPolicySearchResult project */
+                    project?: (string|null);
+
+                    /** IamPolicySearchResult policy */
+                    policy?: (google.iam.v1.IPolicy|null);
+                }
+
+                /** Represents an IamPolicySearchResult. */
+                class IamPolicySearchResult implements IIamPolicySearchResult {
+
+                    /**
+                     * Constructs a new IamPolicySearchResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p1beta1.IIamPolicySearchResult);
+
+                    /** IamPolicySearchResult resource. */
+                    public resource: string;
+
+                    /** IamPolicySearchResult project. */
+                    public project: string;
+
+                    /** IamPolicySearchResult policy. */
+                    public policy?: (google.iam.v1.IPolicy|null);
+
+                    /**
+                     * Creates a new IamPolicySearchResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IamPolicySearchResult instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p1beta1.IIamPolicySearchResult): google.cloud.asset.v1p1beta1.IamPolicySearchResult;
+
+                    /**
+                     * Encodes the specified IamPolicySearchResult message. Does not implicitly {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult.verify|verify} messages.
+                     * @param message IamPolicySearchResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p1beta1.IIamPolicySearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IamPolicySearchResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult.verify|verify} messages.
+                     * @param message IamPolicySearchResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p1beta1.IIamPolicySearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IamPolicySearchResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IamPolicySearchResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p1beta1.IamPolicySearchResult;
+
+                    /**
+                     * Decodes an IamPolicySearchResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IamPolicySearchResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p1beta1.IamPolicySearchResult;
+
+                    /**
+                     * Verifies an IamPolicySearchResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IamPolicySearchResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IamPolicySearchResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p1beta1.IamPolicySearchResult;
+
+                    /**
+                     * Creates a plain object from an IamPolicySearchResult message. Also converts values to other types if specified.
+                     * @param message IamPolicySearchResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p1beta1.IamPolicySearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IamPolicySearchResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
             }
 
             /** Namespace v1p2beta1. */
             namespace v1p2beta1 {
-
-                /** Properties of a TemporalAsset. */
-                interface ITemporalAsset {
-
-                    /** TemporalAsset window */
-                    window?: (google.cloud.asset.v1p2beta1.ITimeWindow|null);
-
-                    /** TemporalAsset deleted */
-                    deleted?: (boolean|null);
-
-                    /** TemporalAsset asset */
-                    asset?: (google.cloud.asset.v1p2beta1.IAsset|null);
-                }
-
-                /** Represents a TemporalAsset. */
-                class TemporalAsset implements ITemporalAsset {
-
-                    /**
-                     * Constructs a new TemporalAsset.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1p2beta1.ITemporalAsset);
-
-                    /** TemporalAsset window. */
-                    public window?: (google.cloud.asset.v1p2beta1.ITimeWindow|null);
-
-                    /** TemporalAsset deleted. */
-                    public deleted: boolean;
-
-                    /** TemporalAsset asset. */
-                    public asset?: (google.cloud.asset.v1p2beta1.IAsset|null);
-
-                    /**
-                     * Creates a new TemporalAsset instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TemporalAsset instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1p2beta1.ITemporalAsset): google.cloud.asset.v1p2beta1.TemporalAsset;
-
-                    /**
-                     * Encodes the specified TemporalAsset message. Does not implicitly {@link google.cloud.asset.v1p2beta1.TemporalAsset.verify|verify} messages.
-                     * @param message TemporalAsset message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1p2beta1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TemporalAsset message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.TemporalAsset.verify|verify} messages.
-                     * @param message TemporalAsset message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TemporalAsset message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TemporalAsset
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.TemporalAsset;
-
-                    /**
-                     * Decodes a TemporalAsset message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TemporalAsset
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.TemporalAsset;
-
-                    /**
-                     * Verifies a TemporalAsset message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TemporalAsset message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TemporalAsset
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.TemporalAsset;
-
-                    /**
-                     * Creates a plain object from a TemporalAsset message. Also converts values to other types if specified.
-                     * @param message TemporalAsset
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1p2beta1.TemporalAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TemporalAsset to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a TimeWindow. */
-                interface ITimeWindow {
-
-                    /** TimeWindow startTime */
-                    startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** TimeWindow endTime */
-                    endTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a TimeWindow. */
-                class TimeWindow implements ITimeWindow {
-
-                    /**
-                     * Constructs a new TimeWindow.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1p2beta1.ITimeWindow);
-
-                    /** TimeWindow startTime. */
-                    public startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** TimeWindow endTime. */
-                    public endTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new TimeWindow instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TimeWindow instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1p2beta1.ITimeWindow): google.cloud.asset.v1p2beta1.TimeWindow;
-
-                    /**
-                     * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.asset.v1p2beta1.TimeWindow.verify|verify} messages.
-                     * @param message TimeWindow message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1p2beta1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.TimeWindow.verify|verify} messages.
-                     * @param message TimeWindow message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TimeWindow message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TimeWindow
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.TimeWindow;
-
-                    /**
-                     * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TimeWindow
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.TimeWindow;
-
-                    /**
-                     * Verifies a TimeWindow message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TimeWindow
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.TimeWindow;
-
-                    /**
-                     * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
-                     * @param message TimeWindow
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1p2beta1.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TimeWindow to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an Asset. */
-                interface IAsset {
-
-                    /** Asset name */
-                    name?: (string|null);
-
-                    /** Asset assetType */
-                    assetType?: (string|null);
-
-                    /** Asset resource */
-                    resource?: (google.cloud.asset.v1p2beta1.IResource|null);
-
-                    /** Asset iamPolicy */
-                    iamPolicy?: (google.iam.v1.IPolicy|null);
-
-                    /** Asset ancestors */
-                    ancestors?: (string[]|null);
-                }
-
-                /** Represents an Asset. */
-                class Asset implements IAsset {
-
-                    /**
-                     * Constructs a new Asset.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1p2beta1.IAsset);
-
-                    /** Asset name. */
-                    public name: string;
-
-                    /** Asset assetType. */
-                    public assetType: string;
-
-                    /** Asset resource. */
-                    public resource?: (google.cloud.asset.v1p2beta1.IResource|null);
-
-                    /** Asset iamPolicy. */
-                    public iamPolicy?: (google.iam.v1.IPolicy|null);
-
-                    /** Asset ancestors. */
-                    public ancestors: string[];
-
-                    /**
-                     * Creates a new Asset instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Asset instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1p2beta1.IAsset): google.cloud.asset.v1p2beta1.Asset;
-
-                    /**
-                     * Encodes the specified Asset message. Does not implicitly {@link google.cloud.asset.v1p2beta1.Asset.verify|verify} messages.
-                     * @param message Asset message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1p2beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.Asset.verify|verify} messages.
-                     * @param message Asset message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an Asset message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Asset
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.Asset;
-
-                    /**
-                     * Decodes an Asset message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Asset
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.Asset;
-
-                    /**
-                     * Verifies an Asset message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an Asset message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Asset
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.Asset;
-
-                    /**
-                     * Creates a plain object from an Asset message. Also converts values to other types if specified.
-                     * @param message Asset
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1p2beta1.Asset, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Asset to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Resource. */
-                interface IResource {
-
-                    /** Resource version */
-                    version?: (string|null);
-
-                    /** Resource discoveryDocumentUri */
-                    discoveryDocumentUri?: (string|null);
-
-                    /** Resource discoveryName */
-                    discoveryName?: (string|null);
-
-                    /** Resource resourceUrl */
-                    resourceUrl?: (string|null);
-
-                    /** Resource parent */
-                    parent?: (string|null);
-
-                    /** Resource data */
-                    data?: (google.protobuf.IStruct|null);
-                }
-
-                /** Represents a Resource. */
-                class Resource implements IResource {
-
-                    /**
-                     * Constructs a new Resource.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.asset.v1p2beta1.IResource);
-
-                    /** Resource version. */
-                    public version: string;
-
-                    /** Resource discoveryDocumentUri. */
-                    public discoveryDocumentUri: string;
-
-                    /** Resource discoveryName. */
-                    public discoveryName: string;
-
-                    /** Resource resourceUrl. */
-                    public resourceUrl: string;
-
-                    /** Resource parent. */
-                    public parent: string;
-
-                    /** Resource data. */
-                    public data?: (google.protobuf.IStruct|null);
-
-                    /**
-                     * Creates a new Resource instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Resource instance
-                     */
-                    public static create(properties?: google.cloud.asset.v1p2beta1.IResource): google.cloud.asset.v1p2beta1.Resource;
-
-                    /**
-                     * Encodes the specified Resource message. Does not implicitly {@link google.cloud.asset.v1p2beta1.Resource.verify|verify} messages.
-                     * @param message Resource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.asset.v1p2beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.Resource.verify|verify} messages.
-                     * @param message Resource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Resource message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Resource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.Resource;
-
-                    /**
-                     * Decodes a Resource message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Resource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.Resource;
-
-                    /**
-                     * Verifies a Resource message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Resource message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Resource
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.Resource;
-
-                    /**
-                     * Creates a plain object from a Resource message. Also converts values to other types if specified.
-                     * @param message Resource
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.asset.v1p2beta1.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Resource to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
 
                 /** Represents an AssetService */
                 class AssetService extends $protobuf.rpc.Service {
@@ -6078,238 +5646,444 @@ export namespace google {
                     RESOURCE = 1,
                     IAM_POLICY = 2
                 }
+
+                /** Properties of a TemporalAsset. */
+                interface ITemporalAsset {
+
+                    /** TemporalAsset window */
+                    window?: (google.cloud.asset.v1p2beta1.ITimeWindow|null);
+
+                    /** TemporalAsset deleted */
+                    deleted?: (boolean|null);
+
+                    /** TemporalAsset asset */
+                    asset?: (google.cloud.asset.v1p2beta1.IAsset|null);
+                }
+
+                /** Represents a TemporalAsset. */
+                class TemporalAsset implements ITemporalAsset {
+
+                    /**
+                     * Constructs a new TemporalAsset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p2beta1.ITemporalAsset);
+
+                    /** TemporalAsset window. */
+                    public window?: (google.cloud.asset.v1p2beta1.ITimeWindow|null);
+
+                    /** TemporalAsset deleted. */
+                    public deleted: boolean;
+
+                    /** TemporalAsset asset. */
+                    public asset?: (google.cloud.asset.v1p2beta1.IAsset|null);
+
+                    /**
+                     * Creates a new TemporalAsset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TemporalAsset instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p2beta1.ITemporalAsset): google.cloud.asset.v1p2beta1.TemporalAsset;
+
+                    /**
+                     * Encodes the specified TemporalAsset message. Does not implicitly {@link google.cloud.asset.v1p2beta1.TemporalAsset.verify|verify} messages.
+                     * @param message TemporalAsset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p2beta1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TemporalAsset message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.TemporalAsset.verify|verify} messages.
+                     * @param message TemporalAsset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.ITemporalAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TemporalAsset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TemporalAsset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.TemporalAsset;
+
+                    /**
+                     * Decodes a TemporalAsset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TemporalAsset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.TemporalAsset;
+
+                    /**
+                     * Verifies a TemporalAsset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TemporalAsset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TemporalAsset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.TemporalAsset;
+
+                    /**
+                     * Creates a plain object from a TemporalAsset message. Also converts values to other types if specified.
+                     * @param message TemporalAsset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p2beta1.TemporalAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TemporalAsset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TimeWindow. */
+                interface ITimeWindow {
+
+                    /** TimeWindow startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TimeWindow endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a TimeWindow. */
+                class TimeWindow implements ITimeWindow {
+
+                    /**
+                     * Constructs a new TimeWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p2beta1.ITimeWindow);
+
+                    /** TimeWindow startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TimeWindow endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new TimeWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimeWindow instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p2beta1.ITimeWindow): google.cloud.asset.v1p2beta1.TimeWindow;
+
+                    /**
+                     * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.asset.v1p2beta1.TimeWindow.verify|verify} messages.
+                     * @param message TimeWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p2beta1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.TimeWindow.verify|verify} messages.
+                     * @param message TimeWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimeWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimeWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.TimeWindow;
+
+                    /**
+                     * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimeWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.TimeWindow;
+
+                    /**
+                     * Verifies a TimeWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimeWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.TimeWindow;
+
+                    /**
+                     * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
+                     * @param message TimeWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p2beta1.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimeWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Asset. */
+                interface IAsset {
+
+                    /** Asset name */
+                    name?: (string|null);
+
+                    /** Asset assetType */
+                    assetType?: (string|null);
+
+                    /** Asset resource */
+                    resource?: (google.cloud.asset.v1p2beta1.IResource|null);
+
+                    /** Asset iamPolicy */
+                    iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** Asset ancestors */
+                    ancestors?: (string[]|null);
+                }
+
+                /** Represents an Asset. */
+                class Asset implements IAsset {
+
+                    /**
+                     * Constructs a new Asset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p2beta1.IAsset);
+
+                    /** Asset name. */
+                    public name: string;
+
+                    /** Asset assetType. */
+                    public assetType: string;
+
+                    /** Asset resource. */
+                    public resource?: (google.cloud.asset.v1p2beta1.IResource|null);
+
+                    /** Asset iamPolicy. */
+                    public iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** Asset ancestors. */
+                    public ancestors: string[];
+
+                    /**
+                     * Creates a new Asset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Asset instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p2beta1.IAsset): google.cloud.asset.v1p2beta1.Asset;
+
+                    /**
+                     * Encodes the specified Asset message. Does not implicitly {@link google.cloud.asset.v1p2beta1.Asset.verify|verify} messages.
+                     * @param message Asset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p2beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.Asset.verify|verify} messages.
+                     * @param message Asset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Asset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Asset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.Asset;
+
+                    /**
+                     * Decodes an Asset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Asset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.Asset;
+
+                    /**
+                     * Verifies an Asset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Asset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Asset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.Asset;
+
+                    /**
+                     * Creates a plain object from an Asset message. Also converts values to other types if specified.
+                     * @param message Asset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p2beta1.Asset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Asset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Resource. */
+                interface IResource {
+
+                    /** Resource version */
+                    version?: (string|null);
+
+                    /** Resource discoveryDocumentUri */
+                    discoveryDocumentUri?: (string|null);
+
+                    /** Resource discoveryName */
+                    discoveryName?: (string|null);
+
+                    /** Resource resourceUrl */
+                    resourceUrl?: (string|null);
+
+                    /** Resource parent */
+                    parent?: (string|null);
+
+                    /** Resource data */
+                    data?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a Resource. */
+                class Resource implements IResource {
+
+                    /**
+                     * Constructs a new Resource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p2beta1.IResource);
+
+                    /** Resource version. */
+                    public version: string;
+
+                    /** Resource discoveryDocumentUri. */
+                    public discoveryDocumentUri: string;
+
+                    /** Resource discoveryName. */
+                    public discoveryName: string;
+
+                    /** Resource resourceUrl. */
+                    public resourceUrl: string;
+
+                    /** Resource parent. */
+                    public parent: string;
+
+                    /** Resource data. */
+                    public data?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new Resource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Resource instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p2beta1.IResource): google.cloud.asset.v1p2beta1.Resource;
+
+                    /**
+                     * Encodes the specified Resource message. Does not implicitly {@link google.cloud.asset.v1p2beta1.Resource.verify|verify} messages.
+                     * @param message Resource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p2beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.Resource.verify|verify} messages.
+                     * @param message Resource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Resource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Resource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.Resource;
+
+                    /**
+                     * Decodes a Resource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Resource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.Resource;
+
+                    /**
+                     * Verifies a Resource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Resource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.Resource;
+
+                    /**
+                     * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                     * @param message Resource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p2beta1.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Resource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
             }
         }
     }
 
     /** Namespace api. */
     namespace api {
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -6658,6 +6432,232 @@ export namespace google {
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
             IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
     }
 
@@ -8518,11 +8518,11 @@ export namespace google {
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
-
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */

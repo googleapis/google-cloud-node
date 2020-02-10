@@ -8,100 +8,15 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Asset.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1;asset",
                     "java_multiple_files": true,
-                    "java_outer_classname": "AssetServiceProto",
+                    "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1"
+                    "php_namespace": "Google\\Cloud\\Asset\\V1",
+                    "cc_enable_arenas": true
                   },
                   "nested": {
-                    "TemporalAsset": {
-                      "fields": {
-                        "window": {
-                          "type": "TimeWindow",
-                          "id": 1
-                        },
-                        "deleted": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "asset": {
-                          "type": "Asset",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TimeWindow": {
-                      "fields": {
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Asset": {
-                      "options": {
-                        "(google.api.resource).type": "cloudasset.googleapis.com/Asset",
-                        "(google.api.resource).pattern": "*"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "assetType": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "resource": {
-                          "type": "Resource",
-                          "id": 3
-                        },
-                        "iamPolicy": {
-                          "type": "google.iam.v1.Policy",
-                          "id": 4
-                        },
-                        "ancestors": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 10
-                        }
-                      }
-                    },
-                    "Resource": {
-                      "fields": {
-                        "version": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "discoveryDocumentUri": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "discoveryName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "resourceUrl": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "data": {
-                          "type": "google.protobuf.Struct",
-                          "id": 6
-                        }
-                      }
-                    },
                     "AssetService": {
                       "options": {
                         "(google.api.default_host)": "cloudasset.googleapis.com",
@@ -470,20 +385,7 @@
                           }
                         }
                       }
-                    }
-                  }
-                },
-                "v1beta1": {
-                  "options": {
-                    "cc_enable_arenas": true,
-                    "csharp_namespace": "Google.Cloud.Asset.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1beta1;asset",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "AssetServiceProto",
-                    "java_package": "com.google.cloud.asset.v1beta1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1beta1"
-                  },
-                  "nested": {
+                    },
                     "TemporalAsset": {
                       "fields": {
                         "window": {
@@ -533,6 +435,11 @@
                         "iamPolicy": {
                           "type": "google.iam.v1.Policy",
                           "id": 4
+                        },
+                        "ancestors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
@@ -563,7 +470,20 @@
                           "id": 6
                         }
                       }
-                    },
+                    }
+                  }
+                },
+                "v1beta1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.Asset.V1Beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1beta1;asset",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "AssetProto",
+                    "java_package": "com.google.cloud.asset.v1beta1",
+                    "php_namespace": "Google\\Cloud\\Asset\\V1beta1",
+                    "cc_enable_arenas": true
+                  },
+                  "nested": {
                     "AssetService": {
                       "options": {
                         "(google.api.default_host)": "cloudasset.googleapis.com",
@@ -717,21 +637,40 @@
                         "RESOURCE": 1,
                         "IAM_POLICY": 2
                       }
-                    }
-                  }
-                },
-                "v1p1beta1": {
-                  "options": {
-                    "cc_enable_arenas": true,
-                    "csharp_namespace": "Google.Cloud.Asset.V1P1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p1beta1;asset",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "AssetServiceProto",
-                    "java_package": "com.google.cloud.asset.v1p1beta1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1p1beta1"
-                  },
-                  "nested": {
-                    "StandardResourceMetadata": {
+                    },
+                    "TemporalAsset": {
+                      "fields": {
+                        "window": {
+                          "type": "TimeWindow",
+                          "id": 1
+                        },
+                        "deleted": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "asset": {
+                          "type": "Asset",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TimeWindow": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Asset": {
+                      "options": {
+                        "(google.api.resource).type": "cloudasset.googleapis.com/Asset",
+                        "(google.api.resource).pattern": "*"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -741,41 +680,57 @@
                           "type": "string",
                           "id": 2
                         },
-                        "project": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "additionalAttributes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 10
-                        }
-                      }
-                    },
-                    "IamPolicySearchResult": {
-                      "fields": {
                         "resource": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "project": {
-                          "type": "string",
+                          "type": "Resource",
                           "id": 3
                         },
-                        "policy": {
+                        "iamPolicy": {
                           "type": "google.iam.v1.Policy",
                           "id": 4
                         }
                       }
                     },
+                    "Resource": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "discoveryDocumentUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "discoveryName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "resourceUrl": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "data": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        }
+                      }
+                    }
+                  }
+                },
+                "v1p1beta1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.Asset.V1P1Beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p1beta1;asset",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "AssetProto",
+                    "java_package": "com.google.cloud.asset.v1p1beta1",
+                    "php_namespace": "Google\\Cloud\\Asset\\V1p1beta1",
+                    "cc_enable_arenas": true
+                  },
+                  "nested": {
                     "AssetService": {
                       "options": {
                         "(google.api.default_host)": "cloudasset.googleapis.com",
@@ -1011,49 +966,8 @@
                           "id": 2
                         }
                       }
-                    }
-                  }
-                },
-                "v1p2beta1": {
-                  "options": {
-                    "cc_enable_arenas": true,
-                    "csharp_namespace": "Google.Cloud.Asset.V1p2Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p2beta1;asset",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "AssetServiceProto",
-                    "java_package": "com.google.cloud.asset.v1p2beta1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1p2Beta1"
-                  },
-                  "nested": {
-                    "TemporalAsset": {
-                      "fields": {
-                        "window": {
-                          "type": "TimeWindow",
-                          "id": 1
-                        },
-                        "deleted": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "asset": {
-                          "type": "Asset",
-                          "id": 3
-                        }
-                      }
                     },
-                    "TimeWindow": {
-                      "fields": {
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Asset": {
+                    "StandardResourceMetadata": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1063,49 +977,54 @@
                           "type": "string",
                           "id": 2
                         },
-                        "resource": {
-                          "type": "Resource",
-                          "id": 3
-                        },
-                        "iamPolicy": {
-                          "type": "google.iam.v1.Policy",
-                          "id": 4
-                        },
-                        "ancestors": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "Resource": {
-                      "fields": {
-                        "version": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "discoveryDocumentUri": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "discoveryName": {
+                        "project": {
                           "type": "string",
                           "id": 3
                         },
-                        "resourceUrl": {
+                        "displayName": {
                           "type": "string",
                           "id": 4
                         },
-                        "parent": {
+                        "description": {
                           "type": "string",
                           "id": 5
                         },
-                        "data": {
-                          "type": "google.protobuf.Struct",
-                          "id": 6
+                        "additionalAttributes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
+                    "IamPolicySearchResult": {
+                      "fields": {
+                        "resource": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "policy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 4
+                        }
+                      }
+                    }
+                  }
+                },
+                "v1p2beta1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.Asset.v1p2beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p2beta1;asset",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "AssetProto",
+                    "java_package": "com.google.cloud.asset.v1p2beta1",
+                    "php_namespace": "Google\\Cloud\\Asset\\v1p2beta1",
+                    "cc_enable_arenas": true
+                  },
+                  "nested": {
                     "AssetService": {
                       "options": {
                         "(google.api.default_host)": "cloudasset.googleapis.com",
@@ -1339,6 +1258,87 @@
                         "RESOURCE": 1,
                         "IAM_POLICY": 2
                       }
+                    },
+                    "TemporalAsset": {
+                      "fields": {
+                        "window": {
+                          "type": "TimeWindow",
+                          "id": 1
+                        },
+                        "deleted": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "asset": {
+                          "type": "Asset",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TimeWindow": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Asset": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assetType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resource": {
+                          "type": "Resource",
+                          "id": 3
+                        },
+                        "iamPolicy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 4
+                        },
+                        "ancestors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "Resource": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "discoveryDocumentUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "discoveryName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "resourceUrl": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "data": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        }
+                      }
                     }
                   }
                 }
@@ -1348,80 +1348,14 @@
         },
         "api": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -1539,6 +1473,72 @@
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }
