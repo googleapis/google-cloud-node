@@ -141,15 +141,14 @@ export class AssetServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      assetPathTemplate: new gaxModule.PathTemplate('*'),
-      projectFeedPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/feeds/{feed}'
-      ),
       folderFeedPathTemplate: new gaxModule.PathTemplate(
         'folders/{folder}/feeds/{feed}'
       ),
       organizationFeedPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/feeds/{feed}'
+      ),
+      projectFeedPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/feeds/{feed}'
       ),
     };
 
@@ -912,53 +911,6 @@ export class AssetServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified asset resource name string.
-   *
-   * @returns {string} Resource name string.
-   */
-  assetPath() {
-    return this._pathTemplates.assetPathTemplate.render({});
-  }
-
-  /**
-   * Return a fully-qualified projectFeed resource name string.
-   *
-   * @param {string} project
-   * @param {string} feed
-   * @returns {string} Resource name string.
-   */
-  projectFeedPath(project: string, feed: string) {
-    return this._pathTemplates.projectFeedPathTemplate.render({
-      project,
-      feed,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectFeed resource.
-   *
-   * @param {string} projectFeedName
-   *   A fully-qualified path representing project_feed resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectFeedName(projectFeedName: string) {
-    return this._pathTemplates.projectFeedPathTemplate.match(projectFeedName)
-      .project;
-  }
-
-  /**
-   * Parse the feed from ProjectFeed resource.
-   *
-   * @param {string} projectFeedName
-   *   A fully-qualified path representing project_feed resource.
-   * @returns {string} A string representing the feed.
-   */
-  matchFeedFromProjectFeedName(projectFeedName: string) {
-    return this._pathTemplates.projectFeedPathTemplate.match(projectFeedName)
-      .feed;
-  }
-
-  /**
    * Return a fully-qualified folderFeed resource name string.
    *
    * @param {string} folder
@@ -1034,6 +986,44 @@ export class AssetServiceClient {
     return this._pathTemplates.organizationFeedPathTemplate.match(
       organizationFeedName
     ).feed;
+  }
+
+  /**
+   * Return a fully-qualified projectFeed resource name string.
+   *
+   * @param {string} project
+   * @param {string} feed
+   * @returns {string} Resource name string.
+   */
+  projectFeedPath(project: string, feed: string) {
+    return this._pathTemplates.projectFeedPathTemplate.render({
+      project,
+      feed,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectFeed resource.
+   *
+   * @param {string} projectFeedName
+   *   A fully-qualified path representing project_feed resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectFeedName(projectFeedName: string) {
+    return this._pathTemplates.projectFeedPathTemplate.match(projectFeedName)
+      .project;
+  }
+
+  /**
+   * Parse the feed from ProjectFeed resource.
+   *
+   * @param {string} projectFeedName
+   *   A fully-qualified path representing project_feed resource.
+   * @returns {string} A string representing the feed.
+   */
+  matchFeedFromProjectFeedName(projectFeedName: string) {
+    return this._pathTemplates.projectFeedPathTemplate.match(projectFeedName)
+      .feed;
   }
 
   /**

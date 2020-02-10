@@ -110,6 +110,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -132,6 +133,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -156,6 +158,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.ICreateFeedRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -178,6 +181,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.ICreateFeedRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -202,6 +206,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IGetFeedRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -224,6 +229,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IGetFeedRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -248,6 +254,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IListFeedsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -270,6 +277,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IListFeedsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -344,6 +352,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IDeleteFeedRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -366,6 +375,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IDeleteFeedRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -390,6 +400,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IExportAssetsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -419,6 +430,7 @@ describe('v1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IExportAssetsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer

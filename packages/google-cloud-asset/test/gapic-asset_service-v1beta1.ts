@@ -112,6 +112,7 @@ describe('v1beta1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1beta1.IBatchGetAssetsHistoryRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -134,6 +135,7 @@ describe('v1beta1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1beta1.IBatchGetAssetsHistoryRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -158,6 +160,7 @@ describe('v1beta1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1beta1.IExportAssetsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -187,6 +190,7 @@ describe('v1beta1.AssetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.asset.v1beta1.IExportAssetsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer

@@ -315,12 +315,13 @@ export class AssetServiceClient {
    *   Optional. A list of asset types that this request searches for. If empty, it will
    *   search all the supported asset types.
    * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Returned results may be fewer
-   *   than requested. The value of this field is capped at 2000.  If set to the
-   *   zero value, server will pick an appropriate default.
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
    * @param {string} [request.pageToken]
    *   Optional. If present, then retrieve the next batch of results from the preceding call
-   *   to this method.  `page_token` must be the value of `next_page_token` from
+   *   to this method. `page_token` must be the value of `next_page_token` from
    *   the previous response. The values of all other method parameters, must be
    *   identical to those in the previous call.
    * @param {object} [options]
@@ -401,12 +402,13 @@ export class AssetServiceClient {
    *   Optional. A list of asset types that this request searches for. If empty, it will
    *   search all the supported asset types.
    * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Returned results may be fewer
-   *   than requested. The value of this field is capped at 2000.  If set to the
-   *   zero value, server will pick an appropriate default.
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
    * @param {string} [request.pageToken]
    *   Optional. If present, then retrieve the next batch of results from the preceding call
-   *   to this method.  `page_token` must be the value of `next_page_token` from
+   *   to this method. `page_token` must be the value of `next_page_token` from
    *   the previous response. The values of all other method parameters, must be
    *   identical to those in the previous call.
    * @param {object} [options]
@@ -416,9 +418,10 @@ export class AssetServiceClient {
    */
   searchResourcesStream(
     request?: protosTypes.google.cloud.asset.v1p1beta1.ISearchResourcesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.searchResources.createStream(
       this._innerApiCalls.searchResources as gax.GaxCall,
@@ -462,9 +465,10 @@ export class AssetServiceClient {
    *   * "policy:myuser@mydomain.com"
    *   * "policy:(myuser@mydomain.com viewer)"
    * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Returned results may be fewer
-   *   than requested. The maximum is 2000. If set to the zero value, the server
-   *   will pick an appropriate default.
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
    * @param {string} [request.pageToken]
    *   Optional. If present, retrieve the next batch of results from the preceding call to
    *   this method. `page_token` must be the value of `next_page_token` from the
@@ -548,9 +552,10 @@ export class AssetServiceClient {
    *   * "policy:myuser@mydomain.com"
    *   * "policy:(myuser@mydomain.com viewer)"
    * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Returned results may be fewer
-   *   than requested. The maximum is 2000. If set to the zero value, the server
-   *   will pick an appropriate default.
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
    * @param {string} [request.pageToken]
    *   Optional. If present, retrieve the next batch of results from the preceding call to
    *   this method. `page_token` must be the value of `next_page_token` from the
@@ -563,9 +568,10 @@ export class AssetServiceClient {
    */
   searchIamPoliciesStream(
     request?: protosTypes.google.cloud.asset.v1p1beta1.ISearchIamPoliciesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.searchIamPolicies.createStream(
       this._innerApiCalls.searchIamPolicies as gax.GaxCall,
@@ -614,9 +620,10 @@ export class AssetServiceClient {
    *   Optional. A list of asset types that this request searches for. If empty, it will
    *   search all the supported asset types.
    * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Returned results may be fewer
-   *   than requested. The value of this field is capped at 2000.  If set to the
-   *   zero value, server will pick an appropriate default.
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
    * @param {string} [request.pageToken]
    *   Optional. If present, then retrieve the next batch of results from the preceding call
    *   to this method.  `page_token` must be the value of `next_page_token` from
@@ -707,9 +714,10 @@ export class AssetServiceClient {
    *   Optional. A list of asset types that this request searches for. If empty, it will
    *   search all the supported asset types.
    * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Returned results may be fewer
-   *   than requested. The value of this field is capped at 2000.  If set to the
-   *   zero value, server will pick an appropriate default.
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
    * @param {string} [request.pageToken]
    *   Optional. If present, then retrieve the next batch of results from the preceding call
    *   to this method.  `page_token` must be the value of `next_page_token` from
@@ -722,9 +730,17 @@ export class AssetServiceClient {
    */
   searchAllResourcesStream(
     request?: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.searchAllResources.createStream(
       this._innerApiCalls.searchAllResources as gax.GaxCall,
@@ -773,9 +789,10 @@ export class AssetServiceClient {
    *   * "policy:myuser@mydomain.com"
    *   * "policy:(myuser@mydomain.com viewer)"
    * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Returned results may be fewer
-   *   than requested. The maximum is 2000. If set to the zero value, the server
-   *   will pick an appropriate default.
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
    * @param {string} [request.pageToken]
    *   Optional. If present, retrieve the next batch of results from the preceding call to
    *   this method. `page_token` must be the value of `next_page_token` from the
@@ -866,9 +883,10 @@ export class AssetServiceClient {
    *   * "policy:myuser@mydomain.com"
    *   * "policy:(myuser@mydomain.com viewer)"
    * @param {number} [request.pageSize]
-   *   Optional. The page size for search result pagination. Returned results may be fewer
-   *   than requested. The maximum is 2000. If set to the zero value, the server
-   *   will pick an appropriate default.
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
    * @param {string} [request.pageToken]
    *   Optional. If present, retrieve the next batch of results from the preceding call to
    *   this method. `page_token` must be the value of `next_page_token` from the
@@ -881,9 +899,17 @@ export class AssetServiceClient {
    */
   searchAllIamPoliciesStream(
     request?: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.searchAllIamPolicies.createStream(
       this._innerApiCalls.searchAllIamPolicies as gax.GaxCall,
