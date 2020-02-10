@@ -368,7 +368,6 @@ export class SpeechClient {
    *   will emit objects representing [StreamingRecognizeResponse]{@link google.cloud.speech.v1p1beta1.StreamingRecognizeResponse} on 'data' event asynchronously.
    */
   _streamingRecognize(options?: gax.CallOptions): gax.CancellableStream {
-    options = options || {};
     return this._innerApiCalls.streamingRecognize(options);
   }
 
