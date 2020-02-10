@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [4.3.1](https://www.github.com/googleapis/nodejs-storage/compare/v4.3.0...v4.3.1) (2020-02-06)
+
+
+### Bug Fixes
+
+* **samples:** fix overwritten IAM conditions sample ([#1042](https://www.github.com/googleapis/nodejs-storage/issues/1042)) ([25d839c](https://www.github.com/googleapis/nodejs-storage/commit/25d839ccf421276d8a4c18b2be95004ca832d84d))
+* skip validation for server decompressed objects ([#1063](https://www.github.com/googleapis/nodejs-storage/issues/1063)) ([d6e3738](https://www.github.com/googleapis/nodejs-storage/commit/d6e37382da1ed3b72771770cb9447c62c91f26a5))
+* unhandled promise rejection warning in samples ([#1056](https://www.github.com/googleapis/nodejs-storage/issues/1056)) ([e95ec19](https://www.github.com/googleapis/nodejs-storage/commit/e95ec19756388e6fc4fc8e0d49a40c613ed006c6))
+
 ## [4.3.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.2.0...v4.3.0) (2020-01-21)
 
 

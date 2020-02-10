@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@google-cloud/pubsub": "^1.0.0",
-    "@google-cloud/storage": "^4.3.0",
+    "@google-cloud/storage": "^4.3.1",
     "uuid": "^3.3.2",
     "yargs": "^15.0.0"
   },
