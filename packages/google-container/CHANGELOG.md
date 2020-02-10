@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [1.6.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.6.1...v1.6.2) (2020-02-10)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([ab62cfd](https://www.github.com/googleapis/nodejs-cloud-container/commit/ab62cfddac9ab594318d906b7ee6272131ddaae2))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.6.0...v1.6.1) (2020-01-28)
 
 
