@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-02-07T20:54:08.367917Z",
+  "updateTime": "2020-02-08T12:28:53.699603Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e46f761cd6ec15a9e3d5ed4ff321a4bcba8e8585",
-        "internalRef": "293710856"
+        "sha": "e7d8a694f4559201e6913f6610069cb08b39274e",
+        "internalRef": "293903652",
+        "log": "e7d8a694f4559201e6913f6610069cb08b39274e\nDepend on the latest gapic-generator and resource names plugin.\n\nThis fixes the very old an very annoying bug: https://github.com/googleapis/gapic-generator/pull/3087\n\nPiperOrigin-RevId: 293903652\n\n806b2854a966d55374ee26bb0cef4e30eda17b58\nfix: correct capitalization of Ruby namespaces in SecurityCenter V1p1beta1\n\nPiperOrigin-RevId: 293903613\n\n1b83c92462b14d67a7644e2980f723112472e03a\nPublish annotations and grpc service config for Logging API.\n\nPiperOrigin-RevId: 293893514\n\n"
       }
     },
     {
