@@ -78,7 +78,7 @@
     "js-green-licenses": "^1.1.0",
     "json-stable-stringify": "^1.0.1",
     "koa": "^2.7.0",
-    "linkinator": "^1.5.0",
+    "linkinator": "^2.0.0",
     "lodash.maxby": "^4.6.0",
     "lodash.merge": "^4.6.2",
     "lodash.omit": "^4.5.0",
