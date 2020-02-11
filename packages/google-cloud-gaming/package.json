@@ -25,7 +25,9 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^1.12.0"
+    "google-gax": "^1.12.0",
+    "node": "^13.8.0",
+    "node-gyp": "^6.1.0"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.5",

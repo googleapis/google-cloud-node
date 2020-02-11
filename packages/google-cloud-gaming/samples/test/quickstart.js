@@ -16,19 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-"use strict";
+'use strict';
 
-const path = require("path");
-const { assert } = require("chai");
-const cp = require("child_process");
-const { describe, it } = require("mocha");
+const path = require('path');
+const {assert} = require('chai');
+const cp = require('child_process');
+const {describe, it} = require('mocha');
 
-const execSync = cmd => cp.execSync(cmd, { encoding: "utf-8" });
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const cwd = path.join(__dirname, "..");
+const cwd = path.join(__dirname, '..');
 
-describe("Quickstart", () => {
-  it("should run quickstart", async () => {
-    const stdout = execSync(`node ./samples/quickstart.js`, { cwd });
+describe('Quickstart', () => {
+  it('should run quickstart', async () => {
+    const stdout = execSync(`node quickstart.js`, {cwd});
   });
 });
