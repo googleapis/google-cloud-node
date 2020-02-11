@@ -29,7 +29,8 @@ function checkpoint (message, success = true) {
 // grab files using GitHub API.
 async function getContent (owner, repo, path) {
   const headers = {};
-  if (argv.token) headers.authorization = `token ${argv.token}`;
+  const token = argv.token || process.env.GITHUB_TOKEN;
+  if (token) headers.authorization = `token ${token}`;
   const res = await fetch(`${apiUrl}/repos/${owner}/${repo}/contents/${path}`, {
     headers: headers
   });

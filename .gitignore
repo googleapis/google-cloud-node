@@ -8,3 +8,4 @@ packages/*/AUTHORS
 packages/*/CONTRIBUTORS
 packages/*/COPYING
 package-lock.json
+__pycache__
