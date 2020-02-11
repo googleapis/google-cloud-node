@@ -17,4 +17,3 @@ import subprocess
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'generate'])
-
