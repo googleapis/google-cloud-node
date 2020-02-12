@@ -36,7 +36,8 @@
     "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
     "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs"
+    "predocs-test": "npm run docs",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
     "google-gax": "^1.7.5"
