@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.2.0...v1.2.1) (2020-02-12)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([0960f4c](https://www.github.com/googleapis/nodejs-secret-manager/commit/0960f4cc1226a16d342d6accc5a42511c8694a03))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.1.2...v1.2.0) (2020-01-30)
 
 
