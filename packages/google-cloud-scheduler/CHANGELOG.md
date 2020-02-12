@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [1.4.3](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.4.2...v1.4.3) (2020-02-12)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([59297c1](https://www.github.com/googleapis/nodejs-scheduler/commit/59297c14779951c41d7a55502c832af237e9502f))
+
 ### [1.4.2](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.4.1...v1.4.2) (2020-01-28)
 
 
