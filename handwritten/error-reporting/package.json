@@ -29,7 +29,8 @@
     "pretest": "npm run compile",
     "license-check": "jsgl --local .",
     "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs"
+    "predocs-test": "npm run docs",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
     "@google-cloud/common": "^2.0.1",
