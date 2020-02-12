@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-dlp/compare/v2.0.0...v2.0.1) (2020-02-12)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([ad49a5b](https://www.github.com/googleapis/nodejs-dlp/commit/ad49a5b645e65d256f7db5804e4410692952dc3a))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.9.0...v2.0.0) (2020-01-28)
 
 
