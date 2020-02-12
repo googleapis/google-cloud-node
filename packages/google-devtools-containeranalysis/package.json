@@ -61,7 +61,8 @@
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
-    "prepare": "npm run compile"
+    "prepare": "npm run compile",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "license": "Apache-2.0",
   "engines": {
