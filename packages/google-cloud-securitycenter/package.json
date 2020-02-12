@@ -24,7 +24,8 @@
     "prepare": "npm run compile",
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../"
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "keywords": [
     "google apis client",
