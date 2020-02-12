@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.7.1...v1.8.0) (2020-02-12)
+
+
+### Features
+
+* move API to typescript code generation ([#135](https://www.github.com/googleapis/nodejs-containeranalysis/issues/135)) ([b2d88af](https://www.github.com/googleapis/nodejs-containeranalysis/commit/b2d88af53e958360b1c91035b8ac5d9cbb0a37e5))
+
 ### [1.7.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.7.0...v1.7.1) (2020-02-05)
 
 
