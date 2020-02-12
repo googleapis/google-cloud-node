@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [1.5.3](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.5.2...v1.5.3) (2020-02-12)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([983411e](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/983411e0a115c6be6fe9ac0001d333bfef5e81a8))
+
 ### [1.5.2](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.5.1...v1.5.2) (2020-01-28)
 
 
