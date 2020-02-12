@@ -48,7 +48,8 @@
     "prepare": "npm run compile",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "benchwrapper": "node bin/benchwrapper.js"
+    "benchwrapper": "node bin/benchwrapper.js",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
     "@google-cloud/common": "^2.1.1",
