@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-recommender/compare/v2.0.1...v2.0.2) (2020-02-12)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([acea090](https://www.github.com/googleapis/nodejs-recommender/commit/acea09085a4caddfaa69c35f37dd83f32ed81987))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-recommender/compare/v2.0.0...v2.0.1) (2020-01-28)
 
 
