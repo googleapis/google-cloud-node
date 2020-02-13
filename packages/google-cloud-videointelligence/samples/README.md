@@ -20,7 +20,10 @@
   * [Analyze-streaming-shot-change](#analyze-streaming-shot-change)
   * [Analyze](#analyze)
   * [Analyze.v1p2beta1](#analyze.v1p2beta1)
-  * [Analyze.v1p3beta1](#analyze.v1p3beta1)
+  * [Analyze_face_detection](#analyze_face_detection)
+  * [Analyze_face_detection_gcs](#analyze_face_detection_gcs)
+  * [Analyze_person_detection](#analyze_person_detection)
+  * [Analyze_person_detection_gcs](#analyze_person_detection_gcs)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -174,16 +177,67 @@ __Usage:__
 
 
 
-### Analyze.v1p3beta1
+### Analyze_face_detection
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.v1p3beta1.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_face_detection.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze.v1p3beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_face_detection.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/analyze.v1p3beta1.js`
+`node samples/analyze_face_detection.js`
+
+
+-----
+
+
+
+
+### Analyze_face_detection_gcs
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_face_detection_gcs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_face_detection_gcs.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/analyze_face_detection_gcs.js`
+
+
+-----
+
+
+
+
+### Analyze_person_detection
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_person_detection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_person_detection.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/analyze_person_detection.js`
+
+
+-----
+
+
+
+
+### Analyze_person_detection_gcs
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_person_detection_gcs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_person_detection_gcs.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/analyze_person_detection_gcs.js`
 
 
 -----
