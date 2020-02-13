@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.0.3...v1.1.0) (2020-02-13)
+
+
+### Features
+
+* bump release level to beta ([#34](https://www.github.com/googleapis/nodejs-billing-budgets/issues/34)) ([23c64fc](https://www.github.com/googleapis/nodejs-billing-budgets/commit/23c64fc76999fb783f5e10343b3f6381b8b90d48))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.0.2...v1.0.3) (2020-02-10)
 
 
