@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-asset/compare/v2.0.1...v2.1.0) (2020-02-13)
+
+
+### Features
+
+* bump release level to ga ([#264](https://www.github.com/googleapis/nodejs-asset/issues/264)) ([b432a76](https://www.github.com/googleapis/nodejs-asset/commit/b432a76f80b0499125cd091135bc1f215dbaae64))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-asset/compare/v2.0.0...v2.0.1) (2020-02-10)
 
 
