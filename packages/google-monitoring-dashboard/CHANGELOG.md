@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.0.2...v1.1.0) (2020-02-13)
+
+
+### Features
+
+* bump the release level to ga ([#30](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/30)) ([c4080f7](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/c4080f7e2dbbcb5e42c928c4dfd5174d892975a2))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.0.1...v1.0.2) (2020-01-28)
 
 
