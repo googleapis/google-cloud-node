@@ -55,7 +55,8 @@
     "system-test": "c8 mocha --timeout=15000 system-test/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs"
+    "docs-test": "linkinator docs",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "license": "Apache-2.0",
   "engines": {
