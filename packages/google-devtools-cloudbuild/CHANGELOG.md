@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.3.3...v1.4.0) (2020-02-13)
+
+
+### Features
+
+* bump release level to GA ([#62](https://www.github.com/googleapis/nodejs-cloudbuild/issues/62)) ([114756d](https://www.github.com/googleapis/nodejs-cloudbuild/commit/114756d12007d1978fc3e4bb71b72e543bcc6945))
+
 ### [1.3.3](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.3.2...v1.3.3) (2020-02-10)
 
 
