@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.7.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.5...v2.7.0) (2020-02-13)
+
+
+### Features
+
+* face and person detection samples ([#362](https://www.github.com/googleapis/nodejs-video-intelligence/issues/362)) ([cff2f36](https://www.github.com/googleapis/nodejs-video-intelligence/commit/cff2f36a4e6294908a4e26587ed840c1ec1b03f8))
+
+
+### Bug Fixes
+
+* adds spaces to region tags, other fixes ([#369](https://www.github.com/googleapis/nodejs-video-intelligence/issues/369)) ([2b6943e](https://www.github.com/googleapis/nodejs-video-intelligence/commit/2b6943ee0685761a0076c7b8023eed4f12f93d64))
+* fixes face and people detection region tags ([#367](https://www.github.com/googleapis/nodejs-video-intelligence/issues/367)) ([ab039b5](https://www.github.com/googleapis/nodejs-video-intelligence/commit/ab039b56b3bea27edf93c4db7c97241599d38419))
+* refactors person and face detection samples into separate files ([#370](https://www.github.com/googleapis/nodejs-video-intelligence/issues/370)) ([eb9b400](https://www.github.com/googleapis/nodejs-video-intelligence/commit/eb9b400c24bdf306d8263ec402922b3235754034))
+* updates README file with correct links ([#371](https://www.github.com/googleapis/nodejs-video-intelligence/issues/371)) ([fb2701a](https://www.github.com/googleapis/nodejs-video-intelligence/commit/fb2701a81c7476ef06ab279a8d4572f006abe831))
+
 ### [2.6.5](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.4...v2.6.5) (2020-01-29)
 
 
