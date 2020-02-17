@@ -1,7 +1,6 @@
 # Google Cloud Profiler
 
 [![NPM Version][npm-image]][npm-url]
-[![Build Status][circle-image]][circle-url]
 [![Dependency Status][david-image]][david-url]
 [![devDependency Status][david-dev-image]][david-dev-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
@@ -295,8 +294,6 @@ the service when starting the profiler:
        });
        ```
 [app-default-credentials]: https://developers.google.com/identity/protocols/application-default-credentials
-[circle-image]: https://circleci.com/gh/googleapis/cloud-profiler-nodejs.svg?style=svg
-[circle-url]: https://circleci.com/gh/googleapis/cloud-profiler-nodejs
 [cloud-console]: https://console.cloud.google.com
 [coveralls-image]: https://coveralls.io/repos/googleapis/cloud-profiler-nodejs/badge.svg?branch=master&service=github
 [david-image]: https://david-dm.org/googleapis/cloud-profiler-nodejs.svg
