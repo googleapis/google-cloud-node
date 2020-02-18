@@ -20,31 +20,26 @@ import subprocess
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 version = "v3"
-library = gapic.node_library(
-  "monitoring", version, config_path="/google/monitoring/artman_monitoring.yaml"
+library = gapic.typescript_library(
+    "monitoring",
+    version,
+    generator_args={
+        "grpc-service-config": f"google/monitoring/{version}/monitoring_grpc_service_config.json",
+        "package-name": f"@google-cloud/monitoring",
+        "main-service": f"monitoring"
+    },
+    proto_path=f'/google/monitoring/{version}',
+    extra_proto_files=['google/cloud/common_resources.proto']
 )
-s.copy(library, excludes=["src/index.js", "README.md", "package.json"])
+
+s.copy(library, excludes=["src/index.ts", "README.md", "package.json"])
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
-
-# [START fix-dead-link]
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'toISOString\]',
-        'toISOString)')
-# [END fix-dead-link]
-
-s.replace('src/**/doc/google/api/doc_distribution.js',
-        r"Sum\[i=1\.\.n\]\(https:\/\/cloud\.google\.com\(x_i - mean\)\^2\)",
-        "Sum\[i=1..n](x_1 - mean)^2")
-
 
 subprocess.run(["npm", "install"])
 subprocess.run(["npm", "run", "fix"])
+subprocess.run(['npx', 'compileProtos', 'src'])

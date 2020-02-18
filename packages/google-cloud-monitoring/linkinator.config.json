@@ -3,7 +3,6 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "https://cloud.google.com/monitoring/workspaces/tiers",
     "img.shields.io"
   ]
 }

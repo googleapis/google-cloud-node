@@ -17,156 +17,11 @@
                 "(google.api.resource_definition).history": "ORIGINALLY_SINGLE_PATTERN"
               },
               "nested": {
-                "AlertPolicyService": {
-                  "options": {
-                    "(google.api.default_host)": "monitoring.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
-                  },
-                  "methods": {
-                    "ListAlertPolicies": {
-                      "requestType": "ListAlertPoliciesRequest",
-                      "responseType": "ListAlertPoliciesResponse",
-                      "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*}/alertPolicies",
-                        "(google.api.method_signature)": "name"
-                      }
-                    },
-                    "GetAlertPolicy": {
-                      "requestType": "GetAlertPolicyRequest",
-                      "responseType": "AlertPolicy",
-                      "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/alertPolicies/*}",
-                        "(google.api.method_signature)": "name"
-                      }
-                    },
-                    "CreateAlertPolicy": {
-                      "requestType": "CreateAlertPolicyRequest",
-                      "responseType": "AlertPolicy",
-                      "options": {
-                        "(google.api.http).post": "/v3/{name=projects/*}/alertPolicies",
-                        "(google.api.http).body": "alert_policy",
-                        "(google.api.method_signature)": "name,alert_policy"
-                      }
-                    },
-                    "DeleteAlertPolicy": {
-                      "requestType": "DeleteAlertPolicyRequest",
-                      "responseType": "google.protobuf.Empty",
-                      "options": {
-                        "(google.api.http).delete": "/v3/{name=projects/*/alertPolicies/*}",
-                        "(google.api.method_signature)": "name"
-                      }
-                    },
-                    "UpdateAlertPolicy": {
-                      "requestType": "UpdateAlertPolicyRequest",
-                      "responseType": "AlertPolicy",
-                      "options": {
-                        "(google.api.http).patch": "/v3/{alert_policy.name=projects/*/alertPolicies/*}",
-                        "(google.api.http).body": "alert_policy",
-                        "(google.api.method_signature)": "update_mask,alert_policy"
-                      }
-                    }
-                  }
-                },
-                "CreateAlertPolicyRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 3,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/AlertPolicy"
-                      }
-                    },
-                    "alertPolicy": {
-                      "type": "AlertPolicy",
-                      "id": 2,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
-                    }
-                  }
-                },
-                "GetAlertPolicyRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 3,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).type": "monitoring.googleapis.com/AlertPolicy"
-                      }
-                    }
-                  }
-                },
-                "ListAlertPoliciesRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 4,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/AlertPolicy"
-                      }
-                    },
-                    "filter": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "orderBy": {
-                      "type": "string",
-                      "id": 6
-                    },
-                    "pageSize": {
-                      "type": "int32",
-                      "id": 2
-                    },
-                    "pageToken": {
-                      "type": "string",
-                      "id": 3
-                    }
-                  }
-                },
-                "ListAlertPoliciesResponse": {
-                  "fields": {
-                    "alertPolicies": {
-                      "rule": "repeated",
-                      "type": "AlertPolicy",
-                      "id": 3
-                    },
-                    "nextPageToken": {
-                      "type": "string",
-                      "id": 2
-                    }
-                  }
-                },
-                "UpdateAlertPolicyRequest": {
-                  "fields": {
-                    "updateMask": {
-                      "type": "google.protobuf.FieldMask",
-                      "id": 2
-                    },
-                    "alertPolicy": {
-                      "type": "AlertPolicy",
-                      "id": 3,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
-                    }
-                  }
-                },
-                "DeleteAlertPolicyRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 3,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).type": "monitoring.googleapis.com/AlertPolicy"
-                      }
-                    }
-                  }
-                },
                 "AlertPolicy": {
+                  "options": {
+                    "(google.api.resource).type": "monitoring.googleapis.com/AlertPolicy",
+                    "(google.api.resource).pattern": "*"
+                  },
                   "fields": {
                     "name": {
                       "type": "string",
@@ -230,6 +85,10 @@
                       }
                     },
                     "Condition": {
+                      "options": {
+                        "(google.api.resource).type": "monitoring.googleapis.com/AlertPolicyCondition",
+                        "(google.api.resource).pattern": "*"
+                      },
                       "oneofs": {
                         "condition": {
                           "oneof": [
@@ -492,6 +351,192 @@
                     }
                   }
                 },
+                "AlertPolicyService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
+                  },
+                  "methods": {
+                    "ListAlertPolicies": {
+                      "requestType": "ListAlertPoliciesRequest",
+                      "responseType": "ListAlertPoliciesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3/{name=projects/*}/alertPolicies",
+                        "(google.api.method_signature)": "name"
+                      }
+                    },
+                    "GetAlertPolicy": {
+                      "requestType": "GetAlertPolicyRequest",
+                      "responseType": "AlertPolicy",
+                      "options": {
+                        "(google.api.http).get": "/v3/{name=projects/*/alertPolicies/*}",
+                        "(google.api.method_signature)": "name"
+                      }
+                    },
+                    "CreateAlertPolicy": {
+                      "requestType": "CreateAlertPolicyRequest",
+                      "responseType": "AlertPolicy",
+                      "options": {
+                        "(google.api.http).post": "/v3/{name=projects/*}/alertPolicies",
+                        "(google.api.http).body": "alert_policy",
+                        "(google.api.method_signature)": "name,alert_policy"
+                      }
+                    },
+                    "DeleteAlertPolicy": {
+                      "requestType": "DeleteAlertPolicyRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v3/{name=projects/*/alertPolicies/*}",
+                        "(google.api.method_signature)": "name"
+                      }
+                    },
+                    "UpdateAlertPolicy": {
+                      "requestType": "UpdateAlertPolicyRequest",
+                      "responseType": "AlertPolicy",
+                      "options": {
+                        "(google.api.http).patch": "/v3/{alert_policy.name=projects/*/alertPolicies/*}",
+                        "(google.api.http).body": "alert_policy",
+                        "(google.api.method_signature)": "update_mask,alert_policy"
+                      }
+                    }
+                  }
+                },
+                "CreateAlertPolicyRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/AlertPolicy"
+                      }
+                    },
+                    "alertPolicy": {
+                      "type": "AlertPolicy",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "GetAlertPolicyRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/AlertPolicy"
+                      }
+                    }
+                  }
+                },
+                "ListAlertPoliciesRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/AlertPolicy"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "orderBy": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "ListAlertPoliciesResponse": {
+                  "fields": {
+                    "alertPolicies": {
+                      "rule": "repeated",
+                      "type": "AlertPolicy",
+                      "id": 3
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "UpdateAlertPolicyRequest": {
+                  "fields": {
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2
+                    },
+                    "alertPolicy": {
+                      "type": "AlertPolicy",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "DeleteAlertPolicyRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/AlertPolicy"
+                      }
+                    }
+                  }
+                },
+                "DroppedLabels": {
+                  "fields": {
+                    "label": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "Group": {
+                  "options": {
+                    "(google.api.resource).type": "monitoring.googleapis.com/Group",
+                    "(google.api.resource).pattern": "*"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "parentName": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "isCluster": {
+                      "type": "bool",
+                      "id": 6
+                    }
+                  }
+                },
                 "GroupService": {
                   "options": {
                     "(google.api.default_host)": "monitoring.googleapis.com",
@@ -724,27 +769,44 @@
                     }
                   }
                 },
-                "Group": {
+                "Point": {
                   "fields": {
-                    "name": {
-                      "type": "string",
+                    "interval": {
+                      "type": "TimeInterval",
                       "id": 1
                     },
-                    "displayName": {
-                      "type": "string",
+                    "value": {
+                      "type": "TypedValue",
+                      "id": 2
+                    }
+                  }
+                },
+                "TimeSeries": {
+                  "fields": {
+                    "metric": {
+                      "type": "google.api.Metric",
+                      "id": 1
+                    },
+                    "resource": {
+                      "type": "google.api.MonitoredResource",
                       "id": 2
                     },
-                    "parentName": {
-                      "type": "string",
+                    "metadata": {
+                      "type": "google.api.MonitoredResourceMetadata",
+                      "id": 7
+                    },
+                    "metricKind": {
+                      "type": "google.api.MetricDescriptor.MetricKind",
                       "id": 3
                     },
-                    "filter": {
-                      "type": "string",
-                      "id": 5
+                    "valueType": {
+                      "type": "google.api.MetricDescriptor.ValueType",
+                      "id": 4
                     },
-                    "isCluster": {
-                      "type": "bool",
-                      "id": 6
+                    "points": {
+                      "rule": "repeated",
+                      "type": "Point",
+                      "id": 5
                     }
                   }
                 },
@@ -958,7 +1020,7 @@
                       "id": 10,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/TimeSeries"
+                        "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                       }
                     },
                     "filter": {
@@ -1033,7 +1095,7 @@
                       "id": 3,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/TimeSeries"
+                        "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                       }
                     },
                     "timeSeries": {
@@ -1095,44 +1157,95 @@
                     }
                   }
                 },
-                "Point": {
+                "NotificationChannelDescriptor": {
+                  "options": {
+                    "(google.api.resource).type": "monitoring.googleapis.com/NotificationChannelDescriptor",
+                    "(google.api.resource).pattern": "*"
+                  },
                   "fields": {
-                    "interval": {
-                      "type": "TimeInterval",
+                    "name": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "type": {
+                      "type": "string",
                       "id": 1
                     },
-                    "value": {
-                      "type": "TypedValue",
+                    "displayName": {
+                      "type": "string",
                       "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "labels": {
+                      "rule": "repeated",
+                      "type": "google.api.LabelDescriptor",
+                      "id": 4
+                    },
+                    "supportedTiers": {
+                      "rule": "repeated",
+                      "type": "ServiceTier",
+                      "id": 5,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "launchStage": {
+                      "type": "google.api.LaunchStage",
+                      "id": 7
                     }
                   }
                 },
-                "TimeSeries": {
+                "NotificationChannel": {
+                  "options": {
+                    "(google.api.resource).type": "monitoring.googleapis.com/NotificationChannel",
+                    "(google.api.resource).pattern": "*"
+                  },
                   "fields": {
-                    "metric": {
-                      "type": "google.api.Metric",
+                    "type": {
+                      "type": "string",
                       "id": 1
                     },
-                    "resource": {
-                      "type": "google.api.MonitoredResource",
-                      "id": 2
+                    "name": {
+                      "type": "string",
+                      "id": 6
                     },
-                    "metadata": {
-                      "type": "google.api.MonitoredResourceMetadata",
-                      "id": 7
-                    },
-                    "metricKind": {
-                      "type": "google.api.MetricDescriptor.MetricKind",
+                    "displayName": {
+                      "type": "string",
                       "id": 3
                     },
-                    "valueType": {
-                      "type": "google.api.MetricDescriptor.ValueType",
+                    "description": {
+                      "type": "string",
                       "id": 4
                     },
-                    "points": {
-                      "rule": "repeated",
-                      "type": "Point",
+                    "labels": {
+                      "keyType": "string",
+                      "type": "string",
                       "id": 5
+                    },
+                    "userLabels": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 8
+                    },
+                    "verificationStatus": {
+                      "type": "VerificationStatus",
+                      "id": 9
+                    },
+                    "enabled": {
+                      "type": "google.protobuf.BoolValue",
+                      "id": 11
+                    }
+                  },
+                  "nested": {
+                    "VerificationStatus": {
+                      "values": {
+                        "VERIFICATION_STATUS_UNSPECIFIED": 0,
+                        "UNVERIFIED": 1,
+                        "VERIFIED": 2
+                      }
                     }
                   }
                 },
@@ -1436,13 +1549,23 @@
                     }
                   }
                 },
-                "NotificationChannelDescriptor": {
+                "Service": {
+                  "options": {
+                    "(google.api.resource).type": "monitoring.googleapis.com/Service",
+                    "(google.api.resource).pattern": "*"
+                  },
+                  "oneofs": {
+                    "identifier": {
+                      "oneof": [
+                        "custom",
+                        "appEngine",
+                        "cloudEndpoints",
+                        "clusterIstio"
+                      ]
+                    }
+                  },
                   "fields": {
                     "name": {
-                      "type": "string",
-                      "id": 6
-                    },
-                    "type": {
                       "type": "string",
                       "id": 1
                     },
@@ -1450,68 +1573,328 @@
                       "type": "string",
                       "id": 2
                     },
-                    "description": {
-                      "type": "string",
-                      "id": 3
+                    "custom": {
+                      "type": "Custom",
+                      "id": 6
                     },
-                    "labels": {
-                      "rule": "repeated",
-                      "type": "google.api.LabelDescriptor",
-                      "id": 4
+                    "appEngine": {
+                      "type": "AppEngine",
+                      "id": 7
                     },
-                    "supportedTiers": {
-                      "rule": "repeated",
-                      "type": "ServiceTier",
-                      "id": 5,
-                      "options": {
-                        "deprecated": true
+                    "cloudEndpoints": {
+                      "type": "CloudEndpoints",
+                      "id": 8
+                    },
+                    "clusterIstio": {
+                      "type": "ClusterIstio",
+                      "id": 9
+                    },
+                    "telemetry": {
+                      "type": "Telemetry",
+                      "id": 13
+                    }
+                  },
+                  "nested": {
+                    "Custom": {
+                      "fields": {}
+                    },
+                    "AppEngine": {
+                      "fields": {
+                        "moduleId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CloudEndpoints": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ClusterIstio": {
+                      "fields": {
+                        "location": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "clusterName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "serviceNamespace": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "serviceName": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Telemetry": {
+                      "fields": {
+                        "resourceName": {
+                          "type": "string",
+                          "id": 1
+                        }
                       }
                     }
                   }
                 },
-                "NotificationChannel": {
+                "ServiceLevelObjective": {
+                  "options": {
+                    "(google.api.resource).type": "monitoring.googleapis.com/ServiceLevelObjective",
+                    "(google.api.resource).pattern": "*",
+                    "(google.api.resource).history": "ORIGINALLY_SINGLE_PATTERN"
+                  },
+                  "oneofs": {
+                    "period": {
+                      "oneof": [
+                        "rollingPeriod",
+                        "calendarPeriod"
+                      ]
+                    }
+                  },
                   "fields": {
-                    "type": {
+                    "name": {
                       "type": "string",
                       "id": 1
                     },
-                    "name": {
-                      "type": "string",
-                      "id": 6
-                    },
                     "displayName": {
                       "type": "string",
+                      "id": 11
+                    },
+                    "serviceLevelIndicator": {
+                      "type": "ServiceLevelIndicator",
                       "id": 3
                     },
-                    "description": {
-                      "type": "string",
+                    "goal": {
+                      "type": "double",
                       "id": 4
                     },
-                    "labels": {
-                      "keyType": "string",
-                      "type": "string",
+                    "rollingPeriod": {
+                      "type": "google.protobuf.Duration",
                       "id": 5
                     },
-                    "userLabels": {
-                      "keyType": "string",
-                      "type": "string",
-                      "id": 8
-                    },
-                    "verificationStatus": {
-                      "type": "VerificationStatus",
-                      "id": 9
-                    },
-                    "enabled": {
-                      "type": "google.protobuf.BoolValue",
-                      "id": 11
+                    "calendarPeriod": {
+                      "type": "google.type.CalendarPeriod",
+                      "id": 6
                     }
                   },
                   "nested": {
-                    "VerificationStatus": {
+                    "View": {
                       "values": {
-                        "VERIFICATION_STATUS_UNSPECIFIED": 0,
-                        "UNVERIFIED": 1,
-                        "VERIFIED": 2
+                        "VIEW_UNSPECIFIED": 0,
+                        "FULL": 2,
+                        "EXPLICIT": 1
+                      }
+                    }
+                  }
+                },
+                "ServiceLevelIndicator": {
+                  "oneofs": {
+                    "type": {
+                      "oneof": [
+                        "basicSli",
+                        "requestBased",
+                        "windowsBased"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "basicSli": {
+                      "type": "BasicSli",
+                      "id": 4
+                    },
+                    "requestBased": {
+                      "type": "RequestBasedSli",
+                      "id": 1
+                    },
+                    "windowsBased": {
+                      "type": "WindowsBasedSli",
+                      "id": 2
+                    }
+                  }
+                },
+                "BasicSli": {
+                  "oneofs": {
+                    "sliCriteria": {
+                      "oneof": [
+                        "availability",
+                        "latency"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "method": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 7
+                    },
+                    "location": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 8
+                    },
+                    "version": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 9
+                    },
+                    "availability": {
+                      "type": "AvailabilityCriteria",
+                      "id": 2
+                    },
+                    "latency": {
+                      "type": "LatencyCriteria",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "AvailabilityCriteria": {
+                      "fields": {}
+                    },
+                    "LatencyCriteria": {
+                      "fields": {
+                        "threshold": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "Range": {
+                  "fields": {
+                    "min": {
+                      "type": "double",
+                      "id": 1
+                    },
+                    "max": {
+                      "type": "double",
+                      "id": 2
+                    }
+                  }
+                },
+                "RequestBasedSli": {
+                  "oneofs": {
+                    "method": {
+                      "oneof": [
+                        "goodTotalRatio",
+                        "distributionCut"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "goodTotalRatio": {
+                      "type": "TimeSeriesRatio",
+                      "id": 1
+                    },
+                    "distributionCut": {
+                      "type": "DistributionCut",
+                      "id": 3
+                    }
+                  }
+                },
+                "TimeSeriesRatio": {
+                  "fields": {
+                    "goodServiceFilter": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "badServiceFilter": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "totalServiceFilter": {
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                },
+                "DistributionCut": {
+                  "fields": {
+                    "distributionFilter": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "range": {
+                      "type": "Range",
+                      "id": 5
+                    }
+                  }
+                },
+                "WindowsBasedSli": {
+                  "oneofs": {
+                    "windowCriterion": {
+                      "oneof": [
+                        "goodBadMetricFilter",
+                        "goodTotalRatioThreshold",
+                        "metricMeanInRange",
+                        "metricSumInRange"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "goodBadMetricFilter": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "goodTotalRatioThreshold": {
+                      "type": "PerformanceThreshold",
+                      "id": 2
+                    },
+                    "metricMeanInRange": {
+                      "type": "MetricRange",
+                      "id": 6
+                    },
+                    "metricSumInRange": {
+                      "type": "MetricRange",
+                      "id": 7
+                    },
+                    "windowPeriod": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "PerformanceThreshold": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "performance",
+                            "basicSliPerformance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "performance": {
+                          "type": "RequestBasedSli",
+                          "id": 1
+                        },
+                        "basicSliPerformance": {
+                          "type": "BasicSli",
+                          "id": 3
+                        },
+                        "threshold": {
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "MetricRange": {
+                      "fields": {
+                        "timeSeries": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "range": {
+                          "type": "Range",
+                          "id": 4
+                        }
                       }
                     }
                   }
@@ -1814,14 +2197,79 @@
                     }
                   }
                 },
-                "Service": {
+                "SpanContext": {
+                  "fields": {
+                    "spanName": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "UptimeCheckRegion": {
+                  "values": {
+                    "REGION_UNSPECIFIED": 0,
+                    "USA": 1,
+                    "EUROPE": 2,
+                    "SOUTH_AMERICA": 3,
+                    "ASIA_PACIFIC": 4
+                  }
+                },
+                "InternalChecker": {
+                  "options": {
+                    "deprecated": true
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "network": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "gcpZone": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "peerProjectId": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 7
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "UNSPECIFIED": 0,
+                        "CREATING": 1,
+                        "RUNNING": 2
+                      }
+                    }
+                  }
+                },
+                "UptimeCheckConfig": {
+                  "options": {
+                    "(google.api.resource).type": "monitoring.googleapis.com/UptimeCheckConfig",
+                    "(google.api.resource).pattern": "*"
+                  },
                   "oneofs": {
-                    "identifier": {
+                    "resource": {
                       "oneof": [
-                        "custom",
-                        "appEngine",
-                        "cloudEndpoints",
-                        "clusterIstio"
+                        "monitoredResource",
+                        "resourceGroup"
+                      ]
+                    },
+                    "checkRequestType": {
+                      "oneof": [
+                        "httpCheck",
+                        "tcpCheck"
                       ]
                     }
                   },
@@ -1834,324 +2282,169 @@
                       "type": "string",
                       "id": 2
                     },
-                    "custom": {
-                      "type": "Custom",
+                    "monitoredResource": {
+                      "type": "google.api.MonitoredResource",
+                      "id": 3
+                    },
+                    "resourceGroup": {
+                      "type": "ResourceGroup",
+                      "id": 4
+                    },
+                    "httpCheck": {
+                      "type": "HttpCheck",
+                      "id": 5
+                    },
+                    "tcpCheck": {
+                      "type": "TcpCheck",
                       "id": 6
                     },
-                    "appEngine": {
-                      "type": "AppEngine",
+                    "period": {
+                      "type": "google.protobuf.Duration",
                       "id": 7
                     },
-                    "cloudEndpoints": {
-                      "type": "CloudEndpoints",
+                    "timeout": {
+                      "type": "google.protobuf.Duration",
                       "id": 8
                     },
-                    "clusterIstio": {
-                      "type": "ClusterIstio",
+                    "contentMatchers": {
+                      "rule": "repeated",
+                      "type": "ContentMatcher",
                       "id": 9
                     },
-                    "telemetry": {
-                      "type": "Telemetry",
-                      "id": 13
+                    "selectedRegions": {
+                      "rule": "repeated",
+                      "type": "UptimeCheckRegion",
+                      "id": 10
+                    },
+                    "isInternal": {
+                      "type": "bool",
+                      "id": 15,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "internalCheckers": {
+                      "rule": "repeated",
+                      "type": "InternalChecker",
+                      "id": 14,
+                      "options": {
+                        "deprecated": true
+                      }
                     }
                   },
                   "nested": {
-                    "Custom": {
-                      "fields": {}
-                    },
-                    "AppEngine": {
+                    "ResourceGroup": {
                       "fields": {
-                        "moduleId": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "CloudEndpoints": {
-                      "fields": {
-                        "service": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ClusterIstio": {
-                      "fields": {
-                        "location": {
+                        "groupId": {
                           "type": "string",
                           "id": 1
                         },
-                        "clusterName": {
+                        "resourceType": {
+                          "type": "GroupResourceType",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "HttpCheck": {
+                      "fields": {
+                        "useSsl": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "path": {
                           "type": "string",
                           "id": 2
                         },
-                        "serviceNamespace": {
-                          "type": "string",
+                        "port": {
+                          "type": "int32",
                           "id": 3
                         },
-                        "serviceName": {
-                          "type": "string",
+                        "authInfo": {
+                          "type": "BasicAuthentication",
                           "id": 4
-                        }
-                      }
-                    },
-                    "Telemetry": {
-                      "fields": {
-                        "resourceName": {
+                        },
+                        "maskHeaders": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "headers": {
+                          "keyType": "string",
                           "type": "string",
-                          "id": 1
-                        }
-                      }
-                    }
-                  }
-                },
-                "ServiceLevelObjective": {
-                  "oneofs": {
-                    "period": {
-                      "oneof": [
-                        "rollingPeriod",
-                        "calendarPeriod"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "displayName": {
-                      "type": "string",
-                      "id": 11
-                    },
-                    "serviceLevelIndicator": {
-                      "type": "ServiceLevelIndicator",
-                      "id": 3
-                    },
-                    "goal": {
-                      "type": "double",
-                      "id": 4
-                    },
-                    "rollingPeriod": {
-                      "type": "google.protobuf.Duration",
-                      "id": 5
-                    },
-                    "calendarPeriod": {
-                      "type": "google.type.CalendarPeriod",
-                      "id": 6
-                    }
-                  },
-                  "nested": {
-                    "View": {
-                      "values": {
-                        "VIEW_UNSPECIFIED": 0,
-                        "FULL": 2,
-                        "EXPLICIT": 1
-                      }
-                    }
-                  }
-                },
-                "ServiceLevelIndicator": {
-                  "oneofs": {
-                    "type": {
-                      "oneof": [
-                        "basicSli",
-                        "requestBased",
-                        "windowsBased"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "basicSli": {
-                      "type": "BasicSli",
-                      "id": 4
-                    },
-                    "requestBased": {
-                      "type": "RequestBasedSli",
-                      "id": 1
-                    },
-                    "windowsBased": {
-                      "type": "WindowsBasedSli",
-                      "id": 2
-                    }
-                  }
-                },
-                "BasicSli": {
-                  "oneofs": {
-                    "sliCriteria": {
-                      "oneof": [
-                        "availability",
-                        "latency"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "method": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 7
-                    },
-                    "location": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 8
-                    },
-                    "version": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 9
-                    },
-                    "availability": {
-                      "type": "AvailabilityCriteria",
-                      "id": 2
-                    },
-                    "latency": {
-                      "type": "LatencyCriteria",
-                      "id": 3
-                    }
-                  },
-                  "nested": {
-                    "AvailabilityCriteria": {
-                      "fields": {}
-                    },
-                    "LatencyCriteria": {
-                      "fields": {
-                        "threshold": {
-                          "type": "google.protobuf.Duration",
-                          "id": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                "Range": {
-                  "fields": {
-                    "min": {
-                      "type": "double",
-                      "id": 1
-                    },
-                    "max": {
-                      "type": "double",
-                      "id": 2
-                    }
-                  }
-                },
-                "RequestBasedSli": {
-                  "oneofs": {
-                    "method": {
-                      "oneof": [
-                        "goodTotalRatio",
-                        "distributionCut"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "goodTotalRatio": {
-                      "type": "TimeSeriesRatio",
-                      "id": 1
-                    },
-                    "distributionCut": {
-                      "type": "DistributionCut",
-                      "id": 3
-                    }
-                  }
-                },
-                "TimeSeriesRatio": {
-                  "fields": {
-                    "goodServiceFilter": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "badServiceFilter": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "totalServiceFilter": {
-                      "type": "string",
-                      "id": 6
-                    }
-                  }
-                },
-                "DistributionCut": {
-                  "fields": {
-                    "distributionFilter": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "range": {
-                      "type": "Range",
-                      "id": 5
-                    }
-                  }
-                },
-                "WindowsBasedSli": {
-                  "oneofs": {
-                    "windowCriterion": {
-                      "oneof": [
-                        "goodBadMetricFilter",
-                        "goodTotalRatioThreshold",
-                        "metricMeanInRange",
-                        "metricSumInRange"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "goodBadMetricFilter": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "goodTotalRatioThreshold": {
-                      "type": "PerformanceThreshold",
-                      "id": 2
-                    },
-                    "metricMeanInRange": {
-                      "type": "MetricRange",
-                      "id": 6
-                    },
-                    "metricSumInRange": {
-                      "type": "MetricRange",
-                      "id": 7
-                    },
-                    "windowPeriod": {
-                      "type": "google.protobuf.Duration",
-                      "id": 4
-                    }
-                  },
-                  "nested": {
-                    "PerformanceThreshold": {
-                      "oneofs": {
-                        "type": {
-                          "oneof": [
-                            "performance",
-                            "basicSliPerformance"
-                          ]
+                          "id": 6
+                        },
+                        "validateSsl": {
+                          "type": "bool",
+                          "id": 7
                         }
                       },
-                      "fields": {
-                        "performance": {
-                          "type": "RequestBasedSli",
-                          "id": 1
-                        },
-                        "basicSliPerformance": {
-                          "type": "BasicSli",
-                          "id": 3
-                        },
-                        "threshold": {
-                          "type": "double",
-                          "id": 2
+                      "nested": {
+                        "BasicAuthentication": {
+                          "fields": {
+                            "username": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "password": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
-                    "MetricRange": {
+                    "TcpCheck": {
                       "fields": {
-                        "timeSeries": {
+                        "port": {
+                          "type": "int32",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ContentMatcher": {
+                      "fields": {
+                        "content": {
                           "type": "string",
                           "id": 1
                         },
-                        "range": {
-                          "type": "Range",
-                          "id": 4
+                        "matcher": {
+                          "type": "ContentMatcherOption",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ContentMatcherOption": {
+                          "values": {
+                            "CONTENT_MATCHER_OPTION_UNSPECIFIED": 0,
+                            "CONTAINS_STRING": 1,
+                            "NOT_CONTAINS_STRING": 2,
+                            "MATCHES_REGEX": 3,
+                            "NOT_MATCHES_REGEX": 4
+                          }
                         }
                       }
+                    }
+                  }
+                },
+                "GroupResourceType": {
+                  "values": {
+                    "RESOURCE_TYPE_UNSPECIFIED": 0,
+                    "INSTANCE": 1,
+                    "AWS_ELB_LOAD_BALANCER": 2
+                  }
+                },
+                "UptimeCheckIp": {
+                  "fields": {
+                    "region": {
+                      "type": "UptimeCheckRegion",
+                      "id": 1
+                    },
+                    "location": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "ipAddress": {
+                      "type": "string",
+                      "id": 3
                     }
                   }
                 },
@@ -2331,245 +2624,6 @@
                       "id": 2
                     }
                   }
-                },
-                "InternalChecker": {
-                  "options": {
-                    "deprecated": true
-                  },
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "displayName": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "network": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "gcpZone": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "peerProjectId": {
-                      "type": "string",
-                      "id": 6
-                    },
-                    "state": {
-                      "type": "State",
-                      "id": 7
-                    }
-                  },
-                  "nested": {
-                    "State": {
-                      "values": {
-                        "UNSPECIFIED": 0,
-                        "CREATING": 1,
-                        "RUNNING": 2
-                      }
-                    }
-                  }
-                },
-                "UptimeCheckConfig": {
-                  "oneofs": {
-                    "resource": {
-                      "oneof": [
-                        "monitoredResource",
-                        "resourceGroup"
-                      ]
-                    },
-                    "checkRequestType": {
-                      "oneof": [
-                        "httpCheck",
-                        "tcpCheck"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "displayName": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "monitoredResource": {
-                      "type": "google.api.MonitoredResource",
-                      "id": 3
-                    },
-                    "resourceGroup": {
-                      "type": "ResourceGroup",
-                      "id": 4
-                    },
-                    "httpCheck": {
-                      "type": "HttpCheck",
-                      "id": 5
-                    },
-                    "tcpCheck": {
-                      "type": "TcpCheck",
-                      "id": 6
-                    },
-                    "period": {
-                      "type": "google.protobuf.Duration",
-                      "id": 7
-                    },
-                    "timeout": {
-                      "type": "google.protobuf.Duration",
-                      "id": 8
-                    },
-                    "contentMatchers": {
-                      "rule": "repeated",
-                      "type": "ContentMatcher",
-                      "id": 9
-                    },
-                    "selectedRegions": {
-                      "rule": "repeated",
-                      "type": "UptimeCheckRegion",
-                      "id": 10
-                    },
-                    "isInternal": {
-                      "type": "bool",
-                      "id": 15,
-                      "options": {
-                        "deprecated": true
-                      }
-                    },
-                    "internalCheckers": {
-                      "rule": "repeated",
-                      "type": "InternalChecker",
-                      "id": 14,
-                      "options": {
-                        "deprecated": true
-                      }
-                    }
-                  },
-                  "nested": {
-                    "ResourceGroup": {
-                      "fields": {
-                        "groupId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "resourceType": {
-                          "type": "GroupResourceType",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "HttpCheck": {
-                      "fields": {
-                        "useSsl": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "path": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "port": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "authInfo": {
-                          "type": "BasicAuthentication",
-                          "id": 4
-                        },
-                        "maskHeaders": {
-                          "type": "bool",
-                          "id": 5
-                        },
-                        "headers": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 6
-                        },
-                        "validateSsl": {
-                          "type": "bool",
-                          "id": 7
-                        }
-                      },
-                      "nested": {
-                        "BasicAuthentication": {
-                          "fields": {
-                            "username": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "password": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TcpCheck": {
-                      "fields": {
-                        "port": {
-                          "type": "int32",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ContentMatcher": {
-                      "fields": {
-                        "content": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "matcher": {
-                          "type": "ContentMatcherOption",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "ContentMatcherOption": {
-                          "values": {
-                            "CONTENT_MATCHER_OPTION_UNSPECIFIED": 0,
-                            "CONTAINS_STRING": 1,
-                            "NOT_CONTAINS_STRING": 2,
-                            "MATCHES_REGEX": 3,
-                            "NOT_MATCHES_REGEX": 4
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "UptimeCheckRegion": {
-                  "values": {
-                    "REGION_UNSPECIFIED": 0,
-                    "USA": 1,
-                    "EUROPE": 2,
-                    "SOUTH_AMERICA": 3,
-                    "ASIA_PACIFIC": 4
-                  }
-                },
-                "UptimeCheckIp": {
-                  "fields": {
-                    "region": {
-                      "type": "UptimeCheckRegion",
-                      "id": 1
-                    },
-                    "location": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "ipAddress": {
-                      "type": "string",
-                      "id": 3
-                    }
-                  }
-                },
-                "GroupResourceType": {
-                  "values": {
-                    "RESOURCE_TYPE_UNSPECIFIED": 0,
-                    "INSTANCE": 1,
-                    "AWS_ELB_LOAD_BALANCER": 2
-                  }
                 }
               }
             }
@@ -2577,133 +2631,14 @@
         },
         "api": {
           "options": {
+            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/metric;metric",
             "java_multiple_files": true,
             "java_outer_classname": "MetricProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
-              }
-            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -2901,6 +2836,125 @@
                     }
                   }
                 }
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
               }
             },
             "MonitoredResourceDescriptor": {
@@ -4092,18 +4146,6 @@
                 }
               }
             },
-            "Empty": {
-              "fields": {}
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Struct": {
               "fields": {
                 "fields": {
@@ -4163,6 +4205,18 @@
                 "values": {
                   "rule": "repeated",
                   "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
                   "id": 1
                 }
               }
