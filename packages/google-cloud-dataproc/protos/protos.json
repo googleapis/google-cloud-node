@@ -11,7 +11,9 @@
                     "go_package": "google.golang.org/genproto/googleapis/cloud/dataproc/v1;dataproc",
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowTemplatesProto",
-                    "java_package": "com.google.cloud.dataproc.v1"
+                    "java_package": "com.google.cloud.dataproc.v1",
+                    "(google.api.resource_definition).type": "dataproc.googleapis.com/Region",
+                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}"
                   },
                   "nested": {
                     "AutoscalingPolicyService": {
