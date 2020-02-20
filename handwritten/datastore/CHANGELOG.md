@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [5.0.6](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.5...v5.0.6) (2020-02-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency sinon to v9 ([#592](https://www.github.com/googleapis/nodejs-datastore/issues/592)) ([58c2b3f](https://www.github.com/googleapis/nodejs-datastore/commit/58c2b3fd97b1bab6bd6f03de0d7cdfba622bb6cb))
+
 ### [5.0.5](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.4...v5.0.5) (2020-02-12)
 
 
