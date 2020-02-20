@@ -407,7 +407,6 @@ export class SessionsClient {
    *   will emit objects representing [StreamingDetectIntentResponse]{@link google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse} on 'data' event asynchronously.
    */
   streamingDetectIntent(options?: gax.CallOptions): gax.CancellableStream {
-    options = options || {};
     return this._innerApiCalls.streamingDetectIntent(options);
   }
 
