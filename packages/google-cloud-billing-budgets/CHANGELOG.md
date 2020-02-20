@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.1.0...v1.2.0) (2020-02-20)
+
+
+### Features
+
+* **types:** loosens types on various fields ([dd39da4](https://www.github.com/googleapis/nodejs-billing-budgets/commit/dd39da49917bb5b21c07cada24d5067d99d8a426))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.0.3...v1.1.0) (2020-02-13)
 
 
