@@ -1,20 +1,27 @@
 {
-  "updateTime": "2020-02-13T04:39:40.167097Z",
+  "updateTime": "2020-02-14T12:14:16.238631Z",
   "sources": [
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-billing-budgets.git",
-        "sha": "7e67121eabbc4cc6f5d58dc3c521c3f05a6b901c"
+        "remote": "https://github.com/googleapis/nodejs-billing-budgets.git",
+        "sha": "d4584c8c252f361b6e1505b1545183f66dc6abaa"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "rpc://devrel/cloud/libraries/tools/autosynth",
+        "sha": "dd7cd93888cbeb1d4c56a1ca814491c7813160e8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "0646bc775203077226c2c34d3e4d50cc4ec53660",
-        "internalRef": "294809380",
-        "log": "0646bc775203077226c2c34d3e4d50cc4ec53660\nRemove unnecessary languages from bigquery-related artman configuration files.\n\nPiperOrigin-RevId: 294809380\n\n8b78aa04382e3d4147112ad6d344666771bb1909\nUpdate backend.proto for schemes and protocol\n\nPiperOrigin-RevId: 294788800\n\n80b8f8b3de2359831295e24e5238641a38d8488f\nAdds artman config files for bigquerystorage endpoints v1beta2, v1alpha2, v1\n\nPiperOrigin-RevId: 294763931\n\n2c17ac33b226194041155bb5340c3f34733f1b3a\nAdd parameter to sample generated for UpdateInstance. Related to https://github.com/googleapis/python-redis/issues/4\n\nPiperOrigin-RevId: 294734008\n\nd5e8a8953f2acdfe96fb15e85eb2f33739623957\nMove bigquery datatransfer to gapic v2.\n\nPiperOrigin-RevId: 294703703\n\nefd36705972cfcd7d00ab4c6dfa1135bafacd4ae\nfix: Add two annotations that we missed.\n\nPiperOrigin-RevId: 294664231\n\n8a36b928873ff9c05b43859b9d4ea14cd205df57\nFix: Define the \"bigquery.googleapis.com/Table\" resource in the BigQuery Storage API (v1beta2).\n\nPiperOrigin-RevId: 294459768\n\nc7a3caa2c40c49f034a3c11079dd90eb24987047\nFix: Define the \"bigquery.googleapis.com/Table\" resource in the BigQuery Storage API (v1).\n\nPiperOrigin-RevId: 294456889\n\n5006247aa157e59118833658084345ee59af7c09\nFix: Make deprecated fields optional\nFix: Deprecate SetLoggingServiceRequest.zone in line with the comments\nFeature: Add resource name method signatures where appropriate\n\nPiperOrigin-RevId: 294383128\n\neabba40dac05c5cbe0fca3a35761b17e372036c4\nFix: C# and PHP package/namespace capitalization for BigQuery Storage v1.\n\nPiperOrigin-RevId: 294382444\n\nf8d9a858a7a55eba8009a23aa3f5cc5fe5e88dde\nfix: artman configuration file for bigtable-admin\n\nPiperOrigin-RevId: 294322616\n\n0f29555d1cfcf96add5c0b16b089235afbe9b1a9\nAPI definition for (not-yet-launched) GCS gRPC.\n\nPiperOrigin-RevId: 294321472\n\nfcc86bee0e84dc11e9abbff8d7c3529c0626f390\nfix: Bigtable Admin v2\n\nChange LRO metadata from PartialUpdateInstanceMetadata\nto UpdateInstanceMetadata. (Otherwise, it will not build.)\n\nPiperOrigin-RevId: 294264582\n\n6d9361eae2ebb3f42d8c7ce5baf4bab966fee7c0\nrefactor: Add annotations to Bigtable Admin v2.\n\nPiperOrigin-RevId: 294243406\n\n"
+        "sha": "5169f46d9f792e2934d9fa25c36d0515b4fd0024",
+        "internalRef": "295026522",
+        "log": "5169f46d9f792e2934d9fa25c36d0515b4fd0024\nAdded cloud asset api v1p4beta1.\n\nPiperOrigin-RevId: 295026522\n\n56b55aa8818cd0a532a7d779f6ef337ba809ccbd\nFix: Resource annotations for CreateTimeSeriesRequest and ListTimeSeriesRequest should refer to valid resources. TimeSeries is not a named resource.\n\nPiperOrigin-RevId: 294931650\n\n"
       }
     },
     {
