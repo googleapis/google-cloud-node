@@ -1,0 +1,38 @@
+{
+  "updateTime": "2020-02-18T22:56:39.544261Z",
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/steffanyb/nodejs-bigquery-storage",
+        "sha": "6152883ee18789d86f9d44ffc8433b55b7889118"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "ab2685d8d3a0e191dc8aef83df36773c07cb3d06",
+        "internalRef": "295738415"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2020.2.4"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "bigquerystorage",
+        "apiVersion": "v1beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    }
+  ]
+}

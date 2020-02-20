@@ -1,0 +1,11 @@
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io",
+    "https://www.npmjs.org/package/@google-cloud/bigquery-storage",
+    "https://github.com/googleapis/nodejs-bigquery-storage/tree/master/samples",
+    "https://github.com/googleapis/nodejs-bigquery-storage/blob/master/samples/quickstart.js"
+  ]
+}
