@@ -1,3 +1,19 @@
 {
-  "updateTime": "2020-02-11T00:58:02.975939Z"
+  "updateTime": "2020-02-21T12:10:17.157671Z",
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/google-cloud-node.git",
+        "sha": "a5fec3d3c986c50c786bc4ca9d09fab4f4ecc0db"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "rpc://devrel/cloud/libraries/tools/autosynth",
+        "sha": "706a38c26db42299845396cdae55db635c38794a"
+      }
+    }
+  ]
 }
