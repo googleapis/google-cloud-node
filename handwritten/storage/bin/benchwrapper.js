@@ -45,9 +45,8 @@ function read(call, callback) {
   storageClient
     .bucket(bucketName)
     .file(objectName)
-    .download({validation: false});
-
-  callback(null, null);
+    .download({validation: false})
+    .then(() => callback(null, null))
 }
 
 function write(call, callback) {
