@@ -82,7 +82,7 @@
     "prettier": "^1.18.2",
     "proxyquire": "^2.1.0",
     "typescript": "3.6.4",
-    "uuid": "^3.3.2",
+    "uuid": "^7.0.0",
     "winston": "^3.2.1"
   },
   "peerDependencies": {
