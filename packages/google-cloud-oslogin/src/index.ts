@@ -24,3 +24,5 @@ export {v1beta, v1, OsLoginServiceClient};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
 export default {v1beta, v1, OsLoginServiceClient};
+import * as protos from '../protos/protos';
+export {protos};
