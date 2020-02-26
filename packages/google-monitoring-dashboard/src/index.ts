@@ -22,3 +22,5 @@ export {v1, DashboardsServiceClient};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
 export default {v1, DashboardsServiceClient};
+import * as protos from '../protos/protos';
+export {protos};
