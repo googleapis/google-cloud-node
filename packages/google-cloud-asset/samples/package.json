@@ -17,7 +17,7 @@
   "dependencies": {
     "@google-cloud/asset": "^2.1.0",
     "@google-cloud/storage": "^4.0.0",
-    "uuid": "^3.3.2",
+    "uuid": "^7.0.0",
     "yargs": "^15.0.0"
   },
   "devDependencies": {
