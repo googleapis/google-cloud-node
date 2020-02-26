@@ -1004,3 +1004,5 @@ export interface DatastoreOptions extends GoogleAuthOptions {
 export interface KeyToLegacyUrlSafeCallback {
   (err?: Error | null, urlSafeKey?: string): void;
 }
+import * as protos from '../protos/protos';
+export {protos};
