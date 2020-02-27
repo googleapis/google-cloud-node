@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [5.2.0](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.6...v5.2.0) (2020-02-27)
+
+
+### Features
+
+* export protos in src/index.ts ([#451](https://www.github.com/googleapis/nodejs-translate/issues/451)) ([a70079e](https://www.github.com/googleapis/nodejs-translate/commit/a70079ea24fe36d7efdd7d028a55fd6acbd6b3e1))
+
 ### [5.1.6](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.5...v5.1.6) (2020-02-07)
 
 
