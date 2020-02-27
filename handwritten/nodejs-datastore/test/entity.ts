@@ -777,6 +777,23 @@ describe('entity', () => {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
+    it('should emit warning on out of bounce int', done => {
+      const largeIntValue = 9223372036854775807;
+      const property = 'largeInt';
+      const expectedWarning =
+        'IntegerOutOfBoundsWarning: ' +
+        "the value for '" +
+        property +
+        "' property is outside of bounds of a JavaScript Number.\n" +
+        "Use 'Datastore.int(<integer_value_as_string>)' to preserve accuracy during the upload.";
+
+      process.on('warning', warning => {
+        assert.strictEqual(warning.message, expectedWarning);
+        done();
+      });
+      entity.encodeValue(largeIntValue, property);
+    });
+
     it('should encode an Int object', () => {
       const value = new entity.Int(3);
 

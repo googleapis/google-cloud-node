@@ -246,6 +246,17 @@ describe('Datastore', () => {
       await datastore.delete(postKey);
     });
 
+    it('should accurately save/get a large int value via Datastore.int()', async () => {
+      const postKey = datastore.key('Team');
+      const largeIntValueAsString = '9223372036854775807';
+      const points = Datastore.int(largeIntValueAsString);
+      await datastore.save({key: postKey, data: {points}});
+      const [entity] = await datastore.get(postKey, {wrapNumbers: true});
+      assert.strictEqual(entity.points.value, largeIntValueAsString);
+      assert.throws(() => entity.points.valueOf());
+      await datastore.delete(postKey);
+    });
+
     it('should save/get/delete with a key name', async () => {
       const postKey = datastore.key(['Post', 'post1']);
       await datastore.save({key: postKey, data: post});
