@@ -22,3 +22,5 @@ export {v1beta1, WebRiskServiceV1Beta1Client};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
 export default {v1beta1, WebRiskServiceV1Beta1Client};
+import * as protos from '../protos/protos';
+export {protos};
