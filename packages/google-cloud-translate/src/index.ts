@@ -68,3 +68,5 @@ export default {
   v3,
   TranslationServiceClient,
 };
+import * as protos from '../protos/protos';
+export {protos};
