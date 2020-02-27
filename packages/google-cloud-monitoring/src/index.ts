@@ -43,3 +43,5 @@ export default {
   ServiceMonitoringServiceClient,
   UptimeCheckServiceClient,
 };
+import * as protos from '../protos/protos';
+export {protos};
