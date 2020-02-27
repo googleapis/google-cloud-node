@@ -20,3 +20,5 @@ export {v2, v2beta2, v2beta3, CloudTasksClient};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
 export default {v2, v2beta2, v2beta3, CloudTasksClient};
+import * as protos from '../protos/protos';
+export {protos};
