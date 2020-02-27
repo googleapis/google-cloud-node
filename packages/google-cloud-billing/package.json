@@ -1,0 +1,56 @@
+{
+  "name": "@google-cloud/billing",
+  "version": "0.1.0",
+  "description": "Billing client for Node.js",
+  "repository": "googleapis/nodejs-billing",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "files": [
+    "build/src",
+    "build/protos"
+  ],
+  "main": "build/src/index.js",
+  "scripts": {
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "docs": "jsdoc -c .jsdoc.js",
+    "docs-test": "linkinator docs",
+    "fix": "gts fix && eslint samples --fix",
+    "lint": "gts check && eslint samples",
+    "prelint": "cd samples; npm link ../; npm i",
+    "predocs-test": "npm run docs",
+    "prepare": "npm run compile-protos && npm run compile",
+    "system-test": "c8 mocha build/system-test",
+    "test": "c8 mocha build/test",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../"
+  },
+  "dependencies": {
+    "google-gax": "^1.12.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^12.0.0",
+    "c8": "^6.0.0",
+    "gts": "^1.0.0",
+    "jsdoc": "^3.5.5",
+    "jsdoc-fresh": "^1.0.1",
+    "jsdoc-region-tag": "^1.0.2",
+    "linkinator": "^1.5.0",
+    "mocha": "^6.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "null-loader": "^3.0.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "~3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "eslint": "^6.0.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.17.0"
+  },
+  "engines": {
+    "node": ">=8.13.0"
+  }
+}
