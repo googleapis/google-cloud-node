@@ -22,53 +22,26 @@ import subprocess
 logging.basicConfig(level=logging.DEBUG)
 
 # Run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ["v4beta1"]
 for version in versions:
-    library = gapic.node_library(
-        "talent", version, config_path="/google/cloud/talent/"
-        f"artman_talent_{version}.yaml",
-        artman_output_name=f"talent-v4beta1")
+    library = gapic.typescript_library(
+        "talent", version, 
+        generator_args={
+            "grpc-service-config": f"google/cloud/talent/{version}/talent_grpc_service_config.json",
+            "package-name": f"@google-cloud/talent",
+            "main-service": f"talent"
+            },
+            proto_path=f'/google/cloud/talent/{version}',
+    )
     s.copy(library, excludes=['README.md', 'package.json', '.eslintrc.yml'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=['.eslintrc.yml'])
-
-# cleanup some hiccups in jsdoc comments.
-s.replace("src/index.js",
-r"""\/\*\*
- \* @namespace google
- \*/""",
-r"""
-/**
- * @namespace google
- */
-/**
- * @namespace google.protobuf
- */
- /**
- * @namespace google.longrunning
- */
- /**
- * @namespace google.rpc
- */
-/**
- * @namespace google.type
- */
-""")
-
-# [START fix-dead-link]
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-# [END fix-dead-link]
-
-s.replace('src/v4beta1/doc/google/cloud/talent/v4beta1/doc_company.js',
-        '"https:\/\/www\.google\.com"',
-        '`https://www.google.com`')
 
 # Node.js specific cleanup
 subprocess.run(["npm", "install"])
 subprocess.run(["npm", "run", "fix"])
+subprocess.run(["npx", "compileProtos", "src"])

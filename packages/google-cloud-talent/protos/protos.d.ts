@@ -26,711 +26,6 @@ export namespace google {
             /** Namespace v4beta1. */
             namespace v4beta1 {
 
-                /** Represents an ApplicationService */
-                class ApplicationService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new ApplicationService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new ApplicationService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ApplicationService;
-
-                    /**
-                     * Calls CreateApplication.
-                     * @param request CreateApplicationRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Application
-                     */
-                    public createApplication(request: google.cloud.talent.v4beta1.ICreateApplicationRequest, callback: google.cloud.talent.v4beta1.ApplicationService.CreateApplicationCallback): void;
-
-                    /**
-                     * Calls CreateApplication.
-                     * @param request CreateApplicationRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createApplication(request: google.cloud.talent.v4beta1.ICreateApplicationRequest): Promise<google.cloud.talent.v4beta1.Application>;
-
-                    /**
-                     * Calls GetApplication.
-                     * @param request GetApplicationRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Application
-                     */
-                    public getApplication(request: google.cloud.talent.v4beta1.IGetApplicationRequest, callback: google.cloud.talent.v4beta1.ApplicationService.GetApplicationCallback): void;
-
-                    /**
-                     * Calls GetApplication.
-                     * @param request GetApplicationRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getApplication(request: google.cloud.talent.v4beta1.IGetApplicationRequest): Promise<google.cloud.talent.v4beta1.Application>;
-
-                    /**
-                     * Calls UpdateApplication.
-                     * @param request UpdateApplicationRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Application
-                     */
-                    public updateApplication(request: google.cloud.talent.v4beta1.IUpdateApplicationRequest, callback: google.cloud.talent.v4beta1.ApplicationService.UpdateApplicationCallback): void;
-
-                    /**
-                     * Calls UpdateApplication.
-                     * @param request UpdateApplicationRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateApplication(request: google.cloud.talent.v4beta1.IUpdateApplicationRequest): Promise<google.cloud.talent.v4beta1.Application>;
-
-                    /**
-                     * Calls DeleteApplication.
-                     * @param request DeleteApplicationRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteApplication(request: google.cloud.talent.v4beta1.IDeleteApplicationRequest, callback: google.cloud.talent.v4beta1.ApplicationService.DeleteApplicationCallback): void;
-
-                    /**
-                     * Calls DeleteApplication.
-                     * @param request DeleteApplicationRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteApplication(request: google.cloud.talent.v4beta1.IDeleteApplicationRequest): Promise<google.protobuf.Empty>;
-
-                    /**
-                     * Calls ListApplications.
-                     * @param request ListApplicationsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListApplicationsResponse
-                     */
-                    public listApplications(request: google.cloud.talent.v4beta1.IListApplicationsRequest, callback: google.cloud.talent.v4beta1.ApplicationService.ListApplicationsCallback): void;
-
-                    /**
-                     * Calls ListApplications.
-                     * @param request ListApplicationsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listApplications(request: google.cloud.talent.v4beta1.IListApplicationsRequest): Promise<google.cloud.talent.v4beta1.ListApplicationsResponse>;
-                }
-
-                namespace ApplicationService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#createApplication}.
-                     * @param error Error, if any
-                     * @param [response] Application
-                     */
-                    type CreateApplicationCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Application) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#getApplication}.
-                     * @param error Error, if any
-                     * @param [response] Application
-                     */
-                    type GetApplicationCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Application) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#updateApplication}.
-                     * @param error Error, if any
-                     * @param [response] Application
-                     */
-                    type UpdateApplicationCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Application) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#deleteApplication}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteApplicationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#listApplications}.
-                     * @param error Error, if any
-                     * @param [response] ListApplicationsResponse
-                     */
-                    type ListApplicationsCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.ListApplicationsResponse) => void;
-                }
-
-                /** Properties of a CreateApplicationRequest. */
-                interface ICreateApplicationRequest {
-
-                    /** CreateApplicationRequest parent */
-                    parent?: (string|null);
-
-                    /** CreateApplicationRequest application */
-                    application?: (google.cloud.talent.v4beta1.IApplication|null);
-                }
-
-                /** Represents a CreateApplicationRequest. */
-                class CreateApplicationRequest implements ICreateApplicationRequest {
-
-                    /**
-                     * Constructs a new CreateApplicationRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.ICreateApplicationRequest);
-
-                    /** CreateApplicationRequest parent. */
-                    public parent: string;
-
-                    /** CreateApplicationRequest application. */
-                    public application?: (google.cloud.talent.v4beta1.IApplication|null);
-
-                    /**
-                     * Creates a new CreateApplicationRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateApplicationRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.ICreateApplicationRequest): google.cloud.talent.v4beta1.CreateApplicationRequest;
-
-                    /**
-                     * Encodes the specified CreateApplicationRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.CreateApplicationRequest.verify|verify} messages.
-                     * @param message CreateApplicationRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.ICreateApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateApplicationRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.CreateApplicationRequest.verify|verify} messages.
-                     * @param message CreateApplicationRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICreateApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateApplicationRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateApplicationRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.CreateApplicationRequest;
-
-                    /**
-                     * Decodes a CreateApplicationRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateApplicationRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.CreateApplicationRequest;
-
-                    /**
-                     * Verifies a CreateApplicationRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateApplicationRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateApplicationRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.CreateApplicationRequest;
-
-                    /**
-                     * Creates a plain object from a CreateApplicationRequest message. Also converts values to other types if specified.
-                     * @param message CreateApplicationRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.CreateApplicationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateApplicationRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetApplicationRequest. */
-                interface IGetApplicationRequest {
-
-                    /** GetApplicationRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetApplicationRequest. */
-                class GetApplicationRequest implements IGetApplicationRequest {
-
-                    /**
-                     * Constructs a new GetApplicationRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IGetApplicationRequest);
-
-                    /** GetApplicationRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetApplicationRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetApplicationRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IGetApplicationRequest): google.cloud.talent.v4beta1.GetApplicationRequest;
-
-                    /**
-                     * Encodes the specified GetApplicationRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.GetApplicationRequest.verify|verify} messages.
-                     * @param message GetApplicationRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IGetApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetApplicationRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.GetApplicationRequest.verify|verify} messages.
-                     * @param message GetApplicationRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IGetApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetApplicationRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetApplicationRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.GetApplicationRequest;
-
-                    /**
-                     * Decodes a GetApplicationRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetApplicationRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.GetApplicationRequest;
-
-                    /**
-                     * Verifies a GetApplicationRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetApplicationRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetApplicationRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.GetApplicationRequest;
-
-                    /**
-                     * Creates a plain object from a GetApplicationRequest message. Also converts values to other types if specified.
-                     * @param message GetApplicationRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.GetApplicationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetApplicationRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an UpdateApplicationRequest. */
-                interface IUpdateApplicationRequest {
-
-                    /** UpdateApplicationRequest application */
-                    application?: (google.cloud.talent.v4beta1.IApplication|null);
-
-                    /** UpdateApplicationRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdateApplicationRequest. */
-                class UpdateApplicationRequest implements IUpdateApplicationRequest {
-
-                    /**
-                     * Constructs a new UpdateApplicationRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IUpdateApplicationRequest);
-
-                    /** UpdateApplicationRequest application. */
-                    public application?: (google.cloud.talent.v4beta1.IApplication|null);
-
-                    /** UpdateApplicationRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdateApplicationRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateApplicationRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IUpdateApplicationRequest): google.cloud.talent.v4beta1.UpdateApplicationRequest;
-
-                    /**
-                     * Encodes the specified UpdateApplicationRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateApplicationRequest.verify|verify} messages.
-                     * @param message UpdateApplicationRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IUpdateApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateApplicationRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateApplicationRequest.verify|verify} messages.
-                     * @param message UpdateApplicationRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IUpdateApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateApplicationRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateApplicationRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.UpdateApplicationRequest;
-
-                    /**
-                     * Decodes an UpdateApplicationRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateApplicationRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.UpdateApplicationRequest;
-
-                    /**
-                     * Verifies an UpdateApplicationRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateApplicationRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateApplicationRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.UpdateApplicationRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateApplicationRequest message. Also converts values to other types if specified.
-                     * @param message UpdateApplicationRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.UpdateApplicationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateApplicationRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeleteApplicationRequest. */
-                interface IDeleteApplicationRequest {
-
-                    /** DeleteApplicationRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a DeleteApplicationRequest. */
-                class DeleteApplicationRequest implements IDeleteApplicationRequest {
-
-                    /**
-                     * Constructs a new DeleteApplicationRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IDeleteApplicationRequest);
-
-                    /** DeleteApplicationRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new DeleteApplicationRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeleteApplicationRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IDeleteApplicationRequest): google.cloud.talent.v4beta1.DeleteApplicationRequest;
-
-                    /**
-                     * Encodes the specified DeleteApplicationRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteApplicationRequest.verify|verify} messages.
-                     * @param message DeleteApplicationRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IDeleteApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeleteApplicationRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteApplicationRequest.verify|verify} messages.
-                     * @param message DeleteApplicationRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IDeleteApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeleteApplicationRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeleteApplicationRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.DeleteApplicationRequest;
-
-                    /**
-                     * Decodes a DeleteApplicationRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeleteApplicationRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.DeleteApplicationRequest;
-
-                    /**
-                     * Verifies a DeleteApplicationRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeleteApplicationRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeleteApplicationRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.DeleteApplicationRequest;
-
-                    /**
-                     * Creates a plain object from a DeleteApplicationRequest message. Also converts values to other types if specified.
-                     * @param message DeleteApplicationRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.DeleteApplicationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeleteApplicationRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListApplicationsRequest. */
-                interface IListApplicationsRequest {
-
-                    /** ListApplicationsRequest parent */
-                    parent?: (string|null);
-
-                    /** ListApplicationsRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** ListApplicationsRequest pageSize */
-                    pageSize?: (number|null);
-                }
-
-                /** Represents a ListApplicationsRequest. */
-                class ListApplicationsRequest implements IListApplicationsRequest {
-
-                    /**
-                     * Constructs a new ListApplicationsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IListApplicationsRequest);
-
-                    /** ListApplicationsRequest parent. */
-                    public parent: string;
-
-                    /** ListApplicationsRequest pageToken. */
-                    public pageToken: string;
-
-                    /** ListApplicationsRequest pageSize. */
-                    public pageSize: number;
-
-                    /**
-                     * Creates a new ListApplicationsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListApplicationsRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IListApplicationsRequest): google.cloud.talent.v4beta1.ListApplicationsRequest;
-
-                    /**
-                     * Encodes the specified ListApplicationsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.ListApplicationsRequest.verify|verify} messages.
-                     * @param message ListApplicationsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IListApplicationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListApplicationsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListApplicationsRequest.verify|verify} messages.
-                     * @param message ListApplicationsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListApplicationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListApplicationsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListApplicationsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListApplicationsRequest;
-
-                    /**
-                     * Decodes a ListApplicationsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListApplicationsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListApplicationsRequest;
-
-                    /**
-                     * Verifies a ListApplicationsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListApplicationsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListApplicationsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListApplicationsRequest;
-
-                    /**
-                     * Creates a plain object from a ListApplicationsRequest message. Also converts values to other types if specified.
-                     * @param message ListApplicationsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.ListApplicationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListApplicationsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListApplicationsResponse. */
-                interface IListApplicationsResponse {
-
-                    /** ListApplicationsResponse applications */
-                    applications?: (google.cloud.talent.v4beta1.IApplication[]|null);
-
-                    /** ListApplicationsResponse nextPageToken */
-                    nextPageToken?: (string|null);
-
-                    /** ListApplicationsResponse metadata */
-                    metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
-                }
-
-                /** Represents a ListApplicationsResponse. */
-                class ListApplicationsResponse implements IListApplicationsResponse {
-
-                    /**
-                     * Constructs a new ListApplicationsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IListApplicationsResponse);
-
-                    /** ListApplicationsResponse applications. */
-                    public applications: google.cloud.talent.v4beta1.IApplication[];
-
-                    /** ListApplicationsResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /** ListApplicationsResponse metadata. */
-                    public metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
-
-                    /**
-                     * Creates a new ListApplicationsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListApplicationsResponse instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IListApplicationsResponse): google.cloud.talent.v4beta1.ListApplicationsResponse;
-
-                    /**
-                     * Encodes the specified ListApplicationsResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.ListApplicationsResponse.verify|verify} messages.
-                     * @param message ListApplicationsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IListApplicationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListApplicationsResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListApplicationsResponse.verify|verify} messages.
-                     * @param message ListApplicationsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListApplicationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListApplicationsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListApplicationsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListApplicationsResponse;
-
-                    /**
-                     * Decodes a ListApplicationsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListApplicationsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListApplicationsResponse;
-
-                    /**
-                     * Verifies a ListApplicationsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListApplicationsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListApplicationsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListApplicationsResponse;
-
-                    /**
-                     * Creates a plain object from a ListApplicationsResponse message. Also converts values to other types if specified.
-                     * @param message ListApplicationsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.ListApplicationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListApplicationsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of an Application. */
                 interface IApplication {
 
@@ -2773,6 +2068,966 @@ export namespace google {
                     CLIENT_SUBMISSION = 4
                 }
 
+                /** Represents an ApplicationService */
+                class ApplicationService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ApplicationService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ApplicationService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ApplicationService;
+
+                    /**
+                     * Calls CreateApplication.
+                     * @param request CreateApplicationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Application
+                     */
+                    public createApplication(request: google.cloud.talent.v4beta1.ICreateApplicationRequest, callback: google.cloud.talent.v4beta1.ApplicationService.CreateApplicationCallback): void;
+
+                    /**
+                     * Calls CreateApplication.
+                     * @param request CreateApplicationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createApplication(request: google.cloud.talent.v4beta1.ICreateApplicationRequest): Promise<google.cloud.talent.v4beta1.Application>;
+
+                    /**
+                     * Calls GetApplication.
+                     * @param request GetApplicationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Application
+                     */
+                    public getApplication(request: google.cloud.talent.v4beta1.IGetApplicationRequest, callback: google.cloud.talent.v4beta1.ApplicationService.GetApplicationCallback): void;
+
+                    /**
+                     * Calls GetApplication.
+                     * @param request GetApplicationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getApplication(request: google.cloud.talent.v4beta1.IGetApplicationRequest): Promise<google.cloud.talent.v4beta1.Application>;
+
+                    /**
+                     * Calls UpdateApplication.
+                     * @param request UpdateApplicationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Application
+                     */
+                    public updateApplication(request: google.cloud.talent.v4beta1.IUpdateApplicationRequest, callback: google.cloud.talent.v4beta1.ApplicationService.UpdateApplicationCallback): void;
+
+                    /**
+                     * Calls UpdateApplication.
+                     * @param request UpdateApplicationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateApplication(request: google.cloud.talent.v4beta1.IUpdateApplicationRequest): Promise<google.cloud.talent.v4beta1.Application>;
+
+                    /**
+                     * Calls DeleteApplication.
+                     * @param request DeleteApplicationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteApplication(request: google.cloud.talent.v4beta1.IDeleteApplicationRequest, callback: google.cloud.talent.v4beta1.ApplicationService.DeleteApplicationCallback): void;
+
+                    /**
+                     * Calls DeleteApplication.
+                     * @param request DeleteApplicationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteApplication(request: google.cloud.talent.v4beta1.IDeleteApplicationRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListApplications.
+                     * @param request ListApplicationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListApplicationsResponse
+                     */
+                    public listApplications(request: google.cloud.talent.v4beta1.IListApplicationsRequest, callback: google.cloud.talent.v4beta1.ApplicationService.ListApplicationsCallback): void;
+
+                    /**
+                     * Calls ListApplications.
+                     * @param request ListApplicationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listApplications(request: google.cloud.talent.v4beta1.IListApplicationsRequest): Promise<google.cloud.talent.v4beta1.ListApplicationsResponse>;
+                }
+
+                namespace ApplicationService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#createApplication}.
+                     * @param error Error, if any
+                     * @param [response] Application
+                     */
+                    type CreateApplicationCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Application) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#getApplication}.
+                     * @param error Error, if any
+                     * @param [response] Application
+                     */
+                    type GetApplicationCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Application) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#updateApplication}.
+                     * @param error Error, if any
+                     * @param [response] Application
+                     */
+                    type UpdateApplicationCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Application) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#deleteApplication}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteApplicationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ApplicationService#listApplications}.
+                     * @param error Error, if any
+                     * @param [response] ListApplicationsResponse
+                     */
+                    type ListApplicationsCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.ListApplicationsResponse) => void;
+                }
+
+                /** Properties of a CreateApplicationRequest. */
+                interface ICreateApplicationRequest {
+
+                    /** CreateApplicationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateApplicationRequest application */
+                    application?: (google.cloud.talent.v4beta1.IApplication|null);
+                }
+
+                /** Represents a CreateApplicationRequest. */
+                class CreateApplicationRequest implements ICreateApplicationRequest {
+
+                    /**
+                     * Constructs a new CreateApplicationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ICreateApplicationRequest);
+
+                    /** CreateApplicationRequest parent. */
+                    public parent: string;
+
+                    /** CreateApplicationRequest application. */
+                    public application?: (google.cloud.talent.v4beta1.IApplication|null);
+
+                    /**
+                     * Creates a new CreateApplicationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateApplicationRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.ICreateApplicationRequest): google.cloud.talent.v4beta1.CreateApplicationRequest;
+
+                    /**
+                     * Encodes the specified CreateApplicationRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.CreateApplicationRequest.verify|verify} messages.
+                     * @param message CreateApplicationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.ICreateApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateApplicationRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.CreateApplicationRequest.verify|verify} messages.
+                     * @param message CreateApplicationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICreateApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateApplicationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateApplicationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.CreateApplicationRequest;
+
+                    /**
+                     * Decodes a CreateApplicationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateApplicationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.CreateApplicationRequest;
+
+                    /**
+                     * Verifies a CreateApplicationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateApplicationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateApplicationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.CreateApplicationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateApplicationRequest message. Also converts values to other types if specified.
+                     * @param message CreateApplicationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.CreateApplicationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateApplicationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetApplicationRequest. */
+                interface IGetApplicationRequest {
+
+                    /** GetApplicationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetApplicationRequest. */
+                class GetApplicationRequest implements IGetApplicationRequest {
+
+                    /**
+                     * Constructs a new GetApplicationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IGetApplicationRequest);
+
+                    /** GetApplicationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetApplicationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetApplicationRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IGetApplicationRequest): google.cloud.talent.v4beta1.GetApplicationRequest;
+
+                    /**
+                     * Encodes the specified GetApplicationRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.GetApplicationRequest.verify|verify} messages.
+                     * @param message GetApplicationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IGetApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetApplicationRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.GetApplicationRequest.verify|verify} messages.
+                     * @param message GetApplicationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IGetApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetApplicationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetApplicationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.GetApplicationRequest;
+
+                    /**
+                     * Decodes a GetApplicationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetApplicationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.GetApplicationRequest;
+
+                    /**
+                     * Verifies a GetApplicationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetApplicationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetApplicationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.GetApplicationRequest;
+
+                    /**
+                     * Creates a plain object from a GetApplicationRequest message. Also converts values to other types if specified.
+                     * @param message GetApplicationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.GetApplicationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetApplicationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateApplicationRequest. */
+                interface IUpdateApplicationRequest {
+
+                    /** UpdateApplicationRequest application */
+                    application?: (google.cloud.talent.v4beta1.IApplication|null);
+
+                    /** UpdateApplicationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateApplicationRequest. */
+                class UpdateApplicationRequest implements IUpdateApplicationRequest {
+
+                    /**
+                     * Constructs a new UpdateApplicationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IUpdateApplicationRequest);
+
+                    /** UpdateApplicationRequest application. */
+                    public application?: (google.cloud.talent.v4beta1.IApplication|null);
+
+                    /** UpdateApplicationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateApplicationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateApplicationRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IUpdateApplicationRequest): google.cloud.talent.v4beta1.UpdateApplicationRequest;
+
+                    /**
+                     * Encodes the specified UpdateApplicationRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateApplicationRequest.verify|verify} messages.
+                     * @param message UpdateApplicationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IUpdateApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateApplicationRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateApplicationRequest.verify|verify} messages.
+                     * @param message UpdateApplicationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IUpdateApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateApplicationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateApplicationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.UpdateApplicationRequest;
+
+                    /**
+                     * Decodes an UpdateApplicationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateApplicationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.UpdateApplicationRequest;
+
+                    /**
+                     * Verifies an UpdateApplicationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateApplicationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateApplicationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.UpdateApplicationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateApplicationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateApplicationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.UpdateApplicationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateApplicationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteApplicationRequest. */
+                interface IDeleteApplicationRequest {
+
+                    /** DeleteApplicationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteApplicationRequest. */
+                class DeleteApplicationRequest implements IDeleteApplicationRequest {
+
+                    /**
+                     * Constructs a new DeleteApplicationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IDeleteApplicationRequest);
+
+                    /** DeleteApplicationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteApplicationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteApplicationRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IDeleteApplicationRequest): google.cloud.talent.v4beta1.DeleteApplicationRequest;
+
+                    /**
+                     * Encodes the specified DeleteApplicationRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteApplicationRequest.verify|verify} messages.
+                     * @param message DeleteApplicationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IDeleteApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteApplicationRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteApplicationRequest.verify|verify} messages.
+                     * @param message DeleteApplicationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IDeleteApplicationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteApplicationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteApplicationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.DeleteApplicationRequest;
+
+                    /**
+                     * Decodes a DeleteApplicationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteApplicationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.DeleteApplicationRequest;
+
+                    /**
+                     * Verifies a DeleteApplicationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteApplicationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteApplicationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.DeleteApplicationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteApplicationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteApplicationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.DeleteApplicationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteApplicationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListApplicationsRequest. */
+                interface IListApplicationsRequest {
+
+                    /** ListApplicationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListApplicationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListApplicationsRequest pageSize */
+                    pageSize?: (number|null);
+                }
+
+                /** Represents a ListApplicationsRequest. */
+                class ListApplicationsRequest implements IListApplicationsRequest {
+
+                    /**
+                     * Constructs a new ListApplicationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IListApplicationsRequest);
+
+                    /** ListApplicationsRequest parent. */
+                    public parent: string;
+
+                    /** ListApplicationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListApplicationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /**
+                     * Creates a new ListApplicationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListApplicationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IListApplicationsRequest): google.cloud.talent.v4beta1.ListApplicationsRequest;
+
+                    /**
+                     * Encodes the specified ListApplicationsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.ListApplicationsRequest.verify|verify} messages.
+                     * @param message ListApplicationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IListApplicationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListApplicationsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListApplicationsRequest.verify|verify} messages.
+                     * @param message ListApplicationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListApplicationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListApplicationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListApplicationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListApplicationsRequest;
+
+                    /**
+                     * Decodes a ListApplicationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListApplicationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListApplicationsRequest;
+
+                    /**
+                     * Verifies a ListApplicationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListApplicationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListApplicationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListApplicationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListApplicationsRequest message. Also converts values to other types if specified.
+                     * @param message ListApplicationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.ListApplicationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListApplicationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListApplicationsResponse. */
+                interface IListApplicationsResponse {
+
+                    /** ListApplicationsResponse applications */
+                    applications?: (google.cloud.talent.v4beta1.IApplication[]|null);
+
+                    /** ListApplicationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListApplicationsResponse metadata */
+                    metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
+                }
+
+                /** Represents a ListApplicationsResponse. */
+                class ListApplicationsResponse implements IListApplicationsResponse {
+
+                    /**
+                     * Constructs a new ListApplicationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IListApplicationsResponse);
+
+                    /** ListApplicationsResponse applications. */
+                    public applications: google.cloud.talent.v4beta1.IApplication[];
+
+                    /** ListApplicationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListApplicationsResponse metadata. */
+                    public metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
+
+                    /**
+                     * Creates a new ListApplicationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListApplicationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IListApplicationsResponse): google.cloud.talent.v4beta1.ListApplicationsResponse;
+
+                    /**
+                     * Encodes the specified ListApplicationsResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.ListApplicationsResponse.verify|verify} messages.
+                     * @param message ListApplicationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IListApplicationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListApplicationsResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListApplicationsResponse.verify|verify} messages.
+                     * @param message ListApplicationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListApplicationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListApplicationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListApplicationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListApplicationsResponse;
+
+                    /**
+                     * Decodes a ListApplicationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListApplicationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListApplicationsResponse;
+
+                    /**
+                     * Verifies a ListApplicationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListApplicationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListApplicationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListApplicationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListApplicationsResponse message. Also converts values to other types if specified.
+                     * @param message ListApplicationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.ListApplicationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListApplicationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Company. */
+                interface ICompany {
+
+                    /** Company name */
+                    name?: (string|null);
+
+                    /** Company displayName */
+                    displayName?: (string|null);
+
+                    /** Company externalId */
+                    externalId?: (string|null);
+
+                    /** Company size */
+                    size?: (google.cloud.talent.v4beta1.CompanySize|keyof typeof google.cloud.talent.v4beta1.CompanySize|null);
+
+                    /** Company headquartersAddress */
+                    headquartersAddress?: (string|null);
+
+                    /** Company hiringAgency */
+                    hiringAgency?: (boolean|null);
+
+                    /** Company eeoText */
+                    eeoText?: (string|null);
+
+                    /** Company websiteUri */
+                    websiteUri?: (string|null);
+
+                    /** Company careerSiteUri */
+                    careerSiteUri?: (string|null);
+
+                    /** Company imageUri */
+                    imageUri?: (string|null);
+
+                    /** Company keywordSearchableJobCustomAttributes */
+                    keywordSearchableJobCustomAttributes?: (string[]|null);
+
+                    /** Company derivedInfo */
+                    derivedInfo?: (google.cloud.talent.v4beta1.Company.IDerivedInfo|null);
+
+                    /** Company suspended */
+                    suspended?: (boolean|null);
+                }
+
+                /** Represents a Company. */
+                class Company implements ICompany {
+
+                    /**
+                     * Constructs a new Company.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ICompany);
+
+                    /** Company name. */
+                    public name: string;
+
+                    /** Company displayName. */
+                    public displayName: string;
+
+                    /** Company externalId. */
+                    public externalId: string;
+
+                    /** Company size. */
+                    public size: (google.cloud.talent.v4beta1.CompanySize|keyof typeof google.cloud.talent.v4beta1.CompanySize);
+
+                    /** Company headquartersAddress. */
+                    public headquartersAddress: string;
+
+                    /** Company hiringAgency. */
+                    public hiringAgency: boolean;
+
+                    /** Company eeoText. */
+                    public eeoText: string;
+
+                    /** Company websiteUri. */
+                    public websiteUri: string;
+
+                    /** Company careerSiteUri. */
+                    public careerSiteUri: string;
+
+                    /** Company imageUri. */
+                    public imageUri: string;
+
+                    /** Company keywordSearchableJobCustomAttributes. */
+                    public keywordSearchableJobCustomAttributes: string[];
+
+                    /** Company derivedInfo. */
+                    public derivedInfo?: (google.cloud.talent.v4beta1.Company.IDerivedInfo|null);
+
+                    /** Company suspended. */
+                    public suspended: boolean;
+
+                    /**
+                     * Creates a new Company instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Company instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.ICompany): google.cloud.talent.v4beta1.Company;
+
+                    /**
+                     * Encodes the specified Company message. Does not implicitly {@link google.cloud.talent.v4beta1.Company.verify|verify} messages.
+                     * @param message Company message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.ICompany, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Company message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.Company.verify|verify} messages.
+                     * @param message Company message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICompany, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Company message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Company
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.Company;
+
+                    /**
+                     * Decodes a Company message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Company
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.Company;
+
+                    /**
+                     * Verifies a Company message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Company message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Company
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.Company;
+
+                    /**
+                     * Creates a plain object from a Company message. Also converts values to other types if specified.
+                     * @param message Company
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.Company, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Company to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Company {
+
+                    /** Properties of a DerivedInfo. */
+                    interface IDerivedInfo {
+
+                        /** DerivedInfo headquartersLocation */
+                        headquartersLocation?: (google.cloud.talent.v4beta1.ILocation|null);
+                    }
+
+                    /** Represents a DerivedInfo. */
+                    class DerivedInfo implements IDerivedInfo {
+
+                        /**
+                         * Constructs a new DerivedInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.talent.v4beta1.Company.IDerivedInfo);
+
+                        /** DerivedInfo headquartersLocation. */
+                        public headquartersLocation?: (google.cloud.talent.v4beta1.ILocation|null);
+
+                        /**
+                         * Creates a new DerivedInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DerivedInfo instance
+                         */
+                        public static create(properties?: google.cloud.talent.v4beta1.Company.IDerivedInfo): google.cloud.talent.v4beta1.Company.DerivedInfo;
+
+                        /**
+                         * Encodes the specified DerivedInfo message. Does not implicitly {@link google.cloud.talent.v4beta1.Company.DerivedInfo.verify|verify} messages.
+                         * @param message DerivedInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.talent.v4beta1.Company.IDerivedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DerivedInfo message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.Company.DerivedInfo.verify|verify} messages.
+                         * @param message DerivedInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.talent.v4beta1.Company.IDerivedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DerivedInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DerivedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.Company.DerivedInfo;
+
+                        /**
+                         * Decodes a DerivedInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DerivedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.Company.DerivedInfo;
+
+                        /**
+                         * Verifies a DerivedInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DerivedInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DerivedInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.Company.DerivedInfo;
+
+                        /**
+                         * Creates a plain object from a DerivedInfo message. Also converts values to other types if specified.
+                         * @param message DerivedInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.talent.v4beta1.Company.DerivedInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DerivedInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Represents a CompanyService */
                 class CompanyService extends $protobuf.rpc.Service {
 
@@ -3484,261 +3739,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a Company. */
-                interface ICompany {
-
-                    /** Company name */
-                    name?: (string|null);
-
-                    /** Company displayName */
-                    displayName?: (string|null);
-
-                    /** Company externalId */
-                    externalId?: (string|null);
-
-                    /** Company size */
-                    size?: (google.cloud.talent.v4beta1.CompanySize|keyof typeof google.cloud.talent.v4beta1.CompanySize|null);
-
-                    /** Company headquartersAddress */
-                    headquartersAddress?: (string|null);
-
-                    /** Company hiringAgency */
-                    hiringAgency?: (boolean|null);
-
-                    /** Company eeoText */
-                    eeoText?: (string|null);
-
-                    /** Company websiteUri */
-                    websiteUri?: (string|null);
-
-                    /** Company careerSiteUri */
-                    careerSiteUri?: (string|null);
-
-                    /** Company imageUri */
-                    imageUri?: (string|null);
-
-                    /** Company keywordSearchableJobCustomAttributes */
-                    keywordSearchableJobCustomAttributes?: (string[]|null);
-
-                    /** Company derivedInfo */
-                    derivedInfo?: (google.cloud.talent.v4beta1.Company.IDerivedInfo|null);
-
-                    /** Company suspended */
-                    suspended?: (boolean|null);
-                }
-
-                /** Represents a Company. */
-                class Company implements ICompany {
-
-                    /**
-                     * Constructs a new Company.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.ICompany);
-
-                    /** Company name. */
-                    public name: string;
-
-                    /** Company displayName. */
-                    public displayName: string;
-
-                    /** Company externalId. */
-                    public externalId: string;
-
-                    /** Company size. */
-                    public size: (google.cloud.talent.v4beta1.CompanySize|keyof typeof google.cloud.talent.v4beta1.CompanySize);
-
-                    /** Company headquartersAddress. */
-                    public headquartersAddress: string;
-
-                    /** Company hiringAgency. */
-                    public hiringAgency: boolean;
-
-                    /** Company eeoText. */
-                    public eeoText: string;
-
-                    /** Company websiteUri. */
-                    public websiteUri: string;
-
-                    /** Company careerSiteUri. */
-                    public careerSiteUri: string;
-
-                    /** Company imageUri. */
-                    public imageUri: string;
-
-                    /** Company keywordSearchableJobCustomAttributes. */
-                    public keywordSearchableJobCustomAttributes: string[];
-
-                    /** Company derivedInfo. */
-                    public derivedInfo?: (google.cloud.talent.v4beta1.Company.IDerivedInfo|null);
-
-                    /** Company suspended. */
-                    public suspended: boolean;
-
-                    /**
-                     * Creates a new Company instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Company instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.ICompany): google.cloud.talent.v4beta1.Company;
-
-                    /**
-                     * Encodes the specified Company message. Does not implicitly {@link google.cloud.talent.v4beta1.Company.verify|verify} messages.
-                     * @param message Company message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.ICompany, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Company message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.Company.verify|verify} messages.
-                     * @param message Company message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICompany, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Company message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Company
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.Company;
-
-                    /**
-                     * Decodes a Company message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Company
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.Company;
-
-                    /**
-                     * Verifies a Company message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Company message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Company
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.Company;
-
-                    /**
-                     * Creates a plain object from a Company message. Also converts values to other types if specified.
-                     * @param message Company
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.Company, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Company to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace Company {
-
-                    /** Properties of a DerivedInfo. */
-                    interface IDerivedInfo {
-
-                        /** DerivedInfo headquartersLocation */
-                        headquartersLocation?: (google.cloud.talent.v4beta1.ILocation|null);
-                    }
-
-                    /** Represents a DerivedInfo. */
-                    class DerivedInfo implements IDerivedInfo {
-
-                        /**
-                         * Constructs a new DerivedInfo.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.talent.v4beta1.Company.IDerivedInfo);
-
-                        /** DerivedInfo headquartersLocation. */
-                        public headquartersLocation?: (google.cloud.talent.v4beta1.ILocation|null);
-
-                        /**
-                         * Creates a new DerivedInfo instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns DerivedInfo instance
-                         */
-                        public static create(properties?: google.cloud.talent.v4beta1.Company.IDerivedInfo): google.cloud.talent.v4beta1.Company.DerivedInfo;
-
-                        /**
-                         * Encodes the specified DerivedInfo message. Does not implicitly {@link google.cloud.talent.v4beta1.Company.DerivedInfo.verify|verify} messages.
-                         * @param message DerivedInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.talent.v4beta1.Company.IDerivedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified DerivedInfo message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.Company.DerivedInfo.verify|verify} messages.
-                         * @param message DerivedInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.talent.v4beta1.Company.IDerivedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a DerivedInfo message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns DerivedInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.Company.DerivedInfo;
-
-                        /**
-                         * Decodes a DerivedInfo message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns DerivedInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.Company.DerivedInfo;
-
-                        /**
-                         * Verifies a DerivedInfo message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a DerivedInfo message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns DerivedInfo
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.Company.DerivedInfo;
-
-                        /**
-                         * Creates a plain object from a DerivedInfo message. Also converts values to other types if specified.
-                         * @param message DerivedInfo
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.talent.v4beta1.Company.DerivedInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this DerivedInfo to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-                }
-
                 /** Represents a Completion */
                 class Completion extends $protobuf.rpc.Service {
 
@@ -4129,147 +4129,6 @@ export namespace google {
                     }
                 }
 
-                /** Represents an EventService */
-                class EventService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new EventService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new EventService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): EventService;
-
-                    /**
-                     * Calls CreateClientEvent.
-                     * @param request CreateClientEventRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ClientEvent
-                     */
-                    public createClientEvent(request: google.cloud.talent.v4beta1.ICreateClientEventRequest, callback: google.cloud.talent.v4beta1.EventService.CreateClientEventCallback): void;
-
-                    /**
-                     * Calls CreateClientEvent.
-                     * @param request CreateClientEventRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createClientEvent(request: google.cloud.talent.v4beta1.ICreateClientEventRequest): Promise<google.cloud.talent.v4beta1.ClientEvent>;
-                }
-
-                namespace EventService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.EventService#createClientEvent}.
-                     * @param error Error, if any
-                     * @param [response] ClientEvent
-                     */
-                    type CreateClientEventCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.ClientEvent) => void;
-                }
-
-                /** Properties of a CreateClientEventRequest. */
-                interface ICreateClientEventRequest {
-
-                    /** CreateClientEventRequest parent */
-                    parent?: (string|null);
-
-                    /** CreateClientEventRequest clientEvent */
-                    clientEvent?: (google.cloud.talent.v4beta1.IClientEvent|null);
-                }
-
-                /** Represents a CreateClientEventRequest. */
-                class CreateClientEventRequest implements ICreateClientEventRequest {
-
-                    /**
-                     * Constructs a new CreateClientEventRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.ICreateClientEventRequest);
-
-                    /** CreateClientEventRequest parent. */
-                    public parent: string;
-
-                    /** CreateClientEventRequest clientEvent. */
-                    public clientEvent?: (google.cloud.talent.v4beta1.IClientEvent|null);
-
-                    /**
-                     * Creates a new CreateClientEventRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateClientEventRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.ICreateClientEventRequest): google.cloud.talent.v4beta1.CreateClientEventRequest;
-
-                    /**
-                     * Encodes the specified CreateClientEventRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.CreateClientEventRequest.verify|verify} messages.
-                     * @param message CreateClientEventRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.ICreateClientEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateClientEventRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.CreateClientEventRequest.verify|verify} messages.
-                     * @param message CreateClientEventRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICreateClientEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateClientEventRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateClientEventRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.CreateClientEventRequest;
-
-                    /**
-                     * Decodes a CreateClientEventRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateClientEventRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.CreateClientEventRequest;
-
-                    /**
-                     * Verifies a CreateClientEventRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateClientEventRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateClientEventRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.CreateClientEventRequest;
-
-                    /**
-                     * Creates a plain object from a CreateClientEventRequest message. Also converts values to other types if specified.
-                     * @param message CreateClientEventRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.CreateClientEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateClientEventRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a ClientEvent. */
                 interface IClientEvent {
 
@@ -4631,11 +4490,11 @@ export namespace google {
                     }
                 }
 
-                /** Represents a JobService */
-                class JobService extends $protobuf.rpc.Service {
+                /** Represents an EventService */
+                class EventService extends $protobuf.rpc.Service {
 
                     /**
-                     * Constructs a new JobService service.
+                     * Constructs a new EventService service.
                      * @param rpcImpl RPC implementation
                      * @param [requestDelimited=false] Whether requests are length-delimited
                      * @param [responseDelimited=false] Whether responses are length-delimited
@@ -4643,1958 +4502,133 @@ export namespace google {
                     constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
 
                     /**
-                     * Creates new JobService service using the specified rpc implementation.
+                     * Creates new EventService service using the specified rpc implementation.
                      * @param rpcImpl RPC implementation
                      * @param [requestDelimited=false] Whether requests are length-delimited
                      * @param [responseDelimited=false] Whether responses are length-delimited
                      * @returns RPC service. Useful where requests and/or responses are streamed.
                      */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): JobService;
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): EventService;
 
                     /**
-                     * Calls CreateJob.
-                     * @param request CreateJobRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Job
+                     * Calls CreateClientEvent.
+                     * @param request CreateClientEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ClientEvent
                      */
-                    public createJob(request: google.cloud.talent.v4beta1.ICreateJobRequest, callback: google.cloud.talent.v4beta1.JobService.CreateJobCallback): void;
+                    public createClientEvent(request: google.cloud.talent.v4beta1.ICreateClientEventRequest, callback: google.cloud.talent.v4beta1.EventService.CreateClientEventCallback): void;
 
                     /**
-                     * Calls CreateJob.
-                     * @param request CreateJobRequest message or plain object
+                     * Calls CreateClientEvent.
+                     * @param request CreateClientEventRequest message or plain object
                      * @returns Promise
                      */
-                    public createJob(request: google.cloud.talent.v4beta1.ICreateJobRequest): Promise<google.cloud.talent.v4beta1.Job>;
-
-                    /**
-                     * Calls BatchCreateJobs.
-                     * @param request BatchCreateJobsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public batchCreateJobs(request: google.cloud.talent.v4beta1.IBatchCreateJobsRequest, callback: google.cloud.talent.v4beta1.JobService.BatchCreateJobsCallback): void;
-
-                    /**
-                     * Calls BatchCreateJobs.
-                     * @param request BatchCreateJobsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public batchCreateJobs(request: google.cloud.talent.v4beta1.IBatchCreateJobsRequest): Promise<google.longrunning.Operation>;
-
-                    /**
-                     * Calls GetJob.
-                     * @param request GetJobRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Job
-                     */
-                    public getJob(request: google.cloud.talent.v4beta1.IGetJobRequest, callback: google.cloud.talent.v4beta1.JobService.GetJobCallback): void;
-
-                    /**
-                     * Calls GetJob.
-                     * @param request GetJobRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getJob(request: google.cloud.talent.v4beta1.IGetJobRequest): Promise<google.cloud.talent.v4beta1.Job>;
-
-                    /**
-                     * Calls UpdateJob.
-                     * @param request UpdateJobRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Job
-                     */
-                    public updateJob(request: google.cloud.talent.v4beta1.IUpdateJobRequest, callback: google.cloud.talent.v4beta1.JobService.UpdateJobCallback): void;
-
-                    /**
-                     * Calls UpdateJob.
-                     * @param request UpdateJobRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateJob(request: google.cloud.talent.v4beta1.IUpdateJobRequest): Promise<google.cloud.talent.v4beta1.Job>;
-
-                    /**
-                     * Calls BatchUpdateJobs.
-                     * @param request BatchUpdateJobsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public batchUpdateJobs(request: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest, callback: google.cloud.talent.v4beta1.JobService.BatchUpdateJobsCallback): void;
-
-                    /**
-                     * Calls BatchUpdateJobs.
-                     * @param request BatchUpdateJobsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public batchUpdateJobs(request: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest): Promise<google.longrunning.Operation>;
-
-                    /**
-                     * Calls DeleteJob.
-                     * @param request DeleteJobRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteJob(request: google.cloud.talent.v4beta1.IDeleteJobRequest, callback: google.cloud.talent.v4beta1.JobService.DeleteJobCallback): void;
-
-                    /**
-                     * Calls DeleteJob.
-                     * @param request DeleteJobRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteJob(request: google.cloud.talent.v4beta1.IDeleteJobRequest): Promise<google.protobuf.Empty>;
-
-                    /**
-                     * Calls BatchDeleteJobs.
-                     * @param request BatchDeleteJobsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public batchDeleteJobs(request: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest, callback: google.cloud.talent.v4beta1.JobService.BatchDeleteJobsCallback): void;
-
-                    /**
-                     * Calls BatchDeleteJobs.
-                     * @param request BatchDeleteJobsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public batchDeleteJobs(request: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest): Promise<google.protobuf.Empty>;
-
-                    /**
-                     * Calls ListJobs.
-                     * @param request ListJobsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListJobsResponse
-                     */
-                    public listJobs(request: google.cloud.talent.v4beta1.IListJobsRequest, callback: google.cloud.talent.v4beta1.JobService.ListJobsCallback): void;
-
-                    /**
-                     * Calls ListJobs.
-                     * @param request ListJobsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listJobs(request: google.cloud.talent.v4beta1.IListJobsRequest): Promise<google.cloud.talent.v4beta1.ListJobsResponse>;
-
-                    /**
-                     * Calls SearchJobs.
-                     * @param request SearchJobsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and SearchJobsResponse
-                     */
-                    public searchJobs(request: google.cloud.talent.v4beta1.ISearchJobsRequest, callback: google.cloud.talent.v4beta1.JobService.SearchJobsCallback): void;
-
-                    /**
-                     * Calls SearchJobs.
-                     * @param request SearchJobsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public searchJobs(request: google.cloud.talent.v4beta1.ISearchJobsRequest): Promise<google.cloud.talent.v4beta1.SearchJobsResponse>;
-
-                    /**
-                     * Calls SearchJobsForAlert.
-                     * @param request SearchJobsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and SearchJobsResponse
-                     */
-                    public searchJobsForAlert(request: google.cloud.talent.v4beta1.ISearchJobsRequest, callback: google.cloud.talent.v4beta1.JobService.SearchJobsForAlertCallback): void;
-
-                    /**
-                     * Calls SearchJobsForAlert.
-                     * @param request SearchJobsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public searchJobsForAlert(request: google.cloud.talent.v4beta1.ISearchJobsRequest): Promise<google.cloud.talent.v4beta1.SearchJobsResponse>;
+                    public createClientEvent(request: google.cloud.talent.v4beta1.ICreateClientEventRequest): Promise<google.cloud.talent.v4beta1.ClientEvent>;
                 }
 
-                namespace JobService {
+                namespace EventService {
 
                     /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#createJob}.
+                     * Callback as used by {@link google.cloud.talent.v4beta1.EventService#createClientEvent}.
                      * @param error Error, if any
-                     * @param [response] Job
+                     * @param [response] ClientEvent
                      */
-                    type CreateJobCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Job) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#batchCreateJobs}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type BatchCreateJobsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#getJob}.
-                     * @param error Error, if any
-                     * @param [response] Job
-                     */
-                    type GetJobCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Job) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#updateJob}.
-                     * @param error Error, if any
-                     * @param [response] Job
-                     */
-                    type UpdateJobCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Job) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#batchUpdateJobs}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type BatchUpdateJobsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#deleteJob}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteJobCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#batchDeleteJobs}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type BatchDeleteJobsCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#listJobs}.
-                     * @param error Error, if any
-                     * @param [response] ListJobsResponse
-                     */
-                    type ListJobsCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.ListJobsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#searchJobs}.
-                     * @param error Error, if any
-                     * @param [response] SearchJobsResponse
-                     */
-                    type SearchJobsCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.SearchJobsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#searchJobsForAlert}.
-                     * @param error Error, if any
-                     * @param [response] SearchJobsResponse
-                     */
-                    type SearchJobsForAlertCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.SearchJobsResponse) => void;
+                    type CreateClientEventCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.ClientEvent) => void;
                 }
 
-                /** Properties of a CreateJobRequest. */
-                interface ICreateJobRequest {
+                /** Properties of a CreateClientEventRequest. */
+                interface ICreateClientEventRequest {
 
-                    /** CreateJobRequest parent */
+                    /** CreateClientEventRequest parent */
                     parent?: (string|null);
 
-                    /** CreateJobRequest job */
-                    job?: (google.cloud.talent.v4beta1.IJob|null);
+                    /** CreateClientEventRequest clientEvent */
+                    clientEvent?: (google.cloud.talent.v4beta1.IClientEvent|null);
                 }
 
-                /** Represents a CreateJobRequest. */
-                class CreateJobRequest implements ICreateJobRequest {
+                /** Represents a CreateClientEventRequest. */
+                class CreateClientEventRequest implements ICreateClientEventRequest {
 
                     /**
-                     * Constructs a new CreateJobRequest.
+                     * Constructs a new CreateClientEventRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.talent.v4beta1.ICreateJobRequest);
+                    constructor(properties?: google.cloud.talent.v4beta1.ICreateClientEventRequest);
 
-                    /** CreateJobRequest parent. */
+                    /** CreateClientEventRequest parent. */
                     public parent: string;
 
-                    /** CreateJobRequest job. */
-                    public job?: (google.cloud.talent.v4beta1.IJob|null);
+                    /** CreateClientEventRequest clientEvent. */
+                    public clientEvent?: (google.cloud.talent.v4beta1.IClientEvent|null);
 
                     /**
-                     * Creates a new CreateJobRequest instance using the specified properties.
+                     * Creates a new CreateClientEventRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns CreateJobRequest instance
+                     * @returns CreateClientEventRequest instance
                      */
-                    public static create(properties?: google.cloud.talent.v4beta1.ICreateJobRequest): google.cloud.talent.v4beta1.CreateJobRequest;
+                    public static create(properties?: google.cloud.talent.v4beta1.ICreateClientEventRequest): google.cloud.talent.v4beta1.CreateClientEventRequest;
 
                     /**
-                     * Encodes the specified CreateJobRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.CreateJobRequest.verify|verify} messages.
-                     * @param message CreateJobRequest message or plain object to encode
+                     * Encodes the specified CreateClientEventRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.CreateClientEventRequest.verify|verify} messages.
+                     * @param message CreateClientEventRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.talent.v4beta1.ICreateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.talent.v4beta1.ICreateClientEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified CreateJobRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.CreateJobRequest.verify|verify} messages.
-                     * @param message CreateJobRequest message or plain object to encode
+                     * Encodes the specified CreateClientEventRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.CreateClientEventRequest.verify|verify} messages.
+                     * @param message CreateClientEventRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICreateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICreateClientEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a CreateJobRequest message from the specified reader or buffer.
+                     * Decodes a CreateClientEventRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns CreateJobRequest
+                     * @returns CreateClientEventRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.CreateJobRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.CreateClientEventRequest;
 
                     /**
-                     * Decodes a CreateJobRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a CreateClientEventRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns CreateJobRequest
+                     * @returns CreateClientEventRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.CreateJobRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.CreateClientEventRequest;
 
                     /**
-                     * Verifies a CreateJobRequest message.
+                     * Verifies a CreateClientEventRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a CreateJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a CreateClientEventRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns CreateJobRequest
+                     * @returns CreateClientEventRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.CreateJobRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.CreateClientEventRequest;
 
                     /**
-                     * Creates a plain object from a CreateJobRequest message. Also converts values to other types if specified.
-                     * @param message CreateJobRequest
+                     * Creates a plain object from a CreateClientEventRequest message. Also converts values to other types if specified.
+                     * @param message CreateClientEventRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.talent.v4beta1.CreateJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.talent.v4beta1.CreateClientEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this CreateJobRequest to JSON.
+                     * Converts this CreateClientEventRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetJobRequest. */
-                interface IGetJobRequest {
-
-                    /** GetJobRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetJobRequest. */
-                class GetJobRequest implements IGetJobRequest {
-
-                    /**
-                     * Constructs a new GetJobRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IGetJobRequest);
-
-                    /** GetJobRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetJobRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetJobRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IGetJobRequest): google.cloud.talent.v4beta1.GetJobRequest;
-
-                    /**
-                     * Encodes the specified GetJobRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.GetJobRequest.verify|verify} messages.
-                     * @param message GetJobRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IGetJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetJobRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.GetJobRequest.verify|verify} messages.
-                     * @param message GetJobRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IGetJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetJobRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetJobRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.GetJobRequest;
-
-                    /**
-                     * Decodes a GetJobRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetJobRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.GetJobRequest;
-
-                    /**
-                     * Verifies a GetJobRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetJobRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetJobRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.GetJobRequest;
-
-                    /**
-                     * Creates a plain object from a GetJobRequest message. Also converts values to other types if specified.
-                     * @param message GetJobRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.GetJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetJobRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an UpdateJobRequest. */
-                interface IUpdateJobRequest {
-
-                    /** UpdateJobRequest job */
-                    job?: (google.cloud.talent.v4beta1.IJob|null);
-
-                    /** UpdateJobRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdateJobRequest. */
-                class UpdateJobRequest implements IUpdateJobRequest {
-
-                    /**
-                     * Constructs a new UpdateJobRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IUpdateJobRequest);
-
-                    /** UpdateJobRequest job. */
-                    public job?: (google.cloud.talent.v4beta1.IJob|null);
-
-                    /** UpdateJobRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdateJobRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateJobRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IUpdateJobRequest): google.cloud.talent.v4beta1.UpdateJobRequest;
-
-                    /**
-                     * Encodes the specified UpdateJobRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateJobRequest.verify|verify} messages.
-                     * @param message UpdateJobRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IUpdateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateJobRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateJobRequest.verify|verify} messages.
-                     * @param message UpdateJobRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IUpdateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateJobRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateJobRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.UpdateJobRequest;
-
-                    /**
-                     * Decodes an UpdateJobRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateJobRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.UpdateJobRequest;
-
-                    /**
-                     * Verifies an UpdateJobRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateJobRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateJobRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.UpdateJobRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateJobRequest message. Also converts values to other types if specified.
-                     * @param message UpdateJobRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.UpdateJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateJobRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeleteJobRequest. */
-                interface IDeleteJobRequest {
-
-                    /** DeleteJobRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a DeleteJobRequest. */
-                class DeleteJobRequest implements IDeleteJobRequest {
-
-                    /**
-                     * Constructs a new DeleteJobRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IDeleteJobRequest);
-
-                    /** DeleteJobRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new DeleteJobRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeleteJobRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IDeleteJobRequest): google.cloud.talent.v4beta1.DeleteJobRequest;
-
-                    /**
-                     * Encodes the specified DeleteJobRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteJobRequest.verify|verify} messages.
-                     * @param message DeleteJobRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IDeleteJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeleteJobRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteJobRequest.verify|verify} messages.
-                     * @param message DeleteJobRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IDeleteJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeleteJobRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeleteJobRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.DeleteJobRequest;
-
-                    /**
-                     * Decodes a DeleteJobRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeleteJobRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.DeleteJobRequest;
-
-                    /**
-                     * Verifies a DeleteJobRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeleteJobRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeleteJobRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.DeleteJobRequest;
-
-                    /**
-                     * Creates a plain object from a DeleteJobRequest message. Also converts values to other types if specified.
-                     * @param message DeleteJobRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.DeleteJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeleteJobRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a BatchDeleteJobsRequest. */
-                interface IBatchDeleteJobsRequest {
-
-                    /** BatchDeleteJobsRequest parent */
-                    parent?: (string|null);
-
-                    /** BatchDeleteJobsRequest filter */
-                    filter?: (string|null);
-                }
-
-                /** Represents a BatchDeleteJobsRequest. */
-                class BatchDeleteJobsRequest implements IBatchDeleteJobsRequest {
-
-                    /**
-                     * Constructs a new BatchDeleteJobsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest);
-
-                    /** BatchDeleteJobsRequest parent. */
-                    public parent: string;
-
-                    /** BatchDeleteJobsRequest filter. */
-                    public filter: string;
-
-                    /**
-                     * Creates a new BatchDeleteJobsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BatchDeleteJobsRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest): google.cloud.talent.v4beta1.BatchDeleteJobsRequest;
-
-                    /**
-                     * Encodes the specified BatchDeleteJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.BatchDeleteJobsRequest.verify|verify} messages.
-                     * @param message BatchDeleteJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BatchDeleteJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.BatchDeleteJobsRequest.verify|verify} messages.
-                     * @param message BatchDeleteJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BatchDeleteJobsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BatchDeleteJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.BatchDeleteJobsRequest;
-
-                    /**
-                     * Decodes a BatchDeleteJobsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BatchDeleteJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.BatchDeleteJobsRequest;
-
-                    /**
-                     * Verifies a BatchDeleteJobsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BatchDeleteJobsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BatchDeleteJobsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.BatchDeleteJobsRequest;
-
-                    /**
-                     * Creates a plain object from a BatchDeleteJobsRequest message. Also converts values to other types if specified.
-                     * @param message BatchDeleteJobsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.BatchDeleteJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BatchDeleteJobsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListJobsRequest. */
-                interface IListJobsRequest {
-
-                    /** ListJobsRequest parent */
-                    parent?: (string|null);
-
-                    /** ListJobsRequest filter */
-                    filter?: (string|null);
-
-                    /** ListJobsRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** ListJobsRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListJobsRequest jobView */
-                    jobView?: (google.cloud.talent.v4beta1.JobView|keyof typeof google.cloud.talent.v4beta1.JobView|null);
-                }
-
-                /** Represents a ListJobsRequest. */
-                class ListJobsRequest implements IListJobsRequest {
-
-                    /**
-                     * Constructs a new ListJobsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IListJobsRequest);
-
-                    /** ListJobsRequest parent. */
-                    public parent: string;
-
-                    /** ListJobsRequest filter. */
-                    public filter: string;
-
-                    /** ListJobsRequest pageToken. */
-                    public pageToken: string;
-
-                    /** ListJobsRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListJobsRequest jobView. */
-                    public jobView: (google.cloud.talent.v4beta1.JobView|keyof typeof google.cloud.talent.v4beta1.JobView);
-
-                    /**
-                     * Creates a new ListJobsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListJobsRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IListJobsRequest): google.cloud.talent.v4beta1.ListJobsRequest;
-
-                    /**
-                     * Encodes the specified ListJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.ListJobsRequest.verify|verify} messages.
-                     * @param message ListJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IListJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListJobsRequest.verify|verify} messages.
-                     * @param message ListJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListJobsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListJobsRequest;
-
-                    /**
-                     * Decodes a ListJobsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListJobsRequest;
-
-                    /**
-                     * Verifies a ListJobsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListJobsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListJobsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListJobsRequest;
-
-                    /**
-                     * Creates a plain object from a ListJobsRequest message. Also converts values to other types if specified.
-                     * @param message ListJobsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.ListJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListJobsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** JobView enum. */
-                enum JobView {
-                    JOB_VIEW_UNSPECIFIED = 0,
-                    JOB_VIEW_ID_ONLY = 1,
-                    JOB_VIEW_MINIMAL = 2,
-                    JOB_VIEW_SMALL = 3,
-                    JOB_VIEW_FULL = 4
-                }
-
-                /** Properties of a ListJobsResponse. */
-                interface IListJobsResponse {
-
-                    /** ListJobsResponse jobs */
-                    jobs?: (google.cloud.talent.v4beta1.IJob[]|null);
-
-                    /** ListJobsResponse nextPageToken */
-                    nextPageToken?: (string|null);
-
-                    /** ListJobsResponse metadata */
-                    metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
-                }
-
-                /** Represents a ListJobsResponse. */
-                class ListJobsResponse implements IListJobsResponse {
-
-                    /**
-                     * Constructs a new ListJobsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IListJobsResponse);
-
-                    /** ListJobsResponse jobs. */
-                    public jobs: google.cloud.talent.v4beta1.IJob[];
-
-                    /** ListJobsResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /** ListJobsResponse metadata. */
-                    public metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
-
-                    /**
-                     * Creates a new ListJobsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListJobsResponse instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IListJobsResponse): google.cloud.talent.v4beta1.ListJobsResponse;
-
-                    /**
-                     * Encodes the specified ListJobsResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.ListJobsResponse.verify|verify} messages.
-                     * @param message ListJobsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IListJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListJobsResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListJobsResponse.verify|verify} messages.
-                     * @param message ListJobsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListJobsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListJobsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListJobsResponse;
-
-                    /**
-                     * Decodes a ListJobsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListJobsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListJobsResponse;
-
-                    /**
-                     * Verifies a ListJobsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListJobsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListJobsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListJobsResponse;
-
-                    /**
-                     * Creates a plain object from a ListJobsResponse message. Also converts values to other types if specified.
-                     * @param message ListJobsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.ListJobsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListJobsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a SearchJobsRequest. */
-                interface ISearchJobsRequest {
-
-                    /** SearchJobsRequest parent */
-                    parent?: (string|null);
-
-                    /** SearchJobsRequest searchMode */
-                    searchMode?: (google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode|null);
-
-                    /** SearchJobsRequest requestMetadata */
-                    requestMetadata?: (google.cloud.talent.v4beta1.IRequestMetadata|null);
-
-                    /** SearchJobsRequest jobQuery */
-                    jobQuery?: (google.cloud.talent.v4beta1.IJobQuery|null);
-
-                    /** SearchJobsRequest enableBroadening */
-                    enableBroadening?: (boolean|null);
-
-                    /** SearchJobsRequest requirePreciseResultSize */
-                    requirePreciseResultSize?: (boolean|null);
-
-                    /** SearchJobsRequest histogramQueries */
-                    histogramQueries?: (google.cloud.talent.v4beta1.IHistogramQuery[]|null);
-
-                    /** SearchJobsRequest jobView */
-                    jobView?: (google.cloud.talent.v4beta1.JobView|keyof typeof google.cloud.talent.v4beta1.JobView|null);
-
-                    /** SearchJobsRequest offset */
-                    offset?: (number|null);
-
-                    /** SearchJobsRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** SearchJobsRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** SearchJobsRequest orderBy */
-                    orderBy?: (string|null);
-
-                    /** SearchJobsRequest diversificationLevel */
-                    diversificationLevel?: (google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel|null);
-
-                    /** SearchJobsRequest customRankingInfo */
-                    customRankingInfo?: (google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo|null);
-
-                    /** SearchJobsRequest disableKeywordMatch */
-                    disableKeywordMatch?: (boolean|null);
-                }
-
-                /** Represents a SearchJobsRequest. */
-                class SearchJobsRequest implements ISearchJobsRequest {
-
-                    /**
-                     * Constructs a new SearchJobsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.ISearchJobsRequest);
-
-                    /** SearchJobsRequest parent. */
-                    public parent: string;
-
-                    /** SearchJobsRequest searchMode. */
-                    public searchMode: (google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode);
-
-                    /** SearchJobsRequest requestMetadata. */
-                    public requestMetadata?: (google.cloud.talent.v4beta1.IRequestMetadata|null);
-
-                    /** SearchJobsRequest jobQuery. */
-                    public jobQuery?: (google.cloud.talent.v4beta1.IJobQuery|null);
-
-                    /** SearchJobsRequest enableBroadening. */
-                    public enableBroadening: boolean;
-
-                    /** SearchJobsRequest requirePreciseResultSize. */
-                    public requirePreciseResultSize: boolean;
-
-                    /** SearchJobsRequest histogramQueries. */
-                    public histogramQueries: google.cloud.talent.v4beta1.IHistogramQuery[];
-
-                    /** SearchJobsRequest jobView. */
-                    public jobView: (google.cloud.talent.v4beta1.JobView|keyof typeof google.cloud.talent.v4beta1.JobView);
-
-                    /** SearchJobsRequest offset. */
-                    public offset: number;
-
-                    /** SearchJobsRequest pageSize. */
-                    public pageSize: number;
-
-                    /** SearchJobsRequest pageToken. */
-                    public pageToken: string;
-
-                    /** SearchJobsRequest orderBy. */
-                    public orderBy: string;
-
-                    /** SearchJobsRequest diversificationLevel. */
-                    public diversificationLevel: (google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel);
-
-                    /** SearchJobsRequest customRankingInfo. */
-                    public customRankingInfo?: (google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo|null);
-
-                    /** SearchJobsRequest disableKeywordMatch. */
-                    public disableKeywordMatch: boolean;
-
-                    /**
-                     * Creates a new SearchJobsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SearchJobsRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.ISearchJobsRequest): google.cloud.talent.v4beta1.SearchJobsRequest;
-
-                    /**
-                     * Encodes the specified SearchJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsRequest.verify|verify} messages.
-                     * @param message SearchJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.ISearchJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SearchJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsRequest.verify|verify} messages.
-                     * @param message SearchJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISearchJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SearchJobsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SearchJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsRequest;
-
-                    /**
-                     * Decodes a SearchJobsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SearchJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsRequest;
-
-                    /**
-                     * Verifies a SearchJobsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SearchJobsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SearchJobsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsRequest;
-
-                    /**
-                     * Creates a plain object from a SearchJobsRequest message. Also converts values to other types if specified.
-                     * @param message SearchJobsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.SearchJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SearchJobsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace SearchJobsRequest {
-
-                    /** Properties of a CustomRankingInfo. */
-                    interface ICustomRankingInfo {
-
-                        /** CustomRankingInfo importanceLevel */
-                        importanceLevel?: (google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel|null);
-
-                        /** CustomRankingInfo rankingExpression */
-                        rankingExpression?: (string|null);
-                    }
-
-                    /** Represents a CustomRankingInfo. */
-                    class CustomRankingInfo implements ICustomRankingInfo {
-
-                        /**
-                         * Constructs a new CustomRankingInfo.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo);
-
-                        /** CustomRankingInfo importanceLevel. */
-                        public importanceLevel: (google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel);
-
-                        /** CustomRankingInfo rankingExpression. */
-                        public rankingExpression: string;
-
-                        /**
-                         * Creates a new CustomRankingInfo instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns CustomRankingInfo instance
-                         */
-                        public static create(properties?: google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo): google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo;
-
-                        /**
-                         * Encodes the specified CustomRankingInfo message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.verify|verify} messages.
-                         * @param message CustomRankingInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified CustomRankingInfo message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.verify|verify} messages.
-                         * @param message CustomRankingInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a CustomRankingInfo message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns CustomRankingInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo;
-
-                        /**
-                         * Decodes a CustomRankingInfo message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns CustomRankingInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo;
-
-                        /**
-                         * Verifies a CustomRankingInfo message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a CustomRankingInfo message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns CustomRankingInfo
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo;
-
-                        /**
-                         * Creates a plain object from a CustomRankingInfo message. Also converts values to other types if specified.
-                         * @param message CustomRankingInfo
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this CustomRankingInfo to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace CustomRankingInfo {
-
-                        /** ImportanceLevel enum. */
-                        enum ImportanceLevel {
-                            IMPORTANCE_LEVEL_UNSPECIFIED = 0,
-                            NONE = 1,
-                            LOW = 2,
-                            MILD = 3,
-                            MEDIUM = 4,
-                            HIGH = 5,
-                            EXTREME = 6
-                        }
-                    }
-
-                    /** SearchMode enum. */
-                    enum SearchMode {
-                        SEARCH_MODE_UNSPECIFIED = 0,
-                        JOB_SEARCH = 1,
-                        FEATURED_JOB_SEARCH = 2
-                    }
-
-                    /** DiversificationLevel enum. */
-                    enum DiversificationLevel {
-                        DIVERSIFICATION_LEVEL_UNSPECIFIED = 0,
-                        DISABLED = 1,
-                        SIMPLE = 2
-                    }
-                }
-
-                /** Properties of a SearchJobsResponse. */
-                interface ISearchJobsResponse {
-
-                    /** SearchJobsResponse matchingJobs */
-                    matchingJobs?: (google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[]|null);
-
-                    /** SearchJobsResponse histogramQueryResults */
-                    histogramQueryResults?: (google.cloud.talent.v4beta1.IHistogramQueryResult[]|null);
-
-                    /** SearchJobsResponse nextPageToken */
-                    nextPageToken?: (string|null);
-
-                    /** SearchJobsResponse locationFilters */
-                    locationFilters?: (google.cloud.talent.v4beta1.ILocation[]|null);
-
-                    /** SearchJobsResponse estimatedTotalSize */
-                    estimatedTotalSize?: (number|null);
-
-                    /** SearchJobsResponse totalSize */
-                    totalSize?: (number|null);
-
-                    /** SearchJobsResponse metadata */
-                    metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
-
-                    /** SearchJobsResponse broadenedQueryJobsCount */
-                    broadenedQueryJobsCount?: (number|null);
-
-                    /** SearchJobsResponse spellCorrection */
-                    spellCorrection?: (google.cloud.talent.v4beta1.ISpellingCorrection|null);
-                }
-
-                /** Represents a SearchJobsResponse. */
-                class SearchJobsResponse implements ISearchJobsResponse {
-
-                    /**
-                     * Constructs a new SearchJobsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.ISearchJobsResponse);
-
-                    /** SearchJobsResponse matchingJobs. */
-                    public matchingJobs: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[];
-
-                    /** SearchJobsResponse histogramQueryResults. */
-                    public histogramQueryResults: google.cloud.talent.v4beta1.IHistogramQueryResult[];
-
-                    /** SearchJobsResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /** SearchJobsResponse locationFilters. */
-                    public locationFilters: google.cloud.talent.v4beta1.ILocation[];
-
-                    /** SearchJobsResponse estimatedTotalSize. */
-                    public estimatedTotalSize: number;
-
-                    /** SearchJobsResponse totalSize. */
-                    public totalSize: number;
-
-                    /** SearchJobsResponse metadata. */
-                    public metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
-
-                    /** SearchJobsResponse broadenedQueryJobsCount. */
-                    public broadenedQueryJobsCount: number;
-
-                    /** SearchJobsResponse spellCorrection. */
-                    public spellCorrection?: (google.cloud.talent.v4beta1.ISpellingCorrection|null);
-
-                    /**
-                     * Creates a new SearchJobsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SearchJobsResponse instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.ISearchJobsResponse): google.cloud.talent.v4beta1.SearchJobsResponse;
-
-                    /**
-                     * Encodes the specified SearchJobsResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.verify|verify} messages.
-                     * @param message SearchJobsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.ISearchJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SearchJobsResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.verify|verify} messages.
-                     * @param message SearchJobsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISearchJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SearchJobsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SearchJobsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsResponse;
-
-                    /**
-                     * Decodes a SearchJobsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SearchJobsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsResponse;
-
-                    /**
-                     * Verifies a SearchJobsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SearchJobsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SearchJobsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsResponse;
-
-                    /**
-                     * Creates a plain object from a SearchJobsResponse message. Also converts values to other types if specified.
-                     * @param message SearchJobsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.SearchJobsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SearchJobsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace SearchJobsResponse {
-
-                    /** Properties of a MatchingJob. */
-                    interface IMatchingJob {
-
-                        /** MatchingJob job */
-                        job?: (google.cloud.talent.v4beta1.IJob|null);
-
-                        /** MatchingJob jobSummary */
-                        jobSummary?: (string|null);
-
-                        /** MatchingJob jobTitleSnippet */
-                        jobTitleSnippet?: (string|null);
-
-                        /** MatchingJob searchTextSnippet */
-                        searchTextSnippet?: (string|null);
-
-                        /** MatchingJob commuteInfo */
-                        commuteInfo?: (google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo|null);
-                    }
-
-                    /** Represents a MatchingJob. */
-                    class MatchingJob implements IMatchingJob {
-
-                        /**
-                         * Constructs a new MatchingJob.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob);
-
-                        /** MatchingJob job. */
-                        public job?: (google.cloud.talent.v4beta1.IJob|null);
-
-                        /** MatchingJob jobSummary. */
-                        public jobSummary: string;
-
-                        /** MatchingJob jobTitleSnippet. */
-                        public jobTitleSnippet: string;
-
-                        /** MatchingJob searchTextSnippet. */
-                        public searchTextSnippet: string;
-
-                        /** MatchingJob commuteInfo. */
-                        public commuteInfo?: (google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo|null);
-
-                        /**
-                         * Creates a new MatchingJob instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns MatchingJob instance
-                         */
-                        public static create(properties?: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob): google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob;
-
-                        /**
-                         * Encodes the specified MatchingJob message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob.verify|verify} messages.
-                         * @param message MatchingJob message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified MatchingJob message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob.verify|verify} messages.
-                         * @param message MatchingJob message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a MatchingJob message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns MatchingJob
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob;
-
-                        /**
-                         * Decodes a MatchingJob message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns MatchingJob
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob;
-
-                        /**
-                         * Verifies a MatchingJob message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a MatchingJob message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns MatchingJob
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob;
-
-                        /**
-                         * Creates a plain object from a MatchingJob message. Also converts values to other types if specified.
-                         * @param message MatchingJob
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this MatchingJob to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a CommuteInfo. */
-                    interface ICommuteInfo {
-
-                        /** CommuteInfo jobLocation */
-                        jobLocation?: (google.cloud.talent.v4beta1.ILocation|null);
-
-                        /** CommuteInfo travelDuration */
-                        travelDuration?: (google.protobuf.IDuration|null);
-                    }
-
-                    /** Represents a CommuteInfo. */
-                    class CommuteInfo implements ICommuteInfo {
-
-                        /**
-                         * Constructs a new CommuteInfo.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo);
-
-                        /** CommuteInfo jobLocation. */
-                        public jobLocation?: (google.cloud.talent.v4beta1.ILocation|null);
-
-                        /** CommuteInfo travelDuration. */
-                        public travelDuration?: (google.protobuf.IDuration|null);
-
-                        /**
-                         * Creates a new CommuteInfo instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns CommuteInfo instance
-                         */
-                        public static create(properties?: google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo): google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo;
-
-                        /**
-                         * Encodes the specified CommuteInfo message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo.verify|verify} messages.
-                         * @param message CommuteInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified CommuteInfo message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo.verify|verify} messages.
-                         * @param message CommuteInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a CommuteInfo message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns CommuteInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo;
-
-                        /**
-                         * Decodes a CommuteInfo message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns CommuteInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo;
-
-                        /**
-                         * Verifies a CommuteInfo message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a CommuteInfo message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns CommuteInfo
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo;
-
-                        /**
-                         * Creates a plain object from a CommuteInfo message. Also converts values to other types if specified.
-                         * @param message CommuteInfo
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this CommuteInfo to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-                }
-
-                /** Properties of a BatchCreateJobsRequest. */
-                interface IBatchCreateJobsRequest {
-
-                    /** BatchCreateJobsRequest parent */
-                    parent?: (string|null);
-
-                    /** BatchCreateJobsRequest jobs */
-                    jobs?: (google.cloud.talent.v4beta1.IJob[]|null);
-                }
-
-                /** Represents a BatchCreateJobsRequest. */
-                class BatchCreateJobsRequest implements IBatchCreateJobsRequest {
-
-                    /**
-                     * Constructs a new BatchCreateJobsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IBatchCreateJobsRequest);
-
-                    /** BatchCreateJobsRequest parent. */
-                    public parent: string;
-
-                    /** BatchCreateJobsRequest jobs. */
-                    public jobs: google.cloud.talent.v4beta1.IJob[];
-
-                    /**
-                     * Creates a new BatchCreateJobsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BatchCreateJobsRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IBatchCreateJobsRequest): google.cloud.talent.v4beta1.BatchCreateJobsRequest;
-
-                    /**
-                     * Encodes the specified BatchCreateJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.BatchCreateJobsRequest.verify|verify} messages.
-                     * @param message BatchCreateJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IBatchCreateJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BatchCreateJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.BatchCreateJobsRequest.verify|verify} messages.
-                     * @param message BatchCreateJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IBatchCreateJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BatchCreateJobsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BatchCreateJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.BatchCreateJobsRequest;
-
-                    /**
-                     * Decodes a BatchCreateJobsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BatchCreateJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.BatchCreateJobsRequest;
-
-                    /**
-                     * Verifies a BatchCreateJobsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BatchCreateJobsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BatchCreateJobsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.BatchCreateJobsRequest;
-
-                    /**
-                     * Creates a plain object from a BatchCreateJobsRequest message. Also converts values to other types if specified.
-                     * @param message BatchCreateJobsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.BatchCreateJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BatchCreateJobsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a BatchUpdateJobsRequest. */
-                interface IBatchUpdateJobsRequest {
-
-                    /** BatchUpdateJobsRequest parent */
-                    parent?: (string|null);
-
-                    /** BatchUpdateJobsRequest jobs */
-                    jobs?: (google.cloud.talent.v4beta1.IJob[]|null);
-
-                    /** BatchUpdateJobsRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents a BatchUpdateJobsRequest. */
-                class BatchUpdateJobsRequest implements IBatchUpdateJobsRequest {
-
-                    /**
-                     * Constructs a new BatchUpdateJobsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest);
-
-                    /** BatchUpdateJobsRequest parent. */
-                    public parent: string;
-
-                    /** BatchUpdateJobsRequest jobs. */
-                    public jobs: google.cloud.talent.v4beta1.IJob[];
-
-                    /** BatchUpdateJobsRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new BatchUpdateJobsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BatchUpdateJobsRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest): google.cloud.talent.v4beta1.BatchUpdateJobsRequest;
-
-                    /**
-                     * Encodes the specified BatchUpdateJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.BatchUpdateJobsRequest.verify|verify} messages.
-                     * @param message BatchUpdateJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BatchUpdateJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.BatchUpdateJobsRequest.verify|verify} messages.
-                     * @param message BatchUpdateJobsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BatchUpdateJobsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BatchUpdateJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.BatchUpdateJobsRequest;
-
-                    /**
-                     * Decodes a BatchUpdateJobsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BatchUpdateJobsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.BatchUpdateJobsRequest;
-
-                    /**
-                     * Verifies a BatchUpdateJobsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BatchUpdateJobsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BatchUpdateJobsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.BatchUpdateJobsRequest;
-
-                    /**
-                     * Creates a plain object from a BatchUpdateJobsRequest message. Also converts values to other types if specified.
-                     * @param message BatchUpdateJobsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.BatchUpdateJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BatchUpdateJobsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a JobOperationResult. */
-                interface IJobOperationResult {
-
-                    /** JobOperationResult jobResults */
-                    jobResults?: (google.cloud.talent.v4beta1.JobOperationResult.IJobResult[]|null);
-                }
-
-                /** Represents a JobOperationResult. */
-                class JobOperationResult implements IJobOperationResult {
-
-                    /**
-                     * Constructs a new JobOperationResult.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IJobOperationResult);
-
-                    /** JobOperationResult jobResults. */
-                    public jobResults: google.cloud.talent.v4beta1.JobOperationResult.IJobResult[];
-
-                    /**
-                     * Creates a new JobOperationResult instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns JobOperationResult instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IJobOperationResult): google.cloud.talent.v4beta1.JobOperationResult;
-
-                    /**
-                     * Encodes the specified JobOperationResult message. Does not implicitly {@link google.cloud.talent.v4beta1.JobOperationResult.verify|verify} messages.
-                     * @param message JobOperationResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IJobOperationResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified JobOperationResult message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.JobOperationResult.verify|verify} messages.
-                     * @param message JobOperationResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IJobOperationResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a JobOperationResult message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns JobOperationResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.JobOperationResult;
-
-                    /**
-                     * Decodes a JobOperationResult message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns JobOperationResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.JobOperationResult;
-
-                    /**
-                     * Verifies a JobOperationResult message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a JobOperationResult message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns JobOperationResult
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.JobOperationResult;
-
-                    /**
-                     * Creates a plain object from a JobOperationResult message. Also converts values to other types if specified.
-                     * @param message JobOperationResult
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.JobOperationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this JobOperationResult to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace JobOperationResult {
-
-                    /** Properties of a JobResult. */
-                    interface IJobResult {
-
-                        /** JobResult job */
-                        job?: (google.cloud.talent.v4beta1.IJob|null);
-
-                        /** JobResult status */
-                        status?: (google.rpc.IStatus|null);
-                    }
-
-                    /** Represents a JobResult. */
-                    class JobResult implements IJobResult {
-
-                        /**
-                         * Constructs a new JobResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.talent.v4beta1.JobOperationResult.IJobResult);
-
-                        /** JobResult job. */
-                        public job?: (google.cloud.talent.v4beta1.IJob|null);
-
-                        /** JobResult status. */
-                        public status?: (google.rpc.IStatus|null);
-
-                        /**
-                         * Creates a new JobResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns JobResult instance
-                         */
-                        public static create(properties?: google.cloud.talent.v4beta1.JobOperationResult.IJobResult): google.cloud.talent.v4beta1.JobOperationResult.JobResult;
-
-                        /**
-                         * Encodes the specified JobResult message. Does not implicitly {@link google.cloud.talent.v4beta1.JobOperationResult.JobResult.verify|verify} messages.
-                         * @param message JobResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.talent.v4beta1.JobOperationResult.IJobResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified JobResult message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.JobOperationResult.JobResult.verify|verify} messages.
-                         * @param message JobResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.talent.v4beta1.JobOperationResult.IJobResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a JobResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns JobResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.JobOperationResult.JobResult;
-
-                        /**
-                         * Decodes a JobResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns JobResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.JobOperationResult.JobResult;
-
-                        /**
-                         * Verifies a JobResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a JobResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns JobResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.JobOperationResult.JobResult;
-
-                        /**
-                         * Creates a plain object from a JobResult message. Also converts values to other types if specified.
-                         * @param message JobResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.talent.v4beta1.JobOperationResult.JobResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this JobResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
                 }
 
                 /** Properties of a JobQuery. */
@@ -9272,11 +7306,11 @@ export namespace google {
                     }
                 }
 
-                /** Represents a ProfileService */
-                class ProfileService extends $protobuf.rpc.Service {
+                /** Represents a JobService */
+                class JobService extends $protobuf.rpc.Service {
 
                     /**
-                     * Constructs a new ProfileService service.
+                     * Constructs a new JobService service.
                      * @param rpcImpl RPC implementation
                      * @param [requestDelimited=false] Whether requests are length-delimited
                      * @param [responseDelimited=false] Whether responses are length-delimited
@@ -9284,1102 +7318,1958 @@ export namespace google {
                     constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
 
                     /**
-                     * Creates new ProfileService service using the specified rpc implementation.
+                     * Creates new JobService service using the specified rpc implementation.
                      * @param rpcImpl RPC implementation
                      * @param [requestDelimited=false] Whether requests are length-delimited
                      * @param [responseDelimited=false] Whether responses are length-delimited
                      * @returns RPC service. Useful where requests and/or responses are streamed.
                      */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ProfileService;
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): JobService;
 
                     /**
-                     * Calls ListProfiles.
-                     * @param request ListProfilesRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListProfilesResponse
+                     * Calls CreateJob.
+                     * @param request CreateJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Job
                      */
-                    public listProfiles(request: google.cloud.talent.v4beta1.IListProfilesRequest, callback: google.cloud.talent.v4beta1.ProfileService.ListProfilesCallback): void;
+                    public createJob(request: google.cloud.talent.v4beta1.ICreateJobRequest, callback: google.cloud.talent.v4beta1.JobService.CreateJobCallback): void;
 
                     /**
-                     * Calls ListProfiles.
-                     * @param request ListProfilesRequest message or plain object
+                     * Calls CreateJob.
+                     * @param request CreateJobRequest message or plain object
                      * @returns Promise
                      */
-                    public listProfiles(request: google.cloud.talent.v4beta1.IListProfilesRequest): Promise<google.cloud.talent.v4beta1.ListProfilesResponse>;
+                    public createJob(request: google.cloud.talent.v4beta1.ICreateJobRequest): Promise<google.cloud.talent.v4beta1.Job>;
 
                     /**
-                     * Calls CreateProfile.
-                     * @param request CreateProfileRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Profile
+                     * Calls BatchCreateJobs.
+                     * @param request BatchCreateJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
                      */
-                    public createProfile(request: google.cloud.talent.v4beta1.ICreateProfileRequest, callback: google.cloud.talent.v4beta1.ProfileService.CreateProfileCallback): void;
+                    public batchCreateJobs(request: google.cloud.talent.v4beta1.IBatchCreateJobsRequest, callback: google.cloud.talent.v4beta1.JobService.BatchCreateJobsCallback): void;
 
                     /**
-                     * Calls CreateProfile.
-                     * @param request CreateProfileRequest message or plain object
+                     * Calls BatchCreateJobs.
+                     * @param request BatchCreateJobsRequest message or plain object
                      * @returns Promise
                      */
-                    public createProfile(request: google.cloud.talent.v4beta1.ICreateProfileRequest): Promise<google.cloud.talent.v4beta1.Profile>;
+                    public batchCreateJobs(request: google.cloud.talent.v4beta1.IBatchCreateJobsRequest): Promise<google.longrunning.Operation>;
 
                     /**
-                     * Calls GetProfile.
-                     * @param request GetProfileRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Profile
+                     * Calls GetJob.
+                     * @param request GetJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Job
                      */
-                    public getProfile(request: google.cloud.talent.v4beta1.IGetProfileRequest, callback: google.cloud.talent.v4beta1.ProfileService.GetProfileCallback): void;
+                    public getJob(request: google.cloud.talent.v4beta1.IGetJobRequest, callback: google.cloud.talent.v4beta1.JobService.GetJobCallback): void;
 
                     /**
-                     * Calls GetProfile.
-                     * @param request GetProfileRequest message or plain object
+                     * Calls GetJob.
+                     * @param request GetJobRequest message or plain object
                      * @returns Promise
                      */
-                    public getProfile(request: google.cloud.talent.v4beta1.IGetProfileRequest): Promise<google.cloud.talent.v4beta1.Profile>;
+                    public getJob(request: google.cloud.talent.v4beta1.IGetJobRequest): Promise<google.cloud.talent.v4beta1.Job>;
 
                     /**
-                     * Calls UpdateProfile.
-                     * @param request UpdateProfileRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Profile
+                     * Calls UpdateJob.
+                     * @param request UpdateJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Job
                      */
-                    public updateProfile(request: google.cloud.talent.v4beta1.IUpdateProfileRequest, callback: google.cloud.talent.v4beta1.ProfileService.UpdateProfileCallback): void;
+                    public updateJob(request: google.cloud.talent.v4beta1.IUpdateJobRequest, callback: google.cloud.talent.v4beta1.JobService.UpdateJobCallback): void;
 
                     /**
-                     * Calls UpdateProfile.
-                     * @param request UpdateProfileRequest message or plain object
+                     * Calls UpdateJob.
+                     * @param request UpdateJobRequest message or plain object
                      * @returns Promise
                      */
-                    public updateProfile(request: google.cloud.talent.v4beta1.IUpdateProfileRequest): Promise<google.cloud.talent.v4beta1.Profile>;
+                    public updateJob(request: google.cloud.talent.v4beta1.IUpdateJobRequest): Promise<google.cloud.talent.v4beta1.Job>;
 
                     /**
-                     * Calls DeleteProfile.
-                     * @param request DeleteProfileRequest message or plain object
+                     * Calls BatchUpdateJobs.
+                     * @param request BatchUpdateJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public batchUpdateJobs(request: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest, callback: google.cloud.talent.v4beta1.JobService.BatchUpdateJobsCallback): void;
+
+                    /**
+                     * Calls BatchUpdateJobs.
+                     * @param request BatchUpdateJobsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchUpdateJobs(request: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteJob.
+                     * @param request DeleteJobRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
                      */
-                    public deleteProfile(request: google.cloud.talent.v4beta1.IDeleteProfileRequest, callback: google.cloud.talent.v4beta1.ProfileService.DeleteProfileCallback): void;
+                    public deleteJob(request: google.cloud.talent.v4beta1.IDeleteJobRequest, callback: google.cloud.talent.v4beta1.JobService.DeleteJobCallback): void;
 
                     /**
-                     * Calls DeleteProfile.
-                     * @param request DeleteProfileRequest message or plain object
+                     * Calls DeleteJob.
+                     * @param request DeleteJobRequest message or plain object
                      * @returns Promise
                      */
-                    public deleteProfile(request: google.cloud.talent.v4beta1.IDeleteProfileRequest): Promise<google.protobuf.Empty>;
+                    public deleteJob(request: google.cloud.talent.v4beta1.IDeleteJobRequest): Promise<google.protobuf.Empty>;
 
                     /**
-                     * Calls SearchProfiles.
-                     * @param request SearchProfilesRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and SearchProfilesResponse
+                     * Calls BatchDeleteJobs.
+                     * @param request BatchDeleteJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
                      */
-                    public searchProfiles(request: google.cloud.talent.v4beta1.ISearchProfilesRequest, callback: google.cloud.talent.v4beta1.ProfileService.SearchProfilesCallback): void;
+                    public batchDeleteJobs(request: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest, callback: google.cloud.talent.v4beta1.JobService.BatchDeleteJobsCallback): void;
 
                     /**
-                     * Calls SearchProfiles.
-                     * @param request SearchProfilesRequest message or plain object
+                     * Calls BatchDeleteJobs.
+                     * @param request BatchDeleteJobsRequest message or plain object
                      * @returns Promise
                      */
-                    public searchProfiles(request: google.cloud.talent.v4beta1.ISearchProfilesRequest): Promise<google.cloud.talent.v4beta1.SearchProfilesResponse>;
+                    public batchDeleteJobs(request: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListJobs.
+                     * @param request ListJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListJobsResponse
+                     */
+                    public listJobs(request: google.cloud.talent.v4beta1.IListJobsRequest, callback: google.cloud.talent.v4beta1.JobService.ListJobsCallback): void;
+
+                    /**
+                     * Calls ListJobs.
+                     * @param request ListJobsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listJobs(request: google.cloud.talent.v4beta1.IListJobsRequest): Promise<google.cloud.talent.v4beta1.ListJobsResponse>;
+
+                    /**
+                     * Calls SearchJobs.
+                     * @param request SearchJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchJobsResponse
+                     */
+                    public searchJobs(request: google.cloud.talent.v4beta1.ISearchJobsRequest, callback: google.cloud.talent.v4beta1.JobService.SearchJobsCallback): void;
+
+                    /**
+                     * Calls SearchJobs.
+                     * @param request SearchJobsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchJobs(request: google.cloud.talent.v4beta1.ISearchJobsRequest): Promise<google.cloud.talent.v4beta1.SearchJobsResponse>;
+
+                    /**
+                     * Calls SearchJobsForAlert.
+                     * @param request SearchJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchJobsResponse
+                     */
+                    public searchJobsForAlert(request: google.cloud.talent.v4beta1.ISearchJobsRequest, callback: google.cloud.talent.v4beta1.JobService.SearchJobsForAlertCallback): void;
+
+                    /**
+                     * Calls SearchJobsForAlert.
+                     * @param request SearchJobsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchJobsForAlert(request: google.cloud.talent.v4beta1.ISearchJobsRequest): Promise<google.cloud.talent.v4beta1.SearchJobsResponse>;
                 }
 
-                namespace ProfileService {
+                namespace JobService {
 
                     /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#listProfiles}.
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#createJob}.
                      * @param error Error, if any
-                     * @param [response] ListProfilesResponse
+                     * @param [response] Job
                      */
-                    type ListProfilesCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.ListProfilesResponse) => void;
+                    type CreateJobCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Job) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#createProfile}.
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#batchCreateJobs}.
                      * @param error Error, if any
-                     * @param [response] Profile
+                     * @param [response] Operation
                      */
-                    type CreateProfileCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Profile) => void;
+                    type BatchCreateJobsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#getProfile}.
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#getJob}.
                      * @param error Error, if any
-                     * @param [response] Profile
+                     * @param [response] Job
                      */
-                    type GetProfileCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Profile) => void;
+                    type GetJobCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Job) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#updateProfile}.
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#updateJob}.
                      * @param error Error, if any
-                     * @param [response] Profile
+                     * @param [response] Job
                      */
-                    type UpdateProfileCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Profile) => void;
+                    type UpdateJobCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Job) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#deleteProfile}.
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#batchUpdateJobs}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BatchUpdateJobsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#deleteJob}.
                      * @param error Error, if any
                      * @param [response] Empty
                      */
-                    type DeleteProfileCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    type DeleteJobCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#searchProfiles}.
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#batchDeleteJobs}.
                      * @param error Error, if any
-                     * @param [response] SearchProfilesResponse
+                     * @param [response] Empty
                      */
-                    type SearchProfilesCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.SearchProfilesResponse) => void;
+                    type BatchDeleteJobsCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#listJobs}.
+                     * @param error Error, if any
+                     * @param [response] ListJobsResponse
+                     */
+                    type ListJobsCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.ListJobsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#searchJobs}.
+                     * @param error Error, if any
+                     * @param [response] SearchJobsResponse
+                     */
+                    type SearchJobsCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.SearchJobsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.JobService#searchJobsForAlert}.
+                     * @param error Error, if any
+                     * @param [response] SearchJobsResponse
+                     */
+                    type SearchJobsForAlertCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.SearchJobsResponse) => void;
                 }
 
-                /** Properties of a ListProfilesRequest. */
-                interface IListProfilesRequest {
+                /** Properties of a CreateJobRequest. */
+                interface ICreateJobRequest {
 
-                    /** ListProfilesRequest parent */
+                    /** CreateJobRequest parent */
                     parent?: (string|null);
 
-                    /** ListProfilesRequest filter */
-                    filter?: (string|null);
-
-                    /** ListProfilesRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** ListProfilesRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListProfilesRequest readMask */
-                    readMask?: (google.protobuf.IFieldMask|null);
+                    /** CreateJobRequest job */
+                    job?: (google.cloud.talent.v4beta1.IJob|null);
                 }
 
-                /** Represents a ListProfilesRequest. */
-                class ListProfilesRequest implements IListProfilesRequest {
+                /** Represents a CreateJobRequest. */
+                class CreateJobRequest implements ICreateJobRequest {
 
                     /**
-                     * Constructs a new ListProfilesRequest.
+                     * Constructs a new CreateJobRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.talent.v4beta1.IListProfilesRequest);
+                    constructor(properties?: google.cloud.talent.v4beta1.ICreateJobRequest);
 
-                    /** ListProfilesRequest parent. */
+                    /** CreateJobRequest parent. */
                     public parent: string;
 
-                    /** ListProfilesRequest filter. */
-                    public filter: string;
-
-                    /** ListProfilesRequest pageToken. */
-                    public pageToken: string;
-
-                    /** ListProfilesRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListProfilesRequest readMask. */
-                    public readMask?: (google.protobuf.IFieldMask|null);
+                    /** CreateJobRequest job. */
+                    public job?: (google.cloud.talent.v4beta1.IJob|null);
 
                     /**
-                     * Creates a new ListProfilesRequest instance using the specified properties.
+                     * Creates a new CreateJobRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns ListProfilesRequest instance
+                     * @returns CreateJobRequest instance
                      */
-                    public static create(properties?: google.cloud.talent.v4beta1.IListProfilesRequest): google.cloud.talent.v4beta1.ListProfilesRequest;
+                    public static create(properties?: google.cloud.talent.v4beta1.ICreateJobRequest): google.cloud.talent.v4beta1.CreateJobRequest;
 
                     /**
-                     * Encodes the specified ListProfilesRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.ListProfilesRequest.verify|verify} messages.
-                     * @param message ListProfilesRequest message or plain object to encode
+                     * Encodes the specified CreateJobRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.CreateJobRequest.verify|verify} messages.
+                     * @param message CreateJobRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.talent.v4beta1.IListProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.talent.v4beta1.ICreateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ListProfilesRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListProfilesRequest.verify|verify} messages.
-                     * @param message ListProfilesRequest message or plain object to encode
+                     * Encodes the specified CreateJobRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.CreateJobRequest.verify|verify} messages.
+                     * @param message CreateJobRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICreateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a ListProfilesRequest message from the specified reader or buffer.
+                     * Decodes a CreateJobRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns ListProfilesRequest
+                     * @returns CreateJobRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListProfilesRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.CreateJobRequest;
 
                     /**
-                     * Decodes a ListProfilesRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a CreateJobRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns ListProfilesRequest
+                     * @returns CreateJobRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListProfilesRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.CreateJobRequest;
 
                     /**
-                     * Verifies a ListProfilesRequest message.
+                     * Verifies a CreateJobRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a ListProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a CreateJobRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns ListProfilesRequest
+                     * @returns CreateJobRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListProfilesRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.CreateJobRequest;
 
                     /**
-                     * Creates a plain object from a ListProfilesRequest message. Also converts values to other types if specified.
-                     * @param message ListProfilesRequest
+                     * Creates a plain object from a CreateJobRequest message. Also converts values to other types if specified.
+                     * @param message CreateJobRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.talent.v4beta1.ListProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.talent.v4beta1.CreateJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this ListProfilesRequest to JSON.
+                     * Converts this CreateJobRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a ListProfilesResponse. */
-                interface IListProfilesResponse {
+                /** Properties of a GetJobRequest. */
+                interface IGetJobRequest {
 
-                    /** ListProfilesResponse profiles */
-                    profiles?: (google.cloud.talent.v4beta1.IProfile[]|null);
-
-                    /** ListProfilesResponse nextPageToken */
-                    nextPageToken?: (string|null);
-                }
-
-                /** Represents a ListProfilesResponse. */
-                class ListProfilesResponse implements IListProfilesResponse {
-
-                    /**
-                     * Constructs a new ListProfilesResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.IListProfilesResponse);
-
-                    /** ListProfilesResponse profiles. */
-                    public profiles: google.cloud.talent.v4beta1.IProfile[];
-
-                    /** ListProfilesResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /**
-                     * Creates a new ListProfilesResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListProfilesResponse instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.IListProfilesResponse): google.cloud.talent.v4beta1.ListProfilesResponse;
-
-                    /**
-                     * Encodes the specified ListProfilesResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.ListProfilesResponse.verify|verify} messages.
-                     * @param message ListProfilesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.IListProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListProfilesResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListProfilesResponse.verify|verify} messages.
-                     * @param message ListProfilesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListProfilesResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListProfilesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListProfilesResponse;
-
-                    /**
-                     * Decodes a ListProfilesResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListProfilesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListProfilesResponse;
-
-                    /**
-                     * Verifies a ListProfilesResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListProfilesResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListProfilesResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListProfilesResponse;
-
-                    /**
-                     * Creates a plain object from a ListProfilesResponse message. Also converts values to other types if specified.
-                     * @param message ListProfilesResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.ListProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListProfilesResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a CreateProfileRequest. */
-                interface ICreateProfileRequest {
-
-                    /** CreateProfileRequest parent */
-                    parent?: (string|null);
-
-                    /** CreateProfileRequest profile */
-                    profile?: (google.cloud.talent.v4beta1.IProfile|null);
-                }
-
-                /** Represents a CreateProfileRequest. */
-                class CreateProfileRequest implements ICreateProfileRequest {
-
-                    /**
-                     * Constructs a new CreateProfileRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.ICreateProfileRequest);
-
-                    /** CreateProfileRequest parent. */
-                    public parent: string;
-
-                    /** CreateProfileRequest profile. */
-                    public profile?: (google.cloud.talent.v4beta1.IProfile|null);
-
-                    /**
-                     * Creates a new CreateProfileRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateProfileRequest instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.ICreateProfileRequest): google.cloud.talent.v4beta1.CreateProfileRequest;
-
-                    /**
-                     * Encodes the specified CreateProfileRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.CreateProfileRequest.verify|verify} messages.
-                     * @param message CreateProfileRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.ICreateProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateProfileRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.CreateProfileRequest.verify|verify} messages.
-                     * @param message CreateProfileRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICreateProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateProfileRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateProfileRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.CreateProfileRequest;
-
-                    /**
-                     * Decodes a CreateProfileRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateProfileRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.CreateProfileRequest;
-
-                    /**
-                     * Verifies a CreateProfileRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateProfileRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateProfileRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.CreateProfileRequest;
-
-                    /**
-                     * Creates a plain object from a CreateProfileRequest message. Also converts values to other types if specified.
-                     * @param message CreateProfileRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.CreateProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateProfileRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetProfileRequest. */
-                interface IGetProfileRequest {
-
-                    /** GetProfileRequest name */
+                    /** GetJobRequest name */
                     name?: (string|null);
                 }
 
-                /** Represents a GetProfileRequest. */
-                class GetProfileRequest implements IGetProfileRequest {
+                /** Represents a GetJobRequest. */
+                class GetJobRequest implements IGetJobRequest {
 
                     /**
-                     * Constructs a new GetProfileRequest.
+                     * Constructs a new GetJobRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.talent.v4beta1.IGetProfileRequest);
+                    constructor(properties?: google.cloud.talent.v4beta1.IGetJobRequest);
 
-                    /** GetProfileRequest name. */
+                    /** GetJobRequest name. */
                     public name: string;
 
                     /**
-                     * Creates a new GetProfileRequest instance using the specified properties.
+                     * Creates a new GetJobRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns GetProfileRequest instance
+                     * @returns GetJobRequest instance
                      */
-                    public static create(properties?: google.cloud.talent.v4beta1.IGetProfileRequest): google.cloud.talent.v4beta1.GetProfileRequest;
+                    public static create(properties?: google.cloud.talent.v4beta1.IGetJobRequest): google.cloud.talent.v4beta1.GetJobRequest;
 
                     /**
-                     * Encodes the specified GetProfileRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.GetProfileRequest.verify|verify} messages.
-                     * @param message GetProfileRequest message or plain object to encode
+                     * Encodes the specified GetJobRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.GetJobRequest.verify|verify} messages.
+                     * @param message GetJobRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.talent.v4beta1.IGetProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.talent.v4beta1.IGetJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified GetProfileRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.GetProfileRequest.verify|verify} messages.
-                     * @param message GetProfileRequest message or plain object to encode
+                     * Encodes the specified GetJobRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.GetJobRequest.verify|verify} messages.
+                     * @param message GetJobRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IGetProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IGetJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a GetProfileRequest message from the specified reader or buffer.
+                     * Decodes a GetJobRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns GetProfileRequest
+                     * @returns GetJobRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.GetProfileRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.GetJobRequest;
 
                     /**
-                     * Decodes a GetProfileRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a GetJobRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns GetProfileRequest
+                     * @returns GetJobRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.GetProfileRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.GetJobRequest;
 
                     /**
-                     * Verifies a GetProfileRequest message.
+                     * Verifies a GetJobRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a GetProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a GetJobRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns GetProfileRequest
+                     * @returns GetJobRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.GetProfileRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.GetJobRequest;
 
                     /**
-                     * Creates a plain object from a GetProfileRequest message. Also converts values to other types if specified.
-                     * @param message GetProfileRequest
+                     * Creates a plain object from a GetJobRequest message. Also converts values to other types if specified.
+                     * @param message GetJobRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.talent.v4beta1.GetProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.talent.v4beta1.GetJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this GetProfileRequest to JSON.
+                     * Converts this GetJobRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of an UpdateProfileRequest. */
-                interface IUpdateProfileRequest {
+                /** Properties of an UpdateJobRequest. */
+                interface IUpdateJobRequest {
 
-                    /** UpdateProfileRequest profile */
-                    profile?: (google.cloud.talent.v4beta1.IProfile|null);
+                    /** UpdateJobRequest job */
+                    job?: (google.cloud.talent.v4beta1.IJob|null);
 
-                    /** UpdateProfileRequest updateMask */
+                    /** UpdateJobRequest updateMask */
                     updateMask?: (google.protobuf.IFieldMask|null);
                 }
 
-                /** Represents an UpdateProfileRequest. */
-                class UpdateProfileRequest implements IUpdateProfileRequest {
+                /** Represents an UpdateJobRequest. */
+                class UpdateJobRequest implements IUpdateJobRequest {
 
                     /**
-                     * Constructs a new UpdateProfileRequest.
+                     * Constructs a new UpdateJobRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.talent.v4beta1.IUpdateProfileRequest);
+                    constructor(properties?: google.cloud.talent.v4beta1.IUpdateJobRequest);
 
-                    /** UpdateProfileRequest profile. */
-                    public profile?: (google.cloud.talent.v4beta1.IProfile|null);
+                    /** UpdateJobRequest job. */
+                    public job?: (google.cloud.talent.v4beta1.IJob|null);
 
-                    /** UpdateProfileRequest updateMask. */
+                    /** UpdateJobRequest updateMask. */
                     public updateMask?: (google.protobuf.IFieldMask|null);
 
                     /**
-                     * Creates a new UpdateProfileRequest instance using the specified properties.
+                     * Creates a new UpdateJobRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns UpdateProfileRequest instance
+                     * @returns UpdateJobRequest instance
                      */
-                    public static create(properties?: google.cloud.talent.v4beta1.IUpdateProfileRequest): google.cloud.talent.v4beta1.UpdateProfileRequest;
+                    public static create(properties?: google.cloud.talent.v4beta1.IUpdateJobRequest): google.cloud.talent.v4beta1.UpdateJobRequest;
 
                     /**
-                     * Encodes the specified UpdateProfileRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateProfileRequest.verify|verify} messages.
-                     * @param message UpdateProfileRequest message or plain object to encode
+                     * Encodes the specified UpdateJobRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateJobRequest.verify|verify} messages.
+                     * @param message UpdateJobRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.talent.v4beta1.IUpdateProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.talent.v4beta1.IUpdateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified UpdateProfileRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateProfileRequest.verify|verify} messages.
-                     * @param message UpdateProfileRequest message or plain object to encode
+                     * Encodes the specified UpdateJobRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateJobRequest.verify|verify} messages.
+                     * @param message UpdateJobRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IUpdateProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IUpdateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes an UpdateProfileRequest message from the specified reader or buffer.
+                     * Decodes an UpdateJobRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns UpdateProfileRequest
+                     * @returns UpdateJobRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.UpdateProfileRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.UpdateJobRequest;
 
                     /**
-                     * Decodes an UpdateProfileRequest message from the specified reader or buffer, length delimited.
+                     * Decodes an UpdateJobRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns UpdateProfileRequest
+                     * @returns UpdateJobRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.UpdateProfileRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.UpdateJobRequest;
 
                     /**
-                     * Verifies an UpdateProfileRequest message.
+                     * Verifies an UpdateJobRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates an UpdateProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates an UpdateJobRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns UpdateProfileRequest
+                     * @returns UpdateJobRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.UpdateProfileRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.UpdateJobRequest;
 
                     /**
-                     * Creates a plain object from an UpdateProfileRequest message. Also converts values to other types if specified.
-                     * @param message UpdateProfileRequest
+                     * Creates a plain object from an UpdateJobRequest message. Also converts values to other types if specified.
+                     * @param message UpdateJobRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.talent.v4beta1.UpdateProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.talent.v4beta1.UpdateJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this UpdateProfileRequest to JSON.
+                     * Converts this UpdateJobRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a DeleteProfileRequest. */
-                interface IDeleteProfileRequest {
+                /** Properties of a DeleteJobRequest. */
+                interface IDeleteJobRequest {
 
-                    /** DeleteProfileRequest name */
+                    /** DeleteJobRequest name */
                     name?: (string|null);
                 }
 
-                /** Represents a DeleteProfileRequest. */
-                class DeleteProfileRequest implements IDeleteProfileRequest {
+                /** Represents a DeleteJobRequest. */
+                class DeleteJobRequest implements IDeleteJobRequest {
 
                     /**
-                     * Constructs a new DeleteProfileRequest.
+                     * Constructs a new DeleteJobRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.talent.v4beta1.IDeleteProfileRequest);
+                    constructor(properties?: google.cloud.talent.v4beta1.IDeleteJobRequest);
 
-                    /** DeleteProfileRequest name. */
+                    /** DeleteJobRequest name. */
                     public name: string;
 
                     /**
-                     * Creates a new DeleteProfileRequest instance using the specified properties.
+                     * Creates a new DeleteJobRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns DeleteProfileRequest instance
+                     * @returns DeleteJobRequest instance
                      */
-                    public static create(properties?: google.cloud.talent.v4beta1.IDeleteProfileRequest): google.cloud.talent.v4beta1.DeleteProfileRequest;
+                    public static create(properties?: google.cloud.talent.v4beta1.IDeleteJobRequest): google.cloud.talent.v4beta1.DeleteJobRequest;
 
                     /**
-                     * Encodes the specified DeleteProfileRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteProfileRequest.verify|verify} messages.
-                     * @param message DeleteProfileRequest message or plain object to encode
+                     * Encodes the specified DeleteJobRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteJobRequest.verify|verify} messages.
+                     * @param message DeleteJobRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.talent.v4beta1.IDeleteProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.talent.v4beta1.IDeleteJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified DeleteProfileRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteProfileRequest.verify|verify} messages.
-                     * @param message DeleteProfileRequest message or plain object to encode
+                     * Encodes the specified DeleteJobRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteJobRequest.verify|verify} messages.
+                     * @param message DeleteJobRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IDeleteProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IDeleteJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a DeleteProfileRequest message from the specified reader or buffer.
+                     * Decodes a DeleteJobRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns DeleteProfileRequest
+                     * @returns DeleteJobRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.DeleteProfileRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.DeleteJobRequest;
 
                     /**
-                     * Decodes a DeleteProfileRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a DeleteJobRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns DeleteProfileRequest
+                     * @returns DeleteJobRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.DeleteProfileRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.DeleteJobRequest;
 
                     /**
-                     * Verifies a DeleteProfileRequest message.
+                     * Verifies a DeleteJobRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a DeleteProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a DeleteJobRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns DeleteProfileRequest
+                     * @returns DeleteJobRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.DeleteProfileRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.DeleteJobRequest;
 
                     /**
-                     * Creates a plain object from a DeleteProfileRequest message. Also converts values to other types if specified.
-                     * @param message DeleteProfileRequest
+                     * Creates a plain object from a DeleteJobRequest message. Also converts values to other types if specified.
+                     * @param message DeleteJobRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.talent.v4beta1.DeleteProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.talent.v4beta1.DeleteJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this DeleteProfileRequest to JSON.
+                     * Converts this DeleteJobRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a SearchProfilesRequest. */
-                interface ISearchProfilesRequest {
+                /** Properties of a BatchDeleteJobsRequest. */
+                interface IBatchDeleteJobsRequest {
 
-                    /** SearchProfilesRequest parent */
+                    /** BatchDeleteJobsRequest parent */
                     parent?: (string|null);
 
-                    /** SearchProfilesRequest requestMetadata */
-                    requestMetadata?: (google.cloud.talent.v4beta1.IRequestMetadata|null);
-
-                    /** SearchProfilesRequest profileQuery */
-                    profileQuery?: (google.cloud.talent.v4beta1.IProfileQuery|null);
-
-                    /** SearchProfilesRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** SearchProfilesRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** SearchProfilesRequest offset */
-                    offset?: (number|null);
-
-                    /** SearchProfilesRequest disableSpellCheck */
-                    disableSpellCheck?: (boolean|null);
-
-                    /** SearchProfilesRequest orderBy */
-                    orderBy?: (string|null);
-
-                    /** SearchProfilesRequest caseSensitiveSort */
-                    caseSensitiveSort?: (boolean|null);
-
-                    /** SearchProfilesRequest histogramQueries */
-                    histogramQueries?: (google.cloud.talent.v4beta1.IHistogramQuery[]|null);
-
-                    /** SearchProfilesRequest resultSetId */
-                    resultSetId?: (string|null);
-
-                    /** SearchProfilesRequest strictKeywordsSearch */
-                    strictKeywordsSearch?: (boolean|null);
+                    /** BatchDeleteJobsRequest filter */
+                    filter?: (string|null);
                 }
 
-                /** Represents a SearchProfilesRequest. */
-                class SearchProfilesRequest implements ISearchProfilesRequest {
+                /** Represents a BatchDeleteJobsRequest. */
+                class BatchDeleteJobsRequest implements IBatchDeleteJobsRequest {
 
                     /**
-                     * Constructs a new SearchProfilesRequest.
+                     * Constructs a new BatchDeleteJobsRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.talent.v4beta1.ISearchProfilesRequest);
+                    constructor(properties?: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest);
 
-                    /** SearchProfilesRequest parent. */
+                    /** BatchDeleteJobsRequest parent. */
                     public parent: string;
 
-                    /** SearchProfilesRequest requestMetadata. */
-                    public requestMetadata?: (google.cloud.talent.v4beta1.IRequestMetadata|null);
+                    /** BatchDeleteJobsRequest filter. */
+                    public filter: string;
 
-                    /** SearchProfilesRequest profileQuery. */
-                    public profileQuery?: (google.cloud.talent.v4beta1.IProfileQuery|null);
+                    /**
+                     * Creates a new BatchDeleteJobsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeleteJobsRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest): google.cloud.talent.v4beta1.BatchDeleteJobsRequest;
 
-                    /** SearchProfilesRequest pageSize. */
-                    public pageSize: number;
+                    /**
+                     * Encodes the specified BatchDeleteJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.BatchDeleteJobsRequest.verify|verify} messages.
+                     * @param message BatchDeleteJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
-                    /** SearchProfilesRequest pageToken. */
+                    /**
+                     * Encodes the specified BatchDeleteJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.BatchDeleteJobsRequest.verify|verify} messages.
+                     * @param message BatchDeleteJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IBatchDeleteJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeleteJobsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeleteJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.BatchDeleteJobsRequest;
+
+                    /**
+                     * Decodes a BatchDeleteJobsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeleteJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.BatchDeleteJobsRequest;
+
+                    /**
+                     * Verifies a BatchDeleteJobsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeleteJobsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeleteJobsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.BatchDeleteJobsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeleteJobsRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeleteJobsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.BatchDeleteJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeleteJobsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListJobsRequest. */
+                interface IListJobsRequest {
+
+                    /** ListJobsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListJobsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListJobsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListJobsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListJobsRequest jobView */
+                    jobView?: (google.cloud.talent.v4beta1.JobView|keyof typeof google.cloud.talent.v4beta1.JobView|null);
+                }
+
+                /** Represents a ListJobsRequest. */
+                class ListJobsRequest implements IListJobsRequest {
+
+                    /**
+                     * Constructs a new ListJobsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IListJobsRequest);
+
+                    /** ListJobsRequest parent. */
+                    public parent: string;
+
+                    /** ListJobsRequest filter. */
+                    public filter: string;
+
+                    /** ListJobsRequest pageToken. */
                     public pageToken: string;
 
-                    /** SearchProfilesRequest offset. */
-                    public offset: number;
+                    /** ListJobsRequest pageSize. */
+                    public pageSize: number;
 
-                    /** SearchProfilesRequest disableSpellCheck. */
-                    public disableSpellCheck: boolean;
-
-                    /** SearchProfilesRequest orderBy. */
-                    public orderBy: string;
-
-                    /** SearchProfilesRequest caseSensitiveSort. */
-                    public caseSensitiveSort: boolean;
-
-                    /** SearchProfilesRequest histogramQueries. */
-                    public histogramQueries: google.cloud.talent.v4beta1.IHistogramQuery[];
-
-                    /** SearchProfilesRequest resultSetId. */
-                    public resultSetId: string;
-
-                    /** SearchProfilesRequest strictKeywordsSearch. */
-                    public strictKeywordsSearch: boolean;
+                    /** ListJobsRequest jobView. */
+                    public jobView: (google.cloud.talent.v4beta1.JobView|keyof typeof google.cloud.talent.v4beta1.JobView);
 
                     /**
-                     * Creates a new SearchProfilesRequest instance using the specified properties.
+                     * Creates a new ListJobsRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns SearchProfilesRequest instance
+                     * @returns ListJobsRequest instance
                      */
-                    public static create(properties?: google.cloud.talent.v4beta1.ISearchProfilesRequest): google.cloud.talent.v4beta1.SearchProfilesRequest;
+                    public static create(properties?: google.cloud.talent.v4beta1.IListJobsRequest): google.cloud.talent.v4beta1.ListJobsRequest;
 
                     /**
-                     * Encodes the specified SearchProfilesRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchProfilesRequest.verify|verify} messages.
-                     * @param message SearchProfilesRequest message or plain object to encode
+                     * Encodes the specified ListJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.ListJobsRequest.verify|verify} messages.
+                     * @param message ListJobsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.talent.v4beta1.ISearchProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.talent.v4beta1.IListJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified SearchProfilesRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchProfilesRequest.verify|verify} messages.
-                     * @param message SearchProfilesRequest message or plain object to encode
+                     * Encodes the specified ListJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListJobsRequest.verify|verify} messages.
+                     * @param message ListJobsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISearchProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a SearchProfilesRequest message from the specified reader or buffer.
+                     * Decodes a ListJobsRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns SearchProfilesRequest
+                     * @returns ListJobsRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchProfilesRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListJobsRequest;
 
                     /**
-                     * Decodes a SearchProfilesRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a ListJobsRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns SearchProfilesRequest
+                     * @returns ListJobsRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchProfilesRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListJobsRequest;
 
                     /**
-                     * Verifies a SearchProfilesRequest message.
+                     * Verifies a ListJobsRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a SearchProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a ListJobsRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns SearchProfilesRequest
+                     * @returns ListJobsRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchProfilesRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListJobsRequest;
 
                     /**
-                     * Creates a plain object from a SearchProfilesRequest message. Also converts values to other types if specified.
-                     * @param message SearchProfilesRequest
+                     * Creates a plain object from a ListJobsRequest message. Also converts values to other types if specified.
+                     * @param message ListJobsRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.talent.v4beta1.SearchProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.talent.v4beta1.ListJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this SearchProfilesRequest to JSON.
+                     * Converts this ListJobsRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a SearchProfilesResponse. */
-                interface ISearchProfilesResponse {
+                /** JobView enum. */
+                enum JobView {
+                    JOB_VIEW_UNSPECIFIED = 0,
+                    JOB_VIEW_ID_ONLY = 1,
+                    JOB_VIEW_MINIMAL = 2,
+                    JOB_VIEW_SMALL = 3,
+                    JOB_VIEW_FULL = 4
+                }
 
-                    /** SearchProfilesResponse estimatedTotalSize */
-                    estimatedTotalSize?: (number|Long|string|null);
+                /** Properties of a ListJobsResponse. */
+                interface IListJobsResponse {
 
-                    /** SearchProfilesResponse spellCorrection */
-                    spellCorrection?: (google.cloud.talent.v4beta1.ISpellingCorrection|null);
+                    /** ListJobsResponse jobs */
+                    jobs?: (google.cloud.talent.v4beta1.IJob[]|null);
 
-                    /** SearchProfilesResponse metadata */
-                    metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
-
-                    /** SearchProfilesResponse nextPageToken */
+                    /** ListJobsResponse nextPageToken */
                     nextPageToken?: (string|null);
 
-                    /** SearchProfilesResponse histogramQueryResults */
-                    histogramQueryResults?: (google.cloud.talent.v4beta1.IHistogramQueryResult[]|null);
-
-                    /** SearchProfilesResponse summarizedProfiles */
-                    summarizedProfiles?: (google.cloud.talent.v4beta1.ISummarizedProfile[]|null);
-
-                    /** SearchProfilesResponse resultSetId */
-                    resultSetId?: (string|null);
+                    /** ListJobsResponse metadata */
+                    metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
                 }
 
-                /** Represents a SearchProfilesResponse. */
-                class SearchProfilesResponse implements ISearchProfilesResponse {
+                /** Represents a ListJobsResponse. */
+                class ListJobsResponse implements IListJobsResponse {
 
                     /**
-                     * Constructs a new SearchProfilesResponse.
+                     * Constructs a new ListJobsResponse.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.talent.v4beta1.ISearchProfilesResponse);
+                    constructor(properties?: google.cloud.talent.v4beta1.IListJobsResponse);
 
-                    /** SearchProfilesResponse estimatedTotalSize. */
-                    public estimatedTotalSize: (number|Long|string);
+                    /** ListJobsResponse jobs. */
+                    public jobs: google.cloud.talent.v4beta1.IJob[];
 
-                    /** SearchProfilesResponse spellCorrection. */
-                    public spellCorrection?: (google.cloud.talent.v4beta1.ISpellingCorrection|null);
-
-                    /** SearchProfilesResponse metadata. */
-                    public metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
-
-                    /** SearchProfilesResponse nextPageToken. */
+                    /** ListJobsResponse nextPageToken. */
                     public nextPageToken: string;
 
-                    /** SearchProfilesResponse histogramQueryResults. */
+                    /** ListJobsResponse metadata. */
+                    public metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
+
+                    /**
+                     * Creates a new ListJobsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListJobsResponse instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IListJobsResponse): google.cloud.talent.v4beta1.ListJobsResponse;
+
+                    /**
+                     * Encodes the specified ListJobsResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.ListJobsResponse.verify|verify} messages.
+                     * @param message ListJobsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IListJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListJobsResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListJobsResponse.verify|verify} messages.
+                     * @param message ListJobsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListJobsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListJobsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListJobsResponse;
+
+                    /**
+                     * Decodes a ListJobsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListJobsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListJobsResponse;
+
+                    /**
+                     * Verifies a ListJobsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListJobsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListJobsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListJobsResponse;
+
+                    /**
+                     * Creates a plain object from a ListJobsResponse message. Also converts values to other types if specified.
+                     * @param message ListJobsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.ListJobsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListJobsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SearchJobsRequest. */
+                interface ISearchJobsRequest {
+
+                    /** SearchJobsRequest parent */
+                    parent?: (string|null);
+
+                    /** SearchJobsRequest searchMode */
+                    searchMode?: (google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode|null);
+
+                    /** SearchJobsRequest requestMetadata */
+                    requestMetadata?: (google.cloud.talent.v4beta1.IRequestMetadata|null);
+
+                    /** SearchJobsRequest jobQuery */
+                    jobQuery?: (google.cloud.talent.v4beta1.IJobQuery|null);
+
+                    /** SearchJobsRequest enableBroadening */
+                    enableBroadening?: (boolean|null);
+
+                    /** SearchJobsRequest requirePreciseResultSize */
+                    requirePreciseResultSize?: (boolean|null);
+
+                    /** SearchJobsRequest histogramQueries */
+                    histogramQueries?: (google.cloud.talent.v4beta1.IHistogramQuery[]|null);
+
+                    /** SearchJobsRequest jobView */
+                    jobView?: (google.cloud.talent.v4beta1.JobView|keyof typeof google.cloud.talent.v4beta1.JobView|null);
+
+                    /** SearchJobsRequest offset */
+                    offset?: (number|null);
+
+                    /** SearchJobsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchJobsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** SearchJobsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** SearchJobsRequest diversificationLevel */
+                    diversificationLevel?: (google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel|null);
+
+                    /** SearchJobsRequest customRankingInfo */
+                    customRankingInfo?: (google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo|null);
+
+                    /** SearchJobsRequest disableKeywordMatch */
+                    disableKeywordMatch?: (boolean|null);
+                }
+
+                /** Represents a SearchJobsRequest. */
+                class SearchJobsRequest implements ISearchJobsRequest {
+
+                    /**
+                     * Constructs a new SearchJobsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ISearchJobsRequest);
+
+                    /** SearchJobsRequest parent. */
+                    public parent: string;
+
+                    /** SearchJobsRequest searchMode. */
+                    public searchMode: (google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode);
+
+                    /** SearchJobsRequest requestMetadata. */
+                    public requestMetadata?: (google.cloud.talent.v4beta1.IRequestMetadata|null);
+
+                    /** SearchJobsRequest jobQuery. */
+                    public jobQuery?: (google.cloud.talent.v4beta1.IJobQuery|null);
+
+                    /** SearchJobsRequest enableBroadening. */
+                    public enableBroadening: boolean;
+
+                    /** SearchJobsRequest requirePreciseResultSize. */
+                    public requirePreciseResultSize: boolean;
+
+                    /** SearchJobsRequest histogramQueries. */
+                    public histogramQueries: google.cloud.talent.v4beta1.IHistogramQuery[];
+
+                    /** SearchJobsRequest jobView. */
+                    public jobView: (google.cloud.talent.v4beta1.JobView|keyof typeof google.cloud.talent.v4beta1.JobView);
+
+                    /** SearchJobsRequest offset. */
+                    public offset: number;
+
+                    /** SearchJobsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchJobsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** SearchJobsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** SearchJobsRequest diversificationLevel. */
+                    public diversificationLevel: (google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel);
+
+                    /** SearchJobsRequest customRankingInfo. */
+                    public customRankingInfo?: (google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo|null);
+
+                    /** SearchJobsRequest disableKeywordMatch. */
+                    public disableKeywordMatch: boolean;
+
+                    /**
+                     * Creates a new SearchJobsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchJobsRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.ISearchJobsRequest): google.cloud.talent.v4beta1.SearchJobsRequest;
+
+                    /**
+                     * Encodes the specified SearchJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsRequest.verify|verify} messages.
+                     * @param message SearchJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.ISearchJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsRequest.verify|verify} messages.
+                     * @param message SearchJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISearchJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchJobsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsRequest;
+
+                    /**
+                     * Decodes a SearchJobsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsRequest;
+
+                    /**
+                     * Verifies a SearchJobsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchJobsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchJobsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsRequest;
+
+                    /**
+                     * Creates a plain object from a SearchJobsRequest message. Also converts values to other types if specified.
+                     * @param message SearchJobsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.SearchJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchJobsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace SearchJobsRequest {
+
+                    /** Properties of a CustomRankingInfo. */
+                    interface ICustomRankingInfo {
+
+                        /** CustomRankingInfo importanceLevel */
+                        importanceLevel?: (google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel|null);
+
+                        /** CustomRankingInfo rankingExpression */
+                        rankingExpression?: (string|null);
+                    }
+
+                    /** Represents a CustomRankingInfo. */
+                    class CustomRankingInfo implements ICustomRankingInfo {
+
+                        /**
+                         * Constructs a new CustomRankingInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo);
+
+                        /** CustomRankingInfo importanceLevel. */
+                        public importanceLevel: (google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel);
+
+                        /** CustomRankingInfo rankingExpression. */
+                        public rankingExpression: string;
+
+                        /**
+                         * Creates a new CustomRankingInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomRankingInfo instance
+                         */
+                        public static create(properties?: google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo): google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo;
+
+                        /**
+                         * Encodes the specified CustomRankingInfo message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.verify|verify} messages.
+                         * @param message CustomRankingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomRankingInfo message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.verify|verify} messages.
+                         * @param message CustomRankingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomRankingInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomRankingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo;
+
+                        /**
+                         * Decodes a CustomRankingInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomRankingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo;
+
+                        /**
+                         * Verifies a CustomRankingInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomRankingInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomRankingInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo;
+
+                        /**
+                         * Creates a plain object from a CustomRankingInfo message. Also converts values to other types if specified.
+                         * @param message CustomRankingInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomRankingInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace CustomRankingInfo {
+
+                        /** ImportanceLevel enum. */
+                        enum ImportanceLevel {
+                            IMPORTANCE_LEVEL_UNSPECIFIED = 0,
+                            NONE = 1,
+                            LOW = 2,
+                            MILD = 3,
+                            MEDIUM = 4,
+                            HIGH = 5,
+                            EXTREME = 6
+                        }
+                    }
+
+                    /** SearchMode enum. */
+                    enum SearchMode {
+                        SEARCH_MODE_UNSPECIFIED = 0,
+                        JOB_SEARCH = 1,
+                        FEATURED_JOB_SEARCH = 2
+                    }
+
+                    /** DiversificationLevel enum. */
+                    enum DiversificationLevel {
+                        DIVERSIFICATION_LEVEL_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        SIMPLE = 2
+                    }
+                }
+
+                /** Properties of a SearchJobsResponse. */
+                interface ISearchJobsResponse {
+
+                    /** SearchJobsResponse matchingJobs */
+                    matchingJobs?: (google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[]|null);
+
+                    /** SearchJobsResponse histogramQueryResults */
+                    histogramQueryResults?: (google.cloud.talent.v4beta1.IHistogramQueryResult[]|null);
+
+                    /** SearchJobsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** SearchJobsResponse locationFilters */
+                    locationFilters?: (google.cloud.talent.v4beta1.ILocation[]|null);
+
+                    /** SearchJobsResponse estimatedTotalSize */
+                    estimatedTotalSize?: (number|null);
+
+                    /** SearchJobsResponse totalSize */
+                    totalSize?: (number|null);
+
+                    /** SearchJobsResponse metadata */
+                    metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
+
+                    /** SearchJobsResponse broadenedQueryJobsCount */
+                    broadenedQueryJobsCount?: (number|null);
+
+                    /** SearchJobsResponse spellCorrection */
+                    spellCorrection?: (google.cloud.talent.v4beta1.ISpellingCorrection|null);
+                }
+
+                /** Represents a SearchJobsResponse. */
+                class SearchJobsResponse implements ISearchJobsResponse {
+
+                    /**
+                     * Constructs a new SearchJobsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ISearchJobsResponse);
+
+                    /** SearchJobsResponse matchingJobs. */
+                    public matchingJobs: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[];
+
+                    /** SearchJobsResponse histogramQueryResults. */
                     public histogramQueryResults: google.cloud.talent.v4beta1.IHistogramQueryResult[];
 
-                    /** SearchProfilesResponse summarizedProfiles. */
-                    public summarizedProfiles: google.cloud.talent.v4beta1.ISummarizedProfile[];
+                    /** SearchJobsResponse nextPageToken. */
+                    public nextPageToken: string;
 
-                    /** SearchProfilesResponse resultSetId. */
-                    public resultSetId: string;
+                    /** SearchJobsResponse locationFilters. */
+                    public locationFilters: google.cloud.talent.v4beta1.ILocation[];
+
+                    /** SearchJobsResponse estimatedTotalSize. */
+                    public estimatedTotalSize: number;
+
+                    /** SearchJobsResponse totalSize. */
+                    public totalSize: number;
+
+                    /** SearchJobsResponse metadata. */
+                    public metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
+
+                    /** SearchJobsResponse broadenedQueryJobsCount. */
+                    public broadenedQueryJobsCount: number;
+
+                    /** SearchJobsResponse spellCorrection. */
+                    public spellCorrection?: (google.cloud.talent.v4beta1.ISpellingCorrection|null);
 
                     /**
-                     * Creates a new SearchProfilesResponse instance using the specified properties.
+                     * Creates a new SearchJobsResponse instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns SearchProfilesResponse instance
+                     * @returns SearchJobsResponse instance
                      */
-                    public static create(properties?: google.cloud.talent.v4beta1.ISearchProfilesResponse): google.cloud.talent.v4beta1.SearchProfilesResponse;
+                    public static create(properties?: google.cloud.talent.v4beta1.ISearchJobsResponse): google.cloud.talent.v4beta1.SearchJobsResponse;
 
                     /**
-                     * Encodes the specified SearchProfilesResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchProfilesResponse.verify|verify} messages.
-                     * @param message SearchProfilesResponse message or plain object to encode
+                     * Encodes the specified SearchJobsResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.verify|verify} messages.
+                     * @param message SearchJobsResponse message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.talent.v4beta1.ISearchProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.talent.v4beta1.ISearchJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified SearchProfilesResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchProfilesResponse.verify|verify} messages.
-                     * @param message SearchProfilesResponse message or plain object to encode
+                     * Encodes the specified SearchJobsResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.verify|verify} messages.
+                     * @param message SearchJobsResponse message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISearchProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISearchJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a SearchProfilesResponse message from the specified reader or buffer.
+                     * Decodes a SearchJobsResponse message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns SearchProfilesResponse
+                     * @returns SearchJobsResponse
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchProfilesResponse;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsResponse;
 
                     /**
-                     * Decodes a SearchProfilesResponse message from the specified reader or buffer, length delimited.
+                     * Decodes a SearchJobsResponse message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns SearchProfilesResponse
+                     * @returns SearchJobsResponse
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchProfilesResponse;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsResponse;
 
                     /**
-                     * Verifies a SearchProfilesResponse message.
+                     * Verifies a SearchJobsResponse message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a SearchProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * Creates a SearchJobsResponse message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns SearchProfilesResponse
+                     * @returns SearchJobsResponse
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchProfilesResponse;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsResponse;
 
                     /**
-                     * Creates a plain object from a SearchProfilesResponse message. Also converts values to other types if specified.
-                     * @param message SearchProfilesResponse
+                     * Creates a plain object from a SearchJobsResponse message. Also converts values to other types if specified.
+                     * @param message SearchJobsResponse
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.talent.v4beta1.SearchProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.talent.v4beta1.SearchJobsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this SearchProfilesResponse to JSON.
+                     * Converts this SearchJobsResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a SummarizedProfile. */
-                interface ISummarizedProfile {
+                namespace SearchJobsResponse {
 
-                    /** SummarizedProfile profiles */
-                    profiles?: (google.cloud.talent.v4beta1.IProfile[]|null);
+                    /** Properties of a MatchingJob. */
+                    interface IMatchingJob {
 
-                    /** SummarizedProfile summary */
-                    summary?: (google.cloud.talent.v4beta1.IProfile|null);
+                        /** MatchingJob job */
+                        job?: (google.cloud.talent.v4beta1.IJob|null);
+
+                        /** MatchingJob jobSummary */
+                        jobSummary?: (string|null);
+
+                        /** MatchingJob jobTitleSnippet */
+                        jobTitleSnippet?: (string|null);
+
+                        /** MatchingJob searchTextSnippet */
+                        searchTextSnippet?: (string|null);
+
+                        /** MatchingJob commuteInfo */
+                        commuteInfo?: (google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo|null);
+                    }
+
+                    /** Represents a MatchingJob. */
+                    class MatchingJob implements IMatchingJob {
+
+                        /**
+                         * Constructs a new MatchingJob.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob);
+
+                        /** MatchingJob job. */
+                        public job?: (google.cloud.talent.v4beta1.IJob|null);
+
+                        /** MatchingJob jobSummary. */
+                        public jobSummary: string;
+
+                        /** MatchingJob jobTitleSnippet. */
+                        public jobTitleSnippet: string;
+
+                        /** MatchingJob searchTextSnippet. */
+                        public searchTextSnippet: string;
+
+                        /** MatchingJob commuteInfo. */
+                        public commuteInfo?: (google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo|null);
+
+                        /**
+                         * Creates a new MatchingJob instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MatchingJob instance
+                         */
+                        public static create(properties?: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob): google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob;
+
+                        /**
+                         * Encodes the specified MatchingJob message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob.verify|verify} messages.
+                         * @param message MatchingJob message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MatchingJob message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob.verify|verify} messages.
+                         * @param message MatchingJob message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MatchingJob message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MatchingJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob;
+
+                        /**
+                         * Decodes a MatchingJob message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MatchingJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob;
+
+                        /**
+                         * Verifies a MatchingJob message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MatchingJob message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MatchingJob
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob;
+
+                        /**
+                         * Creates a plain object from a MatchingJob message. Also converts values to other types if specified.
+                         * @param message MatchingJob
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MatchingJob to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CommuteInfo. */
+                    interface ICommuteInfo {
+
+                        /** CommuteInfo jobLocation */
+                        jobLocation?: (google.cloud.talent.v4beta1.ILocation|null);
+
+                        /** CommuteInfo travelDuration */
+                        travelDuration?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a CommuteInfo. */
+                    class CommuteInfo implements ICommuteInfo {
+
+                        /**
+                         * Constructs a new CommuteInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo);
+
+                        /** CommuteInfo jobLocation. */
+                        public jobLocation?: (google.cloud.talent.v4beta1.ILocation|null);
+
+                        /** CommuteInfo travelDuration. */
+                        public travelDuration?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new CommuteInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CommuteInfo instance
+                         */
+                        public static create(properties?: google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo): google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo;
+
+                        /**
+                         * Encodes the specified CommuteInfo message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo.verify|verify} messages.
+                         * @param message CommuteInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CommuteInfo message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo.verify|verify} messages.
+                         * @param message CommuteInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.talent.v4beta1.SearchJobsResponse.ICommuteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CommuteInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CommuteInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo;
+
+                        /**
+                         * Decodes a CommuteInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CommuteInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo;
+
+                        /**
+                         * Verifies a CommuteInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CommuteInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CommuteInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo;
+
+                        /**
+                         * Creates a plain object from a CommuteInfo message. Also converts values to other types if specified.
+                         * @param message CommuteInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CommuteInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
-                /** Represents a SummarizedProfile. */
-                class SummarizedProfile implements ISummarizedProfile {
+                /** Properties of a BatchCreateJobsRequest. */
+                interface IBatchCreateJobsRequest {
+
+                    /** BatchCreateJobsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateJobsRequest jobs */
+                    jobs?: (google.cloud.talent.v4beta1.IJob[]|null);
+                }
+
+                /** Represents a BatchCreateJobsRequest. */
+                class BatchCreateJobsRequest implements IBatchCreateJobsRequest {
 
                     /**
-                     * Constructs a new SummarizedProfile.
+                     * Constructs a new BatchCreateJobsRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.talent.v4beta1.ISummarizedProfile);
+                    constructor(properties?: google.cloud.talent.v4beta1.IBatchCreateJobsRequest);
 
-                    /** SummarizedProfile profiles. */
-                    public profiles: google.cloud.talent.v4beta1.IProfile[];
+                    /** BatchCreateJobsRequest parent. */
+                    public parent: string;
 
-                    /** SummarizedProfile summary. */
-                    public summary?: (google.cloud.talent.v4beta1.IProfile|null);
+                    /** BatchCreateJobsRequest jobs. */
+                    public jobs: google.cloud.talent.v4beta1.IJob[];
 
                     /**
-                     * Creates a new SummarizedProfile instance using the specified properties.
+                     * Creates a new BatchCreateJobsRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns SummarizedProfile instance
+                     * @returns BatchCreateJobsRequest instance
                      */
-                    public static create(properties?: google.cloud.talent.v4beta1.ISummarizedProfile): google.cloud.talent.v4beta1.SummarizedProfile;
+                    public static create(properties?: google.cloud.talent.v4beta1.IBatchCreateJobsRequest): google.cloud.talent.v4beta1.BatchCreateJobsRequest;
 
                     /**
-                     * Encodes the specified SummarizedProfile message. Does not implicitly {@link google.cloud.talent.v4beta1.SummarizedProfile.verify|verify} messages.
-                     * @param message SummarizedProfile message or plain object to encode
+                     * Encodes the specified BatchCreateJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.BatchCreateJobsRequest.verify|verify} messages.
+                     * @param message BatchCreateJobsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.talent.v4beta1.ISummarizedProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.talent.v4beta1.IBatchCreateJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified SummarizedProfile message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SummarizedProfile.verify|verify} messages.
-                     * @param message SummarizedProfile message or plain object to encode
+                     * Encodes the specified BatchCreateJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.BatchCreateJobsRequest.verify|verify} messages.
+                     * @param message BatchCreateJobsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISummarizedProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IBatchCreateJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a SummarizedProfile message from the specified reader or buffer.
+                     * Decodes a BatchCreateJobsRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns SummarizedProfile
+                     * @returns BatchCreateJobsRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SummarizedProfile;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.BatchCreateJobsRequest;
 
                     /**
-                     * Decodes a SummarizedProfile message from the specified reader or buffer, length delimited.
+                     * Decodes a BatchCreateJobsRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns SummarizedProfile
+                     * @returns BatchCreateJobsRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SummarizedProfile;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.BatchCreateJobsRequest;
 
                     /**
-                     * Verifies a SummarizedProfile message.
+                     * Verifies a BatchCreateJobsRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a SummarizedProfile message from a plain object. Also converts values to their respective internal types.
+                     * Creates a BatchCreateJobsRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns SummarizedProfile
+                     * @returns BatchCreateJobsRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SummarizedProfile;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.BatchCreateJobsRequest;
 
                     /**
-                     * Creates a plain object from a SummarizedProfile message. Also converts values to other types if specified.
-                     * @param message SummarizedProfile
+                     * Creates a plain object from a BatchCreateJobsRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateJobsRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.talent.v4beta1.SummarizedProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.talent.v4beta1.BatchCreateJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this SummarizedProfile to JSON.
+                     * Converts this BatchCreateJobsRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchUpdateJobsRequest. */
+                interface IBatchUpdateJobsRequest {
+
+                    /** BatchUpdateJobsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchUpdateJobsRequest jobs */
+                    jobs?: (google.cloud.talent.v4beta1.IJob[]|null);
+
+                    /** BatchUpdateJobsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents a BatchUpdateJobsRequest. */
+                class BatchUpdateJobsRequest implements IBatchUpdateJobsRequest {
+
+                    /**
+                     * Constructs a new BatchUpdateJobsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest);
+
+                    /** BatchUpdateJobsRequest parent. */
+                    public parent: string;
+
+                    /** BatchUpdateJobsRequest jobs. */
+                    public jobs: google.cloud.talent.v4beta1.IJob[];
+
+                    /** BatchUpdateJobsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new BatchUpdateJobsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchUpdateJobsRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest): google.cloud.talent.v4beta1.BatchUpdateJobsRequest;
+
+                    /**
+                     * Encodes the specified BatchUpdateJobsRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.BatchUpdateJobsRequest.verify|verify} messages.
+                     * @param message BatchUpdateJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchUpdateJobsRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.BatchUpdateJobsRequest.verify|verify} messages.
+                     * @param message BatchUpdateJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IBatchUpdateJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchUpdateJobsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchUpdateJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.BatchUpdateJobsRequest;
+
+                    /**
+                     * Decodes a BatchUpdateJobsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchUpdateJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.BatchUpdateJobsRequest;
+
+                    /**
+                     * Verifies a BatchUpdateJobsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchUpdateJobsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchUpdateJobsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.BatchUpdateJobsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchUpdateJobsRequest message. Also converts values to other types if specified.
+                     * @param message BatchUpdateJobsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.BatchUpdateJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchUpdateJobsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a JobOperationResult. */
+                interface IJobOperationResult {
+
+                    /** JobOperationResult jobResults */
+                    jobResults?: (google.cloud.talent.v4beta1.JobOperationResult.IJobResult[]|null);
+                }
+
+                /** Represents a JobOperationResult. */
+                class JobOperationResult implements IJobOperationResult {
+
+                    /**
+                     * Constructs a new JobOperationResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IJobOperationResult);
+
+                    /** JobOperationResult jobResults. */
+                    public jobResults: google.cloud.talent.v4beta1.JobOperationResult.IJobResult[];
+
+                    /**
+                     * Creates a new JobOperationResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns JobOperationResult instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IJobOperationResult): google.cloud.talent.v4beta1.JobOperationResult;
+
+                    /**
+                     * Encodes the specified JobOperationResult message. Does not implicitly {@link google.cloud.talent.v4beta1.JobOperationResult.verify|verify} messages.
+                     * @param message JobOperationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IJobOperationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified JobOperationResult message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.JobOperationResult.verify|verify} messages.
+                     * @param message JobOperationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IJobOperationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a JobOperationResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns JobOperationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.JobOperationResult;
+
+                    /**
+                     * Decodes a JobOperationResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns JobOperationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.JobOperationResult;
+
+                    /**
+                     * Verifies a JobOperationResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a JobOperationResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns JobOperationResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.JobOperationResult;
+
+                    /**
+                     * Creates a plain object from a JobOperationResult message. Also converts values to other types if specified.
+                     * @param message JobOperationResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.JobOperationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this JobOperationResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace JobOperationResult {
+
+                    /** Properties of a JobResult. */
+                    interface IJobResult {
+
+                        /** JobResult job */
+                        job?: (google.cloud.talent.v4beta1.IJob|null);
+
+                        /** JobResult status */
+                        status?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents a JobResult. */
+                    class JobResult implements IJobResult {
+
+                        /**
+                         * Constructs a new JobResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.talent.v4beta1.JobOperationResult.IJobResult);
+
+                        /** JobResult job. */
+                        public job?: (google.cloud.talent.v4beta1.IJob|null);
+
+                        /** JobResult status. */
+                        public status?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new JobResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns JobResult instance
+                         */
+                        public static create(properties?: google.cloud.talent.v4beta1.JobOperationResult.IJobResult): google.cloud.talent.v4beta1.JobOperationResult.JobResult;
+
+                        /**
+                         * Encodes the specified JobResult message. Does not implicitly {@link google.cloud.talent.v4beta1.JobOperationResult.JobResult.verify|verify} messages.
+                         * @param message JobResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.talent.v4beta1.JobOperationResult.IJobResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified JobResult message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.JobOperationResult.JobResult.verify|verify} messages.
+                         * @param message JobResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.talent.v4beta1.JobOperationResult.IJobResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a JobResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns JobResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.JobOperationResult.JobResult;
+
+                        /**
+                         * Decodes a JobResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns JobResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.JobOperationResult.JobResult;
+
+                        /**
+                         * Verifies a JobResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a JobResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns JobResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.JobOperationResult.JobResult;
+
+                        /**
+                         * Creates a plain object from a JobResult message. Also converts values to other types if specified.
+                         * @param message JobResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.talent.v4beta1.JobOperationResult.JobResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this JobResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Properties of a Profile. */
@@ -12449,6 +11339,1234 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Represents a ProfileService */
+                class ProfileService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ProfileService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ProfileService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ProfileService;
+
+                    /**
+                     * Calls ListProfiles.
+                     * @param request ListProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListProfilesResponse
+                     */
+                    public listProfiles(request: google.cloud.talent.v4beta1.IListProfilesRequest, callback: google.cloud.talent.v4beta1.ProfileService.ListProfilesCallback): void;
+
+                    /**
+                     * Calls ListProfiles.
+                     * @param request ListProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listProfiles(request: google.cloud.talent.v4beta1.IListProfilesRequest): Promise<google.cloud.talent.v4beta1.ListProfilesResponse>;
+
+                    /**
+                     * Calls CreateProfile.
+                     * @param request CreateProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Profile
+                     */
+                    public createProfile(request: google.cloud.talent.v4beta1.ICreateProfileRequest, callback: google.cloud.talent.v4beta1.ProfileService.CreateProfileCallback): void;
+
+                    /**
+                     * Calls CreateProfile.
+                     * @param request CreateProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createProfile(request: google.cloud.talent.v4beta1.ICreateProfileRequest): Promise<google.cloud.talent.v4beta1.Profile>;
+
+                    /**
+                     * Calls GetProfile.
+                     * @param request GetProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Profile
+                     */
+                    public getProfile(request: google.cloud.talent.v4beta1.IGetProfileRequest, callback: google.cloud.talent.v4beta1.ProfileService.GetProfileCallback): void;
+
+                    /**
+                     * Calls GetProfile.
+                     * @param request GetProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProfile(request: google.cloud.talent.v4beta1.IGetProfileRequest): Promise<google.cloud.talent.v4beta1.Profile>;
+
+                    /**
+                     * Calls UpdateProfile.
+                     * @param request UpdateProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Profile
+                     */
+                    public updateProfile(request: google.cloud.talent.v4beta1.IUpdateProfileRequest, callback: google.cloud.talent.v4beta1.ProfileService.UpdateProfileCallback): void;
+
+                    /**
+                     * Calls UpdateProfile.
+                     * @param request UpdateProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateProfile(request: google.cloud.talent.v4beta1.IUpdateProfileRequest): Promise<google.cloud.talent.v4beta1.Profile>;
+
+                    /**
+                     * Calls DeleteProfile.
+                     * @param request DeleteProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteProfile(request: google.cloud.talent.v4beta1.IDeleteProfileRequest, callback: google.cloud.talent.v4beta1.ProfileService.DeleteProfileCallback): void;
+
+                    /**
+                     * Calls DeleteProfile.
+                     * @param request DeleteProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteProfile(request: google.cloud.talent.v4beta1.IDeleteProfileRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls SearchProfiles.
+                     * @param request SearchProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchProfilesResponse
+                     */
+                    public searchProfiles(request: google.cloud.talent.v4beta1.ISearchProfilesRequest, callback: google.cloud.talent.v4beta1.ProfileService.SearchProfilesCallback): void;
+
+                    /**
+                     * Calls SearchProfiles.
+                     * @param request SearchProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchProfiles(request: google.cloud.talent.v4beta1.ISearchProfilesRequest): Promise<google.cloud.talent.v4beta1.SearchProfilesResponse>;
+                }
+
+                namespace ProfileService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#listProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListProfilesResponse
+                     */
+                    type ListProfilesCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.ListProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#createProfile}.
+                     * @param error Error, if any
+                     * @param [response] Profile
+                     */
+                    type CreateProfileCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Profile) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#getProfile}.
+                     * @param error Error, if any
+                     * @param [response] Profile
+                     */
+                    type GetProfileCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Profile) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#updateProfile}.
+                     * @param error Error, if any
+                     * @param [response] Profile
+                     */
+                    type UpdateProfileCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.Profile) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#deleteProfile}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteProfileCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.talent.v4beta1.ProfileService#searchProfiles}.
+                     * @param error Error, if any
+                     * @param [response] SearchProfilesResponse
+                     */
+                    type SearchProfilesCallback = (error: (Error|null), response?: google.cloud.talent.v4beta1.SearchProfilesResponse) => void;
+                }
+
+                /** Properties of a ListProfilesRequest. */
+                interface IListProfilesRequest {
+
+                    /** ListProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListProfilesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListProfilesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListProfilesRequest readMask */
+                    readMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents a ListProfilesRequest. */
+                class ListProfilesRequest implements IListProfilesRequest {
+
+                    /**
+                     * Constructs a new ListProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IListProfilesRequest);
+
+                    /** ListProfilesRequest parent. */
+                    public parent: string;
+
+                    /** ListProfilesRequest filter. */
+                    public filter: string;
+
+                    /** ListProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListProfilesRequest readMask. */
+                    public readMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new ListProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProfilesRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IListProfilesRequest): google.cloud.talent.v4beta1.ListProfilesRequest;
+
+                    /**
+                     * Encodes the specified ListProfilesRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.ListProfilesRequest.verify|verify} messages.
+                     * @param message ListProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IListProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProfilesRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListProfilesRequest.verify|verify} messages.
+                     * @param message ListProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListProfilesRequest;
+
+                    /**
+                     * Decodes a ListProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListProfilesRequest;
+
+                    /**
+                     * Verifies a ListProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListProfilesRequest message. Also converts values to other types if specified.
+                     * @param message ListProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.ListProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListProfilesResponse. */
+                interface IListProfilesResponse {
+
+                    /** ListProfilesResponse profiles */
+                    profiles?: (google.cloud.talent.v4beta1.IProfile[]|null);
+
+                    /** ListProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListProfilesResponse. */
+                class ListProfilesResponse implements IListProfilesResponse {
+
+                    /**
+                     * Constructs a new ListProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IListProfilesResponse);
+
+                    /** ListProfilesResponse profiles. */
+                    public profiles: google.cloud.talent.v4beta1.IProfile[];
+
+                    /** ListProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProfilesResponse instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IListProfilesResponse): google.cloud.talent.v4beta1.ListProfilesResponse;
+
+                    /**
+                     * Encodes the specified ListProfilesResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.ListProfilesResponse.verify|verify} messages.
+                     * @param message ListProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IListProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProfilesResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.ListProfilesResponse.verify|verify} messages.
+                     * @param message ListProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IListProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.ListProfilesResponse;
+
+                    /**
+                     * Decodes a ListProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.ListProfilesResponse;
+
+                    /**
+                     * Verifies a ListProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.ListProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListProfilesResponse message. Also converts values to other types if specified.
+                     * @param message ListProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.ListProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateProfileRequest. */
+                interface ICreateProfileRequest {
+
+                    /** CreateProfileRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateProfileRequest profile */
+                    profile?: (google.cloud.talent.v4beta1.IProfile|null);
+                }
+
+                /** Represents a CreateProfileRequest. */
+                class CreateProfileRequest implements ICreateProfileRequest {
+
+                    /**
+                     * Constructs a new CreateProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ICreateProfileRequest);
+
+                    /** CreateProfileRequest parent. */
+                    public parent: string;
+
+                    /** CreateProfileRequest profile. */
+                    public profile?: (google.cloud.talent.v4beta1.IProfile|null);
+
+                    /**
+                     * Creates a new CreateProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateProfileRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.ICreateProfileRequest): google.cloud.talent.v4beta1.CreateProfileRequest;
+
+                    /**
+                     * Encodes the specified CreateProfileRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.CreateProfileRequest.verify|verify} messages.
+                     * @param message CreateProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.ICreateProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateProfileRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.CreateProfileRequest.verify|verify} messages.
+                     * @param message CreateProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ICreateProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.CreateProfileRequest;
+
+                    /**
+                     * Decodes a CreateProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.CreateProfileRequest;
+
+                    /**
+                     * Verifies a CreateProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.CreateProfileRequest;
+
+                    /**
+                     * Creates a plain object from a CreateProfileRequest message. Also converts values to other types if specified.
+                     * @param message CreateProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.CreateProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetProfileRequest. */
+                interface IGetProfileRequest {
+
+                    /** GetProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProfileRequest. */
+                class GetProfileRequest implements IGetProfileRequest {
+
+                    /**
+                     * Constructs a new GetProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IGetProfileRequest);
+
+                    /** GetProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProfileRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IGetProfileRequest): google.cloud.talent.v4beta1.GetProfileRequest;
+
+                    /**
+                     * Encodes the specified GetProfileRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.GetProfileRequest.verify|verify} messages.
+                     * @param message GetProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IGetProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProfileRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.GetProfileRequest.verify|verify} messages.
+                     * @param message GetProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IGetProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.GetProfileRequest;
+
+                    /**
+                     * Decodes a GetProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.GetProfileRequest;
+
+                    /**
+                     * Verifies a GetProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.GetProfileRequest;
+
+                    /**
+                     * Creates a plain object from a GetProfileRequest message. Also converts values to other types if specified.
+                     * @param message GetProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.GetProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateProfileRequest. */
+                interface IUpdateProfileRequest {
+
+                    /** UpdateProfileRequest profile */
+                    profile?: (google.cloud.talent.v4beta1.IProfile|null);
+
+                    /** UpdateProfileRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateProfileRequest. */
+                class UpdateProfileRequest implements IUpdateProfileRequest {
+
+                    /**
+                     * Constructs a new UpdateProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IUpdateProfileRequest);
+
+                    /** UpdateProfileRequest profile. */
+                    public profile?: (google.cloud.talent.v4beta1.IProfile|null);
+
+                    /** UpdateProfileRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateProfileRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IUpdateProfileRequest): google.cloud.talent.v4beta1.UpdateProfileRequest;
+
+                    /**
+                     * Encodes the specified UpdateProfileRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateProfileRequest.verify|verify} messages.
+                     * @param message UpdateProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IUpdateProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateProfileRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.UpdateProfileRequest.verify|verify} messages.
+                     * @param message UpdateProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IUpdateProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.UpdateProfileRequest;
+
+                    /**
+                     * Decodes an UpdateProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.UpdateProfileRequest;
+
+                    /**
+                     * Verifies an UpdateProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.UpdateProfileRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateProfileRequest message. Also converts values to other types if specified.
+                     * @param message UpdateProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.UpdateProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteProfileRequest. */
+                interface IDeleteProfileRequest {
+
+                    /** DeleteProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteProfileRequest. */
+                class DeleteProfileRequest implements IDeleteProfileRequest {
+
+                    /**
+                     * Constructs a new DeleteProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.IDeleteProfileRequest);
+
+                    /** DeleteProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteProfileRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.IDeleteProfileRequest): google.cloud.talent.v4beta1.DeleteProfileRequest;
+
+                    /**
+                     * Encodes the specified DeleteProfileRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteProfileRequest.verify|verify} messages.
+                     * @param message DeleteProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.IDeleteProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteProfileRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.DeleteProfileRequest.verify|verify} messages.
+                     * @param message DeleteProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.IDeleteProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.DeleteProfileRequest;
+
+                    /**
+                     * Decodes a DeleteProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.DeleteProfileRequest;
+
+                    /**
+                     * Verifies a DeleteProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.DeleteProfileRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteProfileRequest message. Also converts values to other types if specified.
+                     * @param message DeleteProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.DeleteProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SearchProfilesRequest. */
+                interface ISearchProfilesRequest {
+
+                    /** SearchProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** SearchProfilesRequest requestMetadata */
+                    requestMetadata?: (google.cloud.talent.v4beta1.IRequestMetadata|null);
+
+                    /** SearchProfilesRequest profileQuery */
+                    profileQuery?: (google.cloud.talent.v4beta1.IProfileQuery|null);
+
+                    /** SearchProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchProfilesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** SearchProfilesRequest offset */
+                    offset?: (number|null);
+
+                    /** SearchProfilesRequest disableSpellCheck */
+                    disableSpellCheck?: (boolean|null);
+
+                    /** SearchProfilesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** SearchProfilesRequest caseSensitiveSort */
+                    caseSensitiveSort?: (boolean|null);
+
+                    /** SearchProfilesRequest histogramQueries */
+                    histogramQueries?: (google.cloud.talent.v4beta1.IHistogramQuery[]|null);
+
+                    /** SearchProfilesRequest resultSetId */
+                    resultSetId?: (string|null);
+
+                    /** SearchProfilesRequest strictKeywordsSearch */
+                    strictKeywordsSearch?: (boolean|null);
+                }
+
+                /** Represents a SearchProfilesRequest. */
+                class SearchProfilesRequest implements ISearchProfilesRequest {
+
+                    /**
+                     * Constructs a new SearchProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ISearchProfilesRequest);
+
+                    /** SearchProfilesRequest parent. */
+                    public parent: string;
+
+                    /** SearchProfilesRequest requestMetadata. */
+                    public requestMetadata?: (google.cloud.talent.v4beta1.IRequestMetadata|null);
+
+                    /** SearchProfilesRequest profileQuery. */
+                    public profileQuery?: (google.cloud.talent.v4beta1.IProfileQuery|null);
+
+                    /** SearchProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** SearchProfilesRequest offset. */
+                    public offset: number;
+
+                    /** SearchProfilesRequest disableSpellCheck. */
+                    public disableSpellCheck: boolean;
+
+                    /** SearchProfilesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** SearchProfilesRequest caseSensitiveSort. */
+                    public caseSensitiveSort: boolean;
+
+                    /** SearchProfilesRequest histogramQueries. */
+                    public histogramQueries: google.cloud.talent.v4beta1.IHistogramQuery[];
+
+                    /** SearchProfilesRequest resultSetId. */
+                    public resultSetId: string;
+
+                    /** SearchProfilesRequest strictKeywordsSearch. */
+                    public strictKeywordsSearch: boolean;
+
+                    /**
+                     * Creates a new SearchProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchProfilesRequest instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.ISearchProfilesRequest): google.cloud.talent.v4beta1.SearchProfilesRequest;
+
+                    /**
+                     * Encodes the specified SearchProfilesRequest message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchProfilesRequest.verify|verify} messages.
+                     * @param message SearchProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.ISearchProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchProfilesRequest message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchProfilesRequest.verify|verify} messages.
+                     * @param message SearchProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISearchProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchProfilesRequest;
+
+                    /**
+                     * Decodes a SearchProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchProfilesRequest;
+
+                    /**
+                     * Verifies a SearchProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a SearchProfilesRequest message. Also converts values to other types if specified.
+                     * @param message SearchProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.SearchProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SearchProfilesResponse. */
+                interface ISearchProfilesResponse {
+
+                    /** SearchProfilesResponse estimatedTotalSize */
+                    estimatedTotalSize?: (number|Long|string|null);
+
+                    /** SearchProfilesResponse spellCorrection */
+                    spellCorrection?: (google.cloud.talent.v4beta1.ISpellingCorrection|null);
+
+                    /** SearchProfilesResponse metadata */
+                    metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
+
+                    /** SearchProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** SearchProfilesResponse histogramQueryResults */
+                    histogramQueryResults?: (google.cloud.talent.v4beta1.IHistogramQueryResult[]|null);
+
+                    /** SearchProfilesResponse summarizedProfiles */
+                    summarizedProfiles?: (google.cloud.talent.v4beta1.ISummarizedProfile[]|null);
+
+                    /** SearchProfilesResponse resultSetId */
+                    resultSetId?: (string|null);
+                }
+
+                /** Represents a SearchProfilesResponse. */
+                class SearchProfilesResponse implements ISearchProfilesResponse {
+
+                    /**
+                     * Constructs a new SearchProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ISearchProfilesResponse);
+
+                    /** SearchProfilesResponse estimatedTotalSize. */
+                    public estimatedTotalSize: (number|Long|string);
+
+                    /** SearchProfilesResponse spellCorrection. */
+                    public spellCorrection?: (google.cloud.talent.v4beta1.ISpellingCorrection|null);
+
+                    /** SearchProfilesResponse metadata. */
+                    public metadata?: (google.cloud.talent.v4beta1.IResponseMetadata|null);
+
+                    /** SearchProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** SearchProfilesResponse histogramQueryResults. */
+                    public histogramQueryResults: google.cloud.talent.v4beta1.IHistogramQueryResult[];
+
+                    /** SearchProfilesResponse summarizedProfiles. */
+                    public summarizedProfiles: google.cloud.talent.v4beta1.ISummarizedProfile[];
+
+                    /** SearchProfilesResponse resultSetId. */
+                    public resultSetId: string;
+
+                    /**
+                     * Creates a new SearchProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchProfilesResponse instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.ISearchProfilesResponse): google.cloud.talent.v4beta1.SearchProfilesResponse;
+
+                    /**
+                     * Encodes the specified SearchProfilesResponse message. Does not implicitly {@link google.cloud.talent.v4beta1.SearchProfilesResponse.verify|verify} messages.
+                     * @param message SearchProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.ISearchProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchProfilesResponse message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SearchProfilesResponse.verify|verify} messages.
+                     * @param message SearchProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISearchProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SearchProfilesResponse;
+
+                    /**
+                     * Decodes a SearchProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SearchProfilesResponse;
+
+                    /**
+                     * Verifies a SearchProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SearchProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a SearchProfilesResponse message. Also converts values to other types if specified.
+                     * @param message SearchProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.SearchProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SummarizedProfile. */
+                interface ISummarizedProfile {
+
+                    /** SummarizedProfile profiles */
+                    profiles?: (google.cloud.talent.v4beta1.IProfile[]|null);
+
+                    /** SummarizedProfile summary */
+                    summary?: (google.cloud.talent.v4beta1.IProfile|null);
+                }
+
+                /** Represents a SummarizedProfile. */
+                class SummarizedProfile implements ISummarizedProfile {
+
+                    /**
+                     * Constructs a new SummarizedProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ISummarizedProfile);
+
+                    /** SummarizedProfile profiles. */
+                    public profiles: google.cloud.talent.v4beta1.IProfile[];
+
+                    /** SummarizedProfile summary. */
+                    public summary?: (google.cloud.talent.v4beta1.IProfile|null);
+
+                    /**
+                     * Creates a new SummarizedProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SummarizedProfile instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.ISummarizedProfile): google.cloud.talent.v4beta1.SummarizedProfile;
+
+                    /**
+                     * Encodes the specified SummarizedProfile message. Does not implicitly {@link google.cloud.talent.v4beta1.SummarizedProfile.verify|verify} messages.
+                     * @param message SummarizedProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.ISummarizedProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SummarizedProfile message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.SummarizedProfile.verify|verify} messages.
+                     * @param message SummarizedProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ISummarizedProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SummarizedProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SummarizedProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.SummarizedProfile;
+
+                    /**
+                     * Decodes a SummarizedProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SummarizedProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.SummarizedProfile;
+
+                    /**
+                     * Verifies a SummarizedProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SummarizedProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SummarizedProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.SummarizedProfile;
+
+                    /**
+                     * Creates a plain object from a SummarizedProfile message. Also converts values to other types if specified.
+                     * @param message SummarizedProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.SummarizedProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SummarizedProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Tenant. */
+                interface ITenant {
+
+                    /** Tenant name */
+                    name?: (string|null);
+
+                    /** Tenant externalId */
+                    externalId?: (string|null);
+
+                    /** Tenant usageType */
+                    usageType?: (google.cloud.talent.v4beta1.Tenant.DataUsageType|keyof typeof google.cloud.talent.v4beta1.Tenant.DataUsageType|null);
+
+                    /** Tenant keywordSearchableProfileCustomAttributes */
+                    keywordSearchableProfileCustomAttributes?: (string[]|null);
+                }
+
+                /** Represents a Tenant. */
+                class Tenant implements ITenant {
+
+                    /**
+                     * Constructs a new Tenant.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.talent.v4beta1.ITenant);
+
+                    /** Tenant name. */
+                    public name: string;
+
+                    /** Tenant externalId. */
+                    public externalId: string;
+
+                    /** Tenant usageType. */
+                    public usageType: (google.cloud.talent.v4beta1.Tenant.DataUsageType|keyof typeof google.cloud.talent.v4beta1.Tenant.DataUsageType);
+
+                    /** Tenant keywordSearchableProfileCustomAttributes. */
+                    public keywordSearchableProfileCustomAttributes: string[];
+
+                    /**
+                     * Creates a new Tenant instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Tenant instance
+                     */
+                    public static create(properties?: google.cloud.talent.v4beta1.ITenant): google.cloud.talent.v4beta1.Tenant;
+
+                    /**
+                     * Encodes the specified Tenant message. Does not implicitly {@link google.cloud.talent.v4beta1.Tenant.verify|verify} messages.
+                     * @param message Tenant message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.talent.v4beta1.ITenant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Tenant message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.Tenant.verify|verify} messages.
+                     * @param message Tenant message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ITenant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Tenant message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Tenant
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.Tenant;
+
+                    /**
+                     * Decodes a Tenant message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Tenant
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.Tenant;
+
+                    /**
+                     * Verifies a Tenant message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Tenant message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Tenant
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.Tenant;
+
+                    /**
+                     * Creates a plain object from a Tenant message. Also converts values to other types if specified.
+                     * @param message Tenant
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.talent.v4beta1.Tenant, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Tenant to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Tenant {
+
+                    /** DataUsageType enum. */
+                    enum DataUsageType {
+                        DATA_USAGE_TYPE_UNSPECIFIED = 0,
+                        AGGREGATED = 1,
+                        ISOLATED = 2
+                    }
+                }
+
                 /** Represents a TenantService */
                 class TenantService extends $protobuf.rpc.Service {
 
@@ -13153,130 +13271,248 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
-
-                /** Properties of a Tenant. */
-                interface ITenant {
-
-                    /** Tenant name */
-                    name?: (string|null);
-
-                    /** Tenant externalId */
-                    externalId?: (string|null);
-
-                    /** Tenant usageType */
-                    usageType?: (google.cloud.talent.v4beta1.Tenant.DataUsageType|keyof typeof google.cloud.talent.v4beta1.Tenant.DataUsageType|null);
-
-                    /** Tenant keywordSearchableProfileCustomAttributes */
-                    keywordSearchableProfileCustomAttributes?: (string[]|null);
-                }
-
-                /** Represents a Tenant. */
-                class Tenant implements ITenant {
-
-                    /**
-                     * Constructs a new Tenant.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.talent.v4beta1.ITenant);
-
-                    /** Tenant name. */
-                    public name: string;
-
-                    /** Tenant externalId. */
-                    public externalId: string;
-
-                    /** Tenant usageType. */
-                    public usageType: (google.cloud.talent.v4beta1.Tenant.DataUsageType|keyof typeof google.cloud.talent.v4beta1.Tenant.DataUsageType);
-
-                    /** Tenant keywordSearchableProfileCustomAttributes. */
-                    public keywordSearchableProfileCustomAttributes: string[];
-
-                    /**
-                     * Creates a new Tenant instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Tenant instance
-                     */
-                    public static create(properties?: google.cloud.talent.v4beta1.ITenant): google.cloud.talent.v4beta1.Tenant;
-
-                    /**
-                     * Encodes the specified Tenant message. Does not implicitly {@link google.cloud.talent.v4beta1.Tenant.verify|verify} messages.
-                     * @param message Tenant message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.talent.v4beta1.ITenant, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Tenant message, length delimited. Does not implicitly {@link google.cloud.talent.v4beta1.Tenant.verify|verify} messages.
-                     * @param message Tenant message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.talent.v4beta1.ITenant, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Tenant message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Tenant
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.talent.v4beta1.Tenant;
-
-                    /**
-                     * Decodes a Tenant message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Tenant
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.talent.v4beta1.Tenant;
-
-                    /**
-                     * Verifies a Tenant message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Tenant message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Tenant
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.talent.v4beta1.Tenant;
-
-                    /**
-                     * Creates a plain object from a Tenant message. Also converts values to other types if specified.
-                     * @param message Tenant
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.talent.v4beta1.Tenant, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Tenant to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace Tenant {
-
-                    /** DataUsageType enum. */
-                    enum DataUsageType {
-                        DATA_USAGE_TYPE_UNSPECIFIED = 0,
-                        AGGREGATED = 1,
-                        ISOLATED = 2
-                    }
-                }
             }
         }
     }
 
     /** Namespace api. */
     namespace api {
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -13612,242 +13848,6 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
