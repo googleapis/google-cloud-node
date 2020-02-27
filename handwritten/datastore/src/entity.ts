@@ -565,7 +565,7 @@ export namespace entity {
    * // }
    */
   // tslint:disable-next-line no-any
-  export function encodeValue(value?: any): ValueProto {
+  export function encodeValue(value: any, property: string): ValueProto {
     const valueProto: ValueProto = {};
 
     if (is.boolean(value)) {
@@ -579,7 +579,16 @@ export namespace entity {
     }
 
     if (typeof value === 'number') {
-      if (value % 1 === 0) {
+      if (Number.isInteger(value)) {
+        if (!Number.isSafeInteger(value)) {
+          process.emitWarning(
+            'IntegerOutOfBoundsWarning: ' +
+              "the value for '" +
+              property +
+              "' property is outside of bounds of a JavaScript Number.\n" +
+              "Use 'Datastore.int(<integer_value_as_string>)' to preserve accuracy during the upload."
+          );
+        }
         value = new entity.Int(value);
       } else {
         value = new entity.Double(value);
@@ -624,7 +633,7 @@ export namespace entity {
 
     if (Array.isArray(value)) {
       valueProto.arrayValue = {
-        values: value.map(entity.encodeValue),
+        values: value.map(val => entity.encodeValue(val, property)),
       };
       return valueProto;
     }
@@ -640,7 +649,7 @@ export namespace entity {
 
         for (const prop in value) {
           if (value.hasOwnProperty(prop)) {
-            value[prop] = entity.encodeValue(value[prop]);
+            value[prop] = entity.encodeValue(value[prop], prop);
           }
         }
       }
@@ -744,7 +753,7 @@ export namespace entity {
 
       properties: Object.keys(properties).reduce(
         (encoded, key) => {
-          encoded[key] = entity.encodeValue(properties[key]);
+          encoded[key] = entity.encodeValue(properties[key], key);
           return encoded;
         },
         // tslint:disable-next-line no-any
@@ -1204,7 +1213,7 @@ export namespace entity {
         if (filter.name === '__key__') {
           value.keyValue = entity.keyToKeyProto(filter.val);
         } else {
-          value = entity.encodeValue(filter.val);
+          value = entity.encodeValue(filter.val, filter.name);
         }
 
         return {
