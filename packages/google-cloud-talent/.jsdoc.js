@@ -39,10 +39,10 @@ module.exports = {
     copyright: 'Copyright 2019 Google, LLC.',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'Talent',
+    systemName: '@google-cloud/talent',
     theme: 'lumen',
     default: {
-      "outputSourceFiles": false
+      outputSourceFiles: false
     }
   },
   markdown: {
