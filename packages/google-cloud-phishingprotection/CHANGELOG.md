@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.5.1...v1.6.0) (2020-02-28)
+
+
+### Features
+
+* export protos in src/index.ts ([a33f101](https://www.github.com/googleapis/nodejs-phishing-protection/commit/a33f1015e429fd0fa2d6492c48818c32e0dc075d))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.5.0...v1.5.1) (2020-01-28)
 
 
