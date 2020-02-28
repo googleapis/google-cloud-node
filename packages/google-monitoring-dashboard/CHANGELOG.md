@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.1.0...v1.2.0) (2020-02-27)
+
+
+### Features
+
+* export protos in src/index.ts ([7a601bd](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/7a601bd1165e8be3e6f4beaea53c6e285d20942e))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.0.2...v1.1.0) (2020-02-13)
 
 
