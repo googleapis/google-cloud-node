@@ -32,7 +32,7 @@ module.exports = {
   source: {
     excludePattern: '(^|\\/|\\\\)[._]',
     include: [
-      'build/src'
+      'build/src',
     ],
     includePattern: '\\.js$'
   },
@@ -43,7 +43,7 @@ module.exports = {
     systemName: '@google-cloud/storage',
     theme: 'lumen',
     default: {
-      "outputSourceFiles": false
+      outputSourceFiles: false
     }
   },
   markdown: {
