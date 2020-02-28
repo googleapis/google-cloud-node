@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.2.1...v2.0.0) (2020-02-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for Node 8 (which is EOL) (#64)
+* library now uses v1 API surface (#62)
+
+### Features
+
+* drop support for Node 8 (which is EOL) ([#64](https://www.github.com/googleapis/nodejs-secret-manager/issues/64)) ([e4118ef](https://www.github.com/googleapis/nodejs-secret-manager/commit/e4118ef699ff63e005f65b154fb2b3a379e3cfd1))
+* export protos in src/index.ts ([46e2c3e](https://www.github.com/googleapis/nodejs-secret-manager/commit/46e2c3e5b598dbd3eefeec859f52fffa32bdf63c))
+* library now uses v1 API surface ([#62](https://www.github.com/googleapis/nodejs-secret-manager/issues/62)) ([a8368d4](https://www.github.com/googleapis/nodejs-secret-manager/commit/a8368d465c8577f708d3185d60c26b7e652befbe))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.2.0...v1.2.1) (2020-02-12)
 
 
