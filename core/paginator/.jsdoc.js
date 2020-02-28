@@ -31,7 +31,7 @@ module.exports = {
   source: {
     excludePattern: '(^|\\/|\\\\)[._]',
     include: [
-      'src'
+      'src',
     ],
     includePattern: '\\.js$'
   },
@@ -42,7 +42,7 @@ module.exports = {
     systemName: '@google-cloud/paginator',
     theme: 'lumen',
     default: {
-      "outputSourceFiles": false
+      outputSourceFiles: false
     }
   },
   markdown: {
