@@ -18,10 +18,10 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const secrets = require('@google-cloud/secret-manager');
+const secretmanager = require('@google-cloud/secret-manager');
 
 function main() {
-  const secretManagerServiceClient = new secrets.SecretManagerServiceClient();
+  const secretManagerServiceClient = new secretmanager.SecretManagerServiceClient();
 }
 
 main();
