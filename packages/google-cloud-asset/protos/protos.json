@@ -737,22 +737,6 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
-                        "SearchResources": {
-                          "requestType": "SearchResourcesRequest",
-                          "responseType": "SearchResourcesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1p1beta1/resources:search",
-                            "(google.api.method_signature)": "scope,query,asset_types"
-                          }
-                        },
-                        "SearchIamPolicies": {
-                          "requestType": "SearchIamPoliciesRequest",
-                          "responseType": "SearchIamPoliciesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1p1beta1/iamPolicies:search",
-                            "(google.api.method_signature)": "scope,query"
-                          }
-                        },
                         "SearchAllResources": {
                           "requestType": "SearchAllResourcesRequest",
                           "responseType": "SearchAllResourcesResponse",
@@ -768,104 +752,6 @@
                             "(google.api.http).get": "/v1p1beta1/{scope=*/*}/iamPolicies:searchAll",
                             "(google.api.method_signature)": "scope,query"
                           }
-                        }
-                      }
-                    },
-                    "SearchResourcesRequest": {
-                      "fields": {
-                        "scope": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "query": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "assetTypes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "SearchResourcesResponse": {
-                      "fields": {
-                        "results": {
-                          "rule": "repeated",
-                          "type": "StandardResourceMetadata",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "SearchIamPoliciesRequest": {
-                      "fields": {
-                        "scope": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "query": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "SearchIamPoliciesResponse": {
-                      "fields": {
-                        "results": {
-                          "rule": "repeated",
-                          "type": "IamPolicySearchResult",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
                         }
                       }
                     },
