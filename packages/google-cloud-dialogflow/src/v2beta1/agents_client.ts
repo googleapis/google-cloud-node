@@ -936,7 +936,7 @@ export class AgentsClient {
    * @param {string} request.parent
    *   Required. The project that the agent is associated with.
    *   Format: `projects/<Project ID>`.
-   * @param {string} request.languageCode
+   * @param {string} [request.languageCode]
    *   Optional. The language for which you want a validation result. If not
    *   specified, the agent's default language is used. [Many
    *   languages](https://cloud.google.com/dialogflow/docs/reference/language)

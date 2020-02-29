@@ -317,8 +317,8 @@ export class SessionsClient {
    *   caller to choose an appropriate session ID. It can be a random number or
    *   some type of user identifier (preferably hashed). The length of the session
    *   ID must not exceed 36 bytes.
-   * @param {google.cloud.dialogflow.v2.QueryParameters} [request.queryParams]
-   *   Optional. The parameters of this query.
+   * @param {google.cloud.dialogflow.v2.QueryParameters} request.queryParams
+   *   The parameters of this query.
    * @param {google.cloud.dialogflow.v2.QueryInput} request.queryInput
    *   Required. The input specification. It can be set to:
    *
@@ -328,12 +328,19 @@ export class SessionsClient {
    *   2.  a conversational query in the form of text, or
    *
    *   3.  an event that specifies which intent to trigger.
-   * @param {google.cloud.dialogflow.v2.OutputAudioConfig} [request.outputAudioConfig]
-   *   Optional. Instructs the speech synthesizer how to generate the output
+   * @param {google.cloud.dialogflow.v2.OutputAudioConfig} request.outputAudioConfig
+   *   Instructs the speech synthesizer how to generate the output
    *   audio. If this field is not set and agent-level speech synthesizer is not
    *   configured, no output audio is generated.
-   * @param {Buffer} [request.inputAudio]
-   *   Optional. The natural language speech audio to be processed. This field
+   * @param {google.protobuf.FieldMask} request.outputAudioConfigMask
+   *   Mask for [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] indicating which settings in this
+   *   request-level config should override speech synthesizer settings defined at
+   *   agent-level.
+   *
+   *   If unspecified or empty, [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] replaces the agent-level
+   *   config in its entirety.
+   * @param {Buffer} request.inputAudio
+   *   The natural language speech audio to be processed. This field
    *   should be populated iff `query_input` is set to an input audio config.
    *   A single request can contain up to 1 minute of speech audio data.
    * @param {object} [options]

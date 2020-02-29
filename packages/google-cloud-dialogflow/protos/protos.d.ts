@@ -157,6 +157,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public restoreAgent(request: google.cloud.dialogflow.v2.IRestoreAgentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetValidationResult.
+                     * @param request GetValidationResultRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ValidationResult
+                     */
+                    public getValidationResult(request: google.cloud.dialogflow.v2.IGetValidationResultRequest, callback: google.cloud.dialogflow.v2.Agents.GetValidationResultCallback): void;
+
+                    /**
+                     * Calls GetValidationResult.
+                     * @param request GetValidationResultRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getValidationResult(request: google.cloud.dialogflow.v2.IGetValidationResultRequest): Promise<google.cloud.dialogflow.v2.ValidationResult>;
                 }
 
                 namespace Agents {
@@ -216,6 +230,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RestoreAgentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.Agents#getValidationResult}.
+                     * @param error Error, if any
+                     * @param [response] ValidationResult
+                     */
+                    type GetValidationResultCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2.ValidationResult) => void;
                 }
 
                 /** Properties of an Agent. */
@@ -1364,6 +1385,306 @@ export namespace google {
 
                     /**
                      * Converts this RestoreAgentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetValidationResultRequest. */
+                interface IGetValidationResultRequest {
+
+                    /** GetValidationResultRequest parent */
+                    parent?: (string|null);
+
+                    /** GetValidationResultRequest languageCode */
+                    languageCode?: (string|null);
+                }
+
+                /** Represents a GetValidationResultRequest. */
+                class GetValidationResultRequest implements IGetValidationResultRequest {
+
+                    /**
+                     * Constructs a new GetValidationResultRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IGetValidationResultRequest);
+
+                    /** GetValidationResultRequest parent. */
+                    public parent: string;
+
+                    /** GetValidationResultRequest languageCode. */
+                    public languageCode: string;
+
+                    /**
+                     * Creates a new GetValidationResultRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetValidationResultRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IGetValidationResultRequest): google.cloud.dialogflow.v2.GetValidationResultRequest;
+
+                    /**
+                     * Encodes the specified GetValidationResultRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.GetValidationResultRequest.verify|verify} messages.
+                     * @param message GetValidationResultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IGetValidationResultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetValidationResultRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GetValidationResultRequest.verify|verify} messages.
+                     * @param message GetValidationResultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGetValidationResultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetValidationResultRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetValidationResultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GetValidationResultRequest;
+
+                    /**
+                     * Decodes a GetValidationResultRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetValidationResultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GetValidationResultRequest;
+
+                    /**
+                     * Verifies a GetValidationResultRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetValidationResultRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetValidationResultRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GetValidationResultRequest;
+
+                    /**
+                     * Creates a plain object from a GetValidationResultRequest message. Also converts values to other types if specified.
+                     * @param message GetValidationResultRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.GetValidationResultRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetValidationResultRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ValidationError. */
+                interface IValidationError {
+
+                    /** ValidationError severity */
+                    severity?: (google.cloud.dialogflow.v2.ValidationError.Severity|keyof typeof google.cloud.dialogflow.v2.ValidationError.Severity|null);
+
+                    /** ValidationError entries */
+                    entries?: (string[]|null);
+
+                    /** ValidationError errorMessage */
+                    errorMessage?: (string|null);
+                }
+
+                /** Represents a ValidationError. */
+                class ValidationError implements IValidationError {
+
+                    /**
+                     * Constructs a new ValidationError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IValidationError);
+
+                    /** ValidationError severity. */
+                    public severity: (google.cloud.dialogflow.v2.ValidationError.Severity|keyof typeof google.cloud.dialogflow.v2.ValidationError.Severity);
+
+                    /** ValidationError entries. */
+                    public entries: string[];
+
+                    /** ValidationError errorMessage. */
+                    public errorMessage: string;
+
+                    /**
+                     * Creates a new ValidationError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValidationError instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IValidationError): google.cloud.dialogflow.v2.ValidationError;
+
+                    /**
+                     * Encodes the specified ValidationError message. Does not implicitly {@link google.cloud.dialogflow.v2.ValidationError.verify|verify} messages.
+                     * @param message ValidationError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IValidationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValidationError message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ValidationError.verify|verify} messages.
+                     * @param message ValidationError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IValidationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValidationError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValidationError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ValidationError;
+
+                    /**
+                     * Decodes a ValidationError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValidationError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ValidationError;
+
+                    /**
+                     * Verifies a ValidationError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValidationError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValidationError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ValidationError;
+
+                    /**
+                     * Creates a plain object from a ValidationError message. Also converts values to other types if specified.
+                     * @param message ValidationError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ValidationError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValidationError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ValidationError {
+
+                    /** Severity enum. */
+                    enum Severity {
+                        SEVERITY_UNSPECIFIED = 0,
+                        INFO = 1,
+                        WARNING = 2,
+                        ERROR = 3,
+                        CRITICAL = 4
+                    }
+                }
+
+                /** Properties of a ValidationResult. */
+                interface IValidationResult {
+
+                    /** ValidationResult validationErrors */
+                    validationErrors?: (google.cloud.dialogflow.v2.IValidationError[]|null);
+                }
+
+                /** Represents a ValidationResult. */
+                class ValidationResult implements IValidationResult {
+
+                    /**
+                     * Constructs a new ValidationResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IValidationResult);
+
+                    /** ValidationResult validationErrors. */
+                    public validationErrors: google.cloud.dialogflow.v2.IValidationError[];
+
+                    /**
+                     * Creates a new ValidationResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValidationResult instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IValidationResult): google.cloud.dialogflow.v2.ValidationResult;
+
+                    /**
+                     * Encodes the specified ValidationResult message. Does not implicitly {@link google.cloud.dialogflow.v2.ValidationResult.verify|verify} messages.
+                     * @param message ValidationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValidationResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ValidationResult.verify|verify} messages.
+                     * @param message ValidationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValidationResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValidationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ValidationResult;
+
+                    /**
+                     * Decodes a ValidationResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValidationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ValidationResult;
+
+                    /**
+                     * Verifies a ValidationResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValidationResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValidationResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ValidationResult;
+
+                    /**
+                     * Creates a plain object from a ValidationResult message. Also converts values to other types if specified.
+                     * @param message ValidationResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ValidationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValidationResult to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -9601,6 +9922,9 @@ export namespace google {
                     /** DetectIntentRequest outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
+                    /** DetectIntentRequest outputAudioConfigMask */
+                    outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
+
                     /** DetectIntentRequest inputAudio */
                     inputAudio?: (Uint8Array|string|null);
                 }
@@ -9625,6 +9949,9 @@ export namespace google {
 
                     /** DetectIntentRequest outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
+
+                    /** DetectIntentRequest outputAudioConfigMask. */
+                    public outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** DetectIntentRequest inputAudio. */
                     public inputAudio: (Uint8Array|string);
@@ -10237,6 +10564,9 @@ export namespace google {
                     /** StreamingDetectIntentRequest outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
+                    /** StreamingDetectIntentRequest outputAudioConfigMask */
+                    outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
+
                     /** StreamingDetectIntentRequest inputAudio */
                     inputAudio?: (Uint8Array|string|null);
                 }
@@ -10264,6 +10594,9 @@ export namespace google {
 
                     /** StreamingDetectIntentRequest outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
+
+                    /** StreamingDetectIntentRequest outputAudioConfigMask. */
+                    public outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** StreamingDetectIntentRequest inputAudio. */
                     public inputAudio: (Uint8Array|string);
@@ -12880,6 +13213,102 @@ export namespace google {
 
                     /**
                      * Converts this DeleteAgentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SubAgent. */
+                interface ISubAgent {
+
+                    /** SubAgent project */
+                    project?: (string|null);
+
+                    /** SubAgent environment */
+                    environment?: (string|null);
+                }
+
+                /** Represents a SubAgent. */
+                class SubAgent implements ISubAgent {
+
+                    /**
+                     * Constructs a new SubAgent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.ISubAgent);
+
+                    /** SubAgent project. */
+                    public project: string;
+
+                    /** SubAgent environment. */
+                    public environment: string;
+
+                    /**
+                     * Creates a new SubAgent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubAgent instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.ISubAgent): google.cloud.dialogflow.v2beta1.SubAgent;
+
+                    /**
+                     * Encodes the specified SubAgent message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SubAgent.verify|verify} messages.
+                     * @param message SubAgent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.ISubAgent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubAgent message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SubAgent.verify|verify} messages.
+                     * @param message SubAgent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.ISubAgent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubAgent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubAgent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.SubAgent;
+
+                    /**
+                     * Decodes a SubAgent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubAgent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.SubAgent;
+
+                    /**
+                     * Verifies a SubAgent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubAgent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubAgent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.SubAgent;
+
+                    /**
+                     * Creates a plain object from a SubAgent message. Also converts values to other types if specified.
+                     * @param message SubAgent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.SubAgent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubAgent to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -25518,6 +25947,9 @@ export namespace google {
                     /** DetectIntentRequest outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
+                    /** DetectIntentRequest outputAudioConfigMask */
+                    outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
+
                     /** DetectIntentRequest inputAudio */
                     inputAudio?: (Uint8Array|string|null);
                 }
@@ -25542,6 +25974,9 @@ export namespace google {
 
                     /** DetectIntentRequest outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
+
+                    /** DetectIntentRequest outputAudioConfigMask. */
+                    public outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** DetectIntentRequest inputAudio. */
                     public inputAudio: (Uint8Array|string);
@@ -25764,6 +26199,9 @@ export namespace google {
                     /** QueryParameters sentimentAnalysisRequestConfig */
                     sentimentAnalysisRequestConfig?: (google.cloud.dialogflow.v2beta1.ISentimentAnalysisRequestConfig|null);
 
+                    /** QueryParameters subAgents */
+                    subAgents?: (google.cloud.dialogflow.v2beta1.ISubAgent[]|null);
+
                     /** QueryParameters webhookHeaders */
                     webhookHeaders?: ({ [k: string]: string }|null);
                 }
@@ -25800,6 +26238,9 @@ export namespace google {
 
                     /** QueryParameters sentimentAnalysisRequestConfig. */
                     public sentimentAnalysisRequestConfig?: (google.cloud.dialogflow.v2beta1.ISentimentAnalysisRequestConfig|null);
+
+                    /** QueryParameters subAgents. */
+                    public subAgents: google.cloud.dialogflow.v2beta1.ISubAgent[];
 
                     /** QueryParameters webhookHeaders. */
                     public webhookHeaders: { [k: string]: string };
@@ -26396,6 +26837,9 @@ export namespace google {
                     /** StreamingDetectIntentRequest outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
+                    /** StreamingDetectIntentRequest outputAudioConfigMask */
+                    outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
+
                     /** StreamingDetectIntentRequest inputAudio */
                     inputAudio?: (Uint8Array|string|null);
                 }
@@ -26423,6 +26867,9 @@ export namespace google {
 
                     /** StreamingDetectIntentRequest outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
+
+                    /** StreamingDetectIntentRequest outputAudioConfigMask. */
+                    public outputAudioConfigMask?: (google.protobuf.IFieldMask|null);
 
                     /** StreamingDetectIntentRequest inputAudio. */
                     public inputAudio: (Uint8Array|string);

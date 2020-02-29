@@ -295,6 +295,7 @@ export class AgentsClient {
       'exportAgent',
       'importAgent',
       'restoreAgent',
+      'getValidationResult',
     ];
 
     for (const methodName of agentsStubMethods) {
@@ -598,6 +599,94 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     return this._innerApiCalls.deleteAgent(request, options, callback);
+  }
+  getValidationResult(
+    request: protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.cloud.dialogflow.v2.IValidationResult,
+      (
+        | protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getValidationResult(
+    request: protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.cloud.dialogflow.v2.IValidationResult,
+      | protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest
+      | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Gets agent validation result. Agent validation is performed during
+   * training time and is updated automatically when training is completed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language for which you want a validation result. If not
+   *   specified, the agent's default language is used. [Many
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ValidationResult]{@link google.cloud.dialogflow.v2.ValidationResult}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getValidationResult(
+    request: protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.dialogflow.v2.IValidationResult,
+          | protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest
+          | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.cloud.dialogflow.v2.IValidationResult,
+      | protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest
+      | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.cloud.dialogflow.v2.IValidationResult,
+      (
+        | protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    return this._innerApiCalls.getValidationResult(request, options, callback);
   }
 
   trainAgent(

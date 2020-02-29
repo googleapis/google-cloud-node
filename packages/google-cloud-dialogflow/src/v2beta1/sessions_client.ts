@@ -325,7 +325,7 @@ export class SessionsClient {
    *   identifiers (preferably hashed). The length of the `Session ID` and
    *   `User ID` must not exceed 36 characters.
    * @param {google.cloud.dialogflow.v2beta1.QueryParameters} request.queryParams
-   *   Optional. The parameters of this query.
+   *   The parameters of this query.
    * @param {google.cloud.dialogflow.v2beta1.QueryInput} request.queryInput
    *   Required. The input specification. It can be set to:
    *
@@ -336,11 +336,18 @@ export class SessionsClient {
    *
    *   3.  an event that specifies which intent to trigger.
    * @param {google.cloud.dialogflow.v2beta1.OutputAudioConfig} request.outputAudioConfig
-   *   Optional. Instructs the speech synthesizer how to generate the output
+   *   Instructs the speech synthesizer how to generate the output
    *   audio. If this field is not set and agent-level speech synthesizer is not
    *   configured, no output audio is generated.
+   * @param {google.protobuf.FieldMask} request.outputAudioConfigMask
+   *   Mask for [output_audio_config][google.cloud.dialogflow.v2beta1.DetectIntentRequest.output_audio_config] indicating which settings in this
+   *   request-level config should override speech synthesizer settings defined at
+   *   agent-level.
+   *
+   *   If unspecified or empty, [output_audio_config][google.cloud.dialogflow.v2beta1.DetectIntentRequest.output_audio_config] replaces the agent-level
+   *   config in its entirety.
    * @param {Buffer} request.inputAudio
-   *   Optional. The natural language speech audio to be processed. This field
+   *   The natural language speech audio to be processed. This field
    *   should be populated iff `query_input` is set to an input audio config.
    *   A single request can contain up to 1 minute of speech audio data.
    * @param {object} [options]

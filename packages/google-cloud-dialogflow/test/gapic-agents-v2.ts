@@ -248,6 +248,54 @@ describe('v2.AgentsClient', () => {
       });
     });
   });
+  describe('getValidationResult', () => {
+    it('invokes getValidationResult without error', done => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.getValidationResult = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.getValidationResult(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getValidationResult with error', done => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.dialogflow.v2.IGetValidationResultRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.getValidationResult = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.getValidationResult(request, (err: FakeError, response: {}) => {
+        assert(err instanceof FakeError);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
   describe('trainAgent', () => {
     it('invokes trainAgent without error', done => {
       const client = new agentsModule.v2.AgentsClient({

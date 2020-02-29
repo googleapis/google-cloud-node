@@ -6,5 +6,6 @@
   "../../protos/google/cloud/dialogflow/v2/intent.proto",
   "../../protos/google/cloud/dialogflow/v2/session.proto",
   "../../protos/google/cloud/dialogflow/v2/session_entity_type.proto",
+  "../../protos/google/cloud/dialogflow/v2/validation_result.proto",
   "../../protos/google/cloud/dialogflow/v2/webhook.proto"
 ]
