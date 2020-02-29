@@ -34,7 +34,8 @@ module.exports = {
   source: {
     excludePattern: '(^|\\/|\\\\)[._]',
     include: [
-      'build/src'
+      'build/src',
+      'protos'
     ],
     includePattern: '\\.js$'
   },
@@ -45,7 +46,7 @@ module.exports = {
     systemName: '@google-cloud/monitoring-dashboards',
     theme: 'lumen',
     default: {
-      "outputSourceFiles": false
+      outputSourceFiles: false
     }
   },
   markdown: {
