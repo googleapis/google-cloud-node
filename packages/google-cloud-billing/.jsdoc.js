@@ -34,16 +34,20 @@ module.exports = {
   source: {
     excludePattern: '(^|\\/|\\\\)[._]',
     include: [
-      'build/src'
+      'build/src',
+      'protos'
     ],
     includePattern: '\\.js$'
   },
   templates: {
-    copyright: 'Copyright 2018 Google, LLC.',
+    copyright: 'Copyright 2019 Google, LLC.',
     includeDate: false,
     sourceFiles: false,
     systemName: '@google-cloud/billing',
-    theme: 'lumen'
+    theme: 'lumen',
+    default: {
+      outputSourceFiles: false
+    }
   },
   markdown: {
     idInHeadings: true

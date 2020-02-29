@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-02-27T22:25:59.292521Z",
+  "updateTime": "2020-02-29T12:16:38.714183Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e9e90a787703ec5d388902e2cb796aaed3a385b4",
-        "internalRef": "297671458"
+        "sha": "83c6f84035ee0f80eaa44d8b688a010461cc4080",
+        "internalRef": "297918498",
+        "log": "83c6f84035ee0f80eaa44d8b688a010461cc4080\nUpdate google/api/auth.proto to make AuthProvider to have JwtLocation\n\nPiperOrigin-RevId: 297918498\n\n"
       }
     },
     {
