@@ -46,3 +46,5 @@ export default {
   ProfileServiceClient,
   TenantServiceClient,
 };
+import * as protos from '../protos/protos';
+export {protos};

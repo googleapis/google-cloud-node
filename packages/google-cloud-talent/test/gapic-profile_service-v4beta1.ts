@@ -277,6 +277,54 @@ describe('v4beta1.ProfileServiceClient', () => {
       });
     });
   });
+  describe('searchProfiles', () => {
+    it('invokes searchProfiles without error', done => {
+      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.searchProfiles = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.searchProfiles(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes searchProfiles with error', done => {
+      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.searchProfiles = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.searchProfiles(request, (err: FakeError, response: {}) => {
+        assert(err instanceof FakeError);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
   describe('listProfiles', () => {
     it('invokes listProfiles without error', done => {
       const client = new profileserviceModule.v4beta1.ProfileServiceClient({
@@ -326,65 +374,6 @@ describe('v4beta1.ProfileServiceClient', () => {
       };
       const stream = client
         .listProfilesStream(request, {})
-        .on('data', (response: {}) => {
-          assert.deepStrictEqual(response, expectedResponse);
-          done();
-        })
-        .on('error', (err: FakeError) => {
-          done(err);
-        });
-      stream.write(expectedResponse);
-    });
-  });
-  describe('searchProfiles', () => {
-    it('invokes searchProfiles without error', done => {
-      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest = {};
-      request.parent = '';
-      // Mock response
-      const expectedResponse = {};
-      // Mock Grpc layer
-      client._innerApiCalls.searchProfiles = (
-        actualRequest: {},
-        options: {},
-        callback: Callback
-      ) => {
-        assert.deepStrictEqual(actualRequest, request);
-        callback(null, expectedResponse);
-      };
-      client.searchProfiles(request, (err: FakeError, response: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-  });
-  describe('searchProfilesStream', () => {
-    it('invokes searchProfilesStream without error', done => {
-      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest = {};
-      request.parent = '';
-      // Mock response
-      const expectedResponse = {response: 'data'};
-      // Mock Grpc layer
-      client._innerApiCalls.searchProfiles = (
-        actualRequest: {},
-        options: {},
-        callback: Callback
-      ) => {
-        assert.deepStrictEqual(actualRequest, request);
-        callback(null, expectedResponse);
-      };
-      const stream = client
-        .searchProfilesStream(request, {})
         .on('data', (response: {}) => {
           assert.deepStrictEqual(response, expectedResponse);
           done();

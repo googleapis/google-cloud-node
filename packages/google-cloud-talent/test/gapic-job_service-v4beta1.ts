@@ -340,6 +340,54 @@ describe('v4beta1.JobServiceClient', () => {
       });
     });
   });
+  describe('searchJobs', () => {
+    it('invokes searchJobs without error', done => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.searchJobs = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.searchJobs(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes searchJobs with error', done => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.searchJobs = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.searchJobs(request, (err: FakeError, response: {}) => {
+        assert(err instanceof FakeError);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
   describe('batchCreateJobs', () => {
     it('invokes batchCreateJobs without error', done => {
       const client = new jobserviceModule.v4beta1.JobServiceClient({
@@ -515,65 +563,6 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const stream = client
         .listJobsStream(request, {})
-        .on('data', (response: {}) => {
-          assert.deepStrictEqual(response, expectedResponse);
-          done();
-        })
-        .on('error', (err: FakeError) => {
-          done(err);
-        });
-      stream.write(expectedResponse);
-    });
-  });
-  describe('searchJobs', () => {
-    it('invokes searchJobs without error', done => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest = {};
-      request.parent = '';
-      // Mock response
-      const expectedResponse = {};
-      // Mock Grpc layer
-      client._innerApiCalls.searchJobs = (
-        actualRequest: {},
-        options: {},
-        callback: Callback
-      ) => {
-        assert.deepStrictEqual(actualRequest, request);
-        callback(null, expectedResponse);
-      };
-      client.searchJobs(request, (err: FakeError, response: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-  });
-  describe('searchJobsStream', () => {
-    it('invokes searchJobsStream without error', done => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      // Mock request
-      const request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest = {};
-      request.parent = '';
-      // Mock response
-      const expectedResponse = {response: 'data'};
-      // Mock Grpc layer
-      client._innerApiCalls.searchJobs = (
-        actualRequest: {},
-        options: {},
-        callback: Callback
-      ) => {
-        assert.deepStrictEqual(actualRequest, request);
-        callback(null, expectedResponse);
-      };
-      const stream = client
-        .searchJobsStream(request, {})
         .on('data', (response: {}) => {
           assert.deepStrictEqual(response, expectedResponse);
           done();
