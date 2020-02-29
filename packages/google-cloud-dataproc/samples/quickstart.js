@@ -24,13 +24,13 @@
 'use strict';
 
 function main(projectId, region, clusterName, jobFilePath) {
-  const dataproc = require('@google-cloud/dataproc').v1;
+  const dataproc = require('@google-cloud/dataproc');
   const {Storage} = require('@google-cloud/storage');
 
   const sleep = require('sleep');
 
   // Create a cluster client with the endpoint set to the desired cluster region
-  const clusterClient = new dataproc.ClusterControllerClient({
+  const clusterClient = new dataproc.v1.ClusterControllerClient({
     apiEndpoint: `${region}-dataproc.googleapis.com`,
   });
 

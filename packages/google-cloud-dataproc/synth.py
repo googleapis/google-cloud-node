@@ -16,26 +16,27 @@ import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v1', 'v1beta2']
 for version in versions:
-  library = gapic.node_library('dataproc', version)
-  s.copy(
-    library,
-    excludes=['package.json', 'src/index.js',]
-  )
+    library = gapic.typescript_library(
+        'dataproc',
+        version,
+        generator_args={
+            "grpc-service-config": f"google/cloud/dataproc/{version}/dataproc_grpc_service_config.json",
+            "package-name": f"@google-cloud/dataproc",
+            "main-service": f"dataproc",
+        },
+        proto_path=f'/google/cloud/dataproc/{version}',
+    )
+    s.copy(
+        library,
+        excludes=['package.json', 'src/index.ts', ]
+    )
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
-
-s.replace('src/**/doc/google/cloud/dataproc/v1beta2/doc_clusters.js',
-        'https:\/\/cloud\.google\.com[\s\*]*\/compute\/',
-        'https://cloud.google.com/compute/')
-
-s.replace('src/v1beta2/cluster_controller_client.js',
-          '\[Empty\]\(https:\/\/cloud\.google\.comgoogle\.protobuf\.Empty\)',
-          'an empty object')
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
