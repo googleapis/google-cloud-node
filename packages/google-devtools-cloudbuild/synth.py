@@ -27,7 +27,8 @@ for version in versions:
   library = gapic.typescript_library(
     'cloudbuild',
     generator_args={
-      "grpc-service-config": "google/devtools/cloudbuild/v1/cloudbuild_grpc_service_config.json"
+      "grpc-service-config": "google/devtools/cloudbuild/v1/cloudbuild_grpc_service_config.json",
+      "package-name": "@google-cloud/cloudbuild"
     },
     proto_path='/google/devtools/cloudbuild/v1',
     version=version)
@@ -39,27 +40,5 @@ templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
 
 # Node.js specific cleanup
-subprocess.run(['rm', '-rf', './system-test/fixtures'])
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
-
-# Add missing jsdoc annotations:
-s.replace("src/index.js",
-r"""\/\*\*
- \* @namespace google
- \*/""",
-r"""/**
- * @namespace google
- */
-/**
- * @namespace google.rpc
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.longrunning
- */""")
-s.replace("src/index.js",
-r"namespace google.cloud.cloudbuild",
-r"namespace google.devtools.cloudbuild")

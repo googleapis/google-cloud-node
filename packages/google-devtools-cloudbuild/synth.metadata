@@ -1,19 +1,12 @@
 {
-  "updateTime": "2020-02-13T04:36:50.444597Z",
+  "updateTime": "2020-02-29T19:14:13.934361Z",
   "sources": [
-    {
-      "git": {
-        "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-cloudbuild.git",
-        "sha": "7efa0aeeb4ee354fda57b14807f8a3d0f4bab194"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "0646bc775203077226c2c34d3e4d50cc4ec53660",
-        "internalRef": "294809380"
+        "sha": "83c6f84035ee0f80eaa44d8b688a010461cc4080",
+        "internalRef": "297918498"
       }
     },
     {

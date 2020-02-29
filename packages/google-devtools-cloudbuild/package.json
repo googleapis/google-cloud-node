@@ -52,7 +52,7 @@
     "prepare": "npm run compile-protos && npm run compile",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test",
-    "system-test": "c8 mocha --timeout=15000 system-test/*.js",
+    "system-test": "c8 mocha --timeout=15000 system-test/*.js build/system-test/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
@@ -63,6 +63,6 @@
     "node": ">=8.10.0"
   },
   "dependencies": {
-    "google-gax": "^1.7.5"
+    "google-gax": "^1.14.2"
   }
 }
