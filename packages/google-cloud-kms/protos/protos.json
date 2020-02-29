@@ -67,28 +67,32 @@
                           "requestType": "GetCryptoKeyRequest",
                           "responseType": "CryptoKey",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetCryptoKeyVersion": {
                           "requestType": "GetCryptoKeyVersionRequest",
                           "responseType": "CryptoKeyVersion",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetPublicKey": {
                           "requestType": "GetPublicKeyRequest",
                           "responseType": "PublicKey",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}/publicKey"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}/publicKey",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetImportJob": {
                           "requestType": "GetImportJobRequest",
                           "responseType": "ImportJob",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/importJobs/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/importJobs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateKeyRing": {
@@ -309,7 +313,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         },
                         "pageSize": {
@@ -695,7 +699,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                            "(google.api.resource_reference).type": "*"
                           }
                         },
                         "plaintext": {
