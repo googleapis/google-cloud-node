@@ -1840,6 +1840,9 @@ export namespace google {
 
                     /** Queue purgeTime */
                     purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Queue stackdriverLoggingConfig */
+                    stackdriverLoggingConfig?: (google.cloud.tasks.v2.IStackdriverLoggingConfig|null);
                 }
 
                 /** Represents a Queue. */
@@ -1868,6 +1871,9 @@ export namespace google {
 
                     /** Queue purgeTime. */
                     public purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Queue stackdriverLoggingConfig. */
+                    public stackdriverLoggingConfig?: (google.cloud.tasks.v2.IStackdriverLoggingConfig|null);
 
                     /**
                      * Creates a new Queue instance using the specified properties.
@@ -2162,6 +2168,96 @@ export namespace google {
 
                     /**
                      * Converts this RetryConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StackdriverLoggingConfig. */
+                interface IStackdriverLoggingConfig {
+
+                    /** StackdriverLoggingConfig samplingRatio */
+                    samplingRatio?: (number|null);
+                }
+
+                /** Represents a StackdriverLoggingConfig. */
+                class StackdriverLoggingConfig implements IStackdriverLoggingConfig {
+
+                    /**
+                     * Constructs a new StackdriverLoggingConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IStackdriverLoggingConfig);
+
+                    /** StackdriverLoggingConfig samplingRatio. */
+                    public samplingRatio: number;
+
+                    /**
+                     * Creates a new StackdriverLoggingConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StackdriverLoggingConfig instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IStackdriverLoggingConfig): google.cloud.tasks.v2.StackdriverLoggingConfig;
+
+                    /**
+                     * Encodes the specified StackdriverLoggingConfig message. Does not implicitly {@link google.cloud.tasks.v2.StackdriverLoggingConfig.verify|verify} messages.
+                     * @param message StackdriverLoggingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IStackdriverLoggingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StackdriverLoggingConfig message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.StackdriverLoggingConfig.verify|verify} messages.
+                     * @param message StackdriverLoggingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IStackdriverLoggingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StackdriverLoggingConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StackdriverLoggingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.StackdriverLoggingConfig;
+
+                    /**
+                     * Decodes a StackdriverLoggingConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StackdriverLoggingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.StackdriverLoggingConfig;
+
+                    /**
+                     * Verifies a StackdriverLoggingConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StackdriverLoggingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StackdriverLoggingConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.StackdriverLoggingConfig;
+
+                    /**
+                     * Creates a plain object from a StackdriverLoggingConfig message. Also converts values to other types if specified.
+                     * @param message StackdriverLoggingConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.StackdriverLoggingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StackdriverLoggingConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

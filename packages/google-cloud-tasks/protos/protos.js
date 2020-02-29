@@ -3897,6 +3897,7 @@
                          * @property {google.cloud.tasks.v2.IRetryConfig|null} [retryConfig] Queue retryConfig
                          * @property {google.cloud.tasks.v2.Queue.State|null} [state] Queue state
                          * @property {google.protobuf.ITimestamp|null} [purgeTime] Queue purgeTime
+                         * @property {google.cloud.tasks.v2.IStackdriverLoggingConfig|null} [stackdriverLoggingConfig] Queue stackdriverLoggingConfig
                          */
     
                         /**
@@ -3963,6 +3964,14 @@
                         Queue.prototype.purgeTime = null;
     
                         /**
+                         * Queue stackdriverLoggingConfig.
+                         * @member {google.cloud.tasks.v2.IStackdriverLoggingConfig|null|undefined} stackdriverLoggingConfig
+                         * @memberof google.cloud.tasks.v2.Queue
+                         * @instance
+                         */
+                        Queue.prototype.stackdriverLoggingConfig = null;
+    
+                        /**
                          * Creates a new Queue instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tasks.v2.Queue
@@ -3998,6 +4007,8 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
                             if (message.purgeTime != null && message.hasOwnProperty("purgeTime"))
                                 $root.google.protobuf.Timestamp.encode(message.purgeTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.stackdriverLoggingConfig != null && message.hasOwnProperty("stackdriverLoggingConfig"))
+                                $root.google.cloud.tasks.v2.StackdriverLoggingConfig.encode(message.stackdriverLoggingConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -4049,6 +4060,9 @@
                                     break;
                                 case 6:
                                     message.purgeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.stackdriverLoggingConfig = $root.google.cloud.tasks.v2.StackdriverLoggingConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4118,6 +4132,11 @@
                                 if (error)
                                     return "purgeTime." + error;
                             }
+                            if (message.stackdriverLoggingConfig != null && message.hasOwnProperty("stackdriverLoggingConfig")) {
+                                var error = $root.google.cloud.tasks.v2.StackdriverLoggingConfig.verify(message.stackdriverLoggingConfig);
+                                if (error)
+                                    return "stackdriverLoggingConfig." + error;
+                            }
                             return null;
                         };
     
@@ -4173,6 +4192,11 @@
                                     throw TypeError(".google.cloud.tasks.v2.Queue.purgeTime: object expected");
                                 message.purgeTime = $root.google.protobuf.Timestamp.fromObject(object.purgeTime);
                             }
+                            if (object.stackdriverLoggingConfig != null) {
+                                if (typeof object.stackdriverLoggingConfig !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2.Queue.stackdriverLoggingConfig: object expected");
+                                message.stackdriverLoggingConfig = $root.google.cloud.tasks.v2.StackdriverLoggingConfig.fromObject(object.stackdriverLoggingConfig);
+                            }
                             return message;
                         };
     
@@ -4196,6 +4220,7 @@
                                 object.retryConfig = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.purgeTime = null;
+                                object.stackdriverLoggingConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4209,6 +4234,8 @@
                                 object.state = options.enums === String ? $root.google.cloud.tasks.v2.Queue.State[message.state] : message.state;
                             if (message.purgeTime != null && message.hasOwnProperty("purgeTime"))
                                 object.purgeTime = $root.google.protobuf.Timestamp.toObject(message.purgeTime, options);
+                            if (message.stackdriverLoggingConfig != null && message.hasOwnProperty("stackdriverLoggingConfig"))
+                                object.stackdriverLoggingConfig = $root.google.cloud.tasks.v2.StackdriverLoggingConfig.toObject(message.stackdriverLoggingConfig, options);
                             return object;
                         };
     
@@ -4765,6 +4792,193 @@
                         };
     
                         return RetryConfig;
+                    })();
+    
+                    v2.StackdriverLoggingConfig = (function() {
+    
+                        /**
+                         * Properties of a StackdriverLoggingConfig.
+                         * @memberof google.cloud.tasks.v2
+                         * @interface IStackdriverLoggingConfig
+                         * @property {number|null} [samplingRatio] StackdriverLoggingConfig samplingRatio
+                         */
+    
+                        /**
+                         * Constructs a new StackdriverLoggingConfig.
+                         * @memberof google.cloud.tasks.v2
+                         * @classdesc Represents a StackdriverLoggingConfig.
+                         * @implements IStackdriverLoggingConfig
+                         * @constructor
+                         * @param {google.cloud.tasks.v2.IStackdriverLoggingConfig=} [properties] Properties to set
+                         */
+                        function StackdriverLoggingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StackdriverLoggingConfig samplingRatio.
+                         * @member {number} samplingRatio
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @instance
+                         */
+                        StackdriverLoggingConfig.prototype.samplingRatio = 0;
+    
+                        /**
+                         * Creates a new StackdriverLoggingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @static
+                         * @param {google.cloud.tasks.v2.IStackdriverLoggingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2.StackdriverLoggingConfig} StackdriverLoggingConfig instance
+                         */
+                        StackdriverLoggingConfig.create = function create(properties) {
+                            return new StackdriverLoggingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StackdriverLoggingConfig message. Does not implicitly {@link google.cloud.tasks.v2.StackdriverLoggingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @static
+                         * @param {google.cloud.tasks.v2.IStackdriverLoggingConfig} message StackdriverLoggingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StackdriverLoggingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.samplingRatio != null && message.hasOwnProperty("samplingRatio"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.samplingRatio);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StackdriverLoggingConfig message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.StackdriverLoggingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @static
+                         * @param {google.cloud.tasks.v2.IStackdriverLoggingConfig} message StackdriverLoggingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StackdriverLoggingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StackdriverLoggingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2.StackdriverLoggingConfig} StackdriverLoggingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StackdriverLoggingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2.StackdriverLoggingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.samplingRatio = reader.double();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StackdriverLoggingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2.StackdriverLoggingConfig} StackdriverLoggingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StackdriverLoggingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StackdriverLoggingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StackdriverLoggingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.samplingRatio != null && message.hasOwnProperty("samplingRatio"))
+                                if (typeof message.samplingRatio !== "number")
+                                    return "samplingRatio: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StackdriverLoggingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2.StackdriverLoggingConfig} StackdriverLoggingConfig
+                         */
+                        StackdriverLoggingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2.StackdriverLoggingConfig)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2.StackdriverLoggingConfig();
+                            if (object.samplingRatio != null)
+                                message.samplingRatio = Number(object.samplingRatio);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StackdriverLoggingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @static
+                         * @param {google.cloud.tasks.v2.StackdriverLoggingConfig} message StackdriverLoggingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StackdriverLoggingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.samplingRatio = 0;
+                            if (message.samplingRatio != null && message.hasOwnProperty("samplingRatio"))
+                                object.samplingRatio = options.json && !isFinite(message.samplingRatio) ? String(message.samplingRatio) : message.samplingRatio;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StackdriverLoggingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2.StackdriverLoggingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StackdriverLoggingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return StackdriverLoggingConfig;
                     })();
     
                     v2.HttpRequest = (function() {

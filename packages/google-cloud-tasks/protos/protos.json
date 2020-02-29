@@ -425,6 +425,10 @@
                         "purgeTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 6
+                        },
+                        "stackdriverLoggingConfig": {
+                          "type": "StackdriverLoggingConfig",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -475,6 +479,14 @@
                         "maxDoublings": {
                           "type": "int32",
                           "id": 5
+                        }
+                      }
+                    },
+                    "StackdriverLoggingConfig": {
+                      "fields": {
+                        "samplingRatio": {
+                          "type": "double",
+                          "id": 1
                         }
                       }
                     },
