@@ -45,7 +45,7 @@
     "google-gax": "^1.14.1"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.5",
+    "@types/mocha": "^7.0.0",
     "@types/node": "^12.12.27",
     "c8": "^7.1.0",
     "codecov": "^3.6.5",
