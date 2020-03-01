@@ -38,3 +38,5 @@ export default {
   GameServerDeploymentsServiceClient,
   RealmsServiceClient,
 };
+import * as protos from '../protos/protos';
+export {protos};

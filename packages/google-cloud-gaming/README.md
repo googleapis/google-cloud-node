@@ -29,8 +29,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -52,6 +52,46 @@ npm install @google-cloud/game-servers
 ```
 
 
+### Using the client library
+
+```javascript
+  const {RealmsServiceClient} = require('@google-cloud/game-servers');
+
+  const client = new RealmsServiceClient();
+
+  const request = {
+    parent: `projects/${projectId}/locations/${location}`,
+    realmId: 'my-realm',
+    realm: {
+      // Must use a valid support time zone.
+      // See https://cloud.google.com/dataprep/docs/html/Supported-Time-Zone-Values_66194188
+      timeZone: 'US/Pacific',
+      description: 'My Game Server realm',
+    },
+  };
+
+  const [operation] = await client.createRealm(request);
+  const results = await operation.promise();
+  const [realm] = results;
+
+  console.log('Realm created:');
+
+  console.log(`\tRealm name: ${realm.name}`);
+  console.log(`\tRealm description: ${realm.description}`);
+  console.log(`\tRealm time zone: ${realm.timeZone}`);
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-game-servers/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 

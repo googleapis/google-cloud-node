@@ -18,17 +18,35 @@
 
 'use strict';
 
-const path = require('path');
 const {assert} = require('chai');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
+const {describe, it, after, before} = require('mocha');
+const uuid = require('uuid');
+const {RealmsServiceClient} = require('@google-cloud/game-servers');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const cwd = path.join(__dirname, '..');
-
 describe('Quickstart', () => {
+  let projectId;
+  let client;
+  const location = 'us-central1';
+  const realmId = `realm-${uuid.v4().split('-')[0]}`;
+
+  before(async () => {
+    client = new RealmsServiceClient();
+    projectId = await client.getProjectId();
+  });
+
   it('should run quickstart', async () => {
-    const stdout = execSync(`node quickstart.js`, {cwd});
+    const stdout = execSync(
+      `node quickstart.js ${projectId} ${location} ${realmId}`
+    );
+    assert.include(stdout, 'Realm created:');
+  });
+
+  after(async () => {
+    await client.deleteRealm({
+      name: client.realmPath(projectId, location, realmId),
+    });
   });
 });

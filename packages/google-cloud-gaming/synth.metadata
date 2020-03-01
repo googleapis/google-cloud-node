@@ -1,19 +1,20 @@
 {
-  "updateTime": "2020-02-10T21:21:11.414668Z",
+  "updateTime": "2020-03-01T12:27:13.049881Z",
   "sources": [
     {
       "git": {
         "name": "googleapis-private",
         "remote": "https://github.com/googleapis/googleapis-private.git",
-        "sha": "a1f5059959398f6278a600b81bbf2828141e1a69",
-        "internalRef": "293086097"
+        "sha": "93896777e78b247f3a2228bde08b1fe1cf4179a5",
+        "internalRef": "295938567",
+        "log": "93896777e78b247f3a2228bde08b1fe1cf4179a5\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 295938567\n\n"
       }
     },
     {
       "template": {
         "name": "node_library",
         "origin": "synthtool.gcp",
-        "version": "2019.10.17"
+        "version": "2020.2.4"
       }
     }
   ],
