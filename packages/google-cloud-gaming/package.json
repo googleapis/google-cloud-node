@@ -1,8 +1,8 @@
 {
   "name": "@google-cloud/game-servers",
   "version": "0.1.0",
-  "description": "Gaming client for Node.js",
-  "repository": "googleapis/nodejs-gaming",
+  "description": "Game service client for Node.js",
+  "repository": "googleapis/nodejs-game-servers",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "files": [

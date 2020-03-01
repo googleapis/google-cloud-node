@@ -12,7 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Quickstart](#quickstart)
+  * [Create Game Server Realm](#create-game-server-realm)
 
 ## Before you begin
 
@@ -29,7 +29,9 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Quickstart
+### Create Game Server Realm
+
+Creates a new Realm within Cloud Game Servers
 
 View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/quickstart.js).
 
@@ -38,7 +40,7 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node quickstart.js <project_id> <location> <realmId>`
 
 
 

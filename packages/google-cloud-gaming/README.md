@@ -11,7 +11,7 @@
 
 
 
-Gaming client for Node.js
+Game service client for Node.js
 
 
 * [Google Cloud Game Servers Node.js Client API Reference][client-docs]
@@ -57,28 +57,36 @@ npm install @google-cloud/game-servers
 ```javascript
   const {RealmsServiceClient} = require('@google-cloud/game-servers');
 
-  const client = new RealmsServiceClient();
+  async function quickstart() {
+    const client = new RealmsServiceClient();
 
-  const request = {
-    parent: `projects/${projectId}/locations/${location}`,
-    realmId: 'my-realm',
-    realm: {
-      // Must use a valid support time zone.
-      // See https://cloud.google.com/dataprep/docs/html/Supported-Time-Zone-Values_66194188
-      timeZone: 'US/Pacific',
-      description: 'My Game Server realm',
-    },
-  };
+    // TODO(developer): uncomment the following section, and add values
+    // const projectId = 'YOUR_PROJECT_ID';
+    // const location = 'us-central1;
+    // const realIm = 'DESIRED_REALM_ID';
 
-  const [operation] = await client.createRealm(request);
-  const results = await operation.promise();
-  const [realm] = results;
+    const request = {
+      parent: `projects/${projectId}/locations/${location}`,
+      realmId,
+      realm: {
+        // Must use a valid support time zone.
+        // See https://cloud.google.com/dataprep/docs/html/Supported-Time-Zone-Values_66194188
+        timeZone: 'US/Pacific',
+        description: 'My Game Server realm',
+      },
+    };
 
-  console.log('Realm created:');
+    const [operation] = await client.createRealm(request);
+    const results = await operation.promise();
+    const [realm] = results;
 
-  console.log(`\tRealm name: ${realm.name}`);
-  console.log(`\tRealm description: ${realm.description}`);
-  console.log(`\tRealm time zone: ${realm.timeZone}`);
+    console.log('Realm created:');
+
+    console.log(`\tRealm name: ${realm.name}`);
+    console.log(`\tRealm description: ${realm.description}`);
+    console.log(`\tRealm time zone: ${realm.timeZone}`);
+  }
+  quickstart();
 
 ```
 
@@ -91,7 +99,7 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Create Game Server Realm | [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 

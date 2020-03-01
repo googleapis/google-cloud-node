@@ -45,8 +45,9 @@ describe('Quickstart', () => {
   });
 
   after(async () => {
-    await client.deleteRealm({
+    const [operation] = await client.deleteRealm({
       name: client.realmPath(projectId, location, realmId),
     });
+    await operation.promise();
   });
 });
