@@ -94,7 +94,7 @@
     "@types/sinon": "^7.0.10",
     "@types/through2": "^2.0.33",
     "@types/tmp": "0.1.0",
-    "@types/uuid": "^3.4.4",
+    "@types/uuid": "^7.0.0",
     "@types/xdg-basedir": "^2.0.0",
     "codecov": "^3.0.0",
     "eslint": "^6.0.0",
