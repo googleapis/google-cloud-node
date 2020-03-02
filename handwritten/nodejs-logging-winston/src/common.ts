@@ -136,8 +136,8 @@ export class LoggingCommon {
     // included in the textPayload or the message property of the jsonPayload.
     // https://cloud.google.com/error-reporting/docs/formatting-error-messages
     // We prefer to format messages as jsonPayload (by putting it as a message
-    // property on an object) as that works is accepted by Error Reporting in
-    // for more resource types.
+    // property on an object) as that works and is accepted by Error Reporting
+    // in far more resource types.
     //
     if (metadata.stack) {
       message += (message ? ' ' : '') + metadata.stack;
