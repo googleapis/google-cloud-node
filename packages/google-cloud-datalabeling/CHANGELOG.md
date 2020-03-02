@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.4.2...v1.5.0) (2020-02-29)
+
+
+### Features
+
+* export protos in src/index.ts ([42812db](https://www.github.com/googleapis/nodejs-datalabeling/commit/42812db5f9c56b744c32314aaf4e7c48c13a62b1))
+
 ### [1.4.2](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.4.1...v1.4.2) (2020-02-10)
 
 
