@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v2.0.0...v2.0.1) (2020-02-29)
+
+
+### Bug Fixes
+
+* proper enum types; updated .jsdoc.js ([07fa7f5](https://www.github.com/googleapis/nodejs-secret-manager/commit/07fa7f53de6cee632df7ed53931b707694695b7e))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.2.1...v2.0.0) (2020-02-28)
 
 
