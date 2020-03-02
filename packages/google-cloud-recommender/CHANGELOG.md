@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-recommender/compare/v2.0.2...v2.1.0) (2020-02-29)
+
+
+### Features
+
+* export protos in src/index.ts ([941ad76](https://www.github.com/googleapis/nodejs-recommender/commit/941ad7602b582311abd5d50eb45bdba92a4b2497))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-recommender/compare/v2.0.1...v2.0.2) (2020-02-12)
 
 
