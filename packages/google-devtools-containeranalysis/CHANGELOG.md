@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.9.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.8.0...v1.9.0) (2020-02-29)
+
+
+### Features
+
+* export protos in src/index.ts ([29af69b](https://www.github.com/googleapis/nodejs-containeranalysis/commit/29af69b2e1af8763ee892d9325d089e401198330))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.7.1...v1.8.0) (2020-02-12)
 
 
