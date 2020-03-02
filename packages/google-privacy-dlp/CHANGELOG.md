@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-dlp/compare/v2.0.1...v2.1.0) (2020-02-29)
+
+
+### Features
+
+* export protos in src/index.ts ([dc75b9e](https://www.github.com/googleapis/nodejs-dlp/commit/dc75b9e104378f001f819086c434f574341e5b92))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-dlp/compare/v2.0.0...v2.0.1) (2020-02-12)
 
 
