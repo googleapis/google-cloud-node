@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [4.3.2](https://www.github.com/googleapis/nodejs-storage/compare/v4.3.1...v4.3.2) (2020-03-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency uuid to v7 ([#1081](https://www.github.com/googleapis/nodejs-storage/issues/1081)) ([c72d57f](https://www.github.com/googleapis/nodejs-storage/commit/c72d57f6f2982dad512d425ee3f041b43a87c278))
+* **tests:** flaky getSignedPolicy tests ([#1093](https://www.github.com/googleapis/nodejs-storage/issues/1093)) ([531050a](https://www.github.com/googleapis/nodejs-storage/commit/531050a05e5b1eeedb25647417a8ae9df8d76f29))
+
 ### [4.3.1](https://www.github.com/googleapis/nodejs-storage/compare/v4.3.0...v4.3.1) (2020-02-06)
 
 
