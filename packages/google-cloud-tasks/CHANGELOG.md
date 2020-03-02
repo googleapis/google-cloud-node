@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.7.3...v1.8.0) (2020-02-29)
+
+
+### Features
+
+* add StackdriverLoggingConfig field to Cloud Tasks v2 API ([db2397a](https://www.github.com/googleapis/nodejs-tasks/commit/db2397a5efc59002a96a80a787ee2d405b1f4ce5))
+* export protos in src/index.ts ([a27e213](https://www.github.com/googleapis/nodejs-tasks/commit/a27e2135a359519ca7d17fae3f28718c42b5acf2))
+
 ### [1.7.3](https://www.github.com/googleapis/nodejs-tasks/compare/v1.7.2...v1.7.3) (2020-02-07)
 
 
