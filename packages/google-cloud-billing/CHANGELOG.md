@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-billing/compare/v1.0.0...v1.1.0) (2020-02-29)
+
+
+### Features
+
+* export protos from src/index.ts; update jsdoc config ([ea41ed3](https://www.github.com/googleapis/nodejs-billing/commit/ea41ed3bdb792c8a3de3c168ebf18904127c9edc))
+
 ## 1.0.0 (2020-02-27)
 
 
