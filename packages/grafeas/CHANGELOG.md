@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.5.2...v2.6.0) (2020-03-03)
+
+
+### Features
+
+* export protos in src/index.ts ([09db103](https://www.github.com/googleapis/nodejs-grafeas/commit/09db103ae572a97031984cf07fc444c586ed2fd2))
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([c44a06b](https://www.github.com/googleapis/nodejs-grafeas/commit/c44a06baf2c7fc390b14af2596fb5fe03fde54a7))
+* **deps:** update dependency @grpc/grpc-js to ^0.7.0 ([#114](https://www.github.com/googleapis/nodejs-grafeas/issues/114)) ([7976bef](https://www.github.com/googleapis/nodejs-grafeas/commit/7976bef684efe1eb8ea4a02851df984b1340f0e4))
+
 ### [2.5.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.5.1...v2.5.2) (2020-02-01)
 
 
