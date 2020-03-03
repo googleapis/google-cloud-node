@@ -1165,7 +1165,7 @@ class Bucket extends ServiceObject {
    * @see [Objects: compose API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose}
    *
    * @throws {Error} if a non-array is provided as sources argument.
-   * @throws {Error} if less than two sources are provided.
+   * @throws {Error} if no sources are provided.
    * @throws {Error} if no destination is provided.
    *
    * @param {string[]|File[]} sources The source files that will be
@@ -1204,8 +1204,8 @@ class Bucket extends ServiceObject {
     optionsOrCallback?: CombineOptions | CombineCallback,
     callback?: CombineCallback
   ): Promise<CombineResponse> | void {
-    if (!Array.isArray(sources) || sources.length < 2) {
-      throw new Error('You must provide at least two source files.');
+    if (!Array.isArray(sources) || sources.length === 0) {
+      throw new Error('You must provide at least one source file.');
     }
 
     if (!destination) {

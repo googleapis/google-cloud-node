@@ -473,14 +473,14 @@ describe('Bucket', () => {
   });
 
   describe('combine', () => {
-    it('should throw if invalid sources are not provided', () => {
+    it('should throw if invalid sources are provided', () => {
       assert.throws(() => {
         bucket.combine();
-      }, /You must provide at least two source files\./);
+      }, /You must provide at least one source file\./);
 
       assert.throws(() => {
-        bucket.combine(['1']);
-      }, /You must provide at least two source files\./);
+        bucket.combine([]);
+      }, /You must provide at least one source file\./);
     });
 
     it('should throw if a destination is not provided', () => {
