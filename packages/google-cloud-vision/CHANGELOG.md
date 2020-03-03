@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.10.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.9.0...v1.10.0) (2020-03-03)
+
+
+### Features
+
+* move API to typescript code generation ([#532](https://www.github.com/googleapis/nodejs-vision/issues/532)) ([401e694](https://www.github.com/googleapis/nodejs-vision/commit/401e6944796fd1249639da6b767e842576345c3e))
+
 ## [1.9.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.8.0...v1.9.0) (2020-02-10)
 
 
