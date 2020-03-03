@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.4.3...v1.5.0) (2020-02-29)
+
+
+### Features
+
+* export protos in src/index.ts ([1fa2092](https://www.github.com/googleapis/nodejs-scheduler/commit/1fa2092d37233eb3f8baa6a06b7b7a0e717dea21))
+
 ### [1.4.3](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.4.2...v1.4.3) (2020-02-12)
 
 
