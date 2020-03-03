@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [3.8.0](https://www.github.com/googleapis/nodejs-language/compare/v3.7.2...v3.8.0) (2020-02-28)
+
+
+### Features
+
+* export protos in src/index.ts ([482fb10](https://www.github.com/googleapis/nodejs-language/commit/482fb10bc1d4f01bd3de38a0301cda2a2efb491d))
+
 ### [3.7.2](https://www.github.com/googleapis/nodejs-language/compare/v3.7.1...v3.7.2) (2020-02-10)
 
 
