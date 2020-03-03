@@ -258,6 +258,15 @@ const TablesModelMetadata = {
  *
  *   This object should have the same structure as [TablesModelColumnInfo]{@link google.cloud.automl.v1beta1.TablesModelColumnInfo}
  *
+ * @property {number} baselineScore
+ *   Output only. Stores the prediction score for the baseline example, which
+ *   is defined as the example with all values set to their baseline values.
+ *   This is used as part of the Sampled Shapley explanation of the model's
+ *   prediction. This field is populated only when feature importance is
+ *   requested. For regression models, this holds the baseline prediction for
+ *   the baseline example. For classification models, this holds the baseline
+ *   prediction for the baseline example for the argmax class.
+ *
  * @typedef TablesAnnotation
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TablesAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/tables.proto}

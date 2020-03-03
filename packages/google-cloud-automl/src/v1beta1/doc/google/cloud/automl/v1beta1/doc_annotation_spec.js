@@ -25,10 +25,8 @@
  *   'projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationSpecs/{annotation_spec_id}'
  *
  * @property {string} displayName
- *   Required.
- *   The name of the annotation spec to show in the interface. The name can be
+ *   Required. The name of the annotation spec to show in the interface. The name can be
  *   up to 32 characters long and must match the regexp `[a-zA-Z0-9_]+`.
- *   (_), and ASCII digits 0-9.
  *
  * @property {number} exampleCount
  *   Output only. The number of examples in the parent dataset

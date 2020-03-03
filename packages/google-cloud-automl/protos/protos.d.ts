@@ -14976,6 +14976,9 @@ export namespace google {
 
                     /** TablesAnnotation tablesModelColumnInfo */
                     tablesModelColumnInfo?: (google.cloud.automl.v1beta1.ITablesModelColumnInfo[]|null);
+
+                    /** TablesAnnotation baselineScore */
+                    baselineScore?: (number|null);
                 }
 
                 /** Represents a TablesAnnotation. */
@@ -14998,6 +15001,9 @@ export namespace google {
 
                     /** TablesAnnotation tablesModelColumnInfo. */
                     public tablesModelColumnInfo: google.cloud.automl.v1beta1.ITablesModelColumnInfo[];
+
+                    /** TablesAnnotation baselineScore. */
+                    public baselineScore: number;
 
                     /**
                      * Creates a new TablesAnnotation instance using the specified properties.
@@ -18907,6 +18913,120 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a RegressionEvaluationMetrics. */
+                interface IRegressionEvaluationMetrics {
+
+                    /** RegressionEvaluationMetrics rootMeanSquaredError */
+                    rootMeanSquaredError?: (number|null);
+
+                    /** RegressionEvaluationMetrics meanAbsoluteError */
+                    meanAbsoluteError?: (number|null);
+
+                    /** RegressionEvaluationMetrics meanAbsolutePercentageError */
+                    meanAbsolutePercentageError?: (number|null);
+
+                    /** RegressionEvaluationMetrics rSquared */
+                    rSquared?: (number|null);
+
+                    /** RegressionEvaluationMetrics rootMeanSquaredLogError */
+                    rootMeanSquaredLogError?: (number|null);
+                }
+
+                /** Represents a RegressionEvaluationMetrics. */
+                class RegressionEvaluationMetrics implements IRegressionEvaluationMetrics {
+
+                    /**
+                     * Constructs a new RegressionEvaluationMetrics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.automl.v1beta1.IRegressionEvaluationMetrics);
+
+                    /** RegressionEvaluationMetrics rootMeanSquaredError. */
+                    public rootMeanSquaredError: number;
+
+                    /** RegressionEvaluationMetrics meanAbsoluteError. */
+                    public meanAbsoluteError: number;
+
+                    /** RegressionEvaluationMetrics meanAbsolutePercentageError. */
+                    public meanAbsolutePercentageError: number;
+
+                    /** RegressionEvaluationMetrics rSquared. */
+                    public rSquared: number;
+
+                    /** RegressionEvaluationMetrics rootMeanSquaredLogError. */
+                    public rootMeanSquaredLogError: number;
+
+                    /**
+                     * Creates a new RegressionEvaluationMetrics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RegressionEvaluationMetrics instance
+                     */
+                    public static create(properties?: google.cloud.automl.v1beta1.IRegressionEvaluationMetrics): google.cloud.automl.v1beta1.RegressionEvaluationMetrics;
+
+                    /**
+                     * Encodes the specified RegressionEvaluationMetrics message. Does not implicitly {@link google.cloud.automl.v1beta1.RegressionEvaluationMetrics.verify|verify} messages.
+                     * @param message RegressionEvaluationMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.automl.v1beta1.IRegressionEvaluationMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RegressionEvaluationMetrics message, length delimited. Does not implicitly {@link google.cloud.automl.v1beta1.RegressionEvaluationMetrics.verify|verify} messages.
+                     * @param message RegressionEvaluationMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.automl.v1beta1.IRegressionEvaluationMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RegressionEvaluationMetrics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RegressionEvaluationMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.automl.v1beta1.RegressionEvaluationMetrics;
+
+                    /**
+                     * Decodes a RegressionEvaluationMetrics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RegressionEvaluationMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.automl.v1beta1.RegressionEvaluationMetrics;
+
+                    /**
+                     * Verifies a RegressionEvaluationMetrics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RegressionEvaluationMetrics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RegressionEvaluationMetrics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.automl.v1beta1.RegressionEvaluationMetrics;
+
+                    /**
+                     * Creates a plain object from a RegressionEvaluationMetrics message. Also converts values to other types if specified.
+                     * @param message RegressionEvaluationMetrics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.automl.v1beta1.RegressionEvaluationMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RegressionEvaluationMetrics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a TextExtractionAnnotation. */
                 interface ITextExtractionAnnotation {
 
@@ -21903,120 +22023,6 @@ export namespace google {
 
                     /**
                      * Converts this ModelEvaluation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a RegressionEvaluationMetrics. */
-                interface IRegressionEvaluationMetrics {
-
-                    /** RegressionEvaluationMetrics rootMeanSquaredError */
-                    rootMeanSquaredError?: (number|null);
-
-                    /** RegressionEvaluationMetrics meanAbsoluteError */
-                    meanAbsoluteError?: (number|null);
-
-                    /** RegressionEvaluationMetrics meanAbsolutePercentageError */
-                    meanAbsolutePercentageError?: (number|null);
-
-                    /** RegressionEvaluationMetrics rSquared */
-                    rSquared?: (number|null);
-
-                    /** RegressionEvaluationMetrics rootMeanSquaredLogError */
-                    rootMeanSquaredLogError?: (number|null);
-                }
-
-                /** Represents a RegressionEvaluationMetrics. */
-                class RegressionEvaluationMetrics implements IRegressionEvaluationMetrics {
-
-                    /**
-                     * Constructs a new RegressionEvaluationMetrics.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.automl.v1beta1.IRegressionEvaluationMetrics);
-
-                    /** RegressionEvaluationMetrics rootMeanSquaredError. */
-                    public rootMeanSquaredError: number;
-
-                    /** RegressionEvaluationMetrics meanAbsoluteError. */
-                    public meanAbsoluteError: number;
-
-                    /** RegressionEvaluationMetrics meanAbsolutePercentageError. */
-                    public meanAbsolutePercentageError: number;
-
-                    /** RegressionEvaluationMetrics rSquared. */
-                    public rSquared: number;
-
-                    /** RegressionEvaluationMetrics rootMeanSquaredLogError. */
-                    public rootMeanSquaredLogError: number;
-
-                    /**
-                     * Creates a new RegressionEvaluationMetrics instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns RegressionEvaluationMetrics instance
-                     */
-                    public static create(properties?: google.cloud.automl.v1beta1.IRegressionEvaluationMetrics): google.cloud.automl.v1beta1.RegressionEvaluationMetrics;
-
-                    /**
-                     * Encodes the specified RegressionEvaluationMetrics message. Does not implicitly {@link google.cloud.automl.v1beta1.RegressionEvaluationMetrics.verify|verify} messages.
-                     * @param message RegressionEvaluationMetrics message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.automl.v1beta1.IRegressionEvaluationMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified RegressionEvaluationMetrics message, length delimited. Does not implicitly {@link google.cloud.automl.v1beta1.RegressionEvaluationMetrics.verify|verify} messages.
-                     * @param message RegressionEvaluationMetrics message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.automl.v1beta1.IRegressionEvaluationMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a RegressionEvaluationMetrics message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns RegressionEvaluationMetrics
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.automl.v1beta1.RegressionEvaluationMetrics;
-
-                    /**
-                     * Decodes a RegressionEvaluationMetrics message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns RegressionEvaluationMetrics
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.automl.v1beta1.RegressionEvaluationMetrics;
-
-                    /**
-                     * Verifies a RegressionEvaluationMetrics message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a RegressionEvaluationMetrics message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns RegressionEvaluationMetrics
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.automl.v1beta1.RegressionEvaluationMetrics;
-
-                    /**
-                     * Creates a plain object from a RegressionEvaluationMetrics message. Also converts values to other types if specified.
-                     * @param message RegressionEvaluationMetrics
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.automl.v1beta1.RegressionEvaluationMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this RegressionEvaluationMetrics to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

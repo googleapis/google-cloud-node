@@ -19,10 +19,10 @@
  * Request message for AutoMl.CreateDataset.
  *
  * @property {string} parent
- *   The resource name of the project to create the dataset for.
+ *   Required. The resource name of the project to create the dataset for.
  *
  * @property {Object} dataset
- *   The dataset to create.
+ *   Required. The dataset to create.
  *
  *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1beta1.Dataset}
  *
@@ -38,7 +38,7 @@ const CreateDatasetRequest = {
  * Request message for AutoMl.GetDataset.
  *
  * @property {string} name
- *   The resource name of the dataset to retrieve.
+ *   Required. The resource name of the dataset to retrieve.
  *
  * @typedef GetDatasetRequest
  * @memberof google.cloud.automl.v1beta1
@@ -52,7 +52,7 @@ const GetDatasetRequest = {
  * Request message for AutoMl.ListDatasets.
  *
  * @property {string} parent
- *   The resource name of the project from which to list datasets.
+ *   Required. The resource name of the project from which to list datasets.
  *
  * @property {string} filter
  *   An expression for filtering the results of the request.
@@ -105,7 +105,7 @@ const ListDatasetsResponse = {
  * Request message for AutoMl.UpdateDataset
  *
  * @property {Object} dataset
- *   The dataset which replaces the resource on the server.
+ *   Required. The dataset which replaces the resource on the server.
  *
  *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1beta1.Dataset}
  *
@@ -126,7 +126,7 @@ const UpdateDatasetRequest = {
  * Request message for AutoMl.DeleteDataset.
  *
  * @property {string} name
- *   The resource name of the dataset to delete.
+ *   Required. The resource name of the dataset to delete.
  *
  * @typedef DeleteDatasetRequest
  * @memberof google.cloud.automl.v1beta1
@@ -180,7 +180,7 @@ const ExportDataRequest = {
  * Request message for AutoMl.GetAnnotationSpec.
  *
  * @property {string} name
- *   The resource name of the annotation spec to retrieve.
+ *   Required. The resource name of the annotation spec to retrieve.
  *
  * @typedef GetAnnotationSpecRequest
  * @memberof google.cloud.automl.v1beta1
@@ -194,7 +194,7 @@ const GetAnnotationSpecRequest = {
  * Request message for AutoMl.GetTableSpec.
  *
  * @property {string} name
- *   The resource name of the table spec to retrieve.
+ *   Required. The resource name of the table spec to retrieve.
  *
  * @property {Object} fieldMask
  *   Mask specifying which fields to read.
@@ -213,7 +213,7 @@ const GetTableSpecRequest = {
  * Request message for AutoMl.ListTableSpecs.
  *
  * @property {string} parent
- *   The resource name of the dataset to list table specs from.
+ *   Required. The resource name of the dataset to list table specs from.
  *
  * @property {Object} fieldMask
  *   Mask specifying which fields to read.
@@ -265,7 +265,7 @@ const ListTableSpecsResponse = {
  * Request message for AutoMl.UpdateTableSpec
  *
  * @property {Object} tableSpec
- *   The table spec which replaces the resource on the server.
+ *   Required. The table spec which replaces the resource on the server.
  *
  *   This object should have the same structure as [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}
  *
@@ -286,7 +286,7 @@ const UpdateTableSpecRequest = {
  * Request message for AutoMl.GetColumnSpec.
  *
  * @property {string} name
- *   The resource name of the column spec to retrieve.
+ *   Required. The resource name of the column spec to retrieve.
  *
  * @property {Object} fieldMask
  *   Mask specifying which fields to read.
@@ -305,7 +305,7 @@ const GetColumnSpecRequest = {
  * Request message for AutoMl.ListColumnSpecs.
  *
  * @property {string} parent
- *   The resource name of the table spec to list column specs from.
+ *   Required. The resource name of the table spec to list column specs from.
  *
  * @property {Object} fieldMask
  *   Mask specifying which fields to read.
@@ -357,7 +357,7 @@ const ListColumnSpecsResponse = {
  * Request message for AutoMl.UpdateColumnSpec
  *
  * @property {Object} columnSpec
- *   The column spec which replaces the resource on the server.
+ *   Required. The column spec which replaces the resource on the server.
  *
  *   This object should have the same structure as [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}
  *
@@ -378,10 +378,10 @@ const UpdateColumnSpecRequest = {
  * Request message for AutoMl.CreateModel.
  *
  * @property {string} parent
- *   Resource name of the parent project where the model is being created.
+ *   Required. Resource name of the parent project where the model is being created.
  *
  * @property {Object} model
- *   The model to create.
+ *   Required. The model to create.
  *
  *   This object should have the same structure as [Model]{@link google.cloud.automl.v1beta1.Model}
  *
@@ -397,7 +397,7 @@ const CreateModelRequest = {
  * Request message for AutoMl.GetModel.
  *
  * @property {string} name
- *   Resource name of the model.
+ *   Required. Resource name of the model.
  *
  * @typedef GetModelRequest
  * @memberof google.cloud.automl.v1beta1
@@ -411,7 +411,7 @@ const GetModelRequest = {
  * Request message for AutoMl.ListModels.
  *
  * @property {string} parent
- *   Resource name of the project, from which to list the models.
+ *   Required. Resource name of the project, from which to list the models.
  *
  * @property {string} filter
  *   An expression for filtering the results of the request.
@@ -465,7 +465,7 @@ const ListModelsResponse = {
  * Request message for AutoMl.DeleteModel.
  *
  * @property {string} name
- *   Resource name of the model being deleted.
+ *   Required. Resource name of the model being deleted.
  *
  * @typedef DeleteModelRequest
  * @memberof google.cloud.automl.v1beta1
@@ -489,7 +489,7 @@ const DeleteModelRequest = {
  *   This object should have the same structure as [ImageClassificationModelDeploymentMetadata]{@link google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata}
  *
  * @property {string} name
- *   Resource name of the model to deploy.
+ *   Required. Resource name of the model to deploy.
  *
  * @typedef DeployModelRequest
  * @memberof google.cloud.automl.v1beta1
@@ -503,7 +503,7 @@ const DeployModelRequest = {
  * Request message for AutoMl.UndeployModel.
  *
  * @property {string} name
- *   Resource name of the model to undeploy.
+ *   Required. Resource name of the model to undeploy.
  *
  * @typedef UndeployModelRequest
  * @memberof google.cloud.automl.v1beta1
@@ -558,7 +558,7 @@ const ExportEvaluatedExamplesRequest = {
  * Request message for AutoMl.GetModelEvaluation.
  *
  * @property {string} name
- *   Resource name for the model evaluation.
+ *   Required. Resource name for the model evaluation.
  *
  * @typedef GetModelEvaluationRequest
  * @memberof google.cloud.automl.v1beta1
@@ -572,7 +572,7 @@ const GetModelEvaluationRequest = {
  * Request message for AutoMl.ListModelEvaluations.
  *
  * @property {string} parent
- *   Resource name of the model to list the model evaluations for.
+ *   Required. Resource name of the model to list the model evaluations for.
  *   If modelId is set as "-", this will list model evaluations from across all
  *   models of the parent location.
  *

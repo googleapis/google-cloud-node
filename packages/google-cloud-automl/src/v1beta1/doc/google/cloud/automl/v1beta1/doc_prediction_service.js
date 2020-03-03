@@ -16,11 +16,10 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for
- * PredictionService.Predict.
+ * Request message for PredictionService.Predict.
  *
  * @property {string} name
- *   Name of the model requested to serve the prediction.
+ *   Required. Name of the model requested to serve the prediction.
  *
  * @property {Object} payload
  *   Required. Payload to perform a prediction on. The payload must match the
@@ -46,12 +45,8 @@
  *          boxes will be returned in the response. Default is 100, the
  *          requested value may be limited by server.
  *   *  For Tables:
- *      `feature_importance` - (boolean) Whether
- *
- *   [feature_importance][[google.cloud.automl.v1beta1.TablesModelColumnInfo.feature_importance]
- *          should be populated in the returned
- *
- *   [TablesAnnotation(-s)][[google.cloud.automl.v1beta1.TablesAnnotation].
+ *      feature_imp<span>ortan</span>ce - (boolean) Whether feature importance
+ *          should be populated in the returned TablesAnnotation.
  *          The default is false.
  *
  * @typedef PredictRequest
@@ -63,8 +58,7 @@ const PredictRequest = {
 };
 
 /**
- * Response message for
- * PredictionService.Predict.
+ * Response message for PredictionService.Predict.
  *
  * @property {Object[]} payload
  *   Prediction result.
@@ -107,11 +101,10 @@ const PredictResponse = {
 };
 
 /**
- * Request message for
- * PredictionService.BatchPredict.
+ * Request message for PredictionService.BatchPredict.
  *
  * @property {string} name
- *   Name of the model requested to serve the batch prediction.
+ *   Required. Name of the model requested to serve the batch prediction.
  *
  * @property {Object} inputConfig
  *   Required. The input configuration for batch prediction.
@@ -125,7 +118,7 @@ const PredictResponse = {
  *   This object should have the same structure as [BatchPredictOutputConfig]{@link google.cloud.automl.v1beta1.BatchPredictOutputConfig}
  *
  * @property {Object.<string, string>} params
- *   Additional domain-specific parameters for the predictions, any string must
+ *   Required. Additional domain-specific parameters for the predictions, any string must
  *   be up to 25000 characters long.
  *
  *   *  For Text Classification:
@@ -150,6 +143,7 @@ const PredictResponse = {
  *          requested value may be limited by server.
  *
  *   *  For Video Classification :
+ *
  *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
  *          makes predictions for a video, it will only produce results that
  *          have at least this confidence score. The default is 0.5.
@@ -177,7 +171,14 @@ const PredictResponse = {
  *          metrics provided to describe that quality. The default is
  *          "false".
  *
+ *   *  For Tables:
+ *
+ *      feature_imp<span>ortan</span>ce - (boolean) Whether feature importance
+ *          should be populated in the returned TablesAnnotations. The
+ *          default is false.
+ *
  *   *  For Video Object Tracking:
+ *
  *      `score_threshold` - (float) When Model detects objects on video frames,
  *          it will only produce bounding boxes which have at least this
  *          confidence score. Value in 0 to 1 range, default is 0.5.
@@ -199,8 +200,7 @@ const BatchPredictRequest = {
 /**
  * Result of the Batch Predict. This message is returned in
  * response of the operation returned
- * by the
- * PredictionService.BatchPredict.
+ * by the PredictionService.BatchPredict.
  *
  * @property {Object.<string, string>} metadata
  *   Additional domain-specific prediction response metadata.

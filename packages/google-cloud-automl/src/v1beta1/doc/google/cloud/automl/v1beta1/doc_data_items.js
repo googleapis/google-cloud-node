@@ -48,11 +48,9 @@ const Image = {
  *   characters long.
  *
  * @property {string} mimeType
- *   Optional. The format of
- *   content. Currently the
- *   only two allowed values are "text/html" and "text/plain". If left blank,
- *   the format is automatically determined from the type of the uploaded
- *   content.
+ *   Optional. The format of content. Currently the only two allowed
+ *   values are "text/html" and "text/plain". If left blank, the format is
+ *   automatically determined from the type of the uploaded content.
  *
  * @property {string} contentUri
  *   Output only. HTTP URI where you can download the content.
@@ -151,9 +149,7 @@ const Document = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Describes the layout information of a
-   * text_segment in
-   * the document.
+   * Describes the layout information of a text_segment in the document.
    *
    * @property {Object} textSegment
    *   Text Segment that represents a segment in
@@ -162,14 +158,12 @@ const Document = {
    *   This object should have the same structure as [TextSegment]{@link google.cloud.automl.v1beta1.TextSegment}
    *
    * @property {number} pageNumber
-   *   Page number of the
-   *   text_segment
-   *   in the original document, starts from 1.
+   *   Page number of the text_segment in the original document, starts
+   *   from 1.
    *
    * @property {Object} boundingPoly
-   *   The position of the
-   *   text_segment
-   *   in the page. Contains exactly 4
+   *   The position of the text_segment in the page.
+   *   Contains exactly 4
    *
    *   normalized_vertices
    *   and they are connected by edges in the order provided, which will
@@ -181,9 +175,7 @@ const Document = {
    *   This object should have the same structure as [BoundingPoly]{@link google.cloud.automl.v1beta1.BoundingPoly}
    *
    * @property {number} textSegmentType
-   *   The type of the
-   *   text_segment
-   *   in document.
+   *   The type of the text_segment in document.
    *
    *   The number should be among the values of [TextSegmentType]{@link google.cloud.automl.v1beta1.TextSegmentType}
    *

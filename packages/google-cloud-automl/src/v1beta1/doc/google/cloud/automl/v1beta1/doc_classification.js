@@ -171,10 +171,7 @@ const ClassificationEvaluationMetrics = {
    *   for each example.
    *
    * @property {number} f1ScoreAt1
-   *   Output only. The harmonic mean of
-   *   recall_at1
-   *   and
-   *   precision_at1.
+   *   Output only. The harmonic mean of recall_at1 and precision_at1.
    *
    * @property {number} truePositiveCount
    *   Output only. The number of model created labels that match a ground truth
@@ -242,9 +239,7 @@ const ClassificationEvaluationMetrics = {
      *   Output only. Value of the specific cell in the confusion matrix.
      *   The number of values each row has (i.e. the length of the row) is equal
      *   to the length of the `annotation_spec_id` field or, if that one is not
-     *   populated, length of the
-     *   display_name
-     *   field.
+     *   populated, length of the display_name field.
      *
      * @typedef Row
      * @memberof google.cloud.automl.v1beta1
