@@ -26,6 +26,396 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of a Vertex. */
+                interface IVertex {
+
+                    /** Vertex x */
+                    x?: (number|null);
+
+                    /** Vertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a Vertex. */
+                class Vertex implements IVertex {
+
+                    /**
+                     * Constructs a new Vertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1.IVertex);
+
+                    /** Vertex x. */
+                    public x: number;
+
+                    /** Vertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new Vertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Vertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1.IVertex): google.cloud.vision.v1.Vertex;
+
+                    /**
+                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.Vertex;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.Vertex;
+
+                    /**
+                     * Verifies a Vertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Vertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.Vertex;
+
+                    /**
+                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
+                     * @param message Vertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Vertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a NormalizedVertex. */
+                interface INormalizedVertex {
+
+                    /** NormalizedVertex x */
+                    x?: (number|null);
+
+                    /** NormalizedVertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a NormalizedVertex. */
+                class NormalizedVertex implements INormalizedVertex {
+
+                    /**
+                     * Constructs a new NormalizedVertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1.INormalizedVertex);
+
+                    /** NormalizedVertex x. */
+                    public x: number;
+
+                    /** NormalizedVertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new NormalizedVertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NormalizedVertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1.INormalizedVertex): google.cloud.vision.v1.NormalizedVertex;
+
+                    /**
+                     * Encodes the specified NormalizedVertex message. Does not implicitly {@link google.cloud.vision.v1.NormalizedVertex.verify|verify} messages.
+                     * @param message NormalizedVertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NormalizedVertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1.NormalizedVertex.verify|verify} messages.
+                     * @param message NormalizedVertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NormalizedVertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NormalizedVertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.NormalizedVertex;
+
+                    /**
+                     * Decodes a NormalizedVertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NormalizedVertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.NormalizedVertex;
+
+                    /**
+                     * Verifies a NormalizedVertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NormalizedVertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NormalizedVertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.NormalizedVertex;
+
+                    /**
+                     * Creates a plain object from a NormalizedVertex message. Also converts values to other types if specified.
+                     * @param message NormalizedVertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1.NormalizedVertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NormalizedVertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BoundingPoly. */
+                interface IBoundingPoly {
+
+                    /** BoundingPoly vertices */
+                    vertices?: (google.cloud.vision.v1.IVertex[]|null);
+
+                    /** BoundingPoly normalizedVertices */
+                    normalizedVertices?: (google.cloud.vision.v1.INormalizedVertex[]|null);
+                }
+
+                /** Represents a BoundingPoly. */
+                class BoundingPoly implements IBoundingPoly {
+
+                    /**
+                     * Constructs a new BoundingPoly.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1.IBoundingPoly);
+
+                    /** BoundingPoly vertices. */
+                    public vertices: google.cloud.vision.v1.IVertex[];
+
+                    /** BoundingPoly normalizedVertices. */
+                    public normalizedVertices: google.cloud.vision.v1.INormalizedVertex[];
+
+                    /**
+                     * Creates a new BoundingPoly instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BoundingPoly instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1.IBoundingPoly): google.cloud.vision.v1.BoundingPoly;
+
+                    /**
+                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.BoundingPoly;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.BoundingPoly;
+
+                    /**
+                     * Verifies a BoundingPoly message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BoundingPoly
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.BoundingPoly;
+
+                    /**
+                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
+                     * @param message BoundingPoly
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BoundingPoly to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Position. */
+                interface IPosition {
+
+                    /** Position x */
+                    x?: (number|null);
+
+                    /** Position y */
+                    y?: (number|null);
+
+                    /** Position z */
+                    z?: (number|null);
+                }
+
+                /** Represents a Position. */
+                class Position implements IPosition {
+
+                    /**
+                     * Constructs a new Position.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1.IPosition);
+
+                    /** Position x. */
+                    public x: number;
+
+                    /** Position y. */
+                    public y: number;
+
+                    /** Position z. */
+                    public z: number;
+
+                    /**
+                     * Creates a new Position instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Position instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1.IPosition): google.cloud.vision.v1.Position;
+
+                    /**
+                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.Position;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.Position;
+
+                    /**
+                     * Verifies a Position message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Position
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.Position;
+
+                    /**
+                     * Creates a plain object from a Position message. Also converts values to other types if specified.
+                     * @param message Position
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Position to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Represents an ImageAnnotator */
                 class ImageAnnotator extends $protobuf.rpc.Service {
 
@@ -4251,396 +4641,6 @@ export namespace google {
                         DONE = 3,
                         CANCELLED = 4
                     }
-                }
-
-                /** Properties of a Vertex. */
-                interface IVertex {
-
-                    /** Vertex x */
-                    x?: (number|null);
-
-                    /** Vertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a Vertex. */
-                class Vertex implements IVertex {
-
-                    /**
-                     * Constructs a new Vertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1.IVertex);
-
-                    /** Vertex x. */
-                    public x: number;
-
-                    /** Vertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new Vertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Vertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1.IVertex): google.cloud.vision.v1.Vertex;
-
-                    /**
-                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.Vertex;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.Vertex;
-
-                    /**
-                     * Verifies a Vertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Vertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.Vertex;
-
-                    /**
-                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
-                     * @param message Vertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Vertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a NormalizedVertex. */
-                interface INormalizedVertex {
-
-                    /** NormalizedVertex x */
-                    x?: (number|null);
-
-                    /** NormalizedVertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a NormalizedVertex. */
-                class NormalizedVertex implements INormalizedVertex {
-
-                    /**
-                     * Constructs a new NormalizedVertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1.INormalizedVertex);
-
-                    /** NormalizedVertex x. */
-                    public x: number;
-
-                    /** NormalizedVertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new NormalizedVertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NormalizedVertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1.INormalizedVertex): google.cloud.vision.v1.NormalizedVertex;
-
-                    /**
-                     * Encodes the specified NormalizedVertex message. Does not implicitly {@link google.cloud.vision.v1.NormalizedVertex.verify|verify} messages.
-                     * @param message NormalizedVertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NormalizedVertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1.NormalizedVertex.verify|verify} messages.
-                     * @param message NormalizedVertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NormalizedVertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NormalizedVertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.NormalizedVertex;
-
-                    /**
-                     * Decodes a NormalizedVertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NormalizedVertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.NormalizedVertex;
-
-                    /**
-                     * Verifies a NormalizedVertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NormalizedVertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NormalizedVertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.NormalizedVertex;
-
-                    /**
-                     * Creates a plain object from a NormalizedVertex message. Also converts values to other types if specified.
-                     * @param message NormalizedVertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1.NormalizedVertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NormalizedVertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a BoundingPoly. */
-                interface IBoundingPoly {
-
-                    /** BoundingPoly vertices */
-                    vertices?: (google.cloud.vision.v1.IVertex[]|null);
-
-                    /** BoundingPoly normalizedVertices */
-                    normalizedVertices?: (google.cloud.vision.v1.INormalizedVertex[]|null);
-                }
-
-                /** Represents a BoundingPoly. */
-                class BoundingPoly implements IBoundingPoly {
-
-                    /**
-                     * Constructs a new BoundingPoly.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1.IBoundingPoly);
-
-                    /** BoundingPoly vertices. */
-                    public vertices: google.cloud.vision.v1.IVertex[];
-
-                    /** BoundingPoly normalizedVertices. */
-                    public normalizedVertices: google.cloud.vision.v1.INormalizedVertex[];
-
-                    /**
-                     * Creates a new BoundingPoly instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BoundingPoly instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1.IBoundingPoly): google.cloud.vision.v1.BoundingPoly;
-
-                    /**
-                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.BoundingPoly;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.BoundingPoly;
-
-                    /**
-                     * Verifies a BoundingPoly message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BoundingPoly
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.BoundingPoly;
-
-                    /**
-                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
-                     * @param message BoundingPoly
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BoundingPoly to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Position. */
-                interface IPosition {
-
-                    /** Position x */
-                    x?: (number|null);
-
-                    /** Position y */
-                    y?: (number|null);
-
-                    /** Position z */
-                    z?: (number|null);
-                }
-
-                /** Represents a Position. */
-                class Position implements IPosition {
-
-                    /**
-                     * Constructs a new Position.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1.IPosition);
-
-                    /** Position x. */
-                    public x: number;
-
-                    /** Position y. */
-                    public y: number;
-
-                    /** Position z. */
-                    public z: number;
-
-                    /**
-                     * Creates a new Position instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Position instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1.IPosition): google.cloud.vision.v1.Position;
-
-                    /**
-                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.Position;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.Position;
-
-                    /**
-                     * Verifies a Position message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Position
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.Position;
-
-                    /**
-                     * Creates a plain object from a Position message. Also converts values to other types if specified.
-                     * @param message Position
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Position to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a ProductSearchParams. */
@@ -10232,6 +10232,294 @@ export namespace google {
             /** Namespace v1p1beta1. */
             namespace v1p1beta1 {
 
+                /** Properties of a Vertex. */
+                interface IVertex {
+
+                    /** Vertex x */
+                    x?: (number|null);
+
+                    /** Vertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a Vertex. */
+                class Vertex implements IVertex {
+
+                    /**
+                     * Constructs a new Vertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p1beta1.IVertex);
+
+                    /** Vertex x. */
+                    public x: number;
+
+                    /** Vertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new Vertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Vertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p1beta1.IVertex): google.cloud.vision.v1p1beta1.Vertex;
+
+                    /**
+                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1p1beta1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p1beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p1beta1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p1beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p1beta1.Vertex;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p1beta1.Vertex;
+
+                    /**
+                     * Verifies a Vertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Vertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p1beta1.Vertex;
+
+                    /**
+                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
+                     * @param message Vertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p1beta1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Vertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BoundingPoly. */
+                interface IBoundingPoly {
+
+                    /** BoundingPoly vertices */
+                    vertices?: (google.cloud.vision.v1p1beta1.IVertex[]|null);
+                }
+
+                /** Represents a BoundingPoly. */
+                class BoundingPoly implements IBoundingPoly {
+
+                    /**
+                     * Constructs a new BoundingPoly.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p1beta1.IBoundingPoly);
+
+                    /** BoundingPoly vertices. */
+                    public vertices: google.cloud.vision.v1p1beta1.IVertex[];
+
+                    /**
+                     * Creates a new BoundingPoly instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BoundingPoly instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p1beta1.IBoundingPoly): google.cloud.vision.v1p1beta1.BoundingPoly;
+
+                    /**
+                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p1beta1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p1beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p1beta1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p1beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p1beta1.BoundingPoly;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p1beta1.BoundingPoly;
+
+                    /**
+                     * Verifies a BoundingPoly message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BoundingPoly
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p1beta1.BoundingPoly;
+
+                    /**
+                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
+                     * @param message BoundingPoly
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p1beta1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BoundingPoly to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Position. */
+                interface IPosition {
+
+                    /** Position x */
+                    x?: (number|null);
+
+                    /** Position y */
+                    y?: (number|null);
+
+                    /** Position z */
+                    z?: (number|null);
+                }
+
+                /** Represents a Position. */
+                class Position implements IPosition {
+
+                    /**
+                     * Constructs a new Position.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p1beta1.IPosition);
+
+                    /** Position x. */
+                    public x: number;
+
+                    /** Position y. */
+                    public y: number;
+
+                    /** Position z. */
+                    public z: number;
+
+                    /**
+                     * Creates a new Position instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Position instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p1beta1.IPosition): google.cloud.vision.v1p1beta1.Position;
+
+                    /**
+                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1p1beta1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p1beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1p1beta1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p1beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p1beta1.Position;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p1beta1.Position;
+
+                    /**
+                     * Verifies a Position message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Position
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p1beta1.Position;
+
+                    /**
+                     * Creates a plain object from a Position message. Also converts values to other types if specified.
+                     * @param message Position
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p1beta1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Position to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Represents an ImageAnnotator */
                 class ImageAnnotator extends $protobuf.rpc.Service {
 
@@ -12648,294 +12936,6 @@ export namespace google {
                     VERY_LIKELY = 5
                 }
 
-                /** Properties of a Vertex. */
-                interface IVertex {
-
-                    /** Vertex x */
-                    x?: (number|null);
-
-                    /** Vertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a Vertex. */
-                class Vertex implements IVertex {
-
-                    /**
-                     * Constructs a new Vertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p1beta1.IVertex);
-
-                    /** Vertex x. */
-                    public x: number;
-
-                    /** Vertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new Vertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Vertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p1beta1.IVertex): google.cloud.vision.v1p1beta1.Vertex;
-
-                    /**
-                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1p1beta1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p1beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p1beta1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p1beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p1beta1.Vertex;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p1beta1.Vertex;
-
-                    /**
-                     * Verifies a Vertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Vertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p1beta1.Vertex;
-
-                    /**
-                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
-                     * @param message Vertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p1beta1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Vertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a BoundingPoly. */
-                interface IBoundingPoly {
-
-                    /** BoundingPoly vertices */
-                    vertices?: (google.cloud.vision.v1p1beta1.IVertex[]|null);
-                }
-
-                /** Represents a BoundingPoly. */
-                class BoundingPoly implements IBoundingPoly {
-
-                    /**
-                     * Constructs a new BoundingPoly.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p1beta1.IBoundingPoly);
-
-                    /** BoundingPoly vertices. */
-                    public vertices: google.cloud.vision.v1p1beta1.IVertex[];
-
-                    /**
-                     * Creates a new BoundingPoly instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BoundingPoly instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p1beta1.IBoundingPoly): google.cloud.vision.v1p1beta1.BoundingPoly;
-
-                    /**
-                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p1beta1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p1beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p1beta1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p1beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p1beta1.BoundingPoly;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p1beta1.BoundingPoly;
-
-                    /**
-                     * Verifies a BoundingPoly message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BoundingPoly
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p1beta1.BoundingPoly;
-
-                    /**
-                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
-                     * @param message BoundingPoly
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p1beta1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BoundingPoly to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Position. */
-                interface IPosition {
-
-                    /** Position x */
-                    x?: (number|null);
-
-                    /** Position y */
-                    y?: (number|null);
-
-                    /** Position z */
-                    z?: (number|null);
-                }
-
-                /** Represents a Position. */
-                class Position implements IPosition {
-
-                    /**
-                     * Constructs a new Position.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p1beta1.IPosition);
-
-                    /** Position x. */
-                    public x: number;
-
-                    /** Position y. */
-                    public y: number;
-
-                    /** Position z. */
-                    public z: number;
-
-                    /**
-                     * Creates a new Position instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Position instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p1beta1.IPosition): google.cloud.vision.v1p1beta1.Position;
-
-                    /**
-                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1p1beta1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p1beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1p1beta1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p1beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p1beta1.Position;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p1beta1.Position;
-
-                    /**
-                     * Verifies a Position message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Position
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p1beta1.Position;
-
-                    /**
-                     * Creates a plain object from a Position message. Also converts values to other types if specified.
-                     * @param message Position
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p1beta1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Position to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a TextAnnotation. */
                 interface ITextAnnotation {
 
@@ -14435,6 +14435,396 @@ export namespace google {
 
             /** Namespace v1p2beta1. */
             namespace v1p2beta1 {
+
+                /** Properties of a Vertex. */
+                interface IVertex {
+
+                    /** Vertex x */
+                    x?: (number|null);
+
+                    /** Vertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a Vertex. */
+                class Vertex implements IVertex {
+
+                    /**
+                     * Constructs a new Vertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p2beta1.IVertex);
+
+                    /** Vertex x. */
+                    public x: number;
+
+                    /** Vertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new Vertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Vertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p2beta1.IVertex): google.cloud.vision.v1p2beta1.Vertex;
+
+                    /**
+                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1p2beta1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p2beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.Vertex;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.Vertex;
+
+                    /**
+                     * Verifies a Vertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Vertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.Vertex;
+
+                    /**
+                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
+                     * @param message Vertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p2beta1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Vertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a NormalizedVertex. */
+                interface INormalizedVertex {
+
+                    /** NormalizedVertex x */
+                    x?: (number|null);
+
+                    /** NormalizedVertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a NormalizedVertex. */
+                class NormalizedVertex implements INormalizedVertex {
+
+                    /**
+                     * Constructs a new NormalizedVertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p2beta1.INormalizedVertex);
+
+                    /** NormalizedVertex x. */
+                    public x: number;
+
+                    /** NormalizedVertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new NormalizedVertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NormalizedVertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p2beta1.INormalizedVertex): google.cloud.vision.v1p2beta1.NormalizedVertex;
+
+                    /**
+                     * Encodes the specified NormalizedVertex message. Does not implicitly {@link google.cloud.vision.v1p2beta1.NormalizedVertex.verify|verify} messages.
+                     * @param message NormalizedVertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p2beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NormalizedVertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.NormalizedVertex.verify|verify} messages.
+                     * @param message NormalizedVertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NormalizedVertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NormalizedVertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.NormalizedVertex;
+
+                    /**
+                     * Decodes a NormalizedVertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NormalizedVertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.NormalizedVertex;
+
+                    /**
+                     * Verifies a NormalizedVertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NormalizedVertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NormalizedVertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.NormalizedVertex;
+
+                    /**
+                     * Creates a plain object from a NormalizedVertex message. Also converts values to other types if specified.
+                     * @param message NormalizedVertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p2beta1.NormalizedVertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NormalizedVertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BoundingPoly. */
+                interface IBoundingPoly {
+
+                    /** BoundingPoly vertices */
+                    vertices?: (google.cloud.vision.v1p2beta1.IVertex[]|null);
+
+                    /** BoundingPoly normalizedVertices */
+                    normalizedVertices?: (google.cloud.vision.v1p2beta1.INormalizedVertex[]|null);
+                }
+
+                /** Represents a BoundingPoly. */
+                class BoundingPoly implements IBoundingPoly {
+
+                    /**
+                     * Constructs a new BoundingPoly.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p2beta1.IBoundingPoly);
+
+                    /** BoundingPoly vertices. */
+                    public vertices: google.cloud.vision.v1p2beta1.IVertex[];
+
+                    /** BoundingPoly normalizedVertices. */
+                    public normalizedVertices: google.cloud.vision.v1p2beta1.INormalizedVertex[];
+
+                    /**
+                     * Creates a new BoundingPoly instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BoundingPoly instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p2beta1.IBoundingPoly): google.cloud.vision.v1p2beta1.BoundingPoly;
+
+                    /**
+                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p2beta1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p2beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.BoundingPoly;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.BoundingPoly;
+
+                    /**
+                     * Verifies a BoundingPoly message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BoundingPoly
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.BoundingPoly;
+
+                    /**
+                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
+                     * @param message BoundingPoly
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p2beta1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BoundingPoly to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Position. */
+                interface IPosition {
+
+                    /** Position x */
+                    x?: (number|null);
+
+                    /** Position y */
+                    y?: (number|null);
+
+                    /** Position z */
+                    z?: (number|null);
+                }
+
+                /** Represents a Position. */
+                class Position implements IPosition {
+
+                    /**
+                     * Constructs a new Position.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p2beta1.IPosition);
+
+                    /** Position x. */
+                    public x: number;
+
+                    /** Position y. */
+                    public y: number;
+
+                    /** Position z. */
+                    public z: number;
+
+                    /**
+                     * Creates a new Position instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Position instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p2beta1.IPosition): google.cloud.vision.v1p2beta1.Position;
+
+                    /**
+                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1p2beta1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p2beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.Position;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.Position;
+
+                    /**
+                     * Verifies a Position message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Position
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.Position;
+
+                    /**
+                     * Creates a plain object from a Position message. Also converts values to other types if specified.
+                     * @param message Position
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p2beta1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Position to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
 
                 /** Represents an ImageAnnotator */
                 class ImageAnnotator extends $protobuf.rpc.Service {
@@ -17935,396 +18325,6 @@ export namespace google {
                     VERY_LIKELY = 5
                 }
 
-                /** Properties of a Vertex. */
-                interface IVertex {
-
-                    /** Vertex x */
-                    x?: (number|null);
-
-                    /** Vertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a Vertex. */
-                class Vertex implements IVertex {
-
-                    /**
-                     * Constructs a new Vertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p2beta1.IVertex);
-
-                    /** Vertex x. */
-                    public x: number;
-
-                    /** Vertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new Vertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Vertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p2beta1.IVertex): google.cloud.vision.v1p2beta1.Vertex;
-
-                    /**
-                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1p2beta1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p2beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.Vertex;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.Vertex;
-
-                    /**
-                     * Verifies a Vertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Vertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.Vertex;
-
-                    /**
-                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
-                     * @param message Vertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p2beta1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Vertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a NormalizedVertex. */
-                interface INormalizedVertex {
-
-                    /** NormalizedVertex x */
-                    x?: (number|null);
-
-                    /** NormalizedVertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a NormalizedVertex. */
-                class NormalizedVertex implements INormalizedVertex {
-
-                    /**
-                     * Constructs a new NormalizedVertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p2beta1.INormalizedVertex);
-
-                    /** NormalizedVertex x. */
-                    public x: number;
-
-                    /** NormalizedVertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new NormalizedVertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NormalizedVertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p2beta1.INormalizedVertex): google.cloud.vision.v1p2beta1.NormalizedVertex;
-
-                    /**
-                     * Encodes the specified NormalizedVertex message. Does not implicitly {@link google.cloud.vision.v1p2beta1.NormalizedVertex.verify|verify} messages.
-                     * @param message NormalizedVertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p2beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NormalizedVertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.NormalizedVertex.verify|verify} messages.
-                     * @param message NormalizedVertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NormalizedVertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NormalizedVertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.NormalizedVertex;
-
-                    /**
-                     * Decodes a NormalizedVertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NormalizedVertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.NormalizedVertex;
-
-                    /**
-                     * Verifies a NormalizedVertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NormalizedVertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NormalizedVertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.NormalizedVertex;
-
-                    /**
-                     * Creates a plain object from a NormalizedVertex message. Also converts values to other types if specified.
-                     * @param message NormalizedVertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p2beta1.NormalizedVertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NormalizedVertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a BoundingPoly. */
-                interface IBoundingPoly {
-
-                    /** BoundingPoly vertices */
-                    vertices?: (google.cloud.vision.v1p2beta1.IVertex[]|null);
-
-                    /** BoundingPoly normalizedVertices */
-                    normalizedVertices?: (google.cloud.vision.v1p2beta1.INormalizedVertex[]|null);
-                }
-
-                /** Represents a BoundingPoly. */
-                class BoundingPoly implements IBoundingPoly {
-
-                    /**
-                     * Constructs a new BoundingPoly.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p2beta1.IBoundingPoly);
-
-                    /** BoundingPoly vertices. */
-                    public vertices: google.cloud.vision.v1p2beta1.IVertex[];
-
-                    /** BoundingPoly normalizedVertices. */
-                    public normalizedVertices: google.cloud.vision.v1p2beta1.INormalizedVertex[];
-
-                    /**
-                     * Creates a new BoundingPoly instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BoundingPoly instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p2beta1.IBoundingPoly): google.cloud.vision.v1p2beta1.BoundingPoly;
-
-                    /**
-                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p2beta1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p2beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.BoundingPoly;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.BoundingPoly;
-
-                    /**
-                     * Verifies a BoundingPoly message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BoundingPoly
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.BoundingPoly;
-
-                    /**
-                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
-                     * @param message BoundingPoly
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p2beta1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BoundingPoly to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Position. */
-                interface IPosition {
-
-                    /** Position x */
-                    x?: (number|null);
-
-                    /** Position y */
-                    y?: (number|null);
-
-                    /** Position z */
-                    z?: (number|null);
-                }
-
-                /** Represents a Position. */
-                class Position implements IPosition {
-
-                    /**
-                     * Constructs a new Position.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p2beta1.IPosition);
-
-                    /** Position x. */
-                    public x: number;
-
-                    /** Position y. */
-                    public y: number;
-
-                    /** Position z. */
-                    public z: number;
-
-                    /**
-                     * Creates a new Position instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Position instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p2beta1.IPosition): google.cloud.vision.v1p2beta1.Position;
-
-                    /**
-                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1p2beta1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p2beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.Position;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.Position;
-
-                    /**
-                     * Verifies a Position message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Position
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.Position;
-
-                    /**
-                     * Creates a plain object from a Position message. Also converts values to other types if specified.
-                     * @param message Position
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p2beta1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Position to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a TextAnnotation. */
                 interface ITextAnnotation {
 
@@ -19824,6 +19824,486 @@ export namespace google {
 
             /** Namespace v1p3beta1. */
             namespace v1p3beta1 {
+
+                /** Properties of a Vertex. */
+                interface IVertex {
+
+                    /** Vertex x */
+                    x?: (number|null);
+
+                    /** Vertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a Vertex. */
+                class Vertex implements IVertex {
+
+                    /**
+                     * Constructs a new Vertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p3beta1.IVertex);
+
+                    /** Vertex x. */
+                    public x: number;
+
+                    /** Vertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new Vertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Vertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p3beta1.IVertex): google.cloud.vision.v1p3beta1.Vertex;
+
+                    /**
+                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1p3beta1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p3beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.Vertex;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.Vertex;
+
+                    /**
+                     * Verifies a Vertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Vertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.Vertex;
+
+                    /**
+                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
+                     * @param message Vertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p3beta1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Vertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a NormalizedVertex. */
+                interface INormalizedVertex {
+
+                    /** NormalizedVertex x */
+                    x?: (number|null);
+
+                    /** NormalizedVertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a NormalizedVertex. */
+                class NormalizedVertex implements INormalizedVertex {
+
+                    /**
+                     * Constructs a new NormalizedVertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p3beta1.INormalizedVertex);
+
+                    /** NormalizedVertex x. */
+                    public x: number;
+
+                    /** NormalizedVertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new NormalizedVertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NormalizedVertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p3beta1.INormalizedVertex): google.cloud.vision.v1p3beta1.NormalizedVertex;
+
+                    /**
+                     * Encodes the specified NormalizedVertex message. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedVertex.verify|verify} messages.
+                     * @param message NormalizedVertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p3beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NormalizedVertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedVertex.verify|verify} messages.
+                     * @param message NormalizedVertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NormalizedVertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NormalizedVertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.NormalizedVertex;
+
+                    /**
+                     * Decodes a NormalizedVertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NormalizedVertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.NormalizedVertex;
+
+                    /**
+                     * Verifies a NormalizedVertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NormalizedVertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NormalizedVertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.NormalizedVertex;
+
+                    /**
+                     * Creates a plain object from a NormalizedVertex message. Also converts values to other types if specified.
+                     * @param message NormalizedVertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p3beta1.NormalizedVertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NormalizedVertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BoundingPoly. */
+                interface IBoundingPoly {
+
+                    /** BoundingPoly vertices */
+                    vertices?: (google.cloud.vision.v1p3beta1.IVertex[]|null);
+
+                    /** BoundingPoly normalizedVertices */
+                    normalizedVertices?: (google.cloud.vision.v1p3beta1.INormalizedVertex[]|null);
+                }
+
+                /** Represents a BoundingPoly. */
+                class BoundingPoly implements IBoundingPoly {
+
+                    /**
+                     * Constructs a new BoundingPoly.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p3beta1.IBoundingPoly);
+
+                    /** BoundingPoly vertices. */
+                    public vertices: google.cloud.vision.v1p3beta1.IVertex[];
+
+                    /** BoundingPoly normalizedVertices. */
+                    public normalizedVertices: google.cloud.vision.v1p3beta1.INormalizedVertex[];
+
+                    /**
+                     * Creates a new BoundingPoly instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BoundingPoly instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p3beta1.IBoundingPoly): google.cloud.vision.v1p3beta1.BoundingPoly;
+
+                    /**
+                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p3beta1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p3beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.BoundingPoly;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.BoundingPoly;
+
+                    /**
+                     * Verifies a BoundingPoly message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BoundingPoly
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.BoundingPoly;
+
+                    /**
+                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
+                     * @param message BoundingPoly
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p3beta1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BoundingPoly to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a NormalizedBoundingPoly. */
+                interface INormalizedBoundingPoly {
+
+                    /** NormalizedBoundingPoly vertices */
+                    vertices?: (google.cloud.vision.v1p3beta1.INormalizedVertex[]|null);
+                }
+
+                /** Represents a NormalizedBoundingPoly. */
+                class NormalizedBoundingPoly implements INormalizedBoundingPoly {
+
+                    /**
+                     * Constructs a new NormalizedBoundingPoly.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly);
+
+                    /** NormalizedBoundingPoly vertices. */
+                    public vertices: google.cloud.vision.v1p3beta1.INormalizedVertex[];
+
+                    /**
+                     * Creates a new NormalizedBoundingPoly instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NormalizedBoundingPoly instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
+
+                    /**
+                     * Encodes the specified NormalizedBoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedBoundingPoly.verify|verify} messages.
+                     * @param message NormalizedBoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NormalizedBoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedBoundingPoly.verify|verify} messages.
+                     * @param message NormalizedBoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NormalizedBoundingPoly message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NormalizedBoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
+
+                    /**
+                     * Decodes a NormalizedBoundingPoly message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NormalizedBoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
+
+                    /**
+                     * Verifies a NormalizedBoundingPoly message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NormalizedBoundingPoly message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NormalizedBoundingPoly
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
+
+                    /**
+                     * Creates a plain object from a NormalizedBoundingPoly message. Also converts values to other types if specified.
+                     * @param message NormalizedBoundingPoly
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p3beta1.NormalizedBoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NormalizedBoundingPoly to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Position. */
+                interface IPosition {
+
+                    /** Position x */
+                    x?: (number|null);
+
+                    /** Position y */
+                    y?: (number|null);
+
+                    /** Position z */
+                    z?: (number|null);
+                }
+
+                /** Represents a Position. */
+                class Position implements IPosition {
+
+                    /**
+                     * Constructs a new Position.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p3beta1.IPosition);
+
+                    /** Position x. */
+                    public x: number;
+
+                    /** Position y. */
+                    public y: number;
+
+                    /** Position z. */
+                    public z: number;
+
+                    /**
+                     * Creates a new Position instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Position instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p3beta1.IPosition): google.cloud.vision.v1p3beta1.Position;
+
+                    /**
+                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1p3beta1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p3beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.Position;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.Position;
+
+                    /**
+                     * Verifies a Position message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Position
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.Position;
+
+                    /**
+                     * Creates a plain object from a Position message. Also converts values to other types if specified.
+                     * @param message Position
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p3beta1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Position to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
 
                 /** Represents an ImageAnnotator */
                 class ImageAnnotator extends $protobuf.rpc.Service {
@@ -23456,486 +23936,6 @@ export namespace google {
                         DONE = 3,
                         CANCELLED = 4
                     }
-                }
-
-                /** Properties of a Vertex. */
-                interface IVertex {
-
-                    /** Vertex x */
-                    x?: (number|null);
-
-                    /** Vertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a Vertex. */
-                class Vertex implements IVertex {
-
-                    /**
-                     * Constructs a new Vertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p3beta1.IVertex);
-
-                    /** Vertex x. */
-                    public x: number;
-
-                    /** Vertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new Vertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Vertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p3beta1.IVertex): google.cloud.vision.v1p3beta1.Vertex;
-
-                    /**
-                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1p3beta1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p3beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.Vertex;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.Vertex;
-
-                    /**
-                     * Verifies a Vertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Vertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.Vertex;
-
-                    /**
-                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
-                     * @param message Vertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p3beta1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Vertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a NormalizedVertex. */
-                interface INormalizedVertex {
-
-                    /** NormalizedVertex x */
-                    x?: (number|null);
-
-                    /** NormalizedVertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a NormalizedVertex. */
-                class NormalizedVertex implements INormalizedVertex {
-
-                    /**
-                     * Constructs a new NormalizedVertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p3beta1.INormalizedVertex);
-
-                    /** NormalizedVertex x. */
-                    public x: number;
-
-                    /** NormalizedVertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new NormalizedVertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NormalizedVertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p3beta1.INormalizedVertex): google.cloud.vision.v1p3beta1.NormalizedVertex;
-
-                    /**
-                     * Encodes the specified NormalizedVertex message. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedVertex.verify|verify} messages.
-                     * @param message NormalizedVertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p3beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NormalizedVertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedVertex.verify|verify} messages.
-                     * @param message NormalizedVertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NormalizedVertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NormalizedVertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.NormalizedVertex;
-
-                    /**
-                     * Decodes a NormalizedVertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NormalizedVertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.NormalizedVertex;
-
-                    /**
-                     * Verifies a NormalizedVertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NormalizedVertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NormalizedVertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.NormalizedVertex;
-
-                    /**
-                     * Creates a plain object from a NormalizedVertex message. Also converts values to other types if specified.
-                     * @param message NormalizedVertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p3beta1.NormalizedVertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NormalizedVertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a BoundingPoly. */
-                interface IBoundingPoly {
-
-                    /** BoundingPoly vertices */
-                    vertices?: (google.cloud.vision.v1p3beta1.IVertex[]|null);
-
-                    /** BoundingPoly normalizedVertices */
-                    normalizedVertices?: (google.cloud.vision.v1p3beta1.INormalizedVertex[]|null);
-                }
-
-                /** Represents a BoundingPoly. */
-                class BoundingPoly implements IBoundingPoly {
-
-                    /**
-                     * Constructs a new BoundingPoly.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p3beta1.IBoundingPoly);
-
-                    /** BoundingPoly vertices. */
-                    public vertices: google.cloud.vision.v1p3beta1.IVertex[];
-
-                    /** BoundingPoly normalizedVertices. */
-                    public normalizedVertices: google.cloud.vision.v1p3beta1.INormalizedVertex[];
-
-                    /**
-                     * Creates a new BoundingPoly instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BoundingPoly instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p3beta1.IBoundingPoly): google.cloud.vision.v1p3beta1.BoundingPoly;
-
-                    /**
-                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p3beta1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p3beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.BoundingPoly;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.BoundingPoly;
-
-                    /**
-                     * Verifies a BoundingPoly message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BoundingPoly
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.BoundingPoly;
-
-                    /**
-                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
-                     * @param message BoundingPoly
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p3beta1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BoundingPoly to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a NormalizedBoundingPoly. */
-                interface INormalizedBoundingPoly {
-
-                    /** NormalizedBoundingPoly vertices */
-                    vertices?: (google.cloud.vision.v1p3beta1.INormalizedVertex[]|null);
-                }
-
-                /** Represents a NormalizedBoundingPoly. */
-                class NormalizedBoundingPoly implements INormalizedBoundingPoly {
-
-                    /**
-                     * Constructs a new NormalizedBoundingPoly.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly);
-
-                    /** NormalizedBoundingPoly vertices. */
-                    public vertices: google.cloud.vision.v1p3beta1.INormalizedVertex[];
-
-                    /**
-                     * Creates a new NormalizedBoundingPoly instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NormalizedBoundingPoly instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
-
-                    /**
-                     * Encodes the specified NormalizedBoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedBoundingPoly.verify|verify} messages.
-                     * @param message NormalizedBoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NormalizedBoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.NormalizedBoundingPoly.verify|verify} messages.
-                     * @param message NormalizedBoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.INormalizedBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NormalizedBoundingPoly message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NormalizedBoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
-
-                    /**
-                     * Decodes a NormalizedBoundingPoly message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NormalizedBoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
-
-                    /**
-                     * Verifies a NormalizedBoundingPoly message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NormalizedBoundingPoly message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NormalizedBoundingPoly
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.NormalizedBoundingPoly;
-
-                    /**
-                     * Creates a plain object from a NormalizedBoundingPoly message. Also converts values to other types if specified.
-                     * @param message NormalizedBoundingPoly
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p3beta1.NormalizedBoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NormalizedBoundingPoly to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Position. */
-                interface IPosition {
-
-                    /** Position x */
-                    x?: (number|null);
-
-                    /** Position y */
-                    y?: (number|null);
-
-                    /** Position z */
-                    z?: (number|null);
-                }
-
-                /** Represents a Position. */
-                class Position implements IPosition {
-
-                    /**
-                     * Constructs a new Position.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p3beta1.IPosition);
-
-                    /** Position x. */
-                    public x: number;
-
-                    /** Position y. */
-                    public y: number;
-
-                    /** Position z. */
-                    public z: number;
-
-                    /**
-                     * Creates a new Position instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Position instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p3beta1.IPosition): google.cloud.vision.v1p3beta1.Position;
-
-                    /**
-                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1p3beta1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p3beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.Position;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.Position;
-
-                    /**
-                     * Verifies a Position message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Position
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.Position;
-
-                    /**
-                     * Creates a plain object from a Position message. Also converts values to other types if specified.
-                     * @param message Position
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p3beta1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Position to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a ProductSearchParams. */
@@ -29252,6 +29252,684 @@ export namespace google {
             /** Namespace v1p4beta1. */
             namespace v1p4beta1 {
 
+                /** Properties of a FaceRecognitionParams. */
+                interface IFaceRecognitionParams {
+
+                    /** FaceRecognitionParams celebritySet */
+                    celebritySet?: (string[]|null);
+                }
+
+                /** Represents a FaceRecognitionParams. */
+                class FaceRecognitionParams implements IFaceRecognitionParams {
+
+                    /**
+                     * Constructs a new FaceRecognitionParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionParams);
+
+                    /** FaceRecognitionParams celebritySet. */
+                    public celebritySet: string[];
+
+                    /**
+                     * Creates a new FaceRecognitionParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FaceRecognitionParams instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionParams): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
+
+                    /**
+                     * Encodes the specified FaceRecognitionParams message. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionParams.verify|verify} messages.
+                     * @param message FaceRecognitionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IFaceRecognitionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FaceRecognitionParams message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionParams.verify|verify} messages.
+                     * @param message FaceRecognitionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IFaceRecognitionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FaceRecognitionParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FaceRecognitionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
+
+                    /**
+                     * Decodes a FaceRecognitionParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FaceRecognitionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
+
+                    /**
+                     * Verifies a FaceRecognitionParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FaceRecognitionParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FaceRecognitionParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
+
+                    /**
+                     * Creates a plain object from a FaceRecognitionParams message. Also converts values to other types if specified.
+                     * @param message FaceRecognitionParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.FaceRecognitionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FaceRecognitionParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Celebrity. */
+                interface ICelebrity {
+
+                    /** Celebrity name */
+                    name?: (string|null);
+
+                    /** Celebrity displayName */
+                    displayName?: (string|null);
+
+                    /** Celebrity description */
+                    description?: (string|null);
+                }
+
+                /** Represents a Celebrity. */
+                class Celebrity implements ICelebrity {
+
+                    /**
+                     * Constructs a new Celebrity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.ICelebrity);
+
+                    /** Celebrity name. */
+                    public name: string;
+
+                    /** Celebrity displayName. */
+                    public displayName: string;
+
+                    /** Celebrity description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new Celebrity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Celebrity instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.ICelebrity): google.cloud.vision.v1p4beta1.Celebrity;
+
+                    /**
+                     * Encodes the specified Celebrity message. Does not implicitly {@link google.cloud.vision.v1p4beta1.Celebrity.verify|verify} messages.
+                     * @param message Celebrity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.ICelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Celebrity message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.Celebrity.verify|verify} messages.
+                     * @param message Celebrity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.ICelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Celebrity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Celebrity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.Celebrity;
+
+                    /**
+                     * Decodes a Celebrity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Celebrity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.Celebrity;
+
+                    /**
+                     * Verifies a Celebrity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Celebrity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Celebrity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.Celebrity;
+
+                    /**
+                     * Creates a plain object from a Celebrity message. Also converts values to other types if specified.
+                     * @param message Celebrity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.Celebrity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Celebrity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FaceRecognitionResult. */
+                interface IFaceRecognitionResult {
+
+                    /** FaceRecognitionResult celebrity */
+                    celebrity?: (google.cloud.vision.v1p4beta1.ICelebrity|null);
+
+                    /** FaceRecognitionResult confidence */
+                    confidence?: (number|null);
+                }
+
+                /** Represents a FaceRecognitionResult. */
+                class FaceRecognitionResult implements IFaceRecognitionResult {
+
+                    /**
+                     * Constructs a new FaceRecognitionResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionResult);
+
+                    /** FaceRecognitionResult celebrity. */
+                    public celebrity?: (google.cloud.vision.v1p4beta1.ICelebrity|null);
+
+                    /** FaceRecognitionResult confidence. */
+                    public confidence: number;
+
+                    /**
+                     * Creates a new FaceRecognitionResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FaceRecognitionResult instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionResult): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
+
+                    /**
+                     * Encodes the specified FaceRecognitionResult message. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionResult.verify|verify} messages.
+                     * @param message FaceRecognitionResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IFaceRecognitionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FaceRecognitionResult message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionResult.verify|verify} messages.
+                     * @param message FaceRecognitionResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IFaceRecognitionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FaceRecognitionResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FaceRecognitionResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
+
+                    /**
+                     * Decodes a FaceRecognitionResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FaceRecognitionResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
+
+                    /**
+                     * Verifies a FaceRecognitionResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FaceRecognitionResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FaceRecognitionResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
+
+                    /**
+                     * Creates a plain object from a FaceRecognitionResult message. Also converts values to other types if specified.
+                     * @param message FaceRecognitionResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.FaceRecognitionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FaceRecognitionResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Vertex. */
+                interface IVertex {
+
+                    /** Vertex x */
+                    x?: (number|null);
+
+                    /** Vertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a Vertex. */
+                class Vertex implements IVertex {
+
+                    /**
+                     * Constructs a new Vertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IVertex);
+
+                    /** Vertex x. */
+                    public x: number;
+
+                    /** Vertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new Vertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Vertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IVertex): google.cloud.vision.v1p4beta1.Vertex;
+
+                    /**
+                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1p4beta1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.Vertex.verify|verify} messages.
+                     * @param message Vertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.Vertex;
+
+                    /**
+                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Vertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.Vertex;
+
+                    /**
+                     * Verifies a Vertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Vertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.Vertex;
+
+                    /**
+                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
+                     * @param message Vertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Vertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a NormalizedVertex. */
+                interface INormalizedVertex {
+
+                    /** NormalizedVertex x */
+                    x?: (number|null);
+
+                    /** NormalizedVertex y */
+                    y?: (number|null);
+                }
+
+                /** Represents a NormalizedVertex. */
+                class NormalizedVertex implements INormalizedVertex {
+
+                    /**
+                     * Constructs a new NormalizedVertex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.INormalizedVertex);
+
+                    /** NormalizedVertex x. */
+                    public x: number;
+
+                    /** NormalizedVertex y. */
+                    public y: number;
+
+                    /**
+                     * Creates a new NormalizedVertex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NormalizedVertex instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.INormalizedVertex): google.cloud.vision.v1p4beta1.NormalizedVertex;
+
+                    /**
+                     * Encodes the specified NormalizedVertex message. Does not implicitly {@link google.cloud.vision.v1p4beta1.NormalizedVertex.verify|verify} messages.
+                     * @param message NormalizedVertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NormalizedVertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.NormalizedVertex.verify|verify} messages.
+                     * @param message NormalizedVertex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NormalizedVertex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NormalizedVertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.NormalizedVertex;
+
+                    /**
+                     * Decodes a NormalizedVertex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NormalizedVertex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.NormalizedVertex;
+
+                    /**
+                     * Verifies a NormalizedVertex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NormalizedVertex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NormalizedVertex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.NormalizedVertex;
+
+                    /**
+                     * Creates a plain object from a NormalizedVertex message. Also converts values to other types if specified.
+                     * @param message NormalizedVertex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.NormalizedVertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NormalizedVertex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BoundingPoly. */
+                interface IBoundingPoly {
+
+                    /** BoundingPoly vertices */
+                    vertices?: (google.cloud.vision.v1p4beta1.IVertex[]|null);
+
+                    /** BoundingPoly normalizedVertices */
+                    normalizedVertices?: (google.cloud.vision.v1p4beta1.INormalizedVertex[]|null);
+                }
+
+                /** Represents a BoundingPoly. */
+                class BoundingPoly implements IBoundingPoly {
+
+                    /**
+                     * Constructs a new BoundingPoly.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IBoundingPoly);
+
+                    /** BoundingPoly vertices. */
+                    public vertices: google.cloud.vision.v1p4beta1.IVertex[];
+
+                    /** BoundingPoly normalizedVertices. */
+                    public normalizedVertices: google.cloud.vision.v1p4beta1.INormalizedVertex[];
+
+                    /**
+                     * Creates a new BoundingPoly instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BoundingPoly instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IBoundingPoly): google.cloud.vision.v1p4beta1.BoundingPoly;
+
+                    /**
+                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p4beta1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.BoundingPoly.verify|verify} messages.
+                     * @param message BoundingPoly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.BoundingPoly;
+
+                    /**
+                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BoundingPoly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.BoundingPoly;
+
+                    /**
+                     * Verifies a BoundingPoly message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BoundingPoly
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.BoundingPoly;
+
+                    /**
+                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
+                     * @param message BoundingPoly
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BoundingPoly to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Position. */
+                interface IPosition {
+
+                    /** Position x */
+                    x?: (number|null);
+
+                    /** Position y */
+                    y?: (number|null);
+
+                    /** Position z */
+                    z?: (number|null);
+                }
+
+                /** Represents a Position. */
+                class Position implements IPosition {
+
+                    /**
+                     * Constructs a new Position.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IPosition);
+
+                    /** Position x. */
+                    public x: number;
+
+                    /** Position y. */
+                    public y: number;
+
+                    /** Position z. */
+                    public z: number;
+
+                    /**
+                     * Creates a new Position instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Position instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IPosition): google.cloud.vision.v1p4beta1.Position;
+
+                    /**
+                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1p4beta1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.Position;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.Position;
+
+                    /**
+                     * Verifies a Position message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Position
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.Position;
+
+                    /**
+                     * Creates a plain object from a Position message. Also converts values to other types if specified.
+                     * @param message Position
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Position to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Represents an ImageAnnotator */
                 class ImageAnnotator extends $protobuf.rpc.Service {
 
@@ -33429,684 +34107,6 @@ export namespace google {
                         DONE = 3,
                         CANCELLED = 4
                     }
-                }
-
-                /** Properties of a FaceRecognitionParams. */
-                interface IFaceRecognitionParams {
-
-                    /** FaceRecognitionParams celebritySet */
-                    celebritySet?: (string[]|null);
-                }
-
-                /** Represents a FaceRecognitionParams. */
-                class FaceRecognitionParams implements IFaceRecognitionParams {
-
-                    /**
-                     * Constructs a new FaceRecognitionParams.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionParams);
-
-                    /** FaceRecognitionParams celebritySet. */
-                    public celebritySet: string[];
-
-                    /**
-                     * Creates a new FaceRecognitionParams instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FaceRecognitionParams instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionParams): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
-
-                    /**
-                     * Encodes the specified FaceRecognitionParams message. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionParams.verify|verify} messages.
-                     * @param message FaceRecognitionParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p4beta1.IFaceRecognitionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FaceRecognitionParams message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionParams.verify|verify} messages.
-                     * @param message FaceRecognitionParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IFaceRecognitionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FaceRecognitionParams message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FaceRecognitionParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
-
-                    /**
-                     * Decodes a FaceRecognitionParams message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FaceRecognitionParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
-
-                    /**
-                     * Verifies a FaceRecognitionParams message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FaceRecognitionParams message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FaceRecognitionParams
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
-
-                    /**
-                     * Creates a plain object from a FaceRecognitionParams message. Also converts values to other types if specified.
-                     * @param message FaceRecognitionParams
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p4beta1.FaceRecognitionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FaceRecognitionParams to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Celebrity. */
-                interface ICelebrity {
-
-                    /** Celebrity name */
-                    name?: (string|null);
-
-                    /** Celebrity displayName */
-                    displayName?: (string|null);
-
-                    /** Celebrity description */
-                    description?: (string|null);
-                }
-
-                /** Represents a Celebrity. */
-                class Celebrity implements ICelebrity {
-
-                    /**
-                     * Constructs a new Celebrity.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p4beta1.ICelebrity);
-
-                    /** Celebrity name. */
-                    public name: string;
-
-                    /** Celebrity displayName. */
-                    public displayName: string;
-
-                    /** Celebrity description. */
-                    public description: string;
-
-                    /**
-                     * Creates a new Celebrity instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Celebrity instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p4beta1.ICelebrity): google.cloud.vision.v1p4beta1.Celebrity;
-
-                    /**
-                     * Encodes the specified Celebrity message. Does not implicitly {@link google.cloud.vision.v1p4beta1.Celebrity.verify|verify} messages.
-                     * @param message Celebrity message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p4beta1.ICelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Celebrity message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.Celebrity.verify|verify} messages.
-                     * @param message Celebrity message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.ICelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Celebrity message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Celebrity
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.Celebrity;
-
-                    /**
-                     * Decodes a Celebrity message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Celebrity
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.Celebrity;
-
-                    /**
-                     * Verifies a Celebrity message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Celebrity message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Celebrity
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.Celebrity;
-
-                    /**
-                     * Creates a plain object from a Celebrity message. Also converts values to other types if specified.
-                     * @param message Celebrity
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p4beta1.Celebrity, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Celebrity to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a FaceRecognitionResult. */
-                interface IFaceRecognitionResult {
-
-                    /** FaceRecognitionResult celebrity */
-                    celebrity?: (google.cloud.vision.v1p4beta1.ICelebrity|null);
-
-                    /** FaceRecognitionResult confidence */
-                    confidence?: (number|null);
-                }
-
-                /** Represents a FaceRecognitionResult. */
-                class FaceRecognitionResult implements IFaceRecognitionResult {
-
-                    /**
-                     * Constructs a new FaceRecognitionResult.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionResult);
-
-                    /** FaceRecognitionResult celebrity. */
-                    public celebrity?: (google.cloud.vision.v1p4beta1.ICelebrity|null);
-
-                    /** FaceRecognitionResult confidence. */
-                    public confidence: number;
-
-                    /**
-                     * Creates a new FaceRecognitionResult instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FaceRecognitionResult instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionResult): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
-
-                    /**
-                     * Encodes the specified FaceRecognitionResult message. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionResult.verify|verify} messages.
-                     * @param message FaceRecognitionResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p4beta1.IFaceRecognitionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FaceRecognitionResult message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionResult.verify|verify} messages.
-                     * @param message FaceRecognitionResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IFaceRecognitionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FaceRecognitionResult message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FaceRecognitionResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
-
-                    /**
-                     * Decodes a FaceRecognitionResult message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FaceRecognitionResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
-
-                    /**
-                     * Verifies a FaceRecognitionResult message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FaceRecognitionResult message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FaceRecognitionResult
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
-
-                    /**
-                     * Creates a plain object from a FaceRecognitionResult message. Also converts values to other types if specified.
-                     * @param message FaceRecognitionResult
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p4beta1.FaceRecognitionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FaceRecognitionResult to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Vertex. */
-                interface IVertex {
-
-                    /** Vertex x */
-                    x?: (number|null);
-
-                    /** Vertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a Vertex. */
-                class Vertex implements IVertex {
-
-                    /**
-                     * Constructs a new Vertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p4beta1.IVertex);
-
-                    /** Vertex x. */
-                    public x: number;
-
-                    /** Vertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new Vertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Vertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p4beta1.IVertex): google.cloud.vision.v1p4beta1.Vertex;
-
-                    /**
-                     * Encodes the specified Vertex message. Does not implicitly {@link google.cloud.vision.v1p4beta1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p4beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Vertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.Vertex.verify|verify} messages.
-                     * @param message Vertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.Vertex;
-
-                    /**
-                     * Decodes a Vertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Vertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.Vertex;
-
-                    /**
-                     * Verifies a Vertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Vertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Vertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.Vertex;
-
-                    /**
-                     * Creates a plain object from a Vertex message. Also converts values to other types if specified.
-                     * @param message Vertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p4beta1.Vertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Vertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a NormalizedVertex. */
-                interface INormalizedVertex {
-
-                    /** NormalizedVertex x */
-                    x?: (number|null);
-
-                    /** NormalizedVertex y */
-                    y?: (number|null);
-                }
-
-                /** Represents a NormalizedVertex. */
-                class NormalizedVertex implements INormalizedVertex {
-
-                    /**
-                     * Constructs a new NormalizedVertex.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p4beta1.INormalizedVertex);
-
-                    /** NormalizedVertex x. */
-                    public x: number;
-
-                    /** NormalizedVertex y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new NormalizedVertex instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NormalizedVertex instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p4beta1.INormalizedVertex): google.cloud.vision.v1p4beta1.NormalizedVertex;
-
-                    /**
-                     * Encodes the specified NormalizedVertex message. Does not implicitly {@link google.cloud.vision.v1p4beta1.NormalizedVertex.verify|verify} messages.
-                     * @param message NormalizedVertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p4beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NormalizedVertex message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.NormalizedVertex.verify|verify} messages.
-                     * @param message NormalizedVertex message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.INormalizedVertex, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NormalizedVertex message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NormalizedVertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.NormalizedVertex;
-
-                    /**
-                     * Decodes a NormalizedVertex message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NormalizedVertex
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.NormalizedVertex;
-
-                    /**
-                     * Verifies a NormalizedVertex message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NormalizedVertex message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NormalizedVertex
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.NormalizedVertex;
-
-                    /**
-                     * Creates a plain object from a NormalizedVertex message. Also converts values to other types if specified.
-                     * @param message NormalizedVertex
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p4beta1.NormalizedVertex, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NormalizedVertex to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a BoundingPoly. */
-                interface IBoundingPoly {
-
-                    /** BoundingPoly vertices */
-                    vertices?: (google.cloud.vision.v1p4beta1.IVertex[]|null);
-
-                    /** BoundingPoly normalizedVertices */
-                    normalizedVertices?: (google.cloud.vision.v1p4beta1.INormalizedVertex[]|null);
-                }
-
-                /** Represents a BoundingPoly. */
-                class BoundingPoly implements IBoundingPoly {
-
-                    /**
-                     * Constructs a new BoundingPoly.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p4beta1.IBoundingPoly);
-
-                    /** BoundingPoly vertices. */
-                    public vertices: google.cloud.vision.v1p4beta1.IVertex[];
-
-                    /** BoundingPoly normalizedVertices. */
-                    public normalizedVertices: google.cloud.vision.v1p4beta1.INormalizedVertex[];
-
-                    /**
-                     * Creates a new BoundingPoly instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BoundingPoly instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p4beta1.IBoundingPoly): google.cloud.vision.v1p4beta1.BoundingPoly;
-
-                    /**
-                     * Encodes the specified BoundingPoly message. Does not implicitly {@link google.cloud.vision.v1p4beta1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p4beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BoundingPoly message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.BoundingPoly.verify|verify} messages.
-                     * @param message BoundingPoly message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IBoundingPoly, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.BoundingPoly;
-
-                    /**
-                     * Decodes a BoundingPoly message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BoundingPoly
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.BoundingPoly;
-
-                    /**
-                     * Verifies a BoundingPoly message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BoundingPoly message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BoundingPoly
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.BoundingPoly;
-
-                    /**
-                     * Creates a plain object from a BoundingPoly message. Also converts values to other types if specified.
-                     * @param message BoundingPoly
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p4beta1.BoundingPoly, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BoundingPoly to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Position. */
-                interface IPosition {
-
-                    /** Position x */
-                    x?: (number|null);
-
-                    /** Position y */
-                    y?: (number|null);
-
-                    /** Position z */
-                    z?: (number|null);
-                }
-
-                /** Represents a Position. */
-                class Position implements IPosition {
-
-                    /**
-                     * Constructs a new Position.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p4beta1.IPosition);
-
-                    /** Position x. */
-                    public x: number;
-
-                    /** Position y. */
-                    public y: number;
-
-                    /** Position z. */
-                    public z: number;
-
-                    /**
-                     * Creates a new Position instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Position instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p4beta1.IPosition): google.cloud.vision.v1p4beta1.Position;
-
-                    /**
-                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.vision.v1p4beta1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p4beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.Position.verify|verify} messages.
-                     * @param message Position message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.Position;
-
-                    /**
-                     * Decodes a Position message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Position
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.Position;
-
-                    /**
-                     * Verifies a Position message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Position
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.Position;
-
-                    /**
-                     * Creates a plain object from a Position message. Also converts values to other types if specified.
-                     * @param message Position
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p4beta1.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Position to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a ProductSearchParams. */

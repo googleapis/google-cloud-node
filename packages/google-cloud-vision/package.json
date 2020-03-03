@@ -8,10 +8,10 @@
     "node": ">=8.10.0"
   },
   "repository": "googleapis/nodejs-vision",
-  "main": "src/index.js",
+  "main": "build/src/index.js",
   "files": [
-    "protos",
-    "src"
+    "build/protos",
+    "build/src"
   ],
   "keywords": [
     "google apis client",
@@ -27,37 +27,53 @@
     "Google Cloud Vision API"
   ],
   "scripts": {
+    "test": "c8 mocha build/test",
+    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
+    "lint": "gts fix && eslint --fix samples/*.js",
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "eslint '**/*.js'",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
+    "system-test": "mocha build/system-test",
+    "fix": "gts fix",
     "test-no-cover": "mocha test/*.js",
-    "test": "nyc mocha",
-    "fix": "eslint --fix '**/*.js'",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm i",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile"
   },
   "dependencies": {
-    "@google-cloud/promisify": "^1.0.0",
-    "google-gax": "^1.7.5",
-    "is": "^3.2.1"
+    "@google-cloud/promisify": "^1.0.4",
+    "google-gax": "^1.14.1",
+    "is": "^3.3.0"
   },
   "devDependencies": {
-    "@google-cloud/storage": "^4.0.0",
-    "codecov": "^3.0.2",
-    "eslint": "^6.0.0",
-    "eslint-config-prettier": "^6.0.0",
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.4",
+    "@types/is": "0.0.21",
+    "@types/sinon": "^7.5.1",
+    "@types/uuid": "^3.4.7",
+    "c8": "^7.1.0",
+    "@google-cloud/storage": "^4.3.1",
+    "codecov": "^3.6.5",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "jsdoc": "^3.6.2",
-    "jsdoc-fresh": "^1.0.1",
-    "jsdoc-region-tag": "^1.0.2",
-    "linkinator": "^2.0.0",
-    "mocha": "^7.0.0",
-    "nyc": "^14.0.0",
-    "prettier": "^1.13.6",
+    "eslint-plugin-prettier": "^3.1.2",
+    "gts": "^1.1.2",
+    "jsdoc": "^3.6.3",
+    "jsdoc-fresh": "^1.0.2",
+    "jsdoc-region-tag": "^1.0.4",
+    "linkinator": "^2.0.3",
+    "mocha": "^7.0.1",
+    "prettier": "^1.19.1",
     "sinon": "^9.0.0",
-    "uuid": "^7.0.0"
+    "uuid": "^3.4.0",
+    "null-loader": "^3.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }

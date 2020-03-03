@@ -16,6 +16,60 @@
                     "objc_class_prefix": "GCVN"
                   },
                   "nested": {
+                    "Vertex": {
+                      "fields": {
+                        "x": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NormalizedVertex": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoundingPoly": {
+                      "fields": {
+                        "vertices": {
+                          "rule": "repeated",
+                          "type": "Vertex",
+                          "id": 1
+                        },
+                        "normalizedVertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Position": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "z": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ImageAnnotator": {
                       "options": {
                         "(google.api.default_host)": "vision.googleapis.com",
@@ -855,60 +909,6 @@
                             "DONE": 3,
                             "CANCELLED": 4
                           }
-                        }
-                      }
-                    },
-                    "Vertex": {
-                      "fields": {
-                        "x": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "NormalizedVertex": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BoundingPoly": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "Vertex",
-                          "id": 1
-                        },
-                        "normalizedVertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Position": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "z": {
-                          "type": "float",
-                          "id": 3
                         }
                       }
                     },
@@ -2057,6 +2057,43 @@
                     "java_package": "com.google.cloud.vision.v1p1beta1"
                   },
                   "nested": {
+                    "Vertex": {
+                      "fields": {
+                        "x": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoundingPoly": {
+                      "fields": {
+                        "vertices": {
+                          "rule": "repeated",
+                          "type": "Vertex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Position": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "z": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ImageAnnotator": {
                       "options": {
                         "(google.api.default_host)": "vision.googleapis.com",
@@ -2550,43 +2587,6 @@
                         "VERY_LIKELY": 5
                       }
                     },
-                    "Vertex": {
-                      "fields": {
-                        "x": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BoundingPoly": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "Vertex",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Position": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "z": {
-                          "type": "float",
-                          "id": 3
-                        }
-                      }
-                    },
                     "TextAnnotation": {
                       "fields": {
                         "pages": {
@@ -2888,6 +2888,60 @@
                     "java_package": "com.google.cloud.vision.v1p2beta1"
                   },
                   "nested": {
+                    "Vertex": {
+                      "fields": {
+                        "x": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NormalizedVertex": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoundingPoly": {
+                      "fields": {
+                        "vertices": {
+                          "rule": "repeated",
+                          "type": "Vertex",
+                          "id": 1
+                        },
+                        "normalizedVertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Position": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "z": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ImageAnnotator": {
                       "options": {
                         "(google.api.default_host)": "vision.googleapis.com",
@@ -3538,60 +3592,6 @@
                         "VERY_LIKELY": 5
                       }
                     },
-                    "Vertex": {
-                      "fields": {
-                        "x": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "NormalizedVertex": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BoundingPoly": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "Vertex",
-                          "id": 1
-                        },
-                        "normalizedVertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Position": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "z": {
-                          "type": "float",
-                          "id": 3
-                        }
-                      }
-                    },
                     "TextAnnotation": {
                       "fields": {
                         "pages": {
@@ -3893,6 +3893,69 @@
                     "java_package": "com.google.cloud.vision.v1p3beta1"
                   },
                   "nested": {
+                    "Vertex": {
+                      "fields": {
+                        "x": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NormalizedVertex": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoundingPoly": {
+                      "fields": {
+                        "vertices": {
+                          "rule": "repeated",
+                          "type": "Vertex",
+                          "id": 1
+                        },
+                        "normalizedVertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NormalizedBoundingPoly": {
+                      "fields": {
+                        "vertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Position": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "z": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ImageAnnotator": {
                       "options": {
                         "(google.api.default_host)": "vision.googleapis.com",
@@ -4576,69 +4639,6 @@
                             "DONE": 3,
                             "CANCELLED": 4
                           }
-                        }
-                      }
-                    },
-                    "Vertex": {
-                      "fields": {
-                        "x": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "NormalizedVertex": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BoundingPoly": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "Vertex",
-                          "id": 1
-                        },
-                        "normalizedVertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "NormalizedBoundingPoly": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Position": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "z": {
-                          "type": "float",
-                          "id": 3
                         }
                       }
                     },
@@ -5756,6 +5756,97 @@
                     "objc_class_prefix": "GCVN"
                   },
                   "nested": {
+                    "FaceRecognitionParams": {
+                      "fields": {
+                        "celebritySet": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Celebrity": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FaceRecognitionResult": {
+                      "fields": {
+                        "celebrity": {
+                          "type": "Celebrity",
+                          "id": 1
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Vertex": {
+                      "fields": {
+                        "x": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NormalizedVertex": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoundingPoly": {
+                      "fields": {
+                        "vertices": {
+                          "rule": "repeated",
+                          "type": "Vertex",
+                          "id": 1
+                        },
+                        "normalizedVertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Position": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "z": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ImageAnnotator": {
                       "options": {
                         "(google.api.default_host)": "vision.googleapis.com",
@@ -6556,97 +6647,6 @@
                             "DONE": 3,
                             "CANCELLED": 4
                           }
-                        }
-                      }
-                    },
-                    "FaceRecognitionParams": {
-                      "fields": {
-                        "celebritySet": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Celebrity": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "FaceRecognitionResult": {
-                      "fields": {
-                        "celebrity": {
-                          "type": "Celebrity",
-                          "id": 1
-                        },
-                        "confidence": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Vertex": {
-                      "fields": {
-                        "x": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "NormalizedVertex": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BoundingPoly": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "Vertex",
-                          "id": 1
-                        },
-                        "normalizedVertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Position": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "z": {
-                          "type": "float",
-                          "id": 3
                         }
                       }
                     },
