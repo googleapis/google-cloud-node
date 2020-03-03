@@ -22,9 +22,10 @@
  * Create a Game Servers realm.
  * @param {string} projectId string project identifier.
  * @param {string} location Compute Engine region.
+ * @param {string} realmId unique identifier for the realm.
  */
 async function main(projectId, location, realmId) {
-  // [START game_servers_quickstart]
+  // [START cloud_game_servers_quickstart]
   const {RealmsServiceClient} = require('@google-cloud/game-servers');
 
   async function quickstart() {
@@ -33,7 +34,7 @@ async function main(projectId, location, realmId) {
     // TODO(developer): uncomment the following section, and add values
     // const projectId = 'YOUR_PROJECT_ID';
     // const location = 'us-central1;
-    // const realIm = 'DESIRED_REALM_ID';
+    // const realmId = 'DESIRED_REALM_ID';
 
     const request = {
       parent: `projects/${projectId}/locations/${location}`,
@@ -57,7 +58,7 @@ async function main(projectId, location, realmId) {
     console.log(`\tRealm time zone: ${realm.timeZone}`);
   }
   quickstart();
-  // [END game_servers_quickstart]
+  // [END cloud_game_servers_quickstart]
 }
 
 main(...process.argv.slice(2)).catch(err => {
