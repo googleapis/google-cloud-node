@@ -1,19 +1,13 @@
 {
-  "updateTime": "2020-02-18T22:56:39.544261Z",
+  "updateTime": "2020-03-03T17:23:33.988627Z",
   "sources": [
-    {
-      "git": {
-        "name": ".",
-        "remote": "sso://user/steffanyb/nodejs-bigquery-storage",
-        "sha": "6152883ee18789d86f9d44ffc8433b55b7889118"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "ab2685d8d3a0e191dc8aef83df36773c07cb3d06",
-        "internalRef": "295738415"
+        "sha": "a78ed801b82a5c6d9c5368e24b1412212e541bb7",
+        "internalRef": "298607357",
+        "log": "a78ed801b82a5c6d9c5368e24b1412212e541bb7\nPublishing v3 protos and configs.\n\nPiperOrigin-RevId: 298607357\n\n4a180bfff8a21645b3a935c2756e8d6ab18a74e0\nautoml/v1beta1 publish proto updates\n\nPiperOrigin-RevId: 298484782\n\n6de6e938b7df1cd62396563a067334abeedb9676\nchore: use the latest gapic-generator and protoc-java-resource-name-plugin in Bazel workspace.\n\nPiperOrigin-RevId: 298474513\n\n244ab2b83a82076a1fa7be63b7e0671af73f5c02\nAdds service config definition for bigqueryreservation v1\n\nPiperOrigin-RevId: 298455048\n\n"
       }
     },
     {
