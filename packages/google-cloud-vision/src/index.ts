@@ -61,3 +61,5 @@ export default {
   ImageAnnotatorClient,
   ProductSearchClient,
 };
+import * as protos from '../protos/protos';
+export {protos};
