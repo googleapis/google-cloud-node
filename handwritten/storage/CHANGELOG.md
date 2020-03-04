@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [4.4.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.3.2...v4.4.0) (2020-03-03)
+
+
+### Features
+
+* **bucket:** support single source in combine ([#1076](https://www.github.com/googleapis/nodejs-storage/issues/1076)) ([#1085](https://www.github.com/googleapis/nodejs-storage/issues/1085)) ([251a617](https://www.github.com/googleapis/nodejs-storage/commit/251a617791ca4b0e148b741d1931013150becc02))
+
 ### [4.3.2](https://www.github.com/googleapis/nodejs-storage/compare/v4.3.1...v4.3.2) (2020-03-02)
 
 
