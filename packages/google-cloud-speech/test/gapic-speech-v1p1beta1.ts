@@ -238,7 +238,7 @@ describe('v1p1beta1.SpeechClient', () => {
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.speech.v1p1beta1.IStreamingRecognizeRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -264,7 +264,7 @@ describe('v1p1beta1.SpeechClient', () => {
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.speech.v1p1beta1.IStreamingRecognizeRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
