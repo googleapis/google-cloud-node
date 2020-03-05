@@ -8,12 +8,10 @@
     "node": ">=8.10.0"
   },
   "repository": "googleapis/nodejs-kms",
-  "main": "src/index.js",
+  "main": "build/src/index.js",
   "files": [
-    "protos",
-    "src",
-    "AUTHORS",
-    "COPYING"
+    "build/protos",
+    "build/src"
   ],
   "keywords": [
     "google apis client",
@@ -29,31 +27,44 @@
     "Google Cloud Key Management Service (KMS) API"
   ],
   "scripts": {
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "test": "c8 mocha",
-    "lint": "eslint '**/*.js'",
+    "test": "c8 mocha build/test",
+    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
+    "lint": "gts fix && eslint samples/*.js",
+    "fix": "gts fix && eslint --fix samples/*.js",
+    "prelint": "cd samples; npm link ../; npm i",
+    "system-test": "mocha build/system-test",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
-    "fix": "eslint '**/*.js' --fix",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "prelint": "cd samples; npm link ../; npm i"
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile"
   },
   "dependencies": {
-    "google-gax": "^1.7.5"
+    "google-gax": "^1.14.2"
   },
   "devDependencies": {
-    "codecov": "^3.0.4",
-    "eslint": "^6.0.0",
-    "eslint-config-prettier": "^6.0.0",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.7.7",
+    "c8": "^7.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "jsdoc": "^3.6.2",
-    "jsdoc-fresh": "^1.0.1",
-    "jsdoc-region-tag": "^1.0.2",
-    "linkinator": "^2.0.0",
-    "mocha": "^7.0.0",
-    "c8": "^7.0.0",
-    "prettier": "^1.13.7"
+    "eslint-plugin-prettier": "^3.1.2",
+    "gts": "^1.1.2",
+    "jsdoc": "^3.6.3",
+    "jsdoc-fresh": "^1.0.2",
+    "jsdoc-region-tag": "^1.0.4",
+    "linkinator": "^2.0.3",
+    "mocha": "^7.1.0",
+    "null-loader": "^3.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "power-assert": "^1.6.1",
+    "prettier": "^1.19.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   }
 }

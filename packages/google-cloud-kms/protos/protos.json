@@ -2,1285 +2,277 @@
   "nested": {
     "google": {
       "nested": {
-        "cloud": {
+        "iam": {
           "nested": {
-            "kms": {
+            "v1": {
+              "options": {
+                "cc_enable_arenas": true,
+                "csharp_namespace": "Google.Cloud.Iam.V1",
+                "go_package": "google.golang.org/genproto/googleapis/iam/v1;iam",
+                "java_multiple_files": true,
+                "java_outer_classname": "IamPolicyProto",
+                "java_package": "com.google.iam.v1",
+                "php_namespace": "Google\\Cloud\\Iam\\V1"
+              },
               "nested": {
-                "v1": {
-                  "options": {
-                    "cc_enable_arenas": true,
-                    "csharp_namespace": "Google.Cloud.Kms.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/kms/v1;kms",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "KmsResourcesProto",
-                    "java_package": "com.google.cloud.kms.v1",
-                    "php_namespace": "Google\\Cloud\\Kms\\V1"
+                "Policy": {
+                  "fields": {
+                    "version": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "bindings": {
+                      "rule": "repeated",
+                      "type": "Binding",
+                      "id": 4
+                    },
+                    "etag": {
+                      "type": "bytes",
+                      "id": 3
+                    }
+                  }
+                },
+                "Binding": {
+                  "fields": {
+                    "role": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "members": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2
+                    },
+                    "condition": {
+                      "type": "google.type.Expr",
+                      "id": 3
+                    }
+                  }
+                },
+                "PolicyDelta": {
+                  "fields": {
+                    "bindingDeltas": {
+                      "rule": "repeated",
+                      "type": "BindingDelta",
+                      "id": 1
+                    },
+                    "auditConfigDeltas": {
+                      "rule": "repeated",
+                      "type": "AuditConfigDelta",
+                      "id": 2
+                    }
+                  }
+                },
+                "BindingDelta": {
+                  "fields": {
+                    "action": {
+                      "type": "Action",
+                      "id": 1
+                    },
+                    "role": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "member": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "condition": {
+                      "type": "google.type.Expr",
+                      "id": 4
+                    }
                   },
                   "nested": {
-                    "KeyManagementService": {
-                      "options": {
-                        "(google.api.default_host)": "cloudkms.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloudkms"
-                      },
-                      "methods": {
-                        "ListKeyRings": {
-                          "requestType": "ListKeyRingsRequest",
-                          "responseType": "ListKeyRingsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/keyRings",
-                            "(google.api.method_signature)": "parent"
-                          }
-                        },
-                        "ListCryptoKeys": {
-                          "requestType": "ListCryptoKeysRequest",
-                          "responseType": "ListCryptoKeysResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
-                            "(google.api.method_signature)": "parent"
-                          }
-                        },
-                        "ListCryptoKeyVersions": {
-                          "requestType": "ListCryptoKeyVersionsRequest",
-                          "responseType": "ListCryptoKeyVersionsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
-                            "(google.api.method_signature)": "parent"
-                          }
-                        },
-                        "ListImportJobs": {
-                          "requestType": "ListImportJobsRequest",
-                          "responseType": "ListImportJobsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
-                            "(google.api.method_signature)": "parent"
-                          }
-                        },
-                        "GetKeyRing": {
-                          "requestType": "GetKeyRingRequest",
-                          "responseType": "KeyRing",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "GetCryptoKey": {
-                          "requestType": "GetCryptoKeyRequest",
-                          "responseType": "CryptoKey",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "GetCryptoKeyVersion": {
-                          "requestType": "GetCryptoKeyVersionRequest",
-                          "responseType": "CryptoKeyVersion",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "GetPublicKey": {
-                          "requestType": "GetPublicKeyRequest",
-                          "responseType": "PublicKey",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}/publicKey",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "GetImportJob": {
-                          "requestType": "GetImportJobRequest",
-                          "responseType": "ImportJob",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/importJobs/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "CreateKeyRing": {
-                          "requestType": "CreateKeyRingRequest",
-                          "responseType": "KeyRing",
-                          "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/keyRings",
-                            "(google.api.http).body": "key_ring",
-                            "(google.api.method_signature)": "parent,key_ring_id,key_ring"
-                          }
-                        },
-                        "CreateCryptoKey": {
-                          "requestType": "CreateCryptoKeyRequest",
-                          "responseType": "CryptoKey",
-                          "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
-                            "(google.api.http).body": "crypto_key",
-                            "(google.api.method_signature)": "parent,crypto_key_id,crypto_key"
-                          }
-                        },
-                        "CreateCryptoKeyVersion": {
-                          "requestType": "CreateCryptoKeyVersionRequest",
-                          "responseType": "CryptoKeyVersion",
-                          "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
-                            "(google.api.http).body": "crypto_key_version",
-                            "(google.api.method_signature)": "parent,crypto_key_version"
-                          }
-                        },
-                        "ImportCryptoKeyVersion": {
-                          "requestType": "ImportCryptoKeyVersionRequest",
-                          "responseType": "CryptoKeyVersion",
-                          "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions:import",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "CreateImportJob": {
-                          "requestType": "CreateImportJobRequest",
-                          "responseType": "ImportJob",
-                          "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
-                            "(google.api.http).body": "import_job",
-                            "(google.api.method_signature)": "parent,import_job_id,import_job"
-                          }
-                        },
-                        "UpdateCryptoKey": {
-                          "requestType": "UpdateCryptoKeyRequest",
-                          "responseType": "CryptoKey",
-                          "options": {
-                            "(google.api.http).patch": "/v1/{crypto_key.name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
-                            "(google.api.http).body": "crypto_key",
-                            "(google.api.method_signature)": "crypto_key,update_mask"
-                          }
-                        },
-                        "UpdateCryptoKeyVersion": {
-                          "requestType": "UpdateCryptoKeyVersionRequest",
-                          "responseType": "CryptoKeyVersion",
-                          "options": {
-                            "(google.api.http).patch": "/v1/{crypto_key_version.name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
-                            "(google.api.http).body": "crypto_key_version",
-                            "(google.api.method_signature)": "crypto_key_version,update_mask"
-                          }
-                        },
-                        "Encrypt": {
-                          "requestType": "EncryptRequest",
-                          "responseType": "EncryptResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/**}:encrypt",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name,plaintext"
-                          }
-                        },
-                        "Decrypt": {
-                          "requestType": "DecryptRequest",
-                          "responseType": "DecryptResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:decrypt",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name,ciphertext"
-                          }
-                        },
-                        "AsymmetricSign": {
-                          "requestType": "AsymmetricSignRequest",
-                          "responseType": "AsymmetricSignResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricSign",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name,digest"
-                          }
-                        },
-                        "AsymmetricDecrypt": {
-                          "requestType": "AsymmetricDecryptRequest",
-                          "responseType": "AsymmetricDecryptResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricDecrypt",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name,ciphertext"
-                          }
-                        },
-                        "UpdateCryptoKeyPrimaryVersion": {
-                          "requestType": "UpdateCryptoKeyPrimaryVersionRequest",
-                          "responseType": "CryptoKey",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:updatePrimaryVersion",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name,crypto_key_version_id"
-                          }
-                        },
-                        "DestroyCryptoKeyVersion": {
-                          "requestType": "DestroyCryptoKeyVersionRequest",
-                          "responseType": "CryptoKeyVersion",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:destroy",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "RestoreCryptoKeyVersion": {
-                          "requestType": "RestoreCryptoKeyVersionRequest",
-                          "responseType": "CryptoKeyVersion",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:restore",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name"
-                          }
-                        }
-                      }
-                    },
-                    "ListKeyRingsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListCryptoKeysRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "versionView": {
-                          "type": "CryptoKeyVersion.CryptoKeyVersionView",
-                          "id": 4
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListCryptoKeyVersionsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "view": {
-                          "type": "CryptoKeyVersion.CryptoKeyVersionView",
-                          "id": 4
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListImportJobsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListKeyRingsResponse": {
-                      "fields": {
-                        "keyRings": {
-                          "rule": "repeated",
-                          "type": "KeyRing",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "totalSize": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListCryptoKeysResponse": {
-                      "fields": {
-                        "cryptoKeys": {
-                          "rule": "repeated",
-                          "type": "CryptoKey",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "totalSize": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListCryptoKeyVersionsResponse": {
-                      "fields": {
-                        "cryptoKeyVersions": {
-                          "rule": "repeated",
-                          "type": "CryptoKeyVersion",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "totalSize": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListImportJobsResponse": {
-                      "fields": {
-                        "importJobs": {
-                          "rule": "repeated",
-                          "type": "ImportJob",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "totalSize": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetKeyRingRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
-                          }
-                        }
-                      }
-                    },
-                    "GetCryptoKeyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
-                          }
-                        }
-                      }
-                    },
-                    "GetCryptoKeyVersionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
-                          }
-                        }
-                      }
-                    },
-                    "GetPublicKeyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
-                          }
-                        }
-                      }
-                    },
-                    "GetImportJobRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/ImportJob"
-                          }
-                        }
-                      }
-                    },
-                    "CreateKeyRingRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
-                          }
-                        },
-                        "keyRingId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "keyRing": {
-                          "type": "KeyRing",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "CreateCryptoKeyRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
-                          }
-                        },
-                        "cryptoKeyId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "cryptoKey": {
-                          "type": "CryptoKey",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "skipInitialVersionCreation": {
-                          "type": "bool",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "CreateCryptoKeyVersionRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
-                          }
-                        },
-                        "cryptoKeyVersion": {
-                          "type": "CryptoKeyVersion",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ImportCryptoKeyVersionRequest": {
-                      "oneofs": {
-                        "wrappedKeyMaterial": {
-                          "oneof": [
-                            "rsaAesWrappedKey"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
-                          }
-                        },
-                        "algorithm": {
-                          "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "importJob": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "rsaAesWrappedKey": {
-                          "type": "bytes",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "CreateImportJobRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
-                          }
-                        },
-                        "importJobId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "importJob": {
-                          "type": "ImportJob",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateCryptoKeyRequest": {
-                      "fields": {
-                        "cryptoKey": {
-                          "type": "CryptoKey",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateCryptoKeyVersionRequest": {
-                      "fields": {
-                        "cryptoKeyVersion": {
-                          "type": "CryptoKeyVersion",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "EncryptRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "*"
-                          }
-                        },
-                        "plaintext": {
-                          "type": "bytes",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "additionalAuthenticatedData": {
-                          "type": "bytes",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DecryptRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
-                          }
-                        },
-                        "ciphertext": {
-                          "type": "bytes",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "additionalAuthenticatedData": {
-                          "type": "bytes",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "AsymmetricSignRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
-                          }
-                        },
-                        "digest": {
-                          "type": "Digest",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "AsymmetricDecryptRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
-                          }
-                        },
-                        "ciphertext": {
-                          "type": "bytes",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DecryptResponse": {
-                      "fields": {
-                        "plaintext": {
-                          "type": "bytes",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "EncryptResponse": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "ciphertext": {
-                          "type": "bytes",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "AsymmetricSignResponse": {
-                      "fields": {
-                        "signature": {
-                          "type": "bytes",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "AsymmetricDecryptResponse": {
-                      "fields": {
-                        "plaintext": {
-                          "type": "bytes",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UpdateCryptoKeyPrimaryVersionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
-                          }
-                        },
-                        "cryptoKeyVersionId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DestroyCryptoKeyVersionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
-                          }
-                        }
-                      }
-                    },
-                    "RestoreCryptoKeyVersionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
-                          }
-                        }
-                      }
-                    },
-                    "Digest": {
-                      "oneofs": {
-                        "digest": {
-                          "oneof": [
-                            "sha256",
-                            "sha384",
-                            "sha512"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "sha256": {
-                          "type": "bytes",
-                          "id": 1
-                        },
-                        "sha384": {
-                          "type": "bytes",
-                          "id": 2
-                        },
-                        "sha512": {
-                          "type": "bytes",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "LocationMetadata": {
-                      "fields": {
-                        "hsmAvailable": {
-                          "type": "bool",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "KeyRing": {
-                      "options": {
-                        "(google.api.resource).type": "cloudkms.googleapis.com/KeyRing",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "CryptoKey": {
-                      "options": {
-                        "(google.api.resource).type": "cloudkms.googleapis.com/CryptoKey",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
-                      },
-                      "oneofs": {
-                        "rotationSchedule": {
-                          "oneof": [
-                            "rotationPeriod"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "primary": {
-                          "type": "CryptoKeyVersion",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "purpose": {
-                          "type": "CryptoKeyPurpose",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "nextRotationTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7
-                        },
-                        "rotationPeriod": {
-                          "type": "google.protobuf.Duration",
-                          "id": 8
-                        },
-                        "versionTemplate": {
-                          "type": "CryptoKeyVersionTemplate",
-                          "id": 11
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 10
-                        }
-                      },
-                      "nested": {
-                        "CryptoKeyPurpose": {
-                          "values": {
-                            "CRYPTO_KEY_PURPOSE_UNSPECIFIED": 0,
-                            "ENCRYPT_DECRYPT": 1,
-                            "ASYMMETRIC_SIGN": 5,
-                            "ASYMMETRIC_DECRYPT": 6
-                          }
-                        }
-                      }
-                    },
-                    "CryptoKeyVersionTemplate": {
-                      "fields": {
-                        "protectionLevel": {
-                          "type": "ProtectionLevel",
-                          "id": 1
-                        },
-                        "algorithm": {
-                          "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "KeyOperationAttestation": {
-                      "fields": {
-                        "format": {
-                          "type": "AttestationFormat",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "content": {
-                          "type": "bytes",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "AttestationFormat": {
-                          "values": {
-                            "ATTESTATION_FORMAT_UNSPECIFIED": 0,
-                            "CAVIUM_V1_COMPRESSED": 3,
-                            "CAVIUM_V2_COMPRESSED": 4
-                          }
-                        }
-                      }
-                    },
-                    "CryptoKeyVersion": {
-                      "options": {
-                        "(google.api.resource).type": "cloudkms.googleapis.com/CryptoKeyVersion",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "CryptoKeyVersionState",
-                          "id": 3
-                        },
-                        "protectionLevel": {
-                          "type": "ProtectionLevel",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "algorithm": {
-                          "type": "CryptoKeyVersionAlgorithm",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "attestation": {
-                          "type": "KeyOperationAttestation",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "generateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "destroyTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "destroyEventTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "importJob": {
-                          "type": "string",
-                          "id": 14,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "importTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "importFailureReason": {
-                          "type": "string",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "CryptoKeyVersionAlgorithm": {
-                          "values": {
-                            "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED": 0,
-                            "GOOGLE_SYMMETRIC_ENCRYPTION": 1,
-                            "RSA_SIGN_PSS_2048_SHA256": 2,
-                            "RSA_SIGN_PSS_3072_SHA256": 3,
-                            "RSA_SIGN_PSS_4096_SHA256": 4,
-                            "RSA_SIGN_PSS_4096_SHA512": 15,
-                            "RSA_SIGN_PKCS1_2048_SHA256": 5,
-                            "RSA_SIGN_PKCS1_3072_SHA256": 6,
-                            "RSA_SIGN_PKCS1_4096_SHA256": 7,
-                            "RSA_SIGN_PKCS1_4096_SHA512": 16,
-                            "RSA_DECRYPT_OAEP_2048_SHA256": 8,
-                            "RSA_DECRYPT_OAEP_3072_SHA256": 9,
-                            "RSA_DECRYPT_OAEP_4096_SHA256": 10,
-                            "RSA_DECRYPT_OAEP_4096_SHA512": 17,
-                            "EC_SIGN_P256_SHA256": 12,
-                            "EC_SIGN_P384_SHA384": 13
-                          }
-                        },
-                        "CryptoKeyVersionState": {
-                          "values": {
-                            "CRYPTO_KEY_VERSION_STATE_UNSPECIFIED": 0,
-                            "PENDING_GENERATION": 5,
-                            "ENABLED": 1,
-                            "DISABLED": 2,
-                            "DESTROYED": 3,
-                            "DESTROY_SCHEDULED": 4,
-                            "PENDING_IMPORT": 6,
-                            "IMPORT_FAILED": 7
-                          }
-                        },
-                        "CryptoKeyVersionView": {
-                          "values": {
-                            "CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED": 0,
-                            "FULL": 1
-                          }
-                        }
-                      }
-                    },
-                    "PublicKey": {
-                      "fields": {
-                        "pem": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "algorithm": {
-                          "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ImportJob": {
-                      "options": {
-                        "(google.api.resource).type": "cloudkms.googleapis.com/ImportJob",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "importMethod": {
-                          "type": "ImportMethod",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "protectionLevel": {
-                          "type": "ProtectionLevel",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "generateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "expireTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "expireEventTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "ImportJobState",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "publicKey": {
-                          "type": "WrappingPublicKey",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "attestation": {
-                          "type": "KeyOperationAttestation",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "WrappingPublicKey": {
-                          "fields": {
-                            "pem": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "ImportMethod": {
-                          "values": {
-                            "IMPORT_METHOD_UNSPECIFIED": 0,
-                            "RSA_OAEP_3072_SHA1_AES_256": 1,
-                            "RSA_OAEP_4096_SHA1_AES_256": 2
-                          }
-                        },
-                        "ImportJobState": {
-                          "values": {
-                            "IMPORT_JOB_STATE_UNSPECIFIED": 0,
-                            "PENDING_GENERATION": 1,
-                            "ACTIVE": 2,
-                            "EXPIRED": 3
-                          }
-                        }
-                      }
-                    },
-                    "ProtectionLevel": {
+                    "Action": {
                       "values": {
-                        "PROTECTION_LEVEL_UNSPECIFIED": 0,
-                        "SOFTWARE": 1,
-                        "HSM": 2,
-                        "EXTERNAL": 3
+                        "ACTION_UNSPECIFIED": 0,
+                        "ADD": 1,
+                        "REMOVE": 2
                       }
                     }
                   }
+                },
+                "AuditConfigDelta": {
+                  "fields": {
+                    "action": {
+                      "type": "Action",
+                      "id": 1
+                    },
+                    "service": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "exemptedMember": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "logType": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "Action": {
+                      "values": {
+                        "ACTION_UNSPECIFIED": 0,
+                        "ADD": 1,
+                        "REMOVE": 2
+                      }
+                    }
+                  }
+                },
+                "GetPolicyOptions": {
+                  "fields": {
+                    "requestedPolicyVersion": {
+                      "type": "int32",
+                      "id": 1
+                    }
+                  }
+                },
+                "IAMPolicy": {
+                  "options": {
+                    "(google.api.default_host)": "iam-meta-api.googleapis.com"
+                  },
+                  "methods": {
+                    "SetIamPolicy": {
+                      "requestType": "SetIamPolicyRequest",
+                      "responseType": "Policy",
+                      "options": {
+                        "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
+                        "(google.api.http).body": "*"
+                      }
+                    },
+                    "GetIamPolicy": {
+                      "requestType": "GetIamPolicyRequest",
+                      "responseType": "Policy",
+                      "options": {
+                        "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
+                        "(google.api.http).body": "*"
+                      }
+                    },
+                    "TestIamPermissions": {
+                      "requestType": "TestIamPermissionsRequest",
+                      "responseType": "TestIamPermissionsResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
+                        "(google.api.http).body": "*"
+                      }
+                    }
+                  }
+                },
+                "SetIamPolicyRequest": {
+                  "fields": {
+                    "resource": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
+                    },
+                    "policy": {
+                      "type": "Policy",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "GetIamPolicyRequest": {
+                  "fields": {
+                    "resource": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
+                    },
+                    "options": {
+                      "type": "GetPolicyOptions",
+                      "id": 2
+                    }
+                  }
+                },
+                "TestIamPermissionsRequest": {
+                  "fields": {
+                    "resource": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
+                    },
+                    "permissions": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "TestIamPermissionsResponse": {
+                  "fields": {
+                    "permissions": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "logging": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.Iam.V1.Logging",
+                    "go_package": "google.golang.org/genproto/googleapis/iam/v1/logging;logging",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "AuditDataProto",
+                    "java_package": "com.google.iam.v1.logging"
+                  },
+                  "nested": {
+                    "AuditData": {
+                      "fields": {
+                        "policyDelta": {
+                          "type": "google.iam.v1.PolicyDelta",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/type/expr;expr",
+            "java_multiple_files": true,
+            "java_outer_classname": "ExprProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Expr": {
+              "fields": {
+                "expression": {
+                  "type": "string",
+                  "id": 1
+                },
+                "title": {
+                  "type": "string",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                },
+                "location": {
+                  "type": "string",
+                  "id": 4
                 }
               }
             }
@@ -2409,225 +1401,1285 @@
             }
           }
         },
-        "iam": {
+        "cloud": {
           "nested": {
-            "v1": {
-              "options": {
-                "cc_enable_arenas": true,
-                "csharp_namespace": "Google.Cloud.Iam.V1",
-                "go_package": "google.golang.org/genproto/googleapis/iam/v1;iam",
-                "java_multiple_files": true,
-                "java_outer_classname": "PolicyProto",
-                "java_package": "com.google.iam.v1",
-                "php_namespace": "Google\\Cloud\\Iam\\V1"
-              },
+            "kms": {
               "nested": {
-                "IAMPolicy": {
-                  "methods": {
-                    "SetIamPolicy": {
-                      "requestType": "SetIamPolicyRequest",
-                      "responseType": "Policy",
-                      "options": {
-                        "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
-                        "(google.api.http).body": "*"
-                      }
-                    },
-                    "GetIamPolicy": {
-                      "requestType": "GetIamPolicyRequest",
-                      "responseType": "Policy",
-                      "options": {
-                        "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
-                        "(google.api.http).body": "*"
-                      }
-                    },
-                    "TestIamPermissions": {
-                      "requestType": "TestIamPermissionsRequest",
-                      "responseType": "TestIamPermissionsResponse",
-                      "options": {
-                        "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
-                        "(google.api.http).body": "*"
-                      }
-                    }
-                  }
-                },
-                "SetIamPolicyRequest": {
-                  "fields": {
-                    "resource": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "policy": {
-                      "type": "Policy",
-                      "id": 2
-                    }
-                  }
-                },
-                "GetIamPolicyRequest": {
-                  "fields": {
-                    "resource": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "TestIamPermissionsRequest": {
-                  "fields": {
-                    "resource": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "permissions": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 2
-                    }
-                  }
-                },
-                "TestIamPermissionsResponse": {
-                  "fields": {
-                    "permissions": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "Policy": {
-                  "fields": {
-                    "version": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "bindings": {
-                      "rule": "repeated",
-                      "type": "Binding",
-                      "id": 4
-                    },
-                    "etag": {
-                      "type": "bytes",
-                      "id": 3
-                    }
-                  }
-                },
-                "Binding": {
-                  "fields": {
-                    "role": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "members": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 2
-                    },
-                    "condition": {
-                      "type": "google.type.Expr",
-                      "id": 3
-                    }
-                  }
-                },
-                "PolicyDelta": {
-                  "fields": {
-                    "bindingDeltas": {
-                      "rule": "repeated",
-                      "type": "BindingDelta",
-                      "id": 1
-                    },
-                    "auditConfigDeltas": {
-                      "rule": "repeated",
-                      "type": "AuditConfigDelta",
-                      "id": 2
-                    }
-                  }
-                },
-                "BindingDelta": {
-                  "fields": {
-                    "action": {
-                      "type": "Action",
-                      "id": 1
-                    },
-                    "role": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "member": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "condition": {
-                      "type": "google.type.Expr",
-                      "id": 4
-                    }
+                "v1": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.Kms.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/kms/v1;kms",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "KmsProto",
+                    "java_package": "com.google.cloud.kms.v1",
+                    "php_namespace": "Google\\Cloud\\Kms\\V1"
                   },
                   "nested": {
-                    "Action": {
+                    "KeyRing": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/KeyRing",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CryptoKey": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/CryptoKey",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
+                      },
+                      "oneofs": {
+                        "rotationSchedule": {
+                          "oneof": [
+                            "rotationPeriod"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "primary": {
+                          "type": "CryptoKeyVersion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "purpose": {
+                          "type": "CryptoKeyPurpose",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextRotationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "rotationPeriod": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8
+                        },
+                        "versionTemplate": {
+                          "type": "CryptoKeyVersionTemplate",
+                          "id": 11
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "CryptoKeyPurpose": {
+                          "values": {
+                            "CRYPTO_KEY_PURPOSE_UNSPECIFIED": 0,
+                            "ENCRYPT_DECRYPT": 1,
+                            "ASYMMETRIC_SIGN": 5,
+                            "ASYMMETRIC_DECRYPT": 6
+                          }
+                        }
+                      }
+                    },
+                    "CryptoKeyVersionTemplate": {
+                      "fields": {
+                        "protectionLevel": {
+                          "type": "ProtectionLevel",
+                          "id": 1
+                        },
+                        "algorithm": {
+                          "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "KeyOperationAttestation": {
+                      "fields": {
+                        "format": {
+                          "type": "AttestationFormat",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "content": {
+                          "type": "bytes",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AttestationFormat": {
+                          "values": {
+                            "ATTESTATION_FORMAT_UNSPECIFIED": 0,
+                            "CAVIUM_V1_COMPRESSED": 3,
+                            "CAVIUM_V2_COMPRESSED": 4
+                          }
+                        }
+                      }
+                    },
+                    "CryptoKeyVersion": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/CryptoKeyVersion",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "CryptoKeyVersionState",
+                          "id": 3
+                        },
+                        "protectionLevel": {
+                          "type": "ProtectionLevel",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "algorithm": {
+                          "type": "CryptoKeyVersionAlgorithm",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "attestation": {
+                          "type": "KeyOperationAttestation",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "generateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "destroyTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "destroyEventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "importJob": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "importTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "importFailureReason": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CryptoKeyVersionAlgorithm": {
+                          "values": {
+                            "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED": 0,
+                            "GOOGLE_SYMMETRIC_ENCRYPTION": 1,
+                            "RSA_SIGN_PSS_2048_SHA256": 2,
+                            "RSA_SIGN_PSS_3072_SHA256": 3,
+                            "RSA_SIGN_PSS_4096_SHA256": 4,
+                            "RSA_SIGN_PSS_4096_SHA512": 15,
+                            "RSA_SIGN_PKCS1_2048_SHA256": 5,
+                            "RSA_SIGN_PKCS1_3072_SHA256": 6,
+                            "RSA_SIGN_PKCS1_4096_SHA256": 7,
+                            "RSA_SIGN_PKCS1_4096_SHA512": 16,
+                            "RSA_DECRYPT_OAEP_2048_SHA256": 8,
+                            "RSA_DECRYPT_OAEP_3072_SHA256": 9,
+                            "RSA_DECRYPT_OAEP_4096_SHA256": 10,
+                            "RSA_DECRYPT_OAEP_4096_SHA512": 17,
+                            "EC_SIGN_P256_SHA256": 12,
+                            "EC_SIGN_P384_SHA384": 13
+                          }
+                        },
+                        "CryptoKeyVersionState": {
+                          "values": {
+                            "CRYPTO_KEY_VERSION_STATE_UNSPECIFIED": 0,
+                            "PENDING_GENERATION": 5,
+                            "ENABLED": 1,
+                            "DISABLED": 2,
+                            "DESTROYED": 3,
+                            "DESTROY_SCHEDULED": 4,
+                            "PENDING_IMPORT": 6,
+                            "IMPORT_FAILED": 7
+                          }
+                        },
+                        "CryptoKeyVersionView": {
+                          "values": {
+                            "CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED": 0,
+                            "FULL": 1
+                          }
+                        }
+                      }
+                    },
+                    "PublicKey": {
+                      "fields": {
+                        "pem": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "algorithm": {
+                          "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportJob": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/ImportJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "importMethod": {
+                          "type": "ImportMethod",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "protectionLevel": {
+                          "type": "ProtectionLevel",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "generateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireEventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "ImportJobState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "publicKey": {
+                          "type": "WrappingPublicKey",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "attestation": {
+                          "type": "KeyOperationAttestation",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "WrappingPublicKey": {
+                          "fields": {
+                            "pem": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ImportMethod": {
+                          "values": {
+                            "IMPORT_METHOD_UNSPECIFIED": 0,
+                            "RSA_OAEP_3072_SHA1_AES_256": 1,
+                            "RSA_OAEP_4096_SHA1_AES_256": 2
+                          }
+                        },
+                        "ImportJobState": {
+                          "values": {
+                            "IMPORT_JOB_STATE_UNSPECIFIED": 0,
+                            "PENDING_GENERATION": 1,
+                            "ACTIVE": 2,
+                            "EXPIRED": 3
+                          }
+                        }
+                      }
+                    },
+                    "ProtectionLevel": {
                       "values": {
-                        "ACTION_UNSPECIFIED": 0,
-                        "ADD": 1,
-                        "REMOVE": 2
+                        "PROTECTION_LEVEL_UNSPECIFIED": 0,
+                        "SOFTWARE": 1,
+                        "HSM": 2,
+                        "EXTERNAL": 3
+                      }
+                    },
+                    "KeyManagementService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudkms.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloudkms"
+                      },
+                      "methods": {
+                        "ListKeyRings": {
+                          "requestType": "ListKeyRingsRequest",
+                          "responseType": "ListKeyRingsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/keyRings",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "ListCryptoKeys": {
+                          "requestType": "ListCryptoKeysRequest",
+                          "responseType": "ListCryptoKeysResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "ListCryptoKeyVersions": {
+                          "requestType": "ListCryptoKeyVersionsRequest",
+                          "responseType": "ListCryptoKeyVersionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "ListImportJobs": {
+                          "requestType": "ListImportJobsRequest",
+                          "responseType": "ListImportJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetKeyRing": {
+                          "requestType": "GetKeyRingRequest",
+                          "responseType": "KeyRing",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "GetCryptoKey": {
+                          "requestType": "GetCryptoKeyRequest",
+                          "responseType": "CryptoKey",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "GetCryptoKeyVersion": {
+                          "requestType": "GetCryptoKeyVersionRequest",
+                          "responseType": "CryptoKeyVersion",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "GetPublicKey": {
+                          "requestType": "GetPublicKeyRequest",
+                          "responseType": "PublicKey",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}/publicKey",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "GetImportJob": {
+                          "requestType": "GetImportJobRequest",
+                          "responseType": "ImportJob",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/importJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "CreateKeyRing": {
+                          "requestType": "CreateKeyRingRequest",
+                          "responseType": "KeyRing",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/keyRings",
+                            "(google.api.http).body": "key_ring",
+                            "(google.api.method_signature)": "parent,key_ring_id,key_ring"
+                          }
+                        },
+                        "CreateCryptoKey": {
+                          "requestType": "CreateCryptoKeyRequest",
+                          "responseType": "CryptoKey",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
+                            "(google.api.http).body": "crypto_key",
+                            "(google.api.method_signature)": "parent,crypto_key_id,crypto_key"
+                          }
+                        },
+                        "CreateCryptoKeyVersion": {
+                          "requestType": "CreateCryptoKeyVersionRequest",
+                          "responseType": "CryptoKeyVersion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
+                            "(google.api.http).body": "crypto_key_version",
+                            "(google.api.method_signature)": "parent,crypto_key_version"
+                          }
+                        },
+                        "ImportCryptoKeyVersion": {
+                          "requestType": "ImportCryptoKeyVersionRequest",
+                          "responseType": "CryptoKeyVersion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions:import",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "CreateImportJob": {
+                          "requestType": "CreateImportJobRequest",
+                          "responseType": "ImportJob",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
+                            "(google.api.http).body": "import_job",
+                            "(google.api.method_signature)": "parent,import_job_id,import_job"
+                          }
+                        },
+                        "UpdateCryptoKey": {
+                          "requestType": "UpdateCryptoKeyRequest",
+                          "responseType": "CryptoKey",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{crypto_key.name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
+                            "(google.api.http).body": "crypto_key",
+                            "(google.api.method_signature)": "crypto_key,update_mask"
+                          }
+                        },
+                        "UpdateCryptoKeyVersion": {
+                          "requestType": "UpdateCryptoKeyVersionRequest",
+                          "responseType": "CryptoKeyVersion",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{crypto_key_version.name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
+                            "(google.api.http).body": "crypto_key_version",
+                            "(google.api.method_signature)": "crypto_key_version,update_mask"
+                          }
+                        },
+                        "Encrypt": {
+                          "requestType": "EncryptRequest",
+                          "responseType": "EncryptResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/**}:encrypt",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,plaintext"
+                          }
+                        },
+                        "Decrypt": {
+                          "requestType": "DecryptRequest",
+                          "responseType": "DecryptResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:decrypt",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,ciphertext"
+                          }
+                        },
+                        "AsymmetricSign": {
+                          "requestType": "AsymmetricSignRequest",
+                          "responseType": "AsymmetricSignResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricSign",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,digest"
+                          }
+                        },
+                        "AsymmetricDecrypt": {
+                          "requestType": "AsymmetricDecryptRequest",
+                          "responseType": "AsymmetricDecryptResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricDecrypt",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,ciphertext"
+                          }
+                        },
+                        "UpdateCryptoKeyPrimaryVersion": {
+                          "requestType": "UpdateCryptoKeyPrimaryVersionRequest",
+                          "responseType": "CryptoKey",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:updatePrimaryVersion",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,crypto_key_version_id"
+                          }
+                        },
+                        "DestroyCryptoKeyVersion": {
+                          "requestType": "DestroyCryptoKeyVersionRequest",
+                          "responseType": "CryptoKeyVersion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:destroy",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "RestoreCryptoKeyVersion": {
+                          "requestType": "RestoreCryptoKeyVersionRequest",
+                          "responseType": "CryptoKeyVersion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:restore",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          }
+                        }
+                      }
+                    },
+                    "ListKeyRingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListCryptoKeysRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "versionView": {
+                          "type": "CryptoKeyVersion.CryptoKeyVersionView",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListCryptoKeyVersionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "view": {
+                          "type": "CryptoKeyVersion.CryptoKeyVersionView",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListImportJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListKeyRingsResponse": {
+                      "fields": {
+                        "keyRings": {
+                          "rule": "repeated",
+                          "type": "KeyRing",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListCryptoKeysResponse": {
+                      "fields": {
+                        "cryptoKeys": {
+                          "rule": "repeated",
+                          "type": "CryptoKey",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListCryptoKeyVersionsResponse": {
+                      "fields": {
+                        "cryptoKeyVersions": {
+                          "rule": "repeated",
+                          "type": "CryptoKeyVersion",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListImportJobsResponse": {
+                      "fields": {
+                        "importJobs": {
+                          "rule": "repeated",
+                          "type": "ImportJob",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetKeyRingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
+                        }
+                      }
+                    },
+                    "GetCryptoKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
+                    "GetCryptoKeyVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        }
+                      }
+                    },
+                    "GetPublicKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        }
+                      }
+                    },
+                    "GetImportJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/ImportJob"
+                          }
+                        }
+                      }
+                    },
+                    "CreateKeyRingRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "keyRingId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "keyRing": {
+                          "type": "KeyRing",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCryptoKeyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
+                        },
+                        "cryptoKeyId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "cryptoKey": {
+                          "type": "CryptoKey",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "skipInitialVersionCreation": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "CreateCryptoKeyVersionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "cryptoKeyVersion": {
+                          "type": "CryptoKeyVersion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ImportCryptoKeyVersionRequest": {
+                      "oneofs": {
+                        "wrappedKeyMaterial": {
+                          "oneof": [
+                            "rsaAesWrappedKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "algorithm": {
+                          "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "importJob": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rsaAesWrappedKey": {
+                          "type": "bytes",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "CreateImportJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
+                        },
+                        "importJobId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "importJob": {
+                          "type": "ImportJob",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCryptoKeyRequest": {
+                      "fields": {
+                        "cryptoKey": {
+                          "type": "CryptoKey",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCryptoKeyVersionRequest": {
+                      "fields": {
+                        "cryptoKeyVersion": {
+                          "type": "CryptoKeyVersion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EncryptRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "*"
+                          }
+                        },
+                        "plaintext": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "additionalAuthenticatedData": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DecryptRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "ciphertext": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "additionalAuthenticatedData": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AsymmetricSignRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        },
+                        "digest": {
+                          "type": "Digest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AsymmetricDecryptRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        },
+                        "ciphertext": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DecryptResponse": {
+                      "fields": {
+                        "plaintext": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "EncryptResponse": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ciphertext": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AsymmetricSignResponse": {
+                      "fields": {
+                        "signature": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AsymmetricDecryptResponse": {
+                      "fields": {
+                        "plaintext": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateCryptoKeyPrimaryVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "cryptoKeyVersionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DestroyCryptoKeyVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        }
+                      }
+                    },
+                    "RestoreCryptoKeyVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        }
+                      }
+                    },
+                    "Digest": {
+                      "oneofs": {
+                        "digest": {
+                          "oneof": [
+                            "sha256",
+                            "sha384",
+                            "sha512"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sha256": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "sha384": {
+                          "type": "bytes",
+                          "id": 2
+                        },
+                        "sha512": {
+                          "type": "bytes",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LocationMetadata": {
+                      "fields": {
+                        "hsmAvailable": {
+                          "type": "bool",
+                          "id": 1
+                        }
                       }
                     }
                   }
-                },
-                "AuditConfigDelta": {
-                  "fields": {
-                    "action": {
-                      "type": "Action",
-                      "id": 1
-                    },
-                    "service": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "exemptedMember": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "logType": {
-                      "type": "string",
-                      "id": 4
-                    }
-                  },
-                  "nested": {
-                    "Action": {
-                      "values": {
-                        "ACTION_UNSPECIFIED": 0,
-                        "ADD": 1,
-                        "REMOVE": 2
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "type": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/type/expr;expr",
-            "java_multiple_files": true,
-            "java_outer_classname": "ExprProto",
-            "java_package": "com.google.type",
-            "objc_class_prefix": "GTP"
-          },
-          "nested": {
-            "Expr": {
-              "fields": {
-                "expression": {
-                  "type": "string",
-                  "id": 1
-                },
-                "title": {
-                  "type": "string",
-                  "id": 2
-                },
-                "description": {
-                  "type": "string",
-                  "id": 3
-                },
-                "location": {
-                  "type": "string",
-                  "id": 4
                 }
               }
             }

@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/kms/v1/resources.proto",
   "../../protos/google/cloud/kms/v1/service.proto",
-  "../../protos/google/iam/v1/iam_policy.proto"
+  "../../protos/google/iam/v1/logging/audit_data.proto"
 ]

@@ -12,5 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Note: this file is purely for documentation. Any contents are not expected
-// to be loaded as the JS file.
+import * as kms from '../src';
+import * as assert from 'assert';
+import {describe, it} from 'mocha';
+
+const client = new kms.KeyManagementServiceClient();
+
+describe('KMS system tests', () => {
+  it('should list global key rings', async () => {
+    const projectId = await client.getProjectId();
+    const parent = client.locationPath(projectId, 'global');
+
+    const [keyRings] = await client.listKeyRings({parent});
+    assert(keyRings);
+    assert(Array.isArray(keyRings));
+  });
+});
