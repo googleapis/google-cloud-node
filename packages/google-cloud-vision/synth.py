@@ -44,7 +44,7 @@ for version in versions:
     )
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
 # Node.js specific cleanup
