@@ -30,6 +30,7 @@ import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as extend from 'extend';
 import * as fs from 'fs';
+import * as http from 'http';
 import * as mime from 'mime-types';
 import * as path from 'path';
 import pLimit from 'p-limit';
@@ -48,6 +49,13 @@ import {
 import {Iam} from './iam';
 import {Notification} from './notification';
 import {Storage, Cors} from './storage';
+import {
+  GetSignedUrlResponse,
+  GetSignedUrlCallback,
+  SignerGetSignedUrlConfig,
+  URLSigner,
+  Query,
+} from './signer';
 
 interface SourceObject {
   name: string;
@@ -231,6 +239,20 @@ export interface GetBucketMetadataCallback {
 
 export interface GetBucketMetadataOptions {
   userProject?: string;
+}
+
+export interface GetBucketSignedUrlConfig {
+  action: 'list';
+  version?: 'v2' | 'v4';
+  cname?: string;
+  virtualHostedStyle?: boolean;
+  expires: string | number | Date;
+  extensionHeaders?: http.OutgoingHttpHeaders;
+  queryParams?: Query;
+}
+
+export enum BucketActionToHTTPMethod {
+  list = 'GET',
 }
 
 export interface GetNotificationsOptions {
@@ -570,6 +592,7 @@ class Bucket extends ServiceObject {
    * }, callback);
    */
   getFilesStream: Function;
+  signer?: URLSigner;
 
   constructor(storage: Storage, name: string, options?: BucketOptions) {
     options = options || {};
@@ -2354,6 +2377,134 @@ class Bucket extends ServiceObject {
         callback!(null, notifications, resp);
       }
     );
+  }
+
+  getSignedUrl(cfg: GetBucketSignedUrlConfig): Promise<GetSignedUrlResponse>;
+  getSignedUrl(
+    cfg: GetBucketSignedUrlConfig,
+    callback: GetSignedUrlCallback
+  ): void;
+  /**
+   * @typedef {array} GetSignedUrlResponse
+   * @property {object} 0 The signed URL.
+   */
+  /**
+   * @callback GetSignedUrlCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} url The signed URL.
+   */
+  /**
+   * @typedef {object} GetBucketSignedUrlConfig
+   * @property {string} action Currently only supports "list" (HTTP: GET).
+   * @property {*} expires A timestamp when this link will expire. Any value
+   *     given is passed to `new Date()`.
+   *     Note: 'v4' supports maximum duration of 7 days (604800 seconds) from now.
+   * @property {string} [version='v2'] The signing version to use, either
+   *     'v2' or 'v4'.
+   * @param {boolean} [virtualHostedStyle=false] Use virtual hosted-style
+   *     URLs ('https://mybucket.storage.googleapis.com/...') instead of path-style
+   *     ('https://storage.googleapis.com/mybucket/...'). Virtual hosted-style URLs
+   *     should generally be preferred instaed of path-style URL.
+   *     Currently defaults to `false` for path-style, although this may change in a
+   *     future major-version release.
+   * @property {string} [cname] The cname for this bucket, i.e.,
+   *     "https://cdn.example.com".
+   *     See [reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls#example}
+   * @property {object} [extensionHeaders] If these headers are used, the
+   *     server will check to make sure that the client provides matching
+   * values. See [Canonical extension
+   * headers](https://cloud.google.com/storage/docs/access-control/signed-urls#about-canonical-extension-headers)
+   *     for the requirements of this feature, most notably:
+   *       - The header name must be prefixed with `x-goog-`
+   *       - The header name must be all lowercase
+   *     Note: Multi-valued header passed as an array in the extensionHeaders
+   *           object is converted into a string, delimited by `,` with
+   *           no space. Requests made using the signed URL will need to
+   *           delimit multi-valued headers using a single `,` as well, or
+   *           else the server will report a mismatched signature.
+   * @param {object} [config.queryParams] Additional query parameters to include
+   *     in the signed URL.
+   */
+  /**
+   * Get a signed URL to allow limited time access to a bucket.
+   *
+   * In Google Cloud Platform environments, such as Cloud Functions and App
+   * Engine, you usually don't provide a `keyFilename` or `credentials` during
+   * instantiation. In those environments, we call the
+   * [signBlob
+   * API](https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/signBlob#authorization-scopes)
+   * to create a signed URL. That API requires either the
+   * `https://www.googleapis.com/auth/iam` or
+   * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
+   * enabled.
+   *
+   * @see [Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls}
+   *
+   * @throws {Error} if an expiration timestamp from the past is given.
+   *
+   * @param {GetBucketSignedUrlConfig} config Configuration object.
+   * @param {GetSignedUrlCallback} [callback] Callback function.
+   * @returns {Promise<GetSignedUrlResponse>}
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const myBucket = storage.bucket('my-bucket');
+   *
+   * //-
+   * // Generate a URL that allows temporary access to list files in a bucket.
+   * //-
+   * const request = require('request');
+   *
+   * const config = {
+   *   action: 'list',
+   *   expires: '03-17-2025'
+   * };
+   *
+   * bucket.getSignedUrl(config, function(err, url) {
+   *   if (err) {
+   *     console.error(err);
+   *     return;
+   *   }
+   *
+   *   // The bucket is now available to be listed from this URL.
+   *   request(url, function(err, resp) {
+   *     // resp.statusCode = 200
+   *   });
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * bucket.getSignedUrl(config).then(function(data) {
+   *   const url = data[0];
+   * });
+   */
+  getSignedUrl(
+    cfg: GetBucketSignedUrlConfig,
+    callback?: GetSignedUrlCallback
+  ): void | Promise<GetSignedUrlResponse> {
+    const method = BucketActionToHTTPMethod[cfg.action];
+    if (!method) {
+      throw new Error('The action is not provided or invalid.');
+    }
+
+    const signConfig = {
+      method,
+      expires: cfg.expires,
+      version: cfg.version,
+      cname: cfg.cname,
+      extensionHeaders: cfg.extensionHeaders || {},
+      queryParams: cfg.queryParams || {},
+    } as SignerGetSignedUrlConfig;
+
+    if (!this.signer) {
+      this.signer = new URLSigner(this.storage.authClient, this);
+    }
+
+    this.signer
+      .getSignedUrl(signConfig)
+      .then(signedUrl => callback!(null, signedUrl), callback!);
   }
 
   lock(metageneration: number | string): Promise<BucketLockResponse>;

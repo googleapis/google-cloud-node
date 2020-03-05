@@ -26,7 +26,6 @@ import {promisifyAll} from '@google-cloud/promisify';
 import compressible = require('compressible');
 import concat = require('concat-stream');
 import * as crypto from 'crypto';
-import * as dateFormat from 'date-and-time';
 import * as extend from 'extend';
 import * as fs from 'fs';
 const hashStreamValidation = require('hash-stream-validation');
@@ -40,12 +39,19 @@ import * as streamEvents from 'stream-events';
 import * as through from 'through2';
 import * as xdgBasedir from 'xdg-basedir';
 import * as zlib from 'zlib';
-import * as url from 'url';
 import * as http from 'http';
 
 import {Storage} from './storage';
 import {Bucket} from './bucket';
 import {Acl} from './acl';
+import {
+  GetSignedUrlResponse,
+  SigningError,
+  GetSignedUrlCallback,
+  URLSigner,
+  SignerGetSignedUrlConfig,
+  Query,
+} from './signer';
 import {
   ResponseBody,
   ApiError,
@@ -53,7 +59,7 @@ import {
   DuplexifyConstructor,
 } from '@google-cloud/common/build/src/util';
 const duplexify: DuplexifyConstructor = require('duplexify');
-import {normalize, objectEntries, encodeURI, qsStringify} from './util';
+import {normalize, objectKeyToLowercase} from './util';
 import {GaxiosError, Headers, request as gaxiosRequest} from 'gaxios';
 
 export type GetExpirationDateResponse = [Date];
@@ -63,46 +69,6 @@ export interface GetExpirationDateCallback {
     expirationDate?: Date | null,
     apiResponse?: Metadata
   ): void;
-}
-
-export interface GetSignedUrlConfig {
-  action: 'read' | 'write' | 'delete' | 'resumable';
-  version?: 'v2' | 'v4';
-  cname?: string;
-  contentMd5?: string;
-  contentType?: string;
-  expires: string | number | Date;
-  extensionHeaders?: http.OutgoingHttpHeaders;
-  promptSaveAs?: string;
-  responseDisposition?: string;
-  responseType?: string;
-}
-
-interface GetSignedUrlConfigInternal {
-  expiration: number;
-  method: string;
-  name: string;
-  resource?: string;
-  extensionHeaders?: http.OutgoingHttpHeaders;
-  contentMd5?: string;
-  contentType?: string;
-  promptSaveAs?: string;
-  responseType?: string;
-  responseDisposition?: string;
-  cname?: string;
-}
-
-export enum ActionToHTTPMethod {
-  read = 'GET',
-  write = 'PUT',
-  delete = 'DELETE',
-  resumable = 'POST',
-}
-
-export type GetSignedUrlResponse = [string];
-
-export interface GetSignedUrlCallback {
-  (err: Error | null, url?: string): void;
 }
 
 export interface PolicyDocument {
@@ -125,6 +91,21 @@ export interface GetSignedPolicyOptions {
   successRedirect?: string;
   successStatus?: string;
   contentLengthRange?: {min?: number; max?: number};
+}
+
+export interface GetSignedUrlConfig {
+  action: 'read' | 'write' | 'delete' | 'resumable';
+  version?: 'v2' | 'v4';
+  virtualHostedStyle?: boolean;
+  cname?: string;
+  contentMd5?: string;
+  contentType?: string;
+  expires: string | number | Date;
+  extensionHeaders?: http.OutgoingHttpHeaders;
+  promptSaveAs?: string;
+  responseDisposition?: string;
+  responseType?: string;
+  queryParams?: Query;
 }
 
 export interface GetFileMetadataOptions {
@@ -246,6 +227,13 @@ export interface RotateEncryptionKeyCallback extends CopyCallback {}
 
 export type RotateEncryptionKeyResponse = CopyResponse;
 
+export enum ActionToHTTPMethod {
+  read = 'GET',
+  write = 'PUT',
+  delete = 'DELETE',
+  resumable = 'POST',
+}
+
 /**
  * Custom error type for errors related to creating a resumable upload.
  *
@@ -254,21 +242,6 @@ export type RotateEncryptionKeyResponse = CopyResponse;
 class ResumableUploadError extends Error {
   name = 'ResumableUploadError';
 }
-
-/**
- * Custom error type for errors related to getting signed errors and policies.
- *
- * @private
- */
-class SigningError extends Error {
-  name = 'SigningError';
-}
-
-/**
- * @const {string}
- * @private
- */
-const STORAGE_DOWNLOAD_BASE_URL = 'https://storage.googleapis.com';
 
 /**
  * @const {string}
@@ -329,30 +302,6 @@ interface FileQuery {
   userProject?: string;
 }
 
-interface SignedUrlQuery {
-  generation?: number;
-  'response-content-type'?: string;
-  'response-content-disposition'?: string;
-}
-
-interface V2SignedUrlQuery extends SignedUrlQuery {
-  GoogleAccessId: string;
-  Expires: number;
-  Signature: string;
-}
-
-interface V4UrlQuery extends SignedUrlQuery {
-  'X-Goog-Algorithm': string;
-  'X-Goog-Credential': string;
-  'X-Goog-Date': string;
-  'X-Goog-Expires': number;
-  'X-Goog-SignedHeaders': string;
-}
-
-interface V4SignedUrlQuery extends V4UrlQuery {
-  'X-Goog-Signature': string;
-}
-
 export interface CreateReadStreamOptions {
   userProject?: string;
   validation?: 'md5' | 'crc32c' | false | true;
@@ -395,16 +344,6 @@ class RequestError extends Error {
   code?: string;
   errors?: Error[];
 }
-
-type ValueOf<T> = T[keyof T];
-type HeaderValue = ValueOf<http.OutgoingHttpHeaders>;
-
-const SEVEN_DAYS = 604800;
-
-/*
- * Default signing version for getSignedUrl is 'v2'.
- */
-const DEFAULT_SIGNING_VERSION = 'v2';
 
 /**
  * A File object is created from your {@link Bucket} object using
@@ -462,6 +401,7 @@ class File extends ServiceObject<File> {
   storage: Storage;
   kmsKeyName?: string;
   userProject?: string;
+  signer?: URLSigner;
   name: string;
   generation?: number;
   parent!: Bucket;
@@ -2373,8 +2313,18 @@ class File extends ServiceObject<File> {
    *     "delete" (HTTP: DELETE), "resumable" (HTTP: POST).
    *     When using "resumable", the header `X-Goog-Resumable: start` has
    *     to be sent when making a request with the signed URL.
+   * @param {*} config.expires A timestamp when this link will expire. Any value
+   *     given is passed to `new Date()`.
+   *     Note: 'v4' supports maximum duration of 7 days (604800 seconds) from now.
+   *     See [reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls#example}
    * @param {string} [config.version='v2'] The signing version to use, either
    *     'v2' or 'v4'.
+   * @param {boolean} [config.virtualHostedStyle=false] Use virtual hosted-style
+   *     URLs ('https://mybucket.storage.googleapis.com/...') instead of path-style
+   *     ('https://storage.googleapis.com/mybucket/...'). Virtual hosted-style URLs
+   *     should generally be preferred instaed of path-style URL.
+   *     Currently defaults to `false` for path-style, although this may change in a
+   *     future major-version release.
    * @param {string} [config.cname] The cname for this bucket, i.e.,
    *     "https://cdn.example.com".
    * @param {string} [config.contentMd5] The MD5 digest value in base64. Just like
@@ -2385,10 +2335,6 @@ class File extends ServiceObject<File> {
    *     must provide this HTTP header with this same value in its request, so to if
    *     this parameter is not provided here, the client must not provide any value
    *     for this HTTP header in its request.
-   * @param {*} config.expires A timestamp when this link will expire. Any value
-   *     given is passed to `new Date()`.
-   *     Note: 'v4' supports maximum duration of 7 days (604800 seconds) from now.
-   *     See [reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls#example}
    * @param {object} [config.extensionHeaders] If these headers are used, the
    *     server will check to make sure that the client provides matching
    * values. See [Canonical extension
@@ -2401,6 +2347,8 @@ class File extends ServiceObject<File> {
    *           no space. Requests made using the signed URL will need to
    *           delimit multi-valued headers using a single `,` as well, or
    *           else the server will report a mismatched signature.
+   * @param {object} [config.queryParams] Additional query parameters to include
+   *     in the signed URL.
    * @param {string} [config.promptSaveAs] The filename to prompt the user to
    *     save the file as when the signed url is accessed. This is ignored if
    *     `config.responseDisposition` is set.
@@ -2483,208 +2431,58 @@ class File extends ServiceObject<File> {
     cfg: GetSignedUrlConfig,
     callback?: GetSignedUrlCallback
   ): void | Promise<GetSignedUrlResponse> {
-    const expiresInMSeconds = new Date(cfg.expires).valueOf();
-
-    if (isNaN(expiresInMSeconds)) {
-      throw new Error('The expiration date provided was invalid.');
-    }
-
-    if (expiresInMSeconds < Date.now()) {
-      throw new Error('An expiration date cannot be in the past.');
-    }
-
-    const expiresInSeconds = Math.round(expiresInMSeconds / 1000); // The API expects seconds.
-
     const method = ActionToHTTPMethod[cfg.action];
-
     if (!method) {
       throw new Error('The action is not provided or invalid.');
     }
-
-    const name = encodeURI(this.name, false);
-    const resource = `/${this.bucket.name}/${name}`;
-
-    const version = cfg.version || DEFAULT_SIGNING_VERSION;
-
-    const config: GetSignedUrlConfigInternal = Object.assign({}, cfg, {
-      method,
-      expiration: expiresInSeconds,
-      resource,
-      name,
-    });
-
-    let promise: Promise<SignedUrlQuery>;
-    if (version === 'v2') {
-      promise = this.getSignedUrlV2(config);
-    } else if (version === 'v4') {
-      promise = this.getSignedUrlV4(config);
-    } else {
-      throw new Error(
-        `Invalid signed URL version: ${version}. Supported versions are 'v2' and 'v4'.`
-      );
-    }
-
-    promise.then(query => {
-      if (typeof config.responseType === 'string') {
-        query['response-content-type'] = config.responseType!;
-      }
-
-      if (typeof config.promptSaveAs === 'string') {
-        query['response-content-disposition'] =
-          'attachment; filename="' + config.promptSaveAs + '"';
-      }
-      if (typeof config.responseDisposition === 'string') {
-        query['response-content-disposition'] = config.responseDisposition!;
-      }
-
-      if (this.generation) {
-        query.generation = this.generation;
-      }
-
-      const signedUrl = new url.URL(config.cname || STORAGE_DOWNLOAD_BASE_URL);
-      signedUrl.pathname = config.cname ? name : `${this.bucket.name}/${name}`;
-      // tslint:disable-next-line:no-any
-      signedUrl.search = qsStringify(query as any);
-
-      callback!(null, signedUrl.href);
-    }, callback!);
-  }
-
-  private getSignedUrlV2(
-    config: GetSignedUrlConfigInternal
-  ): Promise<SignedUrlQuery> {
-    let extensionHeadersString = '';
-
-    if (config.method === 'POST') {
-      config.extensionHeaders = Object.assign({}, config.extensionHeaders, {
-        'x-goog-resumable': 'start',
-      });
-    }
-
-    if (config.extensionHeaders) {
-      for (const headerName of Object.keys(config.extensionHeaders)) {
-        extensionHeadersString += `${headerName}:${config.extensionHeaders[headerName]}\n`;
-      }
-    }
-
-    const blobToSign = [
-      config.method,
-      config.contentMd5 || '',
-      config.contentType || '',
-      config.expiration,
-      extensionHeadersString + config.resource,
-    ].join('\n');
-
-    const authClient = this.storage.authClient;
-    return authClient
-      .sign(blobToSign)
-      .then(signature =>
-        authClient.getCredentials().then(
-          credentials =>
-            ({
-              GoogleAccessId: credentials.client_email!,
-              Expires: config.expiration,
-              Signature: signature,
-            } as V2SignedUrlQuery)
-        )
-      )
-      .catch(err => {
-        const signingErr = new SigningError(err.message);
-        signingErr.stack = err.stack;
-        throw signingErr;
-      });
-  }
-
-  private getSignedUrlV4(
-    config: GetSignedUrlConfigInternal
-  ): Promise<SignedUrlQuery> {
-    const now = new Date();
-    const nowInSeconds = Math.floor(now.valueOf() / 1000);
-    const expiresPeriodInSeconds = config.expiration - nowInSeconds;
-
-    // v4 limit expiration to be 7 days maximum
-    if (expiresPeriodInSeconds > SEVEN_DAYS) {
-      throw new Error(
-        `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`
-      );
-    }
-
-    const extensionHeaders = Object.assign({}, config.extensionHeaders);
-    const fqdn = new url.URL(config.cname || STORAGE_DOWNLOAD_BASE_URL);
-    extensionHeaders.host = fqdn.host;
-    if (config.method === 'POST') {
+    const extensionHeaders = objectKeyToLowercase(cfg.extensionHeaders || {});
+    if (cfg.action === 'resumable') {
       extensionHeaders['x-goog-resumable'] = 'start';
     }
-    if (config.contentMd5) {
-      extensionHeaders['content-md5'] = config.contentMd5;
+
+    const queryParams = Object.assign({}, cfg.queryParams);
+    if (typeof cfg.responseType === 'string') {
+      queryParams['response-content-type'] = cfg.responseType!;
     }
-    if (config.contentType) {
-      extensionHeaders['content-type'] = config.contentType;
+    if (typeof cfg.promptSaveAs === 'string') {
+      queryParams['response-content-disposition'] =
+        'attachment; filename="' + cfg.promptSaveAs + '"';
+    }
+    if (typeof cfg.responseDisposition === 'string') {
+      queryParams['response-content-disposition'] = cfg.responseDisposition!;
+    }
+    if (this.generation) {
+      queryParams['generation'] = this.generation.toString();
     }
 
-    const signedHeaders = Object.keys(extensionHeaders)
-      .map(header => header.toLowerCase())
-      .sort()
-      .join(';');
+    const signConfig = {
+      method,
+      expires: cfg.expires,
+      extensionHeaders,
+      queryParams,
+      contentMd5: cfg.contentMd5,
+      contentType: cfg.contentType,
+    } as SignerGetSignedUrlConfig;
 
-    const extensionHeadersString = this.getCanonicalHeaders(extensionHeaders);
+    if (cfg.cname) {
+      signConfig.cname = cfg.cname;
+    }
 
-    const datestamp = dateFormat.format(now, 'YYYYMMDD', true);
-    const credentialScope = `${datestamp}/auto/storage/goog4_request`;
+    if (cfg.version) {
+      signConfig.version = cfg.version;
+    }
 
-    return this.storage.authClient.getCredentials().then(credentials => {
-      const credential = `${credentials.client_email}/${credentialScope}`;
-      const dateISO = dateFormat.format(now, 'YYYYMMDD[T]HHmmss[Z]', true);
+    if (cfg.virtualHostedStyle) {
+      signConfig.virtualHostedStyle = cfg.virtualHostedStyle;
+    }
 
-      const queryParams: V4UrlQuery = {
-        'X-Goog-Algorithm': 'GOOG4-RSA-SHA256',
-        'X-Goog-Credential': credential,
-        'X-Goog-Date': dateISO,
-        'X-Goog-Expires': expiresPeriodInSeconds,
-        'X-Goog-SignedHeaders': signedHeaders,
-      };
+    if (!this.signer) {
+      this.signer = new URLSigner(this.storage.authClient, this.bucket, this);
+    }
 
-      // tslint:disable-next-line:no-any
-      const canonicalQueryParams = qsStringify(queryParams as any);
-
-      const canonicalRequest = [
-        config.method,
-        config.cname ? `/${config.name}` : config.resource,
-        canonicalQueryParams,
-        extensionHeadersString,
-        signedHeaders,
-        'UNSIGNED-PAYLOAD',
-      ].join('\n');
-
-      const canonicalRequestHash = crypto
-        .createHash('sha256')
-        .update(canonicalRequest)
-        .digest('hex');
-
-      const blobToSign = [
-        'GOOG4-RSA-SHA256',
-        dateISO,
-        credentialScope,
-        canonicalRequestHash,
-      ].join('\n');
-
-      return this.storage.authClient
-        .sign(blobToSign)
-        .then(signature => {
-          const signatureHex = Buffer.from(signature, 'base64').toString('hex');
-
-          const signedQuery: V4SignedUrlQuery = Object.assign({}, queryParams, {
-            'X-Goog-Signature': signatureHex,
-          });
-
-          return signedQuery;
-        })
-        .catch(err => {
-          const signingErr = new SigningError(err.message);
-          signingErr.stack = err.stack;
-          throw signingErr;
-        });
-    });
+    this.signer
+      .getSignedUrl(signConfig)
+      .then(signedUrl => callback!(null, signedUrl), callback!);
   }
 
   isPublic(): Promise<IsPublicResponse>;
@@ -3450,43 +3248,6 @@ class File extends ServiceObject<File> {
       request: reqOpts,
     });
   }
-
-  /**
-   * Create canonical headers for signing v4 url.
-   *
-   * The canonical headers for v4-signing a request demands header names are
-   * first lowercased, followed by sorting the header names.
-   * Then, construct the canonical headers part of the request:
-   *  <lowercasedHeaderName> + ":" + Trim(<value>) + "\n"
-   *  ..
-   *  <lowercasedHeaderName> + ":" + Trim(<value>) + "\n"
-   *
-   * @param headers
-   * @private
-   */
-  private getCanonicalHeaders(headers: http.OutgoingHttpHeaders) {
-    // Sort headers by their lowercased names
-    const sortedHeaders = objectEntries(headers)
-      // Convert header names to lowercase
-      .map<[string, HeaderValue]>(([headerName, value]) => [
-        headerName.toLowerCase(),
-        value,
-      ])
-      .sort((a, b) => a[0].localeCompare(b[0]));
-
-    return sortedHeaders
-      .filter(([_, value]) => value !== undefined)
-      .map(([headerName, value]) => {
-        // - Convert Array (multi-valued header) into string, delimited by
-        //      ',' (no space).
-        // - Trim leading and trailing spaces.
-        // - Convert sequential (2+) spaces into a single space
-        const canonicalValue = `${value}`.trim().replace(/\s{2,}/g, ' ');
-
-        return `${headerName}:${canonicalValue}\n`;
-      })
-      .join('');
-  }
 }
 
 /*! Developer Documentation
@@ -3495,14 +3256,7 @@ class File extends ServiceObject<File> {
  * that a callback is omitted.
  */
 promisifyAll(File, {
-  exclude: [
-    'request',
-    'setEncryptionKey',
-    'getSignedUrlV2',
-    'getSignedUrlV4',
-    'getCanonicalHeaders',
-    'getDate',
-  ],
+  exclude: ['request', 'setEncryptionKey'],
 });
 
 let warned = false;

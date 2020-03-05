@@ -44,9 +44,11 @@ import {
   MakeAllFilesPublicPrivateOptions,
   SetBucketMetadataCallback,
   SetBucketMetadataResponse,
+  GetBucketSignedUrlConfig,
 } from '../src/bucket';
 import {AddAclOptions} from '../src/acl';
 import {Policy} from '../src/iam';
+import sinon = require('sinon');
 
 class FakeFile {
   calledWith_: IArguments;
@@ -150,6 +152,10 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
+const fakeSigner = {
+  URLSigner: () => {},
+};
+
 describe('Bucket', () => {
   // tslint:disable-next-line:variable-name no-any
   let Bucket: any;
@@ -174,6 +180,7 @@ describe('Bucket', () => {
       './file.js': {File: FakeFile},
       './iam.js': {Iam: FakeIam},
       './notification.js': {Notification: FakeNotification},
+      './signer.js': fakeSigner,
     }).Bucket;
   });
 
@@ -1719,6 +1726,94 @@ describe('Bucket', () => {
           done();
         }
       );
+    });
+  });
+
+  describe('getSignedUrl', () => {
+    const EXPECTED_SIGNED_URL = 'signed-url';
+    const CNAME = 'https://www.example.com';
+
+    let sandbox: sinon.SinonSandbox;
+    let signer: {getSignedUrl: Function};
+    let signerGetSignedUrlStub: sinon.SinonStub;
+    let urlSignerStub: sinon.SinonStub;
+    let SIGNED_URL_CONFIG: GetBucketSignedUrlConfig;
+
+    beforeEach(() => {
+      sandbox = sinon.createSandbox();
+
+      signerGetSignedUrlStub = sandbox.stub().resolves(EXPECTED_SIGNED_URL);
+
+      signer = {
+        getSignedUrl: signerGetSignedUrlStub,
+      };
+
+      // tslint:disable-next-line no-any
+      urlSignerStub = (sandbox.stub as any)(fakeSigner, 'URLSigner').returns(
+        signer
+      );
+
+      SIGNED_URL_CONFIG = {
+        version: 'v4',
+        expires: new Date(),
+        action: 'list',
+        cname: CNAME,
+      };
+    });
+
+    afterEach(() => sandbox.restore());
+
+    it('should construct a URLSigner and call getSignedUrl', done => {
+      // assert signer is lazily-initialized.
+      assert.strictEqual(bucket.signer, undefined);
+      bucket.getSignedUrl(
+        SIGNED_URL_CONFIG,
+        (err: Error | null, signedUrl: string) => {
+          assert.ifError(err);
+          assert.strictEqual(bucket.signer, signer);
+          assert.strictEqual(signedUrl, EXPECTED_SIGNED_URL);
+
+          const ctorArgs = urlSignerStub.getCall(0).args;
+          assert.strictEqual(ctorArgs[0], bucket.storage.authClient);
+          assert.strictEqual(ctorArgs[1], bucket);
+
+          const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+          assert.deepStrictEqual(getSignedUrlArgs[0], {
+            method: 'GET',
+            version: 'v4',
+            expires: SIGNED_URL_CONFIG.expires,
+            extensionHeaders: {},
+            queryParams: {},
+            cname: CNAME,
+          });
+          done();
+        }
+      );
+    });
+
+    it('should error if action is null', () => {
+      // tslint:disable-next-line:no-any
+      SIGNED_URL_CONFIG.action = null as any;
+
+      assert.throws(() => {
+        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {});
+      }, /The action is not provided or invalid./);
+    });
+
+    it('should error if action is undefined', () => {
+      delete SIGNED_URL_CONFIG.action;
+      assert.throws(() => {
+        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {});
+      }, /The action is not provided or invalid./);
+    });
+
+    it('should error for an invalid action', () => {
+      // tslint:disable-next-line:no-any
+      SIGNED_URL_CONFIG.action = 'watch' as any;
+
+      assert.throws(() => {
+        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {});
+      }, /The action is not provided or invalid./);
     });
   });
 

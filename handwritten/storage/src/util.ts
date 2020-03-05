@@ -85,3 +85,13 @@ export function qsStringify(qs: querystring.ParsedUrlQueryInput): string {
     encodeURIComponent: (component: string) => encodeURI(component, true),
   });
 }
+
+export function objectKeyToLowercase<T>(object: {[key: string]: T}) {
+  const newObj: {[key: string]: T} = {};
+  for (let key of Object.keys(object)) {
+    const value = object[key];
+    key = key.toLowerCase();
+    newObj[key] = value;
+  }
+  return newObj;
+}

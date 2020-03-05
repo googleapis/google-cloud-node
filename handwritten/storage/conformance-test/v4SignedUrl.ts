@@ -15,27 +15,42 @@
  */
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import * as dateFormat from 'date-and-time';
 import * as fs from 'fs';
 import {OutgoingHttpHeaders} from 'http';
 import * as path from 'path';
 import * as sinon from 'sinon';
+import * as querystring from 'querystring';
 
-import {Storage} from '../src/';
+import {Storage, GetSignedUrlConfig, GetBucketSignedUrlConfig} from '../src/';
+import * as url from 'url';
+
+export enum UrlStyle {
+  PATH_STYLE = 'PATH_STYLE',
+  VIRTUAL_HOSTED_STYLE = 'VIRTUAL_HOSTED_STYLE',
+  BUCKET_BOUND_DOMAIN = 'BUCKET_BOUND_DOMAIN',
+}
 
 interface V4SignedURLConformanceTestCases {
   description: string;
   bucket: string;
-  object: string;
+  object?: string;
+  urlStyle?: UrlStyle;
+  bucketBoundDomain?: string;
+  scheme: 'https' | 'http';
   headers?: OutgoingHttpHeaders;
+  queryParameters?: {[key: string]: string};
   method: string;
   expiration: number;
   timestamp: string;
   expectedUrl: string;
 }
 
-interface MethodAction {
+interface FileAction {
   [key: string]: 'read' | 'resumable' | 'write' | 'delete';
+}
+
+interface BucketAction {
+  [key: string]: 'list';
 }
 
 const testFile = fs.readFileSync(
@@ -43,7 +58,8 @@ const testFile = fs.readFileSync(
   'utf-8'
 );
 
-const testCases = JSON.parse(testFile) as V4SignedURLConformanceTestCases[];
+const testCases = JSON.parse(testFile)
+  .signingV4Tests as V4SignedURLConformanceTestCases[];
 
 const SERVICE_ACCOUNT = path.join(
   __dirname,
@@ -54,41 +70,83 @@ describe('v4 signed url', () => {
   const storage = new Storage({keyFilename: SERVICE_ACCOUNT});
 
   testCases.forEach(testCase => {
-    it(testCase.description, async function() {
-      // v4 signed URL does not support Bucket operations (list bucket, etc) yet
-      // Remove this conditional once it is supported.
-      if (!testCase.object) {
-        this.skip();
+    it(testCase.description, async () => {
+      const NOW = new Date(testCase.timestamp);
+
+      const fakeTimer = sinon.useFakeTimers(NOW);
+      const bucket = storage.bucket(testCase.bucket);
+      const expires = NOW.valueOf() + testCase.expiration * 1000;
+      const version = 'v4' as 'v4';
+      const domain = testCase.bucketBoundDomain
+        ? `${testCase.scheme}://${testCase.bucketBoundDomain}`
+        : undefined;
+      const {cname, virtualHostedStyle} = parseUrlStyle(
+        testCase.urlStyle,
+        domain
+      );
+      const extensionHeaders = testCase.headers;
+      const queryParams = testCase.queryParameters;
+      const baseConfig = {
+        extensionHeaders,
+        version,
+        expires,
+        cname,
+        virtualHostedStyle,
+        queryParams,
+      };
+      let signedUrl: string;
+
+      if (testCase.object) {
+        const file = bucket.file(testCase.object);
+
+        const action = ({
+          GET: 'read',
+          POST: 'resumable',
+          PUT: 'write',
+          DELETE: 'delete',
+        } as FileAction)[testCase.method];
+
+        [signedUrl] = await file.getSignedUrl({
+          action,
+          ...baseConfig,
+        } as GetSignedUrlConfig);
+      } else {
+        // bucket operation
+        const action = ({
+          GET: 'list',
+        } as BucketAction)[testCase.method];
+
+        [signedUrl] = await bucket.getSignedUrl({
+          action,
+          ...baseConfig,
+        });
       }
 
-      const NOW = dateFormat.parse(
-        testCase.timestamp,
-        'YYYYMMDD HHmmss ',
-        true
+      const expected = new url.URL(testCase.expectedUrl);
+      const actual = new url.URL(signedUrl);
+
+      assert.strictEqual(actual.origin, expected.origin);
+      assert.strictEqual(actual.pathname, expected.pathname);
+      // Order-insensitive comparison of query params
+      assert.deepStrictEqual(
+        querystring.parse(actual.search),
+        querystring.parse(expected.search)
       );
-      const fakeTimer = sinon.useFakeTimers(NOW);
 
-      const bucket = storage.bucket(testCase.bucket);
-      const file = bucket.file(testCase.object);
-
-      const action = ({
-        GET: 'read',
-        POST: 'resumable',
-        PUT: 'write',
-        DELETE: 'delete',
-      } as MethodAction)[testCase.method];
-
-      const expires = NOW.valueOf() + testCase.expiration * 1000;
-
-      const [signedUrl] = await file.getSignedUrl({
-        version: 'v4',
-        action,
-        expires,
-        extensionHeaders: testCase.headers,
-      });
-
-      assert.strictEqual(signedUrl, testCase.expectedUrl);
       fakeTimer.restore();
     });
   });
 });
+
+function parseUrlStyle(
+  style?: UrlStyle,
+  domain?: string
+): {cname?: string; virtualHostedStyle?: boolean} {
+  if (style === UrlStyle.BUCKET_BOUND_DOMAIN) {
+    return {cname: domain};
+  } else if (style === UrlStyle.VIRTUAL_HOSTED_STYLE) {
+    return {virtualHostedStyle: true};
+  } else {
+    return {virtualHostedStyle: false};
+  }
+}
