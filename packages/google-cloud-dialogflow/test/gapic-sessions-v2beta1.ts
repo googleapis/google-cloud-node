@@ -158,7 +158,7 @@ describe('v2beta1.SessionsClient', () => {
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.dialogflow.v2beta1.IStreamingDetectIntentRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -184,7 +184,7 @@ describe('v2beta1.SessionsClient', () => {
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.dialogflow.v2beta1.IStreamingDetectIntentRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
