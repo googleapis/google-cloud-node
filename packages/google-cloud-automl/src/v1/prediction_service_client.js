@@ -246,26 +246,51 @@ class PredictionServiceClient {
   // -------------------
 
   /**
-   * Perform an online prediction. The prediction result will be directly
+   * Perform an online prediction. The prediction result is directly
    * returned in the response.
-   * Available for following ML problems, and their expected request payloads:
-   * * Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
-   *                          up to 30MB.
-   * * Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
-   *                            up to 30MB.
-   * * Text Classification - TextSnippet, content up to 60,000 characters,
-   *                         UTF-8 encoded.
-   * * Text Extraction - TextSnippet, content up to 30,000 characters,
-   *                     UTF-8 NFC encoded.
-   * * Translation - TextSnippet, content up to 25,000 characters, UTF-8
-   *                 encoded.
-   * * Text Sentiment - TextSnippet, content up 500 characters, UTF-8
-   *                     encoded.
+   * Available for following ML scenarios, and their expected request payloads:
+   *
+   * <table>
+   * <tr>
+   * <td>AutoML Vision Classification</td>
+   * <td>An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.</td>
+   * </tr>
+   * <tr>
+   * <td>AutoML Vision Object Detection</td>
+   * <td>An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.</td>
+   * </tr>
+   * <tr>
+   * <td>AutoML Natural Language Classification</td>
+   * <td>A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
+   * .PDF, .TIF or .TIFF format with size upto 2MB.</td>
+   * </tr>
+   * <tr>
+   * <td>AutoML Natural Language Entity Extraction</td>
+   * <td>A TextSnippet up to 10,000 characters, UTF-8 NFC encoded or a document
+   *  in .PDF, .TIF or .TIFF format with size upto 20MB.</td>
+   * </tr>
+   * <tr>
+   * <td>AutoML Natural Language Sentiment Analysis</td>
+   * <td>A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
+   * .PDF, .TIF or .TIFF format with size upto 2MB.</td>
+   * </tr>
+   * <tr>
+   * <td>AutoML Translation</td>
+   * <td>A TextSnippet up to 25,000 characters, UTF-8 encoded.</td>
+   * </tr>
+   * <tr>
+   * <td>AutoML Tables</td>
+   * <td>A row with column values matching
+   *   the columns of the model, up to 5MB. Not available for FORECASTING
+   *   `prediction_type`.
+   * </td>
+   * </tr>
+   * </table>
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Name of the model requested to serve the prediction.
+   *   Required. Name of the model requested to serve the prediction.
    * @param {Object} request.payload
    *   Required. Payload to perform a prediction on. The payload must match the
    *   problem type that the model was trained to solve.
@@ -275,19 +300,34 @@ class PredictionServiceClient {
    *   Additional domain-specific parameters, any string must be up to 25000
    *   characters long.
    *
-   *   *  For Image Classification:
+   *   <h4>AutoML Vision Classification</h4>
    *
-   *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
-   *       makes predictions for an image, it will only produce results that have
-   *       at least this confidence score. The default is 0.5.
+   *   `score_threshold`
+   *   : (float) A value from 0.0 to 1.0. When the model
+   *     makes predictions for an image, it will only produce results that have
+   *     at least this confidence score. The default is 0.5.
    *
-   *    *  For Image Object Detection:
-   *      `score_threshold` - (float) When Model detects objects on the image,
-   *          it will only produce bounding boxes which have at least this
-   *          confidence score. Value in 0 to 1 range, default is 0.5.
-   *      `max_bounding_box_count` - (int64) No more than this number of bounding
-   *          boxes will be returned in the response. Default is 100, the
-   *          requested value may be limited by server.
+   *   <h4>AutoML Vision Object Detection</h4>
+   *
+   *   `score_threshold`
+   *   : (float) When Model detects objects on the image,
+   *     it will only produce bounding boxes which have at least this
+   *     confidence score. Value in 0 to 1 range, default is 0.5.
+   *
+   *   `max_bounding_box_count`
+   *   : (int64) The maximum number of bounding
+   *     boxes returned. The default is 100. The
+   *     number of returned bounding boxes might be limited by the server.
+   *
+   *   <h4>AutoML Tables</h4>
+   *
+   *   `feature_importance`
+   *   : (boolean) Whether
+   *
+   *   feature_importance
+   *     is populated in the returned list of
+   *     TablesAnnotation
+   *     objects. The default is false.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -341,23 +381,26 @@ class PredictionServiceClient {
   }
 
   /**
-   * Perform a batch prediction. Unlike the online
-   * Predict, batch
+   * Perform a batch prediction. Unlike the online Predict, batch
    * prediction result won't be immediately available in the response. Instead,
    * a long running operation object is returned. User can poll the operation
    * result via GetOperation
-   * method. Once the operation is done,
-   * BatchPredictResult is returned
-   * in the response field. Available
-   * for following ML problems:
-   * * Image Classification
-   * * Image Object Detection
-   * * Text Extraction
+   * method. Once the operation is done, BatchPredictResult is returned in
+   * the response field.
+   * Available for following ML scenarios:
+   *
+   * * AutoML Vision Classification
+   * * AutoML Vision Object Detection
+   * * AutoML Video Intelligence Classification
+   * * AutoML Video Intelligence Object Tracking * AutoML Natural Language Classification
+   * * AutoML Natural Language Entity Extraction
+   * * AutoML Natural Language Sentiment Analysis
+   * * AutoML Tables
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Name of the model requested to serve the batch prediction.
+   *   Required. Name of the model requested to serve the batch prediction.
    * @param {Object} request.inputConfig
    *   Required. The input configuration for batch prediction.
    *
@@ -371,26 +414,86 @@ class PredictionServiceClient {
    *   Additional domain-specific parameters for the predictions, any string must
    *   be up to 25000 characters long.
    *
-   *   *  For Text Classification:
+   *   <h4>AutoML Natural Language Classification</h4>
    *
-   *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
-   *           makes predictions for a text snippet, it will only produce results
-   *           that have at least this confidence score. The default is 0.5.
+   *   `score_threshold`
+   *   : (float) A value from 0.0 to 1.0. When the model
+   *     makes predictions for a text snippet, it will only produce results
+   *     that have at least this confidence score. The default is 0.5.
    *
-   *   *  For Image Classification:
    *
-   *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
-   *           makes predictions for an image, it will only produce results that
-   *           have at least this confidence score. The default is 0.5.
+   *   <h4>AutoML Vision Classification</h4>
    *
-   *   *  For Image Object Detection:
+   *   `score_threshold`
+   *   : (float) A value from 0.0 to 1.0. When the model
+   *     makes predictions for an image, it will only produce results that
+   *     have at least this confidence score. The default is 0.5.
    *
-   *      `score_threshold` - (float) When Model detects objects on the image,
-   *          it will only produce bounding boxes which have at least this
-   *          confidence score. Value in 0 to 1 range, default is 0.5.
-   *      `max_bounding_box_count` - (int64) No more than this number of bounding
-   *          boxes will be produced per image. Default is 100, the
-   *          requested value may be limited by server.
+   *   <h4>AutoML Vision Object Detection</h4>
+   *
+   *   `score_threshold`
+   *   : (float) When Model detects objects on the image,
+   *     it will only produce bounding boxes which have at least this
+   *     confidence score. Value in 0 to 1 range, default is 0.5.
+   *
+   *   `max_bounding_box_count`
+   *   : (int64) The maximum number of bounding
+   *     boxes returned per image. The default is 100, the
+   *     number of bounding boxes returned might be limited by the server.
+   *   <h4>AutoML Video Intelligence Classification</h4>
+   *
+   *   `score_threshold`
+   *   : (float) A value from 0.0 to 1.0. When the model
+   *     makes predictions for a video, it will only produce results that
+   *     have at least this confidence score. The default is 0.5.
+   *
+   *   `segment_classification`
+   *   : (boolean) Set to true to request
+   *     segment-level classification. AutoML Video Intelligence returns
+   *     labels and their confidence scores for the entire segment of the
+   *     video that user specified in the request configuration.
+   *     The default is true.
+   *
+   *   `shot_classification`
+   *   : (boolean) Set to true to request shot-level
+   *     classification. AutoML Video Intelligence determines the boundaries
+   *     for each camera shot in the entire segment of the video that user
+   *     specified in the request configuration. AutoML Video Intelligence
+   *     then returns labels and their confidence scores for each detected
+   *     shot, along with the start and end time of the shot.
+   *     The default is false.
+   *
+   *     WARNING: Model evaluation is not done for this classification type,
+   *     the quality of it depends on training data, but there are no metrics
+   *     provided to describe that quality.
+   *
+   *   `1s_interval_classification`
+   *   : (boolean) Set to true to request
+   *     classification for a video at one-second intervals. AutoML Video
+   *     Intelligence returns labels and their confidence scores for each
+   *     second of the entire segment of the video that user specified in the
+   *     request configuration. The default is false.
+   *
+   *     WARNING: Model evaluation is not done for this classification
+   *     type, the quality of it depends on training data, but there are no
+   *     metrics provided to describe that quality.
+   *
+   *   <h4>AutoML Video Intelligence Object Tracking</h4>
+   *
+   *   `score_threshold`
+   *   : (float) When Model detects objects on video frames,
+   *     it will only produce bounding boxes which have at least this
+   *     confidence score. Value in 0 to 1 range, default is 0.5.
+   *
+   *   `max_bounding_box_count`
+   *   : (int64) The maximum number of bounding
+   *     boxes returned per image. The default is 100, the
+   *     number of bounding boxes returned might be limited by the server.
+   *
+   *   `min_bounding_box_size`
+   *   : (float) Only bounding boxes with shortest edge
+   *     at least that long as a relative value of video frame size are
+   *     returned. Value in 0 to 1 range. Default is 0.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

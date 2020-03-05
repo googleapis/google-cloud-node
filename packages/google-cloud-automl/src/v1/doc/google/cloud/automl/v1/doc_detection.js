@@ -24,8 +24,8 @@
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.automl.v1.BoundingPoly}
  *
  * @property {number} score
- *   Output only. The confidence that this annotation is positive for the parent
- *   example, value in [0, 1], higher means higher positivity confidence.
+ *   Output only. The confidence that this annotation is positive for the parent example,
+ *   value in [0, 1], higher means higher positivity confidence.
  *
  * @typedef ImageObjectDetectionAnnotation
  * @memberof google.cloud.automl.v1

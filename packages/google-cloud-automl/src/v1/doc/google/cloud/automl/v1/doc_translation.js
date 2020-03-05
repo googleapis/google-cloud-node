@@ -60,11 +60,11 @@ const TranslationEvaluationMetrics = {
  *
  * @property {string} sourceLanguageCode
  *   Output only. Inferred from the dataset.
- *   The source languge (The BCP-47 language code) that is used for training.
+ *   The source language (The BCP-47 language code) that is used for training.
  *
  * @property {string} targetLanguageCode
- *   Output only. The target languge (The BCP-47 language code) that is used for
- *   training.
+ *   Output only. The target language (The BCP-47 language code) that is used
+ *   for training.
  *
  * @typedef TranslationModelMetadata
  * @memberof google.cloud.automl.v1

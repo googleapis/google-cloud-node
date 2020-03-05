@@ -16,14 +16,13 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for
- * AutoMl.CreateDataset.
+ * Request message for AutoMl.CreateDataset.
  *
  * @property {string} parent
- *   The resource name of the project to create the dataset for.
+ *   Required. The resource name of the project to create the dataset for.
  *
  * @property {Object} dataset
- *   The dataset to create.
+ *   Required. The dataset to create.
  *
  *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1.Dataset}
  *
@@ -36,11 +35,10 @@ const CreateDatasetRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.GetDataset.
+ * Request message for AutoMl.GetDataset.
  *
  * @property {string} name
- *   The resource name of the dataset to retrieve.
+ *   Required. The resource name of the dataset to retrieve.
  *
  * @typedef GetDatasetRequest
  * @memberof google.cloud.automl.v1
@@ -51,18 +49,16 @@ const GetDatasetRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ListDatasets.
+ * Request message for AutoMl.ListDatasets.
  *
  * @property {string} parent
- *   The resource name of the project from which to list datasets.
+ *   Required. The resource name of the project from which to list datasets.
  *
  * @property {string} filter
  *   An expression for filtering the results of the request.
  *
  *     * `dataset_metadata` - for existence of the case (e.g.
- *               image_classification_dataset_metadata:*). Some examples of
- *               using the filter are:
+ *               image_classification_dataset_metadata:*). Some examples of using the filter are:
  *
  *     * `translation_dataset_metadata:*` --> The dataset has
  *                                            translation_dataset_metadata.
@@ -74,8 +70,7 @@ const GetDatasetRequest = {
  * @property {string} pageToken
  *   A token identifying a page of results for the server to return
  *   Typically obtained via
- *   ListDatasetsResponse.next_page_token
- *   of the previous
+ *   ListDatasetsResponse.next_page_token of the previous
  *   AutoMl.ListDatasets call.
  *
  * @typedef ListDatasetsRequest
@@ -87,8 +82,7 @@ const ListDatasetsRequest = {
 };
 
 /**
- * Response message for
- * AutoMl.ListDatasets.
+ * Response message for AutoMl.ListDatasets.
  *
  * @property {Object[]} datasets
  *   The datasets read.
@@ -97,9 +91,7 @@ const ListDatasetsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results.
- *   Pass to
- *   ListDatasetsRequest.page_token
- *   to obtain that page.
+ *   Pass to ListDatasetsRequest.page_token to obtain that page.
  *
  * @typedef ListDatasetsResponse
  * @memberof google.cloud.automl.v1
@@ -110,11 +102,10 @@ const ListDatasetsResponse = {
 };
 
 /**
- * Request message for
- * AutoMl.UpdateDataset
+ * Request message for AutoMl.UpdateDataset
  *
  * @property {Object} dataset
- *   The dataset which replaces the resource on the server.
+ *   Required. The dataset which replaces the resource on the server.
  *
  *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1.Dataset}
  *
@@ -132,11 +123,10 @@ const UpdateDatasetRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.DeleteDataset.
+ * Request message for AutoMl.DeleteDataset.
  *
  * @property {string} name
- *   The resource name of the dataset to delete.
+ *   Required. The resource name of the dataset to delete.
  *
  * @typedef DeleteDatasetRequest
  * @memberof google.cloud.automl.v1
@@ -147,8 +137,7 @@ const DeleteDatasetRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ImportData.
+ * Request message for AutoMl.ImportData.
  *
  * @property {string} name
  *   Required. Dataset name. Dataset must already exist. All imported
@@ -169,8 +158,7 @@ const ImportDataRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ExportData.
+ * Request message for AutoMl.ExportData.
  *
  * @property {string} name
  *   Required. The resource name of the dataset.
@@ -189,11 +177,10 @@ const ExportDataRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.GetAnnotationSpec.
+ * Request message for AutoMl.GetAnnotationSpec.
  *
  * @property {string} name
- *   The resource name of the annotation spec to retrieve.
+ *   Required. The resource name of the annotation spec to retrieve.
  *
  * @typedef GetAnnotationSpecRequest
  * @memberof google.cloud.automl.v1
@@ -204,14 +191,13 @@ const GetAnnotationSpecRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.CreateModel.
+ * Request message for AutoMl.CreateModel.
  *
  * @property {string} parent
- *   Resource name of the parent project where the model is being created.
+ *   Required. Resource name of the parent project where the model is being created.
  *
  * @property {Object} model
- *   The model to create.
+ *   Required. The model to create.
  *
  *   This object should have the same structure as [Model]{@link google.cloud.automl.v1.Model}
  *
@@ -224,11 +210,10 @@ const CreateModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.GetModel.
+ * Request message for AutoMl.GetModel.
  *
  * @property {string} name
- *   Resource name of the model.
+ *   Required. Resource name of the model.
  *
  * @typedef GetModelRequest
  * @memberof google.cloud.automl.v1
@@ -239,17 +224,16 @@ const GetModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ListModels.
+ * Request message for AutoMl.ListModels.
  *
  * @property {string} parent
- *   Resource name of the project, from which to list the models.
+ *   Required. Resource name of the project, from which to list the models.
  *
  * @property {string} filter
  *   An expression for filtering the results of the request.
  *
  *     * `model_metadata` - for existence of the case (e.g.
- *               image_classification_model_metadata:*).
+ *               video_classification_model_metadata:*).
  *     * `dataset_id` - for = or !=. Some examples of using the filter are:
  *
  *     * `image_classification_model_metadata:*` --> The model has
@@ -262,8 +246,7 @@ const GetModelRequest = {
  * @property {string} pageToken
  *   A token identifying a page of results for the server to return
  *   Typically obtained via
- *   ListModelsResponse.next_page_token
- *   of the previous
+ *   ListModelsResponse.next_page_token of the previous
  *   AutoMl.ListModels call.
  *
  * @typedef ListModelsRequest
@@ -275,8 +258,7 @@ const ListModelsRequest = {
 };
 
 /**
- * Response message for
- * AutoMl.ListModels.
+ * Response message for AutoMl.ListModels.
  *
  * @property {Object[]} model
  *   List of models in the requested page.
@@ -285,9 +267,7 @@ const ListModelsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results.
- *   Pass to
- *   ListModelsRequest.page_token
- *   to obtain that page.
+ *   Pass to ListModelsRequest.page_token to obtain that page.
  *
  * @typedef ListModelsResponse
  * @memberof google.cloud.automl.v1
@@ -298,11 +278,10 @@ const ListModelsResponse = {
 };
 
 /**
- * Request message for
- * AutoMl.DeleteModel.
+ * Request message for AutoMl.DeleteModel.
  *
  * @property {string} name
- *   Resource name of the model being deleted.
+ *   Required. Resource name of the model being deleted.
  *
  * @typedef DeleteModelRequest
  * @memberof google.cloud.automl.v1
@@ -313,11 +292,10 @@ const DeleteModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.UpdateModel
+ * Request message for AutoMl.UpdateModel
  *
  * @property {Object} model
- *   The model which replaces the resource on the server.
+ *   Required. The model which replaces the resource on the server.
  *
  *   This object should have the same structure as [Model]{@link google.cloud.automl.v1.Model}
  *
@@ -335,8 +313,7 @@ const UpdateModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.DeployModel.
+ * Request message for AutoMl.DeployModel.
  *
  * @property {Object} imageObjectDetectionModelDeploymentMetadata
  *   Model deployment metadata specific to Image Object Detection.
@@ -349,7 +326,7 @@ const UpdateModelRequest = {
  *   This object should have the same structure as [ImageClassificationModelDeploymentMetadata]{@link google.cloud.automl.v1.ImageClassificationModelDeploymentMetadata}
  *
  * @property {string} name
- *   Resource name of the model to deploy.
+ *   Required. Resource name of the model to deploy.
  *
  * @typedef DeployModelRequest
  * @memberof google.cloud.automl.v1
@@ -360,11 +337,10 @@ const DeployModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.UndeployModel.
+ * Request message for AutoMl.UndeployModel.
  *
  * @property {string} name
- *   Resource name of the model to undeploy.
+ *   Required. Resource name of the model to undeploy.
  *
  * @typedef UndeployModelRequest
  * @memberof google.cloud.automl.v1
@@ -375,9 +351,9 @@ const UndeployModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ExportModel. Models need
- * to be enabled for exporting, otherwise an error code will be returned.
+ * Request message for AutoMl.ExportModel.
+ * Models need to be enabled for exporting, otherwise an error code will be
+ * returned.
  *
  * @property {string} name
  *   Required. The resource name of the model to export.
@@ -396,11 +372,10 @@ const ExportModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.GetModelEvaluation.
+ * Request message for AutoMl.GetModelEvaluation.
  *
  * @property {string} name
- *   Resource name for the model evaluation.
+ *   Required. Resource name for the model evaluation.
  *
  * @typedef GetModelEvaluationRequest
  * @memberof google.cloud.automl.v1
@@ -411,16 +386,15 @@ const GetModelEvaluationRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ListModelEvaluations.
+ * Request message for AutoMl.ListModelEvaluations.
  *
  * @property {string} parent
- *   Resource name of the model to list the model evaluations for.
+ *   Required. Resource name of the model to list the model evaluations for.
  *   If modelId is set as "-", this will list model evaluations from across all
  *   models of the parent location.
  *
  * @property {string} filter
- *   An expression for filtering the results of the request.
+ *   Required. An expression for filtering the results of the request.
  *
  *     * `annotation_spec_id` - for =, !=  or existence. See example below for
  *                            the last.
@@ -438,10 +412,8 @@ const GetModelEvaluationRequest = {
  * @property {string} pageToken
  *   A token identifying a page of results for the server to return.
  *   Typically obtained via
- *   ListModelEvaluationsResponse.next_page_token
- *   of the previous
- *   AutoMl.ListModelEvaluations
- *   call.
+ *   ListModelEvaluationsResponse.next_page_token of the previous
+ *   AutoMl.ListModelEvaluations call.
  *
  * @typedef ListModelEvaluationsRequest
  * @memberof google.cloud.automl.v1
@@ -452,8 +424,7 @@ const ListModelEvaluationsRequest = {
 };
 
 /**
- * Response message for
- * AutoMl.ListModelEvaluations.
+ * Response message for AutoMl.ListModelEvaluations.
  *
  * @property {Object[]} modelEvaluation
  *   List of model evaluations in the requested page.
@@ -462,11 +433,8 @@ const ListModelEvaluationsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results.
- *   Pass to the
- *   ListModelEvaluationsRequest.page_token
- *   field of a new
- *   AutoMl.ListModelEvaluations
- *   request to obtain that page.
+ *   Pass to the ListModelEvaluationsRequest.page_token field of a new
+ *   AutoMl.ListModelEvaluations request to obtain that page.
  *
  * @typedef ListModelEvaluationsResponse
  * @memberof google.cloud.automl.v1

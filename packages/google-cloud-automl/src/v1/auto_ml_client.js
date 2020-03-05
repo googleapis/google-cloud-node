@@ -392,9 +392,9 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The resource name of the project to create the dataset for.
+   *   Required. The resource name of the project to create the dataset for.
    * @param {Object} request.dataset
-   *   The dataset to create.
+   *   Required. The dataset to create.
    *
    *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1.Dataset}
    * @param {Object} [options]
@@ -509,7 +509,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.dataset
-   *   The dataset which replaces the resource on the server.
+   *   Required. The dataset which replaces the resource on the server.
    *
    *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1.Dataset}
    * @param {Object} request.updateMask
@@ -574,7 +574,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the dataset to retrieve.
+   *   Required. The resource name of the dataset to retrieve.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -628,13 +628,12 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The resource name of the project from which to list datasets.
+   *   Required. The resource name of the project from which to list datasets.
    * @param {string} [request.filter]
    *   An expression for filtering the results of the request.
    *
    *     * `dataset_metadata` - for existence of the case (e.g.
-   *               image_classification_dataset_metadata:*). Some examples of
-   *               using the filter are:
+   *               image_classification_dataset_metadata:*). Some examples of using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            translation_dataset_metadata.
@@ -749,13 +748,12 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The resource name of the project from which to list datasets.
+   *   Required. The resource name of the project from which to list datasets.
    * @param {string} [request.filter]
    *   An expression for filtering the results of the request.
    *
    *     * `dataset_metadata` - for existence of the case (e.g.
-   *               image_classification_dataset_metadata:*). Some examples of
-   *               using the filter are:
+   *               image_classification_dataset_metadata:*). Some examples of using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            translation_dataset_metadata.
@@ -807,7 +805,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the dataset to delete.
+   *   Required. The resource name of the dataset to delete.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -901,6 +899,14 @@ class AutoMlClient {
 
   /**
    * Imports data into a dataset.
+   * For Tables this method can only be called on an empty Dataset.
+   *
+   * For Tables:
+   * *   A
+   * schema_inference_version
+   *     parameter must be explicitly set.
+   * Returns an empty response in the
+   * response field when it completes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1143,7 +1149,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the annotation spec to retrieve.
+   *   Required. The resource name of the annotation spec to retrieve.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1201,9 +1207,9 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent project where the model is being created.
+   *   Required. Resource name of the parent project where the model is being created.
    * @param {Object} request.model
-   *   The model to create.
+   *   Required. The model to create.
    *
    *   This object should have the same structure as [Model]{@link google.cloud.automl.v1.Model}
    * @param {Object} [options]
@@ -1318,7 +1324,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the model.
+   *   Required. Resource name of the model.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1372,7 +1378,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.model
-   *   The model which replaces the resource on the server.
+   *   Required. The model which replaces the resource on the server.
    *
    *   This object should have the same structure as [Model]{@link google.cloud.automl.v1.Model}
    * @param {Object} request.updateMask
@@ -1437,12 +1443,12 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the project, from which to list the models.
+   *   Required. Resource name of the project, from which to list the models.
    * @param {string} [request.filter]
    *   An expression for filtering the results of the request.
    *
    *     * `model_metadata` - for existence of the case (e.g.
-   *               image_classification_model_metadata:*).
+   *               video_classification_model_metadata:*).
    *     * `dataset_id` - for = or !=. Some examples of using the filter are:
    *
    *     * `image_classification_model_metadata:*` --> The model has
@@ -1559,12 +1565,12 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the project, from which to list the models.
+   *   Required. Resource name of the project, from which to list the models.
    * @param {string} [request.filter]
    *   An expression for filtering the results of the request.
    *
    *     * `model_metadata` - for existence of the case (e.g.
-   *               image_classification_model_metadata:*).
+   *               video_classification_model_metadata:*).
    *     * `dataset_id` - for = or !=. Some examples of using the filter are:
    *
    *     * `image_classification_model_metadata:*` --> The model has
@@ -1618,7 +1624,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the model being deleted.
+   *   Required. Resource name of the model being deleted.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1718,8 +1724,8 @@ class AutoMlClient {
    * node_number)
    *  will reset the deployment state without pausing the model's availability.
    *
-   * Only applicable for Text Classification, Image Object Detection; all other
-   * domains manage deployment automatically.
+   * Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage
+   * deployment automatically.
    *
    * Returns an empty response in the
    * response field when it completes.
@@ -1727,7 +1733,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the model to deploy.
+   *   Required. Resource name of the model to deploy.
    * @param {Object} [request.imageObjectDetectionModelDeploymentMetadata]
    *   Model deployment metadata specific to Image Object Detection.
    *
@@ -1830,7 +1836,7 @@ class AutoMlClient {
   /**
    * Undeploys a model. If the model is not deployed this method has no effect.
    *
-   * Only applicable for Text Classification, Image Object Detection;
+   * Only applicable for Text Classification, Image Object Detection and Tables;
    * all other domains manage deployment automatically.
    *
    * Returns an empty response in the
@@ -1839,7 +1845,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the model to undeploy.
+   *   Required. Resource name of the model to undeploy.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2060,7 +2066,7 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name for the model evaluation.
+   *   Required. Resource name for the model evaluation.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2114,11 +2120,11 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the model to list the model evaluations for.
+   *   Required. Resource name of the model to list the model evaluations for.
    *   If modelId is set as "-", this will list model evaluations from across all
    *   models of the parent location.
    * @param {string} request.filter
-   *   An expression for filtering the results of the request.
+   *   Required. An expression for filtering the results of the request.
    *
    *     * `annotation_spec_id` - for =, !=  or existence. See example below for
    *                            the last.
@@ -2250,11 +2256,11 @@ class AutoMlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the model to list the model evaluations for.
+   *   Required. Resource name of the model to list the model evaluations for.
    *   If modelId is set as "-", this will list model evaluations from across all
    *   models of the parent location.
    * @param {string} request.filter
-   *   An expression for filtering the results of the request.
+   *   Required. An expression for filtering the results of the request.
    *
    *     * `annotation_spec_id` - for =, !=  or existence. See example below for
    *                            the last.
