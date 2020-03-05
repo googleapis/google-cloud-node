@@ -51,16 +51,6 @@ s.replace("src/v1/doc/google/cloud/iot/v1/doc_resources.js",
         "\[RFC(.*)\]\(https:\/\/cloud\.google\.com",
         r"[RFC\1](")
 
-# [START fix-dead-link]
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'toISOString\]',
-        'toISOString)')
-
-# [END fix-dead-link]
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
