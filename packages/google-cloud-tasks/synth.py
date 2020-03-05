@@ -42,21 +42,12 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-# [START fix-dead-link]
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'toISOString\]',
-        'toISOString)')
 s.replace('**/src/**/cloud_tasks_client_config.json',
         '"initial_rpc_timeout_millis": 60000',
         '"initial_rpc_timeout_millis": 20000')
 s.replace('**/src/**/cloud_tasks_client_config.json',
         '"max_rpc_timeout_millis": 60000',
         '"max_rpc_timeout_millis": 20000')        
-# [END fix-dead-link]
 
 # Node.js specific cleanup
 subprocess.run(["npm", "install"])
