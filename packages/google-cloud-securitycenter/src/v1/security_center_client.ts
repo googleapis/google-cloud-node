@@ -150,6 +150,9 @@ export class SecurityCenterClient {
       findingPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
+      notificationConfigPathTemplate: new gaxModule.PathTemplate(
+        'organizations/{organization}/notificationConfigs/{notification_config}'
+      ),
       organizationPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
@@ -190,6 +193,11 @@ export class SecurityCenterClient {
         'pageToken',
         'nextPageToken',
         'listFindingsResults'
+      ),
+      listNotificationConfigs: new gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'notificationConfigs'
       ),
       listSources: new gaxModule.PageDescriptor(
         'pageToken',
@@ -256,19 +264,24 @@ export class SecurityCenterClient {
     const securityCenterStubMethods = [
       'createSource',
       'createFinding',
+      'createNotificationConfig',
+      'deleteNotificationConfig',
       'getIamPolicy',
+      'getNotificationConfig',
       'getOrganizationSettings',
       'getSource',
       'groupAssets',
       'groupFindings',
       'listAssets',
       'listFindings',
+      'listNotificationConfigs',
       'listSources',
       'runAssetDiscovery',
       'setFindingState',
       'setIamPolicy',
       'testIamPermissions',
       'updateFinding',
+      'updateNotificationConfig',
       'updateOrganizationSettings',
       'updateSource',
       'updateSecurityMarks',
@@ -387,8 +400,8 @@ export class SecurityCenterClient {
    *   Required. Resource name of the new source's parent. Its format should be
    *   "organizations/[organization_id]".
    * @param {google.cloud.securitycenter.v1.Source} request.source
-   *   Required. The Source being created, only the display_name and description will be
-   *   used. All other fields will be ignored.
+   *   Required. The Source being created, only the display_name and description
+   *   will be used. All other fields will be ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -476,8 +489,8 @@ export class SecurityCenterClient {
    *   It must be alphanumeric and less than or equal to 32 characters and
    *   greater than 0 characters in length.
    * @param {google.cloud.securitycenter.v1.Finding} request.finding
-   *   Required. The Finding being created. The name and security_marks will be ignored as
-   *   they are both output only fields on this resource.
+   *   Required. The Finding being created. The name and security_marks will be
+   *   ignored as they are both output only fields on this resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -527,6 +540,185 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     return this._innerApiCalls.createFinding(request, options, callback);
+  }
+  createNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      (
+        | protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      | protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest
+      | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Creates a notification config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the new notification config's parent. Its format
+   *   is "organizations/[organization_id]".
+   * @param {string} request.configId
+   *   Required.
+   *   Unique identifier provided by the client within the parent scope.
+   *   It must be between 1 and 128 characters, and contains alphanumeric
+   *   characters, underscores or hyphens only.
+   * @param {google.cloud.securitycenter.v1.NotificationConfig} request.notificationConfig
+   *   Required. The notification config being created. The name and the service
+   *   account will be ignored as they are both output only fields on this
+   *   resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  createNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+          | protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest
+          | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      | protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest
+      | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      (
+        | protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    return this._innerApiCalls.createNotificationConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  deleteNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.protobuf.IEmpty,
+      (
+        | protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.protobuf.IEmpty,
+      | protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest
+      | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Deletes a notification config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the notification config to delete. Its format is
+   *   "organizations/[organization_id]/notificationConfigs/[config_id]".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  deleteNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.protobuf.IEmpty,
+          | protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest
+          | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.protobuf.IEmpty,
+      | protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest
+      | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.protobuf.IEmpty,
+      (
+        | protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    return this._innerApiCalls.deleteNotificationConfig(
+      request,
+      options,
+      callback
+    );
   }
   getIamPolicy(
     request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
@@ -597,6 +789,91 @@ export class SecurityCenterClient {
     });
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
+  getNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      (
+        | protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      | protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest
+      | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Gets a notification config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the notification config to get. Its format is
+   *   "organizations/[organization_id]/notificationConfigs/[config_id]".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+          | protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest
+          | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      | protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest
+      | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      (
+        | protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    return this._innerApiCalls.getNotificationConfig(
+      request,
+      options,
+      callback
+    );
+  }
   getOrganizationSettings(
     request: protosTypes.google.cloud.securitycenter.v1.IGetOrganizationSettingsRequest,
     options?: gax.CallOptions
@@ -626,8 +903,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the organization to get organization settings for. Its format is
-   *   "organizations/[organization_id]/organizationSettings".
+   *   Required. Name of the organization to get organization settings for. Its
+   *   format is "organizations/[organization_id]/organizationSettings".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1010,8 +1287,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.securitycenter.v1.Finding} request.finding
-   *   Required. The finding resource to update or create if it does not already exist.
-   *   parent, security_marks, and update_time will be ignored.
+   *   Required. The finding resource to update or create if it does not already
+   *   exist. parent, security_marks, and update_time will be ignored.
    *
    *   In the case of creation, the finding id portion of the name must be
    *   alphanumeric and less than or equal to 32 characters and greater than 0
@@ -1073,6 +1350,95 @@ export class SecurityCenterClient {
       'finding.name': request.finding!.name || '',
     });
     return this._innerApiCalls.updateFinding(request, options, callback);
+  }
+  updateNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      (
+        | protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      | protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest
+      | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   *
+   * Updates a notification config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycenter.v1.NotificationConfig} request.notificationConfig
+   *   Required. The notification config to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The FieldMask to use when updating the notification config.
+   *
+   *   If empty all mutable fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  updateNotificationConfig(
+    request: protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+          | protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest
+          | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      | protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest
+      | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig,
+      (
+        | protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'notification_config.name': request.notificationConfig!.name || '',
+    });
+    return this._innerApiCalls.updateNotificationConfig(
+      request,
+      options,
+      callback
+    );
   }
   updateOrganizationSettings(
     request: protosTypes.google.cloud.securitycenter.v1.IUpdateOrganizationSettingsRequest,
@@ -1373,8 +1739,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the organization to run asset discovery for. Its format is
-   *   "organizations/[organization_id]".
+   *   Required. Name of the organization to run asset discovery for. Its format
+   *   is "organizations/[organization_id]".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1515,9 +1881,9 @@ export class SecurityCenterClient {
    *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
+   *   Required. Expression that defines what assets fields to use for grouping.
+   *   The string value should follow SQL syntax: comma separated list of fields.
+   *   For example:
    *   "security_center_properties.resource_project,security_center_properties.project".
    *
    *   The following fields are supported when compare_duration is not set:
@@ -1707,9 +2073,9 @@ export class SecurityCenterClient {
    *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
+   *   Required. Expression that defines what assets fields to use for grouping.
+   *   The string value should follow SQL syntax: comma separated list of fields.
+   *   For example:
    *   "security_center_properties.resource_project,security_center_properties.project".
    *
    *   The following fields are supported when compare_duration is not set:
@@ -1868,9 +2234,9 @@ export class SecurityCenterClient {
    *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state_change`). The string value should follow SQL syntax: comma separated
-   *   list of fields. For example: "parent,resource_name".
+   *   Required. Expression that defines what assets fields to use for grouping
+   *   (including `state_change`). The string value should follow SQL syntax:
+   *   comma separated list of fields. For example: "parent,resource_name".
    *
    *   The following fields are supported:
    *
@@ -1901,12 +2267,18 @@ export class SecurityCenterClient {
    *
    *   Possible "state_change" values when compare_duration is specified:
    *
-   *   * "CHANGED":   indicates that the finding was present at the start of
-   *                    compare_duration, but changed its state at read_time.
-   *   * "UNCHANGED": indicates that the finding was present at the start of
-   *                    compare_duration and did not change state at read_time.
-   *   * "ADDED":     indicates that the finding was not present at the start
-   *                    of compare_duration, but was present at read_time.
+   *   * "CHANGED":   indicates that the finding was present and matched the given
+   *                    filter at the start of compare_duration, but changed its
+   *                    state at read_time.
+   *   * "UNCHANGED": indicates that the finding was present and matched the given
+   *                    filter at the start of compare_duration and did not change
+   *                    state at read_time.
+   *   * "ADDED":     indicates that the finding did not match the given filter or
+   *                    was not present at the start of compare_duration, but was
+   *                    present at read_time.
+   *   * "REMOVED":   indicates that the finding was present and matched the
+   *                    filter at the start of compare_duration, but did not match
+   *                    the filter at read_time.
    *
    *   If compare_duration is not specified, then the only possible state_change
    *   is "UNUSED",  which will be the state_change set for all findings present
@@ -2044,9 +2416,9 @@ export class SecurityCenterClient {
    *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state_change`). The string value should follow SQL syntax: comma separated
-   *   list of fields. For example: "parent,resource_name".
+   *   Required. Expression that defines what assets fields to use for grouping
+   *   (including `state_change`). The string value should follow SQL syntax:
+   *   comma separated list of fields. For example: "parent,resource_name".
    *
    *   The following fields are supported:
    *
@@ -2077,12 +2449,18 @@ export class SecurityCenterClient {
    *
    *   Possible "state_change" values when compare_duration is specified:
    *
-   *   * "CHANGED":   indicates that the finding was present at the start of
-   *                    compare_duration, but changed its state at read_time.
-   *   * "UNCHANGED": indicates that the finding was present at the start of
-   *                    compare_duration and did not change state at read_time.
-   *   * "ADDED":     indicates that the finding was not present at the start
-   *                    of compare_duration, but was present at read_time.
+   *   * "CHANGED":   indicates that the finding was present and matched the given
+   *                    filter at the start of compare_duration, but changed its
+   *                    state at read_time.
+   *   * "UNCHANGED": indicates that the finding was present and matched the given
+   *                    filter at the start of compare_duration and did not change
+   *                    state at read_time.
+   *   * "ADDED":     indicates that the finding did not match the given filter or
+   *                    was not present at the start of compare_duration, but was
+   *                    present at read_time.
+   *   * "REMOVED":   indicates that the finding was present and matched the
+   *                    filter at the start of compare_duration, but did not match
+   *                    the filter at read_time.
    *
    *   If compare_duration is not specified, then the only possible state_change
    *   is "UNUSED",  which will be the state_change set for all findings present
@@ -2259,9 +2637,8 @@ export class SecurityCenterClient {
    *   is "UNUSED",  which will be the state_change set for all assets present at
    *   read_time.
    * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
-   *   response.
-   *   An empty field mask will list all fields.
+   *   Optional. A field mask to specify the ListAssetsResult fields to be listed
+   *   in the response. An empty field mask will list all fields.
    * @param {string} request.pageToken
    *   The value returned by the last `ListAssetsResponse`; indicates
    *   that this is a continuation of a prior `ListAssets` call, and
@@ -2455,9 +2832,8 @@ export class SecurityCenterClient {
    *   is "UNUSED",  which will be the state_change set for all assets present at
    *   read_time.
    * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
-   *   response.
-   *   An empty field mask will list all fields.
+   *   Optional. A field mask to specify the ListAssetsResult fields to be listed
+   *   in the response. An empty field mask will list all fields.
    * @param {string} request.pageToken
    *   The value returned by the last `ListAssetsResponse`; indicates
    *   that this is a continuation of a prior `ListAssets` call, and
@@ -2605,19 +2981,25 @@ export class SecurityCenterClient {
    *
    *   Possible "state_change" values when compare_duration is specified:
    *
-   *   * "CHANGED":   indicates that the finding was present at the start of
-   *                    compare_duration, but changed its state at read_time.
-   *   * "UNCHANGED": indicates that the finding was present at the start of
-   *                    compare_duration and did not change state at read_time.
-   *   * "ADDED":     indicates that the finding was not present at the start
-   *                    of compare_duration, but was present at read_time.
+   *   * "CHANGED":   indicates that the finding was present and matched the given
+   *                    filter at the start of compare_duration, but changed its
+   *                    state at read_time.
+   *   * "UNCHANGED": indicates that the finding was present and matched the given
+   *                    filter at the start of compare_duration and did not change
+   *                    state at read_time.
+   *   * "ADDED":     indicates that the finding did not match the given filter or
+   *                    was not present at the start of compare_duration, but was
+   *                    present at read_time.
+   *   * "REMOVED":   indicates that the finding was present and matched the
+   *                    filter at the start of compare_duration, but did not match
+   *                    the filter at read_time.
    *
    *   If compare_duration is not specified, then the only possible state_change
    *   is "UNUSED", which will be the state_change set for all findings present at
    *   read_time.
    * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the Finding fields to be listed in the response.
-   *   An empty field mask will list all fields.
+   *   Optional. A field mask to specify the Finding fields to be listed in the
+   *   response. An empty field mask will list all fields.
    * @param {string} request.pageToken
    *   The value returned by the last `ListFindingsResponse`; indicates
    *   that this is a continuation of a prior `ListFindings` call, and
@@ -2786,19 +3168,25 @@ export class SecurityCenterClient {
    *
    *   Possible "state_change" values when compare_duration is specified:
    *
-   *   * "CHANGED":   indicates that the finding was present at the start of
-   *                    compare_duration, but changed its state at read_time.
-   *   * "UNCHANGED": indicates that the finding was present at the start of
-   *                    compare_duration and did not change state at read_time.
-   *   * "ADDED":     indicates that the finding was not present at the start
-   *                    of compare_duration, but was present at read_time.
+   *   * "CHANGED":   indicates that the finding was present and matched the given
+   *                    filter at the start of compare_duration, but changed its
+   *                    state at read_time.
+   *   * "UNCHANGED": indicates that the finding was present and matched the given
+   *                    filter at the start of compare_duration and did not change
+   *                    state at read_time.
+   *   * "ADDED":     indicates that the finding did not match the given filter or
+   *                    was not present at the start of compare_duration, but was
+   *                    present at read_time.
+   *   * "REMOVED":   indicates that the finding was present and matched the
+   *                    filter at the start of compare_duration, but did not match
+   *                    the filter at read_time.
    *
    *   If compare_duration is not specified, then the only possible state_change
    *   is "UNUSED", which will be the state_change set for all findings present at
    *   read_time.
    * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the Finding fields to be listed in the response.
-   *   An empty field mask will list all fields.
+   *   Optional. A field mask to specify the Finding fields to be listed in the
+   *   response. An empty field mask will list all fields.
    * @param {string} request.pageToken
    *   The value returned by the last `ListFindingsResponse`; indicates
    *   that this is a continuation of a prior `ListFindings` call, and
@@ -2831,6 +3219,152 @@ export class SecurityCenterClient {
       callSettings
     );
   }
+  listNotificationConfigs(
+    request: protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig[],
+      protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest | null,
+      protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsResponse
+    ]
+  >;
+  listNotificationConfigs(
+    request: protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig[],
+      protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest | null,
+      protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsResponse
+    >
+  ): void;
+  /**
+   * Lists notification configs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the organization to list notification configs.
+   *   Its format is "organizations/[organization_id]".
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListNotificationConfigsResponse`; indicates
+   *   that this is a continuation of a prior `ListNotificationConfigs` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListNotificationConfigsRequest]{@link google.cloud.securitycenter.v1.ListNotificationConfigsRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListNotificationConfigsResponse]{@link google.cloud.securitycenter.v1.ListNotificationConfigsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  listNotificationConfigs(
+    request: protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.cloud.securitycenter.v1.INotificationConfig[],
+          protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest | null,
+          protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsResponse
+        >,
+    callback?: Callback<
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig[],
+      protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest | null,
+      protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsResponse
+    >
+  ): Promise<
+    [
+      protosTypes.google.cloud.securitycenter.v1.INotificationConfig[],
+      protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest | null,
+      protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    return this._innerApiCalls.listNotificationConfigs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to {@link listNotificationConfigs}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listNotificationConfigs} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the organization to list notification configs.
+   *   Its format is "organizations/[organization_id]".
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListNotificationConfigsResponse`; indicates
+   *   that this is a continuation of a prior `ListNotificationConfigs` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig} on 'data' event.
+   */
+  listNotificationConfigsStream(
+    request?: protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest,
+    options?: gax.CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    return this._descriptors.page.listNotificationConfigs.createStream(
+      this._innerApiCalls.listNotificationConfigs as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
   listSources(
     request: protosTypes.google.cloud.securitycenter.v1.IListSourcesRequest,
     options?: gax.CallOptions
@@ -2856,8 +3390,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id]".
+   *   Required. Resource name of the parent of sources to list. Its format should
+   *   be "organizations/[organization_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -2939,8 +3473,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id]".
+   *   Required. Resource name of the parent of sources to list. Its format should
+   *   be "organizations/[organization_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -3061,6 +3595,48 @@ export class SecurityCenterClient {
    */
   matchFindingFromFindingName(findingName: string) {
     return this._pathTemplates.findingPathTemplate.match(findingName).finding;
+  }
+
+  /**
+   * Return a fully-qualified notificationConfig resource name string.
+   *
+   * @param {string} organization
+   * @param {string} notification_config
+   * @returns {string} Resource name string.
+   */
+  notificationConfigPath(organization: string, notificationConfig: string) {
+    return this._pathTemplates.notificationConfigPathTemplate.render({
+      organization,
+      notification_config: notificationConfig,
+    });
+  }
+
+  /**
+   * Parse the organization from NotificationConfig resource.
+   *
+   * @param {string} notificationConfigName
+   *   A fully-qualified path representing NotificationConfig resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromNotificationConfigName(notificationConfigName: string) {
+    return this._pathTemplates.notificationConfigPathTemplate.match(
+      notificationConfigName
+    ).organization;
+  }
+
+  /**
+   * Parse the notification_config from NotificationConfig resource.
+   *
+   * @param {string} notificationConfigName
+   *   A fully-qualified path representing NotificationConfig resource.
+   * @returns {string} A string representing the notification_config.
+   */
+  matchNotificationConfigFromNotificationConfigName(
+    notificationConfigName: string
+  ) {
+    return this._pathTemplates.notificationConfigPathTemplate.match(
+      notificationConfigName
+    ).notification_config;
   }
 
   /**

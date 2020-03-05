@@ -13,7 +13,10 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.securitycenter.v1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1",
-                    "ruby_package": "Google::Cloud::SecurityCenter::V1"
+                    "ruby_package": "Google::Cloud::SecurityCenter::V1",
+                    "java_outer_classname": "NotificationMessageProto",
+                    "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
+                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
                   },
                   "nested": {
                     "Asset": {
@@ -178,6 +181,76 @@
                         }
                       }
                     },
+                    "NotificationConfig": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/NotificationConfig",
+                        "(google.api.resource).pattern": "organizations/{organization}/notificationConfigs/{notification_config}"
+                      },
+                      "oneofs": {
+                        "notifyConfig": {
+                          "oneof": [
+                            "streamingConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pubsubTopic": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "pubsub.googleapis.com/Topic"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "streamingConfig": {
+                          "type": "StreamingConfig",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "StreamingConfig": {
+                          "fields": {
+                            "filter": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "NotificationMessage": {
+                      "oneofs": {
+                        "event": {
+                          "oneof": [
+                            "finding"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "notificationConfigName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "finding": {
+                          "type": "Finding",
+                          "id": 2
+                        }
+                      }
+                    },
                     "OrganizationSettings": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/OrganizationSettings",
@@ -268,6 +341,23 @@
                             "(google.api.method_signature)": "parent,finding_id,finding"
                           }
                         },
+                        "CreateNotificationConfig": {
+                          "requestType": "CreateNotificationConfigRequest",
+                          "responseType": "NotificationConfig",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*}/notificationConfigs",
+                            "(google.api.http).body": "notification_config",
+                            "(google.api.method_signature)": "parent,notification_config"
+                          }
+                        },
+                        "DeleteNotificationConfig": {
+                          "requestType": "DeleteNotificationConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/notificationConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
                           "responseType": "google.iam.v1.Policy",
@@ -275,6 +365,14 @@
                             "(google.api.http).post": "/v1/{resource=organizations/*/sources/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource"
+                          }
+                        },
+                        "GetNotificationConfig": {
+                          "requestType": "GetNotificationConfigRequest",
+                          "responseType": "NotificationConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/notificationConfigs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetOrganizationSettings": {
@@ -322,6 +420,14 @@
                           "responseType": "ListFindingsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*/sources/*}/findings"
+                          }
+                        },
+                        "ListNotificationConfigs": {
+                          "requestType": "ListNotificationConfigsRequest",
+                          "responseType": "ListNotificationConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*}/notificationConfigs",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "ListSources": {
@@ -377,6 +483,15 @@
                             "(google.api.http).patch": "/v1/{finding.name=organizations/*/sources/*/findings/*}",
                             "(google.api.http).body": "finding",
                             "(google.api.method_signature)": "finding"
+                          }
+                        },
+                        "UpdateNotificationConfig": {
+                          "requestType": "UpdateNotificationConfigRequest",
+                          "responseType": "NotificationConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{notification_config.name=organizations/*/notificationConfigs/*}",
+                            "(google.api.http).body": "notification_config",
+                            "(google.api.method_signature)": "notification_config,update_mask"
                           }
                         },
                         "UpdateOrganizationSettings": {
@@ -436,6 +551,32 @@
                         }
                       }
                     },
+                    "CreateNotificationConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
+                        },
+                        "configId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "notificationConfig": {
+                          "type": "NotificationConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CreateSourceRequest": {
                       "fields": {
                         "parent": {
@@ -451,6 +592,30 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteNotificationConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/NotificationConfig"
+                          }
+                        }
+                      }
+                    },
+                    "GetNotificationConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/NotificationConfig"
                           }
                         }
                       }
@@ -608,6 +773,39 @@
                         },
                         "count": {
                           "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListNotificationConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListNotificationConfigsResponse": {
+                      "fields": {
+                        "notificationConfigs": {
+                          "rule": "repeated",
+                          "type": "NotificationConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
                           "id": 2
                         }
                       }
@@ -892,6 +1090,21 @@
                       "fields": {
                         "finding": {
                           "type": "Finding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateNotificationConfigRequest": {
+                      "fields": {
+                        "notificationConfig": {
+                          "type": "NotificationConfig",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
@@ -3063,80 +3276,14 @@
         },
         "api": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
             "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -3219,6 +3366,72 @@
                   "id": 1
                 },
                 "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
                   "type": "string",
                   "id": 2
                 }

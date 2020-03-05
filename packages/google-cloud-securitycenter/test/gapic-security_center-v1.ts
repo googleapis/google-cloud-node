@@ -200,6 +200,108 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
   });
+  describe('createNotificationConfig', () => {
+    it('invokes createNotificationConfig without error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.createNotificationConfig = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.createNotificationConfig(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createNotificationConfig with error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.createNotificationConfig = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.createNotificationConfig(
+        request,
+        (err: FakeError, response: {}) => {
+          assert(err instanceof FakeError);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          assert(typeof response === 'undefined');
+          done();
+        }
+      );
+    });
+  });
+  describe('deleteNotificationConfig', () => {
+    it('invokes deleteNotificationConfig without error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.deleteNotificationConfig = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.deleteNotificationConfig(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes deleteNotificationConfig with error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.deleteNotificationConfig = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.deleteNotificationConfig(
+        request,
+        (err: FakeError, response: {}) => {
+          assert(err instanceof FakeError);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          assert(typeof response === 'undefined');
+          done();
+        }
+      );
+    });
+  });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', done => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
@@ -241,6 +343,54 @@ describe('v1.SecurityCenterClient', () => {
         error
       );
       client.getIamPolicy(request, (err: FakeError, response: {}) => {
+        assert(err instanceof FakeError);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+  describe('getNotificationConfig', () => {
+    it('invokes getNotificationConfig without error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.getNotificationConfig = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.getNotificationConfig(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getNotificationConfig with error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.getNotificationConfig = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.getNotificationConfig(request, (err: FakeError, response: {}) => {
         assert(err instanceof FakeError);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
@@ -539,6 +689,59 @@ describe('v1.SecurityCenterClient', () => {
         assert(typeof response === 'undefined');
         done();
       });
+    });
+  });
+  describe('updateNotificationConfig', () => {
+    it('invokes updateNotificationConfig without error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest = {};
+      request.notificationConfig = {};
+      request.notificationConfig.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.updateNotificationConfig = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.updateNotificationConfig(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateNotificationConfig with error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest = {};
+      request.notificationConfig = {};
+      request.notificationConfig.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.updateNotificationConfig = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.updateNotificationConfig(
+        request,
+        (err: FakeError, response: {}) => {
+          assert(err instanceof FakeError);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          assert(typeof response === 'undefined');
+          done();
+        }
+      );
     });
   });
   describe('updateOrganizationSettings', () => {
@@ -983,6 +1186,68 @@ describe('v1.SecurityCenterClient', () => {
       };
       const stream = client
         .listFindingsStream(request, {})
+        .on('data', (response: {}) => {
+          assert.deepStrictEqual(response, expectedResponse);
+          done();
+        })
+        .on('error', (err: FakeError) => {
+          done(err);
+        });
+      stream.write(expectedResponse);
+    });
+  });
+  describe('listNotificationConfigs', () => {
+    it('invokes listNotificationConfigs without error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock Grpc layer
+      client._innerApiCalls.listNotificationConfigs = (
+        actualRequest: {},
+        options: {},
+        callback: Callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse);
+      };
+      client.listNotificationConfigs(
+        request,
+        (err: FakeError, response: {}) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(response, expectedResponse);
+          done();
+        }
+      );
+    });
+  });
+  describe('listNotificationConfigsStream', () => {
+    it('invokes listNotificationConfigsStream without error', done => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {response: 'data'};
+      // Mock Grpc layer
+      client._innerApiCalls.listNotificationConfigs = (
+        actualRequest: {},
+        options: {},
+        callback: Callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse);
+      };
+      const stream = client
+        .listNotificationConfigsStream(request, {})
         .on('data', (response: {}) => {
           assert.deepStrictEqual(response, expectedResponse);
           done();

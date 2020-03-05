@@ -627,6 +627,315 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a NotificationConfig. */
+                interface INotificationConfig {
+
+                    /** NotificationConfig name */
+                    name?: (string|null);
+
+                    /** NotificationConfig description */
+                    description?: (string|null);
+
+                    /** NotificationConfig pubsubTopic */
+                    pubsubTopic?: (string|null);
+
+                    /** NotificationConfig serviceAccount */
+                    serviceAccount?: (string|null);
+
+                    /** NotificationConfig streamingConfig */
+                    streamingConfig?: (google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig|null);
+                }
+
+                /** Represents a NotificationConfig. */
+                class NotificationConfig implements INotificationConfig {
+
+                    /**
+                     * Constructs a new NotificationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.INotificationConfig);
+
+                    /** NotificationConfig name. */
+                    public name: string;
+
+                    /** NotificationConfig description. */
+                    public description: string;
+
+                    /** NotificationConfig pubsubTopic. */
+                    public pubsubTopic: string;
+
+                    /** NotificationConfig serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** NotificationConfig streamingConfig. */
+                    public streamingConfig?: (google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig|null);
+
+                    /** NotificationConfig notifyConfig. */
+                    public notifyConfig?: "streamingConfig";
+
+                    /**
+                     * Creates a new NotificationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NotificationConfig instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.INotificationConfig): google.cloud.securitycenter.v1.NotificationConfig;
+
+                    /**
+                     * Encodes the specified NotificationConfig message. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationConfig.verify|verify} messages.
+                     * @param message NotificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.INotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NotificationConfig message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationConfig.verify|verify} messages.
+                     * @param message NotificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.INotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NotificationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NotificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.NotificationConfig;
+
+                    /**
+                     * Decodes a NotificationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NotificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.NotificationConfig;
+
+                    /**
+                     * Verifies a NotificationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NotificationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NotificationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.NotificationConfig;
+
+                    /**
+                     * Creates a plain object from a NotificationConfig message. Also converts values to other types if specified.
+                     * @param message NotificationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.NotificationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NotificationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace NotificationConfig {
+
+                    /** Properties of a StreamingConfig. */
+                    interface IStreamingConfig {
+
+                        /** StreamingConfig filter */
+                        filter?: (string|null);
+                    }
+
+                    /** Represents a StreamingConfig. */
+                    class StreamingConfig implements IStreamingConfig {
+
+                        /**
+                         * Constructs a new StreamingConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig);
+
+                        /** StreamingConfig filter. */
+                        public filter: string;
+
+                        /**
+                         * Creates a new StreamingConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StreamingConfig instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig): google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig;
+
+                        /**
+                         * Encodes the specified StreamingConfig message. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.verify|verify} messages.
+                         * @param message StreamingConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StreamingConfig message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.verify|verify} messages.
+                         * @param message StreamingConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StreamingConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StreamingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig;
+
+                        /**
+                         * Decodes a StreamingConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StreamingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig;
+
+                        /**
+                         * Verifies a StreamingConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StreamingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StreamingConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig;
+
+                        /**
+                         * Creates a plain object from a StreamingConfig message. Also converts values to other types if specified.
+                         * @param message StreamingConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StreamingConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a NotificationMessage. */
+                interface INotificationMessage {
+
+                    /** NotificationMessage notificationConfigName */
+                    notificationConfigName?: (string|null);
+
+                    /** NotificationMessage finding */
+                    finding?: (google.cloud.securitycenter.v1.IFinding|null);
+                }
+
+                /** Represents a NotificationMessage. */
+                class NotificationMessage implements INotificationMessage {
+
+                    /**
+                     * Constructs a new NotificationMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.INotificationMessage);
+
+                    /** NotificationMessage notificationConfigName. */
+                    public notificationConfigName: string;
+
+                    /** NotificationMessage finding. */
+                    public finding?: (google.cloud.securitycenter.v1.IFinding|null);
+
+                    /** NotificationMessage event. */
+                    public event?: "finding";
+
+                    /**
+                     * Creates a new NotificationMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NotificationMessage instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.INotificationMessage): google.cloud.securitycenter.v1.NotificationMessage;
+
+                    /**
+                     * Encodes the specified NotificationMessage message. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationMessage.verify|verify} messages.
+                     * @param message NotificationMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.INotificationMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NotificationMessage message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationMessage.verify|verify} messages.
+                     * @param message NotificationMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.INotificationMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NotificationMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NotificationMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.NotificationMessage;
+
+                    /**
+                     * Decodes a NotificationMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NotificationMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.NotificationMessage;
+
+                    /**
+                     * Verifies a NotificationMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NotificationMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NotificationMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.NotificationMessage;
+
+                    /**
+                     * Creates a plain object from a NotificationMessage message. Also converts values to other types if specified.
+                     * @param message NotificationMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.NotificationMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NotificationMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an OrganizationSettings. */
                 interface IOrganizationSettings {
 
@@ -994,6 +1303,34 @@ export namespace google {
                     public createFinding(request: google.cloud.securitycenter.v1.ICreateFindingRequest): Promise<google.cloud.securitycenter.v1.Finding>;
 
                     /**
+                     * Calls CreateNotificationConfig.
+                     * @param request CreateNotificationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NotificationConfig
+                     */
+                    public createNotificationConfig(request: google.cloud.securitycenter.v1.ICreateNotificationConfigRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.CreateNotificationConfigCallback): void;
+
+                    /**
+                     * Calls CreateNotificationConfig.
+                     * @param request CreateNotificationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createNotificationConfig(request: google.cloud.securitycenter.v1.ICreateNotificationConfigRequest): Promise<google.cloud.securitycenter.v1.NotificationConfig>;
+
+                    /**
+                     * Calls DeleteNotificationConfig.
+                     * @param request DeleteNotificationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteNotificationConfig(request: google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.DeleteNotificationConfigCallback): void;
+
+                    /**
+                     * Calls DeleteNotificationConfig.
+                     * @param request DeleteNotificationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteNotificationConfig(request: google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest): Promise<google.protobuf.Empty>;
+
+                    /**
                      * Calls GetIamPolicy.
                      * @param request GetIamPolicyRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Policy
@@ -1006,6 +1343,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls GetNotificationConfig.
+                     * @param request GetNotificationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NotificationConfig
+                     */
+                    public getNotificationConfig(request: google.cloud.securitycenter.v1.IGetNotificationConfigRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.GetNotificationConfigCallback): void;
+
+                    /**
+                     * Calls GetNotificationConfig.
+                     * @param request GetNotificationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getNotificationConfig(request: google.cloud.securitycenter.v1.IGetNotificationConfigRequest): Promise<google.cloud.securitycenter.v1.NotificationConfig>;
 
                     /**
                      * Calls GetOrganizationSettings.
@@ -1092,6 +1443,20 @@ export namespace google {
                     public listFindings(request: google.cloud.securitycenter.v1.IListFindingsRequest): Promise<google.cloud.securitycenter.v1.ListFindingsResponse>;
 
                     /**
+                     * Calls ListNotificationConfigs.
+                     * @param request ListNotificationConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListNotificationConfigsResponse
+                     */
+                    public listNotificationConfigs(request: google.cloud.securitycenter.v1.IListNotificationConfigsRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.ListNotificationConfigsCallback): void;
+
+                    /**
+                     * Calls ListNotificationConfigs.
+                     * @param request ListNotificationConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listNotificationConfigs(request: google.cloud.securitycenter.v1.IListNotificationConfigsRequest): Promise<google.cloud.securitycenter.v1.ListNotificationConfigsResponse>;
+
+                    /**
                      * Calls ListSources.
                      * @param request ListSourcesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListSourcesResponse
@@ -1176,6 +1541,20 @@ export namespace google {
                     public updateFinding(request: google.cloud.securitycenter.v1.IUpdateFindingRequest): Promise<google.cloud.securitycenter.v1.Finding>;
 
                     /**
+                     * Calls UpdateNotificationConfig.
+                     * @param request UpdateNotificationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NotificationConfig
+                     */
+                    public updateNotificationConfig(request: google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.UpdateNotificationConfigCallback): void;
+
+                    /**
+                     * Calls UpdateNotificationConfig.
+                     * @param request UpdateNotificationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateNotificationConfig(request: google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest): Promise<google.cloud.securitycenter.v1.NotificationConfig>;
+
+                    /**
                      * Calls UpdateOrganizationSettings.
                      * @param request UpdateOrganizationSettingsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and OrganizationSettings
@@ -1235,11 +1614,32 @@ export namespace google {
                     type CreateFindingCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.Finding) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createNotificationConfig}.
+                     * @param error Error, if any
+                     * @param [response] NotificationConfig
+                     */
+                    type CreateNotificationConfigCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.NotificationConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#deleteNotificationConfig}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteNotificationConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getIamPolicy}.
                      * @param error Error, if any
                      * @param [response] Policy
                      */
                     type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getNotificationConfig}.
+                     * @param error Error, if any
+                     * @param [response] NotificationConfig
+                     */
+                    type GetNotificationConfigCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.NotificationConfig) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getOrganizationSettings}.
@@ -1284,6 +1684,13 @@ export namespace google {
                     type ListFindingsCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.ListFindingsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listNotificationConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListNotificationConfigsResponse
+                     */
+                    type ListNotificationConfigsCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.ListNotificationConfigsResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listSources}.
                      * @param error Error, if any
                      * @param [response] ListSourcesResponse
@@ -1324,6 +1731,13 @@ export namespace google {
                      * @param [response] Finding
                      */
                     type UpdateFindingCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.Finding) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateNotificationConfig}.
+                     * @param error Error, if any
+                     * @param [response] NotificationConfig
+                     */
+                    type UpdateNotificationConfigCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.NotificationConfig) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateOrganizationSettings}.
@@ -1449,6 +1863,108 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a CreateNotificationConfigRequest. */
+                interface ICreateNotificationConfigRequest {
+
+                    /** CreateNotificationConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateNotificationConfigRequest configId */
+                    configId?: (string|null);
+
+                    /** CreateNotificationConfigRequest notificationConfig */
+                    notificationConfig?: (google.cloud.securitycenter.v1.INotificationConfig|null);
+                }
+
+                /** Represents a CreateNotificationConfigRequest. */
+                class CreateNotificationConfigRequest implements ICreateNotificationConfigRequest {
+
+                    /**
+                     * Constructs a new CreateNotificationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICreateNotificationConfigRequest);
+
+                    /** CreateNotificationConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateNotificationConfigRequest configId. */
+                    public configId: string;
+
+                    /** CreateNotificationConfigRequest notificationConfig. */
+                    public notificationConfig?: (google.cloud.securitycenter.v1.INotificationConfig|null);
+
+                    /**
+                     * Creates a new CreateNotificationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateNotificationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICreateNotificationConfigRequest): google.cloud.securitycenter.v1.CreateNotificationConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateNotificationConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.CreateNotificationConfigRequest.verify|verify} messages.
+                     * @param message CreateNotificationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICreateNotificationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateNotificationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CreateNotificationConfigRequest.verify|verify} messages.
+                     * @param message CreateNotificationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICreateNotificationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateNotificationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateNotificationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.CreateNotificationConfigRequest;
+
+                    /**
+                     * Decodes a CreateNotificationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateNotificationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.CreateNotificationConfigRequest;
+
+                    /**
+                     * Verifies a CreateNotificationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateNotificationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateNotificationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.CreateNotificationConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateNotificationConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateNotificationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.CreateNotificationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateNotificationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a CreateSourceRequest. */
                 interface ICreateSourceRequest {
 
@@ -1540,6 +2056,186 @@ export namespace google {
 
                     /**
                      * Converts this CreateSourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteNotificationConfigRequest. */
+                interface IDeleteNotificationConfigRequest {
+
+                    /** DeleteNotificationConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteNotificationConfigRequest. */
+                class DeleteNotificationConfigRequest implements IDeleteNotificationConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteNotificationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest);
+
+                    /** DeleteNotificationConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteNotificationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteNotificationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest): google.cloud.securitycenter.v1.DeleteNotificationConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteNotificationConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteNotificationConfigRequest.verify|verify} messages.
+                     * @param message DeleteNotificationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteNotificationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteNotificationConfigRequest.verify|verify} messages.
+                     * @param message DeleteNotificationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteNotificationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteNotificationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.DeleteNotificationConfigRequest;
+
+                    /**
+                     * Decodes a DeleteNotificationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteNotificationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.DeleteNotificationConfigRequest;
+
+                    /**
+                     * Verifies a DeleteNotificationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteNotificationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteNotificationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.DeleteNotificationConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteNotificationConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteNotificationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.DeleteNotificationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteNotificationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetNotificationConfigRequest. */
+                interface IGetNotificationConfigRequest {
+
+                    /** GetNotificationConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetNotificationConfigRequest. */
+                class GetNotificationConfigRequest implements IGetNotificationConfigRequest {
+
+                    /**
+                     * Constructs a new GetNotificationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IGetNotificationConfigRequest);
+
+                    /** GetNotificationConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetNotificationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNotificationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IGetNotificationConfigRequest): google.cloud.securitycenter.v1.GetNotificationConfigRequest;
+
+                    /**
+                     * Encodes the specified GetNotificationConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.GetNotificationConfigRequest.verify|verify} messages.
+                     * @param message GetNotificationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IGetNotificationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNotificationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.GetNotificationConfigRequest.verify|verify} messages.
+                     * @param message GetNotificationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IGetNotificationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNotificationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNotificationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.GetNotificationConfigRequest;
+
+                    /**
+                     * Decodes a GetNotificationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNotificationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.GetNotificationConfigRequest;
+
+                    /**
+                     * Verifies a GetNotificationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNotificationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNotificationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.GetNotificationConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetNotificationConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetNotificationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.GetNotificationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNotificationConfigRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2284,6 +2980,204 @@ export namespace google {
 
                     /**
                      * Converts this GroupResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListNotificationConfigsRequest. */
+                interface IListNotificationConfigsRequest {
+
+                    /** ListNotificationConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListNotificationConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListNotificationConfigsRequest pageSize */
+                    pageSize?: (number|null);
+                }
+
+                /** Represents a ListNotificationConfigsRequest. */
+                class ListNotificationConfigsRequest implements IListNotificationConfigsRequest {
+
+                    /**
+                     * Constructs a new ListNotificationConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IListNotificationConfigsRequest);
+
+                    /** ListNotificationConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListNotificationConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListNotificationConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /**
+                     * Creates a new ListNotificationConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNotificationConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IListNotificationConfigsRequest): google.cloud.securitycenter.v1.ListNotificationConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListNotificationConfigsRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.ListNotificationConfigsRequest.verify|verify} messages.
+                     * @param message ListNotificationConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IListNotificationConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNotificationConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListNotificationConfigsRequest.verify|verify} messages.
+                     * @param message ListNotificationConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IListNotificationConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNotificationConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNotificationConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ListNotificationConfigsRequest;
+
+                    /**
+                     * Decodes a ListNotificationConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNotificationConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ListNotificationConfigsRequest;
+
+                    /**
+                     * Verifies a ListNotificationConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNotificationConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNotificationConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ListNotificationConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListNotificationConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListNotificationConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ListNotificationConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNotificationConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListNotificationConfigsResponse. */
+                interface IListNotificationConfigsResponse {
+
+                    /** ListNotificationConfigsResponse notificationConfigs */
+                    notificationConfigs?: (google.cloud.securitycenter.v1.INotificationConfig[]|null);
+
+                    /** ListNotificationConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListNotificationConfigsResponse. */
+                class ListNotificationConfigsResponse implements IListNotificationConfigsResponse {
+
+                    /**
+                     * Constructs a new ListNotificationConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IListNotificationConfigsResponse);
+
+                    /** ListNotificationConfigsResponse notificationConfigs. */
+                    public notificationConfigs: google.cloud.securitycenter.v1.INotificationConfig[];
+
+                    /** ListNotificationConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListNotificationConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNotificationConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IListNotificationConfigsResponse): google.cloud.securitycenter.v1.ListNotificationConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListNotificationConfigsResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.ListNotificationConfigsResponse.verify|verify} messages.
+                     * @param message ListNotificationConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IListNotificationConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNotificationConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListNotificationConfigsResponse.verify|verify} messages.
+                     * @param message ListNotificationConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IListNotificationConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNotificationConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNotificationConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ListNotificationConfigsResponse;
+
+                    /**
+                     * Decodes a ListNotificationConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNotificationConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ListNotificationConfigsResponse;
+
+                    /**
+                     * Verifies a ListNotificationConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNotificationConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNotificationConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ListNotificationConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListNotificationConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListNotificationConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ListNotificationConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNotificationConfigsResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -3591,6 +4485,102 @@ export namespace google {
 
                     /**
                      * Converts this UpdateFindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateNotificationConfigRequest. */
+                interface IUpdateNotificationConfigRequest {
+
+                    /** UpdateNotificationConfigRequest notificationConfig */
+                    notificationConfig?: (google.cloud.securitycenter.v1.INotificationConfig|null);
+
+                    /** UpdateNotificationConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateNotificationConfigRequest. */
+                class UpdateNotificationConfigRequest implements IUpdateNotificationConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateNotificationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest);
+
+                    /** UpdateNotificationConfigRequest notificationConfig. */
+                    public notificationConfig?: (google.cloud.securitycenter.v1.INotificationConfig|null);
+
+                    /** UpdateNotificationConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateNotificationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateNotificationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest): google.cloud.securitycenter.v1.UpdateNotificationConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateNotificationConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateNotificationConfigRequest.verify|verify} messages.
+                     * @param message UpdateNotificationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateNotificationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateNotificationConfigRequest.verify|verify} messages.
+                     * @param message UpdateNotificationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateNotificationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateNotificationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.UpdateNotificationConfigRequest;
+
+                    /**
+                     * Decodes an UpdateNotificationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateNotificationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.UpdateNotificationConfigRequest;
+
+                    /**
+                     * Verifies an UpdateNotificationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateNotificationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateNotificationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.UpdateNotificationConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateNotificationConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateNotificationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.UpdateNotificationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateNotificationConfigRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -12596,232 +13586,6 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a Http. */
         interface IHttp {
 
@@ -13156,6 +13920,232 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

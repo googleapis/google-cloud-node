@@ -1681,6 +1681,728 @@
                         return Finding;
                     })();
     
+                    v1.NotificationConfig = (function() {
+    
+                        /**
+                         * Properties of a NotificationConfig.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface INotificationConfig
+                         * @property {string|null} [name] NotificationConfig name
+                         * @property {string|null} [description] NotificationConfig description
+                         * @property {string|null} [pubsubTopic] NotificationConfig pubsubTopic
+                         * @property {string|null} [serviceAccount] NotificationConfig serviceAccount
+                         * @property {google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig|null} [streamingConfig] NotificationConfig streamingConfig
+                         */
+    
+                        /**
+                         * Constructs a new NotificationConfig.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a NotificationConfig.
+                         * @implements INotificationConfig
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.INotificationConfig=} [properties] Properties to set
+                         */
+                        function NotificationConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NotificationConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @instance
+                         */
+                        NotificationConfig.prototype.name = "";
+    
+                        /**
+                         * NotificationConfig description.
+                         * @member {string} description
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @instance
+                         */
+                        NotificationConfig.prototype.description = "";
+    
+                        /**
+                         * NotificationConfig pubsubTopic.
+                         * @member {string} pubsubTopic
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @instance
+                         */
+                        NotificationConfig.prototype.pubsubTopic = "";
+    
+                        /**
+                         * NotificationConfig serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @instance
+                         */
+                        NotificationConfig.prototype.serviceAccount = "";
+    
+                        /**
+                         * NotificationConfig streamingConfig.
+                         * @member {google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig|null|undefined} streamingConfig
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @instance
+                         */
+                        NotificationConfig.prototype.streamingConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * NotificationConfig notifyConfig.
+                         * @member {"streamingConfig"|undefined} notifyConfig
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @instance
+                         */
+                        Object.defineProperty(NotificationConfig.prototype, "notifyConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["streamingConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new NotificationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.INotificationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.NotificationConfig} NotificationConfig instance
+                         */
+                        NotificationConfig.create = function create(properties) {
+                            return new NotificationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NotificationConfig message. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.INotificationConfig} message NotificationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NotificationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pubsubTopic);
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.serviceAccount);
+                            if (message.streamingConfig != null && message.hasOwnProperty("streamingConfig"))
+                                $root.google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.encode(message.streamingConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NotificationConfig message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.INotificationConfig} message NotificationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NotificationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NotificationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.NotificationConfig} NotificationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NotificationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.NotificationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.pubsubTopic = reader.string();
+                                    break;
+                                case 4:
+                                    message.serviceAccount = reader.string();
+                                    break;
+                                case 5:
+                                    message.streamingConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NotificationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.NotificationConfig} NotificationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NotificationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NotificationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NotificationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic"))
+                                if (!$util.isString(message.pubsubTopic))
+                                    return "pubsubTopic: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            if (message.streamingConfig != null && message.hasOwnProperty("streamingConfig")) {
+                                properties.notifyConfig = 1;
+                                {
+                                    var error = $root.google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.verify(message.streamingConfig);
+                                    if (error)
+                                        return "streamingConfig." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NotificationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.NotificationConfig} NotificationConfig
+                         */
+                        NotificationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.NotificationConfig)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.NotificationConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.pubsubTopic != null)
+                                message.pubsubTopic = String(object.pubsubTopic);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            if (object.streamingConfig != null) {
+                                if (typeof object.streamingConfig !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.NotificationConfig.streamingConfig: object expected");
+                                message.streamingConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.fromObject(object.streamingConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NotificationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.NotificationConfig} message NotificationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NotificationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.pubsubTopic = "";
+                                object.serviceAccount = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic"))
+                                object.pubsubTopic = message.pubsubTopic;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.streamingConfig != null && message.hasOwnProperty("streamingConfig")) {
+                                object.streamingConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.toObject(message.streamingConfig, options);
+                                if (options.oneofs)
+                                    object.notifyConfig = "streamingConfig";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NotificationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NotificationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        NotificationConfig.StreamingConfig = (function() {
+    
+                            /**
+                             * Properties of a StreamingConfig.
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                             * @interface IStreamingConfig
+                             * @property {string|null} [filter] StreamingConfig filter
+                             */
+    
+                            /**
+                             * Constructs a new StreamingConfig.
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig
+                             * @classdesc Represents a StreamingConfig.
+                             * @implements IStreamingConfig
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig=} [properties] Properties to set
+                             */
+                            function StreamingConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StreamingConfig filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @instance
+                             */
+                            StreamingConfig.prototype.filter = "";
+    
+                            /**
+                             * Creates a new StreamingConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig} StreamingConfig instance
+                             */
+                            StreamingConfig.create = function create(properties) {
+                                return new StreamingConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StreamingConfig message. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig} message StreamingConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StreamingConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StreamingConfig message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig} message StreamingConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StreamingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StreamingConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig} StreamingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StreamingConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.filter = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StreamingConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig} StreamingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StreamingConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StreamingConfig message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StreamingConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StreamingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig} StreamingConfig
+                             */
+                            StreamingConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig();
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StreamingConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig} message StreamingConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StreamingConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.filter = "";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StreamingConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.NotificationConfig.StreamingConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StreamingConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return StreamingConfig;
+                        })();
+    
+                        return NotificationConfig;
+                    })();
+    
+                    v1.NotificationMessage = (function() {
+    
+                        /**
+                         * Properties of a NotificationMessage.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface INotificationMessage
+                         * @property {string|null} [notificationConfigName] NotificationMessage notificationConfigName
+                         * @property {google.cloud.securitycenter.v1.IFinding|null} [finding] NotificationMessage finding
+                         */
+    
+                        /**
+                         * Constructs a new NotificationMessage.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a NotificationMessage.
+                         * @implements INotificationMessage
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.INotificationMessage=} [properties] Properties to set
+                         */
+                        function NotificationMessage(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NotificationMessage notificationConfigName.
+                         * @member {string} notificationConfigName
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @instance
+                         */
+                        NotificationMessage.prototype.notificationConfigName = "";
+    
+                        /**
+                         * NotificationMessage finding.
+                         * @member {google.cloud.securitycenter.v1.IFinding|null|undefined} finding
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @instance
+                         */
+                        NotificationMessage.prototype.finding = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * NotificationMessage event.
+                         * @member {"finding"|undefined} event
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @instance
+                         */
+                        Object.defineProperty(NotificationMessage.prototype, "event", {
+                            get: $util.oneOfGetter($oneOfFields = ["finding"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new NotificationMessage instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.INotificationMessage=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.NotificationMessage} NotificationMessage instance
+                         */
+                        NotificationMessage.create = function create(properties) {
+                            return new NotificationMessage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NotificationMessage message. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationMessage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.INotificationMessage} message NotificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NotificationMessage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.notificationConfigName != null && message.hasOwnProperty("notificationConfigName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.notificationConfigName);
+                            if (message.finding != null && message.hasOwnProperty("finding"))
+                                $root.google.cloud.securitycenter.v1.Finding.encode(message.finding, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NotificationMessage message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.NotificationMessage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.INotificationMessage} message NotificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NotificationMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NotificationMessage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.NotificationMessage} NotificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NotificationMessage.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.NotificationMessage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.notificationConfigName = reader.string();
+                                    break;
+                                case 2:
+                                    message.finding = $root.google.cloud.securitycenter.v1.Finding.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NotificationMessage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.NotificationMessage} NotificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NotificationMessage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NotificationMessage message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NotificationMessage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.notificationConfigName != null && message.hasOwnProperty("notificationConfigName"))
+                                if (!$util.isString(message.notificationConfigName))
+                                    return "notificationConfigName: string expected";
+                            if (message.finding != null && message.hasOwnProperty("finding")) {
+                                properties.event = 1;
+                                {
+                                    var error = $root.google.cloud.securitycenter.v1.Finding.verify(message.finding);
+                                    if (error)
+                                        return "finding." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NotificationMessage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.NotificationMessage} NotificationMessage
+                         */
+                        NotificationMessage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.NotificationMessage)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.NotificationMessage();
+                            if (object.notificationConfigName != null)
+                                message.notificationConfigName = String(object.notificationConfigName);
+                            if (object.finding != null) {
+                                if (typeof object.finding !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.NotificationMessage.finding: object expected");
+                                message.finding = $root.google.cloud.securitycenter.v1.Finding.fromObject(object.finding);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NotificationMessage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.NotificationMessage} message NotificationMessage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NotificationMessage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.notificationConfigName = "";
+                            if (message.notificationConfigName != null && message.hasOwnProperty("notificationConfigName"))
+                                object.notificationConfigName = message.notificationConfigName;
+                            if (message.finding != null && message.hasOwnProperty("finding")) {
+                                object.finding = $root.google.cloud.securitycenter.v1.Finding.toObject(message.finding, options);
+                                if (options.oneofs)
+                                    object.event = "finding";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NotificationMessage to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.NotificationMessage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NotificationMessage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return NotificationMessage;
+                    })();
+    
                     v1.OrganizationSettings = (function() {
     
                         /**
@@ -2533,6 +3255,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createNotificationConfig}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef CreateNotificationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.NotificationConfig} [response] NotificationConfig
+                         */
+    
+                        /**
+                         * Calls CreateNotificationConfig.
+                         * @function createNotificationConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.ICreateNotificationConfigRequest} request CreateNotificationConfigRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.CreateNotificationConfigCallback} callback Node-style callback called with the error, if any, and NotificationConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.createNotificationConfig = function createNotificationConfig(request, callback) {
+                            return this.rpcCall(createNotificationConfig, $root.google.cloud.securitycenter.v1.CreateNotificationConfigRequest, $root.google.cloud.securitycenter.v1.NotificationConfig, request, callback);
+                        }, "name", { value: "CreateNotificationConfig" });
+    
+                        /**
+                         * Calls CreateNotificationConfig.
+                         * @function createNotificationConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.ICreateNotificationConfigRequest} request CreateNotificationConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.NotificationConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#deleteNotificationConfig}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef DeleteNotificationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteNotificationConfig.
+                         * @function deleteNotificationConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest} request DeleteNotificationConfigRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.DeleteNotificationConfigCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.deleteNotificationConfig = function deleteNotificationConfig(request, callback) {
+                            return this.rpcCall(deleteNotificationConfig, $root.google.cloud.securitycenter.v1.DeleteNotificationConfigRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteNotificationConfig" });
+    
+                        /**
+                         * Calls DeleteNotificationConfig.
+                         * @function deleteNotificationConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest} request DeleteNotificationConfigRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getIamPolicy}.
                          * @memberof google.cloud.securitycenter.v1.SecurityCenter
                          * @typedef GetIamPolicyCallback
@@ -2562,6 +3350,39 @@
                          * @instance
                          * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
                          * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getNotificationConfig}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef GetNotificationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.NotificationConfig} [response] NotificationConfig
+                         */
+    
+                        /**
+                         * Calls GetNotificationConfig.
+                         * @function getNotificationConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IGetNotificationConfigRequest} request GetNotificationConfigRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.GetNotificationConfigCallback} callback Node-style callback called with the error, if any, and NotificationConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.getNotificationConfig = function getNotificationConfig(request, callback) {
+                            return this.rpcCall(getNotificationConfig, $root.google.cloud.securitycenter.v1.GetNotificationConfigRequest, $root.google.cloud.securitycenter.v1.NotificationConfig, request, callback);
+                        }, "name", { value: "GetNotificationConfig" });
+    
+                        /**
+                         * Calls GetNotificationConfig.
+                         * @function getNotificationConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IGetNotificationConfigRequest} request GetNotificationConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.NotificationConfig>} Promise
                          * @variation 2
                          */
     
@@ -2764,6 +3585,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listNotificationConfigs}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef ListNotificationConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.ListNotificationConfigsResponse} [response] ListNotificationConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListNotificationConfigs.
+                         * @function listNotificationConfigs
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsRequest} request ListNotificationConfigsRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.ListNotificationConfigsCallback} callback Node-style callback called with the error, if any, and ListNotificationConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.listNotificationConfigs = function listNotificationConfigs(request, callback) {
+                            return this.rpcCall(listNotificationConfigs, $root.google.cloud.securitycenter.v1.ListNotificationConfigsRequest, $root.google.cloud.securitycenter.v1.ListNotificationConfigsResponse, request, callback);
+                        }, "name", { value: "ListNotificationConfigs" });
+    
+                        /**
+                         * Calls ListNotificationConfigs.
+                         * @function listNotificationConfigs
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsRequest} request ListNotificationConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.ListNotificationConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listSources}.
                          * @memberof google.cloud.securitycenter.v1.SecurityCenter
                          * @typedef ListSourcesCallback
@@ -2958,6 +3812,39 @@
                          * @instance
                          * @param {google.cloud.securitycenter.v1.IUpdateFindingRequest} request UpdateFindingRequest message or plain object
                          * @returns {Promise<google.cloud.securitycenter.v1.Finding>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateNotificationConfig}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef UpdateNotificationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.NotificationConfig} [response] NotificationConfig
+                         */
+    
+                        /**
+                         * Calls UpdateNotificationConfig.
+                         * @function updateNotificationConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest} request UpdateNotificationConfigRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.UpdateNotificationConfigCallback} callback Node-style callback called with the error, if any, and NotificationConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.updateNotificationConfig = function updateNotificationConfig(request, callback) {
+                            return this.rpcCall(updateNotificationConfig, $root.google.cloud.securitycenter.v1.UpdateNotificationConfigRequest, $root.google.cloud.securitycenter.v1.NotificationConfig, request, callback);
+                        }, "name", { value: "UpdateNotificationConfig" });
+    
+                        /**
+                         * Calls UpdateNotificationConfig.
+                         * @function updateNotificationConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest} request UpdateNotificationConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.NotificationConfig>} Promise
                          * @variation 2
                          */
     
@@ -3300,6 +4187,243 @@
                         return CreateFindingRequest;
                     })();
     
+                    v1.CreateNotificationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateNotificationConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ICreateNotificationConfigRequest
+                         * @property {string|null} [parent] CreateNotificationConfigRequest parent
+                         * @property {string|null} [configId] CreateNotificationConfigRequest configId
+                         * @property {google.cloud.securitycenter.v1.INotificationConfig|null} [notificationConfig] CreateNotificationConfigRequest notificationConfig
+                         */
+    
+                        /**
+                         * Constructs a new CreateNotificationConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a CreateNotificationConfigRequest.
+                         * @implements ICreateNotificationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ICreateNotificationConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateNotificationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateNotificationConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @instance
+                         */
+                        CreateNotificationConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateNotificationConfigRequest configId.
+                         * @member {string} configId
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @instance
+                         */
+                        CreateNotificationConfigRequest.prototype.configId = "";
+    
+                        /**
+                         * CreateNotificationConfigRequest notificationConfig.
+                         * @member {google.cloud.securitycenter.v1.INotificationConfig|null|undefined} notificationConfig
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @instance
+                         */
+                        CreateNotificationConfigRequest.prototype.notificationConfig = null;
+    
+                        /**
+                         * Creates a new CreateNotificationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateNotificationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.CreateNotificationConfigRequest} CreateNotificationConfigRequest instance
+                         */
+                        CreateNotificationConfigRequest.create = function create(properties) {
+                            return new CreateNotificationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateNotificationConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.CreateNotificationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateNotificationConfigRequest} message CreateNotificationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateNotificationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.configId != null && message.hasOwnProperty("configId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.configId);
+                            if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig"))
+                                $root.google.cloud.securitycenter.v1.NotificationConfig.encode(message.notificationConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateNotificationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CreateNotificationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateNotificationConfigRequest} message CreateNotificationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateNotificationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateNotificationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.CreateNotificationConfigRequest} CreateNotificationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateNotificationConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.CreateNotificationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.configId = reader.string();
+                                    break;
+                                case 3:
+                                    message.notificationConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateNotificationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.CreateNotificationConfigRequest} CreateNotificationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateNotificationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateNotificationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateNotificationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.configId != null && message.hasOwnProperty("configId"))
+                                if (!$util.isString(message.configId))
+                                    return "configId: string expected";
+                            if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig")) {
+                                var error = $root.google.cloud.securitycenter.v1.NotificationConfig.verify(message.notificationConfig);
+                                if (error)
+                                    return "notificationConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateNotificationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.CreateNotificationConfigRequest} CreateNotificationConfigRequest
+                         */
+                        CreateNotificationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.CreateNotificationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.CreateNotificationConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.configId != null)
+                                message.configId = String(object.configId);
+                            if (object.notificationConfig != null) {
+                                if (typeof object.notificationConfig !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.CreateNotificationConfigRequest.notificationConfig: object expected");
+                                message.notificationConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.fromObject(object.notificationConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateNotificationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.CreateNotificationConfigRequest} message CreateNotificationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateNotificationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.configId = "";
+                                object.notificationConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.configId != null && message.hasOwnProperty("configId"))
+                                object.configId = message.configId;
+                            if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig"))
+                                object.notificationConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.toObject(message.notificationConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateNotificationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.CreateNotificationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateNotificationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateNotificationConfigRequest;
+                    })();
+    
                     v1.CreateSourceRequest = (function() {
     
                         /**
@@ -3513,6 +4637,380 @@
                         };
     
                         return CreateSourceRequest;
+                    })();
+    
+                    v1.DeleteNotificationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteNotificationConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IDeleteNotificationConfigRequest
+                         * @property {string|null} [name] DeleteNotificationConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteNotificationConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a DeleteNotificationConfigRequest.
+                         * @implements IDeleteNotificationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteNotificationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteNotificationConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @instance
+                         */
+                        DeleteNotificationConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteNotificationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.DeleteNotificationConfigRequest} DeleteNotificationConfigRequest instance
+                         */
+                        DeleteNotificationConfigRequest.create = function create(properties) {
+                            return new DeleteNotificationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteNotificationConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteNotificationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest} message DeleteNotificationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteNotificationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteNotificationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteNotificationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest} message DeleteNotificationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteNotificationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteNotificationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.DeleteNotificationConfigRequest} DeleteNotificationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteNotificationConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.DeleteNotificationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteNotificationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.DeleteNotificationConfigRequest} DeleteNotificationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteNotificationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteNotificationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteNotificationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteNotificationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.DeleteNotificationConfigRequest} DeleteNotificationConfigRequest
+                         */
+                        DeleteNotificationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.DeleteNotificationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.DeleteNotificationConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteNotificationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.DeleteNotificationConfigRequest} message DeleteNotificationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteNotificationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteNotificationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.DeleteNotificationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteNotificationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteNotificationConfigRequest;
+                    })();
+    
+                    v1.GetNotificationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetNotificationConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IGetNotificationConfigRequest
+                         * @property {string|null} [name] GetNotificationConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetNotificationConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a GetNotificationConfigRequest.
+                         * @implements IGetNotificationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IGetNotificationConfigRequest=} [properties] Properties to set
+                         */
+                        function GetNotificationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetNotificationConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @instance
+                         */
+                        GetNotificationConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetNotificationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetNotificationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.GetNotificationConfigRequest} GetNotificationConfigRequest instance
+                         */
+                        GetNotificationConfigRequest.create = function create(properties) {
+                            return new GetNotificationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetNotificationConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.GetNotificationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetNotificationConfigRequest} message GetNotificationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNotificationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetNotificationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.GetNotificationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetNotificationConfigRequest} message GetNotificationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNotificationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetNotificationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.GetNotificationConfigRequest} GetNotificationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNotificationConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.GetNotificationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetNotificationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.GetNotificationConfigRequest} GetNotificationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNotificationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetNotificationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetNotificationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetNotificationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.GetNotificationConfigRequest} GetNotificationConfigRequest
+                         */
+                        GetNotificationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.GetNotificationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.GetNotificationConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetNotificationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.GetNotificationConfigRequest} message GetNotificationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetNotificationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetNotificationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.GetNotificationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetNotificationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetNotificationConfigRequest;
                     })();
     
                     v1.GetOrganizationSettingsRequest = (function() {
@@ -5361,6 +6859,469 @@
                         };
     
                         return GroupResult;
+                    })();
+    
+                    v1.ListNotificationConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListNotificationConfigsRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IListNotificationConfigsRequest
+                         * @property {string|null} [parent] ListNotificationConfigsRequest parent
+                         * @property {string|null} [pageToken] ListNotificationConfigsRequest pageToken
+                         * @property {number|null} [pageSize] ListNotificationConfigsRequest pageSize
+                         */
+    
+                        /**
+                         * Constructs a new ListNotificationConfigsRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a ListNotificationConfigsRequest.
+                         * @implements IListNotificationConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListNotificationConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListNotificationConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @instance
+                         */
+                        ListNotificationConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListNotificationConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @instance
+                         */
+                        ListNotificationConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListNotificationConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @instance
+                         */
+                        ListNotificationConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * Creates a new ListNotificationConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ListNotificationConfigsRequest} ListNotificationConfigsRequest instance
+                         */
+                        ListNotificationConfigsRequest.create = function create(properties) {
+                            return new ListNotificationConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListNotificationConfigsRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.ListNotificationConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsRequest} message ListNotificationConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNotificationConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListNotificationConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListNotificationConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsRequest} message ListNotificationConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNotificationConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListNotificationConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ListNotificationConfigsRequest} ListNotificationConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNotificationConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ListNotificationConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 3:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListNotificationConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ListNotificationConfigsRequest} ListNotificationConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNotificationConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListNotificationConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListNotificationConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListNotificationConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ListNotificationConfigsRequest} ListNotificationConfigsRequest
+                         */
+                        ListNotificationConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ListNotificationConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ListNotificationConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListNotificationConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ListNotificationConfigsRequest} message ListNotificationConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListNotificationConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageToken = "";
+                                object.pageSize = 0;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListNotificationConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListNotificationConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListNotificationConfigsRequest;
+                    })();
+    
+                    v1.ListNotificationConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListNotificationConfigsResponse.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IListNotificationConfigsResponse
+                         * @property {Array.<google.cloud.securitycenter.v1.INotificationConfig>|null} [notificationConfigs] ListNotificationConfigsResponse notificationConfigs
+                         * @property {string|null} [nextPageToken] ListNotificationConfigsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListNotificationConfigsResponse.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a ListNotificationConfigsResponse.
+                         * @implements IListNotificationConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListNotificationConfigsResponse(properties) {
+                            this.notificationConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListNotificationConfigsResponse notificationConfigs.
+                         * @member {Array.<google.cloud.securitycenter.v1.INotificationConfig>} notificationConfigs
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @instance
+                         */
+                        ListNotificationConfigsResponse.prototype.notificationConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListNotificationConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @instance
+                         */
+                        ListNotificationConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListNotificationConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ListNotificationConfigsResponse} ListNotificationConfigsResponse instance
+                         */
+                        ListNotificationConfigsResponse.create = function create(properties) {
+                            return new ListNotificationConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListNotificationConfigsResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.ListNotificationConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsResponse} message ListNotificationConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNotificationConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.notificationConfigs != null && message.notificationConfigs.length)
+                                for (var i = 0; i < message.notificationConfigs.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.NotificationConfig.encode(message.notificationConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListNotificationConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListNotificationConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListNotificationConfigsResponse} message ListNotificationConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNotificationConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListNotificationConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ListNotificationConfigsResponse} ListNotificationConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNotificationConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ListNotificationConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.notificationConfigs && message.notificationConfigs.length))
+                                        message.notificationConfigs = [];
+                                    message.notificationConfigs.push($root.google.cloud.securitycenter.v1.NotificationConfig.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListNotificationConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ListNotificationConfigsResponse} ListNotificationConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNotificationConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListNotificationConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListNotificationConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.notificationConfigs != null && message.hasOwnProperty("notificationConfigs")) {
+                                if (!Array.isArray(message.notificationConfigs))
+                                    return "notificationConfigs: array expected";
+                                for (var i = 0; i < message.notificationConfigs.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.NotificationConfig.verify(message.notificationConfigs[i]);
+                                    if (error)
+                                        return "notificationConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListNotificationConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ListNotificationConfigsResponse} ListNotificationConfigsResponse
+                         */
+                        ListNotificationConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ListNotificationConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ListNotificationConfigsResponse();
+                            if (object.notificationConfigs) {
+                                if (!Array.isArray(object.notificationConfigs))
+                                    throw TypeError(".google.cloud.securitycenter.v1.ListNotificationConfigsResponse.notificationConfigs: array expected");
+                                message.notificationConfigs = [];
+                                for (var i = 0; i < object.notificationConfigs.length; ++i) {
+                                    if (typeof object.notificationConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.ListNotificationConfigsResponse.notificationConfigs: object expected");
+                                    message.notificationConfigs[i] = $root.google.cloud.securitycenter.v1.NotificationConfig.fromObject(object.notificationConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListNotificationConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ListNotificationConfigsResponse} message ListNotificationConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListNotificationConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.notificationConfigs = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.notificationConfigs && message.notificationConfigs.length) {
+                                object.notificationConfigs = [];
+                                for (var j = 0; j < message.notificationConfigs.length; ++j)
+                                    object.notificationConfigs[j] = $root.google.cloud.securitycenter.v1.NotificationConfig.toObject(message.notificationConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListNotificationConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ListNotificationConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListNotificationConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListNotificationConfigsResponse;
                     })();
     
                     v1.ListSourcesRequest = (function() {
@@ -8584,6 +10545,226 @@
                         };
     
                         return UpdateFindingRequest;
+                    })();
+    
+                    v1.UpdateNotificationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateNotificationConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IUpdateNotificationConfigRequest
+                         * @property {google.cloud.securitycenter.v1.INotificationConfig|null} [notificationConfig] UpdateNotificationConfigRequest notificationConfig
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateNotificationConfigRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateNotificationConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an UpdateNotificationConfigRequest.
+                         * @implements IUpdateNotificationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateNotificationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateNotificationConfigRequest notificationConfig.
+                         * @member {google.cloud.securitycenter.v1.INotificationConfig|null|undefined} notificationConfig
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @instance
+                         */
+                        UpdateNotificationConfigRequest.prototype.notificationConfig = null;
+    
+                        /**
+                         * UpdateNotificationConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @instance
+                         */
+                        UpdateNotificationConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateNotificationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.UpdateNotificationConfigRequest} UpdateNotificationConfigRequest instance
+                         */
+                        UpdateNotificationConfigRequest.create = function create(properties) {
+                            return new UpdateNotificationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateNotificationConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateNotificationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest} message UpdateNotificationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateNotificationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig"))
+                                $root.google.cloud.securitycenter.v1.NotificationConfig.encode(message.notificationConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateNotificationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateNotificationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest} message UpdateNotificationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateNotificationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateNotificationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.UpdateNotificationConfigRequest} UpdateNotificationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateNotificationConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.UpdateNotificationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.notificationConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateNotificationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.UpdateNotificationConfigRequest} UpdateNotificationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateNotificationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateNotificationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateNotificationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig")) {
+                                var error = $root.google.cloud.securitycenter.v1.NotificationConfig.verify(message.notificationConfig);
+                                if (error)
+                                    return "notificationConfig." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateNotificationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.UpdateNotificationConfigRequest} UpdateNotificationConfigRequest
+                         */
+                        UpdateNotificationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.UpdateNotificationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.UpdateNotificationConfigRequest();
+                            if (object.notificationConfig != null) {
+                                if (typeof object.notificationConfig !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.UpdateNotificationConfigRequest.notificationConfig: object expected");
+                                message.notificationConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.fromObject(object.notificationConfig);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.UpdateNotificationConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateNotificationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.UpdateNotificationConfigRequest} message UpdateNotificationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateNotificationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.notificationConfig = null;
+                                object.updateMask = null;
+                            }
+                            if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig"))
+                                object.notificationConfig = $root.google.cloud.securitycenter.v1.NotificationConfig.toObject(message.notificationConfig, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateNotificationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.UpdateNotificationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateNotificationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateNotificationConfigRequest;
                     })();
     
                     v1.UpdateOrganizationSettingsRequest = (function() {
@@ -29806,565 +31987,6 @@
              */
             var api = {};
     
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.pattern = [];
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {string}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
-            })();
-    
             api.Http = (function() {
     
                 /**
@@ -31267,6 +32889,565 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             /**
