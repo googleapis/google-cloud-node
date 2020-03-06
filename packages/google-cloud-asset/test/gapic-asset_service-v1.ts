@@ -102,12 +102,30 @@ describe('v1.AssetServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new assetserviceModule.v1.AssetServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.assetServiceStub, undefined);
+    await client.initialize();
+    assert(client.assetServiceStub);
+  });
+  it('has close method', () => {
+    const client = new assetserviceModule.v1.AssetServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('batchGetAssetsHistory', () => {
     it('invokes batchGetAssetsHistory without error', done => {
       const client = new assetserviceModule.v1.AssetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest = {};
       request.parent = '';
@@ -131,6 +149,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest = {};
       request.parent = '';
@@ -156,6 +176,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.ICreateFeedRequest = {};
       request.parent = '';
@@ -179,6 +201,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.ICreateFeedRequest = {};
       request.parent = '';
@@ -204,6 +228,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IGetFeedRequest = {};
       request.name = '';
@@ -227,6 +253,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IGetFeedRequest = {};
       request.name = '';
@@ -252,6 +280,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IListFeedsRequest = {};
       request.parent = '';
@@ -275,6 +305,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IListFeedsRequest = {};
       request.parent = '';
@@ -300,6 +332,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IUpdateFeedRequest = {};
       request.feed = {};
@@ -324,6 +358,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IUpdateFeedRequest = {};
       request.feed = {};
@@ -350,6 +386,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IDeleteFeedRequest = {};
       request.name = '';
@@ -373,6 +411,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IDeleteFeedRequest = {};
       request.name = '';
@@ -398,6 +438,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IExportAssetsRequest = {};
       request.parent = '';
@@ -428,6 +470,8 @@ describe('v1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.asset.v1.IExportAssetsRequest = {};
       request.parent = '';
