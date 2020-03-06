@@ -83,12 +83,30 @@ describe('v1beta2.LanguageServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.languageServiceStub, undefined);
+    await client.initialize();
+    assert(client.languageServiceStub);
+  });
+  it('has close method', () => {
+    const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('analyzeSentiment', () => {
     it('invokes analyzeSentiment without error', done => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest = {};
       // Mock response
@@ -111,6 +129,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest = {};
       // Mock response
@@ -135,6 +155,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest = {};
       // Mock response
@@ -157,6 +179,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest = {};
       // Mock response
@@ -181,6 +205,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest = {};
       // Mock response
@@ -203,6 +229,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest = {};
       // Mock response
@@ -227,6 +255,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest = {};
       // Mock response
@@ -249,6 +279,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest = {};
       // Mock response
@@ -273,6 +305,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest = {};
       // Mock response
@@ -295,6 +329,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest = {};
       // Mock response
@@ -319,6 +355,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest = {};
       // Mock response
@@ -341,6 +379,8 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest = {};
       // Mock response
