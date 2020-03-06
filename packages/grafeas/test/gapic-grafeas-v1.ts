@@ -81,12 +81,30 @@ describe('v1.GrafeasClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new grafeasModule.v1.GrafeasClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.grafeasStub, undefined);
+    await client.initialize();
+    assert(client.grafeasStub);
+  });
+  it('has close method', () => {
+    const client = new grafeasModule.v1.GrafeasClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getOccurrence', () => {
     it('invokes getOccurrence without error', done => {
       const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IGetOccurrenceRequest = {};
       request.name = '';
@@ -110,6 +128,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IGetOccurrenceRequest = {};
       request.name = '';
@@ -135,6 +155,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IDeleteOccurrenceRequest = {};
       request.name = '';
@@ -158,6 +180,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IDeleteOccurrenceRequest = {};
       request.name = '';
@@ -183,6 +207,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.ICreateOccurrenceRequest = {};
       request.parent = '';
@@ -206,6 +232,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.ICreateOccurrenceRequest = {};
       request.parent = '';
@@ -231,6 +259,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IBatchCreateOccurrencesRequest = {};
       request.parent = '';
@@ -254,6 +284,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IBatchCreateOccurrencesRequest = {};
       request.parent = '';
@@ -279,6 +311,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IUpdateOccurrenceRequest = {};
       request.name = '';
@@ -302,6 +336,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IUpdateOccurrenceRequest = {};
       request.name = '';
@@ -327,6 +363,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IGetOccurrenceNoteRequest = {};
       request.name = '';
@@ -350,6 +388,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IGetOccurrenceNoteRequest = {};
       request.name = '';
@@ -375,6 +415,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IGetNoteRequest = {};
       request.name = '';
@@ -398,6 +440,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IGetNoteRequest = {};
       request.name = '';
@@ -423,6 +467,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IDeleteNoteRequest = {};
       request.name = '';
@@ -446,6 +492,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IDeleteNoteRequest = {};
       request.name = '';
@@ -471,6 +519,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.ICreateNoteRequest = {};
       request.parent = '';
@@ -494,6 +544,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.ICreateNoteRequest = {};
       request.parent = '';
@@ -519,6 +571,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IBatchCreateNotesRequest = {};
       request.parent = '';
@@ -542,6 +596,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IBatchCreateNotesRequest = {};
       request.parent = '';
@@ -567,6 +623,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IUpdateNoteRequest = {};
       request.name = '';
@@ -590,6 +648,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IUpdateNoteRequest = {};
       request.name = '';
@@ -615,6 +675,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IListOccurrencesRequest = {};
       request.parent = '';
@@ -642,6 +704,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IListOccurrencesRequest = {};
       request.parent = '';
@@ -674,6 +738,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IListNotesRequest = {};
       request.parent = '';
@@ -701,6 +767,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IListNotesRequest = {};
       request.parent = '';
@@ -733,6 +801,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IListNoteOccurrencesRequest = {};
       request.name = '';
@@ -760,6 +830,8 @@ describe('v1.GrafeasClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.grafeas.v1.IListNoteOccurrencesRequest = {};
       request.name = '';
