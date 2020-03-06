@@ -58,9 +58,14 @@ export class AutoMlClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  autoMlStub: Promise<{[name: string]: Function}>;
+  autoMlStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AutoMlClient.
@@ -84,8 +89,6 @@ export class AutoMlClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -115,25 +118,28 @@ export class AutoMlClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof AutoMlClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -149,7 +155,7 @@ export class AutoMlClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -157,25 +163,25 @@ export class AutoMlClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      annotationSpecPathTemplate: new gaxModule.PathTemplate(
+      annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
-      columnSpecPathTemplate: new gaxModule.PathTemplate(
+      columnSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}/columnSpecs/{column_spec}'
       ),
-      datasetPathTemplate: new gaxModule.PathTemplate(
+      datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
-      locationPathTemplate: new gaxModule.PathTemplate(
+      locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      modelPathTemplate: new gaxModule.PathTemplate(
+      modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
-      modelEvaluationPathTemplate: new gaxModule.PathTemplate(
+      modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/modelEvaluations/{model_evaluation}'
       ),
-      tableSpecPathTemplate: new gaxModule.PathTemplate(
+      tableSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}'
       ),
     };
@@ -184,27 +190,27 @@ export class AutoMlClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listDatasets: new gaxModule.PageDescriptor(
+      listDatasets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'datasets'
       ),
-      listTableSpecs: new gaxModule.PageDescriptor(
+      listTableSpecs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'tableSpecs'
       ),
-      listColumnSpecs: new gaxModule.PageDescriptor(
+      listColumnSpecs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'columnSpecs'
       ),
-      listModels: new gaxModule.PageDescriptor(
+      listModels: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'model'
       ),
-      listModelEvaluations: new gaxModule.PageDescriptor(
+      listModelEvaluations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'modelEvaluation'
@@ -215,13 +221,15 @@ export class AutoMlClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const deleteDatasetResponse = protoFilesRoot.lookup(
@@ -280,47 +288,47 @@ export class AutoMlClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      deleteDataset: new gaxModule.LongrunningDescriptor(
+      deleteDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDatasetResponse.decode.bind(deleteDatasetResponse),
         deleteDatasetMetadata.decode.bind(deleteDatasetMetadata)
       ),
-      importData: new gaxModule.LongrunningDescriptor(
+      importData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataResponse.decode.bind(importDataResponse),
         importDataMetadata.decode.bind(importDataMetadata)
       ),
-      exportData: new gaxModule.LongrunningDescriptor(
+      exportData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata)
       ),
-      createModel: new gaxModule.LongrunningDescriptor(
+      createModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createModelResponse.decode.bind(createModelResponse),
         createModelMetadata.decode.bind(createModelMetadata)
       ),
-      deleteModel: new gaxModule.LongrunningDescriptor(
+      deleteModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteModelResponse.decode.bind(deleteModelResponse),
         deleteModelMetadata.decode.bind(deleteModelMetadata)
       ),
-      deployModel: new gaxModule.LongrunningDescriptor(
+      deployModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deployModelResponse.decode.bind(deployModelResponse),
         deployModelMetadata.decode.bind(deployModelMetadata)
       ),
-      undeployModel: new gaxModule.LongrunningDescriptor(
+      undeployModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         undeployModelResponse.decode.bind(undeployModelResponse),
         undeployModelMetadata.decode.bind(undeployModelMetadata)
       ),
-      exportModel: new gaxModule.LongrunningDescriptor(
+      exportModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportModelResponse.decode.bind(exportModelResponse),
         exportModelMetadata.decode.bind(exportModelMetadata)
       ),
-      exportEvaluatedExamples: new gaxModule.LongrunningDescriptor(
+      exportEvaluatedExamples: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportEvaluatedExamplesResponse.decode.bind(
           exportEvaluatedExamplesResponse
@@ -332,7 +340,7 @@ export class AutoMlClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.automl.v1beta1.AutoMl',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -343,17 +351,35 @@ export class AutoMlClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.autoMlStub) {
+      return this.autoMlStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.automl.v1beta1.AutoMl.
-    this.autoMlStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.autoMlStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.automl.v1beta1.AutoMl'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.automl.v1beta1.AutoMl,
-      opts
+          (this._protos as any).google.cloud.automl.v1beta1.AutoMl,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -398,9 +424,9 @@ export class AutoMlClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -414,6 +440,8 @@ export class AutoMlClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.autoMlStub;
   }
 
   /**
@@ -538,6 +566,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createDataset(request, options, callback);
   }
   getDataset(
@@ -610,6 +639,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getDataset(request, options, callback);
   }
   updateDataset(
@@ -684,6 +714,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       'dataset.name': request.dataset!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateDataset(request, options, callback);
   }
   getAnnotationSpec(
@@ -764,6 +795,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getAnnotationSpec(request, options, callback);
   }
   getTableSpec(
@@ -838,6 +870,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getTableSpec(request, options, callback);
   }
   updateTableSpec(
@@ -920,6 +953,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       'table_spec.name': request.tableSpec!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateTableSpec(request, options, callback);
   }
   getColumnSpec(
@@ -994,6 +1028,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getColumnSpec(request, options, callback);
   }
   updateColumnSpec(
@@ -1076,6 +1111,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       'column_spec.name': request.columnSpec!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateColumnSpec(request, options, callback);
   }
   getModel(
@@ -1147,6 +1183,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getModel(request, options, callback);
   }
   getModelEvaluation(
@@ -1227,6 +1264,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getModelEvaluation(request, options, callback);
   }
 
@@ -1258,9 +1296,9 @@ export class AutoMlClient {
   /**
    * Deletes a dataset and all of its contents.
    * Returns empty response in the
-   * [response][google.longrunning.Operation.response] field when it completes,
+   * {@link google.longrunning.Operation.response|response} field when it completes,
    * and `delete_details` in the
-   * [metadata][google.longrunning.Operation.metadata] field.
+   * {@link google.longrunning.Operation.metadata|metadata} field.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1318,6 +1356,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteDataset(request, options, callback);
   }
   importData(
@@ -1351,10 +1390,10 @@ export class AutoMlClient {
    *
    * For Tables:
    * *   A
-   * [schema_inference_version][google.cloud.automl.v1beta1.InputConfig.params]
+   * {@link google.cloud.automl.v1beta1.InputConfig.params|schema_inference_version}
    *     parameter must be explicitly set.
    * Returns an empty response in the
-   * [response][google.longrunning.Operation.response] field when it completes.
+   * {@link google.longrunning.Operation.response|response} field when it completes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1416,6 +1455,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.importData(request, options, callback);
   }
   exportData(
@@ -1446,7 +1486,7 @@ export class AutoMlClient {
   /**
    * Exports dataset's data to the provided output location.
    * Returns an empty response in the
-   * [response][google.longrunning.Operation.response] field when it completes.
+   * {@link google.longrunning.Operation.response|response} field when it completes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1506,6 +1546,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.exportData(request, options, callback);
   }
   createModel(
@@ -1535,7 +1576,7 @@ export class AutoMlClient {
   ): void;
   /**
    * Creates a model.
-   * Returns a Model in the [response][google.longrunning.Operation.response]
+   * Returns a Model in the {@link google.longrunning.Operation.response|response}
    * field when it completes.
    * When you create a model, several model evaluations are created for it:
    * a global evaluation, and one evaluation for each annotation spec.
@@ -1598,6 +1639,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createModel(request, options, callback);
   }
   deleteModel(
@@ -1628,9 +1670,9 @@ export class AutoMlClient {
   /**
    * Deletes a model.
    * Returns `google.protobuf.Empty` in the
-   * [response][google.longrunning.Operation.response] field when it completes,
+   * {@link google.longrunning.Operation.response|response} field when it completes,
    * and `delete_details` in the
-   * [metadata][google.longrunning.Operation.metadata] field.
+   * {@link google.longrunning.Operation.metadata|metadata} field.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1688,6 +1730,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteModel(request, options, callback);
   }
   deployModel(
@@ -1720,14 +1763,14 @@ export class AutoMlClient {
    * same parameters has no effect. Deploying with different parametrs
    * (as e.g. changing
    *
-   * [node_number][google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata.node_number])
+   * {@link google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata.node_number|node_number})
    *  will reset the deployment state without pausing the model's availability.
    *
    * Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage
    * deployment automatically.
    *
    * Returns an empty response in the
-   * [response][google.longrunning.Operation.response] field when it completes.
+   * {@link google.longrunning.Operation.response|response} field when it completes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1789,6 +1832,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deployModel(request, options, callback);
   }
   undeployModel(
@@ -1823,7 +1867,7 @@ export class AutoMlClient {
    * all other domains manage deployment automatically.
    *
    * Returns an empty response in the
-   * [response][google.longrunning.Operation.response] field when it completes.
+   * {@link google.longrunning.Operation.response|response} field when it completes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1881,6 +1925,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.undeployModel(request, options, callback);
   }
   exportModel(
@@ -1913,10 +1958,10 @@ export class AutoMlClient {
    * Storage location. A model is considered export-able if and only if it has
    * an export format defined for it in
    *
-   * [ModelExportOutputConfig][google.cloud.automl.v1beta1.ModelExportOutputConfig].
+   * {@link google.cloud.automl.v1beta1.ModelExportOutputConfig|ModelExportOutputConfig}.
    *
    * Returns an empty response in the
-   * [response][google.longrunning.Operation.response] field when it completes.
+   * {@link google.longrunning.Operation.response|response} field when it completes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1976,6 +2021,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.exportModel(request, options, callback);
   }
   exportEvaluatedExamples(
@@ -2017,7 +2063,7 @@ export class AutoMlClient {
    * Currently only available for Tables.
    *
    * Returns an empty response in the
-   * [response][google.longrunning.Operation.response] field when it completes.
+   * {@link google.longrunning.Operation.response|response} field when it completes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2078,6 +2124,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.exportEvaluatedExamples(
       request,
       options,
@@ -2124,8 +2171,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   [ListDatasetsResponse.next_page_token][google.cloud.automl.v1beta1.ListDatasetsResponse.next_page_token] of the previous
-   *   [AutoMl.ListDatasets][google.cloud.automl.v1beta1.AutoMl.ListDatasets] call.
+   *   {@link google.cloud.automl.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListDatasets|AutoMl.ListDatasets} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2181,6 +2228,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listDatasets(request, options, callback);
   }
 
@@ -2215,8 +2263,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   [ListDatasetsResponse.next_page_token][google.cloud.automl.v1beta1.ListDatasetsResponse.next_page_token] of the previous
-   *   [AutoMl.ListDatasets][google.cloud.automl.v1beta1.AutoMl.ListDatasets] call.
+   *   {@link google.cloud.automl.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListDatasets|AutoMl.ListDatasets} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2236,6 +2284,7 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listDatasets.createStream(
       this._innerApiCalls.listDatasets as gax.GaxCall,
       request,
@@ -2278,8 +2327,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return.
    *   Typically obtained from the
-   *   [ListTableSpecsResponse.next_page_token][google.cloud.automl.v1beta1.ListTableSpecsResponse.next_page_token] field of the previous
-   *   [AutoMl.ListTableSpecs][google.cloud.automl.v1beta1.AutoMl.ListTableSpecs] call.
+   *   {@link google.cloud.automl.v1beta1.ListTableSpecsResponse.next_page_token|ListTableSpecsResponse.next_page_token} field of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListTableSpecs|AutoMl.ListTableSpecs} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2335,6 +2384,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listTableSpecs(request, options, callback);
   }
 
@@ -2365,8 +2415,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return.
    *   Typically obtained from the
-   *   [ListTableSpecsResponse.next_page_token][google.cloud.automl.v1beta1.ListTableSpecsResponse.next_page_token] field of the previous
-   *   [AutoMl.ListTableSpecs][google.cloud.automl.v1beta1.AutoMl.ListTableSpecs] call.
+   *   {@link google.cloud.automl.v1beta1.ListTableSpecsResponse.next_page_token|ListTableSpecsResponse.next_page_token} field of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListTableSpecs|AutoMl.ListTableSpecs} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2386,6 +2436,7 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listTableSpecs.createStream(
       this._innerApiCalls.listTableSpecs as gax.GaxCall,
       request,
@@ -2428,8 +2479,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return.
    *   Typically obtained from the
-   *   [ListColumnSpecsResponse.next_page_token][google.cloud.automl.v1beta1.ListColumnSpecsResponse.next_page_token] field of the previous
-   *   [AutoMl.ListColumnSpecs][google.cloud.automl.v1beta1.AutoMl.ListColumnSpecs] call.
+   *   {@link google.cloud.automl.v1beta1.ListColumnSpecsResponse.next_page_token|ListColumnSpecsResponse.next_page_token} field of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListColumnSpecs|AutoMl.ListColumnSpecs} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2485,6 +2536,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listColumnSpecs(request, options, callback);
   }
 
@@ -2515,8 +2567,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return.
    *   Typically obtained from the
-   *   [ListColumnSpecsResponse.next_page_token][google.cloud.automl.v1beta1.ListColumnSpecsResponse.next_page_token] field of the previous
-   *   [AutoMl.ListColumnSpecs][google.cloud.automl.v1beta1.AutoMl.ListColumnSpecs] call.
+   *   {@link google.cloud.automl.v1beta1.ListColumnSpecsResponse.next_page_token|ListColumnSpecsResponse.next_page_token} field of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListColumnSpecs|AutoMl.ListColumnSpecs} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2536,6 +2588,7 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listColumnSpecs.createStream(
       this._innerApiCalls.listColumnSpecs as gax.GaxCall,
       request,
@@ -2583,8 +2636,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   [ListModelsResponse.next_page_token][google.cloud.automl.v1beta1.ListModelsResponse.next_page_token] of the previous
-   *   [AutoMl.ListModels][google.cloud.automl.v1beta1.AutoMl.ListModels] call.
+   *   {@link google.cloud.automl.v1beta1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListModels|AutoMl.ListModels} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2640,6 +2693,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listModels(request, options, callback);
   }
 
@@ -2675,8 +2729,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   [ListModelsResponse.next_page_token][google.cloud.automl.v1beta1.ListModelsResponse.next_page_token] of the previous
-   *   [AutoMl.ListModels][google.cloud.automl.v1beta1.AutoMl.ListModels] call.
+   *   {@link google.cloud.automl.v1beta1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListModels|AutoMl.ListModels} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2696,6 +2750,7 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listModels.createStream(
       this._innerApiCalls.listModels as gax.GaxCall,
       request,
@@ -2747,8 +2802,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return.
    *   Typically obtained via
-   *   [ListModelEvaluationsResponse.next_page_token][google.cloud.automl.v1beta1.ListModelEvaluationsResponse.next_page_token] of the previous
-   *   [AutoMl.ListModelEvaluations][google.cloud.automl.v1beta1.AutoMl.ListModelEvaluations] call.
+   *   {@link google.cloud.automl.v1beta1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListModelEvaluations|AutoMl.ListModelEvaluations} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2804,6 +2859,7 @@ export class AutoMlClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listModelEvaluations(request, options, callback);
   }
 
@@ -2843,8 +2899,8 @@ export class AutoMlClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return.
    *   Typically obtained via
-   *   [ListModelEvaluationsResponse.next_page_token][google.cloud.automl.v1beta1.ListModelEvaluationsResponse.next_page_token] of the previous
-   *   [AutoMl.ListModelEvaluations][google.cloud.automl.v1beta1.AutoMl.ListModelEvaluations] call.
+   *   {@link google.cloud.automl.v1beta1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1beta1.AutoMl.ListModelEvaluations|AutoMl.ListModelEvaluations} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2864,6 +2920,7 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listModelEvaluations.createStream(
       this._innerApiCalls.listModelEvaluations as gax.GaxCall,
       request,
@@ -3322,8 +3379,9 @@ export class AutoMlClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.autoMlStub.then(stub => {
+      return this.autoMlStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -45,9 +45,14 @@ export class PredictionServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  predictionServiceStub: Promise<{[name: string]: Function}>;
+  predictionServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PredictionServiceClient.
@@ -71,8 +76,6 @@ export class PredictionServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -102,25 +105,28 @@ export class PredictionServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof PredictionServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -136,7 +142,7 @@ export class PredictionServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -144,16 +150,16 @@ export class PredictionServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      annotationSpecPathTemplate: new gaxModule.PathTemplate(
+      annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
-      datasetPathTemplate: new gaxModule.PathTemplate(
+      datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
-      modelPathTemplate: new gaxModule.PathTemplate(
+      modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
-      modelEvaluationPathTemplate: new gaxModule.PathTemplate(
+      modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/modelEvaluations/{model_evaluation}'
       ),
     };
@@ -162,13 +168,15 @@ export class PredictionServiceClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const batchPredictResponse = protoFilesRoot.lookup(
@@ -179,7 +187,7 @@ export class PredictionServiceClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      batchPredict: new gaxModule.LongrunningDescriptor(
+      batchPredict: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchPredictResponse.decode.bind(batchPredictResponse),
         batchPredictMetadata.decode.bind(batchPredictMetadata)
@@ -187,7 +195,7 @@ export class PredictionServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.automl.v1.PredictionService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -198,17 +206,35 @@ export class PredictionServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.predictionServiceStub) {
+      return this.predictionServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.automl.v1.PredictionService.
-    this.predictionServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.predictionServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.automl.v1.PredictionService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.automl.v1.PredictionService,
-      opts
+          (this._protos as any).google.cloud.automl.v1.PredictionService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -228,9 +254,9 @@ export class PredictionServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -244,6 +270,8 @@ export class PredictionServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.predictionServiceStub;
   }
 
   /**
@@ -392,9 +420,9 @@ export class PredictionServiceClient {
    *   `feature_importance`
    *   : (boolean) Whether
    *
-   *   [feature_importance][google.cloud.automl.v1.TablesModelColumnInfo.feature_importance]
+   *   {@link google.cloud.automl.v1.TablesModelColumnInfo.feature_importance|feature_importance}
    *     is populated in the returned list of
-   *     [TablesAnnotation][google.cloud.automl.v1.TablesAnnotation]
+   *     {@link google.cloud.automl.v1.TablesAnnotation|TablesAnnotation}
    *     objects. The default is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -439,6 +467,7 @@ export class PredictionServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.predict(request, options, callback);
   }
 
@@ -468,12 +497,12 @@ export class PredictionServiceClient {
     >
   ): void;
   /**
-   * Perform a batch prediction. Unlike the online [Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+   * Perform a batch prediction. Unlike the online {@link google.cloud.automl.v1.PredictionService.Predict|Predict}, batch
    * prediction result won't be immediately available in the response. Instead,
    * a long running operation object is returned. User can poll the operation
-   * result via [GetOperation][google.longrunning.Operations.GetOperation]
-   * method. Once the operation is done, [BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned in
-   * the [response][google.longrunning.Operation.response] field.
+   * result via {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * method. Once the operation is done, {@link google.cloud.automl.v1.BatchPredictResult|BatchPredictResult} is returned in
+   * the {@link google.longrunning.Operation.response|response} field.
    * Available for following ML scenarios:
    *
    * * AutoML Vision Classification
@@ -630,6 +659,7 @@ export class PredictionServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.batchPredict(request, options, callback);
   }
   // --------------------
@@ -890,8 +920,9 @@ export class PredictionServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.predictionServiceStub.then(stub => {
+      return this.predictionServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

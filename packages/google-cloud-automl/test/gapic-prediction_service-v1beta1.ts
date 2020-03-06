@@ -104,6 +104,22 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.predictionServiceStub, undefined);
+    await client.initialize();
+    assert(client.predictionServiceStub);
+  });
+  it('has close method', () => {
+    const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('predict', () => {
     it('invokes predict without error', done => {
       const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
@@ -112,6 +128,8 @@ describe('v1beta1.PredictionServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IPredictRequest = {};
       request.name = '';
@@ -137,6 +155,8 @@ describe('v1beta1.PredictionServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IPredictRequest = {};
       request.name = '';
@@ -164,6 +184,8 @@ describe('v1beta1.PredictionServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IBatchPredictRequest = {};
       request.name = '';
@@ -196,6 +218,8 @@ describe('v1beta1.PredictionServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IBatchPredictRequest = {};
       request.name = '';

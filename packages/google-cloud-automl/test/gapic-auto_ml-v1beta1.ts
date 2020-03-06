@@ -102,12 +102,30 @@ describe('v1beta1.AutoMlClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new automlModule.v1beta1.AutoMlClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.autoMlStub, undefined);
+    await client.initialize();
+    assert(client.autoMlStub);
+  });
+  it('has close method', () => {
+    const client = new automlModule.v1beta1.AutoMlClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
       const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.ICreateDatasetRequest = {};
       request.parent = '';
@@ -131,6 +149,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.ICreateDatasetRequest = {};
       request.parent = '';
@@ -156,6 +176,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetDatasetRequest = {};
       request.name = '';
@@ -179,6 +201,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetDatasetRequest = {};
       request.name = '';
@@ -204,6 +228,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IUpdateDatasetRequest = {};
       request.dataset = {};
@@ -228,6 +254,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IUpdateDatasetRequest = {};
       request.dataset = {};
@@ -254,6 +282,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest = {};
       request.name = '';
@@ -277,6 +307,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest = {};
       request.name = '';
@@ -302,6 +334,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetTableSpecRequest = {};
       request.name = '';
@@ -325,6 +359,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetTableSpecRequest = {};
       request.name = '';
@@ -350,6 +386,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IUpdateTableSpecRequest = {};
       request.tableSpec = {};
@@ -374,6 +412,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IUpdateTableSpecRequest = {};
       request.tableSpec = {};
@@ -400,6 +440,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetColumnSpecRequest = {};
       request.name = '';
@@ -423,6 +465,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetColumnSpecRequest = {};
       request.name = '';
@@ -448,6 +492,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest = {};
       request.columnSpec = {};
@@ -472,6 +518,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest = {};
       request.columnSpec = {};
@@ -498,6 +546,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetModelRequest = {};
       request.name = '';
@@ -521,6 +571,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetModelRequest = {};
       request.name = '';
@@ -546,6 +598,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetModelEvaluationRequest = {};
       request.name = '';
@@ -569,6 +623,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IGetModelEvaluationRequest = {};
       request.name = '';
@@ -594,6 +650,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IDeleteDatasetRequest = {};
       request.name = '';
@@ -624,6 +682,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IDeleteDatasetRequest = {};
       request.name = '';
@@ -657,6 +717,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IImportDataRequest = {};
       request.name = '';
@@ -687,6 +749,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IImportDataRequest = {};
       request.name = '';
@@ -720,6 +784,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IExportDataRequest = {};
       request.name = '';
@@ -750,6 +816,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IExportDataRequest = {};
       request.name = '';
@@ -783,6 +851,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.ICreateModelRequest = {};
       request.parent = '';
@@ -813,6 +883,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.ICreateModelRequest = {};
       request.parent = '';
@@ -846,6 +918,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IDeleteModelRequest = {};
       request.name = '';
@@ -876,6 +950,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IDeleteModelRequest = {};
       request.name = '';
@@ -909,6 +985,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IDeployModelRequest = {};
       request.name = '';
@@ -939,6 +1017,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IDeployModelRequest = {};
       request.name = '';
@@ -972,6 +1052,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IUndeployModelRequest = {};
       request.name = '';
@@ -1002,6 +1084,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IUndeployModelRequest = {};
       request.name = '';
@@ -1035,6 +1119,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IExportModelRequest = {};
       request.name = '';
@@ -1065,6 +1151,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IExportModelRequest = {};
       request.name = '';
@@ -1098,6 +1186,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IExportEvaluatedExamplesRequest = {};
       request.name = '';
@@ -1128,6 +1218,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IExportEvaluatedExamplesRequest = {};
       request.name = '';
@@ -1161,6 +1253,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListDatasetsRequest = {};
       request.parent = '';
@@ -1188,6 +1282,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListDatasetsRequest = {};
       request.parent = '';
@@ -1220,6 +1316,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListTableSpecsRequest = {};
       request.parent = '';
@@ -1247,6 +1345,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListTableSpecsRequest = {};
       request.parent = '';
@@ -1279,6 +1379,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListColumnSpecsRequest = {};
       request.parent = '';
@@ -1306,6 +1408,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListColumnSpecsRequest = {};
       request.parent = '';
@@ -1338,6 +1442,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListModelsRequest = {};
       request.parent = '';
@@ -1365,6 +1471,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListModelsRequest = {};
       request.parent = '';
@@ -1397,6 +1505,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListModelEvaluationsRequest = {};
       request.parent = '';
@@ -1424,6 +1534,8 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.automl.v1beta1.IListModelEvaluationsRequest = {};
       request.parent = '';
