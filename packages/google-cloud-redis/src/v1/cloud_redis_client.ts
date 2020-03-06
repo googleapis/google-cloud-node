@@ -59,9 +59,14 @@ export class CloudRedisClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  cloudRedisStub: Promise<{[name: string]: Function}>;
+  cloudRedisStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CloudRedisClient.
@@ -85,8 +90,6 @@ export class CloudRedisClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -116,25 +119,28 @@ export class CloudRedisClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof CloudRedisClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -150,7 +156,7 @@ export class CloudRedisClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -158,10 +164,10 @@ export class CloudRedisClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      instancePathTemplate: new gaxModule.PathTemplate(
+      instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}'
       ),
-      locationPathTemplate: new gaxModule.PathTemplate(
+      locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
     };
@@ -170,7 +176,7 @@ export class CloudRedisClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listInstances: new gaxModule.PageDescriptor(
+      listInstances: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'instances'
@@ -181,13 +187,15 @@ export class CloudRedisClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const createInstanceResponse = protoFilesRoot.lookup(
@@ -228,32 +236,32 @@ export class CloudRedisClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      createInstance: new gaxModule.LongrunningDescriptor(
+      createInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstanceResponse.decode.bind(createInstanceResponse),
         createInstanceMetadata.decode.bind(createInstanceMetadata)
       ),
-      updateInstance: new gaxModule.LongrunningDescriptor(
+      updateInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateInstanceResponse.decode.bind(updateInstanceResponse),
         updateInstanceMetadata.decode.bind(updateInstanceMetadata)
       ),
-      importInstance: new gaxModule.LongrunningDescriptor(
+      importInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importInstanceResponse.decode.bind(importInstanceResponse),
         importInstanceMetadata.decode.bind(importInstanceMetadata)
       ),
-      exportInstance: new gaxModule.LongrunningDescriptor(
+      exportInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportInstanceResponse.decode.bind(exportInstanceResponse),
         exportInstanceMetadata.decode.bind(exportInstanceMetadata)
       ),
-      failoverInstance: new gaxModule.LongrunningDescriptor(
+      failoverInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         failoverInstanceResponse.decode.bind(failoverInstanceResponse),
         failoverInstanceMetadata.decode.bind(failoverInstanceMetadata)
       ),
-      deleteInstance: new gaxModule.LongrunningDescriptor(
+      deleteInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
         deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
@@ -261,7 +269,7 @@ export class CloudRedisClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.redis.v1.CloudRedis',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -272,17 +280,35 @@ export class CloudRedisClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.cloudRedisStub) {
+      return this.cloudRedisStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.redis.v1.CloudRedis.
-    this.cloudRedisStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.cloudRedisStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.redis.v1.CloudRedis'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.redis.v1.CloudRedis,
-      opts
+          (this._protos as any).google.cloud.redis.v1.CloudRedis,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -311,9 +337,9 @@ export class CloudRedisClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -327,6 +353,8 @@ export class CloudRedisClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.cloudRedisStub;
   }
 
   /**
@@ -450,6 +478,7 @@ export class CloudRedisClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getInstance(request, options, callback);
   }
 
@@ -561,6 +590,7 @@ export class CloudRedisClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createInstance(request, options, callback);
   }
   updateInstance(
@@ -600,7 +630,7 @@ export class CloudRedisClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field. The elements of the repeated paths field may only include these
-   *   fields from [Instance][google.cloud.redis.v1.Instance]:
+   *   fields from {@link google.cloud.redis.v1.Instance|Instance}:
    *
    *    *   `displayName`
    *    *   `labels`
@@ -661,6 +691,7 @@ export class CloudRedisClient {
     ] = gax.routingHeader.fromParams({
       'instance.name': request.instance!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateInstance(request, options, callback);
   }
   importInstance(
@@ -758,6 +789,7 @@ export class CloudRedisClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.importInstance(request, options, callback);
   }
   exportInstance(
@@ -853,6 +885,7 @@ export class CloudRedisClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.exportInstance(request, options, callback);
   }
   failoverInstance(
@@ -945,6 +978,7 @@ export class CloudRedisClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.failoverInstance(request, options, callback);
   }
   deleteInstance(
@@ -1034,6 +1068,7 @@ export class CloudRedisClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteInstance(request, options, callback);
   }
   listInstances(
@@ -1078,11 +1113,11 @@ export class CloudRedisClient {
    *   If not specified, a default value of 1000 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   [`next_page_token`][google.cloud.redis.v1.ListInstancesResponse.next_page_token]
+   *   {@link google.cloud.redis.v1.ListInstancesResponse.next_page_token|`next_page_token`}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `next_page_token` value returned from a previous
-   *   [ListInstances][google.cloud.redis.v1.CloudRedis.ListInstances] request, if any.
+   *   {@link google.cloud.redis.v1.CloudRedis.ListInstances|ListInstances} request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1138,6 +1173,7 @@ export class CloudRedisClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listInstances(request, options, callback);
   }
 
@@ -1166,11 +1202,11 @@ export class CloudRedisClient {
    *   If not specified, a default value of 1000 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   [`next_page_token`][google.cloud.redis.v1.ListInstancesResponse.next_page_token]
+   *   {@link google.cloud.redis.v1.ListInstancesResponse.next_page_token|`next_page_token`}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `next_page_token` value returned from a previous
-   *   [ListInstances][google.cloud.redis.v1.CloudRedis.ListInstances] request, if any.
+   *   {@link google.cloud.redis.v1.CloudRedis.ListInstances|ListInstances} request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1190,6 +1226,7 @@ export class CloudRedisClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listInstances.createStream(
       this._innerApiCalls.listInstances as gax.GaxCall,
       request,
@@ -1294,8 +1331,9 @@ export class CloudRedisClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.cloudRedisStub.then(stub => {
+      return this.cloudRedisStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -102,12 +102,30 @@ describe('v1.CloudRedisClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new cloudredisModule.v1.CloudRedisClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudRedisStub, undefined);
+    await client.initialize();
+    assert(client.cloudRedisStub);
+  });
+  it('has close method', () => {
+    const client = new cloudredisModule.v1.CloudRedisClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getInstance', () => {
     it('invokes getInstance without error', done => {
       const client = new cloudredisModule.v1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IGetInstanceRequest = {};
       request.name = '';
@@ -131,6 +149,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IGetInstanceRequest = {};
       request.name = '';
@@ -156,6 +176,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.ICreateInstanceRequest = {};
       request.parent = '';
@@ -186,6 +208,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.ICreateInstanceRequest = {};
       request.parent = '';
@@ -219,6 +243,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IUpdateInstanceRequest = {};
       request.instance = {};
@@ -250,6 +276,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IUpdateInstanceRequest = {};
       request.instance = {};
@@ -284,6 +312,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IImportInstanceRequest = {};
       request.name = '';
@@ -314,6 +344,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IImportInstanceRequest = {};
       request.name = '';
@@ -347,6 +379,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IExportInstanceRequest = {};
       request.name = '';
@@ -377,6 +411,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IExportInstanceRequest = {};
       request.name = '';
@@ -410,6 +446,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IFailoverInstanceRequest = {};
       request.name = '';
@@ -440,6 +478,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IFailoverInstanceRequest = {};
       request.name = '';
@@ -473,6 +513,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IDeleteInstanceRequest = {};
       request.name = '';
@@ -503,6 +545,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IDeleteInstanceRequest = {};
       request.name = '';
@@ -536,6 +580,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IListInstancesRequest = {};
       request.parent = '';
@@ -563,6 +609,8 @@ describe('v1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IListInstancesRequest = {};
       request.parent = '';
