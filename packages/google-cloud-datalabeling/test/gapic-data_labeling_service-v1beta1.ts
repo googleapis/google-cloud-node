@@ -107,6 +107,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.dataLabelingServiceStub, undefined);
+    await client.initialize();
+    assert(client.dataLabelingServiceStub);
+  });
+  it('has close method', () => {
+    const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
       const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
@@ -115,6 +135,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest = {};
       request.parent = '';
@@ -140,6 +162,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest = {};
       request.parent = '';
@@ -167,6 +191,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetDatasetRequest = {};
       request.name = '';
@@ -192,6 +218,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetDatasetRequest = {};
       request.name = '';
@@ -219,6 +247,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest = {};
       request.name = '';
@@ -244,6 +274,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest = {};
       request.name = '';
@@ -271,6 +303,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetDataItemRequest = {};
       request.name = '';
@@ -296,6 +330,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetDataItemRequest = {};
       request.name = '';
@@ -323,6 +359,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest = {};
       request.name = '';
@@ -348,6 +386,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest = {};
       request.name = '';
@@ -375,6 +415,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest = {};
       request.name = '';
@@ -400,6 +442,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest = {};
       request.name = '';
@@ -427,6 +471,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetExampleRequest = {};
       request.name = '';
@@ -452,6 +498,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetExampleRequest = {};
       request.name = '';
@@ -479,6 +527,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest = {};
       request.parent = '';
@@ -504,6 +554,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest = {};
       request.parent = '';
@@ -534,6 +586,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest = {};
       request.name = '';
@@ -559,6 +613,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest = {};
       request.name = '';
@@ -586,6 +642,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest = {};
       request.name = '';
@@ -611,6 +669,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest = {};
       request.name = '';
@@ -641,6 +701,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetInstructionRequest = {};
       request.name = '';
@@ -666,6 +728,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetInstructionRequest = {};
       request.name = '';
@@ -693,6 +757,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest = {};
       request.name = '';
@@ -718,6 +784,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest = {};
       request.name = '';
@@ -745,6 +813,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest = {};
       request.name = '';
@@ -770,6 +840,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest = {};
       request.name = '';
@@ -797,6 +869,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest = {};
       request.parent = '';
@@ -822,6 +896,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest = {};
       request.parent = '';
@@ -849,6 +925,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest = {};
       request.evaluationJob = {};
@@ -875,6 +953,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest = {};
       request.evaluationJob = {};
@@ -903,6 +983,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest = {};
       request.name = '';
@@ -928,6 +1010,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest = {};
       request.name = '';
@@ -955,6 +1039,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest = {};
       request.name = '';
@@ -980,6 +1066,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest = {};
       request.name = '';
@@ -1007,6 +1095,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest = {};
       request.name = '';
@@ -1032,6 +1122,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest = {};
       request.name = '';
@@ -1059,6 +1151,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest = {};
       request.name = '';
@@ -1084,6 +1178,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest = {};
       request.name = '';
@@ -1111,6 +1207,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IImportDataRequest = {};
       request.name = '';
@@ -1143,6 +1241,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IImportDataRequest = {};
       request.name = '';
@@ -1178,6 +1278,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IExportDataRequest = {};
       request.name = '';
@@ -1210,6 +1312,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IExportDataRequest = {};
       request.name = '';
@@ -1245,6 +1349,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelImageRequest = {};
       request.parent = '';
@@ -1277,6 +1383,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelImageRequest = {};
       request.parent = '';
@@ -1312,6 +1420,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelVideoRequest = {};
       request.parent = '';
@@ -1344,6 +1454,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelVideoRequest = {};
       request.parent = '';
@@ -1379,6 +1491,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelTextRequest = {};
       request.parent = '';
@@ -1411,6 +1525,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelTextRequest = {};
       request.parent = '';
@@ -1446,6 +1562,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest = {};
       request.parent = '';
@@ -1478,6 +1596,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest = {};
       request.parent = '';
@@ -1513,6 +1633,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListDatasetsRequest = {};
       request.parent = '';
@@ -1542,6 +1664,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListDatasetsRequest = {};
       request.parent = '';
@@ -1576,6 +1700,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListDataItemsRequest = {};
       request.parent = '';
@@ -1605,6 +1731,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListDataItemsRequest = {};
       request.parent = '';
@@ -1639,6 +1767,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest = {};
       request.parent = '';
@@ -1668,6 +1798,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest = {};
       request.parent = '';
@@ -1702,6 +1834,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListExamplesRequest = {};
       request.parent = '';
@@ -1731,6 +1865,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListExamplesRequest = {};
       request.parent = '';
@@ -1765,6 +1901,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest = {};
       request.parent = '';
@@ -1794,6 +1932,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest = {};
       request.parent = '';
@@ -1828,6 +1968,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListInstructionsRequest = {};
       request.parent = '';
@@ -1857,6 +1999,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListInstructionsRequest = {};
       request.parent = '';
@@ -1891,6 +2035,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest = {};
       request.parent = '';
@@ -1920,6 +2066,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest = {};
       request.parent = '';
@@ -1954,6 +2102,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest = {};
       request.parent = '';
@@ -1986,6 +2136,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest = {};
       request.parent = '';
@@ -2020,6 +2172,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest = {};
       request.parent = '';
@@ -2049,6 +2203,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest = {};
       request.parent = '';

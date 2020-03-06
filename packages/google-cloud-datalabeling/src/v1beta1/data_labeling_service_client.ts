@@ -44,9 +44,14 @@ export class DataLabelingServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  dataLabelingServiceStub: Promise<{[name: string]: Function}>;
+  dataLabelingServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataLabelingServiceClient.
@@ -70,8 +75,6 @@ export class DataLabelingServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -101,25 +104,28 @@ export class DataLabelingServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof DataLabelingServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -135,7 +141,7 @@ export class DataLabelingServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -143,78 +149,80 @@ export class DataLabelingServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      annotatedDatasetPathTemplate: new gaxModule.PathTemplate(
+      annotatedDatasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}'
       ),
-      annotationSpecSetPathTemplate: new gaxModule.PathTemplate(
+      annotationSpecSetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/annotationSpecSets/{annotation_spec_set}'
       ),
-      dataItemPathTemplate: new gaxModule.PathTemplate(
+      dataItemPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/dataItems/{data_item}'
       ),
-      datasetPathTemplate: new gaxModule.PathTemplate(
+      datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}'
       ),
-      evaluationPathTemplate: new gaxModule.PathTemplate(
+      evaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/evaluations/{evaluation}'
       ),
-      evaluationJobPathTemplate: new gaxModule.PathTemplate(
+      evaluationJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/evaluationJobs/{evaluation_job}'
       ),
-      examplePathTemplate: new gaxModule.PathTemplate(
+      examplePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}/examples/{example}'
       ),
-      instructionPathTemplate: new gaxModule.PathTemplate(
+      instructionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/instructions/{instruction}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listDatasets: new gaxModule.PageDescriptor(
+      listDatasets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'datasets'
       ),
-      listDataItems: new gaxModule.PageDescriptor(
+      listDataItems: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'dataItems'
       ),
-      listAnnotatedDatasets: new gaxModule.PageDescriptor(
+      listAnnotatedDatasets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'annotatedDatasets'
       ),
-      listExamples: new gaxModule.PageDescriptor(
+      listExamples: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'examples'
       ),
-      listAnnotationSpecSets: new gaxModule.PageDescriptor(
+      listAnnotationSpecSets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'annotationSpecSets'
       ),
-      listInstructions: new gaxModule.PageDescriptor(
+      listInstructions: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'instructions'
       ),
-      searchEvaluations: new gaxModule.PageDescriptor(
+      searchEvaluations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'evaluations'
       ),
-      searchExampleComparisons: new gaxModule.PageDescriptor(
+      searchExampleComparisons: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'exampleComparisons'
       ),
-      listEvaluationJobs: new gaxModule.PageDescriptor(
+      listEvaluationJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'evaluationJobs'
@@ -225,13 +233,15 @@ export class DataLabelingServiceClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const importDataResponse = protoFilesRoot.lookup(
@@ -272,32 +282,32 @@ export class DataLabelingServiceClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      importData: new gaxModule.LongrunningDescriptor(
+      importData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataResponse.decode.bind(importDataResponse),
         importDataMetadata.decode.bind(importDataMetadata)
       ),
-      exportData: new gaxModule.LongrunningDescriptor(
+      exportData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata)
       ),
-      labelImage: new gaxModule.LongrunningDescriptor(
+      labelImage: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelImageResponse.decode.bind(labelImageResponse),
         labelImageMetadata.decode.bind(labelImageMetadata)
       ),
-      labelVideo: new gaxModule.LongrunningDescriptor(
+      labelVideo: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelVideoResponse.decode.bind(labelVideoResponse),
         labelVideoMetadata.decode.bind(labelVideoMetadata)
       ),
-      labelText: new gaxModule.LongrunningDescriptor(
+      labelText: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelTextResponse.decode.bind(labelTextResponse),
         labelTextMetadata.decode.bind(labelTextMetadata)
       ),
-      createInstruction: new gaxModule.LongrunningDescriptor(
+      createInstruction: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstructionResponse.decode.bind(createInstructionResponse),
         createInstructionMetadata.decode.bind(createInstructionMetadata)
@@ -305,7 +315,7 @@ export class DataLabelingServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.datalabeling.v1beta1.DataLabelingService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -316,17 +326,36 @@ export class DataLabelingServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.dataLabelingServiceStub) {
+      return this.dataLabelingServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.datalabeling.v1beta1.DataLabelingService.
-    this.dataLabelingServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.dataLabelingServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.datalabeling.v1beta1.DataLabelingService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.datalabeling.v1beta1.DataLabelingService,
-      opts
+          (this._protos as any).google.cloud.datalabeling.v1beta1
+            .DataLabelingService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -381,9 +410,9 @@ export class DataLabelingServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -397,6 +426,8 @@ export class DataLabelingServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.dataLabelingServiceStub;
   }
 
   /**
@@ -530,6 +561,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createDataset(request, options, callback);
   }
   getDataset(
@@ -611,6 +643,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getDataset(request, options, callback);
   }
   deleteDataset(
@@ -692,6 +725,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteDataset(request, options, callback);
   }
   getDataItem(
@@ -774,6 +808,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getDataItem(request, options, callback);
   }
   getAnnotatedDataset(
@@ -856,6 +891,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getAnnotatedDataset(request, options, callback);
   }
   deleteAnnotatedDataset(
@@ -938,6 +974,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteAnnotatedDataset(
       request,
       options,
@@ -1028,6 +1065,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getExample(request, options, callback);
   }
   createAnnotationSpecSet(
@@ -1113,6 +1151,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createAnnotationSpecSet(
       request,
       options,
@@ -1198,6 +1237,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getAnnotationSpecSet(request, options, callback);
   }
   deleteAnnotationSpecSet(
@@ -1279,6 +1319,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteAnnotationSpecSet(
       request,
       options,
@@ -1364,6 +1405,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getInstruction(request, options, callback);
   }
   deleteInstruction(
@@ -1445,6 +1487,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteInstruction(request, options, callback);
   }
   getEvaluation(
@@ -1472,7 +1515,7 @@ export class DataLabelingServiceClient {
   ): void;
   /**
    * Gets an evaluation by resource name (to search, use
-   * [projects.evaluations.search][google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations]).
+   * {@link google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations|projects.evaluations.search}).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1528,6 +1571,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getEvaluation(request, options, callback);
   }
   createEvaluationJob(
@@ -1611,6 +1655,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createEvaluationJob(request, options, callback);
   }
   updateEvaluationJob(
@@ -1638,7 +1683,7 @@ export class DataLabelingServiceClient {
   ): void;
   /**
    * Updates an evaluation job. You can only update certain fields of the job's
-   * [EvaluationJobConfig][google.cloud.datalabeling.v1beta1.EvaluationJobConfig]: `humanAnnotationConfig.instruction`,
+   * {@link google.cloud.datalabeling.v1beta1.EvaluationJobConfig|EvaluationJobConfig}: `humanAnnotationConfig.instruction`,
    * `exampleCount`, and `exampleSamplePercentage`.
    *
    * If you want to change any other aspect of the evaluation job, you must
@@ -1706,6 +1751,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       'evaluation_job.name': request.evaluationJob!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateEvaluationJob(request, options, callback);
   }
   getEvaluationJob(
@@ -1788,6 +1834,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getEvaluationJob(request, options, callback);
   }
   pauseEvaluationJob(
@@ -1871,6 +1918,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.pauseEvaluationJob(request, options, callback);
   }
   resumeEvaluationJob(
@@ -1954,6 +2002,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.resumeEvaluationJob(request, options, callback);
   }
   deleteEvaluationJob(
@@ -2036,6 +2085,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteEvaluationJob(request, options, callback);
   }
 
@@ -2133,6 +2183,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.importData(request, options, callback);
   }
   exportData(
@@ -2233,6 +2284,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.exportData(request, options, callback);
   }
   labelImage(
@@ -2341,6 +2393,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.labelImage(request, options, callback);
   }
   labelVideo(
@@ -2449,6 +2502,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.labelVideo(request, options, callback);
   }
   labelText(
@@ -2549,6 +2603,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.labelText(request, options, callback);
   }
   createInstruction(
@@ -2638,6 +2693,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createInstruction(request, options, callback);
   }
   listDatasets(
@@ -2675,7 +2731,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListDatasetsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListDatasets] call.
    *   Returns the first page if empty.
    * @param {object} [options]
@@ -2733,6 +2789,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listDatasets(request, options, callback);
   }
 
@@ -2762,7 +2819,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListDatasetsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListDatasets] call.
    *   Returns the first page if empty.
    * @param {object} [options]
@@ -2784,6 +2841,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listDatasets.createStream(
       this._innerApiCalls.listDatasets as gax.GaxCall,
       request,
@@ -2826,7 +2884,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListDataItemsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token|ListDataItemsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListDataItems] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -2884,6 +2942,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listDataItems(request, options, callback);
   }
 
@@ -2913,7 +2972,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListDataItemsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token|ListDataItemsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListDataItems] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -2935,6 +2994,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listDataItems.createStream(
       this._innerApiCalls.listDataItems as gax.GaxCall,
       request,
@@ -2976,7 +3036,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListAnnotatedDatasetsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token|ListAnnotatedDatasetsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListAnnotatedDatasets] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -3034,6 +3094,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listAnnotatedDatasets(
       request,
       options,
@@ -3067,7 +3128,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListAnnotatedDatasetsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token|ListAnnotatedDatasetsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListAnnotatedDatasets] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -3089,6 +3150,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listAnnotatedDatasets.createStream(
       this._innerApiCalls.listAnnotatedDatasets as gax.GaxCall,
       request,
@@ -3132,7 +3194,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListExamplesResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token|ListExamplesResponse.next_page_token} of the previous
    *   [DataLabelingService.ListExamples] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -3190,6 +3252,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listExamples(request, options, callback);
   }
 
@@ -3221,7 +3284,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListExamplesResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token|ListExamplesResponse.next_page_token} of the previous
    *   [DataLabelingService.ListExamples] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -3243,6 +3306,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listExamples.createStream(
       this._innerApiCalls.listExamples as gax.GaxCall,
       request,
@@ -3284,7 +3348,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListAnnotationSpecSetsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token|ListAnnotationSpecSetsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListAnnotationSpecSets] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -3342,6 +3406,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listAnnotationSpecSets(
       request,
       options,
@@ -3375,7 +3440,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListAnnotationSpecSetsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token|ListAnnotationSpecSetsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListAnnotationSpecSets] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -3397,6 +3462,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listAnnotationSpecSets.createStream(
       this._innerApiCalls.listAnnotationSpecSets as gax.GaxCall,
       request,
@@ -3438,7 +3504,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListInstructionsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token|ListInstructionsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListInstructions] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -3496,6 +3562,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listInstructions(request, options, callback);
   }
 
@@ -3525,7 +3592,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by
-   *   [ListInstructionsResponse.next_page_token][google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token] of the previous
+   *   {@link google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token|ListInstructionsResponse.next_page_token} of the previous
    *   [DataLabelingService.ListInstructions] call.
    *   Return first page if empty.
    * @param {object} [options]
@@ -3547,6 +3614,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listInstructions.createStream(
       this._innerApiCalls.listInstructions as gax.GaxCall,
       request,
@@ -3573,7 +3641,7 @@ export class DataLabelingServiceClient {
     >
   ): void;
   /**
-   * Searches [evaluations][google.cloud.datalabeling.v1beta1.Evaluation] within a project.
+   * Searches {@link google.cloud.datalabeling.v1beta1.Evaluation|evaluations} within a project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3584,21 +3652,21 @@ export class DataLabelingServiceClient {
    *   Optional. To search evaluations, you can filter by the following:
    *
    *   * evaluation<span>_</span>job.evaluation_job_id (the last part of
-   *     [EvaluationJob.name][google.cloud.datalabeling.v1beta1.EvaluationJob.name])
+   *     {@link google.cloud.datalabeling.v1beta1.EvaluationJob.name|EvaluationJob.name})
    *   * evaluation<span>_</span>job.model_id (the <var>{model_name}</var> portion
-   *     of [EvaluationJob.modelVersion][google.cloud.datalabeling.v1beta1.EvaluationJob.model_version])
+   *     of {@link google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion})
    *   * evaluation<span>_</span>job.evaluation_job_run_time_start (Minimum
    *     threshold for the
-   *     [evaluationJobRunTime][google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time] that created
+   *     {@link google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
    *     the evaluation)
    *   * evaluation<span>_</span>job.evaluation_job_run_time_end (Maximum
    *     threshold for the
-   *     [evaluationJobRunTime][google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time] that created
+   *     {@link google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
    *     the evaluation)
-   *   * evaluation<span>_</span>job.job_state ([EvaluationJob.state][google.cloud.datalabeling.v1beta1.EvaluationJob.state])
+   *   * evaluation<span>_</span>job.job_state ({@link google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state})
    *   * annotation<span>_</span>spec.display_name (the Evaluation contains a
    *     metric for the annotation spec with this
-   *     [displayName][google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name])
+   *     {@link google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name|displayName})
    *
    *   To filter by multiple critiera, use the `AND` operator or the `OR`
    *   operator. The following examples shows a string that filters by several
@@ -3618,7 +3686,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by the
-   *   [nextPageToken][google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token] of the response
+   *   {@link google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token|nextPageToken} of the response
    *   to a previous search request.
    *
    *   If you don't specify this field, the API call requests the first page of
@@ -3678,6 +3746,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.searchEvaluations(request, options, callback);
   }
 
@@ -3703,21 +3772,21 @@ export class DataLabelingServiceClient {
    *   Optional. To search evaluations, you can filter by the following:
    *
    *   * evaluation<span>_</span>job.evaluation_job_id (the last part of
-   *     [EvaluationJob.name][google.cloud.datalabeling.v1beta1.EvaluationJob.name])
+   *     {@link google.cloud.datalabeling.v1beta1.EvaluationJob.name|EvaluationJob.name})
    *   * evaluation<span>_</span>job.model_id (the <var>{model_name}</var> portion
-   *     of [EvaluationJob.modelVersion][google.cloud.datalabeling.v1beta1.EvaluationJob.model_version])
+   *     of {@link google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion})
    *   * evaluation<span>_</span>job.evaluation_job_run_time_start (Minimum
    *     threshold for the
-   *     [evaluationJobRunTime][google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time] that created
+   *     {@link google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
    *     the evaluation)
    *   * evaluation<span>_</span>job.evaluation_job_run_time_end (Maximum
    *     threshold for the
-   *     [evaluationJobRunTime][google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time] that created
+   *     {@link google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
    *     the evaluation)
-   *   * evaluation<span>_</span>job.job_state ([EvaluationJob.state][google.cloud.datalabeling.v1beta1.EvaluationJob.state])
+   *   * evaluation<span>_</span>job.job_state ({@link google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state})
    *   * annotation<span>_</span>spec.display_name (the Evaluation contains a
    *     metric for the annotation spec with this
-   *     [displayName][google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name])
+   *     {@link google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name|displayName})
    *
    *   To filter by multiple critiera, use the `AND` operator or the `OR`
    *   operator. The following examples shows a string that filters by several
@@ -3737,7 +3806,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by the
-   *   [nextPageToken][google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token] of the response
+   *   {@link google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token|nextPageToken} of the response
    *   to a previous search request.
    *
    *   If you don't specify this field, the API call requests the first page of
@@ -3761,6 +3830,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.searchEvaluations.createStream(
       this._innerApiCalls.searchEvaluations as gax.GaxCall,
       request,
@@ -3794,7 +3864,7 @@ export class DataLabelingServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the [Evaluation][google.cloud.datalabeling.v1beta1.Evaluation] resource to search for example
+   *   Required. Name of the {@link google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} resource to search for example
    *   comparisons from. Format:
    *
    *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>"
@@ -3804,7 +3874,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by the
-   *   [nextPageToken][SearchExampleComparisons.next_page_token] of the response
+   *   {@link SearchExampleComparisons.next_page_token|nextPageToken} of the response
    *   to a previous search rquest.
    *
    *   If you don't specify this field, the API call requests the first page of
@@ -3864,6 +3934,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.searchExampleComparisons(
       request,
       options,
@@ -3887,7 +3958,7 @@ export class DataLabelingServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the [Evaluation][google.cloud.datalabeling.v1beta1.Evaluation] resource to search for example
+   *   Required. Name of the {@link google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} resource to search for example
    *   comparisons from. Format:
    *
    *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>"
@@ -3897,7 +3968,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by the
-   *   [nextPageToken][SearchExampleComparisons.next_page_token] of the response
+   *   {@link SearchExampleComparisons.next_page_token|nextPageToken} of the response
    *   to a previous search rquest.
    *
    *   If you don't specify this field, the API call requests the first page of
@@ -3921,6 +3992,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.searchExampleComparisons.createStream(
       this._innerApiCalls.searchExampleComparisons as gax.GaxCall,
       request,
@@ -3958,8 +4030,8 @@ export class DataLabelingServiceClient {
    * @param {string} [request.filter]
    *   Optional. You can filter the jobs to list by model_id (also known as
    *   model_name, as described in
-   *   [EvaluationJob.modelVersion][google.cloud.datalabeling.v1beta1.EvaluationJob.model_version]) or by
-   *   evaluation job state (as described in [EvaluationJob.state][google.cloud.datalabeling.v1beta1.EvaluationJob.state]). To filter
+   *   {@link google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion}) or by
+   *   evaluation job state (as described in {@link google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state}). To filter
    *   by both criteria, use the `AND` operator or the `OR` operator. For example,
    *   you can use the following string for your filter:
    *   "evaluation<span>_</span>job.model_id = <var>{model_name}</var> AND
@@ -3970,7 +4042,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by the
-   *   [nextPageToken][google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token] in the response
+   *   {@link google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token|nextPageToken} in the response
    *   to the previous request. The request returns the first page if this is
    *   empty.
    * @param {object} [options]
@@ -4028,6 +4100,7 @@ export class DataLabelingServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listEvaluationJobs(request, options, callback);
   }
 
@@ -4052,8 +4125,8 @@ export class DataLabelingServiceClient {
    * @param {string} [request.filter]
    *   Optional. You can filter the jobs to list by model_id (also known as
    *   model_name, as described in
-   *   [EvaluationJob.modelVersion][google.cloud.datalabeling.v1beta1.EvaluationJob.model_version]) or by
-   *   evaluation job state (as described in [EvaluationJob.state][google.cloud.datalabeling.v1beta1.EvaluationJob.state]). To filter
+   *   {@link google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion}) or by
+   *   evaluation job state (as described in {@link google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state}). To filter
    *   by both criteria, use the `AND` operator or the `OR` operator. For example,
    *   you can use the following string for your filter:
    *   "evaluation<span>_</span>job.model_id = <var>{model_name}</var> AND
@@ -4064,7 +4137,7 @@ export class DataLabelingServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results for the server to return.
    *   Typically obtained by the
-   *   [nextPageToken][google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token] in the response
+   *   {@link google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token|nextPageToken} in the response
    *   to the previous request. The request returns the first page if this is
    *   empty.
    * @param {object} [options]
@@ -4086,6 +4159,7 @@ export class DataLabelingServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listEvaluationJobs.createStream(
       this._innerApiCalls.listEvaluationJobs as gax.GaxCall,
       request,
@@ -4510,8 +4584,9 @@ export class DataLabelingServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.dataLabelingServiceStub.then(stub => {
+      return this.dataLabelingServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
