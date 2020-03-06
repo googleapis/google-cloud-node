@@ -124,12 +124,30 @@ describe('v1.SpeechClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new speechModule.v1.SpeechClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.speechStub, undefined);
+    await client.initialize();
+    assert(client.speechStub);
+  });
+  it('has close method', () => {
+    const client = new speechModule.v1.SpeechClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('recognize', () => {
     it('invokes recognize without error', done => {
       const client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.speech.v1.IRecognizeRequest = {};
       // Mock response
@@ -152,6 +170,8 @@ describe('v1.SpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.speech.v1.IRecognizeRequest = {};
       // Mock response
@@ -176,6 +196,8 @@ describe('v1.SpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.speech.v1.ILongRunningRecognizeRequest = {};
       // Mock response
@@ -205,6 +227,8 @@ describe('v1.SpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.speech.v1.ILongRunningRecognizeRequest = {};
       // Mock response
@@ -237,6 +261,8 @@ describe('v1.SpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.speech.v1.IStreamingRecognizeRequest = {};
       // Mock response
@@ -263,6 +289,8 @@ describe('v1.SpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.speech.v1.IStreamingRecognizeRequest = {};
       // Mock response

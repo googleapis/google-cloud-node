@@ -41,6 +41,7 @@ describe('Speech helper methods', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      client.initialize();
 
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
@@ -74,6 +75,7 @@ describe('Speech helper methods', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      client.initialize();
 
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
@@ -95,6 +97,7 @@ describe('Speech helper methods', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      client.initialize();
 
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
@@ -120,6 +123,7 @@ describe('Speech helper methods', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      client.initialize();
 
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
@@ -146,6 +150,7 @@ describe('Speech helper methods', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      client.initialize();
 
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
