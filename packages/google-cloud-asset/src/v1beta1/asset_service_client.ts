@@ -41,9 +41,14 @@ export class AssetServiceClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
   private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  assetServiceStub: Promise<{[name: string]: Function}>;
+  assetServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AssetServiceClient.
@@ -67,8 +72,6 @@ export class AssetServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -98,25 +101,28 @@ export class AssetServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof AssetServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -132,7 +138,7 @@ export class AssetServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -140,13 +146,15 @@ export class AssetServiceClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const exportAssetsResponse = protoFilesRoot.lookup(
@@ -157,7 +165,7 @@ export class AssetServiceClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      exportAssets: new gaxModule.LongrunningDescriptor(
+      exportAssets: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportAssetsResponse.decode.bind(exportAssetsResponse),
         exportAssetsMetadata.decode.bind(exportAssetsMetadata)
@@ -165,7 +173,7 @@ export class AssetServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.asset.v1beta1.AssetService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -176,17 +184,35 @@ export class AssetServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.assetServiceStub) {
+      return this.assetServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.asset.v1beta1.AssetService.
-    this.assetServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.assetServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.asset.v1beta1.AssetService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.asset.v1beta1.AssetService,
-      opts
+          (this._protos as any).google.cloud.asset.v1beta1.AssetService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -206,9 +232,9 @@ export class AssetServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -222,6 +248,8 @@ export class AssetServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.assetServiceStub;
   }
 
   /**
@@ -378,6 +406,7 @@ export class AssetServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.batchGetAssetsHistory(
       request,
       options,
@@ -414,7 +443,7 @@ export class AssetServiceClient {
    * Exports assets with time and resource types to a given Cloud Storage
    * location. The output format is newline-delimited JSON.
    * This API implements the
-   * [google.longrunning.Operation][google.longrunning.Operation] API allowing
+   * {@link google.longrunning.Operation|google.longrunning.Operation} API allowing
    * you to keep track of the export.
    *
    * @param {Object} request
@@ -494,6 +523,7 @@ export class AssetServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.exportAssets(request, options, callback);
   }
 
@@ -503,8 +533,9 @@ export class AssetServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.assetServiceStub.then(stub => {
+      return this.assetServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
