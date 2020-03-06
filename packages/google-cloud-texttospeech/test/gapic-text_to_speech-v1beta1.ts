@@ -83,12 +83,30 @@ describe('v1beta1.TextToSpeechClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new texttospeechModule.v1beta1.TextToSpeechClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.textToSpeechStub, undefined);
+    await client.initialize();
+    assert(client.textToSpeechStub);
+  });
+  it('has close method', () => {
+    const client = new texttospeechModule.v1beta1.TextToSpeechClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('listVoices', () => {
     it('invokes listVoices without error', done => {
       const client = new texttospeechModule.v1beta1.TextToSpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.texttospeech.v1beta1.IListVoicesRequest = {};
       // Mock response
@@ -111,6 +129,8 @@ describe('v1beta1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.texttospeech.v1beta1.IListVoicesRequest = {};
       // Mock response
@@ -135,6 +155,8 @@ describe('v1beta1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest = {};
       // Mock response
@@ -157,6 +179,8 @@ describe('v1beta1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest = {};
       // Mock response
