@@ -88,6 +88,26 @@ describe('v3.NotificationChannelServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.notificationChannelServiceStub, undefined);
+    await client.initialize();
+    assert(client.notificationChannelServiceStub);
+  });
+  it('has close method', () => {
+    const client = new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('getNotificationChannelDescriptor', () => {
     it('invokes getNotificationChannelDescriptor without error', done => {
       const client = new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
@@ -96,6 +116,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetNotificationChannelDescriptorRequest = {};
       request.name = '';
@@ -124,6 +146,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetNotificationChannelDescriptorRequest = {};
       request.name = '';
@@ -154,6 +178,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetNotificationChannelRequest = {};
       request.name = '';
@@ -179,6 +205,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetNotificationChannelRequest = {};
       request.name = '';
@@ -206,6 +234,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateNotificationChannelRequest = {};
       request.name = '';
@@ -231,6 +261,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateNotificationChannelRequest = {};
       request.name = '';
@@ -261,6 +293,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateNotificationChannelRequest = {};
       request.notificationChannel = {};
@@ -287,6 +321,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateNotificationChannelRequest = {};
       request.notificationChannel = {};
@@ -318,6 +354,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteNotificationChannelRequest = {};
       request.name = '';
@@ -343,6 +381,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteNotificationChannelRequest = {};
       request.name = '';
@@ -373,6 +413,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest = {};
       request.name = '';
@@ -401,6 +443,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest = {};
       request.name = '';
@@ -431,6 +475,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest = {};
       request.name = '';
@@ -459,6 +505,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest = {};
       request.name = '';
@@ -489,6 +537,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IVerifyNotificationChannelRequest = {};
       request.name = '';
@@ -514,6 +564,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IVerifyNotificationChannelRequest = {};
       request.name = '';
@@ -544,6 +596,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListNotificationChannelDescriptorsRequest = {};
       request.name = '';
@@ -576,6 +630,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListNotificationChannelDescriptorsRequest = {};
       request.name = '';
@@ -610,6 +666,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListNotificationChannelsRequest = {};
       request.name = '';
@@ -642,6 +700,8 @@ describe('v3.NotificationChannelServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListNotificationChannelsRequest = {};
       request.name = '';

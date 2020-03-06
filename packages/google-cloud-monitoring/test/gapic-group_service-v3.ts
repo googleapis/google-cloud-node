@@ -81,12 +81,30 @@ describe('v3.GroupServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new groupserviceModule.v3.GroupServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.groupServiceStub, undefined);
+    await client.initialize();
+    assert(client.groupServiceStub);
+  });
+  it('has close method', () => {
+    const client = new groupserviceModule.v3.GroupServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getGroup', () => {
     it('invokes getGroup without error', done => {
       const client = new groupserviceModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetGroupRequest = {};
       request.name = '';
@@ -110,6 +128,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetGroupRequest = {};
       request.name = '';
@@ -135,6 +155,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateGroupRequest = {};
       request.name = '';
@@ -158,6 +180,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateGroupRequest = {};
       request.name = '';
@@ -183,6 +207,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateGroupRequest = {};
       request.group = {};
@@ -207,6 +233,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateGroupRequest = {};
       request.group = {};
@@ -233,6 +261,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteGroupRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteGroupRequest = {};
       request.name = '';
@@ -281,6 +313,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListGroupsRequest = {};
       request.name = '';
@@ -308,6 +342,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListGroupsRequest = {};
       request.name = '';
@@ -340,6 +376,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListGroupMembersRequest = {};
       request.name = '';
@@ -367,6 +405,8 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListGroupMembersRequest = {};
       request.name = '';

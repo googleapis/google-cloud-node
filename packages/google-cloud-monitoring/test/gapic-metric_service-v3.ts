@@ -81,12 +81,30 @@ describe('v3.MetricServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new metricserviceModule.v3.MetricServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.metricServiceStub, undefined);
+    await client.initialize();
+    assert(client.metricServiceStub);
+  });
+  it('has close method', () => {
+    const client = new metricserviceModule.v3.MetricServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getMonitoredResourceDescriptor', () => {
     it('invokes getMonitoredResourceDescriptor without error', done => {
       const client = new metricserviceModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest = {};
       request.name = '';
@@ -113,6 +131,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest = {};
       request.name = '';
@@ -141,6 +161,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetMetricDescriptorRequest = {};
       request.name = '';
@@ -164,6 +186,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetMetricDescriptorRequest = {};
       request.name = '';
@@ -189,6 +213,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateMetricDescriptorRequest = {};
       request.name = '';
@@ -212,6 +238,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateMetricDescriptorRequest = {};
       request.name = '';
@@ -237,6 +265,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteMetricDescriptorRequest = {};
       request.name = '';
@@ -260,6 +290,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteMetricDescriptorRequest = {};
       request.name = '';
@@ -285,6 +317,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateTimeSeriesRequest = {};
       request.name = '';
@@ -308,6 +342,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateTimeSeriesRequest = {};
       request.name = '';
@@ -333,6 +369,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest = {};
       request.name = '';
@@ -363,6 +401,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest = {};
       request.name = '';
@@ -395,6 +435,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListMetricDescriptorsRequest = {};
       request.name = '';
@@ -422,6 +464,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListMetricDescriptorsRequest = {};
       request.name = '';
@@ -454,6 +498,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListTimeSeriesRequest = {};
       request.name = '';
@@ -481,6 +527,8 @@ describe('v3.MetricServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListTimeSeriesRequest = {};
       request.name = '';

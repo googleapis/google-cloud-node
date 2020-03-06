@@ -83,12 +83,30 @@ describe('v3.UptimeCheckServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.uptimeCheckServiceStub, undefined);
+    await client.initialize();
+    assert(client.uptimeCheckServiceStub);
+  });
+  it('has close method', () => {
+    const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getUptimeCheckConfig', () => {
     it('invokes getUptimeCheckConfig without error', done => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetUptimeCheckConfigRequest = {};
       request.name = '';
@@ -112,6 +130,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetUptimeCheckConfigRequest = {};
       request.name = '';
@@ -137,6 +157,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateUptimeCheckConfigRequest = {};
       request.parent = '';
@@ -160,6 +182,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateUptimeCheckConfigRequest = {};
       request.parent = '';
@@ -188,6 +212,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateUptimeCheckConfigRequest = {};
       request.uptimeCheckConfig = {};
@@ -212,6 +238,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateUptimeCheckConfigRequest = {};
       request.uptimeCheckConfig = {};
@@ -241,6 +269,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteUptimeCheckConfigRequest = {};
       request.name = '';
@@ -264,6 +294,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteUptimeCheckConfigRequest = {};
       request.name = '';
@@ -292,6 +324,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListUptimeCheckConfigsRequest = {};
       request.parent = '';
@@ -319,6 +353,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListUptimeCheckConfigsRequest = {};
       request.parent = '';
@@ -351,6 +387,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListUptimeCheckIpsRequest = {};
       // Mock response
@@ -377,6 +415,8 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListUptimeCheckIpsRequest = {};
       // Mock response

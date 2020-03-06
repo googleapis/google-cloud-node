@@ -83,12 +83,30 @@ describe('v3.AlertPolicyServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new alertpolicyserviceModule.v3.AlertPolicyServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.alertPolicyServiceStub, undefined);
+    await client.initialize();
+    assert(client.alertPolicyServiceStub);
+  });
+  it('has close method', () => {
+    const client = new alertpolicyserviceModule.v3.AlertPolicyServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getAlertPolicy', () => {
     it('invokes getAlertPolicy without error', done => {
       const client = new alertpolicyserviceModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetAlertPolicyRequest = {};
       request.name = '';
@@ -112,6 +130,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetAlertPolicyRequest = {};
       request.name = '';
@@ -137,6 +157,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest = {};
       request.name = '';
@@ -160,6 +182,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest = {};
       request.name = '';
@@ -185,6 +209,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest = {};
       request.name = '';
@@ -208,6 +234,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest = {};
       request.name = '';
@@ -233,6 +261,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest = {};
       request.alertPolicy = {};
@@ -257,6 +287,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest = {};
       request.alertPolicy = {};
@@ -283,6 +315,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListAlertPoliciesRequest = {};
       request.name = '';
@@ -310,6 +344,8 @@ describe('v3.AlertPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListAlertPoliciesRequest = {};
       request.name = '';

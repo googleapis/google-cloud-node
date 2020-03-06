@@ -55,8 +55,13 @@ export class GroupServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  groupServiceStub: Promise<{[name: string]: Function}>;
+  groupServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of GroupServiceClient.
@@ -80,8 +85,6 @@ export class GroupServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -111,25 +114,28 @@ export class GroupServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof GroupServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -145,7 +151,7 @@ export class GroupServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -153,77 +159,79 @@ export class GroupServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      folderAlertPolicyPathTemplate: new gaxModule.PathTemplate(
+      folderAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/alertPolicies/{alert_policy}'
       ),
-      folderAlertPolicyConditionPathTemplate: new gaxModule.PathTemplate(
+      folderAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/alertPolicies/{alert_policy}/conditions/{condition}'
       ),
-      folderChannelDescriptorPathTemplate: new gaxModule.PathTemplate(
+      folderChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/notificationChannelDescriptors/{channel_descriptor}'
       ),
-      folderGroupPathTemplate: new gaxModule.PathTemplate(
+      folderGroupPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/groups/{group}'
       ),
-      folderNotificationChannelPathTemplate: new gaxModule.PathTemplate(
+      folderNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/notificationChannels/{notification_channel}'
       ),
-      folderServicePathTemplate: new gaxModule.PathTemplate(
+      folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate: new gaxModule.PathTemplate(
+      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
       ),
-      folderUptimeCheckConfigPathTemplate: new gaxModule.PathTemplate(
+      folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
-      organizationAlertPolicyPathTemplate: new gaxModule.PathTemplate(
+      organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate: new gaxModule.PathTemplate(
+      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
       ),
-      organizationChannelDescriptorPathTemplate: new gaxModule.PathTemplate(
+      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
       ),
-      organizationGroupPathTemplate: new gaxModule.PathTemplate(
+      organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationNotificationChannelPathTemplate: new gaxModule.PathTemplate(
+      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/notificationChannels/{notification_channel}'
       ),
-      organizationServicePathTemplate: new gaxModule.PathTemplate(
+      organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate: new gaxModule.PathTemplate(
+      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
       ),
-      organizationUptimeCheckConfigPathTemplate: new gaxModule.PathTemplate(
+      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      projectAlertPolicyPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/alertPolicies/{alert_policy}'
       ),
-      projectAlertPolicyConditionPathTemplate: new gaxModule.PathTemplate(
+      projectAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/alertPolicies/{alert_policy}/conditions/{condition}'
       ),
-      projectChannelDescriptorPathTemplate: new gaxModule.PathTemplate(
+      projectChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/notificationChannelDescriptors/{channel_descriptor}'
       ),
-      projectGroupPathTemplate: new gaxModule.PathTemplate(
+      projectGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/groups/{group}'
       ),
-      projectNotificationChannelPathTemplate: new gaxModule.PathTemplate(
+      projectNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/notificationChannels/{notification_channel}'
       ),
-      projectServicePathTemplate: new gaxModule.PathTemplate(
+      projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate: new gaxModule.PathTemplate(
+      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
       ),
-      projectUptimeCheckConfigPathTemplate: new gaxModule.PathTemplate(
+      projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
     };
@@ -232,12 +240,12 @@ export class GroupServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listGroups: new gaxModule.PageDescriptor(
+      listGroups: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'group'
       ),
-      listGroupMembers: new gaxModule.PageDescriptor(
+      listGroupMembers: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'members'
@@ -245,7 +253,7 @@ export class GroupServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.monitoring.v3.GroupService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -256,17 +264,35 @@ export class GroupServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.groupServiceStub) {
+      return this.groupServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.monitoring.v3.GroupService.
-    this.groupServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.groupServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.monitoring.v3.GroupService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.monitoring.v3.GroupService,
-      opts
+          (this._protos as any).google.monitoring.v3.GroupService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -293,9 +319,9 @@ export class GroupServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -309,6 +335,8 @@ export class GroupServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.groupServiceStub;
   }
 
   /**
@@ -436,6 +464,7 @@ export class GroupServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getGroup(request, options, callback);
   }
   createGroup(
@@ -514,6 +543,7 @@ export class GroupServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.createGroup(request, options, callback);
   }
   updateGroup(
@@ -589,6 +619,7 @@ export class GroupServiceClient {
     ] = gax.routingHeader.fromParams({
       'group.name': request.group!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateGroup(request, options, callback);
   }
   deleteGroup(
@@ -666,6 +697,7 @@ export class GroupServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteGroup(request, options, callback);
   }
 
@@ -782,6 +814,7 @@ export class GroupServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.listGroups(request, options, callback);
   }
 
@@ -853,6 +886,7 @@ export class GroupServiceClient {
       name: request.name || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listGroups.createStream(
       this._innerApiCalls.listGroups as gax.GaxCall,
       request,
@@ -962,6 +996,7 @@ export class GroupServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.listGroupMembers(request, options, callback);
   }
 
@@ -1023,6 +1058,7 @@ export class GroupServiceClient {
       name: request.name || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listGroupMembers.createStream(
       this._innerApiCalls.listGroupMembers as gax.GaxCall,
       request,
@@ -2233,8 +2269,9 @@ export class GroupServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.groupServiceStub.then(stub => {
+      return this.groupServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

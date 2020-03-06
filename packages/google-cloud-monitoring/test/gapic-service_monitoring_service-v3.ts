@@ -88,6 +88,26 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.serviceMonitoringServiceStub, undefined);
+    await client.initialize();
+    assert(client.serviceMonitoringServiceStub);
+  });
+  it('has close method', () => {
+    const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('createService', () => {
     it('invokes createService without error', done => {
       const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
@@ -96,6 +116,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateServiceRequest = {};
       request.parent = '';
@@ -121,6 +143,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateServiceRequest = {};
       request.parent = '';
@@ -148,6 +172,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetServiceRequest = {};
       request.name = '';
@@ -173,6 +199,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetServiceRequest = {};
       request.name = '';
@@ -200,6 +228,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateServiceRequest = {};
       request.service = {};
@@ -226,6 +256,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateServiceRequest = {};
       request.service = {};
@@ -254,6 +286,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteServiceRequest = {};
       request.name = '';
@@ -279,6 +313,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteServiceRequest = {};
       request.name = '';
@@ -306,6 +342,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest = {};
       request.parent = '';
@@ -331,6 +369,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest = {};
       request.parent = '';
@@ -361,6 +401,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest = {};
       request.name = '';
@@ -386,6 +428,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest = {};
       request.name = '';
@@ -416,6 +460,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest = {};
       request.serviceLevelObjective = {};
@@ -442,6 +488,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest = {};
       request.serviceLevelObjective = {};
@@ -473,6 +521,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest = {};
       request.name = '';
@@ -498,6 +548,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest = {};
       request.name = '';
@@ -528,6 +580,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListServicesRequest = {};
       request.parent = '';
@@ -557,6 +611,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListServicesRequest = {};
       request.parent = '';
@@ -591,6 +647,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest = {};
       request.parent = '';
@@ -623,6 +681,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest = {};
       request.parent = '';

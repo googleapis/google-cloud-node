@@ -45,8 +45,13 @@ export class MetricServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  metricServiceStub: Promise<{[name: string]: Function}>;
+  metricServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of MetricServiceClient.
@@ -70,8 +75,6 @@ export class MetricServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -101,25 +104,28 @@ export class MetricServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof MetricServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -135,7 +141,7 @@ export class MetricServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -143,95 +149,97 @@ export class MetricServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      folderAlertPolicyPathTemplate: new gaxModule.PathTemplate(
+      folderAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/alertPolicies/{alert_policy}'
       ),
-      folderAlertPolicyConditionPathTemplate: new gaxModule.PathTemplate(
+      folderAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/alertPolicies/{alert_policy}/conditions/{condition}'
       ),
-      folderChannelDescriptorPathTemplate: new gaxModule.PathTemplate(
+      folderChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/notificationChannelDescriptors/{channel_descriptor}'
       ),
-      folderGroupPathTemplate: new gaxModule.PathTemplate(
+      folderGroupPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/groups/{group}'
       ),
-      folderMetricDescriptorPathTemplate: new gaxModule.PathTemplate(
+      folderMetricDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/metricDescriptors/{metric_descriptor=**}'
       ),
-      folderMonitoredResourceDescriptorPathTemplate: new gaxModule.PathTemplate(
+      folderMonitoredResourceDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/monitoredResourceDescriptors/{monitored_resource_descriptor}'
       ),
-      folderNotificationChannelPathTemplate: new gaxModule.PathTemplate(
+      folderNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/notificationChannels/{notification_channel}'
       ),
-      folderServicePathTemplate: new gaxModule.PathTemplate(
+      folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate: new gaxModule.PathTemplate(
+      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
       ),
-      folderUptimeCheckConfigPathTemplate: new gaxModule.PathTemplate(
+      folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
-      organizationAlertPolicyPathTemplate: new gaxModule.PathTemplate(
+      organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate: new gaxModule.PathTemplate(
+      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
       ),
-      organizationChannelDescriptorPathTemplate: new gaxModule.PathTemplate(
+      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
       ),
-      organizationGroupPathTemplate: new gaxModule.PathTemplate(
+      organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationMetricDescriptorPathTemplate: new gaxModule.PathTemplate(
+      organizationMetricDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/metricDescriptors/{metric_descriptor=**}'
       ),
-      organizationMonitoredResourceDescriptorPathTemplate: new gaxModule.PathTemplate(
+      organizationMonitoredResourceDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/monitoredResourceDescriptors/{monitored_resource_descriptor}'
       ),
-      organizationNotificationChannelPathTemplate: new gaxModule.PathTemplate(
+      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/notificationChannels/{notification_channel}'
       ),
-      organizationServicePathTemplate: new gaxModule.PathTemplate(
+      organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate: new gaxModule.PathTemplate(
+      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
       ),
-      organizationUptimeCheckConfigPathTemplate: new gaxModule.PathTemplate(
+      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      projectAlertPolicyPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/alertPolicies/{alert_policy}'
       ),
-      projectAlertPolicyConditionPathTemplate: new gaxModule.PathTemplate(
+      projectAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/alertPolicies/{alert_policy}/conditions/{condition}'
       ),
-      projectChannelDescriptorPathTemplate: new gaxModule.PathTemplate(
+      projectChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/notificationChannelDescriptors/{channel_descriptor}'
       ),
-      projectGroupPathTemplate: new gaxModule.PathTemplate(
+      projectGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/groups/{group}'
       ),
-      projectMetricDescriptorPathTemplate: new gaxModule.PathTemplate(
+      projectMetricDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/metricDescriptors/{metric_descriptor=**}'
       ),
-      projectMonitoredResourceDescriptorPathTemplate: new gaxModule.PathTemplate(
+      projectMonitoredResourceDescriptorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/monitoredResourceDescriptors/{monitored_resource_descriptor}'
       ),
-      projectNotificationChannelPathTemplate: new gaxModule.PathTemplate(
+      projectNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/notificationChannels/{notification_channel}'
       ),
-      projectServicePathTemplate: new gaxModule.PathTemplate(
+      projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate: new gaxModule.PathTemplate(
+      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
       ),
-      projectUptimeCheckConfigPathTemplate: new gaxModule.PathTemplate(
+      projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
     };
@@ -240,17 +248,17 @@ export class MetricServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listMonitoredResourceDescriptors: new gaxModule.PageDescriptor(
+      listMonitoredResourceDescriptors: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'resourceDescriptors'
       ),
-      listMetricDescriptors: new gaxModule.PageDescriptor(
+      listMetricDescriptors: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'metricDescriptors'
       ),
-      listTimeSeries: new gaxModule.PageDescriptor(
+      listTimeSeries: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'timeSeries'
@@ -258,7 +266,7 @@ export class MetricServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.monitoring.v3.MetricService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -269,17 +277,35 @@ export class MetricServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.metricServiceStub) {
+      return this.metricServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.monitoring.v3.MetricService.
-    this.metricServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.metricServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.monitoring.v3.MetricService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.monitoring.v3.MetricService,
-      opts
+          (this._protos as any).google.monitoring.v3.MetricService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -308,9 +334,9 @@ export class MetricServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -324,6 +350,8 @@ export class MetricServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.metricServiceStub;
   }
 
   /**
@@ -464,6 +492,7 @@ export class MetricServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getMonitoredResourceDescriptor(
       request,
       options,
@@ -545,6 +574,7 @@ export class MetricServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getMetricDescriptor(request, options, callback);
   }
   createMetricDescriptor(
@@ -632,6 +662,7 @@ export class MetricServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.createMetricDescriptor(
       request,
       options,
@@ -723,6 +754,7 @@ export class MetricServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteMetricDescriptor(
       request,
       options,
@@ -811,6 +843,7 @@ export class MetricServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.createTimeSeries(request, options, callback);
   }
 
@@ -910,6 +943,7 @@ export class MetricServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.listMonitoredResourceDescriptors(
       request,
       options,
@@ -968,6 +1002,7 @@ export class MetricServiceClient {
       name: request.name || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listMonitoredResourceDescriptors.createStream(
       this._innerApiCalls.listMonitoredResourceDescriptors as gax.GaxCall,
       request,
@@ -1072,6 +1107,7 @@ export class MetricServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.listMetricDescriptors(
       request,
       options,
@@ -1132,6 +1168,7 @@ export class MetricServiceClient {
       name: request.name || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listMetricDescriptors.createStream(
       this._innerApiCalls.listMetricDescriptors as gax.GaxCall,
       request,
@@ -1254,6 +1291,7 @@ export class MetricServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.listTimeSeries(request, options, callback);
   }
 
@@ -1328,6 +1366,7 @@ export class MetricServiceClient {
       name: request.name || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listTimeSeries.createStream(
       this._innerApiCalls.listTimeSeries as gax.GaxCall,
       request,
@@ -2820,8 +2859,9 @@ export class MetricServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.metricServiceStub.then(stub => {
+      return this.metricServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
