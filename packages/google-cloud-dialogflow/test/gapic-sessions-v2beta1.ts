@@ -103,12 +103,30 @@ describe('v2beta1.SessionsClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new sessionsModule.v2beta1.SessionsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.sessionsStub, undefined);
+    await client.initialize();
+    assert(client.sessionsStub);
+  });
+  it('has close method', () => {
+    const client = new sessionsModule.v2beta1.SessionsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('detectIntent', () => {
     it('invokes detectIntent without error', done => {
       const client = new sessionsModule.v2beta1.SessionsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IDetectIntentRequest = {};
       request.session = '';
@@ -132,6 +150,8 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IDetectIntentRequest = {};
       request.session = '';
@@ -157,6 +177,8 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IStreamingDetectIntentRequest = {};
       // Mock response
@@ -183,6 +205,8 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IStreamingDetectIntentRequest = {};
       // Mock response

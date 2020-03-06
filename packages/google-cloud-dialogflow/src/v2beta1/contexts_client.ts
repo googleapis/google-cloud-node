@@ -43,8 +43,8 @@ const version = require('../../../package.json').version;
  *  geographic location, and so on.
  *
  *  You can include contexts as input parameters of a
- *  [DetectIntent][google.cloud.dialogflow.v2beta1.Sessions.DetectIntent] (or
- *  [StreamingDetectIntent][google.cloud.dialogflow.v2beta1.Sessions.StreamingDetectIntent]) request,
+ *  {@link google.cloud.dialogflow.v2beta1.Sessions.DetectIntent|DetectIntent} (or
+ *  {@link google.cloud.dialogflow.v2beta1.Sessions.StreamingDetectIntent|StreamingDetectIntent}) request,
  *  or as output contexts included in the returned intent.
  *  Contexts expire when an intent is matched, after the number of `DetectIntent`
  *  requests specified by the `lifespan_count` parameter, or after 20 minutes
@@ -61,8 +61,13 @@ export class ContextsClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  contextsStub: Promise<{[name: string]: Function}>;
+  contextsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ContextsClient.
@@ -86,8 +91,6 @@ export class ContextsClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -117,25 +120,28 @@ export class ContextsClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof ContextsClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -151,7 +157,7 @@ export class ContextsClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -159,16 +165,16 @@ export class ContextsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
-      projectIntentPathTemplate: new gaxModule.PathTemplate(
+      projectIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      projectLocationPathTemplate: new gaxModule.PathTemplate(
+      projectLocationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent'
       ),
-      projectLocationIntentPathTemplate: new gaxModule.PathTemplate(
+      projectLocationIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/intents/{intent}'
       ),
     };
@@ -177,7 +183,7 @@ export class ContextsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listContexts: new gaxModule.PageDescriptor(
+      listContexts: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'contexts'
@@ -185,7 +191,7 @@ export class ContextsClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.Contexts',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -196,17 +202,35 @@ export class ContextsClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.contextsStub) {
+      return this.contextsStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.Contexts.
-    this.contextsStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.contextsStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2beta1.Contexts'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.dialogflow.v2beta1.Contexts,
-      opts
+          (this._protos as any).google.cloud.dialogflow.v2beta1.Contexts,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -233,9 +257,9 @@ export class ContextsClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -249,6 +273,8 @@ export class ContextsClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.contextsStub;
   }
 
   /**
@@ -387,6 +413,7 @@ export class ContextsClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getContext(request, options, callback);
   }
   createContext(
@@ -476,6 +503,7 @@ export class ContextsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createContext(request, options, callback);
   }
   updateContext(
@@ -558,6 +586,7 @@ export class ContextsClient {
     ] = gax.routingHeader.fromParams({
       'context.name': request.context!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateContext(request, options, callback);
   }
   deleteContext(
@@ -643,6 +672,7 @@ export class ContextsClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteContext(request, options, callback);
   }
   deleteAllContexts(
@@ -727,6 +757,7 @@ export class ContextsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteAllContexts(request, options, callback);
   }
 
@@ -821,6 +852,7 @@ export class ContextsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listContexts(request, options, callback);
   }
 
@@ -870,6 +902,7 @@ export class ContextsClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listContexts.createStream(
       this._innerApiCalls.listContexts as gax.GaxCall,
       request,
@@ -1046,8 +1079,9 @@ export class ContextsClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.contextsStub.then(stub => {
+      return this.contextsStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

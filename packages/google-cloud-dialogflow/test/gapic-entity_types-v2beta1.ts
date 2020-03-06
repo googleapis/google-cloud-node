@@ -81,12 +81,30 @@ describe('v2beta1.EntityTypesClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new entitytypesModule.v2beta1.EntityTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.entityTypesStub, undefined);
+    await client.initialize();
+    assert(client.entityTypesStub);
+  });
+  it('has close method', () => {
+    const client = new entitytypesModule.v2beta1.EntityTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getEntityType', () => {
     it('invokes getEntityType without error', done => {
       const client = new entitytypesModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest = {};
       request.name = '';
@@ -110,6 +128,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest = {};
       request.name = '';
@@ -135,6 +155,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest = {};
       request.parent = '';
@@ -158,6 +180,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest = {};
       request.parent = '';
@@ -183,6 +207,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest = {};
       request.entityType = {};
@@ -207,6 +233,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest = {};
       request.entityType = {};
@@ -233,6 +261,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest = {};
       request.name = '';
@@ -281,6 +313,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest = {};
       request.parent = '';
@@ -304,6 +338,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest = {};
       request.parent = '';
@@ -329,6 +365,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest = {};
       request.parent = '';
@@ -352,6 +390,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest = {};
       request.parent = '';
@@ -377,6 +417,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest = {};
       request.parent = '';
@@ -400,6 +442,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest = {};
       request.parent = '';
@@ -425,6 +469,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest = {};
       request.parent = '';
@@ -448,6 +494,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest = {};
       request.parent = '';
@@ -473,6 +521,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest = {};
       request.parent = '';
@@ -496,6 +546,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest = {};
       request.parent = '';
@@ -521,6 +573,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest = {};
       request.parent = '';
@@ -548,6 +602,8 @@ describe('v2beta1.EntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest = {};
       request.parent = '';

@@ -41,8 +41,8 @@ const version = require('../../../package.json').version;
  *  in your app, product, or service to determine user intent and respond to the
  *  user in a natural way.
  *
- *  After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts],
- *  [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to
+ *  After you create an agent, you can add {@link google.cloud.dialogflow.v2.Intents|Intents}, {@link google.cloud.dialogflow.v2.Contexts|Contexts},
+ *  {@link google.cloud.dialogflow.v2.EntityTypes|Entity Types}, {@link google.cloud.dialogflow.v2.WebhookRequest|Webhooks}, and so on to
  *  manage the flow of a conversation and match user input to predefined intents
  *  and actions.
  *
@@ -52,8 +52,8 @@ const version = require('../../../package.json').version;
  *  Editions](https://cloud.google.com/dialogflow/docs/editions).
  *
  *  You can save your agent for backup or versioning by exporting the agent by
- *  using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved
- *  agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.
+ *  using the {@link google.cloud.dialogflow.v2.Agents.ExportAgent|ExportAgent} method. You can import a saved
+ *  agent by using the {@link google.cloud.dialogflow.v2.Agents.ImportAgent|ImportAgent} method.
  *
  *  Dialogflow provides several
  *  [prebuilt
@@ -72,9 +72,14 @@ export class AgentsClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  agentsStub: Promise<{[name: string]: Function}>;
+  agentsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AgentsClient.
@@ -98,8 +103,6 @@ export class AgentsClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -129,25 +132,28 @@ export class AgentsClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof AgentsClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -163,7 +169,7 @@ export class AgentsClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -171,18 +177,22 @@ export class AgentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      agentPathTemplate: new gaxModule.PathTemplate('projects/{project}/agent'),
-      contextPathTemplate: new gaxModule.PathTemplate(
+      agentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent'
+      ),
+      contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
-      entityTypePathTemplate: new gaxModule.PathTemplate(
+      entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/entityTypes/{entity_type}'
       ),
-      intentPathTemplate: new gaxModule.PathTemplate(
+      intentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      sessionEntityTypePathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      sessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
     };
@@ -191,7 +201,7 @@ export class AgentsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      searchAgents: new gaxModule.PageDescriptor(
+      searchAgents: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'agents'
@@ -202,13 +212,15 @@ export class AgentsClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const trainAgentResponse = protoFilesRoot.lookup(
@@ -237,22 +249,22 @@ export class AgentsClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      trainAgent: new gaxModule.LongrunningDescriptor(
+      trainAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         trainAgentResponse.decode.bind(trainAgentResponse),
         trainAgentMetadata.decode.bind(trainAgentMetadata)
       ),
-      exportAgent: new gaxModule.LongrunningDescriptor(
+      exportAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportAgentResponse.decode.bind(exportAgentResponse),
         exportAgentMetadata.decode.bind(exportAgentMetadata)
       ),
-      importAgent: new gaxModule.LongrunningDescriptor(
+      importAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importAgentResponse.decode.bind(importAgentResponse),
         importAgentMetadata.decode.bind(importAgentMetadata)
       ),
-      restoreAgent: new gaxModule.LongrunningDescriptor(
+      restoreAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         restoreAgentResponse.decode.bind(restoreAgentResponse),
         restoreAgentMetadata.decode.bind(restoreAgentMetadata)
@@ -260,7 +272,7 @@ export class AgentsClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2.Agents',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -271,17 +283,35 @@ export class AgentsClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.agentsStub) {
+      return this.agentsStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2.Agents.
-    this.agentsStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.agentsStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2.Agents'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.dialogflow.v2.Agents,
-      opts
+          (this._protos as any).google.cloud.dialogflow.v2.Agents,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -311,9 +341,9 @@ export class AgentsClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -327,6 +357,8 @@ export class AgentsClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.agentsStub;
   }
 
   /**
@@ -452,6 +484,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.getAgent(request, options, callback);
   }
   setAgent(
@@ -525,6 +558,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       'agent.parent': request.agent!.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.setAgent(request, options, callback);
   }
   deleteAgent(
@@ -598,6 +632,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteAgent(request, options, callback);
   }
   getValidationResult(
@@ -686,6 +721,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.getValidationResult(request, options, callback);
   }
 
@@ -717,7 +753,7 @@ export class AgentsClient {
   /**
    * Trains the specified agent.
    *
-   * Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -776,6 +812,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.trainAgent(request, options, callback);
   }
   exportAgent(
@@ -806,7 +843,7 @@ export class AgentsClient {
   /**
    * Exports the specified agent to a ZIP file.
    *
-   * Operation <response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse]>
+   * Operation <response: {@link google.cloud.dialogflow.v2.ExportAgentResponse|ExportAgentResponse}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -870,6 +907,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.exportAgent(request, options, callback);
   }
   importAgent(
@@ -904,7 +942,7 @@ export class AgentsClient {
    * Intents and entity types with the same name are replaced with the new
    * versions from ImportAgentRequest.
    *
-   * Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -968,6 +1006,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.importAgent(request, options, callback);
   }
   restoreAgent(
@@ -1001,7 +1040,7 @@ export class AgentsClient {
    * Replaces the current agent version with a new one. All the intents and
    * entity types in the older version are deleted.
    *
-   * Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1065,6 +1104,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.restoreAgent(request, options, callback);
   }
   searchAgents(
@@ -1160,6 +1200,7 @@ export class AgentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.searchAgents(request, options, callback);
   }
 
@@ -1205,6 +1246,7 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.searchAgents.createStream(
       this._innerApiCalls.searchAgents as gax.GaxCall,
       request,
@@ -1445,8 +1487,9 @@ export class AgentsClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.agentsStub.then(stub => {
+      return this.agentsStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

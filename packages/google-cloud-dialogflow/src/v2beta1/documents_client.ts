@@ -44,8 +44,13 @@ export class DocumentsClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  documentsStub: Promise<{[name: string]: Function}>;
+  documentsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DocumentsClient.
@@ -69,8 +74,6 @@ export class DocumentsClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -100,25 +103,28 @@ export class DocumentsClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof DocumentsClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -134,7 +140,7 @@ export class DocumentsClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -142,16 +148,16 @@ export class DocumentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
-      projectIntentPathTemplate: new gaxModule.PathTemplate(
+      projectIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      projectLocationPathTemplate: new gaxModule.PathTemplate(
+      projectLocationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent'
       ),
-      projectLocationIntentPathTemplate: new gaxModule.PathTemplate(
+      projectLocationIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/intents/{intent}'
       ),
     };
@@ -160,7 +166,7 @@ export class DocumentsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listDocuments: new gaxModule.PageDescriptor(
+      listDocuments: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'documents'
@@ -168,7 +174,7 @@ export class DocumentsClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.Documents',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -179,17 +185,35 @@ export class DocumentsClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.documentsStub) {
+      return this.documentsStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.Documents.
-    this.documentsStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.documentsStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2beta1.Documents'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.dialogflow.v2beta1.Documents,
-      opts
+          (this._protos as any).google.cloud.dialogflow.v2beta1.Documents,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -216,9 +240,9 @@ export class DocumentsClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -232,6 +256,8 @@ export class DocumentsClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.documentsStub;
   }
 
   /**
@@ -370,6 +396,7 @@ export class DocumentsClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getDocument(request, options, callback);
   }
   createDocument(
@@ -401,8 +428,8 @@ export class DocumentsClient {
    * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
    * only use `projects.knowledgeBases.documents`.
    *
-   * Operation <response: [Document][google.cloud.dialogflow.v2beta1.Document],
-   *            metadata: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata]>
+   * Operation <response: {@link google.cloud.dialogflow.v2beta1.Document|Document},
+   *            metadata: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -459,6 +486,7 @@ export class DocumentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createDocument(request, options, callback);
   }
   deleteDocument(
@@ -490,8 +518,8 @@ export class DocumentsClient {
    * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
    * only use `projects.knowledgeBases.documents`.
    *
-   * Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
-   *            metadata: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata]>
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty},
+   *            metadata: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -547,6 +575,7 @@ export class DocumentsClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteDocument(request, options, callback);
   }
   updateDocument(
@@ -578,8 +607,8 @@ export class DocumentsClient {
    * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
    * only use `projects.knowledgeBases.documents`.
    *
-   * Operation <response: [Document][google.cloud.dialogflow.v2beta1.Document],
-   *            metadata: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata]>
+   * Operation <response: {@link google.cloud.dialogflow.v2beta1.Document|Document},
+   *            metadata: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -637,6 +666,7 @@ export class DocumentsClient {
     ] = gax.routingHeader.fromParams({
       'document.name': request.document!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateDocument(request, options, callback);
   }
   reloadDocument(
@@ -671,8 +701,8 @@ export class DocumentsClient {
    * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
    * only use `projects.knowledgeBases.documents`.
    *
-   * Operation <response: [Document][google.cloud.dialogflow.v2beta1.Document],
-   *            metadata: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata]>
+   * Operation <response: {@link google.cloud.dialogflow.v2beta1.Document|Document},
+   *            metadata: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -730,6 +760,7 @@ export class DocumentsClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.reloadDocument(request, options, callback);
   }
 
@@ -823,6 +854,7 @@ export class DocumentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listDocuments(request, options, callback);
   }
 
@@ -868,6 +900,7 @@ export class DocumentsClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listDocuments.createStream(
       this._innerApiCalls.listDocuments as gax.GaxCall,
       request,
@@ -1044,8 +1077,9 @@ export class DocumentsClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.documentsStub.then(stub => {
+      return this.documentsStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

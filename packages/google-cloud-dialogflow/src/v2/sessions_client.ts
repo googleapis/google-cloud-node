@@ -33,8 +33,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  A session represents an interaction with a user. You retrieve user input
- *  and pass it to the [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
- *  [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method to determine
+ *  and pass it to the {@link google.cloud.dialogflow.v2.Sessions.DetectIntent|DetectIntent} (or
+ *  {@link google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent|StreamingDetectIntent}) method to determine
  *  user intent and respond.
  * @class
  * @memberof v2
@@ -44,8 +44,13 @@ export class SessionsClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  sessionsStub: Promise<{[name: string]: Function}>;
+  sessionsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SessionsClient.
@@ -69,8 +74,6 @@ export class SessionsClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -100,25 +103,28 @@ export class SessionsClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof SessionsClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -134,7 +140,7 @@ export class SessionsClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -142,23 +148,25 @@ export class SessionsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      agentPathTemplate: new gaxModule.PathTemplate('projects/{project}/agent'),
-      contextPathTemplate: new gaxModule.PathTemplate(
+      agentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent'
+      ),
+      contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
-      entityTypePathTemplate: new gaxModule.PathTemplate(
+      entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/entityTypes/{entity_type}'
       ),
-      intentPathTemplate: new gaxModule.PathTemplate(
+      intentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      projectLocationSessionPathTemplate: new gaxModule.PathTemplate(
+      projectLocationSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/sessions/{session}'
       ),
-      projectSessionPathTemplate: new gaxModule.PathTemplate(
+      projectSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}'
       ),
-      sessionEntityTypePathTemplate: new gaxModule.PathTemplate(
+      sessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
     };
@@ -166,13 +174,13 @@ export class SessionsClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this._descriptors.stream = {
-      streamingDetectIntent: new gaxModule.StreamDescriptor(
+      streamingDetectIntent: new this._gaxModule.StreamDescriptor(
         gax.StreamType.BIDI_STREAMING
       ),
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2.Sessions',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -183,17 +191,35 @@ export class SessionsClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.sessionsStub) {
+      return this.sessionsStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2.Sessions.
-    this.sessionsStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.sessionsStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2.Sessions'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.dialogflow.v2.Sessions,
-      opts
+          (this._protos as any).google.cloud.dialogflow.v2.Sessions,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -213,9 +239,9 @@ export class SessionsClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -229,6 +255,8 @@ export class SessionsClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.sessionsStub;
   }
 
   /**
@@ -333,11 +361,11 @@ export class SessionsClient {
    *   audio. If this field is not set and agent-level speech synthesizer is not
    *   configured, no output audio is generated.
    * @param {google.protobuf.FieldMask} request.outputAudioConfigMask
-   *   Mask for [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] indicating which settings in this
+   *   Mask for {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config} indicating which settings in this
    *   request-level config should override speech synthesizer settings defined at
    *   agent-level.
    *
-   *   If unspecified or empty, [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] replaces the agent-level
+   *   If unspecified or empty, {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config} replaces the agent-level
    *   config in its entirety.
    * @param {Buffer} request.inputAudio
    *   The natural language speech audio to be processed. This field
@@ -387,6 +415,7 @@ export class SessionsClient {
     ] = gax.routingHeader.fromParams({
       session: request.session || '',
     });
+    this.initialize();
     return this._innerApiCalls.detectIntent(request, options, callback);
   }
 
@@ -403,6 +432,7 @@ export class SessionsClient {
    *   will emit objects representing [StreamingDetectIntentResponse]{@link google.cloud.dialogflow.v2.StreamingDetectIntentResponse} on 'data' event asynchronously.
    */
   streamingDetectIntent(options?: gax.CallOptions): gax.CancellableStream {
+    this.initialize();
     return this._innerApiCalls.streamingDetectIntent(options);
   }
 
@@ -722,8 +752,9 @@ export class SessionsClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.sessionsStub.then(stub => {
+      return this.sessionsStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

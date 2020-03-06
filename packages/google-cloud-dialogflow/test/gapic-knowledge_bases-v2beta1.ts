@@ -83,12 +83,30 @@ describe('v2beta1.KnowledgeBasesClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.knowledgeBasesStub, undefined);
+    await client.initialize();
+    assert(client.knowledgeBasesStub);
+  });
+  it('has close method', () => {
+    const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getKnowledgeBase', () => {
     it('invokes getKnowledgeBase without error', done => {
       const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest = {};
       request.name = '';
@@ -112,6 +130,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest = {};
       request.name = '';
@@ -137,6 +157,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest = {};
       request.parent = '';
@@ -160,6 +182,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest = {};
       request.parent = '';
@@ -185,6 +209,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest = {};
       request.name = '';
@@ -208,6 +234,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest = {};
       request.name = '';
@@ -233,6 +261,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest = {};
       request.knowledgeBase = {};
@@ -257,6 +287,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest = {};
       request.knowledgeBase = {};
@@ -283,6 +315,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest = {};
       request.parent = '';
@@ -310,6 +344,8 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest = {};
       request.parent = '';

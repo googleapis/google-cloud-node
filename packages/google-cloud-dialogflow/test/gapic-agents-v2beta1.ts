@@ -81,12 +81,30 @@ describe('v2beta1.AgentsClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new agentsModule.v2beta1.AgentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.agentsStub, undefined);
+    await client.initialize();
+    assert(client.agentsStub);
+  });
+  it('has close method', () => {
+    const client = new agentsModule.v2beta1.AgentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getAgent', () => {
     it('invokes getAgent without error', done => {
       const client = new agentsModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest = {};
       request.parent = '';
@@ -110,6 +128,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest = {};
       request.parent = '';
@@ -135,6 +155,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest = {};
       request.agent = {};
@@ -159,6 +181,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest = {};
       request.agent = {};
@@ -185,6 +209,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest = {};
       request.parent = '';
@@ -208,6 +234,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest = {};
       request.parent = '';
@@ -233,6 +261,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest = {};
       request.parent = '';
@@ -256,6 +286,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest = {};
       request.parent = '';
@@ -281,6 +313,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest = {};
       request.parent = '';
@@ -304,6 +338,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest = {};
       request.parent = '';
@@ -329,6 +365,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest = {};
       request.parent = '';
@@ -352,6 +390,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest = {};
       request.parent = '';
@@ -377,6 +417,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest = {};
       request.parent = '';
@@ -400,6 +442,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest = {};
       request.parent = '';
@@ -425,6 +469,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest = {};
       request.parent = '';
@@ -448,6 +494,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest = {};
       request.parent = '';
@@ -473,6 +521,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest = {};
       request.parent = '';
@@ -500,6 +550,8 @@ describe('v2beta1.AgentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest = {};
       request.parent = '';

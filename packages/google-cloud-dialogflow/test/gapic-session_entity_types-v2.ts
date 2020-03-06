@@ -83,12 +83,30 @@ describe('v2.SessionEntityTypesClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.sessionEntityTypesStub, undefined);
+    await client.initialize();
+    assert(client.sessionEntityTypesStub);
+  });
+  it('has close method', () => {
+    const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getSessionEntityType', () => {
     it('invokes getSessionEntityType without error', done => {
       const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IGetSessionEntityTypeRequest = {};
       request.name = '';
@@ -112,6 +130,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IGetSessionEntityTypeRequest = {};
       request.name = '';
@@ -137,6 +157,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.ICreateSessionEntityTypeRequest = {};
       request.parent = '';
@@ -160,6 +182,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.ICreateSessionEntityTypeRequest = {};
       request.parent = '';
@@ -188,6 +212,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IUpdateSessionEntityTypeRequest = {};
       request.sessionEntityType = {};
@@ -212,6 +238,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IUpdateSessionEntityTypeRequest = {};
       request.sessionEntityType = {};
@@ -241,6 +269,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IDeleteSessionEntityTypeRequest = {};
       request.name = '';
@@ -264,6 +294,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IDeleteSessionEntityTypeRequest = {};
       request.name = '';
@@ -292,6 +324,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest = {};
       request.parent = '';
@@ -319,6 +353,8 @@ describe('v2.SessionEntityTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest = {};
       request.parent = '';

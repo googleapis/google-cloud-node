@@ -102,12 +102,30 @@ describe('v2.IntentsClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new intentsModule.v2.IntentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.intentsStub, undefined);
+    await client.initialize();
+    assert(client.intentsStub);
+  });
+  it('has close method', () => {
+    const client = new intentsModule.v2.IntentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getIntent', () => {
     it('invokes getIntent without error', done => {
       const client = new intentsModule.v2.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IGetIntentRequest = {};
       request.name = '';
@@ -131,6 +149,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IGetIntentRequest = {};
       request.name = '';
@@ -156,6 +176,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.ICreateIntentRequest = {};
       request.parent = '';
@@ -179,6 +201,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.ICreateIntentRequest = {};
       request.parent = '';
@@ -204,6 +228,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IUpdateIntentRequest = {};
       request.intent = {};
@@ -228,6 +254,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IUpdateIntentRequest = {};
       request.intent = {};
@@ -254,6 +282,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IDeleteIntentRequest = {};
       request.name = '';
@@ -277,6 +307,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IDeleteIntentRequest = {};
       request.name = '';
@@ -302,6 +334,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IBatchUpdateIntentsRequest = {};
       request.parent = '';
@@ -332,6 +366,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IBatchUpdateIntentsRequest = {};
       request.parent = '';
@@ -365,6 +401,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IBatchDeleteIntentsRequest = {};
       request.parent = '';
@@ -395,6 +433,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IBatchDeleteIntentsRequest = {};
       request.parent = '';
@@ -428,6 +468,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IListIntentsRequest = {};
       request.parent = '';
@@ -455,6 +497,8 @@ describe('v2.IntentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IListIntentsRequest = {};
       request.parent = '';

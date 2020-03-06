@@ -38,8 +38,8 @@ const version = require('../../../package.json').version;
 /**
  *  An intent represents a mapping between input from a user and an action to
  *  be taken by your application. When you pass user input to the
- *  [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
- *  [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method, the
+ *  {@link google.cloud.dialogflow.v2.Sessions.DetectIntent|DetectIntent} (or
+ *  {@link google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent|StreamingDetectIntent}) method, the
  *  Dialogflow API analyzes the input and searches
  *  for a matching intent. If no match is found, the Dialogflow API returns a
  *  fallback intent (`is_fallback` = true).
@@ -76,9 +76,14 @@ export class IntentsClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  intentsStub: Promise<{[name: string]: Function}>;
+  intentsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of IntentsClient.
@@ -102,8 +107,6 @@ export class IntentsClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -133,25 +136,28 @@ export class IntentsClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof IntentsClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -167,7 +173,7 @@ export class IntentsClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -175,17 +181,19 @@ export class IntentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      agentPathTemplate: new gaxModule.PathTemplate('projects/{project}/agent'),
-      contextPathTemplate: new gaxModule.PathTemplate(
+      agentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent'
+      ),
+      contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
-      entityTypePathTemplate: new gaxModule.PathTemplate(
+      entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/entityTypes/{entity_type}'
       ),
-      intentPathTemplate: new gaxModule.PathTemplate(
+      intentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      sessionEntityTypePathTemplate: new gaxModule.PathTemplate(
+      sessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
     };
@@ -194,7 +202,7 @@ export class IntentsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listIntents: new gaxModule.PageDescriptor(
+      listIntents: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'intents'
@@ -205,13 +213,15 @@ export class IntentsClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const batchUpdateIntentsResponse = protoFilesRoot.lookup(
@@ -228,12 +238,12 @@ export class IntentsClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      batchUpdateIntents: new gaxModule.LongrunningDescriptor(
+      batchUpdateIntents: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchUpdateIntentsResponse.decode.bind(batchUpdateIntentsResponse),
         batchUpdateIntentsMetadata.decode.bind(batchUpdateIntentsMetadata)
       ),
-      batchDeleteIntents: new gaxModule.LongrunningDescriptor(
+      batchDeleteIntents: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchDeleteIntentsResponse.decode.bind(batchDeleteIntentsResponse),
         batchDeleteIntentsMetadata.decode.bind(batchDeleteIntentsMetadata)
@@ -241,7 +251,7 @@ export class IntentsClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2.Intents',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -252,17 +262,35 @@ export class IntentsClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.intentsStub) {
+      return this.intentsStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2.Intents.
-    this.intentsStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.intentsStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2.Intents'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.dialogflow.v2.Intents,
-      opts
+          (this._protos as any).google.cloud.dialogflow.v2.Intents,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -290,9 +318,9 @@ export class IntentsClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -306,6 +334,8 @@ export class IntentsClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.intentsStub;
   }
 
   /**
@@ -440,6 +470,7 @@ export class IntentsClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getIntent(request, options, callback);
   }
   createIntent(
@@ -524,6 +555,7 @@ export class IntentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createIntent(request, options, callback);
   }
   updateIntent(
@@ -607,6 +639,7 @@ export class IntentsClient {
     ] = gax.routingHeader.fromParams({
       'intent.name': request.intent!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateIntent(request, options, callback);
   }
   deleteIntent(
@@ -681,6 +714,7 @@ export class IntentsClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteIntent(request, options, callback);
   }
 
@@ -712,7 +746,7 @@ export class IntentsClient {
   /**
    * Updates/Creates multiple intents in the specified agent.
    *
-   * Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
+   * Operation <response: {@link google.cloud.dialogflow.v2.BatchUpdateIntentsResponse|BatchUpdateIntentsResponse}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -788,6 +822,7 @@ export class IntentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.batchUpdateIntents(request, options, callback);
   }
   batchDeleteIntents(
@@ -818,7 +853,7 @@ export class IntentsClient {
   /**
    * Deletes intents in the specified agent.
    *
-   * Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -880,6 +915,7 @@ export class IntentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.batchDeleteIntents(request, options, callback);
   }
   listIntents(
@@ -978,6 +1014,7 @@ export class IntentsClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listIntents(request, options, callback);
   }
 
@@ -1032,6 +1069,7 @@ export class IntentsClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listIntents.createStream(
       this._innerApiCalls.listIntents as gax.GaxCall,
       request,
@@ -1249,8 +1287,9 @@ export class IntentsClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.intentsStub.then(stub => {
+      return this.intentsStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -81,12 +81,30 @@ describe('v2.ContextsClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new contextsModule.v2.ContextsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.contextsStub, undefined);
+    await client.initialize();
+    assert(client.contextsStub);
+  });
+  it('has close method', () => {
+    const client = new contextsModule.v2.ContextsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getContext', () => {
     it('invokes getContext without error', done => {
       const client = new contextsModule.v2.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IGetContextRequest = {};
       request.name = '';
@@ -110,6 +128,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IGetContextRequest = {};
       request.name = '';
@@ -135,6 +155,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.ICreateContextRequest = {};
       request.parent = '';
@@ -158,6 +180,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.ICreateContextRequest = {};
       request.parent = '';
@@ -183,6 +207,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IUpdateContextRequest = {};
       request.context = {};
@@ -207,6 +233,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IUpdateContextRequest = {};
       request.context = {};
@@ -233,6 +261,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IDeleteContextRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IDeleteContextRequest = {};
       request.name = '';
@@ -281,6 +313,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IDeleteAllContextsRequest = {};
       request.parent = '';
@@ -304,6 +338,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IDeleteAllContextsRequest = {};
       request.parent = '';
@@ -329,6 +365,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IListContextsRequest = {};
       request.parent = '';
@@ -356,6 +394,8 @@ describe('v2.ContextsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.dialogflow.v2.IListContextsRequest = {};
       request.parent = '';
