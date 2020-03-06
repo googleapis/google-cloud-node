@@ -56,34 +56,8 @@ s.replace("src/v1/container_analysis_client.ts",
 """import * as path from 'path';
 const { GrafeasClient } = require('@google-cloud/grafeas');
 """)
-s.replace("src/v1/container_analysis_client.ts",
-"""auth\: gax\.GoogleAuth;
-""",
-"""auth: gax.GoogleAuth;
-opts: ClientOptions;
-""")
-s.replace("src/v1/container_analysis_client.ts",
-"""  \}
-
-  \/\*\*
-   \* The DNS address for this API service\.
-   \*\/
-""",
-"""    this.opts = opts;
-  }
-
-  /**
-   * The DNS address for this API service.
-   */
-""")
-s.replace("src/v1/container_analysis_client.ts",
-r"""  matchNoteFromNoteName\(noteName: string\) {
-    return this\._pathTemplates\.notePathTemplate\.match\(noteName\)\.note;
-  }
-""",
-r"""  matchNoteFromNoteName(noteName: string) {
-    return this._pathTemplates.notePathTemplate.match(noteName).note;
-  }
+s.replace("src/v1/container_analysis_client.ts", "^}",
+r"""
   /**
    * Returns an instance of a @google-cloud/grafeas client, configured to
    * connect to Google Cloud's Container Analysis API. For documentation
@@ -94,8 +68,9 @@ r"""  matchNoteFromNoteName(noteName: string) {
    *
    */
   getGrafeasClient() {
-    return new GrafeasClient(this.opts);
+    return new GrafeasClient(this._opts);
   }
+}
 """)
 # Node.js specific cleanup
 to_remove=['src/v1/grafeas_client.ts', 'src/v1/grafeas_client_config.json', 'src/v1/grafeas_proto_list.json', 'src/v1beta1/grafeas_client.ts','src/v1beta1/grafeas_client_config.json', 'src/v1beta1/grafeas_proto_list.json', 'test/gapic-grafeas_v1_beta1-v1beta1.ts', 'test/gapic-grafeas-v1.ts', 'test/gapic-grafeas-v1beta1.ts']

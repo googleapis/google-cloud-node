@@ -54,9 +54,13 @@ export class ContainerAnalysisClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  opts: ClientOptions;
-  containerAnalysisStub: Promise<{[name: string]: Function}>;
+  containerAnalysisStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ContainerAnalysisClient.
@@ -80,8 +84,6 @@ export class ContainerAnalysisClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -111,25 +113,28 @@ export class ContainerAnalysisClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof ContainerAnalysisClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -145,7 +150,7 @@ export class ContainerAnalysisClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -153,16 +158,16 @@ export class ContainerAnalysisClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      notePathTemplate: new gaxModule.PathTemplate(
+      notePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/notes/{note}'
       ),
-      occurrencePathTemplate: new gaxModule.PathTemplate(
+      occurrencePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/occurrences/{occurrence}'
       ),
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.devtools.containeranalysis.v1.ContainerAnalysis',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -173,18 +178,36 @@ export class ContainerAnalysisClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.containerAnalysisStub) {
+      return this.containerAnalysisStub;
+    }
 
     // Put together the "service stub" for
     // google.devtools.containeranalysis.v1.ContainerAnalysis.
-    this.containerAnalysisStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.containerAnalysisStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.devtools.containeranalysis.v1.ContainerAnalysis'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.devtools.containeranalysis.v1
+          (this._protos as any).google.devtools.containeranalysis.v1
             .ContainerAnalysis,
-      opts
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -208,9 +231,9 @@ export class ContainerAnalysisClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -224,7 +247,8 @@ export class ContainerAnalysisClient {
         return apiCall(argument, callOptions, callback);
       };
     }
-    this.opts = opts;
+
+    return this.containerAnalysisStub;
   }
 
   /**
@@ -351,6 +375,7 @@ export class ContainerAnalysisClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.setIamPolicy(request, options, callback);
   }
   getIamPolicy(
@@ -427,6 +452,7 @@ export class ContainerAnalysisClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
   testIamPermissions(
@@ -502,6 +528,7 @@ export class ContainerAnalysisClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.testIamPermissions(request, options, callback);
   }
 
@@ -543,18 +570,6 @@ export class ContainerAnalysisClient {
    */
   matchNoteFromNoteName(noteName: string) {
     return this._pathTemplates.notePathTemplate.match(noteName).note;
-  }
-  /**
-   * Returns an instance of a @google-cloud/grafeas client, configured to
-   * connect to Google Cloud's Container Analysis API. For documentation
-   * on this client, see:
-   * <a href="https://googleapis.dev/nodejs/grafeas/latest/index.html">https://googleapis.dev/nodejs/grafeas/latest/index.html</a>
-   *
-   * @returns {GrafeasClient} - An instance of a Grafeas client.
-   *
-   */
-  getGrafeasClient() {
-    return new GrafeasClient(this.opts);
   }
 
   /**
@@ -601,12 +616,26 @@ export class ContainerAnalysisClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.containerAnalysisStub.then(stub => {
+      return this.containerAnalysisStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
     }
     return Promise.resolve();
+  }
+
+  /**
+   * Returns an instance of a @google-cloud/grafeas client, configured to
+   * connect to Google Cloud's Container Analysis API. For documentation
+   * on this client, see:
+   * <a href="https://googleapis.dev/nodejs/grafeas/latest/index.html">https://googleapis.dev/nodejs/grafeas/latest/index.html</a>
+   *
+   * @returns {GrafeasClient} - An instance of a Grafeas client.
+   *
+   */
+  getGrafeasClient() {
+    return new GrafeasClient(this._opts);
   }
 }

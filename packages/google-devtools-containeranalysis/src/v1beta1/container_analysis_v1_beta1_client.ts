@@ -56,8 +56,13 @@ export class ContainerAnalysisV1Beta1Client {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  containerAnalysisV1Beta1Stub: Promise<{[name: string]: Function}>;
+  containerAnalysisV1Beta1Stub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ContainerAnalysisV1Beta1Client.
@@ -81,8 +86,6 @@ export class ContainerAnalysisV1Beta1Client {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -113,26 +116,29 @@ export class ContainerAnalysisV1Beta1Client {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this
       .constructor as typeof ContainerAnalysisV1Beta1Client).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -148,7 +154,7 @@ export class ContainerAnalysisV1Beta1Client {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -156,14 +162,16 @@ export class ContainerAnalysisV1Beta1Client {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      notePathTemplate: new gaxModule.PathTemplate(
+      notePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/notes/{note}'
       ),
-      occurrencePathTemplate: new gaxModule.PathTemplate(
+      occurrencePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/occurrences/{occurrence}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      scanConfigPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      scanConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/scanConfigs/{scan_config}'
       ),
     };
@@ -172,7 +180,7 @@ export class ContainerAnalysisV1Beta1Client {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listScanConfigs: new gaxModule.PageDescriptor(
+      listScanConfigs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'scanConfigs'
@@ -180,7 +188,7 @@ export class ContainerAnalysisV1Beta1Client {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -191,18 +199,36 @@ export class ContainerAnalysisV1Beta1Client {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.containerAnalysisV1Beta1Stub) {
+      return this.containerAnalysisV1Beta1Stub;
+    }
 
     // Put together the "service stub" for
     // google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.
-    this.containerAnalysisV1Beta1Stub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.containerAnalysisV1Beta1Stub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.devtools.containeranalysis.v1beta1
+          (this._protos as any).google.devtools.containeranalysis.v1beta1
             .ContainerAnalysisV1Beta1,
-      opts
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -229,9 +255,9 @@ export class ContainerAnalysisV1Beta1Client {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -245,6 +271,8 @@ export class ContainerAnalysisV1Beta1Client {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.containerAnalysisV1Beta1Stub;
   }
 
   /**
@@ -371,6 +399,7 @@ export class ContainerAnalysisV1Beta1Client {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.setIamPolicy(request, options, callback);
   }
   getIamPolicy(
@@ -447,6 +476,7 @@ export class ContainerAnalysisV1Beta1Client {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
   testIamPermissions(
@@ -522,6 +552,7 @@ export class ContainerAnalysisV1Beta1Client {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.testIamPermissions(request, options, callback);
   }
   getScanConfig(
@@ -603,6 +634,7 @@ export class ContainerAnalysisV1Beta1Client {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getScanConfig(request, options, callback);
   }
   updateScanConfig(
@@ -686,6 +718,7 @@ export class ContainerAnalysisV1Beta1Client {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateScanConfig(request, options, callback);
   }
 
@@ -777,6 +810,7 @@ export class ContainerAnalysisV1Beta1Client {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listScanConfigs(request, options, callback);
   }
 
@@ -823,6 +857,7 @@ export class ContainerAnalysisV1Beta1Client {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listScanConfigs.createStream(
       this._innerApiCalls.listScanConfigs as gax.GaxCall,
       request,
@@ -974,8 +1009,9 @@ export class ContainerAnalysisV1Beta1Client {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.containerAnalysisV1Beta1Stub.then(stub => {
+      return this.containerAnalysisV1Beta1Stub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

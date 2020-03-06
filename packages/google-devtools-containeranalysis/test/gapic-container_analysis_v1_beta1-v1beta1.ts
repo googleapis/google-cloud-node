@@ -89,6 +89,26 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.containerAnalysisV1Beta1Stub, undefined);
+    await client.initialize();
+    assert(client.containerAnalysisV1Beta1Stub);
+  });
+  it('has close method', () => {
+    const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
       const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
@@ -97,6 +117,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -122,6 +144,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -149,6 +173,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -174,6 +200,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -201,6 +229,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -226,6 +256,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -253,6 +285,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest = {};
       request.name = '';
@@ -278,6 +312,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest = {};
       request.name = '';
@@ -305,6 +341,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest = {};
       request.name = '';
@@ -330,6 +368,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest = {};
       request.name = '';
@@ -357,6 +397,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest = {};
       request.parent = '';
@@ -386,6 +428,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest = {};
       request.parent = '';
