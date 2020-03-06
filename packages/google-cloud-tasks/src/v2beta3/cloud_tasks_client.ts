@@ -45,8 +45,13 @@ export class CloudTasksClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  cloudTasksStub: Promise<{[name: string]: Function}>;
+  cloudTasksStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CloudTasksClient.
@@ -70,8 +75,6 @@ export class CloudTasksClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -101,25 +104,28 @@ export class CloudTasksClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof CloudTasksClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -135,7 +141,7 @@ export class CloudTasksClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -143,14 +149,16 @@ export class CloudTasksClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      locationPathTemplate: new gaxModule.PathTemplate(
+      locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      queuePathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      queuePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/queues/{queue}'
       ),
-      taskPathTemplate: new gaxModule.PathTemplate(
+      taskPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/queues/{queue}/tasks/{task}'
       ),
     };
@@ -159,12 +167,12 @@ export class CloudTasksClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listQueues: new gaxModule.PageDescriptor(
+      listQueues: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'queues'
       ),
-      listTasks: new gaxModule.PageDescriptor(
+      listTasks: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'tasks'
@@ -172,7 +180,7 @@ export class CloudTasksClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.tasks.v2beta3.CloudTasks',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -183,17 +191,35 @@ export class CloudTasksClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.cloudTasksStub) {
+      return this.cloudTasksStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.tasks.v2beta3.CloudTasks.
-    this.cloudTasksStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.cloudTasksStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.tasks.v2beta3.CloudTasks'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.tasks.v2beta3.CloudTasks,
-      opts
+          (this._protos as any).google.cloud.tasks.v2beta3.CloudTasks,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -230,9 +256,9 @@ export class CloudTasksClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -246,6 +272,8 @@ export class CloudTasksClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.cloudTasksStub;
   }
 
   /**
@@ -368,6 +396,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getQueue(request, options, callback);
   }
   createQueue(
@@ -411,11 +440,11 @@ export class CloudTasksClient {
    *
    *   The list of allowed locations can be obtained by calling Cloud
    *   Tasks' implementation of
-   *   [ListLocations][google.cloud.location.Locations.ListLocations].
+   *   {@link google.cloud.location.Locations.ListLocations|ListLocations}.
    * @param {google.cloud.tasks.v2beta3.Queue} request.queue
    *   Required. The queue to create.
    *
-   *   [Queue's name][google.cloud.tasks.v2beta3.Queue.name] cannot be the same as an existing queue.
+   *   {@link google.cloud.tasks.v2beta3.Queue.name|Queue's name} cannot be the same as an existing queue.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -460,6 +489,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createQueue(request, options, callback);
   }
   updateQueue(
@@ -503,11 +533,11 @@ export class CloudTasksClient {
    * @param {google.cloud.tasks.v2beta3.Queue} request.queue
    *   Required. The queue to create or update.
    *
-   *   The queue's [name][google.cloud.tasks.v2beta3.Queue.name] must be specified.
+   *   The queue's {@link google.cloud.tasks.v2beta3.Queue.name|name} must be specified.
    *
    *   Output only fields cannot be modified using UpdateQueue.
    *   Any value specified for an output only field will be ignored.
-   *   The queue's [name][google.cloud.tasks.v2beta3.Queue.name] cannot be changed.
+   *   The queue's {@link google.cloud.tasks.v2beta3.Queue.name|name} cannot be changed.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   A mask used to specify which fields of the queue are being updated.
    *
@@ -556,6 +586,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       'queue.name': request.queue!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateQueue(request, options, callback);
   }
   deleteQueue(
@@ -641,6 +672,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteQueue(request, options, callback);
   }
   purgeQueue(
@@ -718,6 +750,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.purgeQueue(request, options, callback);
   }
   pauseQueue(
@@ -744,9 +777,9 @@ export class CloudTasksClient {
    *
    * If a queue is paused then the system will stop dispatching tasks
    * until the queue is resumed via
-   * [ResumeQueue][google.cloud.tasks.v2beta3.CloudTasks.ResumeQueue]. Tasks can still be added
+   * {@link google.cloud.tasks.v2beta3.CloudTasks.ResumeQueue|ResumeQueue}. Tasks can still be added
    * when the queue is paused. A queue is paused if its
-   * [state][google.cloud.tasks.v2beta3.Queue.state] is [PAUSED][google.cloud.tasks.v2beta3.Queue.State.PAUSED].
+   * {@link google.cloud.tasks.v2beta3.Queue.state|state} is {@link google.cloud.tasks.v2beta3.Queue.State.PAUSED|PAUSED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -796,6 +829,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.pauseQueue(request, options, callback);
   }
   resumeQueue(
@@ -821,10 +855,10 @@ export class CloudTasksClient {
    * Resume a queue.
    *
    * This method resumes a queue after it has been
-   * [PAUSED][google.cloud.tasks.v2beta3.Queue.State.PAUSED] or
-   * [DISABLED][google.cloud.tasks.v2beta3.Queue.State.DISABLED]. The state of a queue is stored
-   * in the queue's [state][google.cloud.tasks.v2beta3.Queue.state]; after calling this method it
-   * will be set to [RUNNING][google.cloud.tasks.v2beta3.Queue.State.RUNNING].
+   * {@link google.cloud.tasks.v2beta3.Queue.State.PAUSED|PAUSED} or
+   * {@link google.cloud.tasks.v2beta3.Queue.State.DISABLED|DISABLED}. The state of a queue is stored
+   * in the queue's {@link google.cloud.tasks.v2beta3.Queue.state|state}; after calling this method it
+   * will be set to {@link google.cloud.tasks.v2beta3.Queue.State.RUNNING|RUNNING}.
    *
    * WARNING: Resuming many high-QPS queues at the same time can
    * lead to target overloading. If you are resuming high-QPS
@@ -881,6 +915,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.resumeQueue(request, options, callback);
   }
   getIamPolicy(
@@ -903,7 +938,7 @@ export class CloudTasksClient {
     >
   ): void;
   /**
-   * Gets the access control policy for a [Queue][google.cloud.tasks.v2beta3.Queue].
+   * Gets the access control policy for a {@link google.cloud.tasks.v2beta3.Queue|Queue}.
    * Returns an empty policy if the resource exists and does not have a policy
    * set.
    *
@@ -958,6 +993,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
@@ -980,7 +1016,7 @@ export class CloudTasksClient {
     >
   ): void;
   /**
-   * Sets the access control policy for a [Queue][google.cloud.tasks.v2beta3.Queue]. Replaces any existing
+   * Sets the access control policy for a {@link google.cloud.tasks.v2beta3.Queue|Queue}. Replaces any existing
    * policy.
    *
    * Note: The Cloud Console does not check queue-level IAM permissions yet.
@@ -1037,6 +1073,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
@@ -1059,9 +1096,9 @@ export class CloudTasksClient {
     >
   ): void;
   /**
-   * Returns permissions that a caller has on a [Queue][google.cloud.tasks.v2beta3.Queue].
+   * Returns permissions that a caller has on a {@link google.cloud.tasks.v2beta3.Queue|Queue}.
    * If the resource does not exist, this will return an empty set of
-   * permissions, not a [NOT_FOUND][google.rpc.Code.NOT_FOUND] error.
+   * permissions, not a {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} error.
    *
    * Note: This operation is designed to be used for building permission-aware
    * UIs and command-line tools, not for authorization checking. This operation
@@ -1112,6 +1149,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.testIamPermissions(request, options, callback);
   }
   getTask(
@@ -1142,18 +1180,18 @@ export class CloudTasksClient {
    *   Required. The task name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {google.cloud.tasks.v2beta3.Task.View} request.responseView
-   *   The response_view specifies which subset of the [Task][google.cloud.tasks.v2beta3.Task] will be
+   *   The response_view specifies which subset of the {@link google.cloud.tasks.v2beta3.Task|Task} will be
    *   returned.
    *
-   *   By default response_view is [BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC]; not all
+   *   By default response_view is {@link google.cloud.tasks.v2beta3.Task.View.BASIC|BASIC}; not all
    *   information is retrieved by default because some data, such as
    *   payloads, might be desirable to return only when needed because
    *   of its large size or because of the sensitivity of data that it
    *   contains.
    *
-   *   Authorization for [FULL][google.cloud.tasks.v2beta3.Task.View.FULL] requires
+   *   Authorization for {@link google.cloud.tasks.v2beta3.Task.View.FULL|FULL} requires
    *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-   *   permission on the [Task][google.cloud.tasks.v2beta3.Task] resource.
+   *   permission on the {@link google.cloud.tasks.v2beta3.Task|Task} resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1197,6 +1235,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getTask(request, options, callback);
   }
   createTask(
@@ -1237,12 +1276,12 @@ export class CloudTasksClient {
    *
    *   Task names have the following format:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
-   *   The user can optionally specify a task [name][google.cloud.tasks.v2beta3.Task.name]. If a
+   *   The user can optionally specify a task {@link google.cloud.tasks.v2beta3.Task.name|name}. If a
    *   name is not specified then the system will generate a random
    *   unique task id, which will be set in the task returned in the
-   *   [response][google.cloud.tasks.v2beta3.Task.name].
+   *   {@link google.cloud.tasks.v2beta3.Task.name|response}.
    *
-   *   If [schedule_time][google.cloud.tasks.v2beta3.Task.schedule_time] is not set or is in the
+   *   If {@link google.cloud.tasks.v2beta3.Task.schedule_time|schedule_time} is not set or is in the
    *   past then Cloud Tasks will set it to the current time.
    *
    *   Task De-duplication:
@@ -1250,7 +1289,7 @@ export class CloudTasksClient {
    *   Explicitly specifying a task ID enables task de-duplication.  If
    *   a task's ID is identical to that of an existing task or a task
    *   that was deleted or executed recently then the call will fail
-   *   with [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS].
+   *   with {@link google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS}.
    *   If the task's queue was created using Cloud Tasks, then another task with
    *   the same name can't be created for ~1hour after the original task was
    *   deleted or executed. If the task's queue was created using queue.yaml or
@@ -1258,7 +1297,7 @@ export class CloudTasksClient {
    *   for ~9days after the original task was deleted or executed.
    *
    *   Because there is an extra lookup cost to identify duplicate task
-   *   names, these [CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask] calls have significantly
+   *   names, these {@link google.cloud.tasks.v2beta3.CloudTasks.CreateTask|CreateTask} calls have significantly
    *   increased latency. Using hashed strings for the task id or for
    *   the prefix of the task id is recommended. Choosing task ids that
    *   are sequential or have sequential prefixes, for example using a
@@ -1267,18 +1306,18 @@ export class CloudTasksClient {
    *   uniform distribution of task ids to store and serve tasks
    *   efficiently.
    * @param {google.cloud.tasks.v2beta3.Task.View} request.responseView
-   *   The response_view specifies which subset of the [Task][google.cloud.tasks.v2beta3.Task] will be
+   *   The response_view specifies which subset of the {@link google.cloud.tasks.v2beta3.Task|Task} will be
    *   returned.
    *
-   *   By default response_view is [BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC]; not all
+   *   By default response_view is {@link google.cloud.tasks.v2beta3.Task.View.BASIC|BASIC}; not all
    *   information is retrieved by default because some data, such as
    *   payloads, might be desirable to return only when needed because
    *   of its large size or because of the sensitivity of data that it
    *   contains.
    *
-   *   Authorization for [FULL][google.cloud.tasks.v2beta3.Task.View.FULL] requires
+   *   Authorization for {@link google.cloud.tasks.v2beta3.Task.View.FULL|FULL} requires
    *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-   *   permission on the [Task][google.cloud.tasks.v2beta3.Task] resource.
+   *   permission on the {@link google.cloud.tasks.v2beta3.Task|Task} resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1322,6 +1361,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createTask(request, options, callback);
   }
   deleteTask(
@@ -1398,6 +1438,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteTask(request, options, callback);
   }
   runTask(
@@ -1423,26 +1464,26 @@ export class CloudTasksClient {
    * Forces a task to run now.
    *
    * When this method is called, Cloud Tasks will dispatch the task, even if
-   * the task is already running, the queue has reached its [RateLimits][google.cloud.tasks.v2beta3.RateLimits] or
-   * is [PAUSED][google.cloud.tasks.v2beta3.Queue.State.PAUSED].
+   * the task is already running, the queue has reached its {@link google.cloud.tasks.v2beta3.RateLimits|RateLimits} or
+   * is {@link google.cloud.tasks.v2beta3.Queue.State.PAUSED|PAUSED}.
    *
    * This command is meant to be used for manual debugging. For
-   * example, [RunTask][google.cloud.tasks.v2beta3.CloudTasks.RunTask] can be used to retry a failed
+   * example, {@link google.cloud.tasks.v2beta3.CloudTasks.RunTask|RunTask} can be used to retry a failed
    * task after a fix has been made or to manually force a task to be
    * dispatched now.
    *
    * The dispatched task is returned. That is, the task that is returned
-   * contains the [status][Task.status] after the task is dispatched but
+   * contains the {@link Task.status|status} after the task is dispatched but
    * before the task is received by its target.
    *
    * If Cloud Tasks receives a successful response from the task's
    * target, then the task will be deleted; otherwise the task's
-   * [schedule_time][google.cloud.tasks.v2beta3.Task.schedule_time] will be reset to the time that
-   * [RunTask][google.cloud.tasks.v2beta3.CloudTasks.RunTask] was called plus the retry delay specified
-   * in the queue's [RetryConfig][google.cloud.tasks.v2beta3.RetryConfig].
+   * {@link google.cloud.tasks.v2beta3.Task.schedule_time|schedule_time} will be reset to the time that
+   * {@link google.cloud.tasks.v2beta3.CloudTasks.RunTask|RunTask} was called plus the retry delay specified
+   * in the queue's {@link google.cloud.tasks.v2beta3.RetryConfig|RetryConfig}.
    *
-   * [RunTask][google.cloud.tasks.v2beta3.CloudTasks.RunTask] returns
-   * [NOT_FOUND][google.rpc.Code.NOT_FOUND] when it is called on a
+   * {@link google.cloud.tasks.v2beta3.CloudTasks.RunTask|RunTask} returns
+   * {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} when it is called on a
    * task that has already succeeded or permanently failed.
    *
    * @param {Object} request
@@ -1451,18 +1492,18 @@ export class CloudTasksClient {
    *   Required. The task name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {google.cloud.tasks.v2beta3.Task.View} request.responseView
-   *   The response_view specifies which subset of the [Task][google.cloud.tasks.v2beta3.Task] will be
+   *   The response_view specifies which subset of the {@link google.cloud.tasks.v2beta3.Task|Task} will be
    *   returned.
    *
-   *   By default response_view is [BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC]; not all
+   *   By default response_view is {@link google.cloud.tasks.v2beta3.Task.View.BASIC|BASIC}; not all
    *   information is retrieved by default because some data, such as
    *   payloads, might be desirable to return only when needed because
    *   of its large size or because of the sensitivity of data that it
    *   contains.
    *
-   *   Authorization for [FULL][google.cloud.tasks.v2beta3.Task.View.FULL] requires
+   *   Authorization for {@link google.cloud.tasks.v2beta3.Task.View.FULL|FULL} requires
    *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-   *   permission on the [Task][google.cloud.tasks.v2beta3.Task] resource.
+   *   permission on the {@link google.cloud.tasks.v2beta3.Task|Task} resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1506,6 +1547,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.runTask(request, options, callback);
   }
 
@@ -1539,7 +1581,7 @@ export class CloudTasksClient {
    *   Required. The location name.
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} request.filter
-   *   `filter` can be used to specify a subset of queues. Any [Queue][google.cloud.tasks.v2beta3.Queue]
+   *   `filter` can be used to specify a subset of queues. Any {@link google.cloud.tasks.v2beta3.Queue|Queue}
    *   field can be used as a filter and several operators as supported.
    *   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
    *   described in
@@ -1556,17 +1598,17 @@ export class CloudTasksClient {
    *   The maximum page size is 9800. If unspecified, the page size will
    *   be the maximum. Fewer queues than requested might be returned,
    *   even if more queues exist; use the
-   *   [next_page_token][google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token] in the
+   *   {@link google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token|next_page_token} in the
    *   response to determine if more queues exist.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return.
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   [next_page_token][google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token] returned
-   *   from the previous call to [ListQueues][google.cloud.tasks.v2beta3.CloudTasks.ListQueues]
+   *   {@link google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token|next_page_token} returned
+   *   from the previous call to {@link google.cloud.tasks.v2beta3.CloudTasks.ListQueues|ListQueues}
    *   method. It is an error to switch the value of the
-   *   [filter][google.cloud.tasks.v2beta3.ListQueuesRequest.filter] while iterating through pages.
+   *   {@link google.cloud.tasks.v2beta3.ListQueuesRequest.filter|filter} while iterating through pages.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1622,6 +1664,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listQueues(request, options, callback);
   }
 
@@ -1644,7 +1687,7 @@ export class CloudTasksClient {
    *   Required. The location name.
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} request.filter
-   *   `filter` can be used to specify a subset of queues. Any [Queue][google.cloud.tasks.v2beta3.Queue]
+   *   `filter` can be used to specify a subset of queues. Any {@link google.cloud.tasks.v2beta3.Queue|Queue}
    *   field can be used as a filter and several operators as supported.
    *   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
    *   described in
@@ -1661,17 +1704,17 @@ export class CloudTasksClient {
    *   The maximum page size is 9800. If unspecified, the page size will
    *   be the maximum. Fewer queues than requested might be returned,
    *   even if more queues exist; use the
-   *   [next_page_token][google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token] in the
+   *   {@link google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token|next_page_token} in the
    *   response to determine if more queues exist.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return.
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   [next_page_token][google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token] returned
-   *   from the previous call to [ListQueues][google.cloud.tasks.v2beta3.CloudTasks.ListQueues]
+   *   {@link google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token|next_page_token} returned
+   *   from the previous call to {@link google.cloud.tasks.v2beta3.CloudTasks.ListQueues|ListQueues}
    *   method. It is an error to switch the value of the
-   *   [filter][google.cloud.tasks.v2beta3.ListQueuesRequest.filter] while iterating through pages.
+   *   {@link google.cloud.tasks.v2beta3.ListQueuesRequest.filter|filter} while iterating through pages.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1691,6 +1734,7 @@ export class CloudTasksClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listQueues.createStream(
       this._innerApiCalls.listQueues as gax.GaxCall,
       request,
@@ -1719,9 +1763,9 @@ export class CloudTasksClient {
   /**
    * Lists the tasks in a queue.
    *
-   * By default, only the [BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC] view is retrieved
+   * By default, only the {@link google.cloud.tasks.v2beta3.Task.View.BASIC|BASIC} view is retrieved
    * due to performance considerations;
-   * [response_view][google.cloud.tasks.v2beta3.ListTasksRequest.response_view] controls the
+   * {@link google.cloud.tasks.v2beta3.ListTasksRequest.response_view|response_view} controls the
    * subset of information which is returned.
    *
    * The tasks may be returned in any order. The ordering may change at any
@@ -1733,23 +1777,23 @@ export class CloudTasksClient {
    *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {google.cloud.tasks.v2beta3.Task.View} request.responseView
-   *   The response_view specifies which subset of the [Task][google.cloud.tasks.v2beta3.Task] will be
+   *   The response_view specifies which subset of the {@link google.cloud.tasks.v2beta3.Task|Task} will be
    *   returned.
    *
-   *   By default response_view is [BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC]; not all
+   *   By default response_view is {@link google.cloud.tasks.v2beta3.Task.View.BASIC|BASIC}; not all
    *   information is retrieved by default because some data, such as
    *   payloads, might be desirable to return only when needed because
    *   of its large size or because of the sensitivity of data that it
    *   contains.
    *
-   *   Authorization for [FULL][google.cloud.tasks.v2beta3.Task.View.FULL] requires
+   *   Authorization for {@link google.cloud.tasks.v2beta3.Task.View.FULL|FULL} requires
    *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-   *   permission on the [Task][google.cloud.tasks.v2beta3.Task] resource.
+   *   permission on the {@link google.cloud.tasks.v2beta3.Task|Task} resource.
    * @param {number} request.pageSize
    *   Maximum page size.
    *
    *   Fewer tasks than requested might be returned, even if more tasks exist; use
-   *   [next_page_token][google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token] in the response to
+   *   {@link google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token|next_page_token} in the response to
    *   determine if more tasks exist.
    *
    *   The maximum page size is 1000. If unspecified, the page size will be the
@@ -1759,8 +1803,8 @@ export class CloudTasksClient {
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   [next_page_token][google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token] returned
-   *   from the previous call to [ListTasks][google.cloud.tasks.v2beta3.CloudTasks.ListTasks]
+   *   {@link google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token|next_page_token} returned
+   *   from the previous call to {@link google.cloud.tasks.v2beta3.CloudTasks.ListTasks|ListTasks}
    *   method.
    *
    *   The page token is valid for only 2 hours.
@@ -1819,6 +1863,7 @@ export class CloudTasksClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listTasks(request, options, callback);
   }
 
@@ -1841,23 +1886,23 @@ export class CloudTasksClient {
    *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {google.cloud.tasks.v2beta3.Task.View} request.responseView
-   *   The response_view specifies which subset of the [Task][google.cloud.tasks.v2beta3.Task] will be
+   *   The response_view specifies which subset of the {@link google.cloud.tasks.v2beta3.Task|Task} will be
    *   returned.
    *
-   *   By default response_view is [BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC]; not all
+   *   By default response_view is {@link google.cloud.tasks.v2beta3.Task.View.BASIC|BASIC}; not all
    *   information is retrieved by default because some data, such as
    *   payloads, might be desirable to return only when needed because
    *   of its large size or because of the sensitivity of data that it
    *   contains.
    *
-   *   Authorization for [FULL][google.cloud.tasks.v2beta3.Task.View.FULL] requires
+   *   Authorization for {@link google.cloud.tasks.v2beta3.Task.View.FULL|FULL} requires
    *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-   *   permission on the [Task][google.cloud.tasks.v2beta3.Task] resource.
+   *   permission on the {@link google.cloud.tasks.v2beta3.Task|Task} resource.
    * @param {number} request.pageSize
    *   Maximum page size.
    *
    *   Fewer tasks than requested might be returned, even if more tasks exist; use
-   *   [next_page_token][google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token] in the response to
+   *   {@link google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token|next_page_token} in the response to
    *   determine if more tasks exist.
    *
    *   The maximum page size is 1000. If unspecified, the page size will be the
@@ -1867,8 +1912,8 @@ export class CloudTasksClient {
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   [next_page_token][google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token] returned
-   *   from the previous call to [ListTasks][google.cloud.tasks.v2beta3.CloudTasks.ListTasks]
+   *   {@link google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token|next_page_token} returned
+   *   from the previous call to {@link google.cloud.tasks.v2beta3.CloudTasks.ListTasks|ListTasks}
    *   method.
    *
    *   The page token is valid for only 2 hours.
@@ -1891,6 +1936,7 @@ export class CloudTasksClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listTasks.createStream(
       this._innerApiCalls.listTasks as gax.GaxCall,
       request,
@@ -2078,8 +2124,9 @@ export class CloudTasksClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.cloudTasksStub.then(stub => {
+      return this.cloudTasksStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

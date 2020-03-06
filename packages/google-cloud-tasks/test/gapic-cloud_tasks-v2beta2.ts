@@ -81,12 +81,30 @@ describe('v2beta2.CloudTasksClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudTasksStub, undefined);
+    await client.initialize();
+    assert(client.cloudTasksStub);
+  });
+  it('has close method', () => {
+    const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getQueue', () => {
     it('invokes getQueue without error', done => {
       const client = new cloudtasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest = {};
       request.name = '';
@@ -110,6 +128,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest = {};
       request.name = '';
@@ -135,6 +155,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest = {};
       request.parent = '';
@@ -158,6 +180,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest = {};
       request.parent = '';
@@ -183,6 +207,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest = {};
       request.queue = {};
@@ -207,6 +233,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest = {};
       request.queue = {};
@@ -233,6 +261,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest = {};
       request.name = '';
@@ -281,6 +313,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest = {};
       request.name = '';
@@ -304,6 +338,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest = {};
       request.name = '';
@@ -329,6 +365,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest = {};
       request.name = '';
@@ -352,6 +390,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest = {};
       request.name = '';
@@ -377,6 +417,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest = {};
       request.name = '';
@@ -400,6 +442,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest = {};
       request.name = '';
@@ -425,6 +469,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -448,6 +494,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -473,6 +521,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -496,6 +546,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -521,6 +573,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -544,6 +598,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -569,6 +625,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest = {};
       request.name = '';
@@ -592,6 +650,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest = {};
       request.name = '';
@@ -617,6 +677,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest = {};
       request.parent = '';
@@ -640,6 +702,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest = {};
       request.parent = '';
@@ -665,6 +729,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest = {};
       request.name = '';
@@ -688,6 +754,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest = {};
       request.name = '';
@@ -713,6 +781,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest = {};
       request.parent = '';
@@ -736,6 +806,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest = {};
       request.parent = '';
@@ -761,6 +833,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest = {};
       request.name = '';
@@ -784,6 +858,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest = {};
       request.name = '';
@@ -809,6 +885,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest = {};
       request.name = '';
@@ -832,6 +910,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest = {};
       request.name = '';
@@ -857,6 +937,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest = {};
       request.name = '';
@@ -880,6 +962,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest = {};
       request.name = '';
@@ -905,6 +989,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest = {};
       request.name = '';
@@ -928,6 +1014,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest = {};
       request.name = '';
@@ -953,6 +1041,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest = {};
       request.parent = '';
@@ -980,6 +1070,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest = {};
       request.parent = '';
@@ -1012,6 +1104,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest = {};
       request.parent = '';
@@ -1039,6 +1133,8 @@ describe('v2beta2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest = {};
       request.parent = '';
