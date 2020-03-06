@@ -83,6 +83,22 @@ describe('v1.DataTransferServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new datatransferserviceModule.v1.DataTransferServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dataTransferServiceStub, undefined);
+    await client.initialize();
+    assert(client.dataTransferServiceStub);
+  });
+  it('has close method', () => {
+    const client = new datatransferserviceModule.v1.DataTransferServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getDataSource', () => {
     it('invokes getDataSource without error', done => {
       const client = new datatransferserviceModule.v1.DataTransferServiceClient(
@@ -91,6 +107,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest = {};
       request.name = '';
@@ -116,6 +134,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest = {};
       request.name = '';
@@ -143,6 +163,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest = {};
       request.parent = '';
@@ -168,6 +190,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest = {};
       request.parent = '';
@@ -195,6 +219,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IUpdateTransferConfigRequest = {};
       request.transferConfig = {};
@@ -221,6 +247,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IUpdateTransferConfigRequest = {};
       request.transferConfig = {};
@@ -249,6 +277,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest = {};
       request.name = '';
@@ -274,6 +304,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest = {};
       request.name = '';
@@ -301,6 +333,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest = {};
       request.name = '';
@@ -326,6 +360,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest = {};
       request.name = '';
@@ -353,6 +389,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest = {};
       request.parent = '';
@@ -378,6 +416,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest = {};
       request.parent = '';
@@ -405,6 +445,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest = {};
       request.parent = '';
@@ -430,6 +472,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest = {};
       request.parent = '';
@@ -460,6 +504,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest = {};
       request.name = '';
@@ -485,6 +531,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest = {};
       request.name = '';
@@ -512,6 +560,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest = {};
       request.name = '';
@@ -537,6 +587,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest = {};
       request.name = '';
@@ -564,6 +616,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest = {};
       request.name = '';
@@ -589,6 +643,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest = {};
       request.name = '';
@@ -616,6 +672,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest = {};
       request.parent = '';
@@ -645,6 +703,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest = {};
       request.parent = '';
@@ -679,6 +739,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest = {};
       request.parent = '';
@@ -708,6 +770,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest = {};
       request.parent = '';
@@ -742,6 +806,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest = {};
       request.parent = '';
@@ -771,6 +837,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest = {};
       request.parent = '';
@@ -805,6 +873,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest = {};
       request.parent = '';
@@ -834,6 +904,8 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest = {};
       request.parent = '';
