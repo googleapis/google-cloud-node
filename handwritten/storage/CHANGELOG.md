@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [4.5.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.4.0...v4.5.0) (2020-03-06)
+
+
+### Features
+
+* **v4:** support v4 signed URL for GA ([#1072](https://www.github.com/googleapis/nodejs-storage/issues/1072)) ([79d7b8f](https://www.github.com/googleapis/nodejs-storage/commit/79d7b8f5a187f23e58bf84db3f4b8c4b1a921978)), closes [#1051](https://www.github.com/googleapis/nodejs-storage/issues/1051) [#1056](https://www.github.com/googleapis/nodejs-storage/issues/1056) [#1066](https://www.github.com/googleapis/nodejs-storage/issues/1066) [#1068](https://www.github.com/googleapis/nodejs-storage/issues/1068) [#1069](https://www.github.com/googleapis/nodejs-storage/issues/1069) [#1067](https://www.github.com/googleapis/nodejs-storage/issues/1067) [#1070](https://www.github.com/googleapis/nodejs-storage/issues/1070)
+
 ## [4.4.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.3.2...v4.4.0) (2020-03-03)
 
 
