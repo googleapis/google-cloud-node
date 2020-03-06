@@ -88,6 +88,26 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
+    await client.initialize();
+    assert(client.webRiskServiceV1Beta1Stub);
+  });
+  it('has close method', () => {
+    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('computeThreatListDiff', () => {
     it('invokes computeThreatListDiff without error', done => {
       const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
@@ -96,6 +116,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest = {};
       // Mock response
@@ -120,6 +142,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest = {};
       // Mock response
@@ -146,6 +170,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.webrisk.v1beta1.ISearchUrisRequest = {};
       // Mock response
@@ -170,6 +196,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.webrisk.v1beta1.ISearchUrisRequest = {};
       // Mock response
@@ -196,6 +224,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.webrisk.v1beta1.ISearchHashesRequest = {};
       // Mock response
@@ -220,6 +250,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.webrisk.v1beta1.ISearchHashesRequest = {};
       // Mock response
