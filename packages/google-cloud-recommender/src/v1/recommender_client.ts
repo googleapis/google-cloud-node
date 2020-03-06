@@ -47,8 +47,13 @@ export class RecommenderClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  recommenderStub: Promise<{[name: string]: Function}>;
+  recommenderStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of RecommenderClient.
@@ -72,8 +77,6 @@ export class RecommenderClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -103,25 +106,28 @@ export class RecommenderClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof RecommenderClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -137,7 +143,7 @@ export class RecommenderClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -145,10 +151,10 @@ export class RecommenderClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      recommendationPathTemplate: new gaxModule.PathTemplate(
+      recommendationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
       ),
-      recommenderPathTemplate: new gaxModule.PathTemplate(
+      recommenderPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/recommenders/{recommender}'
       ),
     };
@@ -157,7 +163,7 @@ export class RecommenderClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listRecommendations: new gaxModule.PageDescriptor(
+      listRecommendations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'recommendations'
@@ -165,7 +171,7 @@ export class RecommenderClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.recommender.v1.Recommender',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -176,17 +182,35 @@ export class RecommenderClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.recommenderStub) {
+      return this.recommenderStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.recommender.v1.Recommender.
-    this.recommenderStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.recommenderStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.recommender.v1.Recommender'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.recommender.v1.Recommender,
-      opts
+          (this._protos as any).google.cloud.recommender.v1.Recommender,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -212,9 +236,9 @@ export class RecommenderClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -228,6 +252,8 @@ export class RecommenderClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.recommenderStub;
   }
 
   /**
@@ -359,6 +385,7 @@ export class RecommenderClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getRecommendation(request, options, callback);
   }
   markRecommendationClaimed(
@@ -403,7 +430,7 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex /^[a-z0-9][a-z0-9_.-]{0,62}$/.
+   *   Keys must match the regex /^{@link a-z0-9_.-|a-z0-9}{0,62}$/.
    *   Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
@@ -455,6 +482,7 @@ export class RecommenderClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.markRecommendationClaimed(
       request,
       options,
@@ -503,7 +531,7 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex /^[a-z0-9][a-z0-9_.-]{0,62}$/.
+   *   Keys must match the regex /^{@link a-z0-9_.-|a-z0-9}{0,62}$/.
    *   Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
@@ -555,6 +583,7 @@ export class RecommenderClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.markRecommendationSucceeded(
       request,
       options,
@@ -603,7 +632,7 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex /^[a-z0-9][a-z0-9_.-]{0,62}$/.
+   *   Keys must match the regex /^{@link a-z0-9_.-|a-z0-9}{0,62}$/.
    *   Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
@@ -655,6 +684,7 @@ export class RecommenderClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.markRecommendationFailed(
       request,
       options,
@@ -764,6 +794,7 @@ export class RecommenderClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listRecommendations(request, options, callback);
   }
 
@@ -823,6 +854,7 @@ export class RecommenderClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listRecommendations.createStream(
       this._innerApiCalls.listRecommendations as gax.GaxCall,
       request,
@@ -966,8 +998,9 @@ export class RecommenderClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.recommenderStub.then(stub => {
+      return this.recommenderStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

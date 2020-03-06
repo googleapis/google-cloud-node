@@ -81,12 +81,30 @@ describe('v1.RecommenderClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new recommenderModule.v1.RecommenderClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.recommenderStub, undefined);
+    await client.initialize();
+    assert(client.recommenderStub);
+  });
+  it('has close method', () => {
+    const client = new recommenderModule.v1.RecommenderClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getRecommendation', () => {
     it('invokes getRecommendation without error', done => {
       const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest = {};
       request.name = '';
@@ -110,6 +128,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest = {};
       request.name = '';
@@ -135,6 +155,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest = {};
       request.name = '';
@@ -158,6 +180,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest = {};
       request.name = '';
@@ -186,6 +210,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest = {};
       request.name = '';
@@ -209,6 +235,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest = {};
       request.name = '';
@@ -237,6 +265,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest = {};
       request.name = '';
@@ -260,6 +290,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest = {};
       request.name = '';
@@ -288,6 +320,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest = {};
       request.parent = '';
@@ -315,6 +349,8 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest = {};
       request.parent = '';
