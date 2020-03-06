@@ -83,12 +83,30 @@ describe('v1.ClusterManagerClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new clustermanagerModule.v1.ClusterManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.clusterManagerStub, undefined);
+    await client.initialize();
+    assert(client.clusterManagerStub);
+  });
+  it('has close method', () => {
+    const client = new clustermanagerModule.v1.ClusterManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('listClusters', () => {
     it('invokes listClusters without error', done => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IListClustersRequest = {};
       request.parent = '';
@@ -112,6 +130,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IListClustersRequest = {};
       request.parent = '';
@@ -137,6 +157,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IGetClusterRequest = {};
       request.name = '';
@@ -160,6 +182,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IGetClusterRequest = {};
       request.name = '';
@@ -185,6 +209,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ICreateClusterRequest = {};
       request.parent = '';
@@ -208,6 +234,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ICreateClusterRequest = {};
       request.parent = '';
@@ -233,6 +261,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateClusterRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateClusterRequest = {};
       request.name = '';
@@ -281,6 +313,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateNodePoolRequest = {};
       request.name = '';
@@ -304,6 +338,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateNodePoolRequest = {};
       request.name = '';
@@ -329,6 +365,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest = {};
       request.name = '';
@@ -352,6 +390,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest = {};
       request.name = '';
@@ -377,6 +417,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetLoggingServiceRequest = {};
       request.name = '';
@@ -400,6 +442,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetLoggingServiceRequest = {};
       request.name = '';
@@ -425,6 +469,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetMonitoringServiceRequest = {};
       request.name = '';
@@ -448,6 +494,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetMonitoringServiceRequest = {};
       request.name = '';
@@ -473,6 +521,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetAddonsConfigRequest = {};
       request.name = '';
@@ -496,6 +546,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetAddonsConfigRequest = {};
       request.name = '';
@@ -521,6 +573,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetLocationsRequest = {};
       request.name = '';
@@ -544,6 +598,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetLocationsRequest = {};
       request.name = '';
@@ -569,6 +625,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateMasterRequest = {};
       request.name = '';
@@ -592,6 +650,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IUpdateMasterRequest = {};
       request.name = '';
@@ -617,6 +677,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetMasterAuthRequest = {};
       request.name = '';
@@ -640,6 +702,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetMasterAuthRequest = {};
       request.name = '';
@@ -665,6 +729,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IDeleteClusterRequest = {};
       request.name = '';
@@ -688,6 +754,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IDeleteClusterRequest = {};
       request.name = '';
@@ -713,6 +781,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IListOperationsRequest = {};
       request.parent = '';
@@ -736,6 +806,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IListOperationsRequest = {};
       request.parent = '';
@@ -761,6 +833,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IGetOperationRequest = {};
       request.name = '';
@@ -784,6 +858,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IGetOperationRequest = {};
       request.name = '';
@@ -809,6 +885,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ICancelOperationRequest = {};
       request.name = '';
@@ -832,6 +910,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ICancelOperationRequest = {};
       request.name = '';
@@ -857,6 +937,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IGetServerConfigRequest = {};
       request.name = '';
@@ -880,6 +962,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IGetServerConfigRequest = {};
       request.name = '';
@@ -905,6 +989,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IListNodePoolsRequest = {};
       request.parent = '';
@@ -928,6 +1014,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IListNodePoolsRequest = {};
       request.parent = '';
@@ -953,6 +1041,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IGetNodePoolRequest = {};
       request.name = '';
@@ -976,6 +1066,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IGetNodePoolRequest = {};
       request.name = '';
@@ -1001,6 +1093,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ICreateNodePoolRequest = {};
       request.parent = '';
@@ -1024,6 +1118,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ICreateNodePoolRequest = {};
       request.parent = '';
@@ -1049,6 +1145,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IDeleteNodePoolRequest = {};
       request.name = '';
@@ -1072,6 +1170,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IDeleteNodePoolRequest = {};
       request.name = '';
@@ -1097,6 +1197,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest = {};
       request.name = '';
@@ -1120,6 +1222,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest = {};
       request.name = '';
@@ -1148,6 +1252,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolManagementRequest = {};
       request.name = '';
@@ -1171,6 +1277,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolManagementRequest = {};
       request.name = '';
@@ -1196,6 +1304,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetLabelsRequest = {};
       request.name = '';
@@ -1219,6 +1329,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetLabelsRequest = {};
       request.name = '';
@@ -1244,6 +1356,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetLegacyAbacRequest = {};
       request.name = '';
@@ -1267,6 +1381,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetLegacyAbacRequest = {};
       request.name = '';
@@ -1292,6 +1408,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IStartIPRotationRequest = {};
       request.name = '';
@@ -1315,6 +1433,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IStartIPRotationRequest = {};
       request.name = '';
@@ -1340,6 +1460,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ICompleteIPRotationRequest = {};
       request.name = '';
@@ -1363,6 +1485,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ICompleteIPRotationRequest = {};
       request.name = '';
@@ -1388,6 +1512,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolSizeRequest = {};
       request.name = '';
@@ -1411,6 +1537,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetNodePoolSizeRequest = {};
       request.name = '';
@@ -1436,6 +1564,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetNetworkPolicyRequest = {};
       request.name = '';
@@ -1459,6 +1589,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetNetworkPolicyRequest = {};
       request.name = '';
@@ -1484,6 +1616,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetMaintenancePolicyRequest = {};
       request.name = '';
@@ -1507,6 +1641,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.ISetMaintenancePolicyRequest = {};
       request.name = '';
@@ -1532,6 +1668,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IListUsableSubnetworksRequest = {};
       request.parent = '';
@@ -1559,6 +1697,8 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.container.v1.IListUsableSubnetworksRequest = {};
       request.parent = '';

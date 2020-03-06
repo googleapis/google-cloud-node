@@ -43,8 +43,13 @@ export class ClusterManagerClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
   private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  clusterManagerStub: Promise<{[name: string]: Function}>;
+  clusterManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ClusterManagerClient.
@@ -68,8 +73,6 @@ export class ClusterManagerClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -99,25 +102,28 @@ export class ClusterManagerClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof ClusterManagerClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -133,7 +139,7 @@ export class ClusterManagerClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -141,7 +147,7 @@ export class ClusterManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listUsableSubnetworks: new gaxModule.PageDescriptor(
+      listUsableSubnetworks: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'subnetworks'
@@ -149,7 +155,7 @@ export class ClusterManagerClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.container.v1.ClusterManager',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -160,17 +166,35 @@ export class ClusterManagerClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.clusterManagerStub) {
+      return this.clusterManagerStub;
+    }
 
     // Put together the "service stub" for
     // google.container.v1.ClusterManager.
-    this.clusterManagerStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.clusterManagerStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.container.v1.ClusterManager'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.container.v1.ClusterManager,
-      opts
+          (this._protos as any).google.container.v1.ClusterManager,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -222,9 +246,9 @@ export class ClusterManagerClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -238,6 +262,8 @@ export class ClusterManagerClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.clusterManagerStub;
   }
 
   /**
@@ -371,6 +397,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listClusters(request, options, callback);
   }
   getCluster(
@@ -455,6 +482,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getCluster(request, options, callback);
   }
   createCluster(
@@ -551,6 +579,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createCluster(request, options, callback);
   }
   updateCluster(
@@ -637,6 +666,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateCluster(request, options, callback);
   }
   updateNodePool(
@@ -739,6 +769,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateNodePool(request, options, callback);
   }
   setNodePoolAutoscaling(
@@ -838,6 +869,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setNodePoolAutoscaling(
       request,
       options,
@@ -932,6 +964,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setLoggingService(request, options, callback);
   }
   setMonitoringService(
@@ -1025,6 +1058,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setMonitoringService(request, options, callback);
   }
   setAddonsConfig(
@@ -1112,6 +1146,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setAddonsConfig(request, options, callback);
   }
   setLocations(
@@ -1204,6 +1239,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setLocations(request, options, callback);
   }
   updateMaster(
@@ -1299,6 +1335,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateMaster(request, options, callback);
   }
   setMasterAuth(
@@ -1389,6 +1426,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setMasterAuth(request, options, callback);
   }
   deleteCluster(
@@ -1481,6 +1519,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteCluster(request, options, callback);
   }
   listOperations(
@@ -1562,6 +1601,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listOperations(request, options, callback);
   }
   getOperation(
@@ -1646,6 +1686,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getOperation(request, options, callback);
   }
   cancelOperation(
@@ -1729,6 +1770,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.cancelOperation(request, options, callback);
   }
   getServerConfig(
@@ -1809,6 +1851,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getServerConfig(request, options, callback);
   }
   listNodePools(
@@ -1893,6 +1936,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listNodePools(request, options, callback);
   }
   getNodePool(
@@ -1981,6 +2025,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getNodePool(request, options, callback);
   }
   createNodePool(
@@ -2068,6 +2113,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createNodePool(request, options, callback);
   }
   deleteNodePool(
@@ -2156,6 +2202,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteNodePool(request, options, callback);
   }
   rollbackNodePoolUpgrade(
@@ -2254,6 +2301,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.rollbackNodePoolUpgrade(
       request,
       options,
@@ -2349,6 +2397,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setNodePoolManagement(
       request,
       options,
@@ -2446,6 +2495,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setLabels(request, options, callback);
   }
   setLegacyAbac(
@@ -2532,6 +2582,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setLegacyAbac(request, options, callback);
   }
   startIPRotation(
@@ -2618,6 +2669,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.startIPRotation(request, options, callback);
   }
   completeIPRotation(
@@ -2703,6 +2755,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.completeIPRotation(request, options, callback);
   }
   setNodePoolSize(
@@ -2793,6 +2846,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setNodePoolSize(request, options, callback);
   }
   setNetworkPolicy(
@@ -2879,6 +2933,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setNetworkPolicy(request, options, callback);
   }
   setMaintenancePolicy(
@@ -2965,6 +3020,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.setMaintenancePolicy(request, options, callback);
   }
 
@@ -3063,6 +3119,7 @@ export class ClusterManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listUsableSubnetworks(
       request,
       options,
@@ -3120,6 +3177,7 @@ export class ClusterManagerClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listUsableSubnetworks.createStream(
       this._innerApiCalls.listUsableSubnetworks as gax.GaxCall,
       request,
@@ -3133,8 +3191,9 @@ export class ClusterManagerClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.clusterManagerStub.then(stub => {
+      return this.clusterManagerStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
