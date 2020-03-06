@@ -86,6 +86,26 @@ describe('v1beta1.SecretManagerServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new secretmanagerserviceModule.v1beta1.SecretManagerServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.secretManagerServiceStub, undefined);
+    await client.initialize();
+    assert(client.secretManagerServiceStub);
+  });
+  it('has close method', () => {
+    const client = new secretmanagerserviceModule.v1beta1.SecretManagerServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('createSecret', () => {
     it('invokes createSecret without error', done => {
       const client = new secretmanagerserviceModule.v1beta1.SecretManagerServiceClient(
@@ -94,6 +114,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.ICreateSecretRequest = {};
       request.parent = '';
@@ -119,6 +141,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.ICreateSecretRequest = {};
       request.parent = '';
@@ -146,6 +170,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IAddSecretVersionRequest = {};
       request.parent = '';
@@ -171,6 +197,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IAddSecretVersionRequest = {};
       request.parent = '';
@@ -198,6 +226,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IGetSecretRequest = {};
       request.name = '';
@@ -223,6 +253,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IGetSecretRequest = {};
       request.name = '';
@@ -250,6 +282,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IUpdateSecretRequest = {};
       request.secret = {};
@@ -276,6 +310,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IUpdateSecretRequest = {};
       request.secret = {};
@@ -304,6 +340,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDeleteSecretRequest = {};
       request.name = '';
@@ -329,6 +367,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDeleteSecretRequest = {};
       request.name = '';
@@ -356,6 +396,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IGetSecretVersionRequest = {};
       request.name = '';
@@ -381,6 +423,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IGetSecretVersionRequest = {};
       request.name = '';
@@ -408,6 +452,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IAccessSecretVersionRequest = {};
       request.name = '';
@@ -433,6 +479,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IAccessSecretVersionRequest = {};
       request.name = '';
@@ -460,6 +508,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDisableSecretVersionRequest = {};
       request.name = '';
@@ -485,6 +535,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDisableSecretVersionRequest = {};
       request.name = '';
@@ -512,6 +564,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IEnableSecretVersionRequest = {};
       request.name = '';
@@ -537,6 +591,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IEnableSecretVersionRequest = {};
       request.name = '';
@@ -564,6 +620,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDestroySecretVersionRequest = {};
       request.name = '';
@@ -589,6 +647,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDestroySecretVersionRequest = {};
       request.name = '';
@@ -616,6 +676,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -641,6 +703,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -668,6 +732,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -693,6 +759,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -720,6 +788,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -745,6 +815,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -772,6 +844,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IListSecretsRequest = {};
       request.parent = '';
@@ -801,6 +875,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IListSecretsRequest = {};
       request.parent = '';
@@ -835,6 +911,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IListSecretVersionsRequest = {};
       request.parent = '';
@@ -864,6 +942,8 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IListSecretVersionsRequest = {};
       request.parent = '';

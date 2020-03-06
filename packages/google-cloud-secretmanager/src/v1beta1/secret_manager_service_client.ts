@@ -40,8 +40,8 @@ const version = require('../../../package.json').version;
  *  Manages secrets and operations using those secrets. Implements a REST
  *  model with the following objects:
  *
- *  * [Secret][google.cloud.secrets.v1beta1.Secret]
- *  * [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion]
+ *  * {@link google.cloud.secrets.v1beta1.Secret|Secret}
+ *  * {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}
  * @class
  * @memberof v1beta1
  */
@@ -50,8 +50,13 @@ export class SecretManagerServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  secretManagerServiceStub: Promise<{[name: string]: Function}>;
+  secretManagerServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SecretManagerServiceClient.
@@ -75,8 +80,6 @@ export class SecretManagerServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -106,26 +109,29 @@ export class SecretManagerServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this
       .constructor as typeof SecretManagerServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -141,7 +147,7 @@ export class SecretManagerServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -149,10 +155,10 @@ export class SecretManagerServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      secretPathTemplate: new gaxModule.PathTemplate(
+      secretPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}'
       ),
-      secretVersionPathTemplate: new gaxModule.PathTemplate(
+      secretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{secret_version}'
       ),
     };
@@ -161,12 +167,12 @@ export class SecretManagerServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listSecrets: new gaxModule.PageDescriptor(
+      listSecrets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'secrets'
       ),
-      listSecretVersions: new gaxModule.PageDescriptor(
+      listSecretVersions: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'versions'
@@ -174,7 +180,7 @@ export class SecretManagerServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.secrets.v1beta1.SecretManagerService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -185,17 +191,36 @@ export class SecretManagerServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.secretManagerServiceStub) {
+      return this.secretManagerServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.secrets.v1beta1.SecretManagerService.
-    this.secretManagerServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.secretManagerServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.secrets.v1beta1.SecretManagerService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.secrets.v1beta1.SecretManagerService,
-      opts
+          (this._protos as any).google.cloud.secrets.v1beta1
+            .SecretManagerService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -231,9 +256,9 @@ export class SecretManagerServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -247,6 +272,8 @@ export class SecretManagerServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.secretManagerServiceStub;
   }
 
   /**
@@ -319,17 +346,17 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Creates a new [Secret][google.cloud.secrets.v1beta1.Secret] containing no [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion].
+   * Creates a new {@link google.cloud.secrets.v1beta1.Secret|Secret} containing no {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersions}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project to associate with the
-   *   [Secret][google.cloud.secrets.v1beta1.Secret], in the format `projects/*`.
+   *   {@link google.cloud.secrets.v1beta1.Secret|Secret}, in the format `projects/*`.
    * @param {string} request.secretId
    *   Required. This must be unique within the project.
    * @param {google.cloud.secrets.v1beta1.Secret} request.secret
-   *   A [Secret][google.cloud.secrets.v1beta1.Secret] with initial field values.
+   *   A {@link google.cloud.secrets.v1beta1.Secret|Secret} with initial field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -374,6 +401,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createSecret(request, options, callback);
   }
   addSecretVersion(
@@ -400,16 +428,16 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Creates a new [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] containing secret data and attaches
-   * it to an existing [Secret][google.cloud.secrets.v1beta1.Secret].
+   * Creates a new {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} containing secret data and attaches
+   * it to an existing {@link google.cloud.secrets.v1beta1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret] to associate with the
-   *   [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] in the format `projects/* /secrets/*`.
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.Secret|Secret} to associate with the
+   *   {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} in the format `projects/* /secrets/*`.
    * @param {google.cloud.secrets.v1beta1.SecretPayload} request.payload
-   *   Required. The secret payload of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+   *   Required. The secret payload of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -458,6 +486,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.addSecretVersion(request, options, callback);
   }
   getSecret(
@@ -480,12 +509,12 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Gets metadata for a given [Secret][google.cloud.secrets.v1beta1.Secret].
+   * Gets metadata for a given {@link google.cloud.secrets.v1beta1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret], in the format `projects/* /secrets/*`.
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.Secret|Secret}, in the format `projects/* /secrets/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -530,6 +559,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getSecret(request, options, callback);
   }
   updateSecret(
@@ -552,12 +582,12 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Updates metadata of an existing [Secret][google.cloud.secrets.v1beta1.Secret].
+   * Updates metadata of an existing {@link google.cloud.secrets.v1beta1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.secrets.v1beta1.Secret} request.secret
-   *   Required. [Secret][google.cloud.secrets.v1beta1.Secret] with updated field values.
+   *   Required. {@link google.cloud.secrets.v1beta1.Secret|Secret} with updated field values.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Specifies the fields to be updated.
    * @param {object} [options]
@@ -604,6 +634,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       'secret.name': request.secret!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateSecret(request, options, callback);
   }
   deleteSecret(
@@ -626,12 +657,12 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Deletes a [Secret][google.cloud.secrets.v1beta1.Secret].
+   * Deletes a {@link google.cloud.secrets.v1beta1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret] to delete in the format
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.Secret|Secret} to delete in the format
    *   `projects/* /secrets/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -677,6 +708,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteSecret(request, options, callback);
   }
   getSecretVersion(
@@ -703,18 +735,18 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Gets metadata for a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+   * Gets metadata for a {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}.
    *
    * `projects/* /secrets/* /versions/latest` is an alias to the `latest`
-   * [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+   * {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] in the format
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/* /versions/*`.
    *   `projects/* /secrets/* /versions/latest` is an alias to the `latest`
-   *   [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+   *   {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -763,6 +795,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getSecretVersion(request, options, callback);
   }
   accessSecretVersion(
@@ -789,15 +822,15 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Accesses a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion]. This call returns the secret data.
+   * Accesses a {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}. This call returns the secret data.
    *
    * `projects/* /secrets/* /versions/latest` is an alias to the `latest`
-   * [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+   * {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] in the format
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/* /versions/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -847,6 +880,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.accessSecretVersion(request, options, callback);
   }
   disableSecretVersion(
@@ -873,15 +907,15 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Disables a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+   * Disables a {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}.
    *
-   * Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-   * [DISABLED][google.cloud.secrets.v1beta1.SecretVersion.State.DISABLED].
+   * Sets the {@link google.cloud.secrets.v1beta1.SecretVersion.state|state} of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} to
+   * {@link google.cloud.secrets.v1beta1.SecretVersion.State.DISABLED|DISABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to disable in the format
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} to disable in the format
    *   `projects/* /secrets/* /versions/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -931,6 +965,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.disableSecretVersion(request, options, callback);
   }
   enableSecretVersion(
@@ -957,15 +992,15 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Enables a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+   * Enables a {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}.
    *
-   * Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-   * [ENABLED][google.cloud.secrets.v1beta1.SecretVersion.State.ENABLED].
+   * Sets the {@link google.cloud.secrets.v1beta1.SecretVersion.state|state} of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} to
+   * {@link google.cloud.secrets.v1beta1.SecretVersion.State.ENABLED|ENABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to enable in the format
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} to enable in the format
    *   `projects/* /secrets/* /versions/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1015,6 +1050,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.enableSecretVersion(request, options, callback);
   }
   destroySecretVersion(
@@ -1041,16 +1077,16 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Destroys a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+   * Destroys a {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion}.
    *
-   * Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-   * [DESTROYED][google.cloud.secrets.v1beta1.SecretVersion.State.DESTROYED] and irrevocably destroys the
+   * Sets the {@link google.cloud.secrets.v1beta1.SecretVersion.state|state} of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} to
+   * {@link google.cloud.secrets.v1beta1.SecretVersion.State.DESTROYED|DESTROYED} and irrevocably destroys the
    * secret data.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to destroy in the format
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersion} to destroy in the format
    *   `projects/* /secrets/* /versions/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1100,6 +1136,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.destroySecretVersion(request, options, callback);
   }
   setIamPolicy(
@@ -1125,8 +1162,8 @@ export class SecretManagerServiceClient {
    * Sets the access control policy on the specified secret. Replaces any
    * existing policy.
    *
-   * Permissions on [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] are enforced according
-   * to the policy set on the associated [Secret][google.cloud.secrets.v1beta1.Secret].
+   * Permissions on {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersions} are enforced according
+   * to the policy set on the associated {@link google.cloud.secrets.v1beta1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1173,6 +1210,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.setIamPolicy(request, options, callback);
   }
   getIamPolicy(
@@ -1243,6 +1281,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
   testIamPermissions(
@@ -1318,6 +1357,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.testIamPermissions(request, options, callback);
   }
 
@@ -1341,20 +1381,20 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Lists [Secrets][google.cloud.secrets.v1beta1.Secret].
+   * Lists {@link google.cloud.secrets.v1beta1.Secret|Secrets}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   [Secrets][google.cloud.secrets.v1beta1.Secret], in the format `projects/*`.
+   *   {@link google.cloud.secrets.v1beta1.Secret|Secrets}, in the format `projects/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
    *   number is greater than 25000, it is capped at 25000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
-   *   [ListSecretsResponse.next_page_token][google.cloud.secrets.v1beta1.ListSecretsResponse.next_page_token].
+   *   {@link google.cloud.secrets.v1beta1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1410,6 +1450,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listSecrets(request, options, callback);
   }
 
@@ -1430,14 +1471,14 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   [Secrets][google.cloud.secrets.v1beta1.Secret], in the format `projects/*`.
+   *   {@link google.cloud.secrets.v1beta1.Secret|Secrets}, in the format `projects/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
    *   number is greater than 25000, it is capped at 25000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
-   *   [ListSecretsResponse.next_page_token][google.cloud.secrets.v1beta1.ListSecretsResponse.next_page_token].
+   *   {@link google.cloud.secrets.v1beta1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1457,6 +1498,7 @@ export class SecretManagerServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listSecrets.createStream(
       this._innerApiCalls.listSecrets as gax.GaxCall,
       request,
@@ -1483,14 +1525,14 @@ export class SecretManagerServiceClient {
     >
   ): void;
   /**
-   * Lists [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion]. This call does not return secret
+   * Lists {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersions}. This call does not return secret
    * data.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret] associated with the
-   *   [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] to list, in the format
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.Secret|Secret} associated with the
+   *   {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersions} to list, in the format
    *   `projects/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
@@ -1554,6 +1596,7 @@ export class SecretManagerServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listSecretVersions(request, options, callback);
   }
 
@@ -1573,8 +1616,8 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret] associated with the
-   *   [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] to list, in the format
+   *   Required. The resource name of the {@link google.cloud.secrets.v1beta1.Secret|Secret} associated with the
+   *   {@link google.cloud.secrets.v1beta1.SecretVersion|SecretVersions} to list, in the format
    *   `projects/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
@@ -1602,6 +1645,7 @@ export class SecretManagerServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listSecretVersions.createStream(
       this._innerApiCalls.listSecretVersions as gax.GaxCall,
       request,
@@ -1709,8 +1753,9 @@ export class SecretManagerServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.secretManagerServiceStub.then(stub => {
+      return this.secretManagerServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
