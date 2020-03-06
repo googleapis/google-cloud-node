@@ -83,12 +83,30 @@ describe('v1.CloudSchedulerClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudSchedulerStub, undefined);
+    await client.initialize();
+    assert(client.cloudSchedulerStub);
+  });
+  it('has close method', () => {
+    const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getJob', () => {
     it('invokes getJob without error', done => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IGetJobRequest = {};
       request.name = '';
@@ -112,6 +130,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IGetJobRequest = {};
       request.name = '';
@@ -133,6 +153,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.ICreateJobRequest = {};
       request.parent = '';
@@ -156,6 +178,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.ICreateJobRequest = {};
       request.parent = '';
@@ -181,6 +205,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest = {};
       request.job = {};
@@ -205,6 +231,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest = {};
       request.job = {};
@@ -231,6 +259,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest = {};
       request.name = '';
@@ -254,6 +284,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest = {};
       request.name = '';
@@ -279,6 +311,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IPauseJobRequest = {};
       request.name = '';
@@ -302,6 +336,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IPauseJobRequest = {};
       request.name = '';
@@ -327,6 +363,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IResumeJobRequest = {};
       request.name = '';
@@ -350,6 +388,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IResumeJobRequest = {};
       request.name = '';
@@ -375,6 +415,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IRunJobRequest = {};
       request.name = '';
@@ -398,6 +440,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IRunJobRequest = {};
       request.name = '';
@@ -419,6 +463,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IListJobsRequest = {};
       request.parent = '';
@@ -446,6 +492,8 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IListJobsRequest = {};
       request.parent = '';
