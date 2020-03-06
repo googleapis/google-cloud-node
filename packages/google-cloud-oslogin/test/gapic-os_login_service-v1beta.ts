@@ -83,12 +83,30 @@ describe('v1beta.OsLoginServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.osLoginServiceStub, undefined);
+    await client.initialize();
+    assert(client.osLoginServiceStub);
+  });
+  it('has close method', () => {
+    const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('deletePosixAccount', () => {
     it('invokes deletePosixAccount without error', done => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IDeletePosixAccountRequest = {};
       request.name = '';
@@ -112,6 +130,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IDeletePosixAccountRequest = {};
       request.name = '';
@@ -137,6 +157,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest = {};
       request.name = '';
@@ -160,6 +182,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest = {};
       request.name = '';
@@ -185,6 +209,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IGetLoginProfileRequest = {};
       request.name = '';
@@ -208,6 +234,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IGetLoginProfileRequest = {};
       request.name = '';
@@ -233,6 +261,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest = {};
       request.name = '';
@@ -281,6 +313,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest = {};
       request.parent = '';
@@ -304,6 +338,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest = {};
       request.parent = '';
@@ -329,6 +365,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest = {};
       request.name = '';
@@ -352,6 +390,8 @@ describe('v1beta.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest = {};
       request.name = '';

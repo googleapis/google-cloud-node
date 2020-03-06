@@ -44,8 +44,13 @@ export class OsLoginServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  osLoginServiceStub: Promise<{[name: string]: Function}>;
+  osLoginServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of OsLoginServiceClient.
@@ -69,8 +74,6 @@ export class OsLoginServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -100,25 +103,28 @@ export class OsLoginServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof OsLoginServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -134,7 +140,7 @@ export class OsLoginServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -142,17 +148,17 @@ export class OsLoginServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      posixAccountPathTemplate: new gaxModule.PathTemplate(
+      posixAccountPathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/projects/{project}'
       ),
-      sshPublicKeyPathTemplate: new gaxModule.PathTemplate(
+      sshPublicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/sshPublicKeys/{fingerprint}'
       ),
-      userPathTemplate: new gaxModule.PathTemplate('users/{user}'),
+      userPathTemplate: new this._gaxModule.PathTemplate('users/{user}'),
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.oslogin.v1.OsLoginService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -163,17 +169,35 @@ export class OsLoginServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.osLoginServiceStub) {
+      return this.osLoginServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.oslogin.v1.OsLoginService.
-    this.osLoginServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.osLoginServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.oslogin.v1.OsLoginService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.oslogin.v1.OsLoginService,
-      opts
+          (this._protos as any).google.cloud.oslogin.v1.OsLoginService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -200,9 +224,9 @@ export class OsLoginServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -216,6 +240,8 @@ export class OsLoginServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.osLoginServiceStub;
   }
 
   /**
@@ -351,6 +377,7 @@ export class OsLoginServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deletePosixAccount(request, options, callback);
   }
   deleteSshPublicKey(
@@ -433,6 +460,7 @@ export class OsLoginServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteSshPublicKey(request, options, callback);
   }
   getLoginProfile(
@@ -510,6 +538,7 @@ export class OsLoginServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getLoginProfile(request, options, callback);
   }
   getSshPublicKey(
@@ -584,6 +613,7 @@ export class OsLoginServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getSshPublicKey(request, options, callback);
   }
   importSshPublicKey(
@@ -670,6 +700,7 @@ export class OsLoginServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.importSshPublicKey(request, options, callback);
   }
   updateSshPublicKey(
@@ -757,6 +788,7 @@ export class OsLoginServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateSshPublicKey(request, options, callback);
   }
 
@@ -869,8 +901,9 @@ export class OsLoginServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.osLoginServiceStub.then(stub => {
+      return this.osLoginServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
