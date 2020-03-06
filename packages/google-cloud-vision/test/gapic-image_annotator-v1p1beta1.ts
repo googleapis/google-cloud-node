@@ -83,12 +83,30 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new imageannotatorModule.v1p1beta1.ImageAnnotatorClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.imageAnnotatorStub, undefined);
+    await client.initialize();
+    assert(client.imageAnnotatorStub);
+  });
+  it('has close method', () => {
+    const client = new imageannotatorModule.v1p1beta1.ImageAnnotatorClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('batchAnnotateImages', () => {
     it('invokes batchAnnotateImages without error', done => {
       const client = new imageannotatorModule.v1p1beta1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesRequest = {};
       // Mock response
@@ -111,6 +129,8 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesRequest = {};
       // Mock response

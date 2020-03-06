@@ -39,16 +39,16 @@ const version = require('../../../package.json').version;
  *  Manages Products and ProductSets of reference images for use in product
  *  search. It uses the following resource model:
  *
- *  - The API has a collection of [ProductSet][google.cloud.vision.v1p3beta1.ProductSet] resources, named
+ *  - The API has a collection of {@link google.cloud.vision.v1p3beta1.ProductSet|ProductSet} resources, named
  *  `projects/* /locations/* /productSets/*`, which acts as a way to put different
  *  products into groups to limit identification.
  *
  *  In parallel,
  *
- *  - The API has a collection of [Product][google.cloud.vision.v1p3beta1.Product] resources, named
+ *  - The API has a collection of {@link google.cloud.vision.v1p3beta1.Product|Product} resources, named
  *    `projects/* /locations/* /products/*`
  *
- *  - Each [Product][google.cloud.vision.v1p3beta1.Product] has a collection of [ReferenceImage][google.cloud.vision.v1p3beta1.ReferenceImage] resources, named
+ *  - Each {@link google.cloud.vision.v1p3beta1.Product|Product} has a collection of {@link google.cloud.vision.v1p3beta1.ReferenceImage|ReferenceImage} resources, named
  *    `projects/* /locations/* /products/* /referenceImages/*`
  * @class
  * @memberof v1p3beta1
@@ -58,9 +58,14 @@ export class ProductSearchClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  productSearchStub: Promise<{[name: string]: Function}>;
+  productSearchStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ProductSearchClient.
@@ -84,8 +89,6 @@ export class ProductSearchClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -115,25 +118,28 @@ export class ProductSearchClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof ProductSearchClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -149,7 +155,7 @@ export class ProductSearchClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -157,16 +163,16 @@ export class ProductSearchClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      locationPathTemplate: new gaxModule.PathTemplate(
+      locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      productPathTemplate: new gaxModule.PathTemplate(
+      productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/products/{product}'
       ),
-      productSetPathTemplate: new gaxModule.PathTemplate(
+      productSetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/productSets/{product_set}'
       ),
-      referenceImagePathTemplate: new gaxModule.PathTemplate(
+      referenceImagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/products/{product}/referenceImages/{reference_image}'
       ),
     };
@@ -175,22 +181,22 @@ export class ProductSearchClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listProductSets: new gaxModule.PageDescriptor(
+      listProductSets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'productSets'
       ),
-      listProducts: new gaxModule.PageDescriptor(
+      listProducts: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'products'
       ),
-      listReferenceImages: new gaxModule.PageDescriptor(
+      listReferenceImages: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'referenceImages'
       ),
-      listProductsInProductSet: new gaxModule.PageDescriptor(
+      listProductsInProductSet: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'products'
@@ -201,13 +207,15 @@ export class ProductSearchClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const importProductSetsResponse = protoFilesRoot.lookup(
@@ -218,7 +226,7 @@ export class ProductSearchClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      importProductSets: new gaxModule.LongrunningDescriptor(
+      importProductSets: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importProductSetsResponse.decode.bind(importProductSetsResponse),
         importProductSetsMetadata.decode.bind(importProductSetsMetadata)
@@ -226,7 +234,7 @@ export class ProductSearchClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.vision.v1p3beta1.ProductSearch',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -237,17 +245,35 @@ export class ProductSearchClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.productSearchStub) {
+      return this.productSearchStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.vision.v1p3beta1.ProductSearch.
-    this.productSearchStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.productSearchStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.vision.v1p3beta1.ProductSearch'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.vision.v1p3beta1.ProductSearch,
-      opts
+          (this._protos as any).google.cloud.vision.v1p3beta1.ProductSearch,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -286,9 +312,9 @@ export class ProductSearchClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -302,6 +328,8 @@ export class ProductSearchClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.productSearchStub;
   }
 
   /**
@@ -449,6 +477,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createProductSet(request, options, callback);
   }
   getProductSet(
@@ -536,6 +565,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getProductSet(request, options, callback);
   }
   updateProductSet(
@@ -576,7 +606,7 @@ export class ProductSearchClient {
    * @param {google.cloud.vision.v1p3beta1.ProductSet} request.productSet
    *   Required. The ProductSet resource which replaces the one on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The [FieldMask][google.protobuf.FieldMask] that specifies which fields to
+   *   The {@link google.protobuf.FieldMask|FieldMask} that specifies which fields to
    *   update.
    *   If update_mask isn't specified, all mutable fields are to be updated.
    *   Valid mask path is `display_name`.
@@ -628,6 +658,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       'product_set.name': request.productSet!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateProductSet(request, options, callback);
   }
   deleteProductSet(
@@ -718,6 +749,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteProductSet(request, options, callback);
   }
   createProduct(
@@ -815,6 +847,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createProduct(request, options, callback);
   }
   getProduct(
@@ -894,6 +927,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getProduct(request, options, callback);
   }
   updateProduct(
@@ -941,7 +975,7 @@ export class ProductSearchClient {
    *   Required. The Product resource which replaces the one on the server.
    *   product.name is immutable.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The [FieldMask][google.protobuf.FieldMask] that specifies which fields
+   *   The {@link google.protobuf.FieldMask|FieldMask} that specifies which fields
    *   to update.
    *   If update_mask isn't specified, all mutable fields are to be updated.
    *   Valid mask paths include `product_labels`, `display_name`, and
@@ -994,6 +1028,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       'product.name': request.product!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateProduct(request, options, callback);
   }
   deleteProduct(
@@ -1085,6 +1120,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteProduct(request, options, callback);
   }
   createReferenceImage(
@@ -1194,6 +1230,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createReferenceImage(request, options, callback);
   }
   deleteReferenceImage(
@@ -1288,6 +1325,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteReferenceImage(request, options, callback);
   }
   getReferenceImage(
@@ -1376,6 +1414,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getReferenceImage(request, options, callback);
   }
   addProductToProductSet(
@@ -1471,6 +1510,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.addProductToProductSet(
       request,
       options,
@@ -1567,6 +1607,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.removeProductFromProductSet(
       request,
       options,
@@ -1603,14 +1644,14 @@ export class ProductSearchClient {
    * Asynchronous API that imports a list of reference images to specified
    * product sets based on a list of image information.
    *
-   * The [google.longrunning.Operation][google.longrunning.Operation] API can be
+   * The {@link google.longrunning.Operation|google.longrunning.Operation} API can be
    * used to keep track of the progress and results of the request.
    * `Operation.metadata` contains `BatchOperationMetadata`. (progress)
    * `Operation.response` contains `ImportProductSetsResponse`. (results)
    *
    * The input source of this method is a csv file on Google Cloud Storage.
    * For the format of the csv file please see
-   * [ImportProductSetsGcsSource.csv_file_uri][google.cloud.vision.v1p3beta1.ImportProductSetsGcsSource.csv_file_uri].
+   * {@link google.cloud.vision.v1p3beta1.ImportProductSetsGcsSource.csv_file_uri|ImportProductSetsGcsSource.csv_file_uri}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1672,6 +1713,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.importProductSets(request, options, callback);
   }
   listProductSets(
@@ -1766,6 +1808,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listProductSets(request, options, callback);
   }
 
@@ -1811,6 +1854,7 @@ export class ProductSearchClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listProductSets.createStream(
       this._innerApiCalls.listProductSets as gax.GaxCall,
       request,
@@ -1909,6 +1953,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listProducts(request, options, callback);
   }
 
@@ -1955,6 +2000,7 @@ export class ProductSearchClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listProducts.createStream(
       this._innerApiCalls.listProducts as gax.GaxCall,
       request,
@@ -2058,6 +2104,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listReferenceImages(request, options, callback);
   }
 
@@ -2107,6 +2154,7 @@ export class ProductSearchClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listReferenceImages.createStream(
       this._innerApiCalls.listReferenceImages as gax.GaxCall,
       request,
@@ -2207,6 +2255,7 @@ export class ProductSearchClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.listProductsInProductSet(
       request,
       options,
@@ -2257,6 +2306,7 @@ export class ProductSearchClient {
       name: request.name || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listProductsInProductSet.createStream(
       this._innerApiCalls.listProductsInProductSet as gax.GaxCall,
       request,
@@ -2486,8 +2536,9 @@ export class ProductSearchClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.productSearchStub.then(stub => {
+      return this.productSearchStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -44,9 +44,14 @@ export class ImageAnnotatorClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  imageAnnotatorStub: Promise<{[name: string]: Function}>;
+  imageAnnotatorStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ImageAnnotatorClient.
@@ -70,8 +75,6 @@ export class ImageAnnotatorClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -101,25 +104,28 @@ export class ImageAnnotatorClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof ImageAnnotatorClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -135,7 +141,7 @@ export class ImageAnnotatorClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -143,13 +149,13 @@ export class ImageAnnotatorClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      productPathTemplate: new gaxModule.PathTemplate(
+      productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/products/{product}'
       ),
-      productSetPathTemplate: new gaxModule.PathTemplate(
+      productSetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/productSets/{product_set}'
       ),
-      referenceImagePathTemplate: new gaxModule.PathTemplate(
+      referenceImagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/products/{product}/referenceImages/{reference_image}'
       ),
     };
@@ -158,13 +164,15 @@ export class ImageAnnotatorClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const asyncBatchAnnotateFilesResponse = protoFilesRoot.lookup(
@@ -175,7 +183,7 @@ export class ImageAnnotatorClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      asyncBatchAnnotateFiles: new gaxModule.LongrunningDescriptor(
+      asyncBatchAnnotateFiles: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         asyncBatchAnnotateFilesResponse.decode.bind(
           asyncBatchAnnotateFilesResponse
@@ -187,7 +195,7 @@ export class ImageAnnotatorClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.vision.v1p3beta1.ImageAnnotator',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -198,17 +206,35 @@ export class ImageAnnotatorClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.imageAnnotatorStub) {
+      return this.imageAnnotatorStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.vision.v1p3beta1.ImageAnnotator.
-    this.imageAnnotatorStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.imageAnnotatorStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.vision.v1p3beta1.ImageAnnotator'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.vision.v1p3beta1.ImageAnnotator,
-      opts
+          (this._protos as any).google.cloud.vision.v1p3beta1.ImageAnnotator,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -231,9 +257,9 @@ export class ImageAnnotatorClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -247,6 +273,8 @@ export class ImageAnnotatorClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.imageAnnotatorStub;
   }
 
   /**
@@ -373,6 +401,7 @@ export class ImageAnnotatorClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.batchAnnotateImages(request, options, callback);
   }
 
@@ -458,6 +487,7 @@ export class ImageAnnotatorClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.asyncBatchAnnotateFiles(
       request,
       options,
@@ -650,8 +680,9 @@ export class ImageAnnotatorClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.imageAnnotatorStub.then(stub => {
+      return this.imageAnnotatorStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

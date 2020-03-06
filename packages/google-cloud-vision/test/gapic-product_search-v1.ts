@@ -102,12 +102,30 @@ describe('v1.ProductSearchClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new productsearchModule.v1.ProductSearchClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.productSearchStub, undefined);
+    await client.initialize();
+    assert(client.productSearchStub);
+  });
+  it('has close method', () => {
+    const client = new productsearchModule.v1.ProductSearchClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createProductSet', () => {
     it('invokes createProductSet without error', done => {
       const client = new productsearchModule.v1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.ICreateProductSetRequest = {};
       request.parent = '';
@@ -131,6 +149,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.ICreateProductSetRequest = {};
       request.parent = '';
@@ -156,6 +176,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IGetProductSetRequest = {};
       request.name = '';
@@ -179,6 +201,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IGetProductSetRequest = {};
       request.name = '';
@@ -204,6 +228,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IUpdateProductSetRequest = {};
       request.productSet = {};
@@ -228,6 +254,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IUpdateProductSetRequest = {};
       request.productSet = {};
@@ -254,6 +282,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IDeleteProductSetRequest = {};
       request.name = '';
@@ -277,6 +307,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IDeleteProductSetRequest = {};
       request.name = '';
@@ -302,6 +334,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.ICreateProductRequest = {};
       request.parent = '';
@@ -325,6 +359,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.ICreateProductRequest = {};
       request.parent = '';
@@ -350,6 +386,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IGetProductRequest = {};
       request.name = '';
@@ -373,6 +411,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IGetProductRequest = {};
       request.name = '';
@@ -398,6 +438,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IUpdateProductRequest = {};
       request.product = {};
@@ -422,6 +464,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IUpdateProductRequest = {};
       request.product = {};
@@ -448,6 +492,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IDeleteProductRequest = {};
       request.name = '';
@@ -471,6 +517,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IDeleteProductRequest = {};
       request.name = '';
@@ -496,6 +544,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.ICreateReferenceImageRequest = {};
       request.parent = '';
@@ -519,6 +569,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.ICreateReferenceImageRequest = {};
       request.parent = '';
@@ -544,6 +596,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IDeleteReferenceImageRequest = {};
       request.name = '';
@@ -567,6 +621,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IDeleteReferenceImageRequest = {};
       request.name = '';
@@ -592,6 +648,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IGetReferenceImageRequest = {};
       request.name = '';
@@ -615,6 +673,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IGetReferenceImageRequest = {};
       request.name = '';
@@ -640,6 +700,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IAddProductToProductSetRequest = {};
       request.name = '';
@@ -663,6 +725,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IAddProductToProductSetRequest = {};
       request.name = '';
@@ -688,6 +752,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IRemoveProductFromProductSetRequest = {};
       request.name = '';
@@ -711,6 +777,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IRemoveProductFromProductSetRequest = {};
       request.name = '';
@@ -739,6 +807,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IImportProductSetsRequest = {};
       request.parent = '';
@@ -769,6 +839,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IImportProductSetsRequest = {};
       request.parent = '';
@@ -802,6 +874,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IPurgeProductsRequest = {};
       request.parent = '';
@@ -832,6 +906,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IPurgeProductsRequest = {};
       request.parent = '';
@@ -865,6 +941,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IListProductSetsRequest = {};
       request.parent = '';
@@ -892,6 +970,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IListProductSetsRequest = {};
       request.parent = '';
@@ -924,6 +1004,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IListProductsRequest = {};
       request.parent = '';
@@ -951,6 +1033,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IListProductsRequest = {};
       request.parent = '';
@@ -983,6 +1067,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IListReferenceImagesRequest = {};
       request.parent = '';
@@ -1010,6 +1096,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IListReferenceImagesRequest = {};
       request.parent = '';
@@ -1042,6 +1130,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IListProductsInProductSetRequest = {};
       request.name = '';
@@ -1072,6 +1162,8 @@ describe('v1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.vision.v1.IListProductsInProductSetRequest = {};
       request.name = '';
