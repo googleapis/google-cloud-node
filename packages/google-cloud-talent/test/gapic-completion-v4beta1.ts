@@ -81,12 +81,30 @@ describe('v4beta1.CompletionClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new completionModule.v4beta1.CompletionClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.completionStub, undefined);
+    await client.initialize();
+    assert(client.completionStub);
+  });
+  it('has close method', () => {
+    const client = new completionModule.v4beta1.CompletionClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('completeQuery', () => {
     it('invokes completeQuery without error', done => {
       const client = new completionModule.v4beta1.CompletionClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICompleteQueryRequest = {};
       request.parent = '';
@@ -110,6 +128,8 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICompleteQueryRequest = {};
       request.parent = '';

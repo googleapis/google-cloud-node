@@ -44,8 +44,13 @@ export class CompanyServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  companyServiceStub: Promise<{[name: string]: Function}>;
+  companyServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CompanyServiceClient.
@@ -69,8 +74,6 @@ export class CompanyServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -100,25 +103,28 @@ export class CompanyServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof CompanyServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -134,7 +140,7 @@ export class CompanyServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -142,26 +148,28 @@ export class CompanyServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      applicationPathTemplate: new gaxModule.PathTemplate(
+      applicationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
       ),
-      profilePathTemplate: new gaxModule.PathTemplate(
+      profilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      projectCompanyPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectCompanyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/companies/{company}'
       ),
-      projectJobPathTemplate: new gaxModule.PathTemplate(
+      projectJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/jobs/{job}'
       ),
-      projectTenantCompanyPathTemplate: new gaxModule.PathTemplate(
+      projectTenantCompanyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/companies/{company}'
       ),
-      projectTenantJobPathTemplate: new gaxModule.PathTemplate(
+      projectTenantJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/jobs/{job}'
       ),
-      tenantPathTemplate: new gaxModule.PathTemplate(
+      tenantPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}'
       ),
     };
@@ -170,7 +178,7 @@ export class CompanyServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listCompanies: new gaxModule.PageDescriptor(
+      listCompanies: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'companies'
@@ -178,7 +186,7 @@ export class CompanyServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.talent.v4beta1.CompanyService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -189,17 +197,35 @@ export class CompanyServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.companyServiceStub) {
+      return this.companyServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.talent.v4beta1.CompanyService.
-    this.companyServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.companyServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.talent.v4beta1.CompanyService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.talent.v4beta1.CompanyService,
-      opts
+          (this._protos as any).google.cloud.talent.v4beta1.CompanyService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -225,9 +251,9 @@ export class CompanyServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -241,6 +267,8 @@ export class CompanyServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.companyServiceStub;
   }
 
   /**
@@ -372,6 +400,7 @@ export class CompanyServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createCompany(request, options, callback);
   }
   getCompany(
@@ -451,6 +480,7 @@ export class CompanyServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getCompany(request, options, callback);
   }
   updateCompany(
@@ -482,11 +512,11 @@ export class CompanyServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Strongly recommended for the best service experience.
    *
-   *   If [update_mask][google.cloud.talent.v4beta1.UpdateCompanyRequest.update_mask] is provided, only the specified fields in
-   *   [company][google.cloud.talent.v4beta1.UpdateCompanyRequest.company] are updated. Otherwise all the fields are updated.
+   *   If {@link google.cloud.talent.v4beta1.UpdateCompanyRequest.update_mask|update_mask} is provided, only the specified fields in
+   *   {@link google.cloud.talent.v4beta1.UpdateCompanyRequest.company|company} are updated. Otherwise all the fields are updated.
    *
    *   A field mask to specify the company fields to be updated. Only
-   *   top level fields of [Company][google.cloud.talent.v4beta1.Company] are supported.
+   *   top level fields of {@link google.cloud.talent.v4beta1.Company|Company} are supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -531,6 +561,7 @@ export class CompanyServiceClient {
     ] = gax.routingHeader.fromParams({
       'company.name': request.company!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateCompany(request, options, callback);
   }
   deleteCompany(
@@ -611,6 +642,7 @@ export class CompanyServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteCompany(request, options, callback);
   }
 
@@ -656,7 +688,7 @@ export class CompanyServiceClient {
    *
    *   Defaults to false.
    *
-   *   If true, at most [page_size][google.cloud.talent.v4beta1.ListCompaniesRequest.page_size] of companies are fetched, among which
+   *   If true, at most {@link google.cloud.talent.v4beta1.ListCompaniesRequest.page_size|page_size} of companies are fetched, among which
    *   only those with open jobs are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -713,6 +745,7 @@ export class CompanyServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listCompanies(request, options, callback);
   }
 
@@ -749,7 +782,7 @@ export class CompanyServiceClient {
    *
    *   Defaults to false.
    *
-   *   If true, at most [page_size][google.cloud.talent.v4beta1.ListCompaniesRequest.page_size] of companies are fetched, among which
+   *   If true, at most {@link google.cloud.talent.v4beta1.ListCompaniesRequest.page_size|page_size} of companies are fetched, among which
    *   only those with open jobs are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -770,6 +803,7 @@ export class CompanyServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listCompanies.createStream(
       this._innerApiCalls.listCompanies as gax.GaxCall,
       request,
@@ -1152,8 +1186,9 @@ export class CompanyServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.companyServiceStub.then(stub => {
+      return this.companyServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

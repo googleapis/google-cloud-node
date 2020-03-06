@@ -45,8 +45,13 @@ export class ProfileServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  profileServiceStub: Promise<{[name: string]: Function}>;
+  profileServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ProfileServiceClient.
@@ -70,8 +75,6 @@ export class ProfileServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -101,25 +104,28 @@ export class ProfileServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof ProfileServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -135,7 +141,7 @@ export class ProfileServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -143,25 +149,25 @@ export class ProfileServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      applicationPathTemplate: new gaxModule.PathTemplate(
+      applicationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
       ),
-      profilePathTemplate: new gaxModule.PathTemplate(
+      profilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}'
       ),
-      projectCompanyPathTemplate: new gaxModule.PathTemplate(
+      projectCompanyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/companies/{company}'
       ),
-      projectJobPathTemplate: new gaxModule.PathTemplate(
+      projectJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/jobs/{job}'
       ),
-      projectTenantCompanyPathTemplate: new gaxModule.PathTemplate(
+      projectTenantCompanyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/companies/{company}'
       ),
-      projectTenantJobPathTemplate: new gaxModule.PathTemplate(
+      projectTenantJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/jobs/{job}'
       ),
-      tenantPathTemplate: new gaxModule.PathTemplate(
+      tenantPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}'
       ),
     };
@@ -170,7 +176,7 @@ export class ProfileServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listProfiles: new gaxModule.PageDescriptor(
+      listProfiles: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'profiles'
@@ -178,7 +184,7 @@ export class ProfileServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.talent.v4beta1.ProfileService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -189,17 +195,35 @@ export class ProfileServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.profileServiceStub) {
+      return this.profileServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.talent.v4beta1.ProfileService.
-    this.profileServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.profileServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.talent.v4beta1.ProfileService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.talent.v4beta1.ProfileService,
-      opts
+          (this._protos as any).google.cloud.talent.v4beta1.ProfileService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -226,9 +250,9 @@ export class ProfileServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -242,6 +266,8 @@ export class ProfileServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.profileServiceStub;
   }
 
   /**
@@ -372,6 +398,7 @@ export class ProfileServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createProfile(request, options, callback);
   }
   getProfile(
@@ -448,6 +475,7 @@ export class ProfileServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getProfile(request, options, callback);
   }
   updateProfile(
@@ -573,6 +601,7 @@ export class ProfileServiceClient {
     ] = gax.routingHeader.fromParams({
       'profile.name': request.profile!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateProfile(request, options, callback);
   }
   deleteProfile(
@@ -651,6 +680,7 @@ export class ProfileServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteProfile(request, options, callback);
   }
   searchProfiles(
@@ -682,7 +712,7 @@ export class ProfileServiceClient {
    * For example, search by raw queries "software engineer in Mountain View" or
    * search by structured filters (location filter, education filter, etc.).
    *
-   * See [SearchProfilesRequest][google.cloud.talent.v4beta1.SearchProfilesRequest] for more information.
+   * See {@link google.cloud.talent.v4beta1.SearchProfilesRequest|SearchProfilesRequest} for more information.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -696,7 +726,7 @@ export class ProfileServiceClient {
    *   to improve the search quality of the service. These values are provided by
    *   users, and must be precise and consistent.
    * @param {google.cloud.talent.v4beta1.ProfileQuery} request.profileQuery
-   *   Search query to execute. See [ProfileQuery][google.cloud.talent.v4beta1.ProfileQuery] for more details.
+   *   Search query to execute. See {@link google.cloud.talent.v4beta1.ProfileQuery|ProfileQuery} for more details.
    * @param {number} request.pageSize
    *   A limit on the number of profiles returned in the search results.
    *   A value above the default value 10 can increase search response time.
@@ -706,13 +736,13 @@ export class ProfileServiceClient {
    *   The pageToken, similar to offset enables users of the API to paginate
    *   through the search results. To retrieve the first page of results, set the
    *   pageToken to empty. The search response includes a
-   *   [nextPageToken][google.cloud.talent.v4beta1.SearchProfilesResponse.next_page_token] field that can be
+   *   {@link google.cloud.talent.v4beta1.SearchProfilesResponse.next_page_token|nextPageToken} field that can be
    *   used to populate the pageToken field for the next page of results. Using
    *   pageToken instead of offset increases the performance of the API,
    *   especially compared to larger offset values.
    * @param {number} request.offset
    *   An integer that specifies the current offset (that is, starting result) in
-   *   search results. This field is only considered if [page_token][google.cloud.talent.v4beta1.SearchProfilesRequest.page_token] is unset.
+   *   search results. This field is only considered if {@link google.cloud.talent.v4beta1.SearchProfilesRequest.page_token|page_token} is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -732,17 +762,17 @@ export class ProfileServiceClient {
    *
    *   * "relevance desc": By descending relevance, as determined by the API
    *      algorithms.
-   *   * "update_date desc": Sort by [Profile.update_time][google.cloud.talent.v4beta1.Profile.update_time] in descending order
+   *   * "update_date desc": Sort by {@link google.cloud.talent.v4beta1.Profile.update_time|Profile.update_time} in descending order
    *     (recently updated profiles first).
-   *   * "create_date desc": Sort by [Profile.create_time][google.cloud.talent.v4beta1.Profile.create_time] in descending order
+   *   * "create_date desc": Sort by {@link google.cloud.talent.v4beta1.Profile.create_time|Profile.create_time} in descending order
    *     (recently created profiles first).
-   *   * "first_name": Sort by [PersonName.PersonStructuredName.given_name][google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name] in
+   *   * "first_name": Sort by {@link google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name|PersonName.PersonStructuredName.given_name} in
    *     ascending order.
-   *   * "first_name desc": Sort by [PersonName.PersonStructuredName.given_name][google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name]
+   *   * "first_name desc": Sort by {@link google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name|PersonName.PersonStructuredName.given_name}
    *     in descending order.
-   *   * "last_name": Sort by [PersonName.PersonStructuredName.family_name][google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name] in
+   *   * "last_name": Sort by {@link google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name|PersonName.PersonStructuredName.family_name} in
    *     ascending order.
-   *   * "last_name desc": Sort by [PersonName.PersonStructuredName.family_name][google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name]
+   *   * "last_name desc": Sort by {@link google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name|PersonName.PersonStructuredName.family_name}
    *     in ascending order.
    * @param {boolean} request.caseSensitiveSort
    *   When sort by field is based on alphabetical order, sort values case
@@ -750,7 +780,7 @@ export class ProfileServiceClient {
    *   is case in-sensitive sort (false).
    * @param {number[]} request.histogramQueries
    *   A list of expressions specifies histogram requests against matching
-   *   profiles for [SearchProfilesRequest][google.cloud.talent.v4beta1.SearchProfilesRequest].
+   *   profiles for {@link google.cloud.talent.v4beta1.SearchProfilesRequest|SearchProfilesRequest}.
    *
    *   The expression syntax looks like a function definition with parameters.
    *
@@ -758,7 +788,7 @@ export class ProfileServiceClient {
    *
    *   Data types:
    *
-   *   * Histogram facet: facet names with format [a-zA-Z][a-zA-Z0-9_]+.
+   *   * Histogram facet: facet names with format {@link a-zA-Z0-9_|a-zA-Z}+.
    *   * String: string like "any string with backslash escape for quote(\")."
    *   * Number: whole number and floating point number like 10, -1 and -0.01.
    *   * List: list of elements with comma(,) separator surrounded by square
@@ -802,13 +832,13 @@ export class ProfileServiceClient {
    *   * experience_in_months: experience in months. 0 means 0 month to 1 month
    *   (exclusive).
    *   * application_date: The application date specifies application start dates.
-   *   See [ApplicationDateFilter][google.cloud.talent.v4beta1.ApplicationDateFilter] for more details.
+   *   See {@link google.cloud.talent.v4beta1.ApplicationDateFilter|ApplicationDateFilter} for more details.
    *   * application_outcome_notes: The application outcome reason specifies the
    *   reasons behind the outcome of the job application.
-   *   See [ApplicationOutcomeNotesFilter][google.cloud.talent.v4beta1.ApplicationOutcomeNotesFilter] for more details.
+   *   See {@link google.cloud.talent.v4beta1.ApplicationOutcomeNotesFilter|ApplicationOutcomeNotesFilter} for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
-   *   See [ApplicationJobFilter][google.cloud.talent.v4beta1.ApplicationJobFilter] for more details.
+   *   See {@link google.cloud.talent.v4beta1.ApplicationJobFilter|ApplicationJobFilter} for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].
@@ -825,25 +855,25 @@ export class ProfileServiceClient {
    *   [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])
    * @param {string} request.resultSetId
    *   An id that uniquely identifies the result set of a
-   *   [SearchProfiles][google.cloud.talent.v4beta1.ProfileService.SearchProfiles] call. The id should be
+   *   {@link google.cloud.talent.v4beta1.ProfileService.SearchProfiles|SearchProfiles} call. The id should be
    *   retrieved from the
-   *   [SearchProfilesResponse][google.cloud.talent.v4beta1.SearchProfilesResponse] message returned from a previous
-   *   invocation of [SearchProfiles][google.cloud.talent.v4beta1.ProfileService.SearchProfiles].
+   *   {@link google.cloud.talent.v4beta1.SearchProfilesResponse|SearchProfilesResponse} message returned from a previous
+   *   invocation of {@link google.cloud.talent.v4beta1.ProfileService.SearchProfiles|SearchProfiles}.
    *
    *   A result set is an ordered list of search results.
    *
    *   If this field is not set, a new result set is computed based on the
-   *   [profile_query][google.cloud.talent.v4beta1.SearchProfilesRequest.profile_query].  A new [result_set_id][google.cloud.talent.v4beta1.SearchProfilesRequest.result_set_id] is returned as a handle to
+   *   {@link google.cloud.talent.v4beta1.SearchProfilesRequest.profile_query|profile_query}.  A new {@link google.cloud.talent.v4beta1.SearchProfilesRequest.result_set_id|result_set_id} is returned as a handle to
    *   access this result set.
    *
    *   If this field is set, the service will ignore the resource and
-   *   [profile_query][google.cloud.talent.v4beta1.SearchProfilesRequest.profile_query] values, and simply retrieve a page of results from the
-   *   corresponding result set.  In this case, one and only one of [page_token][google.cloud.talent.v4beta1.SearchProfilesRequest.page_token]
-   *   or [offset][google.cloud.talent.v4beta1.SearchProfilesRequest.offset] must be set.
+   *   {@link google.cloud.talent.v4beta1.SearchProfilesRequest.profile_query|profile_query} values, and simply retrieve a page of results from the
+   *   corresponding result set.  In this case, one and only one of {@link google.cloud.talent.v4beta1.SearchProfilesRequest.page_token|page_token}
+   *   or {@link google.cloud.talent.v4beta1.SearchProfilesRequest.offset|offset} must be set.
    *
-   *   A typical use case is to invoke [SearchProfilesRequest][google.cloud.talent.v4beta1.SearchProfilesRequest] without this
-   *   field, then use the resulting [result_set_id][google.cloud.talent.v4beta1.SearchProfilesRequest.result_set_id] in
-   *   [SearchProfilesResponse][google.cloud.talent.v4beta1.SearchProfilesResponse] to page through the results.
+   *   A typical use case is to invoke {@link google.cloud.talent.v4beta1.SearchProfilesRequest|SearchProfilesRequest} without this
+   *   field, then use the resulting {@link google.cloud.talent.v4beta1.SearchProfilesRequest.result_set_id|result_set_id} in
+   *   {@link google.cloud.talent.v4beta1.SearchProfilesResponse|SearchProfilesResponse} to page through the results.
    * @param {boolean} request.strictKeywordsSearch
    *   This flag is used to indicate whether the service will attempt to
    *   understand synonyms and terms related to the search query or treat the
@@ -906,6 +936,7 @@ export class ProfileServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.searchProfiles(request, options, callback);
   }
 
@@ -959,7 +990,7 @@ export class ProfileServiceClient {
    * @param {string} request.pageToken
    *   The token that specifies the current offset (that is, starting result).
    *
-   *   Please set the value to [ListProfilesResponse.next_page_token][google.cloud.talent.v4beta1.ListProfilesResponse.next_page_token] to
+   *   Please set the value to {@link google.cloud.talent.v4beta1.ListProfilesResponse.next_page_token|ListProfilesResponse.next_page_token} to
    *   continue the list.
    * @param {number} request.pageSize
    *   The maximum number of profiles to be returned, at most 100.
@@ -1027,6 +1058,7 @@ export class ProfileServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listProfiles(request, options, callback);
   }
 
@@ -1071,7 +1103,7 @@ export class ProfileServiceClient {
    * @param {string} request.pageToken
    *   The token that specifies the current offset (that is, starting result).
    *
-   *   Please set the value to [ListProfilesResponse.next_page_token][google.cloud.talent.v4beta1.ListProfilesResponse.next_page_token] to
+   *   Please set the value to {@link google.cloud.talent.v4beta1.ListProfilesResponse.next_page_token|ListProfilesResponse.next_page_token} to
    *   continue the list.
    * @param {number} request.pageSize
    *   The maximum number of profiles to be returned, at most 100.
@@ -1103,6 +1135,7 @@ export class ProfileServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listProfiles.createStream(
       this._innerApiCalls.listProfiles as gax.GaxCall,
       request,
@@ -1462,8 +1495,9 @@ export class ProfileServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.profileServiceStub.then(stub => {
+      return this.profileServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

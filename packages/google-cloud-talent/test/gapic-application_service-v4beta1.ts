@@ -85,6 +85,26 @@ describe('v4beta1.ApplicationServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.applicationServiceStub, undefined);
+    await client.initialize();
+    assert(client.applicationServiceStub);
+  });
+  it('has close method', () => {
+    const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('createApplication', () => {
     it('invokes createApplication without error', done => {
       const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
@@ -93,6 +113,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest = {};
       request.parent = '';
@@ -118,6 +140,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest = {};
       request.parent = '';
@@ -145,6 +169,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest = {};
       request.name = '';
@@ -170,6 +196,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest = {};
       request.name = '';
@@ -197,6 +225,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest = {};
       request.application = {};
@@ -223,6 +253,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest = {};
       request.application = {};
@@ -251,6 +283,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest = {};
       request.name = '';
@@ -276,6 +310,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest = {};
       request.name = '';
@@ -303,6 +339,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest = {};
       request.parent = '';
@@ -332,6 +370,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest = {};
       request.parent = '';

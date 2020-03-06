@@ -83,12 +83,30 @@ describe('v4beta1.EventServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new eventserviceModule.v4beta1.EventServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.eventServiceStub, undefined);
+    await client.initialize();
+    assert(client.eventServiceStub);
+  });
+  it('has close method', () => {
+    const client = new eventserviceModule.v4beta1.EventServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createClientEvent', () => {
     it('invokes createClientEvent without error', done => {
       const client = new eventserviceModule.v4beta1.EventServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICreateClientEventRequest = {};
       request.parent = '';
@@ -112,6 +130,8 @@ describe('v4beta1.EventServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICreateClientEventRequest = {};
       request.parent = '';

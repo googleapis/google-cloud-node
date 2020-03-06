@@ -83,12 +83,30 @@ describe('v4beta1.ProfileServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.profileServiceStub, undefined);
+    await client.initialize();
+    assert(client.profileServiceStub);
+  });
+  it('has close method', () => {
+    const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createProfile', () => {
     it('invokes createProfile without error', done => {
       const client = new profileserviceModule.v4beta1.ProfileServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest = {};
       request.parent = '';
@@ -112,6 +130,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest = {};
       request.parent = '';
@@ -137,6 +157,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest = {};
       request.name = '';
@@ -160,6 +182,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest = {};
       request.name = '';
@@ -185,6 +209,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest = {};
       request.profile = {};
@@ -209,6 +235,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest = {};
       request.profile = {};
@@ -235,6 +263,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest = {};
       request.name = '';
@@ -258,6 +288,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest = {};
       request.name = '';
@@ -283,6 +315,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest = {};
       request.parent = '';
@@ -306,6 +340,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest = {};
       request.parent = '';
@@ -331,6 +367,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest = {};
       request.parent = '';
@@ -358,6 +396,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest = {};
       request.parent = '';

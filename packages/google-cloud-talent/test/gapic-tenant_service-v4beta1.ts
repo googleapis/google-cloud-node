@@ -83,12 +83,30 @@ describe('v4beta1.TenantServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new tenantserviceModule.v4beta1.TenantServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.tenantServiceStub, undefined);
+    await client.initialize();
+    assert(client.tenantServiceStub);
+  });
+  it('has close method', () => {
+    const client = new tenantserviceModule.v4beta1.TenantServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createTenant', () => {
     it('invokes createTenant without error', done => {
       const client = new tenantserviceModule.v4beta1.TenantServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICreateTenantRequest = {};
       request.parent = '';
@@ -112,6 +130,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.ICreateTenantRequest = {};
       request.parent = '';
@@ -137,6 +157,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IGetTenantRequest = {};
       request.name = '';
@@ -160,6 +182,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IGetTenantRequest = {};
       request.name = '';
@@ -185,6 +209,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IUpdateTenantRequest = {};
       request.tenant = {};
@@ -209,6 +235,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IUpdateTenantRequest = {};
       request.tenant = {};
@@ -235,6 +263,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IDeleteTenantRequest = {};
       request.name = '';
@@ -258,6 +288,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IDeleteTenantRequest = {};
       request.name = '';
@@ -283,6 +315,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IListTenantsRequest = {};
       request.parent = '';
@@ -310,6 +344,8 @@ describe('v4beta1.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.talent.v4beta1.IListTenantsRequest = {};
       request.parent = '';
