@@ -85,6 +85,26 @@ describe('v1.KeyManagementServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new keymanagementserviceModule.v1.KeyManagementServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.keyManagementServiceStub, undefined);
+    await client.initialize();
+    assert(client.keyManagementServiceStub);
+  });
+  it('has close method', () => {
+    const client = new keymanagementserviceModule.v1.KeyManagementServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('getKeyRing', () => {
     it('invokes getKeyRing without error', done => {
       const client = new keymanagementserviceModule.v1.KeyManagementServiceClient(
@@ -93,6 +113,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetKeyRingRequest = {};
       request.name = '';
@@ -118,6 +140,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetKeyRingRequest = {};
       request.name = '';
@@ -145,6 +169,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest = {};
       request.name = '';
@@ -170,6 +196,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest = {};
       request.name = '';
@@ -197,6 +225,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest = {};
       request.name = '';
@@ -222,6 +252,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest = {};
       request.name = '';
@@ -249,6 +281,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest = {};
       request.name = '';
@@ -274,6 +308,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest = {};
       request.name = '';
@@ -301,6 +337,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetImportJobRequest = {};
       request.name = '';
@@ -326,6 +364,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IGetImportJobRequest = {};
       request.name = '';
@@ -353,6 +393,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest = {};
       request.parent = '';
@@ -378,6 +420,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest = {};
       request.parent = '';
@@ -405,6 +449,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest = {};
       request.parent = '';
@@ -430,6 +476,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest = {};
       request.parent = '';
@@ -457,6 +505,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest = {};
       request.parent = '';
@@ -482,6 +532,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest = {};
       request.parent = '';
@@ -509,6 +561,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest = {};
       request.parent = '';
@@ -534,6 +588,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest = {};
       request.parent = '';
@@ -561,6 +617,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.ICreateImportJobRequest = {};
       request.parent = '';
@@ -586,6 +644,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.ICreateImportJobRequest = {};
       request.parent = '';
@@ -613,6 +673,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest = {};
       request.cryptoKey = {};
@@ -639,6 +701,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest = {};
       request.cryptoKey = {};
@@ -667,6 +731,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest = {};
       request.cryptoKeyVersion = {};
@@ -693,6 +759,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest = {};
       request.cryptoKeyVersion = {};
@@ -721,6 +789,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IEncryptRequest = {};
       request.name = '';
@@ -746,6 +816,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IEncryptRequest = {};
       request.name = '';
@@ -773,6 +845,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IDecryptRequest = {};
       request.name = '';
@@ -798,6 +872,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IDecryptRequest = {};
       request.name = '';
@@ -825,6 +901,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest = {};
       request.name = '';
@@ -850,6 +928,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest = {};
       request.name = '';
@@ -877,6 +957,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest = {};
       request.name = '';
@@ -902,6 +984,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest = {};
       request.name = '';
@@ -929,6 +1013,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest = {};
       request.name = '';
@@ -954,6 +1040,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest = {};
       request.name = '';
@@ -984,6 +1072,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest = {};
       request.name = '';
@@ -1009,6 +1099,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest = {};
       request.name = '';
@@ -1039,6 +1131,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest = {};
       request.name = '';
@@ -1064,6 +1158,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest = {};
       request.name = '';
@@ -1094,6 +1190,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IListKeyRingsRequest = {};
       request.parent = '';
@@ -1123,6 +1221,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IListKeyRingsRequest = {};
       request.parent = '';
@@ -1157,6 +1257,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest = {};
       request.parent = '';
@@ -1186,6 +1288,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest = {};
       request.parent = '';
@@ -1220,6 +1324,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest = {};
       request.parent = '';
@@ -1249,6 +1355,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest = {};
       request.parent = '';
@@ -1283,6 +1391,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IListImportJobsRequest = {};
       request.parent = '';
@@ -1312,6 +1422,8 @@ describe('v1.KeyManagementServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.kms.v1.IListImportJobsRequest = {};
       request.parent = '';

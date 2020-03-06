@@ -41,10 +41,10 @@ const version = require('../../../package.json').version;
  *  Manages cryptographic keys and operations using those keys. Implements a REST
  *  model with the following objects:
  *
- *  * [KeyRing][google.cloud.kms.v1.KeyRing]
- *  * [CryptoKey][google.cloud.kms.v1.CryptoKey]
- *  * [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
- *  * [ImportJob][google.cloud.kms.v1.ImportJob]
+ *  * {@link google.cloud.kms.v1.KeyRing|KeyRing}
+ *  * {@link google.cloud.kms.v1.CryptoKey|CryptoKey}
+ *  * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+ *  * {@link google.cloud.kms.v1.ImportJob|ImportJob}
  *
  *  If you are using manual gRPC libraries, see
  *  [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
@@ -57,8 +57,13 @@ export class KeyManagementServiceClient {
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _iamClient: IamClient;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  keyManagementServiceStub: Promise<{[name: string]: Function}>;
+  keyManagementServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of KeyManagementServiceClient.
@@ -82,8 +87,6 @@ export class KeyManagementServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -113,27 +116,30 @@ export class KeyManagementServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this
       .constructor as typeof KeyManagementServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     this._iamClient = new IamClient(opts);
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -149,7 +155,7 @@ export class KeyManagementServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -157,19 +163,19 @@ export class KeyManagementServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      cryptoKeyPathTemplate: new gaxModule.PathTemplate(
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
-      cryptoKeyVersionPathTemplate: new gaxModule.PathTemplate(
+      cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
       ),
-      importJobPathTemplate: new gaxModule.PathTemplate(
+      importJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}'
       ),
-      keyRingPathTemplate: new gaxModule.PathTemplate(
+      keyRingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}'
       ),
-      locationPathTemplate: new gaxModule.PathTemplate(
+      locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
     };
@@ -178,22 +184,22 @@ export class KeyManagementServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listKeyRings: new gaxModule.PageDescriptor(
+      listKeyRings: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'keyRings'
       ),
-      listCryptoKeys: new gaxModule.PageDescriptor(
+      listCryptoKeys: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'cryptoKeys'
       ),
-      listCryptoKeyVersions: new gaxModule.PageDescriptor(
+      listCryptoKeyVersions: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'cryptoKeyVersions'
       ),
-      listImportJobs: new gaxModule.PageDescriptor(
+      listImportJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'importJobs'
@@ -201,7 +207,7 @@ export class KeyManagementServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.kms.v1.KeyManagementService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -212,17 +218,35 @@ export class KeyManagementServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.keyManagementServiceStub) {
+      return this.keyManagementServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.kms.v1.KeyManagementService.
-    this.keyManagementServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.keyManagementServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.kms.v1.KeyManagementService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.kms.v1.KeyManagementService,
-      opts
+          (this._protos as any).google.cloud.kms.v1.KeyManagementService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -266,9 +290,9 @@ export class KeyManagementServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -282,6 +306,8 @@ export class KeyManagementServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.keyManagementServiceStub;
   }
 
   /**
@@ -357,12 +383,12 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Returns metadata for a given [KeyRing][google.cloud.kms.v1.KeyRing].
+   * Returns metadata for a given {@link google.cloud.kms.v1.KeyRing|KeyRing}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v1.KeyRing] to get.
+   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -406,6 +432,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getKeyRing(request, options, callback);
   }
   getCryptoKey(
@@ -428,13 +455,13 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its
-   * [primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].
+   * Returns metadata for a given {@link google.cloud.kms.v1.CryptoKey|CryptoKey}, as well as its
+   * {@link google.cloud.kms.v1.CryptoKey.primary|primary} {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to get.
+   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -478,6 +505,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getCryptoKey(request, options, callback);
   }
   getCryptoKeyVersion(
@@ -500,12 +528,12 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].
+   * Returns metadata for a given {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to get.
+   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -550,6 +578,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getCryptoKeyVersion(request, options, callback);
   }
   getPublicKey(
@@ -572,15 +601,15 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
-   * [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
-   * [ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or
-   * [ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].
+   * Returns the public key for the given {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. The
+   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
+   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN|ASYMMETRIC_SIGN} or
+   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT|ASYMMETRIC_DECRYPT}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key to
+   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} public key to
    *   get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -625,6 +654,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getPublicKey(request, options, callback);
   }
   getImportJob(
@@ -647,12 +677,12 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].
+   * Returns metadata for a given {@link google.cloud.kms.v1.ImportJob|ImportJob}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The [name][google.cloud.kms.v1.ImportJob.name] of the [ImportJob][google.cloud.kms.v1.ImportJob] to get.
+   *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the {@link google.cloud.kms.v1.ImportJob|ImportJob} to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -696,6 +726,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getImportJob(request, options, callback);
   }
   createKeyRing(
@@ -718,18 +749,18 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Create a new [KeyRing][google.cloud.kms.v1.KeyRing] in a given Project and Location.
+   * Create a new {@link google.cloud.kms.v1.KeyRing|KeyRing} in a given Project and Location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   [KeyRings][google.cloud.kms.v1.KeyRing], in the format `projects/* /locations/*`.
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format `projects/* /locations/*`.
    * @param {string} request.keyRingId
    *   Required. It must be unique within a location and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {google.cloud.kms.v1.KeyRing} request.keyRing
-   *   Required. A [KeyRing][google.cloud.kms.v1.KeyRing] with initial field values.
+   *   Required. A {@link google.cloud.kms.v1.KeyRing|KeyRing} with initial field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -773,6 +804,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createKeyRing(request, options, callback);
   }
   createCryptoKey(
@@ -795,28 +827,28 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Create a new [CryptoKey][google.cloud.kms.v1.CryptoKey] within a [KeyRing][google.cloud.kms.v1.KeyRing].
+   * Create a new {@link google.cloud.kms.v1.CryptoKey|CryptoKey} within a {@link google.cloud.kms.v1.KeyRing|KeyRing}.
    *
-   * [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] and
-   * [CryptoKey.version_template.algorithm][google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm]
+   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} and
+   * {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm|CryptoKey.version_template.algorithm}
    * are required.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The [name][google.cloud.kms.v1.KeyRing.name] of the KeyRing associated with the
-   *   [CryptoKeys][google.cloud.kms.v1.CryptoKey].
+   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the KeyRing associated with the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys}.
    * @param {string} request.cryptoKeyId
    *   Required. It must be unique within a KeyRing and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {google.cloud.kms.v1.CryptoKey} request.cryptoKey
-   *   Required. A [CryptoKey][google.cloud.kms.v1.CryptoKey] with initial field values.
+   *   Required. A {@link google.cloud.kms.v1.CryptoKey|CryptoKey} with initial field values.
    * @param {boolean} request.skipInitialVersionCreation
-   *   If set to true, the request will create a [CryptoKey][google.cloud.kms.v1.CryptoKey] without any
-   *   [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion]. You must manually call
-   *   [CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion] or
-   *   [ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion]
-   *   before you can use this [CryptoKey][google.cloud.kms.v1.CryptoKey].
+   *   If set to true, the request will create a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} without any
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}. You must manually call
+   *   {@link google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion|CreateCryptoKeyVersion} or
+   *   {@link google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion|ImportCryptoKeyVersion}
+   *   before you can use this {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -860,6 +892,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createCryptoKey(request, options, callback);
   }
   createCryptoKeyVersion(
@@ -886,19 +919,19 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Create a new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in a [CryptoKey][google.cloud.kms.v1.CryptoKey].
+   * Create a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * The server will assign the next sequential id. If unset,
-   * [state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to
-   * [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED].
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will be set to
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED|ENABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] associated with
-   *   the [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion].
+   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} associated with
+   *   the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}.
    * @param {google.cloud.kms.v1.CryptoKeyVersion} request.cryptoKeyVersion
-   *   Required. A [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with initial field values.
+   *   Required. A {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with initial field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -947,6 +980,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createCryptoKeyVersion(
       request,
       options,
@@ -977,35 +1011,35 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Imports a new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] into an existing [CryptoKey][google.cloud.kms.v1.CryptoKey] using the
+   * Imports a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} into an existing {@link google.cloud.kms.v1.CryptoKey|CryptoKey} using the
    * wrapped key material provided in the request.
    *
    * The version ID will be assigned the next sequential id within the
-   * [CryptoKey][google.cloud.kms.v1.CryptoKey].
+   * {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to
+   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to
    *   be imported into.
    * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm} request.algorithm
-   *   Required. The [algorithm][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm] of
+   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|algorithm} of
    *   the key being imported. This does not need to match the
-   *   [version_template][google.cloud.kms.v1.CryptoKey.version_template] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] this
+   *   {@link google.cloud.kms.v1.CryptoKey.version_template|version_template} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} this
    *   version imports into.
    * @param {string} request.importJob
-   *   Required. The [name][google.cloud.kms.v1.ImportJob.name] of the [ImportJob][google.cloud.kms.v1.ImportJob] that was used to
+   *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the {@link google.cloud.kms.v1.ImportJob|ImportJob} that was used to
    *   wrap this key material.
    * @param {Buffer} request.rsaAesWrappedKey
    *   Wrapped key material produced with
-   *   [RSA_OAEP_3072_SHA1_AES_256][google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256]
+   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256|RSA_OAEP_3072_SHA1_AES_256}
    *   or
-   *   [RSA_OAEP_4096_SHA1_AES_256][google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA1_AES_256].
+   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA1_AES_256|RSA_OAEP_4096_SHA1_AES_256}.
    *
    *   This field contains the concatenation of two wrapped keys:
    *   <ol>
    *     <li>An ephemeral AES-256 wrapping key wrapped with the
-   *         [public_key][google.cloud.kms.v1.ImportJob.public_key] using RSAES-OAEP with SHA-1,
+   *         {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using RSAES-OAEP with SHA-1,
    *         MGF1 with SHA-1, and an empty label.
    *     </li>
    *     <li>The key to be imported, wrapped with the ephemeral AES-256 key
@@ -1068,6 +1102,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.importCryptoKeyVersion(
       request,
       options,
@@ -1094,20 +1129,20 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Create a new [ImportJob][google.cloud.kms.v1.ImportJob] within a [KeyRing][google.cloud.kms.v1.KeyRing].
+   * Create a new {@link google.cloud.kms.v1.ImportJob|ImportJob} within a {@link google.cloud.kms.v1.KeyRing|KeyRing}.
    *
-   * [ImportJob.import_method][google.cloud.kms.v1.ImportJob.import_method] is required.
+   * {@link google.cloud.kms.v1.ImportJob.import_method|ImportJob.import_method} is required.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v1.KeyRing] associated with the
-   *   [ImportJobs][google.cloud.kms.v1.ImportJob].
+   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the {@link google.cloud.kms.v1.KeyRing|KeyRing} associated with the
+   *   {@link google.cloud.kms.v1.ImportJob|ImportJobs}.
    * @param {string} request.importJobId
    *   Required. It must be unique within a KeyRing and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {google.cloud.kms.v1.ImportJob} request.importJob
-   *   Required. An [ImportJob][google.cloud.kms.v1.ImportJob] with initial field values.
+   *   Required. An {@link google.cloud.kms.v1.ImportJob|ImportJob} with initial field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1151,6 +1186,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createImportJob(request, options, callback);
   }
   updateCryptoKey(
@@ -1173,12 +1209,12 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Update a [CryptoKey][google.cloud.kms.v1.CryptoKey].
+   * Update a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.kms.v1.CryptoKey} request.cryptoKey
-   *   Required. [CryptoKey][google.cloud.kms.v1.CryptoKey] with updated values.
+   *   Required. {@link google.cloud.kms.v1.CryptoKey|CryptoKey} with updated values.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. List of fields to be updated in this request.
    * @param {object} [options]
@@ -1224,6 +1260,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       'crypto_key.name': request.cryptoKey!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateCryptoKey(request, options, callback);
   }
   updateCryptoKeyVersion(
@@ -1250,18 +1287,18 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Update a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]'s metadata.
+   * Update a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s metadata.
    *
-   * [state][google.cloud.kms.v1.CryptoKeyVersion.state] may be changed between
-   * [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED] and
-   * [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED] using this
-   * method. See [DestroyCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion] and [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] to
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} may be changed between
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED|ENABLED} and
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED} using this
+   * method. See {@link google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion|DestroyCryptoKeyVersion} and {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion} to
    * move between other states.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.kms.v1.CryptoKeyVersion} request.cryptoKeyVersion
-   *   Required. [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with updated values.
+   *   Required. {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with updated values.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. List of fields to be updated in this request.
    * @param {object} [options]
@@ -1312,6 +1349,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       'crypto_key_version.name': request.cryptoKeyVersion!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateCryptoKeyVersion(
       request,
       options,
@@ -1338,35 +1376,35 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt].
-   * The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
-   * [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
+   * Encrypts data, so that it can only be recovered by a call to {@link google.cloud.kms.v1.KeyManagementService.Decrypt|Decrypt}.
+   * The {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
+   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] or [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} or {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
    *   to use for encryption.
    *
-   *   If a [CryptoKey][google.cloud.kms.v1.CryptoKey] is specified, the server will use its
-   *   [primary version][google.cloud.kms.v1.CryptoKey.primary].
+   *   If a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} is specified, the server will use its
+   *   {@link google.cloud.kms.v1.CryptoKey.primary|primary version}.
    * @param {Buffer} request.plaintext
    *   Required. The data to encrypt. Must be no larger than 64KiB.
    *
    *   The maximum size depends on the key version's
-   *   [protection_level][google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level]. For
-   *   [SOFTWARE][google.cloud.kms.v1.ProtectionLevel.SOFTWARE] keys, the plaintext must be no larger
-   *   than 64KiB. For [HSM][google.cloud.kms.v1.ProtectionLevel.HSM] keys, the combined length of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}. For
+   *   {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the plaintext must be no larger
+   *   than 64KiB. For {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of the
    *   plaintext and additional_authenticated_data fields must be no larger than
    *   8KiB.
    * @param {Buffer} [request.additionalAuthenticatedData]
    *   Optional. Optional data that, if specified, must also be provided during decryption
-   *   through [DecryptRequest.additional_authenticated_data][google.cloud.kms.v1.DecryptRequest.additional_authenticated_data].
+   *   through {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}.
    *
    *   The maximum size depends on the key version's
-   *   [protection_level][google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level]. For
-   *   [SOFTWARE][google.cloud.kms.v1.ProtectionLevel.SOFTWARE] keys, the AAD must be no larger than
-   *   64KiB. For [HSM][google.cloud.kms.v1.ProtectionLevel.HSM] keys, the combined length of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}. For
+   *   {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the AAD must be no larger than
+   *   64KiB. For {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of the
    *   plaintext and additional_authenticated_data fields must be no larger than
    *   8KiB.
    * @param {object} [options]
@@ -1412,6 +1450,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.encrypt(request, options, callback);
   }
   decrypt(
@@ -1434,20 +1473,20 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Decrypts data that was protected by [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
-   * must be [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
+   * Decrypts data that was protected by {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}. The {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
+   * must be {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to use for decryption.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to use for decryption.
    *   The server will choose the appropriate version.
    * @param {Buffer} request.ciphertext
    *   Required. The encrypted data originally returned in
-   *   [EncryptResponse.ciphertext][google.cloud.kms.v1.EncryptResponse.ciphertext].
+   *   {@link google.cloud.kms.v1.EncryptResponse.ciphertext|EncryptResponse.ciphertext}.
    * @param {Buffer} [request.additionalAuthenticatedData]
    *   Optional. Optional data that must match the data originally supplied in
-   *   [EncryptRequest.additional_authenticated_data][google.cloud.kms.v1.EncryptRequest.additional_authenticated_data].
+   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1491,6 +1530,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.decrypt(request, options, callback);
   }
   asymmetricSign(
@@ -1513,18 +1553,18 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
+   * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
    * ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-   * key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey].
+   * key retrieved from {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to use for signing.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for signing.
    * @param {google.cloud.kms.v1.Digest} request.digest
    *   Required. The digest of the data to sign. The digest must be produced with
    *   the same digest algorithm as specified by the key version's
-   *   [algorithm][google.cloud.kms.v1.CryptoKeyVersion.algorithm].
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion.algorithm|algorithm}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1568,6 +1608,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.asymmetricSign(request, options, callback);
   }
   asymmetricDecrypt(
@@ -1591,16 +1632,16 @@ export class KeyManagementServiceClient {
   ): void;
   /**
    * Decrypts data that was encrypted with a public key retrieved from
-   * [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with
-   * [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] ASYMMETRIC_DECRYPT.
+   * {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey} corresponding to a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
+   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} ASYMMETRIC_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to use for
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
    *   decryption.
    * @param {Buffer} request.ciphertext
-   *   Required. The data encrypted with the named [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]'s public
+   *   Required. The data encrypted with the named {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s public
    *   key using OAEP.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1645,6 +1686,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.asymmetricDecrypt(request, options, callback);
   }
   updateCryptoKeyPrimaryVersion(
@@ -1671,16 +1713,16 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Update the version of a [CryptoKey][google.cloud.kms.v1.CryptoKey] that will be used in [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt].
+   * Update the version of a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} that will be used in {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}.
    *
    * Returns an error if called on an asymmetric key.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to update.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to update.
    * @param {string} request.cryptoKeyVersionId
-   *   Required. The id of the child [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to use as primary.
+   *   Required. The id of the child {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use as primary.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1729,6 +1771,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateCryptoKeyPrimaryVersion(
       request,
       options,
@@ -1759,23 +1802,23 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Schedule a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] for destruction.
+   * Schedule a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} for destruction.
    *
-   * Upon calling this method, [CryptoKeyVersion.state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to
-   * [DESTROY_SCHEDULED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED]
-   * and [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] will be set to a time 24
-   * hours in the future, at which point the [state][google.cloud.kms.v1.CryptoKeyVersion.state]
+   * Upon calling this method, {@link google.cloud.kms.v1.CryptoKeyVersion.state|CryptoKeyVersion.state} will be set to
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED}
+   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will be set to a time 24
+   * hours in the future, at which point the {@link google.cloud.kms.v1.CryptoKeyVersion.state|state}
    * will be changed to
-   * [DESTROYED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED], and the key
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}, and the key
    * material will be irrevocably destroyed.
    *
-   * Before the [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] is reached,
-   * [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] may be called to reverse the process.
+   * Before the {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} is reached,
+   * {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion} may be called to reverse the process.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to destroy.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to destroy.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1824,6 +1867,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.destroyCryptoKeyVersion(
       request,
       options,
@@ -1854,18 +1898,18 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Restore a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in the
-   * [DESTROY_SCHEDULED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED]
+   * Restore a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in the
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED}
    * state.
    *
-   * Upon restoration of the CryptoKeyVersion, [state][google.cloud.kms.v1.CryptoKeyVersion.state]
-   * will be set to [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED],
-   * and [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] will be cleared.
+   * Upon restoration of the CryptoKeyVersion, {@link google.cloud.kms.v1.CryptoKeyVersion.state|state}
+   * will be set to {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED},
+   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will be cleared.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to restore.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to restore.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1914,6 +1958,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.restoreCryptoKeyVersion(
       request,
       options,
@@ -1941,21 +1986,21 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Lists [KeyRings][google.cloud.kms.v1.KeyRing].
+   * Lists {@link google.cloud.kms.v1.KeyRing|KeyRings}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   [KeyRings][google.cloud.kms.v1.KeyRing], in the format `projects/* /locations/*`.
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of [KeyRings][google.cloud.kms.v1.KeyRing] to include in the
-   *   response.  Further [KeyRings][google.cloud.kms.v1.KeyRing] can subsequently be obtained by
-   *   including the [ListKeyRingsResponse.next_page_token][google.cloud.kms.v1.ListKeyRingsResponse.next_page_token] in a subsequent
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the
+   *   response.  Further {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token} in a subsequent
    *   request.  If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
-   *   [ListKeyRingsResponse.next_page_token][google.cloud.kms.v1.ListKeyRingsResponse.next_page_token].
+   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
    * @param {string} [request.filter]
    *   Optional. Only include resources that match the filter in the response. For
    *   more information, see
@@ -2021,6 +2066,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listKeyRings(request, options, callback);
   }
 
@@ -2041,15 +2087,15 @@ export class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   [KeyRings][google.cloud.kms.v1.KeyRing], in the format `projects/* /locations/*`.
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of [KeyRings][google.cloud.kms.v1.KeyRing] to include in the
-   *   response.  Further [KeyRings][google.cloud.kms.v1.KeyRing] can subsequently be obtained by
-   *   including the [ListKeyRingsResponse.next_page_token][google.cloud.kms.v1.ListKeyRingsResponse.next_page_token] in a subsequent
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the
+   *   response.  Further {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token} in a subsequent
    *   request.  If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
-   *   [ListKeyRingsResponse.next_page_token][google.cloud.kms.v1.ListKeyRingsResponse.next_page_token].
+   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
    * @param {string} [request.filter]
    *   Optional. Only include resources that match the filter in the response. For
    *   more information, see
@@ -2079,6 +2125,7 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listKeyRings.createStream(
       this._innerApiCalls.listKeyRings as gax.GaxCall,
       request,
@@ -2105,21 +2152,21 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Lists [CryptoKeys][google.cloud.kms.v1.CryptoKey].
+   * Lists {@link google.cloud.kms.v1.CryptoKey|CryptoKeys}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [KeyRing][google.cloud.kms.v1.KeyRing] to list, in the format
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
    *   `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of [CryptoKeys][google.cloud.kms.v1.CryptoKey] to include in the
-   *   response.  Further [CryptoKeys][google.cloud.kms.v1.CryptoKey] can subsequently be obtained by
-   *   including the [ListCryptoKeysResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token] in a subsequent
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the
+   *   response.  Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token} in a subsequent
    *   request.  If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
-   *   [ListCryptoKeysResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token].
+   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
    * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
    *   The fields of the primary version to include in the response.
    * @param {string} [request.filter]
@@ -2187,6 +2234,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listCryptoKeys(request, options, callback);
   }
 
@@ -2206,16 +2254,16 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [KeyRing][google.cloud.kms.v1.KeyRing] to list, in the format
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
    *   `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of [CryptoKeys][google.cloud.kms.v1.CryptoKey] to include in the
-   *   response.  Further [CryptoKeys][google.cloud.kms.v1.CryptoKey] can subsequently be obtained by
-   *   including the [ListCryptoKeysResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token] in a subsequent
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the
+   *   response.  Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token} in a subsequent
    *   request.  If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
-   *   [ListCryptoKeysResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token].
+   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
    * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
    *   The fields of the primary version to include in the response.
    * @param {string} [request.filter]
@@ -2247,6 +2295,7 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listCryptoKeys.createStream(
       this._innerApiCalls.listCryptoKeys as gax.GaxCall,
       request,
@@ -2273,22 +2322,22 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Lists [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion].
+   * Lists {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to list, in the format
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] to
-   *   include in the response. Further [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] can
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to
+   *   include in the response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} can
    *   subsequently be obtained by including the
-   *   [ListCryptoKeyVersionsResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token] in a subsequent request.
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token} in a subsequent request.
    *   If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
-   *   [ListCryptoKeyVersionsResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token].
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
    * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
    *   The fields to include in the response.
    * @param {string} [request.filter]
@@ -2356,6 +2405,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listCryptoKeyVersions(
       request,
       options,
@@ -2379,17 +2429,17 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to list, in the format
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] to
-   *   include in the response. Further [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] can
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to
+   *   include in the response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} can
    *   subsequently be obtained by including the
-   *   [ListCryptoKeyVersionsResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token] in a subsequent request.
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token} in a subsequent request.
    *   If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
-   *   [ListCryptoKeyVersionsResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token].
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
    * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
    *   The fields to include in the response.
    * @param {string} [request.filter]
@@ -2421,6 +2471,7 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listCryptoKeyVersions.createStream(
       this._innerApiCalls.listCryptoKeyVersions as gax.GaxCall,
       request,
@@ -2447,21 +2498,21 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Lists [ImportJobs][google.cloud.kms.v1.ImportJob].
+   * Lists {@link google.cloud.kms.v1.ImportJob|ImportJobs}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [KeyRing][google.cloud.kms.v1.KeyRing] to list, in the format
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
    *   `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of [ImportJobs][google.cloud.kms.v1.ImportJob] to include in the
-   *   response. Further [ImportJobs][google.cloud.kms.v1.ImportJob] can subsequently be obtained by
-   *   including the [ListImportJobsResponse.next_page_token][google.cloud.kms.v1.ListImportJobsResponse.next_page_token] in a subsequent
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the
+   *   response. Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token} in a subsequent
    *   request. If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
-   *   [ListImportJobsResponse.next_page_token][google.cloud.kms.v1.ListImportJobsResponse.next_page_token].
+   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
    * @param {string} [request.filter]
    *   Optional. Only include resources that match the filter in the response. For
    *   more information, see
@@ -2527,6 +2578,7 @@ export class KeyManagementServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listImportJobs(request, options, callback);
   }
 
@@ -2546,16 +2598,16 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the [KeyRing][google.cloud.kms.v1.KeyRing] to list, in the format
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
    *   `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of [ImportJobs][google.cloud.kms.v1.ImportJob] to include in the
-   *   response. Further [ImportJobs][google.cloud.kms.v1.ImportJob] can subsequently be obtained by
-   *   including the [ListImportJobsResponse.next_page_token][google.cloud.kms.v1.ListImportJobsResponse.next_page_token] in a subsequent
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the
+   *   response. Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token} in a subsequent
    *   request. If unspecified, the server will pick an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
-   *   [ListImportJobsResponse.next_page_token][google.cloud.kms.v1.ListImportJobsResponse.next_page_token].
+   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
    * @param {string} [request.filter]
    *   Optional. Only include resources that match the filter in the response. For
    *   more information, see
@@ -2585,6 +2637,7 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listImportJobs.createStream(
       this._innerApiCalls.listImportJobs as gax.GaxCall,
       request,
@@ -2920,8 +2973,9 @@ export class KeyManagementServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.keyManagementServiceStub.then(stub => {
+      return this.keyManagementServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
