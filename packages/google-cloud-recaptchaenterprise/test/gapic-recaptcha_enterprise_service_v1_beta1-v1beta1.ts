@@ -89,6 +89,26 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.recaptchaEnterpriseServiceV1Beta1Stub, undefined);
+    await client.initialize();
+    assert(client.recaptchaEnterpriseServiceV1Beta1Stub);
+  });
+  it('has close method', () => {
+    const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('createAssessment', () => {
     it('invokes createAssessment without error', done => {
       const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
@@ -97,6 +117,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest = {};
       request.parent = '';
@@ -122,6 +144,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest = {};
       request.parent = '';
@@ -149,6 +173,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest = {};
       request.name = '';
@@ -174,6 +200,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest = {};
       request.name = '';
@@ -201,6 +229,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest = {};
       request.parent = '';
@@ -226,6 +256,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest = {};
       request.parent = '';
@@ -253,6 +285,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest = {};
       request.name = '';
@@ -278,6 +312,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest = {};
       request.name = '';
@@ -301,6 +337,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest = {};
       request.key = {};
@@ -327,6 +365,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest = {};
       request.key = {};
@@ -355,6 +395,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest = {};
       request.name = '';
@@ -380,6 +422,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest = {};
       request.name = '';
@@ -407,6 +451,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest = {};
       request.parent = '';
@@ -436,6 +482,8 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest = {};
       request.parent = '';
