@@ -36,8 +36,13 @@ export class JobControllerClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  jobControllerStub: Promise<{[name: string]: Function}>;
+  jobControllerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of JobControllerClient.
@@ -61,8 +66,6 @@ export class JobControllerClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -90,28 +93,31 @@ export class JobControllerClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof JobControllerClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Determine the client header string.
     const clientHeader = [
-      `gax/${gaxModule.version}`,
+      `gax/${this._gaxModule.version}`,
       `gapic/${version}`,
     ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -121,7 +127,7 @@ export class JobControllerClient {
     // For browsers, pass the JSON content.
 
     const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ?
         require("../../protos/protos.json") :
         nodejsProtoPath
@@ -131,16 +137,16 @@ export class JobControllerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectLocationAutoscalingPolicyPathTemplate: new gaxModule.PathTemplate(
+      projectLocationAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
       ),
-      projectLocationWorkflowTemplatePathTemplate: new gaxModule.PathTemplate(
+      projectLocationWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
       ),
-      projectRegionAutoscalingPolicyPathTemplate: new gaxModule.PathTemplate(
+      projectRegionAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
       ),
-      projectRegionWorkflowTemplatePathTemplate: new gaxModule.PathTemplate(
+      projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
       ),
     };
@@ -150,11 +156,11 @@ export class JobControllerClient {
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
       listJobs:
-          new gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs')
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
         'google.cloud.dataproc.v1beta2.JobController', gapicConfig as gax.ClientConfig,
         opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
@@ -162,15 +168,33 @@ export class JobControllerClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.jobControllerStub) {
+      return this.jobControllerStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.dataproc.v1beta2.JobController.
-    this.jobControllerStub = gaxGrpc.createStub(
-        opts.fallback ?
-          (protos as protobuf.Root).lookupService('google.cloud.dataproc.v1beta2.JobController') :
+    this.jobControllerStub = this._gaxGrpc.createStub(
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1beta2.JobController') :
           // tslint:disable-next-line no-any
-          (protos as any).google.cloud.dataproc.v1beta2.JobController,
-        opts) as Promise<{[method: string]: Function}>;
+          (this._protos as any).google.cloud.dataproc.v1beta2.JobController,
+        this._opts) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -189,9 +213,9 @@ export class JobControllerClient {
           throw err;
         });
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
             this._descriptors.stream[methodName] ||
             this._descriptors.longrunning[methodName]
@@ -205,6 +229,8 @@ export class JobControllerClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.jobControllerStub;
   }
 
   /**
@@ -286,9 +312,9 @@ export class JobControllerClient {
  *   Required. The job resource.
  * @param {string} [request.requestId]
  *   Optional. A unique id used to identify the request. If the server
- *   receives two [SubmitJobRequest][google.cloud.dataproc.v1beta2.SubmitJobRequest] requests  with the same
+ *   receives two {@link google.cloud.dataproc.v1beta2.SubmitJobRequest|SubmitJobRequest} requests  with the same
  *   id, then the second request will be ignored and the
- *   first [Job][google.cloud.dataproc.v1beta2.Job] created and stored in the backend
+ *   first {@link google.cloud.dataproc.v1beta2.Job|Job} created and stored in the backend
  *   is returned.
  *
  *   It is recommended to always set this value to a
@@ -325,6 +351,7 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.submitJob(request, options, callback);
   }
   getJob(
@@ -382,6 +409,7 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.getJob(request, options, callback);
   }
   updateJob(
@@ -448,6 +476,7 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.updateJob(request, options, callback);
   }
   cancelJob(
@@ -509,6 +538,7 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.cancelJob(request, options, callback);
   }
   deleteJob(
@@ -567,6 +597,7 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.deleteJob(request, options, callback);
   }
 
@@ -666,6 +697,7 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.listJobs(request, options, callback);
   }
 
@@ -729,6 +761,7 @@ export class JobControllerClient {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listJobs.createStream(
       this._innerApiCalls.listJobs as gax.GaxCall,
       request,
@@ -941,8 +974,9 @@ export class JobControllerClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.jobControllerStub.then(stub => {
+      return this.jobControllerStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

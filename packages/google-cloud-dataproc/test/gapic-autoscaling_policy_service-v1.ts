@@ -78,12 +78,30 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         });
         assert(client);
     });
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        assert.strictEqual(client.autoscalingPolicyServiceStub, undefined);
+        await client.initialize();
+        assert(client.autoscalingPolicyServiceStub);
+    });
+    it('has close method', () => {
+        const client = new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.close();
+    });
     describe('createAutoscalingPolicy', () => {
         it('invokes createAutoscalingPolicy without error', done => {
             const client = new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest = {};
             request.parent = '';
@@ -107,6 +125,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest = {};
             request.parent = '';
@@ -132,6 +152,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest = {};
             request.policy = {};
@@ -156,6 +178,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest = {};
             request.policy = {};
@@ -182,6 +206,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest = {};
             request.name = '';
@@ -205,6 +231,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest = {};
             request.name = '';
@@ -230,6 +258,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest = {};
             request.name = '';
@@ -253,6 +283,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest = {};
             request.name = '';
@@ -278,6 +310,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest = {};
             request.parent = '';
@@ -301,6 +335,8 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest = {};
             request.parent = '';

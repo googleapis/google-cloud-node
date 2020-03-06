@@ -37,9 +37,14 @@ export class WorkflowTemplateServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  workflowTemplateServiceStub: Promise<{[name: string]: Function}>;
+  workflowTemplateServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of WorkflowTemplateServiceClient.
@@ -63,8 +68,6 @@ export class WorkflowTemplateServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -92,28 +95,31 @@ export class WorkflowTemplateServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof WorkflowTemplateServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Determine the client header string.
     const clientHeader = [
-      `gax/${gaxModule.version}`,
+      `gax/${this._gaxModule.version}`,
       `gapic/${version}`,
     ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -123,7 +129,7 @@ export class WorkflowTemplateServiceClient {
     // For browsers, pass the JSON content.
 
     const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ?
         require("../../protos/protos.json") :
         nodejsProtoPath
@@ -133,19 +139,19 @@ export class WorkflowTemplateServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectLocationAutoscalingPolicyPathTemplate: new gaxModule.PathTemplate(
+      projectLocationAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
       ),
-      projectLocationWorkflowTemplatePathTemplate: new gaxModule.PathTemplate(
+      projectLocationWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
       ),
-      projectRegionAutoscalingPolicyPathTemplate: new gaxModule.PathTemplate(
+      projectRegionAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
       ),
-      projectRegionWorkflowTemplatePathTemplate: new gaxModule.PathTemplate(
+      projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
       ),
-      regionPathTemplate: new gaxModule.PathTemplate(
+      regionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}'
       ),
     };
@@ -155,19 +161,19 @@ export class WorkflowTemplateServiceClient {
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
       listWorkflowTemplates:
-          new gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'templates')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'templates')
     };
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback?
-      gaxModule.protobuf.Root.fromJSON(require("../../protos/protos.json")) :
-      gaxModule.protobuf.loadSync(nodejsProtoPath);
+      this._gaxModule.protobuf.Root.fromJSON(require("../../protos/protos.json")) :
+      this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule.lro({
+    this.operationsClient = this._gaxModule.lro({
       auth: this.auth,
-      grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     }).operationsClient(opts);
     const instantiateWorkflowTemplateResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty') as gax.protobuf.Type;
@@ -179,18 +185,18 @@ export class WorkflowTemplateServiceClient {
       '.google.cloud.dataproc.v1.WorkflowMetadata') as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      instantiateWorkflowTemplate: new gaxModule.LongrunningDescriptor(
+      instantiateWorkflowTemplate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         instantiateWorkflowTemplateResponse.decode.bind(instantiateWorkflowTemplateResponse),
         instantiateWorkflowTemplateMetadata.decode.bind(instantiateWorkflowTemplateMetadata)),
-      instantiateInlineWorkflowTemplate: new gaxModule.LongrunningDescriptor(
+      instantiateInlineWorkflowTemplate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         instantiateInlineWorkflowTemplateResponse.decode.bind(instantiateInlineWorkflowTemplateResponse),
         instantiateInlineWorkflowTemplateMetadata.decode.bind(instantiateInlineWorkflowTemplateMetadata))
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
         'google.cloud.dataproc.v1.WorkflowTemplateService', gapicConfig as gax.ClientConfig,
         opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
@@ -198,15 +204,33 @@ export class WorkflowTemplateServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.workflowTemplateServiceStub) {
+      return this.workflowTemplateServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.dataproc.v1.WorkflowTemplateService.
-    this.workflowTemplateServiceStub = gaxGrpc.createStub(
-        opts.fallback ?
-          (protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.WorkflowTemplateService') :
+    this.workflowTemplateServiceStub = this._gaxGrpc.createStub(
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.WorkflowTemplateService') :
           // tslint:disable-next-line no-any
-          (protos as any).google.cloud.dataproc.v1.WorkflowTemplateService,
-        opts) as Promise<{[method: string]: Function}>;
+          (this._protos as any).google.cloud.dataproc.v1.WorkflowTemplateService,
+        this._opts) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -225,9 +249,9 @@ export class WorkflowTemplateServiceClient {
           throw err;
         });
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
             this._descriptors.stream[methodName] ||
             this._descriptors.longrunning[methodName]
@@ -241,6 +265,8 @@ export class WorkflowTemplateServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.workflowTemplateServiceStub;
   }
 
   /**
@@ -362,6 +388,7 @@ export class WorkflowTemplateServiceClient {
     ] = gax.routingHeader.fromParams({
       'parent': request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createWorkflowTemplate(request, options, callback);
   }
   getWorkflowTemplate(
@@ -438,6 +465,7 @@ export class WorkflowTemplateServiceClient {
     ] = gax.routingHeader.fromParams({
       'name': request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getWorkflowTemplate(request, options, callback);
   }
   updateWorkflowTemplate(
@@ -500,6 +528,7 @@ export class WorkflowTemplateServiceClient {
     ] = gax.routingHeader.fromParams({
       'template.name': request.template!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateWorkflowTemplate(request, options, callback);
   }
   deleteWorkflowTemplate(
@@ -572,6 +601,7 @@ export class WorkflowTemplateServiceClient {
     ] = gax.routingHeader.fromParams({
       'name': request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteWorkflowTemplate(request, options, callback);
   }
 
@@ -594,22 +624,22 @@ export class WorkflowTemplateServiceClient {
  *
  * The returned Operation can be used to track execution of
  * workflow by polling
- * [operations.get][google.longrunning.Operations.GetOperation].
+ * {@link google.longrunning.Operations.GetOperation|operations.get}.
  * The Operation will complete when entire workflow is finished.
  *
  * The running workflow can be aborted via
- * [operations.cancel][google.longrunning.Operations.CancelOperation].
+ * {@link google.longrunning.Operations.CancelOperation|operations.cancel}.
  * This will cause any inflight jobs to be cancelled and workflow-owned
  * clusters to be deleted.
  *
- * The [Operation.metadata][google.longrunning.Operation.metadata] will be
+ * The {@link google.longrunning.Operation.metadata|Operation.metadata} will be
  * [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
  * Also see [Using
  * WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
  *
  * On successful completion,
- * [Operation.response][google.longrunning.Operation.response] will be
- * [Empty][google.protobuf.Empty].
+ * {@link google.longrunning.Operation.response|Operation.response} will be
+ * {@link google.protobuf.Empty|Empty}.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -680,6 +710,7 @@ export class WorkflowTemplateServiceClient {
     ] = gax.routingHeader.fromParams({
       'name': request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.instantiateWorkflowTemplate(request, options, callback);
   }
   instantiateInlineWorkflowTemplate(
@@ -700,27 +731,27 @@ export class WorkflowTemplateServiceClient {
  * Instantiates a template and begins execution.
  *
  * This method is equivalent to executing the sequence
- * [CreateWorkflowTemplate][google.cloud.dataproc.v1.WorkflowTemplateService.CreateWorkflowTemplate], [InstantiateWorkflowTemplate][google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate],
- * [DeleteWorkflowTemplate][google.cloud.dataproc.v1.WorkflowTemplateService.DeleteWorkflowTemplate].
+ * {@link google.cloud.dataproc.v1.WorkflowTemplateService.CreateWorkflowTemplate|CreateWorkflowTemplate}, {@link google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate|InstantiateWorkflowTemplate},
+ * {@link google.cloud.dataproc.v1.WorkflowTemplateService.DeleteWorkflowTemplate|DeleteWorkflowTemplate}.
  *
  * The returned Operation can be used to track execution of
  * workflow by polling
- * [operations.get][google.longrunning.Operations.GetOperation].
+ * {@link google.longrunning.Operations.GetOperation|operations.get}.
  * The Operation will complete when entire workflow is finished.
  *
  * The running workflow can be aborted via
- * [operations.cancel][google.longrunning.Operations.CancelOperation].
+ * {@link google.longrunning.Operations.CancelOperation|operations.cancel}.
  * This will cause any inflight jobs to be cancelled and workflow-owned
  * clusters to be deleted.
  *
- * The [Operation.metadata][google.longrunning.Operation.metadata] will be
+ * The {@link google.longrunning.Operation.metadata|Operation.metadata} will be
  * [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
  * Also see [Using
  * WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
  *
  * On successful completion,
- * [Operation.response][google.longrunning.Operation.response] will be
- * [Empty][google.protobuf.Empty].
+ * {@link google.longrunning.Operation.response|Operation.response} will be
+ * {@link google.protobuf.Empty|Empty}.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -783,6 +814,7 @@ export class WorkflowTemplateServiceClient {
     ] = gax.routingHeader.fromParams({
       'parent': request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.instantiateInlineWorkflowTemplate(request, options, callback);
   }
   listWorkflowTemplates(
@@ -871,6 +903,7 @@ export class WorkflowTemplateServiceClient {
     ] = gax.routingHeader.fromParams({
       'parent': request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listWorkflowTemplates(request, options, callback);
   }
 
@@ -924,6 +957,7 @@ export class WorkflowTemplateServiceClient {
       'parent': request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listWorkflowTemplates.createStream(
       this._innerApiCalls.listWorkflowTemplates as gax.GaxCall,
       request,
@@ -1172,8 +1206,9 @@ export class WorkflowTemplateServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.workflowTemplateServiceStub.then(stub => {
+      return this.workflowTemplateServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

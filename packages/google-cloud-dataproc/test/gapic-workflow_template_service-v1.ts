@@ -96,12 +96,30 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         });
         assert(client);
     });
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        assert.strictEqual(client.workflowTemplateServiceStub, undefined);
+        await client.initialize();
+        assert(client.workflowTemplateServiceStub);
+    });
+    it('has close method', () => {
+        const client = new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.close();
+    });
     describe('createWorkflowTemplate', () => {
         it('invokes createWorkflowTemplate without error', done => {
             const client = new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICreateWorkflowTemplateRequest = {};
             request.parent = '';
@@ -125,6 +143,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICreateWorkflowTemplateRequest = {};
             request.parent = '';
@@ -150,6 +170,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetWorkflowTemplateRequest = {};
             request.name = '';
@@ -173,6 +195,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetWorkflowTemplateRequest = {};
             request.name = '';
@@ -198,6 +222,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateWorkflowTemplateRequest = {};
             request.template = {};
@@ -222,6 +248,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateWorkflowTemplateRequest = {};
             request.template = {};
@@ -248,6 +276,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteWorkflowTemplateRequest = {};
             request.name = '';
@@ -271,6 +301,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteWorkflowTemplateRequest = {};
             request.name = '';
@@ -296,6 +328,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IInstantiateWorkflowTemplateRequest = {};
             request.name = '';
@@ -322,6 +356,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IInstantiateWorkflowTemplateRequest = {};
             request.name = '';
@@ -351,6 +387,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IInstantiateInlineWorkflowTemplateRequest = {};
             request.parent = '';
@@ -377,6 +415,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IInstantiateInlineWorkflowTemplateRequest = {};
             request.parent = '';
@@ -406,6 +446,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IListWorkflowTemplatesRequest = {};
             request.parent = '';
@@ -429,6 +471,8 @@ describe('v1.WorkflowTemplateServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IListWorkflowTemplatesRequest = {};
             request.parent = '';

@@ -96,12 +96,30 @@ describe('v1.ClusterControllerClient', () => {
         });
         assert(client);
     });
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new clustercontrollerModule.v1.ClusterControllerClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        assert.strictEqual(client.clusterControllerStub, undefined);
+        await client.initialize();
+        assert(client.clusterControllerStub);
+    });
+    it('has close method', () => {
+        const client = new clustercontrollerModule.v1.ClusterControllerClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.close();
+    });
     describe('getCluster', () => {
         it('invokes getCluster without error', done => {
             const client = new clustercontrollerModule.v1.ClusterControllerClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetClusterRequest = {};
             // Mock response
@@ -124,6 +142,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetClusterRequest = {};
             // Mock response
@@ -148,6 +168,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICreateClusterRequest = {};
             // Mock response
@@ -173,6 +195,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICreateClusterRequest = {};
             // Mock response
@@ -201,6 +225,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateClusterRequest = {};
             // Mock response
@@ -226,6 +252,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateClusterRequest = {};
             // Mock response
@@ -254,6 +282,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteClusterRequest = {};
             // Mock response
@@ -279,6 +309,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteClusterRequest = {};
             // Mock response
@@ -307,6 +339,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDiagnoseClusterRequest = {};
             // Mock response
@@ -332,6 +366,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDiagnoseClusterRequest = {};
             // Mock response
@@ -360,6 +396,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IListClustersRequest = {};
             // Mock response
@@ -382,6 +420,8 @@ describe('v1.ClusterControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IListClustersRequest = {};
             // Mock response

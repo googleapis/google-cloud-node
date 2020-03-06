@@ -78,12 +78,30 @@ describe('v1.JobControllerClient', () => {
         });
         assert(client);
     });
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new jobcontrollerModule.v1.JobControllerClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        assert.strictEqual(client.jobControllerStub, undefined);
+        await client.initialize();
+        assert(client.jobControllerStub);
+    });
+    it('has close method', () => {
+        const client = new jobcontrollerModule.v1.JobControllerClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.close();
+    });
     describe('submitJob', () => {
         it('invokes submitJob without error', done => {
             const client = new jobcontrollerModule.v1.JobControllerClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest = {};
             // Mock response
@@ -106,6 +124,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ISubmitJobRequest = {};
             // Mock response
@@ -130,6 +150,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetJobRequest = {};
             // Mock response
@@ -152,6 +174,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IGetJobRequest = {};
             // Mock response
@@ -176,6 +200,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest = {};
             // Mock response
@@ -198,6 +224,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IUpdateJobRequest = {};
             // Mock response
@@ -222,6 +250,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICancelJobRequest = {};
             // Mock response
@@ -244,6 +274,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.ICancelJobRequest = {};
             // Mock response
@@ -268,6 +300,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest = {};
             // Mock response
@@ -290,6 +324,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IDeleteJobRequest = {};
             // Mock response
@@ -314,6 +350,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IListJobsRequest = {};
             // Mock response
@@ -336,6 +374,8 @@ describe('v1.JobControllerClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            // Initialize client before mocking
+            client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.dataproc.v1.IListJobsRequest = {};
             // Mock response

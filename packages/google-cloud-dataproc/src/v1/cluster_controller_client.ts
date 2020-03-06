@@ -37,9 +37,14 @@ export class ClusterControllerClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  clusterControllerStub: Promise<{[name: string]: Function}>;
+  clusterControllerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ClusterControllerClient.
@@ -63,8 +68,6 @@ export class ClusterControllerClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -92,28 +95,31 @@ export class ClusterControllerClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof ClusterControllerClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Determine the client header string.
     const clientHeader = [
-      `gax/${gaxModule.version}`,
+      `gax/${this._gaxModule.version}`,
       `gapic/${version}`,
     ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -123,7 +129,7 @@ export class ClusterControllerClient {
     // For browsers, pass the JSON content.
 
     const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ?
         require("../../protos/protos.json") :
         nodejsProtoPath
@@ -133,16 +139,16 @@ export class ClusterControllerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectLocationAutoscalingPolicyPathTemplate: new gaxModule.PathTemplate(
+      projectLocationAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
       ),
-      projectLocationWorkflowTemplatePathTemplate: new gaxModule.PathTemplate(
+      projectLocationWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
       ),
-      projectRegionAutoscalingPolicyPathTemplate: new gaxModule.PathTemplate(
+      projectRegionAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
       ),
-      projectRegionWorkflowTemplatePathTemplate: new gaxModule.PathTemplate(
+      projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
       ),
     };
@@ -152,19 +158,19 @@ export class ClusterControllerClient {
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
       listClusters:
-          new gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'clusters')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'clusters')
     };
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback?
-      gaxModule.protobuf.Root.fromJSON(require("../../protos/protos.json")) :
-      gaxModule.protobuf.loadSync(nodejsProtoPath);
+      this._gaxModule.protobuf.Root.fromJSON(require("../../protos/protos.json")) :
+      this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule.lro({
+    this.operationsClient = this._gaxModule.lro({
       auth: this.auth,
-      grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     }).operationsClient(opts);
     const createClusterResponse = protoFilesRoot.lookup(
       '.google.cloud.dataproc.v1.Cluster') as gax.protobuf.Type;
@@ -184,26 +190,26 @@ export class ClusterControllerClient {
       '.google.cloud.dataproc.v1.DiagnoseClusterResults') as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      createCluster: new gaxModule.LongrunningDescriptor(
+      createCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createClusterResponse.decode.bind(createClusterResponse),
         createClusterMetadata.decode.bind(createClusterMetadata)),
-      updateCluster: new gaxModule.LongrunningDescriptor(
+      updateCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateClusterResponse.decode.bind(updateClusterResponse),
         updateClusterMetadata.decode.bind(updateClusterMetadata)),
-      deleteCluster: new gaxModule.LongrunningDescriptor(
+      deleteCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteClusterResponse.decode.bind(deleteClusterResponse),
         deleteClusterMetadata.decode.bind(deleteClusterMetadata)),
-      diagnoseCluster: new gaxModule.LongrunningDescriptor(
+      diagnoseCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         diagnoseClusterResponse.decode.bind(diagnoseClusterResponse),
         diagnoseClusterMetadata.decode.bind(diagnoseClusterMetadata))
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
         'google.cloud.dataproc.v1.ClusterController', gapicConfig as gax.ClientConfig,
         opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
@@ -211,15 +217,33 @@ export class ClusterControllerClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.clusterControllerStub) {
+      return this.clusterControllerStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.dataproc.v1.ClusterController.
-    this.clusterControllerStub = gaxGrpc.createStub(
-        opts.fallback ?
-          (protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.ClusterController') :
+    this.clusterControllerStub = this._gaxGrpc.createStub(
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.ClusterController') :
           // tslint:disable-next-line no-any
-          (protos as any).google.cloud.dataproc.v1.ClusterController,
-        opts) as Promise<{[method: string]: Function}>;
+          (this._protos as any).google.cloud.dataproc.v1.ClusterController,
+        this._opts) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -238,9 +262,9 @@ export class ClusterControllerClient {
           throw err;
         });
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
             this._descriptors.stream[methodName] ||
             this._descriptors.longrunning[methodName]
@@ -254,6 +278,8 @@ export class ClusterControllerClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.clusterControllerStub;
   }
 
   /**
@@ -362,6 +388,7 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.getCluster(request, options, callback);
   }
 
@@ -381,7 +408,7 @@ export class ClusterControllerClient {
           {}|undefined>): void;
 /**
  * Creates a cluster in a project. The returned
- * [Operation.metadata][google.longrunning.Operation.metadata] will be
+ * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
  * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
  *
  * @param {Object} request
@@ -395,9 +422,9 @@ export class ClusterControllerClient {
  *   Required. The cluster to create.
  * @param {string} [request.requestId]
  *   Optional. A unique id used to identify the request. If the server
- *   receives two [CreateClusterRequest][google.cloud.dataproc.v1.CreateClusterRequest] requests  with the same
+ *   receives two {@link google.cloud.dataproc.v1.CreateClusterRequest|CreateClusterRequest} requests  with the same
  *   id, then the second request will be ignored and the
- *   first [google.longrunning.Operation][google.longrunning.Operation] created and stored in the backend
+ *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the backend
  *   is returned.
  *
  *   It is recommended to always set this value to a
@@ -434,6 +461,7 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.createCluster(request, options, callback);
   }
   updateCluster(
@@ -452,7 +480,7 @@ export class ClusterControllerClient {
           {}|undefined>): void;
 /**
  * Updates a cluster in a project. The returned
- * [Operation.metadata][google.longrunning.Operation.metadata] will be
+ * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
  * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
  *
  * @param {Object} request
@@ -530,9 +558,9 @@ export class ClusterControllerClient {
  *    </table>
  * @param {string} [request.requestId]
  *   Optional. A unique id used to identify the request. If the server
- *   receives two [UpdateClusterRequest][google.cloud.dataproc.v1.UpdateClusterRequest] requests  with the same
+ *   receives two {@link google.cloud.dataproc.v1.UpdateClusterRequest|UpdateClusterRequest} requests  with the same
  *   id, then the second request will be ignored and the
- *   first [google.longrunning.Operation][google.longrunning.Operation] created and stored in the
+ *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
  *   backend is returned.
  *
  *   It is recommended to always set this value to a
@@ -569,6 +597,7 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.updateCluster(request, options, callback);
   }
   deleteCluster(
@@ -587,7 +616,7 @@ export class ClusterControllerClient {
           {}|undefined>): void;
 /**
  * Deletes a cluster in a project. The returned
- * [Operation.metadata][google.longrunning.Operation.metadata] will be
+ * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
  * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
  *
  * @param {Object} request
@@ -604,9 +633,9 @@ export class ClusterControllerClient {
  *   (with error NOT_FOUND) if cluster with specified UUID does not exist.
  * @param {string} [request.requestId]
  *   Optional. A unique id used to identify the request. If the server
- *   receives two [DeleteClusterRequest][google.cloud.dataproc.v1.DeleteClusterRequest] requests  with the same
+ *   receives two {@link google.cloud.dataproc.v1.DeleteClusterRequest|DeleteClusterRequest} requests  with the same
  *   id, then the second request will be ignored and the
- *   first [google.longrunning.Operation][google.longrunning.Operation] created and stored in the
+ *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
  *   backend is returned.
  *
  *   It is recommended to always set this value to a
@@ -643,6 +672,7 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.deleteCluster(request, options, callback);
   }
   diagnoseCluster(
@@ -661,10 +691,10 @@ export class ClusterControllerClient {
           {}|undefined>): void;
 /**
  * Gets cluster diagnostic information. The returned
- * [Operation.metadata][google.longrunning.Operation.metadata] will be
+ * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
  * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
  * After the operation completes,
- * [Operation.response][google.longrunning.Operation.response]
+ * {@link google.longrunning.Operation.response|Operation.response}
  * contains
  * [DiagnoseClusterResults](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults).
  *
@@ -706,6 +736,7 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.diagnoseCluster(request, options, callback);
   }
   listClusters(
@@ -800,6 +831,7 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.listClusters(request, options, callback);
   }
 
@@ -859,6 +891,7 @@ export class ClusterControllerClient {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listClusters.createStream(
       this._innerApiCalls.listClusters as gax.GaxCall,
       request,
@@ -1071,8 +1104,9 @@ export class ClusterControllerClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.clusterControllerStub.then(stub => {
+      return this.clusterControllerStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
