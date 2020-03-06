@@ -65,12 +65,30 @@ describe('v1.CloudCatalogClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new cloudcatalogModule.v1.CloudCatalogClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudCatalogStub, undefined);
+    await client.initialize();
+    assert(client.cloudCatalogStub);
+  });
+  it('has close method', () => {
+    const client = new cloudcatalogModule.v1.CloudCatalogClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('listServices', () => {
     it('invokes listServices without error', done => {
       const client = new cloudcatalogModule.v1.CloudCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.v1.IListServicesRequest = {};
       // Mock response
@@ -97,6 +115,8 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.v1.IListServicesRequest = {};
       // Mock response
@@ -128,6 +148,8 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.v1.IListSkusRequest = {};
       request.parent = '';
@@ -155,6 +177,8 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.v1.IListSkusRequest = {};
       request.parent = '';
