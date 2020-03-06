@@ -102,12 +102,30 @@ describe('v1.CloudBuildClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new cloudbuildModule.v1.CloudBuildClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudBuildStub, undefined);
+    await client.initialize();
+    assert(client.cloudBuildStub);
+  });
+  it('has close method', () => {
+    const client = new cloudbuildModule.v1.CloudBuildClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('getBuild', () => {
     it('invokes getBuild without error', done => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IGetBuildRequest = {};
       // Mock response
@@ -130,6 +148,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IGetBuildRequest = {};
       // Mock response
@@ -154,6 +174,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.ICancelBuildRequest = {};
       // Mock response
@@ -176,6 +198,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.ICancelBuildRequest = {};
       // Mock response
@@ -200,6 +224,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest = {};
       // Mock response
@@ -222,6 +248,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest = {};
       // Mock response
@@ -246,6 +274,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest = {};
       // Mock response
@@ -268,6 +298,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest = {};
       // Mock response
@@ -292,6 +324,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest = {};
       // Mock response
@@ -314,6 +348,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest = {};
       // Mock response
@@ -338,6 +374,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest = {};
       // Mock response
@@ -360,6 +398,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest = {};
       // Mock response
@@ -384,6 +424,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest = {};
       // Mock response
@@ -406,6 +448,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest = {};
       // Mock response
@@ -430,6 +474,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest = {};
       // Mock response
@@ -452,6 +498,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest = {};
       // Mock response
@@ -476,6 +524,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest = {};
       // Mock response
@@ -498,6 +548,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest = {};
       // Mock response
@@ -522,6 +574,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest = {};
       // Mock response
@@ -544,6 +598,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest = {};
       // Mock response
@@ -568,6 +624,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest = {};
       // Mock response
@@ -590,6 +648,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest = {};
       // Mock response
@@ -614,6 +674,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildRequest = {};
       // Mock response
@@ -643,6 +705,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildRequest = {};
       // Mock response
@@ -675,6 +739,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IRetryBuildRequest = {};
       // Mock response
@@ -704,6 +770,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IRetryBuildRequest = {};
       // Mock response
@@ -736,6 +804,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest = {};
       // Mock response
@@ -765,6 +835,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest = {};
       // Mock response
@@ -797,6 +869,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest = {};
       // Mock response
@@ -823,6 +897,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest = {};
       // Mock response
@@ -854,6 +930,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest = {};
       // Mock response
@@ -880,6 +958,8 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest = {};
       // Mock response

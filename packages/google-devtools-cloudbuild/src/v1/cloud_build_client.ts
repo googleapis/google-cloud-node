@@ -51,9 +51,14 @@ export class CloudBuildClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
   private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  cloudBuildStub: Promise<{[name: string]: Function}>;
+  cloudBuildStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CloudBuildClient.
@@ -77,8 +82,6 @@ export class CloudBuildClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -108,25 +111,28 @@ export class CloudBuildClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof CloudBuildClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -142,7 +148,7 @@ export class CloudBuildClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -150,12 +156,12 @@ export class CloudBuildClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listBuilds: new gaxModule.PageDescriptor(
+      listBuilds: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'builds'
       ),
-      listBuildTriggers: new gaxModule.PageDescriptor(
+      listBuildTriggers: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'triggers'
@@ -166,13 +172,15 @@ export class CloudBuildClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = gaxModule
+    this.operationsClient = this._gaxModule
       .lro({
         auth: this.auth,
-        grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
     const createBuildResponse = protoFilesRoot.lookup(
@@ -195,17 +203,17 @@ export class CloudBuildClient {
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
-      createBuild: new gaxModule.LongrunningDescriptor(
+      createBuild: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createBuildResponse.decode.bind(createBuildResponse),
         createBuildMetadata.decode.bind(createBuildMetadata)
       ),
-      retryBuild: new gaxModule.LongrunningDescriptor(
+      retryBuild: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         retryBuildResponse.decode.bind(retryBuildResponse),
         retryBuildMetadata.decode.bind(retryBuildMetadata)
       ),
-      runBuildTrigger: new gaxModule.LongrunningDescriptor(
+      runBuildTrigger: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runBuildTriggerResponse.decode.bind(runBuildTriggerResponse),
         runBuildTriggerMetadata.decode.bind(runBuildTriggerMetadata)
@@ -213,7 +221,7 @@ export class CloudBuildClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.devtools.cloudbuild.v1.CloudBuild',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -224,17 +232,35 @@ export class CloudBuildClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.cloudBuildStub) {
+      return this.cloudBuildStub;
+    }
 
     // Put together the "service stub" for
     // google.devtools.cloudbuild.v1.CloudBuild.
-    this.cloudBuildStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.cloudBuildStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.devtools.cloudbuild.v1.CloudBuild'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.devtools.cloudbuild.v1.CloudBuild,
-      opts
+          (this._protos as any).google.devtools.cloudbuild.v1.CloudBuild,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -271,9 +297,9 @@ export class CloudBuildClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -287,6 +313,8 @@ export class CloudBuildClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.cloudBuildStub;
   }
 
   /**
@@ -407,6 +435,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.getBuild(request, options, callback);
   }
   cancelBuild(
@@ -474,6 +503,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.cancelBuild(request, options, callback);
   }
   createBuildTrigger(
@@ -551,6 +581,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.createBuildTrigger(request, options, callback);
   }
   getBuildTrigger(
@@ -628,6 +659,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.getBuildTrigger(request, options, callback);
   }
   deleteBuildTrigger(
@@ -705,6 +737,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.deleteBuildTrigger(request, options, callback);
   }
   updateBuildTrigger(
@@ -784,6 +817,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.updateBuildTrigger(request, options, callback);
   }
   createWorkerPool(
@@ -861,6 +895,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.createWorkerPool(request, options, callback);
   }
   getWorkerPool(
@@ -937,6 +972,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.getWorkerPool(request, options, callback);
   }
   deleteWorkerPool(
@@ -1013,6 +1049,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.deleteWorkerPool(request, options, callback);
   }
   updateWorkerPool(
@@ -1091,6 +1128,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.updateWorkerPool(request, options, callback);
   }
   listWorkerPools(
@@ -1166,6 +1204,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.listWorkerPools(request, options, callback);
   }
 
@@ -1252,6 +1291,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.createBuild(request, options, callback);
   }
   retryBuild(
@@ -1359,6 +1399,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.retryBuild(request, options, callback);
   }
   runBuildTrigger(
@@ -1442,6 +1483,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.runBuildTrigger(request, options, callback);
   }
   listBuilds(
@@ -1527,6 +1569,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.listBuilds(request, options, callback);
   }
 
@@ -1565,6 +1608,7 @@ export class CloudBuildClient {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listBuilds.createStream(
       this._innerApiCalls.listBuilds as gax.GaxCall,
       request,
@@ -1651,6 +1695,7 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.listBuildTriggers(request, options, callback);
   }
 
@@ -1687,6 +1732,7 @@ export class CloudBuildClient {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listBuildTriggers.createStream(
       this._innerApiCalls.listBuildTriggers as gax.GaxCall,
       request,
@@ -1700,8 +1746,9 @@ export class CloudBuildClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.cloudBuildStub.then(stub => {
+      return this.cloudBuildStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
