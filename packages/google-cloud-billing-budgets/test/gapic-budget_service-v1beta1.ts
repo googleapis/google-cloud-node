@@ -83,12 +83,30 @@ describe('v1beta1.BudgetServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new budgetserviceModule.v1beta1.BudgetServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.budgetServiceStub, undefined);
+    await client.initialize();
+    assert(client.budgetServiceStub);
+  });
+  it('has close method', () => {
+    const client = new budgetserviceModule.v1beta1.BudgetServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createBudget', () => {
     it('invokes createBudget without error', done => {
       const client = new budgetserviceModule.v1beta1.BudgetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest = {};
       request.parent = '';
@@ -112,6 +130,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest = {};
       request.parent = '';
@@ -137,6 +157,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest = {};
       request.budget = {};
@@ -161,6 +183,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest = {};
       request.budget = {};
@@ -187,6 +211,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest = {};
       request.name = '';
@@ -210,6 +236,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest = {};
       request.name = '';
@@ -235,6 +263,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest = {};
       request.name = '';
@@ -258,6 +288,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest = {};
       request.name = '';
@@ -283,6 +315,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest = {};
       request.parent = '';
@@ -310,6 +344,8 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest = {};
       request.parent = '';
