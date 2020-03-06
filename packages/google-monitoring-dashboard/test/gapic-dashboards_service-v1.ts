@@ -83,12 +83,30 @@ describe('v1.DashboardsServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dashboardsServiceStub, undefined);
+    await client.initialize();
+    assert(client.dashboardsServiceStub);
+  });
+  it('has close method', () => {
+    const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createDashboard', () => {
     it('invokes createDashboard without error', done => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest = {};
       request.parent = '';
@@ -112,6 +130,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest = {};
       request.parent = '';
@@ -137,6 +157,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest = {};
       request.name = '';
@@ -160,6 +182,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest = {};
       request.name = '';
@@ -185,6 +209,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest = {};
       request.name = '';
@@ -208,6 +234,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest = {};
       request.name = '';
@@ -233,6 +261,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest = {};
       request.dashboard = {};
@@ -257,6 +287,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest = {};
       request.dashboard = {};
@@ -283,6 +315,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest = {};
       request.parent = '';
@@ -310,6 +344,8 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest = {};
       request.parent = '';

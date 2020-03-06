@@ -44,8 +44,13 @@ export class DashboardsServiceClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
   private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  dashboardsServiceStub: Promise<{[name: string]: Function}>;
+  dashboardsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DashboardsServiceClient.
@@ -69,8 +74,6 @@ export class DashboardsServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -100,25 +103,28 @@ export class DashboardsServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof DashboardsServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -134,7 +140,7 @@ export class DashboardsServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -142,7 +148,7 @@ export class DashboardsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listDashboards: new gaxModule.PageDescriptor(
+      listDashboards: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'dashboards'
@@ -150,7 +156,7 @@ export class DashboardsServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.monitoring.dashboard.v1.DashboardsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -161,17 +167,36 @@ export class DashboardsServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.dashboardsServiceStub) {
+      return this.dashboardsServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.monitoring.dashboard.v1.DashboardsService.
-    this.dashboardsServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.dashboardsServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.monitoring.dashboard.v1.DashboardsService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.monitoring.dashboard.v1.DashboardsService,
-      opts
+          (this._protos as any).google.monitoring.dashboard.v1
+            .DashboardsService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -197,9 +222,9 @@ export class DashboardsServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -213,6 +238,8 @@ export class DashboardsServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.dashboardsServiceStub;
   }
 
   /**
@@ -356,6 +383,7 @@ export class DashboardsServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createDashboard(request, options, callback);
   }
   getDashboard(
@@ -443,6 +471,7 @@ export class DashboardsServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getDashboard(request, options, callback);
   }
   deleteDashboard(
@@ -528,6 +557,7 @@ export class DashboardsServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteDashboard(request, options, callback);
   }
   updateDashboard(
@@ -612,6 +642,7 @@ export class DashboardsServiceClient {
     ] = gax.routingHeader.fromParams({
       'dashboard.name': request.dashboard!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateDashboard(request, options, callback);
   }
 
@@ -708,6 +739,7 @@ export class DashboardsServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listDashboards(request, options, callback);
   }
 
@@ -755,6 +787,7 @@ export class DashboardsServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listDashboards.createStream(
       this._innerApiCalls.listDashboards as gax.GaxCall,
       request,
@@ -768,8 +801,9 @@ export class DashboardsServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.dashboardsServiceStub.then(stub => {
+      return this.dashboardsServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
