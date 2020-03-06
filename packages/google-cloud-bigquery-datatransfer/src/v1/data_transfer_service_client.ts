@@ -47,8 +47,13 @@ export class DataTransferServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  dataTransferServiceStub: Promise<{[name: string]: Function}>;
+  dataTransferServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataTransferServiceClient.
@@ -72,8 +77,6 @@ export class DataTransferServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -103,25 +106,28 @@ export class DataTransferServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof DataTransferServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -137,7 +143,7 @@ export class DataTransferServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -145,23 +151,25 @@ export class DataTransferServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      projectDataSourcePathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectDataSourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/dataSources/{data_source}'
       ),
-      projectLocationDataSourcePathTemplate: new gaxModule.PathTemplate(
+      projectLocationDataSourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataSources/{data_source}'
       ),
-      projectLocationTransferConfigPathTemplate: new gaxModule.PathTemplate(
+      projectLocationTransferConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/transferConfigs/{transfer_config}'
       ),
-      projectLocationTransferConfigRunPathTemplate: new gaxModule.PathTemplate(
+      projectLocationTransferConfigRunPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/transferConfigs/{transfer_config}/runs/{run}'
       ),
-      projectTransferConfigPathTemplate: new gaxModule.PathTemplate(
+      projectTransferConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/transferConfigs/{transfer_config}'
       ),
-      projectTransferConfigRunPathTemplate: new gaxModule.PathTemplate(
+      projectTransferConfigRunPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/transferConfigs/{transfer_config}/runs/{run}'
       ),
     };
@@ -170,22 +178,22 @@ export class DataTransferServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listDataSources: new gaxModule.PageDescriptor(
+      listDataSources: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'dataSources'
       ),
-      listTransferConfigs: new gaxModule.PageDescriptor(
+      listTransferConfigs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'transferConfigs'
       ),
-      listTransferRuns: new gaxModule.PageDescriptor(
+      listTransferRuns: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'transferRuns'
       ),
-      listTransferLogs: new gaxModule.PageDescriptor(
+      listTransferLogs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'transferMessages'
@@ -193,7 +201,7 @@ export class DataTransferServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.bigquery.datatransfer.v1.DataTransferService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -204,18 +212,36 @@ export class DataTransferServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.dataTransferServiceStub) {
+      return this.dataTransferServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.bigquery.datatransfer.v1.DataTransferService.
-    this.dataTransferServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.dataTransferServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.bigquery.datatransfer.v1.DataTransferService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.bigquery.datatransfer.v1
+          (this._protos as any).google.cloud.bigquery.datatransfer.v1
             .DataTransferService,
-      opts
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -250,9 +276,9 @@ export class DataTransferServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -266,6 +292,8 @@ export class DataTransferServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.dataTransferServiceStub;
   }
 
   /**
@@ -399,6 +427,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getDataSource(request, options, callback);
   }
   createTransferConfig(
@@ -513,6 +542,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createTransferConfig(request, options, callback);
   }
   updateTransferConfig(
@@ -626,6 +656,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       'transfer_config.name': request.transferConfig!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateTransferConfig(request, options, callback);
   }
   deleteTransferConfig(
@@ -709,6 +740,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteTransferConfig(request, options, callback);
   }
   getTransferConfig(
@@ -791,6 +823,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getTransferConfig(request, options, callback);
   }
   scheduleTransferRuns(
@@ -883,6 +916,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.scheduleTransferRuns(request, options, callback);
   }
   startManualTransferRuns(
@@ -973,6 +1007,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.startManualTransferRuns(
       request,
       options,
@@ -1059,6 +1094,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getTransferRun(request, options, callback);
   }
   deleteTransferRun(
@@ -1141,6 +1177,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteTransferRun(request, options, callback);
   }
   checkValidCreds(
@@ -1228,6 +1265,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.checkValidCreds(request, options, callback);
   }
 
@@ -1323,6 +1361,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listDataSources(request, options, callback);
   }
 
@@ -1372,6 +1411,7 @@ export class DataTransferServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listDataSources.createStream(
       this._innerApiCalls.listDataSources as gax.GaxCall,
       request,
@@ -1471,6 +1511,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listTransferConfigs(request, options, callback);
   }
 
@@ -1522,6 +1563,7 @@ export class DataTransferServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listTransferConfigs.createStream(
       this._innerApiCalls.listTransferConfigs as gax.GaxCall,
       request,
@@ -1624,6 +1666,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listTransferRuns(request, options, callback);
   }
 
@@ -1678,6 +1721,7 @@ export class DataTransferServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listTransferRuns.createStream(
       this._innerApiCalls.listTransferRuns as gax.GaxCall,
       request,
@@ -1778,6 +1822,7 @@ export class DataTransferServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listTransferLogs(request, options, callback);
   }
 
@@ -1830,6 +1875,7 @@ export class DataTransferServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listTransferLogs.createStream(
       this._innerApiCalls.listTransferLogs as gax.GaxCall,
       request,
@@ -2233,8 +2279,9 @@ export class DataTransferServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.dataTransferServiceStub.then(stub => {
+      return this.dataTransferServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
