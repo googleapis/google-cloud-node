@@ -106,6 +106,26 @@ describe('v3beta1.TranslationServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new translationserviceModule.v3beta1.TranslationServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.translationServiceStub, undefined);
+    await client.initialize();
+    assert(client.translationServiceStub);
+  });
+  it('has close method', () => {
+    const client = new translationserviceModule.v3beta1.TranslationServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('translateText', () => {
     it('invokes translateText without error', done => {
       const client = new translationserviceModule.v3beta1.TranslationServiceClient(
@@ -114,6 +134,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest = {};
       request.parent = '';
@@ -139,6 +161,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest = {};
       request.parent = '';
@@ -166,6 +190,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest = {};
       request.parent = '';
@@ -191,6 +217,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest = {};
       request.parent = '';
@@ -218,6 +246,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest = {};
       request.parent = '';
@@ -243,6 +273,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest = {};
       request.parent = '';
@@ -270,6 +302,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest = {};
       request.name = '';
@@ -295,6 +329,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest = {};
       request.name = '';
@@ -322,6 +358,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IBatchTranslateTextRequest = {};
       request.parent = '';
@@ -354,6 +392,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IBatchTranslateTextRequest = {};
       request.parent = '';
@@ -389,6 +429,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryRequest = {};
       request.parent = '';
@@ -421,6 +463,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryRequest = {};
       request.parent = '';
@@ -456,6 +500,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryRequest = {};
       request.name = '';
@@ -488,6 +534,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryRequest = {};
       request.name = '';
@@ -523,6 +571,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest = {};
       request.parent = '';
@@ -552,6 +602,8 @@ describe('v3beta1.TranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest = {};
       request.parent = '';
