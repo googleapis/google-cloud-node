@@ -42,8 +42,13 @@ export class PolicyTagManagerSerializationClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  policyTagManagerSerializationStub: Promise<{[name: string]: Function}>;
+  policyTagManagerSerializationStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PolicyTagManagerSerializationClient.
@@ -67,8 +72,6 @@ export class PolicyTagManagerSerializationClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -99,26 +102,29 @@ export class PolicyTagManagerSerializationClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this
       .constructor as typeof PolicyTagManagerSerializationClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -134,7 +140,7 @@ export class PolicyTagManagerSerializationClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -142,35 +148,37 @@ export class PolicyTagManagerSerializationClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      entryPathTemplate: new gaxModule.PathTemplate(
+      entryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
       ),
-      entryGroupPathTemplate: new gaxModule.PathTemplate(
+      entryGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}'
       ),
-      locationPathTemplate: new gaxModule.PathTemplate(
+      locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      policyTagPathTemplate: new gaxModule.PathTemplate(
+      policyTagPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/taxonomies/{taxonomy}/policyTags/{policy_tag}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      tagPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      tagPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}'
       ),
-      tagTemplatePathTemplate: new gaxModule.PathTemplate(
+      tagTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}'
       ),
-      tagTemplateFieldPathTemplate: new gaxModule.PathTemplate(
+      tagTemplateFieldPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}'
       ),
-      taxonomyPathTemplate: new gaxModule.PathTemplate(
+      taxonomyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/taxonomies/{taxonomy}'
       ),
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -181,18 +189,36 @@ export class PolicyTagManagerSerializationClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.policyTagManagerSerializationStub) {
+      return this.policyTagManagerSerializationStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.
-    this.policyTagManagerSerializationStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.policyTagManagerSerializationStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.datacatalog.v1beta1
+          (this._protos as any).google.cloud.datacatalog.v1beta1
             .PolicyTagManagerSerialization,
-      opts
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -215,9 +241,9 @@ export class PolicyTagManagerSerializationClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -231,6 +257,8 @@ export class PolicyTagManagerSerializationClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.policyTagManagerSerializationStub;
   }
 
   /**
@@ -368,6 +396,7 @@ export class PolicyTagManagerSerializationClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.importTaxonomies(request, options, callback);
   }
   exportTaxonomies(
@@ -456,6 +485,7 @@ export class PolicyTagManagerSerializationClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.exportTaxonomies(request, options, callback);
   }
 
@@ -978,8 +1008,9 @@ export class PolicyTagManagerSerializationClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.policyTagManagerSerializationStub.then(stub => {
+      return this.policyTagManagerSerializationStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

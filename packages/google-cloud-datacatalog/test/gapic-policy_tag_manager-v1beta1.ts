@@ -83,12 +83,30 @@ describe('v1beta1.PolicyTagManagerClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new policytagmanagerModule.v1beta1.PolicyTagManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.policyTagManagerStub, undefined);
+    await client.initialize();
+    assert(client.policyTagManagerStub);
+  });
+  it('has close method', () => {
+    const client = new policytagmanagerModule.v1beta1.PolicyTagManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createTaxonomy', () => {
     it('invokes createTaxonomy without error', done => {
       const client = new policytagmanagerModule.v1beta1.PolicyTagManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest = {};
       request.parent = '';
@@ -112,6 +130,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest = {};
       request.parent = '';
@@ -137,6 +157,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest = {};
       request.name = '';
@@ -160,6 +182,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest = {};
       request.name = '';
@@ -185,6 +209,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest = {};
       request.taxonomy = {};
@@ -209,6 +235,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest = {};
       request.taxonomy = {};
@@ -235,6 +263,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest = {};
       request.name = '';
@@ -258,6 +288,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest = {};
       request.name = '';
@@ -283,6 +315,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest = {};
       request.parent = '';
@@ -306,6 +340,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest = {};
       request.parent = '';
@@ -331,6 +367,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest = {};
       request.name = '';
@@ -354,6 +392,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest = {};
       request.name = '';
@@ -379,6 +419,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest = {};
       request.policyTag = {};
@@ -403,6 +445,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest = {};
       request.policyTag = {};
@@ -429,6 +473,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest = {};
       request.name = '';
@@ -452,6 +498,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest = {};
       request.name = '';
@@ -477,6 +525,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -500,6 +550,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -525,6 +577,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -548,6 +602,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -573,6 +629,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -596,6 +654,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -621,6 +681,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest = {};
       request.parent = '';
@@ -648,6 +710,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest = {};
       request.parent = '';
@@ -680,6 +744,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest = {};
       request.parent = '';
@@ -707,6 +773,8 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest = {};
       request.parent = '';

@@ -89,6 +89,26 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new policytagmanagerserializationModule.v1beta1.PolicyTagManagerSerializationClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.policyTagManagerSerializationStub, undefined);
+    await client.initialize();
+    assert(client.policyTagManagerSerializationStub);
+  });
+  it('has close method', () => {
+    const client = new policytagmanagerserializationModule.v1beta1.PolicyTagManagerSerializationClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('importTaxonomies', () => {
     it('invokes importTaxonomies without error', done => {
       const client = new policytagmanagerserializationModule.v1beta1.PolicyTagManagerSerializationClient(
@@ -97,6 +117,8 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest = {};
       request.parent = '';
@@ -122,6 +144,8 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest = {};
       request.parent = '';
@@ -149,6 +173,8 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest = {};
       request.parent = '';
@@ -174,6 +200,8 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest = {};
       request.parent = '';

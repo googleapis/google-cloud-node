@@ -45,8 +45,13 @@ export class DataCatalogClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  dataCatalogStub: Promise<{[name: string]: Function}>;
+  dataCatalogStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataCatalogClient.
@@ -70,8 +75,6 @@ export class DataCatalogClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -101,25 +104,28 @@ export class DataCatalogClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof DataCatalogClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -135,7 +141,7 @@ export class DataCatalogClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -143,29 +149,31 @@ export class DataCatalogClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      entryPathTemplate: new gaxModule.PathTemplate(
+      entryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
       ),
-      entryGroupPathTemplate: new gaxModule.PathTemplate(
+      entryGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}'
       ),
-      locationPathTemplate: new gaxModule.PathTemplate(
+      locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      policyTagPathTemplate: new gaxModule.PathTemplate(
+      policyTagPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/taxonomies/{taxonomy}/policyTags/{policy_tag}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      tagPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      tagPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}'
       ),
-      tagTemplatePathTemplate: new gaxModule.PathTemplate(
+      tagTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}'
       ),
-      tagTemplateFieldPathTemplate: new gaxModule.PathTemplate(
+      tagTemplateFieldPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}'
       ),
-      taxonomyPathTemplate: new gaxModule.PathTemplate(
+      taxonomyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/taxonomies/{taxonomy}'
       ),
     };
@@ -174,22 +182,22 @@ export class DataCatalogClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      searchCatalog: new gaxModule.PageDescriptor(
+      searchCatalog: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'results'
       ),
-      listEntryGroups: new gaxModule.PageDescriptor(
+      listEntryGroups: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'entryGroups'
       ),
-      listEntries: new gaxModule.PageDescriptor(
+      listEntries: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'entries'
       ),
-      listTags: new gaxModule.PageDescriptor(
+      listTags: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'tags'
@@ -197,7 +205,7 @@ export class DataCatalogClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.datacatalog.v1beta1.DataCatalog',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -208,17 +216,35 @@ export class DataCatalogClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.dataCatalogStub) {
+      return this.dataCatalogStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.datacatalog.v1beta1.DataCatalog.
-    this.dataCatalogStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.dataCatalogStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.datacatalog.v1beta1.DataCatalog'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.datacatalog.v1beta1.DataCatalog,
-      opts
+          (this._protos as any).google.cloud.datacatalog.v1beta1.DataCatalog,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -266,9 +292,9 @@ export class DataCatalogClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -282,6 +308,8 @@ export class DataCatalogClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.dataCatalogStub;
   }
 
   /**
@@ -440,6 +468,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createEntryGroup(request, options, callback);
   }
   updateEntryGroup(
@@ -526,6 +555,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       'entry_group.name': request.entryGroup!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateEntryGroup(request, options, callback);
   }
   getEntryGroup(
@@ -609,6 +639,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getEntryGroup(request, options, callback);
   }
   deleteEntryGroup(
@@ -695,6 +726,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteEntryGroup(request, options, callback);
   }
   createEntry(
@@ -791,6 +823,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createEntry(request, options, callback);
   }
   updateEntry(
@@ -895,6 +928,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       'entry.name': request.entry!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateEntry(request, options, callback);
   }
   deleteEntry(
@@ -922,7 +956,7 @@ export class DataCatalogClient {
   ): void;
   /**
    * Deletes an existing entry. Only entries created through
-   * [CreateEntry][google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntry]
+   * {@link google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntry|CreateEntry}
    * method can be deleted.
    * Users should enable the Data Catalog API in the project identified by
    * the `name` parameter (see [Data Catalog Resource Project]
@@ -982,6 +1016,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteEntry(request, options, callback);
   }
   getEntry(
@@ -1056,6 +1091,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getEntry(request, options, callback);
   }
   lookupEntry(
@@ -1152,6 +1188,7 @@ export class DataCatalogClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.lookupEntry(request, options, callback);
   }
   createTagTemplate(
@@ -1245,6 +1282,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createTagTemplate(request, options, callback);
   }
   getTagTemplate(
@@ -1327,6 +1365,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getTagTemplate(request, options, callback);
   }
   updateTagTemplate(
@@ -1420,6 +1459,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       'tag_template.name': request.tagTemplate!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateTagTemplate(request, options, callback);
   }
   deleteTagTemplate(
@@ -1509,6 +1549,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteTagTemplate(request, options, callback);
   }
   createTagTemplateField(
@@ -1607,6 +1648,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createTagTemplateField(
       request,
       options,
@@ -1713,6 +1755,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateTagTemplateField(
       request,
       options,
@@ -1805,6 +1848,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.renameTagTemplateField(
       request,
       options,
@@ -1898,6 +1942,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteTagTemplateField(
       request,
       options,
@@ -1928,7 +1973,7 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Creates a tag on an [Entry][google.cloud.datacatalog.v1beta1.Entry].
+   * Creates a tag on an {@link google.cloud.datacatalog.v1beta1.Entry|Entry}.
    * Note: The project identified by the `parent` parameter for the
    * [tag](https://cloud.google.com/data-catalog/docs/reference/rest/v1beta1/projects.locations.entryGroups.entries.tags/create#path-parameters)
    * and the
@@ -1996,6 +2041,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createTag(request, options, callback);
   }
   updateTag(
@@ -2079,6 +2125,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       'tag.name': request.tag!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateTag(request, options, callback);
   }
   deleteTag(
@@ -2161,6 +2208,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteTag(request, options, callback);
   }
   setIamPolicy(
@@ -2244,6 +2292,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.setIamPolicy(request, options, callback);
   }
   getIamPolicy(
@@ -2329,6 +2378,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
   testIamPermissions(
@@ -2411,6 +2461,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.testIamPermissions(request, options, callback);
   }
 
@@ -2472,9 +2523,9 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   [SearchCatalogResponse.next_page_token][google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token],
+   *   {@link google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token},
    *   which indicates that this is a continuation of a prior
-   *   [SearchCatalogRequest][google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog]
+   *   {@link google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
    * @param {string} request.orderBy
@@ -2534,6 +2585,7 @@ export class DataCatalogClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.searchCatalog(request, options, callback);
   }
 
@@ -2572,9 +2624,9 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   [SearchCatalogResponse.next_page_token][google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token],
+   *   {@link google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token},
    *   which indicates that this is a continuation of a prior
-   *   [SearchCatalogRequest][google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog]
+   *   {@link google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
    * @param {string} request.orderBy
@@ -2598,6 +2650,7 @@ export class DataCatalogClient {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.searchCatalog.createStream(
       this._innerApiCalls.searchCatalog as gax.GaxCall,
       request,
@@ -2694,6 +2747,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listEntryGroups(request, options, callback);
   }
 
@@ -2742,6 +2796,7 @@ export class DataCatalogClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listEntryGroups.createStream(
       this._innerApiCalls.listEntryGroups as gax.GaxCall,
       request,
@@ -2843,6 +2898,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listEntries(request, options, callback);
   }
 
@@ -2896,6 +2952,7 @@ export class DataCatalogClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listEntries.createStream(
       this._innerApiCalls.listEntries as gax.GaxCall,
       request,
@@ -2922,14 +2979,14 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Lists the tags on an [Entry][google.cloud.datacatalog.v1beta1.Entry].
+   * Lists the tags on an {@link google.cloud.datacatalog.v1beta1.Entry|Entry}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the Data Catalog resource to list the tags of. The
-   *   resource could be an [Entry][google.cloud.datacatalog.v1beta1.Entry] or an
-   *   [EntryGroup][google.cloud.datacatalog.v1beta1.EntryGroup].
+   *   resource could be an {@link google.cloud.datacatalog.v1beta1.Entry|Entry} or an
+   *   {@link google.cloud.datacatalog.v1beta1.EntryGroup|EntryGroup}.
    *
    *   Examples:
    *
@@ -2995,6 +3052,7 @@ export class DataCatalogClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listTags(request, options, callback);
   }
 
@@ -3015,8 +3073,8 @@ export class DataCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the Data Catalog resource to list the tags of. The
-   *   resource could be an [Entry][google.cloud.datacatalog.v1beta1.Entry] or an
-   *   [EntryGroup][google.cloud.datacatalog.v1beta1.EntryGroup].
+   *   resource could be an {@link google.cloud.datacatalog.v1beta1.Entry|Entry} or an
+   *   {@link google.cloud.datacatalog.v1beta1.EntryGroup|EntryGroup}.
    *
    *   Examples:
    *
@@ -3046,6 +3104,7 @@ export class DataCatalogClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listTags.createStream(
       this._innerApiCalls.listTags as gax.GaxCall,
       request,
@@ -3571,8 +3630,9 @@ export class DataCatalogClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.dataCatalogStub.then(stub => {
+      return this.dataCatalogStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

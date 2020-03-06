@@ -45,8 +45,13 @@ export class PolicyTagManagerClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  policyTagManagerStub: Promise<{[name: string]: Function}>;
+  policyTagManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PolicyTagManagerClient.
@@ -70,8 +75,6 @@ export class PolicyTagManagerClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -101,25 +104,28 @@ export class PolicyTagManagerClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof PolicyTagManagerClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -135,7 +141,7 @@ export class PolicyTagManagerClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -143,29 +149,31 @@ export class PolicyTagManagerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      entryPathTemplate: new gaxModule.PathTemplate(
+      entryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
       ),
-      entryGroupPathTemplate: new gaxModule.PathTemplate(
+      entryGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}'
       ),
-      locationPathTemplate: new gaxModule.PathTemplate(
+      locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      policyTagPathTemplate: new gaxModule.PathTemplate(
+      policyTagPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/taxonomies/{taxonomy}/policyTags/{policy_tag}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      tagPathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      tagPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}'
       ),
-      tagTemplatePathTemplate: new gaxModule.PathTemplate(
+      tagTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}'
       ),
-      tagTemplateFieldPathTemplate: new gaxModule.PathTemplate(
+      tagTemplateFieldPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}'
       ),
-      taxonomyPathTemplate: new gaxModule.PathTemplate(
+      taxonomyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/taxonomies/{taxonomy}'
       ),
     };
@@ -174,12 +182,12 @@ export class PolicyTagManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listTaxonomies: new gaxModule.PageDescriptor(
+      listTaxonomies: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'taxonomies'
       ),
-      listPolicyTags: new gaxModule.PageDescriptor(
+      listPolicyTags: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'policyTags'
@@ -187,7 +195,7 @@ export class PolicyTagManagerClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.datacatalog.v1beta1.PolicyTagManager',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -198,17 +206,36 @@ export class PolicyTagManagerClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.policyTagManagerStub) {
+      return this.policyTagManagerStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.datacatalog.v1beta1.PolicyTagManager.
-    this.policyTagManagerStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.policyTagManagerStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.datacatalog.v1beta1.PolicyTagManager'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.datacatalog.v1beta1.PolicyTagManager,
-      opts
+          (this._protos as any).google.cloud.datacatalog.v1beta1
+            .PolicyTagManager,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -242,9 +269,9 @@ export class PolicyTagManagerClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -258,6 +285,8 @@ export class PolicyTagManagerClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.policyTagManagerStub;
   }
 
   /**
@@ -390,6 +419,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createTaxonomy(request, options, callback);
   }
   deleteTaxonomy(
@@ -472,6 +502,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteTaxonomy(request, options, callback);
   }
   updateTaxonomy(
@@ -558,6 +589,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       'taxonomy.name': request.taxonomy!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateTaxonomy(request, options, callback);
   }
   getTaxonomy(
@@ -638,6 +670,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getTaxonomy(request, options, callback);
   }
   createPolicyTag(
@@ -720,6 +753,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createPolicyTag(request, options, callback);
   }
   deletePolicyTag(
@@ -801,6 +835,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deletePolicyTag(request, options, callback);
   }
   updatePolicyTag(
@@ -890,6 +925,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       'policy_tag.name': request.policyTag!.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updatePolicyTag(request, options, callback);
   }
   getPolicyTag(
@@ -970,6 +1006,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getPolicyTag(request, options, callback);
   }
   getIamPolicy(
@@ -1039,6 +1076,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
@@ -1108,6 +1146,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
@@ -1178,6 +1217,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       resource: request.resource || '',
     });
+    this.initialize();
     return this._innerApiCalls.testIamPermissions(request, options, callback);
   }
 
@@ -1269,6 +1309,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listTaxonomies(request, options, callback);
   }
 
@@ -1314,6 +1355,7 @@ export class PolicyTagManagerClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listTaxonomies.createStream(
       this._innerApiCalls.listTaxonomies as gax.GaxCall,
       request,
@@ -1407,6 +1449,7 @@ export class PolicyTagManagerClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listPolicyTags(request, options, callback);
   }
 
@@ -1452,6 +1495,7 @@ export class PolicyTagManagerClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listPolicyTags.createStream(
       this._innerApiCalls.listPolicyTags as gax.GaxCall,
       request,
@@ -1977,8 +2021,9 @@ export class PolicyTagManagerClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.policyTagManagerStub.then(stub => {
+      return this.policyTagManagerStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

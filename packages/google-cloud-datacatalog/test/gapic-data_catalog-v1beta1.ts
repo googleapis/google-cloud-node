@@ -81,12 +81,30 @@ describe('v1beta1.DataCatalogClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new datacatalogModule.v1beta1.DataCatalogClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dataCatalogStub, undefined);
+    await client.initialize();
+    assert(client.dataCatalogStub);
+  });
+  it('has close method', () => {
+    const client = new datacatalogModule.v1beta1.DataCatalogClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createEntryGroup', () => {
     it('invokes createEntryGroup without error', done => {
       const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest = {};
       request.parent = '';
@@ -110,6 +128,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest = {};
       request.parent = '';
@@ -135,6 +155,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest = {};
       request.entryGroup = {};
@@ -159,6 +181,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest = {};
       request.entryGroup = {};
@@ -185,6 +209,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest = {};
       request.name = '';
@@ -208,6 +234,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest = {};
       request.name = '';
@@ -233,6 +261,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest = {};
       request.name = '';
@@ -281,6 +313,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateEntryRequest = {};
       request.parent = '';
@@ -304,6 +338,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateEntryRequest = {};
       request.parent = '';
@@ -329,6 +365,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest = {};
       request.entry = {};
@@ -353,6 +391,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest = {};
       request.entry = {};
@@ -379,6 +419,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest = {};
       request.name = '';
@@ -402,6 +444,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest = {};
       request.name = '';
@@ -427,6 +471,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetEntryRequest = {};
       request.name = '';
@@ -450,6 +496,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetEntryRequest = {};
       request.name = '';
@@ -475,6 +523,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ILookupEntryRequest = {};
       // Mock response
@@ -497,6 +547,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ILookupEntryRequest = {};
       // Mock response
@@ -521,6 +573,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest = {};
       request.parent = '';
@@ -544,6 +598,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest = {};
       request.parent = '';
@@ -569,6 +625,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest = {};
       request.name = '';
@@ -592,6 +650,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest = {};
       request.name = '';
@@ -617,6 +677,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest = {};
       request.tagTemplate = {};
@@ -641,6 +703,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest = {};
       request.tagTemplate = {};
@@ -667,6 +731,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest = {};
       request.name = '';
@@ -690,6 +756,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest = {};
       request.name = '';
@@ -715,6 +783,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest = {};
       request.parent = '';
@@ -738,6 +808,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest = {};
       request.parent = '';
@@ -763,6 +835,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest = {};
       request.name = '';
@@ -786,6 +860,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest = {};
       request.name = '';
@@ -811,6 +887,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest = {};
       request.name = '';
@@ -834,6 +912,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest = {};
       request.name = '';
@@ -859,6 +939,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest = {};
       request.name = '';
@@ -882,6 +964,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest = {};
       request.name = '';
@@ -907,6 +991,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTagRequest = {};
       request.parent = '';
@@ -930,6 +1016,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTagRequest = {};
       request.parent = '';
@@ -955,6 +1043,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTagRequest = {};
       request.tag = {};
@@ -979,6 +1069,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTagRequest = {};
       request.tag = {};
@@ -1005,6 +1097,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTagRequest = {};
       request.name = '';
@@ -1028,6 +1122,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTagRequest = {};
       request.name = '';
@@ -1053,6 +1149,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -1076,6 +1174,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -1101,6 +1201,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -1124,6 +1226,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -1149,6 +1253,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -1172,6 +1278,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -1197,6 +1305,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest = {};
       // Mock response
@@ -1223,6 +1333,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest = {};
       // Mock response
@@ -1254,6 +1366,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest = {};
       request.parent = '';
@@ -1281,6 +1395,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest = {};
       request.parent = '';
@@ -1313,6 +1429,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest = {};
       request.parent = '';
@@ -1340,6 +1458,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListEntriesRequest = {};
       request.parent = '';
@@ -1372,6 +1492,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListTagsRequest = {};
       request.parent = '';
@@ -1399,6 +1521,8 @@ describe('v1beta1.DataCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.datacatalog.v1beta1.IListTagsRequest = {};
       request.parent = '';
