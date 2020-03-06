@@ -89,6 +89,26 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.phishingProtectionServiceV1Beta1Stub, undefined);
+    await client.initialize();
+    assert(client.phishingProtectionServiceV1Beta1Stub);
+  });
+  it('has close method', () => {
+    const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('reportPhishing', () => {
     it('invokes reportPhishing without error', done => {
       const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
@@ -97,6 +117,8 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest = {};
       request.parent = '';
@@ -122,6 +144,8 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest = {};
       request.parent = '';
