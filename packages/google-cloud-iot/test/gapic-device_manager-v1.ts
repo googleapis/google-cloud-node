@@ -81,12 +81,30 @@ describe('v1.DeviceManagerClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new devicemanagerModule.v1.DeviceManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.deviceManagerStub, undefined);
+    await client.initialize();
+    assert(client.deviceManagerStub);
+  });
+  it('has close method', () => {
+    const client = new devicemanagerModule.v1.DeviceManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createDeviceRegistry', () => {
     it('invokes createDeviceRegistry without error', done => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ICreateDeviceRegistryRequest = {};
       request.parent = '';
@@ -110,6 +128,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ICreateDeviceRegistryRequest = {};
       request.parent = '';
@@ -135,6 +155,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IGetDeviceRegistryRequest = {};
       request.name = '';
@@ -158,6 +180,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IGetDeviceRegistryRequest = {};
       request.name = '';
@@ -183,6 +207,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IUpdateDeviceRegistryRequest = {};
       request.deviceRegistry = {};
@@ -207,6 +233,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IUpdateDeviceRegistryRequest = {};
       request.deviceRegistry = {};
@@ -233,6 +261,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IDeleteDeviceRegistryRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IDeleteDeviceRegistryRequest = {};
       request.name = '';
@@ -281,6 +313,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ICreateDeviceRequest = {};
       request.parent = '';
@@ -304,6 +338,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ICreateDeviceRequest = {};
       request.parent = '';
@@ -329,6 +365,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IGetDeviceRequest = {};
       request.name = '';
@@ -352,6 +390,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IGetDeviceRequest = {};
       request.name = '';
@@ -377,6 +417,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IUpdateDeviceRequest = {};
       request.device = {};
@@ -401,6 +443,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IUpdateDeviceRequest = {};
       request.device = {};
@@ -427,6 +471,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IDeleteDeviceRequest = {};
       request.name = '';
@@ -450,6 +496,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IDeleteDeviceRequest = {};
       request.name = '';
@@ -475,6 +523,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest = {};
       request.name = '';
@@ -498,6 +548,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest = {};
       request.name = '';
@@ -526,6 +578,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceConfigVersionsRequest = {};
       request.name = '';
@@ -549,6 +603,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceConfigVersionsRequest = {};
       request.name = '';
@@ -577,6 +633,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceStatesRequest = {};
       request.name = '';
@@ -600,6 +658,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceStatesRequest = {};
       request.name = '';
@@ -625,6 +685,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -648,6 +710,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -673,6 +737,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -696,6 +762,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -721,6 +789,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -744,6 +814,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -769,6 +841,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ISendCommandToDeviceRequest = {};
       request.name = '';
@@ -792,6 +866,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ISendCommandToDeviceRequest = {};
       request.name = '';
@@ -817,6 +893,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IBindDeviceToGatewayRequest = {};
       request.parent = '';
@@ -840,6 +918,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IBindDeviceToGatewayRequest = {};
       request.parent = '';
@@ -865,6 +945,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest = {};
       request.parent = '';
@@ -888,6 +970,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest = {};
       request.parent = '';
@@ -916,6 +1000,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceRegistriesRequest = {};
       request.parent = '';
@@ -943,6 +1029,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceRegistriesRequest = {};
       request.parent = '';
@@ -975,6 +1063,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDevicesRequest = {};
       request.parent = '';
@@ -1002,6 +1092,8 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDevicesRequest = {};
       request.parent = '';
