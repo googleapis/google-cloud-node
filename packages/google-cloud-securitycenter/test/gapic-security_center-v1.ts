@@ -104,12 +104,30 @@ describe('v1.SecurityCenterClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new securitycenterModule.v1.SecurityCenterClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.securityCenterStub, undefined);
+    await client.initialize();
+    assert(client.securityCenterStub);
+  });
+  it('has close method', () => {
+    const client = new securitycenterModule.v1.SecurityCenterClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createSource', () => {
     it('invokes createSource without error', done => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.ICreateSourceRequest = {};
       request.parent = '';
@@ -133,6 +151,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.ICreateSourceRequest = {};
       request.parent = '';
@@ -158,6 +178,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.ICreateFindingRequest = {};
       request.parent = '';
@@ -181,6 +203,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.ICreateFindingRequest = {};
       request.parent = '';
@@ -206,6 +230,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest = {};
       request.parent = '';
@@ -229,6 +255,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest = {};
       request.parent = '';
@@ -257,6 +285,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest = {};
       request.name = '';
@@ -280,6 +310,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest = {};
       request.name = '';
@@ -308,6 +340,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -331,6 +365,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
       request.resource = '';
@@ -356,6 +392,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest = {};
       request.name = '';
@@ -379,6 +417,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGetNotificationConfigRequest = {};
       request.name = '';
@@ -404,6 +444,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGetOrganizationSettingsRequest = {};
       request.name = '';
@@ -427,6 +469,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGetOrganizationSettingsRequest = {};
       request.name = '';
@@ -455,6 +499,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGetSourceRequest = {};
       request.name = '';
@@ -478,6 +524,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGetSourceRequest = {};
       request.name = '';
@@ -503,6 +551,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.ISetFindingStateRequest = {};
       request.name = '';
@@ -526,6 +576,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.ISetFindingStateRequest = {};
       request.name = '';
@@ -551,6 +603,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -574,6 +628,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
       request.resource = '';
@@ -599,6 +655,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -622,6 +680,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
       request.resource = '';
@@ -647,6 +707,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateFindingRequest = {};
       request.finding = {};
@@ -671,6 +733,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateFindingRequest = {};
       request.finding = {};
@@ -697,6 +761,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest = {};
       request.notificationConfig = {};
@@ -721,6 +787,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest = {};
       request.notificationConfig = {};
@@ -750,6 +818,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateOrganizationSettingsRequest = {};
       request.organizationSettings = {};
@@ -774,6 +844,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateOrganizationSettingsRequest = {};
       request.organizationSettings = {};
@@ -803,6 +875,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateSourceRequest = {};
       request.source = {};
@@ -827,6 +901,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateSourceRequest = {};
       request.source = {};
@@ -853,6 +929,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateSecurityMarksRequest = {};
       request.securityMarks = {};
@@ -877,6 +955,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IUpdateSecurityMarksRequest = {};
       request.securityMarks = {};
@@ -903,6 +983,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IRunAssetDiscoveryRequest = {};
       request.parent = '';
@@ -933,6 +1015,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IRunAssetDiscoveryRequest = {};
       request.parent = '';
@@ -966,6 +1050,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGroupAssetsRequest = {};
       request.parent = '';
@@ -993,6 +1079,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGroupAssetsRequest = {};
       request.parent = '';
@@ -1025,6 +1113,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGroupFindingsRequest = {};
       request.parent = '';
@@ -1052,6 +1142,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IGroupFindingsRequest = {};
       request.parent = '';
@@ -1084,6 +1176,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IListAssetsRequest = {};
       request.parent = '';
@@ -1111,6 +1205,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IListAssetsRequest = {};
       request.parent = '';
@@ -1143,6 +1239,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IListFindingsRequest = {};
       request.parent = '';
@@ -1170,6 +1268,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IListFindingsRequest = {};
       request.parent = '';
@@ -1202,6 +1302,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest = {};
       request.parent = '';
@@ -1232,6 +1334,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IListNotificationConfigsRequest = {};
       request.parent = '';
@@ -1264,6 +1368,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IListSourcesRequest = {};
       request.parent = '';
@@ -1291,6 +1397,8 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.securitycenter.v1.IListSourcesRequest = {};
       request.parent = '';
