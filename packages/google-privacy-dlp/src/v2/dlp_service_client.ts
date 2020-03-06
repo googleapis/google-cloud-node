@@ -52,8 +52,13 @@ export class DlpServiceClient {
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  dlpServiceStub: Promise<{[name: string]: Function}>;
+  dlpServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DlpServiceClient.
@@ -77,8 +82,6 @@ export class DlpServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
@@ -108,25 +111,28 @@ export class DlpServiceClient {
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = (this.constructor as typeof DlpServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -142,7 +148,7 @@ export class DlpServiceClient {
       'protos',
       'protos.json'
     );
-    const protos = gaxGrpc.loadProto(
+    this._protos = this._gaxGrpc.loadProto(
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
@@ -150,32 +156,34 @@ export class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      dlpJobPathTemplate: new gaxModule.PathTemplate(
+      dlpJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/dlpJobs/{dlp_job}'
       ),
-      jobTriggerPathTemplate: new gaxModule.PathTemplate(
+      jobTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/jobTriggers/{job_trigger}'
       ),
-      organizationPathTemplate: new gaxModule.PathTemplate(
+      organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
-      organizationDeidentifyTemplatePathTemplate: new gaxModule.PathTemplate(
+      organizationDeidentifyTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/deidentifyTemplates/{deidentify_template}'
       ),
-      organizationInspectTemplatePathTemplate: new gaxModule.PathTemplate(
+      organizationInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/inspectTemplates/{inspect_template}'
       ),
-      organizationStoredInfoTypePathTemplate: new gaxModule.PathTemplate(
+      organizationStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/storedInfoTypes/{stored_info_type}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      projectDeidentifyTemplatePathTemplate: new gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectDeidentifyTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/deidentifyTemplates/{deidentify_template}'
       ),
-      projectInspectTemplatePathTemplate: new gaxModule.PathTemplate(
+      projectInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/inspectTemplates/{inspect_template}'
       ),
-      projectStoredInfoTypePathTemplate: new gaxModule.PathTemplate(
+      projectStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/storedInfoTypes/{stored_info_type}'
       ),
     };
@@ -184,27 +192,27 @@ export class DlpServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listInspectTemplates: new gaxModule.PageDescriptor(
+      listInspectTemplates: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'inspectTemplates'
       ),
-      listDeidentifyTemplates: new gaxModule.PageDescriptor(
+      listDeidentifyTemplates: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'deidentifyTemplates'
       ),
-      listJobTriggers: new gaxModule.PageDescriptor(
+      listJobTriggers: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'jobTriggers'
       ),
-      listDlpJobs: new gaxModule.PageDescriptor(
+      listDlpJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'jobs'
       ),
-      listStoredInfoTypes: new gaxModule.PageDescriptor(
+      listStoredInfoTypes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'storedInfoTypes'
@@ -212,7 +220,7 @@ export class DlpServiceClient {
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
+    this._defaults = this._gaxGrpc.constructSettings(
       'google.privacy.dlp.v2.DlpService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
@@ -223,17 +231,35 @@ export class DlpServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.dlpServiceStub) {
+      return this.dlpServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.privacy.dlp.v2.DlpService.
-    this.dlpServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
+    this.dlpServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
             'google.privacy.dlp.v2.DlpService'
           )
         : // tslint:disable-next-line no-any
-          (protos as any).google.privacy.dlp.v2.DlpService,
-      opts
+          (this._protos as any).google.privacy.dlp.v2.DlpService,
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -285,9 +311,9 @@ export class DlpServiceClient {
         }
       );
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -301,6 +327,8 @@ export class DlpServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.dlpServiceStub;
   }
 
   /**
@@ -444,6 +472,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.inspectContent(request, options, callback);
   }
   redactImage(
@@ -534,6 +563,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.redactImage(request, options, callback);
   }
   deidentifyContent(
@@ -638,6 +668,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.deidentifyContent(request, options, callback);
   }
   reidentifyContent(
@@ -744,6 +775,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.reidentifyContent(request, options, callback);
   }
   listInfoTypes(
@@ -818,6 +850,7 @@ export class DlpServiceClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    this.initialize();
     return this._innerApiCalls.listInfoTypes(request, options, callback);
   }
   createInspectTemplate(
@@ -911,6 +944,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createInspectTemplate(
       request,
       options,
@@ -1002,6 +1036,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateInspectTemplate(
       request,
       options,
@@ -1081,6 +1116,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getInspectTemplate(request, options, callback);
   }
   deleteInspectTemplate(
@@ -1164,6 +1200,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteInspectTemplate(
       request,
       options,
@@ -1262,6 +1299,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createDeidentifyTemplate(
       request,
       options,
@@ -1354,6 +1392,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateDeidentifyTemplate(
       request,
       options,
@@ -1442,6 +1481,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getDeidentifyTemplate(
       request,
       options,
@@ -1530,6 +1570,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteDeidentifyTemplate(
       request,
       options,
@@ -1618,6 +1659,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createJobTrigger(request, options, callback);
   }
   updateJobTrigger(
@@ -1696,6 +1738,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateJobTrigger(request, options, callback);
   }
   getJobTrigger(
@@ -1769,6 +1812,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getJobTrigger(request, options, callback);
   }
   deleteJobTrigger(
@@ -1843,6 +1887,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteJobTrigger(request, options, callback);
   }
   activateJobTrigger(
@@ -1917,6 +1962,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.activateJobTrigger(request, options, callback);
   }
   createDlpJob(
@@ -2006,6 +2052,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createDlpJob(request, options, callback);
   }
   getDlpJob(
@@ -2079,6 +2126,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getDlpJob(request, options, callback);
   }
   deleteDlpJob(
@@ -2154,6 +2202,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteDlpJob(request, options, callback);
   }
   cancelDlpJob(
@@ -2229,6 +2278,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.cancelDlpJob(request, options, callback);
   }
   createStoredInfoType(
@@ -2322,6 +2372,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.createStoredInfoType(request, options, callback);
   }
   updateStoredInfoType(
@@ -2413,6 +2464,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.updateStoredInfoType(request, options, callback);
   }
   getStoredInfoType(
@@ -2489,6 +2541,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.getStoredInfoType(request, options, callback);
   }
   deleteStoredInfoType(
@@ -2573,6 +2626,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
     });
+    this.initialize();
     return this._innerApiCalls.deleteStoredInfoType(request, options, callback);
   }
 
@@ -2682,6 +2736,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listInspectTemplates(request, options, callback);
   }
 
@@ -2745,6 +2800,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listInspectTemplates.createStream(
       this._innerApiCalls.listInspectTemplates as gax.GaxCall,
       request,
@@ -2858,6 +2914,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listDeidentifyTemplates(
       request,
       options,
@@ -2925,6 +2982,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listDeidentifyTemplates.createStream(
       this._innerApiCalls.listDeidentifyTemplates as gax.GaxCall,
       request,
@@ -3063,6 +3121,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listJobTriggers(request, options, callback);
   }
 
@@ -3152,6 +3211,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listJobTriggers.createStream(
       this._innerApiCalls.listJobTriggers as gax.GaxCall,
       request,
@@ -3293,6 +3353,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listDlpJobs(request, options, callback);
   }
 
@@ -3384,6 +3445,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listDlpJobs.createStream(
       this._innerApiCalls.listDlpJobs as gax.GaxCall,
       request,
@@ -3498,6 +3560,7 @@ export class DlpServiceClient {
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
     });
+    this.initialize();
     return this._innerApiCalls.listStoredInfoTypes(request, options, callback);
   }
 
@@ -3562,6 +3625,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
+    this.initialize();
     return this._descriptors.page.listStoredInfoTypes.createStream(
       this._innerApiCalls.listStoredInfoTypes as gax.GaxCall,
       request,
@@ -3969,8 +4033,9 @@ export class DlpServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.dlpServiceStub.then(stub => {
+      return this.dlpServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -81,12 +81,30 @@ describe('v2.DlpServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new dlpserviceModule.v2.DlpServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dlpServiceStub, undefined);
+    await client.initialize();
+    assert(client.dlpServiceStub);
+  });
+  it('has close method', () => {
+    const client = new dlpserviceModule.v2.DlpServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('inspectContent', () => {
     it('invokes inspectContent without error', done => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IInspectContentRequest = {};
       request.parent = '';
@@ -110,6 +128,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IInspectContentRequest = {};
       request.parent = '';
@@ -135,6 +155,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IRedactImageRequest = {};
       request.parent = '';
@@ -158,6 +180,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IRedactImageRequest = {};
       request.parent = '';
@@ -183,6 +207,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest = {};
       request.parent = '';
@@ -206,6 +232,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest = {};
       request.parent = '';
@@ -231,6 +259,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest = {};
       request.parent = '';
@@ -254,6 +284,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest = {};
       request.parent = '';
@@ -279,6 +311,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest = {};
       // Mock response
@@ -301,6 +335,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest = {};
       // Mock response
@@ -325,6 +361,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest = {};
       request.parent = '';
@@ -348,6 +386,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest = {};
       request.parent = '';
@@ -373,6 +413,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest = {};
       request.name = '';
@@ -396,6 +438,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest = {};
       request.name = '';
@@ -421,6 +465,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest = {};
       request.name = '';
@@ -444,6 +490,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest = {};
       request.name = '';
@@ -469,6 +517,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest = {};
       request.name = '';
@@ -492,6 +542,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest = {};
       request.name = '';
@@ -517,6 +569,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest = {};
       request.parent = '';
@@ -540,6 +594,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest = {};
       request.parent = '';
@@ -568,6 +624,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest = {};
       request.name = '';
@@ -591,6 +649,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest = {};
       request.name = '';
@@ -619,6 +679,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest = {};
       request.name = '';
@@ -642,6 +704,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest = {};
       request.name = '';
@@ -667,6 +731,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest = {};
       request.name = '';
@@ -690,6 +756,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest = {};
       request.name = '';
@@ -718,6 +786,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest = {};
       request.parent = '';
@@ -741,6 +811,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest = {};
       request.parent = '';
@@ -766,6 +838,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest = {};
       request.name = '';
@@ -789,6 +863,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest = {};
       request.name = '';
@@ -814,6 +890,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest = {};
       request.name = '';
@@ -837,6 +915,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest = {};
       request.name = '';
@@ -862,6 +942,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest = {};
       request.name = '';
@@ -885,6 +967,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest = {};
       request.name = '';
@@ -910,6 +994,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest = {};
       request.name = '';
@@ -933,6 +1019,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest = {};
       request.name = '';
@@ -958,6 +1046,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest = {};
       request.parent = '';
@@ -981,6 +1071,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest = {};
       request.parent = '';
@@ -1006,6 +1098,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest = {};
       request.name = '';
@@ -1029,6 +1123,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest = {};
       request.name = '';
@@ -1054,6 +1150,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest = {};
       request.name = '';
@@ -1077,6 +1175,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest = {};
       request.name = '';
@@ -1102,6 +1202,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest = {};
       request.name = '';
@@ -1125,6 +1227,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest = {};
       request.name = '';
@@ -1150,6 +1254,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest = {};
       request.parent = '';
@@ -1173,6 +1279,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest = {};
       request.parent = '';
@@ -1198,6 +1306,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest = {};
       request.name = '';
@@ -1221,6 +1331,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest = {};
       request.name = '';
@@ -1246,6 +1358,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest = {};
       request.name = '';
@@ -1269,6 +1383,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest = {};
       request.name = '';
@@ -1294,6 +1410,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest = {};
       request.name = '';
@@ -1317,6 +1435,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest = {};
       request.name = '';
@@ -1342,6 +1462,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest = {};
       request.parent = '';
@@ -1369,6 +1491,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest = {};
       request.parent = '';
@@ -1401,6 +1525,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest = {};
       request.parent = '';
@@ -1431,6 +1557,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest = {};
       request.parent = '';
@@ -1463,6 +1591,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest = {};
       request.parent = '';
@@ -1490,6 +1620,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest = {};
       request.parent = '';
@@ -1522,6 +1654,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest = {};
       request.parent = '';
@@ -1549,6 +1683,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest = {};
       request.parent = '';
@@ -1581,6 +1717,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest = {};
       request.parent = '';
@@ -1608,6 +1746,8 @@ describe('v2.DlpServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest = {};
       request.parent = '';
