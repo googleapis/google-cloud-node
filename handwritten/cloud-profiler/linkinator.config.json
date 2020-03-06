@@ -5,5 +5,7 @@
     "www.googleapis.com",
     "circleci.com/gh/googleapis/cloud-profiler-nodejs",
     "img.shields.io"
-  ]
+  ],
+  "silent": true,
+  "concurrency": 10
 }
