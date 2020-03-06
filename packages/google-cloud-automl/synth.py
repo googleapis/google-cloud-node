@@ -19,20 +19,27 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1', 'v1']
 for version in versions:
-    library = gapic.node_library('automl', version)
-    s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
+    library = gapic.typescript_library(
+        'automl', version,
+        generator_args={
+            "grpc-service-config": f"google/cloud/automl/{version}/automl_grpc_service_config.json",
+            "package-name": f"@google-cloud/automl",
+            "main-service": f"automl"
+            },
+        proto_path=f'/google/cloud/automl/{version}',
+        extra_proto_files=['google/cloud/common_resources.proto'],
+    )
+    s.copy(library, excludes=['src/index.ts', 'README.md', 'package.json'])
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-
+linkinator_json="linkinator.config.json"
+s.replace(linkinator_json, '"recurse": true,', '"recurse": true,\n\t"concurrency": 10,')
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])

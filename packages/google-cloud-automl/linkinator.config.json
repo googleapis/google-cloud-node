@@ -1,10 +1,9 @@
 {
   "recurse": true,
+	"concurrency": 10,
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "setEndpoint.js",
-    "https://www.tensorflow.org/js",
     "img.shields.io"
   ]
 }
