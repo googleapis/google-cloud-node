@@ -105,12 +105,30 @@ describe('v1beta1.BigQueryStorageClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.bigQueryStorageStub, undefined);
+    await client.initialize();
+    assert(client.bigQueryStorageStub);
+  });
+  it('has close method', () => {
+    const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('createReadSession', () => {
     it('invokes createReadSession without error', done => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.ICreateReadSessionRequest = {};
       request.tableReference = {};
@@ -137,6 +155,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.ICreateReadSessionRequest = {};
       request.tableReference = {};
@@ -165,6 +185,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.IBatchCreateReadSessionStreamsRequest = {};
       request.session = {};
@@ -189,6 +211,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.IBatchCreateReadSessionStreamsRequest = {};
       request.session = {};
@@ -218,6 +242,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.IFinalizeStreamRequest = {};
       request.stream = {};
@@ -242,6 +268,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.IFinalizeStreamRequest = {};
       request.stream = {};
@@ -268,6 +296,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.ISplitReadStreamRequest = {};
       request.originalStream = {};
@@ -292,6 +322,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.ISplitReadStreamRequest = {};
       request.originalStream = {};
@@ -318,6 +350,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.IReadRowsRequest = {};
       request.readPosition = {};
@@ -346,6 +380,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.bigquery.storage.v1beta1.IReadRowsRequest = {};
       request.readPosition = {};
