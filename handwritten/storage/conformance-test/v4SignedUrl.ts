@@ -21,21 +21,21 @@ import * as path from 'path';
 import * as sinon from 'sinon';
 import * as querystring from 'querystring';
 
-import {Storage, GetSignedUrlConfig, GetBucketSignedUrlConfig} from '../src/';
+import {Storage, GetSignedUrlConfig} from '../src/';
 import * as url from 'url';
 
 export enum UrlStyle {
   PATH_STYLE = 'PATH_STYLE',
   VIRTUAL_HOSTED_STYLE = 'VIRTUAL_HOSTED_STYLE',
-  BUCKET_BOUND_DOMAIN = 'BUCKET_BOUND_DOMAIN',
+  BUCKET_BOUND_HOSTNAME = 'BUCKET_BOUND_HOSTNAME',
 }
 
-interface V4SignedURLConformanceTestCases {
+interface V4SignedURLTestCase {
   description: string;
   bucket: string;
   object?: string;
   urlStyle?: UrlStyle;
-  bucketBoundDomain?: string;
+  bucketBoundHostname?: string;
   scheme: 'https' | 'http';
   headers?: OutgoingHttpHeaders;
   queryParameters?: {[key: string]: string};
@@ -43,6 +43,33 @@ interface V4SignedURLConformanceTestCases {
   expiration: number;
   timestamp: string;
   expectedUrl: string;
+}
+
+interface V4SignedPolicyTestCase {
+  description: string;
+  policyInput: PolicyInput;
+  policyOutput: PolicyOutput;
+}
+
+interface PolicyInput {
+  scheme: 'https' | 'http';
+  bucket: string;
+  object: string;
+  expiration: number;
+  timestamp: string;
+  conditions?: Conditions;
+  fields?: {[key: string]: string};
+}
+
+interface Conditions {
+  contentLengthRange: [number, number];
+  startsWith: [string, string];
+  acl: string;
+}
+
+interface PolicyOutput {
+  url: string;
+  fields: {[key: string]: string};
 }
 
 interface FileAction {
@@ -58,18 +85,24 @@ const testFile = fs.readFileSync(
   'utf-8'
 );
 
-const testCases = JSON.parse(testFile)
-  .signingV4Tests as V4SignedURLConformanceTestCases[];
+// tslint:disable-next-line no-any
+const testCases: any[] = JSON.parse(testFile).signingV4Tests;
+const v4SignedUrlCases: V4SignedURLTestCase[] = testCases.filter(
+  testCase => testCase.expectedUrl
+);
+const v4SignedPolicyCases: V4SignedPolicyTestCase[] = testCases.filter(
+  testCase => testCase.policyInput
+);
 
 const SERVICE_ACCOUNT = path.join(
   __dirname,
   '../../conformance-test/fixtures/signing-service-account.json'
 );
 
-describe('v4 signed url', () => {
-  const storage = new Storage({keyFilename: SERVICE_ACCOUNT});
+const storage = new Storage({keyFilename: SERVICE_ACCOUNT});
 
-  testCases.forEach(testCase => {
+describe('v4 signed url', () => {
+  v4SignedUrlCases.forEach(testCase => {
     it(testCase.description, async () => {
       const NOW = new Date(testCase.timestamp);
 
@@ -77,8 +110,8 @@ describe('v4 signed url', () => {
       const bucket = storage.bucket(testCase.bucket);
       const expires = NOW.valueOf() + testCase.expiration * 1000;
       const version = 'v4' as 'v4';
-      const domain = testCase.bucketBoundDomain
-        ? `${testCase.scheme}://${testCase.bucketBoundDomain}`
+      const domain = testCase.bucketBoundHostname
+        ? `${testCase.scheme}://${testCase.bucketBoundHostname}`
         : undefined;
       const {cname, virtualHostedStyle} = parseUrlStyle(
         testCase.urlStyle,
@@ -138,11 +171,41 @@ describe('v4 signed url', () => {
   });
 });
 
+// tslint:disable-next-line ban
+describe.skip('v4 signed policy', () => {
+  v4SignedPolicyCases.forEach(testCase => {
+    // TODO: implement parsing v4 signed policy tests
+    it(testCase.description, async () => {
+      // const input = testCase.policyInput;
+      // const NOW = new Date(input.timestamp);
+      // const fakeTimer = sinon.useFakeTimers(NOW);
+      // const bucket = storage.bucket(input.bucket);
+      // const expires = NOW.valueOf() + input.expiration * 1000;
+      // const options = {};
+      // const fields = input.fields || {};
+      // // fields that Node.js supports as argument to method.
+      // const acl = fields.acl;
+      // delete fields.acl;
+      // const successActionStatus = fields.success_action_status;
+      // delete fields.successActionStatus;
+      // const successActionRedirect = fields.success_action_redirect;
+      // delete fields.successActionRedirect;
+      // const conditions = input.conditions || {} as Conditions;
+      // // conditions that Node.js support as argument to method.
+      // const startsWith = conditions.startsWith;
+      // let contentLengthMin
+      // if (conditions.contentLengthRange) {
+      // }
+      // fakeTimer.restore();
+    });
+  });
+});
+
 function parseUrlStyle(
   style?: UrlStyle,
   domain?: string
 ): {cname?: string; virtualHostedStyle?: boolean} {
-  if (style === UrlStyle.BUCKET_BOUND_DOMAIN) {
+  if (style === UrlStyle.BUCKET_BOUND_HOSTNAME) {
     return {cname: domain};
   } else if (style === UrlStyle.VIRTUAL_HOSTED_STYLE) {
     return {virtualHostedStyle: true};
