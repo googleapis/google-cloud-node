@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.8.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.7.0...v2.8.0) (2020-03-09)
+
+
+### Features
+
+* typescript conversion on video-intelligence ([#375](https://www.github.com/googleapis/nodejs-video-intelligence/issues/375)) ([30b01d5](https://www.github.com/googleapis/nodejs-video-intelligence/commit/30b01d5b2e5eae2c26591f916255ee4f09ea5dff))
+
 ## [2.7.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.5...v2.7.0) (2020-02-13)
 
 
