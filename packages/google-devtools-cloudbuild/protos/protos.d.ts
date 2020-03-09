@@ -706,6 +706,12 @@ export namespace google {
 
                     /** RepoSource dir */
                     dir?: (string|null);
+
+                    /** RepoSource invertRegex */
+                    invertRegex?: (boolean|null);
+
+                    /** RepoSource substitutions */
+                    substitutions?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a RepoSource. */
@@ -734,6 +740,12 @@ export namespace google {
 
                     /** RepoSource dir. */
                     public dir: string;
+
+                    /** RepoSource invertRegex. */
+                    public invertRegex: boolean;
+
+                    /** RepoSource substitutions. */
+                    public substitutions: { [k: string]: string };
 
                     /** RepoSource revision. */
                     public revision?: ("branchName"|"tagName"|"commitSha");
@@ -1711,7 +1723,8 @@ export namespace google {
                         FAILURE = 4,
                         INTERNAL_ERROR = 5,
                         TIMEOUT = 6,
-                        CANCELLED = 7
+                        CANCELLED = 7,
+                        EXPIRED = 9
                     }
                 }
 
@@ -3278,6 +3291,9 @@ export namespace google {
 
                     /** PullRequestFilter commentControl */
                     commentControl?: (google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl|keyof typeof google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl|null);
+
+                    /** PullRequestFilter invertRegex */
+                    invertRegex?: (boolean|null);
                 }
 
                 /** Represents a PullRequestFilter. */
@@ -3294,6 +3310,9 @@ export namespace google {
 
                     /** PullRequestFilter commentControl. */
                     public commentControl: (google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl|keyof typeof google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl);
+
+                    /** PullRequestFilter invertRegex. */
+                    public invertRegex: boolean;
 
                     /** PullRequestFilter gitRef. */
                     public gitRef?: "branch";
@@ -3386,6 +3405,9 @@ export namespace google {
 
                     /** PushFilter tag */
                     tag?: (string|null);
+
+                    /** PushFilter invertRegex */
+                    invertRegex?: (boolean|null);
                 }
 
                 /** Represents a PushFilter. */
@@ -3402,6 +3424,9 @@ export namespace google {
 
                     /** PushFilter tag. */
                     public tag: string;
+
+                    /** PushFilter invertRegex. */
+                    public invertRegex: boolean;
 
                     /** PushFilter gitRef. */
                     public gitRef?: ("branch"|"tag");

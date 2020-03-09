@@ -235,6 +235,15 @@
                         "dir": {
                           "type": "string",
                           "id": 7
+                        },
+                        "invertRegex": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "substitutions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9
                         }
                       }
                     },
@@ -270,7 +279,10 @@
                         },
                         "pushTiming": {
                           "type": "TimeSpan",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -319,7 +331,10 @@
                         },
                         "timing": {
                           "type": "TimeSpan",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "pullTiming": {
                           "type": "TimeSpan",
@@ -395,11 +410,17 @@
                       "fields": {
                         "id": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "projectId": {
                           "type": "string",
-                          "id": 16
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "status": {
                           "type": "Status",
@@ -420,19 +441,31 @@
                         },
                         "results": {
                           "type": "Results",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "startTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "finishTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "timeout": {
                           "type": "google.protobuf.Duration",
@@ -465,7 +498,10 @@
                         },
                         "logUrl": {
                           "type": "string",
-                          "id": 25
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "substitutions": {
                           "keyType": "string",
@@ -485,7 +521,10 @@
                         "timing": {
                           "keyType": "string",
                           "type": "TimeSpan",
-                          "id": 33
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -498,7 +537,8 @@
                             "FAILURE": 4,
                             "INTERNAL_ERROR": 5,
                             "TIMEOUT": 6,
-                            "CANCELLED": 7
+                            "CANCELLED": 7,
+                            "EXPIRED": 9
                           }
                         }
                       }
@@ -568,7 +608,10 @@
                         "fileHashes": {
                           "keyType": "string",
                           "type": "FileHashes",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -717,7 +760,10 @@
                       "fields": {
                         "id": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -750,7 +796,10 @@
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "disabled": {
                           "type": "bool",
@@ -824,6 +873,10 @@
                         "commentControl": {
                           "type": "CommentControl",
                           "id": 5
+                        },
+                        "invertRegex": {
+                          "type": "bool",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -852,6 +905,10 @@
                         "tag": {
                           "type": "string",
                           "id": 3
+                        },
+                        "invertRegex": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },

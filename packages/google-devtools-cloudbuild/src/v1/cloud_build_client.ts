@@ -617,7 +617,7 @@ export class CloudBuildClient {
    * @param {string} request.projectId
    *   Required. ID of the project that owns the trigger.
    * @param {string} request.triggerId
-   *   Required. ID of the `BuildTrigger` to get.
+   *   Required. Identifier (`id` or `name`) of the `BuildTrigger` to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -1334,6 +1334,8 @@
                          * @property {string|null} [tagName] RepoSource tagName
                          * @property {string|null} [commitSha] RepoSource commitSha
                          * @property {string|null} [dir] RepoSource dir
+                         * @property {boolean|null} [invertRegex] RepoSource invertRegex
+                         * @property {Object.<string,string>|null} [substitutions] RepoSource substitutions
                          */
     
                         /**
@@ -1345,6 +1347,7 @@
                          * @param {google.devtools.cloudbuild.v1.IRepoSource=} [properties] Properties to set
                          */
                         function RepoSource(properties) {
+                            this.substitutions = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1399,6 +1402,22 @@
                          */
                         RepoSource.prototype.dir = "";
     
+                        /**
+                         * RepoSource invertRegex.
+                         * @member {boolean} invertRegex
+                         * @memberof google.devtools.cloudbuild.v1.RepoSource
+                         * @instance
+                         */
+                        RepoSource.prototype.invertRegex = false;
+    
+                        /**
+                         * RepoSource substitutions.
+                         * @member {Object.<string,string>} substitutions
+                         * @memberof google.devtools.cloudbuild.v1.RepoSource
+                         * @instance
+                         */
+                        RepoSource.prototype.substitutions = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1449,6 +1468,11 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.commitSha);
                             if (message.dir != null && message.hasOwnProperty("dir"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.dir);
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.invertRegex);
+                            if (message.substitutions != null && message.hasOwnProperty("substitutions"))
+                                for (var keys = Object.keys(message.substitutions), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.substitutions[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -1479,7 +1503,7 @@
                         RepoSource.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RepoSource();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RepoSource(), key;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1500,6 +1524,17 @@
                                     break;
                                 case 7:
                                     message.dir = reader.string();
+                                    break;
+                                case 8:
+                                    message.invertRegex = reader.bool();
+                                    break;
+                                case 9:
+                                    reader.skip().pos++;
+                                    if (message.substitutions === $util.emptyObject)
+                                        message.substitutions = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.substitutions[key] = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1565,6 +1600,17 @@
                             if (message.dir != null && message.hasOwnProperty("dir"))
                                 if (!$util.isString(message.dir))
                                     return "dir: string expected";
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                if (typeof message.invertRegex !== "boolean")
+                                    return "invertRegex: boolean expected";
+                            if (message.substitutions != null && message.hasOwnProperty("substitutions")) {
+                                if (!$util.isObject(message.substitutions))
+                                    return "substitutions: object expected";
+                                var key = Object.keys(message.substitutions);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.substitutions[key[i]]))
+                                        return "substitutions: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -1592,6 +1638,15 @@
                                 message.commitSha = String(object.commitSha);
                             if (object.dir != null)
                                 message.dir = String(object.dir);
+                            if (object.invertRegex != null)
+                                message.invertRegex = Boolean(object.invertRegex);
+                            if (object.substitutions) {
+                                if (typeof object.substitutions !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.RepoSource.substitutions: object expected");
+                                message.substitutions = {};
+                                for (var keys = Object.keys(object.substitutions), i = 0; i < keys.length; ++i)
+                                    message.substitutions[keys[i]] = String(object.substitutions[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -1608,10 +1663,13 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.substitutions = {};
                             if (options.defaults) {
                                 object.projectId = "";
                                 object.repoName = "";
                                 object.dir = "";
+                                object.invertRegex = false;
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
@@ -1634,6 +1692,14 @@
                             }
                             if (message.dir != null && message.hasOwnProperty("dir"))
                                 object.dir = message.dir;
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                object.invertRegex = message.invertRegex;
+                            var keys2;
+                            if (message.substitutions && (keys2 = Object.keys(message.substitutions)).length) {
+                                object.substitutions = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.substitutions[keys2[j]] = message.substitutions[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -2527,6 +2593,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 9:
                                     break;
                                 }
                             return null;
@@ -2637,6 +2704,10 @@
                             case "CANCELLED":
                             case 7:
                                 message.status = 7;
+                                break;
+                            case "EXPIRED":
+                            case 9:
+                                message.status = 9;
                                 break;
                             }
                             return message;
@@ -4020,6 +4091,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 9:
                                     break;
                                 }
                             if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
@@ -4180,6 +4252,10 @@
                             case "CANCELLED":
                             case 7:
                                 message.status = 7;
+                                break;
+                            case "EXPIRED":
+                            case 9:
+                                message.status = 9;
                                 break;
                             }
                             if (object.statusDetail != null)
@@ -4419,6 +4495,7 @@
                          * @property {number} INTERNAL_ERROR=5 INTERNAL_ERROR value
                          * @property {number} TIMEOUT=6 TIMEOUT value
                          * @property {number} CANCELLED=7 CANCELLED value
+                         * @property {number} EXPIRED=9 EXPIRED value
                          */
                         Build.Status = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4430,6 +4507,7 @@
                             values[valuesById[5] = "INTERNAL_ERROR"] = 5;
                             values[valuesById[6] = "TIMEOUT"] = 6;
                             values[valuesById[7] = "CANCELLED"] = 7;
+                            values[valuesById[9] = "EXPIRED"] = 9;
                             return values;
                         })();
     
@@ -8324,6 +8402,7 @@
                          * @interface IPullRequestFilter
                          * @property {string|null} [branch] PullRequestFilter branch
                          * @property {google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl|null} [commentControl] PullRequestFilter commentControl
+                         * @property {boolean|null} [invertRegex] PullRequestFilter invertRegex
                          */
     
                         /**
@@ -8356,6 +8435,14 @@
                          * @instance
                          */
                         PullRequestFilter.prototype.commentControl = 0;
+    
+                        /**
+                         * PullRequestFilter invertRegex.
+                         * @member {boolean} invertRegex
+                         * @memberof google.devtools.cloudbuild.v1.PullRequestFilter
+                         * @instance
+                         */
+                        PullRequestFilter.prototype.invertRegex = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -8399,6 +8486,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.branch);
                             if (message.commentControl != null && message.hasOwnProperty("commentControl"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.commentControl);
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.invertRegex);
                             return writer;
                         };
     
@@ -8438,6 +8527,9 @@
                                     break;
                                 case 5:
                                     message.commentControl = reader.int32();
+                                    break;
+                                case 6:
+                                    message.invertRegex = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8488,6 +8580,9 @@
                                 case 1:
                                     break;
                                 }
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                if (typeof message.invertRegex !== "boolean")
+                                    return "invertRegex: boolean expected";
                             return null;
                         };
     
@@ -8515,6 +8610,8 @@
                                 message.commentControl = 1;
                                 break;
                             }
+                            if (object.invertRegex != null)
+                                message.invertRegex = Boolean(object.invertRegex);
                             return message;
                         };
     
@@ -8531,8 +8628,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.commentControl = options.enums === String ? "COMMENTS_DISABLED" : 0;
+                                object.invertRegex = false;
+                            }
                             if (message.branch != null && message.hasOwnProperty("branch")) {
                                 object.branch = message.branch;
                                 if (options.oneofs)
@@ -8540,6 +8639,8 @@
                             }
                             if (message.commentControl != null && message.hasOwnProperty("commentControl"))
                                 object.commentControl = options.enums === String ? $root.google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl[message.commentControl] : message.commentControl;
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                object.invertRegex = message.invertRegex;
                             return object;
                         };
     
@@ -8579,6 +8680,7 @@
                          * @interface IPushFilter
                          * @property {string|null} [branch] PushFilter branch
                          * @property {string|null} [tag] PushFilter tag
+                         * @property {boolean|null} [invertRegex] PushFilter invertRegex
                          */
     
                         /**
@@ -8611,6 +8713,14 @@
                          * @instance
                          */
                         PushFilter.prototype.tag = "";
+    
+                        /**
+                         * PushFilter invertRegex.
+                         * @member {boolean} invertRegex
+                         * @memberof google.devtools.cloudbuild.v1.PushFilter
+                         * @instance
+                         */
+                        PushFilter.prototype.invertRegex = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -8654,6 +8764,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.branch);
                             if (message.tag != null && message.hasOwnProperty("tag"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.tag);
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.invertRegex);
                             return writer;
                         };
     
@@ -8693,6 +8805,9 @@
                                     break;
                                 case 3:
                                     message.tag = reader.string();
+                                    break;
+                                case 4:
+                                    message.invertRegex = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8742,6 +8857,9 @@
                                 if (!$util.isString(message.tag))
                                     return "tag: string expected";
                             }
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                if (typeof message.invertRegex !== "boolean")
+                                    return "invertRegex: boolean expected";
                             return null;
                         };
     
@@ -8761,6 +8879,8 @@
                                 message.branch = String(object.branch);
                             if (object.tag != null)
                                 message.tag = String(object.tag);
+                            if (object.invertRegex != null)
+                                message.invertRegex = Boolean(object.invertRegex);
                             return message;
                         };
     
@@ -8777,6 +8897,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.invertRegex = false;
                             if (message.branch != null && message.hasOwnProperty("branch")) {
                                 object.branch = message.branch;
                                 if (options.oneofs)
@@ -8787,6 +8909,8 @@
                                 if (options.oneofs)
                                     object.gitRef = "tag";
                             }
+                            if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
+                                object.invertRegex = message.invertRegex;
                             return object;
                         };
     
