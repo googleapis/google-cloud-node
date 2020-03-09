@@ -5,30 +5,28 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 common_templates = gcp.CommonTemplates()
 
 versions = ["v1", "v1beta2", "v1p1beta1", "v1p2beta1", "v1p3beta1"]
 
 for version in versions:
-    library = gapic.node_library(
+    library = gapic.typescript_library(
         "video-intelligence",
         version,
-        config_path="/google/cloud/videointelligence/"
-        f"artman_videointelligence_{version}.yaml",
+        generator_args={
+            "grpc-service-config": f"google/cloud/videointelligence/{version}/videointelligence_grpc_service_config.json",
+            "package-name": f"@google-cloud/video-intelligence",
+            "main-service": f"videointelligence",
+        },
+        proto_path=f'/google/cloud/videointelligence/{version}',
     )
 
     # skip index, protos, package.json, and README.md
-    s.copy(library, excludes=["package.json", "README.md", "src/index.js", "smoke-test/video_intelligence_service_smoke_test.js"])
+    s.copy(library, excludes=["package.json", "README.md", "src/index.ts",
+                              "smoke-test/video_intelligence_service_smoke_test.ts"])
 
-#
-# Generator emitted unused helper mockSimpleGrpcMethod, add a temporary
-# s.replace to remove that function.
-# ref: https://github.com/googleapis/gapic-generator/issues/2120
-#
-s.replace("test/gapic-*.js", "function mockSimpleGrpcMethod.*\n(.*\n)*?}\n", "")
-
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
 # Node.js specific cleanup
