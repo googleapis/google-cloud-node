@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.4.0...v1.5.0) (2020-03-09)
+
+
+### Features
+
+* cloudbuild/v1 add new fields and annotate OUTPUT_OUT fields. ([#79](https://www.github.com/googleapis/nodejs-cloudbuild/issues/79)) ([0889fff](https://www.github.com/googleapis/nodejs-cloudbuild/commit/0889fff058e83dd421d4ad798c0f5318d74f22ff))
+* deferred client initialization ([#75](https://www.github.com/googleapis/nodejs-cloudbuild/issues/75)) ([47b177d](https://www.github.com/googleapis/nodejs-cloudbuild/commit/47b177dfed997bf4fafcf2810ddae9c5c7815112))
+* export protos in src/index.ts ([c8e28b3](https://www.github.com/googleapis/nodejs-cloudbuild/commit/c8e28b3f39fa25e09ebaf19292a46b9078738498))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.3.3...v1.4.0) (2020-02-13)
 
 
