@@ -16,40 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-'use strict';
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const videointelligence = require('@google-cloud/video-intelligence');
 
-module.exports = {
-  opts: {
-    readme: './README.md',
-    package: './package.json',
-    template: './node_modules/jsdoc-fresh',
-    recurse: true,
-    verbose: true,
-    destination: './docs/'
-  },
-  plugins: [
-    'plugins/markdown',
-    'jsdoc-region-tag'
-  ],
-  source: {
-    excludePattern: '(^|\\/|\\\\)[._]',
-    include: [
-      'build/src',
-      'protos'
-    ],
-    includePattern: '\\.js$'
-  },
-  templates: {
-    copyright: 'Copyright 2019 Google, LLC.',
-    includeDate: false,
-    sourceFiles: false,
-    systemName: '@google-cloud/video-intelligence',
-    theme: 'lumen',
-    default: {
-      outputSourceFiles: false
-    }
-  },
-  markdown: {
-    idInHeadings: true
-  }
-};
+function main() {
+  const streamingVideoIntelligenceServiceClient = new videointelligence.StreamingVideoIntelligenceServiceClient();
+  const videoIntelligenceServiceClient = new videointelligence.VideoIntelligenceServiceClient();
+}
+
+main();
