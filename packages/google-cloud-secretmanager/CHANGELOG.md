@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v2.0.1...v2.1.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#69](https://www.github.com/googleapis/nodejs-secret-manager/issues/69)) ([237686d](https://www.github.com/googleapis/nodejs-secret-manager/commit/237686de31ce0ce653a87684b186f677733fef4a))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v2.0.0...v2.0.1) (2020-02-29)
 
 
