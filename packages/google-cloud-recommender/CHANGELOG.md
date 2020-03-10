@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-recommender/compare/v2.1.0...v2.2.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#38](https://www.github.com/googleapis/nodejs-recommender/issues/38)) ([6a19840](https://www.github.com/googleapis/nodejs-recommender/commit/6a19840c1d51ff7b930ea7969dbbe32beda0fefd))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-recommender/compare/v2.0.2...v2.1.0) (2020-02-29)
 
 
