@@ -19,6 +19,7 @@
 //   description: Deletes task <taskId>.
 //   usage: node tasks.delete.js <taskId>
 
+/*eslint no-warning-comments: [0, { "terms": ["todo"], "location": "anywhere" }]*/
 async function main(taskId) {
   taskId = Number(taskId);
   // [START datastore_delete_entity]

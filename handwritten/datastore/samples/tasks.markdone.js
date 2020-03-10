@@ -19,6 +19,7 @@
 //   description: Marks task <taskId> as Done.
 //   usage: node tasks.markdone.js <taskId>
 
+/*eslint no-warning-comments: [0, { "terms": ["todo"], "location": "anywhere" }]*/
 async function main(taskId) {
   taskId = Number(taskId);
   // [START datastore_update_entity]

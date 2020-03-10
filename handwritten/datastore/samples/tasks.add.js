@@ -19,6 +19,7 @@
 //   description: Adds a task with a description <description>.
 //   usage: node tasks.add.js <description>
 
+/*eslint no-warning-comments: [0, { "terms": ["todo"], "location": "anywhere" }]*/
 async function main(description) {
   // [START datastore_add_entity]
   const {Datastore} = require('@google-cloud/datastore');
