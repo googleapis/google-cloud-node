@@ -1,3 +1,5 @@
 [
-  "../../protos/google/datastore/v1/datastore.proto"
+  "../../protos/google/datastore/v1/datastore.proto",
+  "../../protos/google/datastore/v1/entity.proto",
+  "../../protos/google/datastore/v1/query.proto"
 ]
