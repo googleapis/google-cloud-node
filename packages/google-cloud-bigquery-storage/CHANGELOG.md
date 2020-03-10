@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v1.0.0...v1.1.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#23](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/23)) ([4741719](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/474171928bbdd5d0fb2eab7be868317f88cd18eb))
+
 ## 1.0.0 (2020-02-29)
 
 
