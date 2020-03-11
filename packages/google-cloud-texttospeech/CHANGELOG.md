@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.2.0...v2.3.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#359](https://www.github.com/googleapis/nodejs-text-to-speech/issues/359)) ([547fb77](https://www.github.com/googleapis/nodejs-text-to-speech/commit/547fb77d625a6c25ef288e8bdad19d448113271e))
+* export protos in src/index.ts ([b6ca82f](https://www.github.com/googleapis/nodejs-text-to-speech/commit/b6ca82f901d4791d3d4994a5782c7f19d449becf))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.1.3...v2.2.0) (2020-02-12)
 
 
