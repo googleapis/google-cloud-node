@@ -16,5 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {StreamingVideoIntelligenceServiceClient} from './streaming_video_intelligence_service_client';
-export {VideoIntelligenceServiceClient} from './video_intelligence_service_client';
+export {StreamingVideoIntelligenceServiceClient} from './streaming_video_intelligence_service_client';export {VideoIntelligenceServiceClient} from './video_intelligence_service_client';

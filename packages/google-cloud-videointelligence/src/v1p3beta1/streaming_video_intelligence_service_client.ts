@@ -17,13 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {APICallback, Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
 import * as protosTypes from '../../protos/protos';
@@ -40,8 +34,13 @@ export class StreamingVideoIntelligenceServiceClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
   private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
+  private _opts: ClientOptions;
+  private _gaxModule: typeof gax | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  streamingVideoIntelligenceServiceStub: Promise<{[name: string]: Function}>;
+  streamingVideoIntelligenceServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of StreamingVideoIntelligenceServiceClient.
@@ -65,22 +64,17 @@ export class StreamingVideoIntelligenceServiceClient {
    *     app is running in an environment which supports
    *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
-   * @param {function} [options.promise] - Custom promise module to use instead
-   *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
 
   constructor(opts?: ClientOptions) {
     // Ensure that options include the service address and port.
-    const staticMembers = this
-      .constructor as typeof StreamingVideoIntelligenceServiceClient;
-    const servicePath =
-      opts && opts.servicePath
-        ? opts.servicePath
-        : opts && opts.apiEndpoint
-        ? opts.apiEndpoint
-        : staticMembers.servicePath;
+    const staticMembers = this.constructor as typeof StreamingVideoIntelligenceServiceClient;
+    const servicePath = opts && opts.servicePath ?
+        opts.servicePath :
+        ((opts && opts.apiEndpoint) ? opts.apiEndpoint :
+                                      staticMembers.servicePath);
     const port = opts && opts.port ? opts.port : staticMembers.port;
 
     if (!opts) {
@@ -90,33 +84,38 @@ export class StreamingVideoIntelligenceServiceClient {
     opts.port = opts.port || port;
     opts.clientConfig = opts.clientConfig || {};
 
-    const isBrowser = typeof window !== 'undefined';
-    if (isBrowser) {
+    const isBrowser = (typeof window !== 'undefined');
+    if (isBrowser){
       opts.fallback = true;
     }
     // If we are in browser, we are already using fallback because of the
     // "browser" field in package.json.
     // But if we were explicitly requested to use fallback, let's do it now.
-    const gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
-    opts.scopes = (this
-      .constructor as typeof StreamingVideoIntelligenceServiceClient).scopes;
-    const gaxGrpc = new gaxModule.GrpcClient(opts);
+    opts.scopes = (this.constructor as typeof StreamingVideoIntelligenceServiceClient).scopes;
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in initialize() method.
+    this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Determine the client header string.
-    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
-      clientHeader.push(`gl-web/${gaxModule.version}`);
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
-      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -125,56 +124,60 @@ export class StreamingVideoIntelligenceServiceClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    const protos = gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
+    this._protos = this._gaxGrpc.loadProto(
+      opts.fallback ?
+        require("../../protos/protos.json") :
+        nodejsProtoPath
     );
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this._descriptors.stream = {
-      streamingAnnotateVideo: new gaxModule.StreamDescriptor(
-        gax.StreamType.BIDI_STREAMING
-      ),
+      streamingAnnotateVideo: new this._gaxModule.StreamDescriptor(gax.StreamType.BIDI_STREAMING)
     };
 
     // Put together the default options sent with requests.
-    const defaults = gaxGrpc.constructSettings(
-      'google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+    this._defaults = this._gaxGrpc.constructSettings(
+        'google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this._innerApiCalls = {};
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call initialize() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  initialize() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.streamingVideoIntelligenceServiceStub) {
+      return this.streamingVideoIntelligenceServiceStub;
+    }
 
     // Put together the "service stub" for
     // google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService.
-    this.streamingVideoIntelligenceServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? (protos as protobuf.Root).lookupService(
-            'google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService'
-          )
-        : // tslint:disable-next-line no-any
-          (protos as any).google.cloud.videointelligence.v1p3beta1
-            .StreamingVideoIntelligenceService,
-      opts
-    ) as Promise<{[method: string]: Function}>;
+    this.streamingVideoIntelligenceServiceStub = this._gaxGrpc.createStub(
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService') :
+          // tslint:disable-next-line no-any
+          (this._protos as any).google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService,
+        this._opts) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const streamingVideoIntelligenceServiceStubMethods = [
-      'streamingAnnotateVideo',
-    ];
+    const streamingVideoIntelligenceServiceStubMethods =
+        ['streamingAnnotateVideo'];
 
     for (const methodName of streamingVideoIntelligenceServiceStubMethods) {
       const innerCallPromise = this.streamingVideoIntelligenceServiceStub.then(
@@ -184,17 +187,16 @@ export class StreamingVideoIntelligenceServiceClient {
           }
           return stub[methodName].apply(stub, args);
         },
-        (err: Error | null | undefined) => () => {
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const apiCall = gaxModule.createApiCall(
+      const apiCall = this._gaxModule.createApiCall(
         innerCallPromise,
-        defaults[methodName],
+        this._defaults[methodName],
         this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+            this._descriptors.stream[methodName] ||
+            this._descriptors.longrunning[methodName]
       );
 
       this._innerApiCalls[methodName] = (
@@ -205,6 +207,8 @@ export class StreamingVideoIntelligenceServiceClient {
         return apiCall(argument, callOptions, callback);
       };
     }
+
+    return this.streamingVideoIntelligenceServiceStub;
   }
 
   /**
@@ -234,7 +238,9 @@ export class StreamingVideoIntelligenceServiceClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -244,9 +250,8 @@ export class StreamingVideoIntelligenceServiceClient {
    * @param {function(Error, string)} callback - the callback to
    *   be called with the current project Id.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -258,21 +263,25 @@ export class StreamingVideoIntelligenceServiceClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Performs video annotation with bidirectional streaming: emitting results
-   * while sending video/audio bytes.
-   * This method is only available via the gRPC API (not REST).
-   *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which is both readable and writable. It accepts objects
-   *   representing [StreamingAnnotateVideoRequest]{@link google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest} for write() method, and
-   *   will emit objects representing [StreamingAnnotateVideoResponse]{@link google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse} on 'data' event asynchronously.
-   */
-  streamingAnnotateVideo(options?: gax.CallOptions): gax.CancellableStream {
+/**
+ * Performs video annotation with bidirectional streaming: emitting results
+ * while sending video/audio bytes.
+ * This method is only available via the gRPC API (not REST).
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing [StreamingAnnotateVideoRequest]{@link google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest} for write() method, and
+ *   will emit objects representing [StreamingAnnotateVideoResponse]{@link google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse} on 'data' event asynchronously.
+ */
+  streamingAnnotateVideo(
+      options?: gax.CallOptions):
+    gax.CancellableStream {
+    this.initialize();
     return this._innerApiCalls.streamingAnnotateVideo(options);
   }
+
 
   /**
    * Terminate the GRPC channel and close the client.
@@ -280,8 +289,9 @@ export class StreamingVideoIntelligenceServiceClient {
    * The client will no longer be usable and all future behavior is undefined.
    */
   close(): Promise<void> {
+    this.initialize();
     if (!this._terminated) {
-      return this.streamingVideoIntelligenceServiceStub.then(stub => {
+      return this.streamingVideoIntelligenceServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
