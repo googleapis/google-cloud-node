@@ -18,140 +18,132 @@
 
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import { describe, it } from 'mocha';
 const streamingvideointelligenceserviceModule = require('../src');
 
 import {PassThrough} from 'stream';
 
+
 const FAKE_STATUS_CODE = 1;
-class FakeError {
-  name: string;
-  message: string;
-  code: number;
-  constructor(n: number) {
-    this.name = 'fakeName';
-    this.message = 'fake message';
-    this.code = n;
-  }
+class FakeError{
+    name: string;
+    message: string;
+    code: number;
+    constructor(n: number){
+        this.name = 'fakeName';
+        this.message = 'fake message';
+        this.code = n;
+    }
 }
 const error = new FakeError(FAKE_STATUS_CODE);
 export interface Callback {
-  (err: FakeError | null, response?: {} | null): void;
+  (err: FakeError|null, response?: {} | null): void;
 }
 
-export class Operation {
-  constructor() {}
-  promise() {}
+export class Operation{
+    constructor(){};
+    promise() {};
 }
-function mockBidiStreamingGrpcMethod(
-  expectedRequest: {},
-  response: {} | null,
-  error: FakeError | null
-) {
-  return () => {
-    const mockStream = new PassThrough({
-      objectMode: true,
-      transform: (chunk: {}, enc: {}, callback: Callback) => {
-        assert.deepStrictEqual(chunk, expectedRequest);
-        if (error) {
-          callback(error);
-        } else {
-          callback(null, response);
-        }
-      },
-    });
-    return mockStream;
-  };
+function mockBidiStreamingGrpcMethod(expectedRequest: {}, response: {} | null, error: FakeError | null) {
+    return () => {
+        const mockStream = new PassThrough({
+          objectMode: true,
+          transform: (chunk: {}, enc: {}, callback: Callback) => {
+            assert.deepStrictEqual(chunk, expectedRequest);
+            if (error) {
+              callback(error);
+            }
+            else {
+              callback(null, response);
+            }
+          }
+        });
+        return mockStream;
+    }
 }
 describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      streamingvideointelligenceserviceModule.v1p3beta1
-        .StreamingVideoIntelligenceServiceClient.servicePath;
-    assert(servicePath);
-  });
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      streamingvideointelligenceserviceModule.v1p3beta1
-        .StreamingVideoIntelligenceServiceClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-  it('has port', () => {
-    const port =
-      streamingvideointelligenceserviceModule.v1p3beta1
-        .StreamingVideoIntelligenceServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-  it('should create a client with no option', () => {
-    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient();
-    assert(client);
-  });
-  it('should create a client with gRPC fallback', () => {
-    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-      {
-        fallback: true,
-      }
-    );
-    assert(client);
-  });
-  describe('streamingAnnotateVideo', () => {
-    it('invokes streamingAnnotateVideo without error', done => {
-      const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      // Mock request
-      const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(
-        request,
-        expectedResponse,
-        null
-      );
-      const stream = client
-        .streamingAnnotateVideo()
-        .on('data', (response: {}) => {
-          assert.deepStrictEqual(response, expectedResponse);
-          done();
-        })
-        .on('error', (err: FakeError) => {
-          done(err);
-        });
-      stream.write(request);
+    it('has servicePath', () => {
+        const servicePath = streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.servicePath;
+        assert(servicePath);
     });
-    it('invokes streamingAnnotateVideo with error', done => {
-      const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      // Mock request
-      const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(
-        request,
-        null,
-        error
-      );
-      const stream = client
-        .streamingAnnotateVideo()
-        .on('data', () => {
-          assert.fail();
-        })
-        .on('error', (err: FakeError) => {
-          assert(err instanceof FakeError);
-          assert.strictEqual(err.code, FAKE_STATUS_CODE);
-          done();
-        });
-      stream.write(request);
+    it('has apiEndpoint', () => {
+        const apiEndpoint = streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.apiEndpoint;
+        assert(apiEndpoint);
     });
-  });
+    it('has port', () => {
+        const port = streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.port;
+        assert(port);
+        assert(typeof port === 'number');
+    });
+    it('should create a client with no option', () => {
+        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient();
+        assert(client);
+    });
+    it('should create a client with gRPC fallback', () => {
+        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
+            fallback: true,
+        });
+        assert(client);
+    });
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        assert.strictEqual(client.streamingVideoIntelligenceServiceStub, undefined);
+        await client.initialize();
+        assert(client.streamingVideoIntelligenceServiceStub);
+    });
+    it('has close method', () => {
+        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.close();
+    });
+    describe('streamingAnnotateVideo', () => {
+        it('invokes streamingAnnotateVideo without error', done => {
+            const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Initialize client before mocking
+            client.initialize();
+            // Mock request
+            const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(request, expectedResponse, null);
+            const stream = client.streamingAnnotateVideo().on('data', (response: {}) =>{
+                assert.deepStrictEqual(response, expectedResponse);
+                done();
+            }).on('error', (err: FakeError) => {
+                done(err);
+            });
+            stream.write(request);
+        });
+        it('invokes streamingAnnotateVideo with error', done => {
+            const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Initialize client before mocking
+            client.initialize();
+            // Mock request
+            const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(request, null, error);
+            const stream = client.streamingAnnotateVideo().on('data', () =>{
+                assert.fail();
+            }).on('error', (err: FakeError) => {
+                assert(err instanceof FakeError);
+                assert.strictEqual(err.code, FAKE_STATUS_CODE);
+                done();
+            });
+            stream.write(request);
+        });
+    });
 });

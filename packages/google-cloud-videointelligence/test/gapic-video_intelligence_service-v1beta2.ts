@@ -18,145 +18,143 @@
 
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import { describe, it } from 'mocha';
 const videointelligenceserviceModule = require('../src');
 
+
 const FAKE_STATUS_CODE = 1;
-class FakeError {
-  name: string;
-  message: string;
-  code: number;
-  constructor(n: number) {
-    this.name = 'fakeName';
-    this.message = 'fake message';
-    this.code = n;
-  }
+class FakeError{
+    name: string;
+    message: string;
+    code: number;
+    constructor(n: number){
+        this.name = 'fakeName';
+        this.message = 'fake message';
+        this.code = n;
+    }
 }
 const error = new FakeError(FAKE_STATUS_CODE);
 export interface Callback {
-  (err: FakeError | null, response?: {} | null): void;
+  (err: FakeError|null, response?: {} | null): void;
 }
 
-export class Operation {
-  constructor() {}
-  promise() {}
+export class Operation{
+    constructor(){};
+    promise() {};
 }
-function mockLongRunningGrpcMethod(
-  expectedRequest: {},
-  response: {} | null,
-  error?: {} | null
-) {
-  return (request: {}) => {
-    assert.deepStrictEqual(request, expectedRequest);
-    const mockOperation = {
-      promise() {
-        return new Promise((resolve, reject) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve([response]);
+function mockLongRunningGrpcMethod(expectedRequest: {}, response: {} | null, error?: {} | null) {
+    return (request: {}) => {
+        assert.deepStrictEqual(request, expectedRequest);
+        const mockOperation = {
+          promise: function() {
+            return new Promise((resolve, reject) => {
+              if (error) {
+                reject(error);
+              }
+              else {
+                resolve([response]);
+              }
+            });
           }
-        });
-      },
+        };
+        return Promise.resolve([mockOperation]);
     };
-    return Promise.resolve([mockOperation]);
-  };
 }
 describe('v1beta2.VideoIntelligenceServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient
-        .servicePath;
-    assert(servicePath);
-  });
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient
-        .apiEndpoint;
-    assert(apiEndpoint);
-  });
-  it('has port', () => {
-    const port =
-      videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient
-        .port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-  it('should create a client with no option', () => {
-    const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient();
-    assert(client);
-  });
-  it('should create a client with gRPC fallback', () => {
-    const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient(
-      {
-        fallback: true,
-      }
-    );
-    assert(client);
-  });
-  describe('annotateVideo', () => {
-    it('invokes annotateVideo without error', done => {
-      const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      // Mock request
-      const request: protosTypes.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
-        request,
-        expectedResponse
-      );
-      client
-        .annotateVideo(request)
-        .then((responses: [Operation]) => {
-          const operation = responses[0];
-          return operation ? operation.promise() : {};
-        })
-        .then((responses: [Operation]) => {
-          assert.deepStrictEqual(responses[0], expectedResponse);
-          done();
-        })
-        .catch((err: {}) => {
-          done(err);
-        });
+    it('has servicePath', () => {
+        const servicePath = videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient.servicePath;
+        assert(servicePath);
     });
+    it('has apiEndpoint', () => {
+        const apiEndpoint = videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient.apiEndpoint;
+        assert(apiEndpoint);
+    });
+    it('has port', () => {
+        const port = videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient.port;
+        assert(port);
+        assert(typeof port === 'number');
+    });
+    it('should create a client with no option', () => {
+        const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient();
+        assert(client);
+    });
+    it('should create a client with gRPC fallback', () => {
+        const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient({
+            fallback: true,
+        });
+        assert(client);
+    });
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
+        await client.initialize();
+        assert(client.videoIntelligenceServiceStub);
+    });
+    it('has close method', () => {
+        const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.close();
+    });
+    describe('annotateVideo', () => {
+        it('invokes annotateVideo without error', done => {
+            const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Initialize client before mocking
+            client.initialize();
+            // Mock request
+            const request: protosTypes.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
+                request,
+                expectedResponse
+            );
+            client.annotateVideo(request).then((responses: [Operation]) => {
+                const operation = responses[0];
+                return operation? operation.promise() : {};
+            }).then((responses: [Operation]) => {
+                assert.deepStrictEqual(responses[0], expectedResponse);
+                done();
+            }).catch((err: {}) => {
+                done(err);
+            });
+        });
 
-    it('invokes annotateVideo with error', done => {
-      const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      // Mock request
-      const request: protosTypes.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest = {};
-      // Mock response
-      const expectedResponse = {};
-      // Mock gRPC layer
-      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
-        request,
-        null,
-        error
-      );
-      client
-        .annotateVideo(request)
-        .then((responses: [Operation]) => {
-          const operation = responses[0];
-          return operation ? operation.promise() : {};
-        })
-        .then(() => {
-          assert.fail();
-        })
-        .catch((err: FakeError) => {
-          assert(err instanceof FakeError);
-          assert.strictEqual(err.code, FAKE_STATUS_CODE);
-          done();
+        it('invokes annotateVideo with error', done => {
+            const client = new videointelligenceserviceModule.v1beta2.VideoIntelligenceServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            // Initialize client before mocking
+            client.initialize();
+            // Mock request
+            const request: protosTypes.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest = {};
+            // Mock response
+            const expectedResponse = {};
+            // Mock gRPC layer
+            client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
+                request,
+                null,
+                error
+            );
+            client.annotateVideo(request).then((responses: [Operation]) => {
+                const operation = responses[0];
+                return operation? operation.promise() : {};
+            }).then(() => {
+                assert.fail();
+            }).catch((err: FakeError) => {
+                assert(err instanceof FakeError);
+                assert.strictEqual(err.code, FAKE_STATUS_CODE);
+                done();
+            });
         });
     });
-  });
 });
