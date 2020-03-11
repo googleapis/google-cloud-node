@@ -26,6 +26,7 @@ import {google} from '../proto/datastore';
 import * as ds from '../src';
 import {entity, Entity, KeyProto, EntityProto} from '../src/entity.js';
 import {IntegerTypeCastOptions, Query, QueryProto} from '../src/query.js';
+import {outOfBoundsError} from './entity';
 import {
   AllocateIdsResponse,
   RequestConfig,
@@ -367,6 +368,41 @@ describe('Request', () => {
         stream
           .on('data', () => {})
           .on('error', () => {
+            setImmediate(() => {
+              assert.strictEqual(stream.destroyed, true);
+              done();
+            });
+          });
+      });
+
+      it('should emit an error from results decoding', done => {
+        const largeInt = '922337203685477850';
+        request.request_ = (config: RequestConfig, callback: Function) => {
+          callback(null, {
+            found: [
+              {
+                entity: {
+                  properties: {
+                    points: {
+                      integerValue: largeInt,
+                      valueType: 'integerValue',
+                    },
+                  },
+                },
+              },
+            ],
+          });
+        };
+
+        const stream = request.createReadStream(key);
+
+        stream
+          .on('data', () => {})
+          .on('error', (err: Error) => {
+            assert.deepStrictEqual(
+              err,
+              outOfBoundsError({integerValue: largeInt})
+            );
             setImmediate(() => {
               assert.strictEqual(stream.destroyed, true);
               done();
@@ -948,6 +984,45 @@ describe('Request', () => {
           .on('error', (err: Error) => {
             assert.strictEqual(err, error);
             done();
+          })
+          .emit('reading');
+      });
+
+      it('should emit an error from results decoding', done => {
+        const largeInt = '922337203685477850';
+        sandbox.stub(entity, 'queryToQueryProto');
+
+        request.request_ = (config: RequestConfig, callback: Function) => {
+          callback(null, {
+            batch: {
+              entityResults: [
+                {
+                  entity: {
+                    properties: {
+                      points: {
+                        integerValue: largeInt,
+                        valueType: 'integerValue',
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          });
+        };
+
+        const stream = request.runQueryStream({});
+
+        stream
+          .on('error', (err: Error) => {
+            assert.deepStrictEqual(
+              err,
+              outOfBoundsError({integerValue: largeInt})
+            );
+            setImmediate(() => {
+              assert.strictEqual(stream.destroyed, true);
+              done();
+            });
           })
           .emit('reading');
       });

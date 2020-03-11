@@ -290,10 +290,17 @@ class DatastoreRequest {
             return;
           }
 
-          const entities = entity.formatArray(
-            resp!.found! as ResponseResult[],
-            options.wrapNumbers
-          );
+          let entities: Entity[] = [];
+
+          try {
+            entities = entity.formatArray(
+              resp!.found! as ResponseResult[],
+              options.wrapNumbers
+            );
+          } catch (err) {
+            stream.destroy(err);
+            return;
+          }
           const nextKeys = (resp!.deferred || [])
             .map(entity.keyFromKeyProto)
             .map(entity.keyToKeyProto);
@@ -778,10 +785,15 @@ class DatastoreRequest {
       let entities: Entity[] = [];
 
       if (resp.batch.entityResults) {
-        entities = entity.formatArray(
-          resp.batch.entityResults,
-          options.wrapNumbers
-        );
+        try {
+          entities = entity.formatArray(
+            resp.batch.entityResults,
+            options.wrapNumbers
+          );
+        } catch (err) {
+          stream.destroy(err);
+          return;
+        }
       }
 
       // Emit each result right away, then get the rest if necessary.
