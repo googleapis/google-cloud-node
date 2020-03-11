@@ -15,7 +15,6 @@ analysis, and syntax analysis. This API is part of the larger Cloud Machine Lear
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Analyze v1](#analyze-v1)
-  * [Analyze v1beta2](#analyze-v1beta2)
   * [Automl Natural Language Dataset](#automl-natural-language-dataset)
   * [Automl Natural Language Model](#automl-natural-language-model)
   * [Automl Natural Language Predict](#automl-natural-language-predict)
@@ -47,23 +46,6 @@ __Usage:__
 
 
 `node samples/analyze.v1.js`
-
-
------
-
-
-
-
-### Analyze v1beta2
-
-View the [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/analyze.v1beta2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/analyze.v1beta2.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/analyze.v1beta2.js`
 
 
 -----
