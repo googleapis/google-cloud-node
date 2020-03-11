@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.6.0...v1.7.0) (2020-03-10)
+
+
+### Features
+
+* deferred client initialization ([#128](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/128)) ([3de999e](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/3de999e1d4efc823dd52844a7ee19ec9b8c3ebfd))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.5.3...v1.6.0) (2020-03-05)
 
 
