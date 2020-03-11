@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.7.0...v1.8.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#283](https://www.github.com/googleapis/nodejs-iot/issues/283)) ([b70a193](https://www.github.com/googleapis/nodejs-iot/commit/b70a1938f4254fff0f3839bca5871207b8d97c35))
+* export protos in src/index.ts ([9c3098c](https://www.github.com/googleapis/nodejs-iot/commit/9c3098ca5a232f7fb575d5dce2bc1473365b20bd))
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([5a35e0f](https://www.github.com/googleapis/nodejs-iot/commit/5a35e0fd4ea40a1a5e9be2c03e83db5fb7c11f81))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.6.1...v1.7.0) (2020-01-30)
 
 
