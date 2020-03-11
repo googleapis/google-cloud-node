@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.6.0...v1.7.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#108](https://www.github.com/googleapis/nodejs-phishing-protection/issues/108)) ([1552963](https://www.github.com/googleapis/nodejs-phishing-protection/commit/1552963ecd210fa5a50abe17f95bf343d502cc3a))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.5.1...v1.6.0) (2020-02-28)
 
 
