@@ -452,7 +452,7 @@ export namespace entity {
           "'options.wrapNumbers' as\n" +
           '{\n' +
           '  integerTypeCastFunction: provide <your_custom_function>\n' +
-          '  properties: optionally specify property name(s) to be cutom casted' +
+          '  properties: optionally specify property name(s) to be custom casted\n' +
           '}\n'
       );
     }

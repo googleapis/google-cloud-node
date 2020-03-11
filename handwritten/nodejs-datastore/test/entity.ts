@@ -19,7 +19,25 @@ import * as sinon from 'sinon';
 import {Datastore} from '../src';
 import {Entity, entity, ValueProto} from '../src/entity';
 import {IntegerTypeCastOptions} from '../src/query';
-import {AnyARecord} from 'dns';
+
+export function outOfBoundsError(opts: {
+  propertyName?: string;
+  integerValue: string | number;
+}) {
+  return new Error(
+    'We attempted to return all of the numeric values, but ' +
+      (opts.propertyName ? opts.propertyName + ' ' : '') +
+      'value ' +
+      opts.integerValue +
+      " is out of bounds of 'Number.MAX_SAFE_INTEGER'.\n" +
+      "To prevent this error, please consider passing 'options.wrapNumbers=true' or\n" +
+      "'options.wrapNumbers' as\n" +
+      '{\n' +
+      '  integerTypeCastFunction: provide <your_custom_function>\n' +
+      '  properties: optionally specify property name(s) to be custom casted\n' +
+      '}\n'
+  );
+}
 
 describe('entity', () => {
   let entity: Entity;
@@ -101,24 +119,6 @@ describe('entity', () => {
       });
 
       describe('integerTypeCastFunction is not provided', () => {
-        const expectedError = (opts: {
-          integerValue?: number;
-          propertyName?: string;
-        }) => {
-          return new Error(
-            'We attempted to return all of the numeric values, but ' +
-              (opts.propertyName ? opts.propertyName + ' ' : '') +
-              'value ' +
-              opts.integerValue +
-              " is out of bounds of 'Number.MAX_SAFE_INTEGER'.\n" +
-              "To prevent this error, please consider passing 'options.wrapNumbers=true' or\n" +
-              "'options.wrapNumbers' as\n" +
-              '{\n' +
-              '  integerTypeCastFunction: provide <your_custom_function>\n' +
-              '  properties: optionally specify property name(s) to be cutom casted' +
-              '}\n'
-          );
-        };
         it('should throw if integerTypeCastOptions is provided but integerTypeCastFunction is not', () => {
           assert.throws(
             () => new entity.Int(valueProto, {}).valueOf(),
@@ -142,11 +142,11 @@ describe('entity', () => {
 
           assert.throws(() => {
             new entity.Int(valueProto).valueOf();
-          }, expectedError(valueProto));
+          }, outOfBoundsError(valueProto));
 
           assert.throws(() => {
             new entity.Int(valueProto2).valueOf();
-          }, expectedError(valueProto2));
+          }, outOfBoundsError(valueProto2));
         });
 
         it('should throw if integer value is outside of bounds passing strings or Numbers', () => {
@@ -156,12 +156,12 @@ describe('entity', () => {
           // should throw when Number is passed
           assert.throws(() => {
             new entity.Int(largeIntegerValue).valueOf();
-          }, expectedError({integerValue: largeIntegerValue}));
+          }, outOfBoundsError({integerValue: largeIntegerValue}));
 
           // should throw when string is passed
           assert.throws(() => {
             new entity.Int(smallIntegerValue.toString()).valueOf();
-          }, expectedError({integerValue: smallIntegerValue}));
+          }, outOfBoundsError({integerValue: smallIntegerValue}));
         });
 
         it('should not auto throw on initialization', () => {
@@ -559,24 +559,6 @@ describe('entity', () => {
         });
 
         it('should throw if integer value is outside of bounds', () => {
-          const expectedError = (opts: {
-            integerValue: number;
-            propertyName: string;
-          }) => {
-            return new Error(
-              'We attempted to return all of the numeric values, but ' +
-                (opts.propertyName ? opts.propertyName + ' ' : '') +
-                'value ' +
-                opts.integerValue +
-                " is out of bounds of 'Number.MAX_SAFE_INTEGER'.\n" +
-                "To prevent this error, please consider passing 'options.wrapNumbers=true' or\n" +
-                "'options.wrapNumbers' as\n" +
-                '{\n' +
-                '  integerTypeCastFunction: provide <your_custom_function>\n' +
-                '  properties: optionally specify property name(s) to be cutom casted' +
-                '}\n'
-            );
-          };
           const largeIntegerValue = Number.MAX_SAFE_INTEGER + 1;
           const smallIntegerValue = Number.MIN_SAFE_INTEGER - 1;
 
@@ -594,11 +576,11 @@ describe('entity', () => {
 
           assert.throws(() => {
             entity.decodeValueProto(valueProto);
-          }, expectedError(valueProto));
+          }, outOfBoundsError(valueProto));
 
           assert.throws(() => {
             entity.decodeValueProto(valueProto2);
-          }, expectedError(valueProto2));
+          }, outOfBoundsError(valueProto2));
         });
       });
 
