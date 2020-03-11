@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.7.0...v1.8.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#127](https://www.github.com/googleapis/nodejs-datacatalog/issues/127)) ([1640d4d](https://www.github.com/googleapis/nodejs-datacatalog/commit/1640d4d8fe1a9adbff9719399e5e2fff95bbb4b5))
+* export protos in src/index.ts ([86933a1](https://www.github.com/googleapis/nodejs-datacatalog/commit/86933a113549c33a5283e7bf438ce0229b74155b))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.6.3...v1.7.0) (2020-02-10)
 
 
