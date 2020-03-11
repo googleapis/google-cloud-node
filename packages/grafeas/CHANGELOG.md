@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [2.7.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.6.0...v2.7.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#115](https://www.github.com/googleapis/nodejs-grafeas/issues/115)) ([dae70de](https://www.github.com/googleapis/nodejs-grafeas/commit/dae70dee2844a14b12fa64ed2ca530613d6c7e16))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.5.2...v2.6.0) (2020-03-03)
 
 
