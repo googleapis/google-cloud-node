@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.5.0...v1.6.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#212](https://www.github.com/googleapis/nodejs-scheduler/issues/212)) ([fc1a2ec](https://www.github.com/googleapis/nodejs-scheduler/commit/fc1a2ec45bd6420074bf6f3f17809cee3c90b9be))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.4.3...v1.5.0) (2020-02-29)
 
 
