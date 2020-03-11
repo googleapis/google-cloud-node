@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.10.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.9.0...v1.10.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#152](https://www.github.com/googleapis/nodejs-containeranalysis/issues/152)) ([0a01d71](https://www.github.com/googleapis/nodejs-containeranalysis/commit/0a01d71cc9b7f45c78215838d13c506e316d904d))
+
 ## [1.9.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.8.0...v1.9.0) (2020-02-29)
 
 
