@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-security-center/compare/v3.0.1...v3.1.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#230](https://www.github.com/googleapis/nodejs-security-center/issues/230)) ([e6ee806](https://www.github.com/googleapis/nodejs-security-center/commit/e6ee8064285adfb64666dd976da401a123c0d8a1))
+* export protos in src/index.ts ([f3b2f47](https://www.github.com/googleapis/nodejs-security-center/commit/f3b2f477aa0af4d3f5a5c1d3b191643986f1c48b))
+
+
+### Bug Fixes
+
+* updated timeout in service config ([280cba4](https://www.github.com/googleapis/nodejs-security-center/commit/280cba439c681fcf7be0b936f052ebdaf215c850))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-security-center/compare/v3.0.0...v3.0.1) (2020-02-07)
 
 
