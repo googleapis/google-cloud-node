@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.9.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.8.0...v2.9.0) (2020-03-11)
+
+
+### Features
+
+* deferred client initialization ([#389](https://www.github.com/googleapis/nodejs-video-intelligence/issues/389)) ([fdbb623](https://www.github.com/googleapis/nodejs-video-intelligence/commit/fdbb62308f628dabf84f0a3cd7728bbe0f26a0fd))
+
 ## [2.8.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.7.0...v2.8.0) (2020-03-09)
 
 
