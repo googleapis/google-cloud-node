@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.5.0...v1.6.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#123](https://www.github.com/googleapis/nodejs-web-risk/issues/123)) ([ebafd9f](https://www.github.com/googleapis/nodejs-web-risk/commit/ebafd9fade2cf3bd3d464e55216fcd2c57225c40))
+* export protos in src/index.ts ([4003c2c](https://www.github.com/googleapis/nodejs-web-risk/commit/4003c2cbc5a235d49e56165331fd85f58e5d9373))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.4.1...v1.5.0) (2020-01-30)
 
 
