@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.9.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.8.0...v1.9.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#370](https://www.github.com/googleapis/nodejs-tasks/issues/370)) ([05fdd69](https://www.github.com/googleapis/nodejs-tasks/commit/05fdd6987c916da04c62193fe0f1081c23b85cbe))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.7.3...v1.8.0) (2020-02-29)
 
 
