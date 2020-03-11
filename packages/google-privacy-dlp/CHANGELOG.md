@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-dlp/compare/v2.1.0...v2.2.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#420](https://www.github.com/googleapis/nodejs-dlp/issues/420)) ([a37da40](https://www.github.com/googleapis/nodejs-dlp/commit/a37da4095bab94a8d3539c67e9fcda4620d6e3a1))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-dlp/compare/v2.0.1...v2.1.0) (2020-02-29)
 
 
