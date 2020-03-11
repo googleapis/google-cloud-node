@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.11.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.10.0...v1.11.0) (2020-03-11)
+
+
+### Features
+
+* deferred client initialization ([#551](https://www.github.com/googleapis/nodejs-vision/issues/551)) ([8866d89](https://www.github.com/googleapis/nodejs-vision/commit/8866d8905750dfc0627f585c30c0b19bb205172d))
+* export protos from src/index.ts ([#547](https://www.github.com/googleapis/nodejs-vision/issues/547)) ([41c736c](https://www.github.com/googleapis/nodejs-vision/commit/41c736c8f234f6fba20120fa5c17353519f2d45d))
+
 ## [1.10.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.9.0...v1.10.0) (2020-03-03)
 
 
