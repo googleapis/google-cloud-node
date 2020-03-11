@@ -508,55 +508,6 @@ export class ProfileServiceClient {
    *   A field mask to specify the profile fields to update.
    *
    *   A full update is performed if it is unset.
-   *
-   *   Valid values are:
-   *
-   *   * external_id
-   *   * source
-   *   * source_types
-   *   * uri
-   *   * is_hirable
-   *   * create_time
-   *   * update_time
-   *   * candidate_update_time
-   *   * resume_update_time
-   *   * resume
-   *   * person_names
-   *   * addresses
-   *   * email_addresses
-   *   * phone_numbers
-   *   * personal_uris
-   *   * additional_contact_info
-   *   * employment_records
-   *   * education_records
-   *   * skills
-   *   * activities
-   *   * publications
-   *   * patents
-   *   * certifications
-   *   * recruiting_notes
-   *   * custom_attributes
-   *   * group_id
-   *   * external_system
-   *   * source_note
-   *   * primary_responsibilities
-   *   * citizenships
-   *   * work_authorizations
-   *   * employee_types
-   *   * language_code
-   *   * qualification_summary
-   *   * allowed_contact_types
-   *   * preferred_contact_types
-   *   * contact_availability
-   *   * language_fluencies
-   *   * work_preference
-   *   * industry_experiences
-   *   * work_environment_experiences
-   *   * work_availability
-   *   * security_clearances
-   *   * references
-   *   * assessments
-   *   * interviews
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

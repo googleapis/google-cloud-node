@@ -34992,587 +34992,6 @@
              */
             var api = {};
     
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {string}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.pattern = [];
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {string}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
-            })();
-    
             api.Http = (function() {
     
                 /**
@@ -36475,6 +35894,587 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {string}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;

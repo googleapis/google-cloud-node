@@ -151,9 +151,6 @@ export class EventServiceClient {
       profilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}'
       ),
-      projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
-      ),
       projectCompanyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/companies/{company}'
       ),
@@ -521,29 +518,6 @@ export class EventServiceClient {
    */
   matchProfileFromProfileName(profileName: string) {
     return this._pathTemplates.profilePathTemplate.match(profileName).profile;
-  }
-
-  /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
-    });
-  }
-
-  /**
-   * Parse the project from Project resource.
-   *
-   * @param {string} projectName
-   *   A fully-qualified path representing project resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**

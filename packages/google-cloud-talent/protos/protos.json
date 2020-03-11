@@ -12,9 +12,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TenantServiceProto",
                     "java_package": "com.google.cloud.talent.v4beta1",
-                    "objc_class_prefix": "CTS",
-                    "(google.api.resource_definition).type": "jobs.googleapis.com/TenantOrProject",
-                    "(google.api.resource_definition).pattern": "projects/{project}"
+                    "objc_class_prefix": "CTS"
                   },
                   "nested": {
                     "Application": {
@@ -45,7 +43,8 @@
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.resource_reference).type": "jobs.googleapis.com/Job"
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Job",
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "company": {
@@ -1034,7 +1033,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "jobs.googleapis.com/TenantOrProject"
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Company"
                           }
                         },
                         "pageToken": {
@@ -1091,7 +1090,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "jobs.googleapis.com/TenantOrProject"
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Company"
                           }
                         },
                         "query": {
@@ -1325,7 +1324,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "jobs.googleapis.com/TenantOrProject"
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Company"
                           }
                         },
                         "clientEvent": {
@@ -3269,7 +3268,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Profile"
                           }
                         },
                         "filter": {
@@ -3666,88 +3666,6 @@
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -3830,6 +3748,88 @@
                   "id": 1
                 },
                 "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
                   "type": "string",
                   "id": 2
                 }
