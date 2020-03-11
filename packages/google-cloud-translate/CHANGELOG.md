@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [5.3.0](https://www.github.com/googleapis/nodejs-translate/compare/v5.2.0...v5.3.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#460](https://www.github.com/googleapis/nodejs-translate/issues/460)) ([0ed76f4](https://www.github.com/googleapis/nodejs-translate/commit/0ed76f4e83528c2d087a26598535f5daf5a08444))
+
 ## [5.2.0](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.6...v5.2.0) (2020-02-27)
 
 
