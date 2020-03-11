@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.5.0...v1.6.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#146](https://www.github.com/googleapis/nodejs-datalabeling/issues/146)) ([cbd8224](https://www.github.com/googleapis/nodejs-datalabeling/commit/cbd82248f93360815e17dbf50098ad3a3ec6360a))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.4.2...v1.5.0) (2020-02-29)
 
 
