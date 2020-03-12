@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.11.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.10.1...v1.11.0) (2020-03-12)
+
+
+### Features
+
+* deferred client initialization ([83ea415](https://www.github.com/googleapis/nodejs-automl/commit/83ea4156e8d57b65989d0ca8abc7ec39a45f3a82))
+* move to typescript code generation ([#332](https://www.github.com/googleapis/nodejs-automl/issues/332)) ([17f0d7a](https://www.github.com/googleapis/nodejs-automl/commit/17f0d7ab8393616a0aff557206cc233941782080))
+* publish proto updates for v1beta1 surface ([8b4a2b5](https://www.github.com/googleapis/nodejs-automl/commit/8b4a2b578629a624a1e9a318d6f3c503171fcc49))
+
 ### [1.10.1](https://www.github.com/googleapis/nodejs-automl/compare/v1.10.0...v1.10.1) (2020-01-28)
 
 
