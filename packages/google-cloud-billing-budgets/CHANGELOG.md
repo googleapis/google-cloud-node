@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.2.0...v1.3.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#51](https://www.github.com/googleapis/nodejs-billing-budgets/issues/51)) ([11913ad](https://www.github.com/googleapis/nodejs-billing-budgets/commit/11913ad03fca2f113ab2a197b72f1a4767f31f64))
+* export protos in src/index.ts ([55c4698](https://www.github.com/googleapis/nodejs-billing-budgets/commit/55c46981558fe8c71ea545e7eba78f8e12c5a7b9))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.1.0...v1.2.0) (2020-02-20)
 
 
