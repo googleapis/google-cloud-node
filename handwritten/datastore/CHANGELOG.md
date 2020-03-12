@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [5.1.0](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.6...v5.1.0) (2020-03-11)
+
+
+### Features
+
+* add warning when int value is too large during upload ([#591](https://www.github.com/googleapis/nodejs-datastore/issues/591)) ([5a4821b](https://www.github.com/googleapis/nodejs-datastore/commit/5a4821b5fc8d283f168d3b52ac57021868e98679))
+* export protos in src/index.ts ([3fe21ab](https://www.github.com/googleapis/nodejs-datastore/commit/3fe21ab8835b4a9aad73659d7c6242d6cabb7f9f))
+* move library to Typescript code generation ([#608](https://www.github.com/googleapis/nodejs-datastore/issues/608)) ([d543aa6](https://www.github.com/googleapis/nodejs-datastore/commit/d543aa635764f9577bfced48c6a41c23f28771a0))
+
+
+### Bug Fixes
+
+* handle large int out of bounds error in streams ([#590](https://www.github.com/googleapis/nodejs-datastore/issues/590)) ([25b1fc2](https://www.github.com/googleapis/nodejs-datastore/commit/25b1fc2de4fddb5b68a9c6fbb5202e444746e69b))
+* **deps:** update dependency @grpc/grpc-js to v0.7.0 ([#613](https://www.github.com/googleapis/nodejs-datastore/issues/613)) ([8b5d391](https://www.github.com/googleapis/nodejs-datastore/commit/8b5d391e4cb80808b274f0992e275fd24177a750))
+
 ### [5.0.6](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.5...v5.0.6) (2020-02-20)
 
 
