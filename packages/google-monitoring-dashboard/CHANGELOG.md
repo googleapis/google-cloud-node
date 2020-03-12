@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.2.0...v1.3.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#43](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/43)) ([63a9eaa](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/63a9eaa8cc7d3afc9cb203027a4d7076e1c1c970))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.1.0...v1.2.0) (2020-02-27)
 
 
