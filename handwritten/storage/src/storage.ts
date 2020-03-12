@@ -68,6 +68,10 @@ export interface Cors {
   responseHeader?: string[];
 }
 
+interface Versioning {
+  enabled: boolean;
+}
+
 export interface CreateBucketRequest {
   archive?: boolean;
   coldline?: boolean;
@@ -81,6 +85,7 @@ export interface CreateBucketRequest {
   standard?: boolean;
   userProject?: string;
   location?: string;
+  versioning?: Versioning;
 }
 
 export type CreateBucketResponse = [Bucket, Metadata];
@@ -498,6 +503,7 @@ export class Storage extends Service {
    *     Force the use of the User Project metadata field to assign operational
    *     costs when an operation is made on a Bucket and its objects.
    * @property {boolean} [standard=true] Specify the storage class as Standard.
+   * @property {Versioning} [versioning=undefined] Specify the versioning status.
    * @property {string} [userProject] The ID of the project which will be billed
    *     for the request.
    */

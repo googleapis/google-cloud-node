@@ -1263,6 +1263,28 @@ describe('storage', () => {
     });
   });
 
+  describe('bucket versioning', () => {
+    describe('bucket', () => {
+      it('should create a bucket with versioning enabled', async () => {
+        const bucket = storage.bucket(generateName());
+        await storage.createBucket(bucket.name, {
+          versioning: {
+            enabled: true,
+          },
+        });
+        await bucket.getMetadata();
+        assert.strictEqual(bucket.metadata.versioning.enabled, true);
+      });
+
+      it('should by default create a bucket without versioning set', async () => {
+        const bucket = storage.bucket(generateName());
+        await storage.createBucket(bucket.name);
+        await bucket.getMetadata();
+        assert.strictEqual(bucket.metadata.versioning, undefined);
+      });
+    });
+  });
+
   describe('bucket retention policies', () => {
     describe('bucket', () => {
       it('should create a bucket with a retention policy', async () => {
