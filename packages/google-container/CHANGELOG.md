@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.6.2...v1.7.0) (2020-03-06)
+
+
+### Features
+
+* deferred client initialization ([#304](https://www.github.com/googleapis/nodejs-cloud-container/issues/304)) ([b1b7080](https://www.github.com/googleapis/nodejs-cloud-container/commit/b1b70806289aea73a6e83d3d33983d05856f21f3))
+* export protos in src/index.ts ([acaaeff](https://www.github.com/googleapis/nodejs-cloud-container/commit/acaaeff08ad5505accc15bb496bcd3a29086a5ac))
+
 ### [1.6.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.6.1...v1.6.2) (2020-02-10)
 
 
