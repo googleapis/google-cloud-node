@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [4.6.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.5.0...v4.6.0) (2020-03-13)
+
+
+### Features
+
+* **storage:** Add versioning as optional metadata param of createBucket ([#1090](https://www.github.com/googleapis/nodejs-storage/issues/1090)) ([39869e3](https://www.github.com/googleapis/nodejs-storage/commit/39869e3c6c62eabe1840f0fd884b361265e2cb76))
+
 ## [4.5.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.4.0...v4.5.0) (2020-03-06)
 
 
