@@ -233,20 +233,18 @@ describe('storage', () => {
       it('should not download a file', async () => {
         const [isPublic] = await file.isPublic();
         assert.strictEqual(isPublic, false);
-        assert.rejects(
+        await assert.rejects(
           file.download(),
           (err: Error) =>
             err.message.indexOf('does not have storage.objects.get') > -1
         );
       });
 
-      it('should not upload a file', done => {
-        file.save('new data', err => {
-          assert(
-            err!.message.indexOf('Could not load the default credentials') > -1
-          );
-          done();
-        });
+      it('should not upload a file', async () => {
+        await assert.rejects(
+          () => file.save('new data'),
+          /Could not load the default credentials/
+        );
       });
     });
   });
