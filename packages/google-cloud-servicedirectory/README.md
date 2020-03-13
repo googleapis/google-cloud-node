@@ -29,8 +29,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -52,6 +52,29 @@ npm install @google-cloud/service-directory
 ```
 
 
+### Using the client library
+
+```javascript
+  // Imports the Google Cloud client library
+  const {LookupServiceClient} = require('@google-cloud/service-directory');
+
+  // Creates a client
+  const ls = new LookupServiceClient();
+
+  console.info(ls);
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-security-directory/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-security-directory/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-security-directory&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 

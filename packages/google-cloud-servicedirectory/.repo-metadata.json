@@ -1,0 +1,13 @@
+{
+  "name": "servicedirectory",
+  "name_pretty": "Service Directory",
+  "product_documentation": "",
+  "client_documentation": "https://googleapis.dev/nodejs/servicedirectory/latest/index.html",
+  "issue_tracker": "",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-security-directory",
+  "distribution_name": "@google-cloud/service-directory",
+  "api_id": "servicedirectory.googleapis.com",
+  "requires_billing": true
+}
