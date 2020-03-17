@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-03-13T18:52:56.614044Z",
+  "updateTime": "2020-03-17T21:26:28.799372Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "047d3a8ac7f75383855df0166144f891d7af08d9",
-        "internalRef": "300773211"
+        "sha": "5058c1c96d0ece7f5301a154cf5a07b2ad03a571",
+        "internalRef": "301443847",
+        "log": "5058c1c96d0ece7f5301a154cf5a07b2ad03a571\nUpdate GAPIC v2 with batching parameters for Logging API\n\nPiperOrigin-RevId: 301443847\n\n64ab9744073de81fec1b3a6a931befc8a90edf90\nFix: Introduce location-based organization/folder/billing-account resources\nChore: Update copyright years\n\nPiperOrigin-RevId: 301373760\n\n23d5f09e670ebb0c1b36214acf78704e2ecfc2ac\nUpdate field_behavior annotations in V1 and V2.\n\nPiperOrigin-RevId: 301337970\n\nb2cf37e7fd62383a811aa4d54d013ecae638851d\nData Catalog V1 API\n\nPiperOrigin-RevId: 301282503\n\n1976b9981e2900c8172b7d34b4220bdb18c5db42\nCloud DLP api update. Adds missing fields to Finding and adds support for hybrid jobs.\n\nPiperOrigin-RevId: 301205325\n\nae78682c05e864d71223ce22532219813b0245ac\nfix: several sample code blocks in comments are now properly indented for markdown\n\nPiperOrigin-RevId: 301185150\n\ndcd171d04bda5b67db13049320f97eca3ace3731\nPublish Media Translation API V1Beta1\n\nPiperOrigin-RevId: 301180096\n\nff1713453b0fbc5a7544a1ef6828c26ad21a370e\nAdd protos and BUILD rules for v1 API.\n\nPiperOrigin-RevId: 301179394\n\n8386761d09819b665b6a6e1e6d6ff884bc8ff781\nfeat: chromeos/modlab publish protos and config for Chrome OS Moblab API.\n\nPiperOrigin-RevId: 300843960\n\nb2e2bc62fab90e6829e62d3d189906d9b79899e4\nUpdates to GCS gRPC API spec:\n\n1. Changed GetIamPolicy and TestBucketIamPermissions to use wrapper messages around google.iam.v1 IAM requests messages, and added CommonRequestParams. This lets us support RequesterPays buckets.\n2. Added a metadata field to GetObjectMediaResponse, to support resuming an object media read safely (by extracting the generation of the object being read, and using it in the resumed read request).\n\nPiperOrigin-RevId: 300817706\n\n7fd916ce12335cc9e784bb9452a8602d00b2516c\nAdd deprecated_collections field for backward-compatiblity in PHP and monolith-generated Python and Ruby clients.\n\nGenerate TopicName class in Java which covers the functionality of both ProjectTopicName and DeletedTopicName. Introduce breaking changes to be fixed by synth.py.\n\nDelete default retry parameters.\n\nRetry codes defs can be deleted once # https://github.com/googleapis/gapic-generator/issues/3137 is fixed.\n\nPiperOrigin-RevId: 300813135\n\n"
       }
     },
     {

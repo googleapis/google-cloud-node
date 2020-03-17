@@ -2,11 +2,11 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Service Directory: Node.js Client](https://github.com/googleapis/nodejs-security-directory)
+# [Service Directory: Node.js Client](https://github.com/googleapis/nodejs-service-directory)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/service-directory.svg)](https://www.npmjs.org/package/@google-cloud/service-directory)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-security-directory/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-security-directory)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-service-directory/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-service-directory)
 
 
 
@@ -16,7 +16,7 @@ Servicedirectory client for Node.js
 
 * [Service Directory Node.js Client API Reference][client-docs]
 
-* [github.com/googleapis/nodejs-security-directory](https://github.com/googleapis/nodejs-security-directory)
+* [github.com/googleapis/nodejs-service-directory](https://github.com/googleapis/nodejs-service-directory)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -69,12 +69,12 @@ npm install @google-cloud/service-directory
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-security-directory/tree/master/samples) directory. The samples' `README.md`
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-service-directory/tree/master/samples) directory. The samples' `README.md`
 has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-security-directory/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-security-directory&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -101,13 +101,13 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-security-directory/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-service-directory/blob/master/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-security-directory/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-service-directory/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/servicedirectory/latest/index.html
 

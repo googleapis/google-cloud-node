@@ -6,7 +6,7 @@
   "issue_tracker": "",
   "release_level": "beta",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-security-directory",
+  "repo": "googleapis/nodejs-service-directory",
   "distribution_name": "@google-cloud/service-directory",
   "api_id": "servicedirectory.googleapis.com",
   "requires_billing": true
