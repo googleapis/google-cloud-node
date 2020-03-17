@@ -46,7 +46,7 @@ function read(call, callback) {
     .bucket(bucketName)
     .file(objectName)
     .download({validation: false})
-    .then(() => callback(null, null))
+    .then(() => callback(null, null));
 }
 
 function write(call, callback) {
