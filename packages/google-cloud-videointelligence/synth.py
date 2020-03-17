@@ -5,6 +5,8 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
 gapic = gcp.GAPICMicrogenerator()
 common_templates = gcp.CommonTemplates()
 
