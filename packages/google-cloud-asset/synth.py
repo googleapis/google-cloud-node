@@ -21,7 +21,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v1beta1', 'v1', 'v1p1beta1', 'v1p2beta1']
+versions = ['v1beta1', 'v1', 'v1p1beta1', 'v1p2beta1', 'v1p4beta1']
 name = 'asset'
 for version in versions:
     library = gapic.typescript_library(
