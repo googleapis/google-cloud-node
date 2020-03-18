@@ -16,40 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-'use strict';
-
-module.exports = {
-  opts: {
-    readme: './README.md',
-    package: './package.json',
-    template: './node_modules/jsdoc-fresh',
-    recurse: true,
-    verbose: true,
-    destination: './docs/'
-  },
-  plugins: [
-    'plugins/markdown',
-    'jsdoc-region-tag'
-  ],
-  source: {
-    excludePattern: '(^|\\/|\\\\)[._]',
-    include: [
-      'build/src',
-      'protos'
-    ],
-    includePattern: '\\.js$'
-  },
-  templates: {
-    copyright: 'Copyright 2019 Google, LLC.',
-    includeDate: false,
-    sourceFiles: false,
-    systemName: '@google-cloud/documentai',
-    theme: 'lumen',
-    default: {
-      outputSourceFiles: false
-    }
-  },
-  markdown: {
-    idInHeadings: true
-  }
-};
+export {DocumentUnderstandingServiceClient} from './document_understanding_service_client';

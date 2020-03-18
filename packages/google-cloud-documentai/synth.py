@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,19 +21,26 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-gapic = gcp.GAPICGenerator()
-versions = ['v1beta1']
+gapic = gcp.GAPICMicrogenerator()
+versions = ['v1beta2']
+name = 'documentai'
 for version in versions:
- library = gapic.node_library(
-   'documentai',
-   version)
+ library = gapic.typescript_library(
+   name,
+   generator_args={
+     "package-name": "@google-cloud/documentai"
+   },
+   extra_proto_files=['google/cloud/common_resources.proto'],
+   proto_path=f'/google/cloud/{name}/{version}',
+   version=version)
  s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])

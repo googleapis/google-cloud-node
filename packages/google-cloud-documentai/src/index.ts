@@ -16,40 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-'use strict';
-
-module.exports = {
-  opts: {
-    readme: './README.md',
-    package: './package.json',
-    template: './node_modules/jsdoc-fresh',
-    recurse: true,
-    verbose: true,
-    destination: './docs/'
-  },
-  plugins: [
-    'plugins/markdown',
-    'jsdoc-region-tag'
-  ],
-  source: {
-    excludePattern: '(^|\\/|\\\\)[._]',
-    include: [
-      'build/src',
-      'protos'
-    ],
-    includePattern: '\\.js$'
-  },
-  templates: {
-    copyright: 'Copyright 2019 Google, LLC.',
-    includeDate: false,
-    sourceFiles: false,
-    systemName: '@google-cloud/documentai',
-    theme: 'lumen',
-    default: {
-      outputSourceFiles: false
-    }
-  },
-  markdown: {
-    idInHeadings: true
-  }
-};
+import * as v1beta2 from './v1beta2';
+const DocumentUnderstandingServiceClient =
+  v1beta2.DocumentUnderstandingServiceClient;
+export {v1beta2, DocumentUnderstandingServiceClient};
+// For compatibility with JavaScript libraries we need to provide this default export:
+// tslint:disable-next-line no-default-export
+export default {v1beta2, DocumentUnderstandingServiceClient};
+import * as protos from '../protos/protos';
+export {protos};

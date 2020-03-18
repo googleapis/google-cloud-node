@@ -1,26 +1,13 @@
 {
-  "updateTime": "2019-11-06T17:52:39.407684Z",
+  "updateTime": "2020-03-18T21:20:42.050992Z",
   "sources": [
-    {
-      "generator": {
-        "name": "artman",
-        "version": "0.41.0",
-        "dockerImage": "googleapis/artman@sha256:75b38a3b073a7b243545f2332463096624c802bb1e56b8cb6f22ba1ecd325fa9"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5691fcb7c1a926b52577aa1834f31d9c50efda54",
-        "internalRef": "278731899"
-      }
-    },
-    {
-      "template": {
-        "name": "node_library",
-        "origin": "synthtool.gcp",
-        "version": "2019.10.17"
+        "sha": "275fbcce2c900278d487c33293a3c7e1fbcd3a34",
+        "internalRef": "301661567",
+        "log": "275fbcce2c900278d487c33293a3c7e1fbcd3a34\nfeat: pubsub/v1 add an experimental filter field to Subscription\n\nPiperOrigin-RevId: 301661567\n\nf2b18cec51d27c999ad30011dba17f3965677e9c\nFix: UpdateBackupRequest.backup is a resource, not a resource reference - remove annotation.\n\nPiperOrigin-RevId: 301636171\n\n800384063ac93a0cac3a510d41726fa4b2cd4a83\nCloud Billing Budget API v1beta1\nModified api documentation to include warnings about the new filter field.\n\nPiperOrigin-RevId: 301634389\n\n0cc6c146b660db21f04056c3d58a4b752ee445e3\nCloud Billing Budget API v1alpha1\nModified api documentation to include warnings about the new filter field.\n\nPiperOrigin-RevId: 301630018\n\nff2ea00f69065585c3ac0993c8b582af3b6fc215\nFix: Add resource definition for a parent of InspectTemplate which was otherwise missing.\n\nPiperOrigin-RevId: 301623052\n\n55fa441c9daf03173910760191646399338f2b7c\nAdd proto definition for AccessLevel, AccessPolicy, and ServicePerimeter.\n\nPiperOrigin-RevId: 301620844\n\ne7b10591c5408a67cf14ffafa267556f3290e262\nCloud Bigtable Managed Backup service and message proto files.\n\nPiperOrigin-RevId: 301585144\n\nd8e226f702f8ddf92915128c9f4693b63fb8685d\nfeat: Add time-to-live in a queue for builds\n\nPiperOrigin-RevId: 301579876\n\n430375af011f8c7a5174884f0d0e539c6ffa7675\ndocs: add missing closing backtick\n\nPiperOrigin-RevId: 301538851\n\n0e9f1f60ded9ad1c2e725e37719112f5b487ab65\nbazel: Use latest release of gax_java\n\nPiperOrigin-RevId: 301480457\n\n5058c1c96d0ece7f5301a154cf5a07b2ad03a571\nUpdate GAPIC v2 with batching parameters for Logging API\n\nPiperOrigin-RevId: 301443847\n\n"
       }
     }
   ],
@@ -29,10 +16,9 @@
       "client": {
         "source": "googleapis",
         "apiName": "documentai",
-        "apiVersion": "v1beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/documentai/artman_documentai_v1beta1.yaml"
+        "apiVersion": "v1beta2",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     }
   ]
