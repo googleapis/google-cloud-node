@@ -24,6 +24,8 @@
   * [Analyze_face_detection_gcs](#analyze_face_detection_gcs)
   * [Analyze_person_detection](#analyze_person_detection)
   * [Analyze_person_detection_gcs](#analyze_person_detection_gcs)
+  * [Detect_logo](#detect_logo)
+  * [Detect_logo_gcs](#detect_logo_gcs)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -238,6 +240,40 @@ __Usage:__
 
 
 `node samples/analyze_person_detection_gcs.js`
+
+
+-----
+
+
+
+
+### Detect_logo
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/detect_logo.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/detect_logo.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/detect_logo.js`
+
+
+-----
+
+
+
+
+### Detect_logo_gcs
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/detect_logo_gcs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/detect_logo_gcs.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/detect_logo_gcs.js`
 
 
 -----

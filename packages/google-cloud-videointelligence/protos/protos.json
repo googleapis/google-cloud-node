@@ -120,7 +120,8 @@
                         "FACE_DETECTION": 4,
                         "SPEECH_TRANSCRIPTION": 6,
                         "TEXT_DETECTION": 7,
-                        "OBJECT_TRACKING": 9
+                        "OBJECT_TRACKING": 9,
+                        "LOGO_RECOGNITION": 12
                       }
                     },
                     "LabelDetectionMode": {
@@ -369,6 +370,94 @@
                         }
                       }
                     },
+                    "TimestampedObject": {
+                      "fields": {
+                        "normalizedBoundingBox": {
+                          "type": "NormalizedBoundingBox",
+                          "id": 1
+                        },
+                        "timeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "attributes": {
+                          "rule": "repeated",
+                          "type": "DetectedAttribute",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "landmarks": {
+                          "rule": "repeated",
+                          "type": "DetectedLandmark",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Track": {
+                      "fields": {
+                        "segment": {
+                          "type": "VideoSegment",
+                          "id": 1
+                        },
+                        "timestampedObjects": {
+                          "rule": "repeated",
+                          "type": "TimestampedObject",
+                          "id": 2
+                        },
+                        "attributes": {
+                          "rule": "repeated",
+                          "type": "DetectedAttribute",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DetectedAttribute": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DetectedLandmark": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "point": {
+                          "type": "NormalizedVertex",
+                          "id": 2
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
                     "VideoAnnotationResults": {
                       "fields": {
                         "inputUri": {
@@ -432,6 +521,11 @@
                           "rule": "repeated",
                           "type": "ObjectTrackingAnnotation",
                           "id": 14
+                        },
+                        "logoRecognitionAnnotations": {
+                          "rule": "repeated",
+                          "type": "LogoRecognitionAnnotation",
+                          "id": 19
                         },
                         "error": {
                           "type": "google.rpc.Status",
@@ -740,6 +834,24 @@
                           "rule": "repeated",
                           "type": "ObjectTrackingFrame",
                           "id": 2
+                        }
+                      }
+                    },
+                    "LogoRecognitionAnnotation": {
+                      "fields": {
+                        "entity": {
+                          "type": "Entity",
+                          "id": 1
+                        },
+                        "tracks": {
+                          "rule": "repeated",
+                          "type": "Track",
+                          "id": 2
+                        },
+                        "segments": {
+                          "rule": "repeated",
+                          "type": "VideoSegment",
+                          "id": 3
                         }
                       }
                     }
