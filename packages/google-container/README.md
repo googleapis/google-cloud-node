@@ -58,24 +58,24 @@ npm install @google-cloud/container
 ### Using the client library
 
 ```javascript
-  const container = require('@google-cloud/container');
+const container = require('@google-cloud/container');
 
-  // Create the Cluster Manager Client
-  const client = new container.v1.ClusterManagerClient();
+// Create the Cluster Manager Client
+const client = new container.v1.ClusterManagerClient();
 
-  async function quickstart() {
-    const zone = 'us-central1-a';
-    const projectId = await client.getProjectId();
-    const request = {
-      projectId: projectId,
-      zone: zone,
-    };
+async function quickstart() {
+  const zone = 'us-central1-a';
+  const projectId = await client.getProjectId();
+  const request = {
+    projectId: projectId,
+    zone: zone,
+  };
 
-    const [response] = await client.listClusters(request);
-    console.log('Clusters:');
-    console.log(response);
-  }
-  quickstart();
+  const [response] = await client.listClusters(request);
+  console.log('Clusters:');
+  console.log(response);
+}
+quickstart();
 
 ```
 
