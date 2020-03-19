@@ -1,0 +1,13 @@
+{
+  "name": "mediatranslation",
+  "name_pretty": "Cloud Media Translation",
+  "product_documentation": "https://cloud.google.com/mediatranslation/docs/",
+  "client_documentation": "https://googleapis.dev/nodejs/mediatranslation/latest",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559749",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-media-translation",
+  "distribution_name": "@google-cloud/media-translation",
+  "api_id": "mediatranslation.googleapis.com",
+  "requires_billing": true
+}

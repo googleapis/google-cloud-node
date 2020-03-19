@@ -29,8 +29,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -52,6 +52,35 @@ npm install @google-cloud/media-translation
 ```
 
 
+### Using the client library
+
+```javascript
+  // Imports the Google Cloud client library
+  const {
+    SpeechTranslationServiceClient,
+  } = require('@google-cloud/media-translation');
+
+  // Creates a client
+  const translate = new SpeechTranslationServiceClient();
+
+  // parent = 'projects/my-project', // Project to list dashboards for.
+
+  // TODO: add an actual sample.
+  console.info(translate);
+
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-media-translation/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-media-translation/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-media-translation&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -80,7 +109,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-media-translation/blob/master/CONTRIBUTING.md).
 
-Please note that this [README.md](README.md), the [samples/README.md](samples/README.md),
+Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
 are generated from a central template. To edit one of these files, make an edit
 to its template in this

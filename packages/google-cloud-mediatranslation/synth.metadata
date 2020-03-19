@@ -1,0 +1,24 @@
+{
+  "updateTime": "2020-03-19T01:33:51.859054Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "275fbcce2c900278d487c33293a3c7e1fbcd3a34",
+        "internalRef": "301661567"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "mediatranslation",
+        "apiVersion": "v1beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    }
+  ]
+}
