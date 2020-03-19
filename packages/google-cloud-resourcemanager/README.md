@@ -63,20 +63,20 @@ npm install @google-cloud/resource
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const {Resource} = require('@google-cloud/resource');
+// Imports the Google Cloud client library
+const {Resource} = require('@google-cloud/resource');
 
-  // Creates a client
-  const resource = new Resource();
+// Creates a client
+const resource = new Resource();
 
-  async function quickstart() {
-    // Lists current projects
-    const [projects] = await resource.getProjects();
+async function quickstart() {
+  // Lists current projects
+  const [projects] = await resource.getProjects();
 
-    console.log('Projects:');
-    projects.forEach(project => console.log(project.id));
-  }
-  quickstart();
+  console.log('Projects:');
+  projects.forEach(project => console.log(project.id));
+}
+quickstart();
 
 ```
 
