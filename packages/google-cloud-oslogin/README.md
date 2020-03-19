@@ -55,18 +55,18 @@ npm install @google-cloud/os-login
 ### Using the client library
 
 ```javascript
-  const {OsLoginServiceClient} = require('@google-cloud/os-login');
-  const client = new OsLoginServiceClient();
+const {OsLoginServiceClient} = require('@google-cloud/os-login');
+const client = new OsLoginServiceClient();
 
-  async function quickstart() {
-    const [loginProfile] = await client.getLoginProfile({
-      name: 'users/beckwith@google.com',
-    });
-    console.log('Login Profile:');
-    console.log(loginProfile);
-  }
+async function quickstart() {
+  const [loginProfile] = await client.getLoginProfile({
+    name: 'users/beckwith@google.com',
+  });
+  console.log('Login Profile:');
+  console.log(loginProfile);
+}
 
-  quickstart();
+quickstart();
 
 ```
 
