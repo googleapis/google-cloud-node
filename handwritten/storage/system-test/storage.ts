@@ -241,10 +241,15 @@ describe('storage', () => {
       });
 
       it('should not upload a file', async () => {
-        await assert.rejects(
-          () => file.save('new data'),
-          /Could not load the default credentials/
-        );
+        try {
+          await file.save('new data');
+        } catch (e) {
+          const allowedErrorMessages = [
+            /Could not load the default credentials/,
+            /does not have storage\.objects\.create access/,
+          ];
+          assert(allowedErrorMessages.some(msg => msg.test(e.message)));
+        }
       });
     });
   });
