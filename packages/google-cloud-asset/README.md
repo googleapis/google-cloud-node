@@ -55,32 +55,32 @@ npm install @google-cloud/asset
 ### Using the client library
 
 ```javascript
-  const util = require('util');
-  const {AssetServiceClient} = require('@google-cloud/asset');
+const util = require('util');
+const {AssetServiceClient} = require('@google-cloud/asset');
 
-  const client = new AssetServiceClient();
+const client = new AssetServiceClient();
 
-  async function quickstart() {
-    const projectId = await client.getProjectId();
-    const projectResource = `projects/${projectId}`;
-    // TODO(developer): Choose asset names, such as //storage.googleapis.com/[YOUR_BUCKET_NAME].
-    // const assetNames = ['ASSET_NAME1', 'ASSET_NAME2', ...];
+async function quickstart() {
+  const projectId = await client.getProjectId();
+  const projectResource = `projects/${projectId}`;
+  // TODO(developer): Choose asset names, such as //storage.googleapis.com/[YOUR_BUCKET_NAME].
+  // const assetNames = ['ASSET_NAME1', 'ASSET_NAME2', ...];
 
-    const request = {
-      parent: projectResource,
-      assetNames: assetNames.split(','),
-      contentType: 'RESOURCE',
-      readTimeWindow: {
-        startTime: {
-          seconds: Math.floor(new Date().getTime() / 1000),
-        },
+  const request = {
+    parent: projectResource,
+    assetNames: assetNames.split(','),
+    contentType: 'RESOURCE',
+    readTimeWindow: {
+      startTime: {
+        seconds: Math.floor(new Date().getTime() / 1000),
       },
-    };
+    },
+  };
 
-    // Handle the operation using the promise pattern.
-    const result = await client.batchGetAssetsHistory(request);
-    // Do things with with the response.
-    console.log(util.inspect(result, {depth: null}));
+  // Handle the operation using the promise pattern.
+  const result = await client.batchGetAssetsHistory(request);
+  // Do things with with the response.
+  console.log(util.inspect(result, {depth: null}));
 
 ```
 
