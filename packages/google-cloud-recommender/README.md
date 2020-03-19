@@ -55,23 +55,23 @@ npm install @google-cloud/recommender
 ### Using the client library
 
 ```javascript
-  async function listRecommendations() {
-    const {RecommenderClient} = require('@google-cloud/recommender');
-    const recommender = new RecommenderClient();
+async function listRecommendations() {
+  const {RecommenderClient} = require('@google-cloud/recommender');
+  const recommender = new RecommenderClient();
 
-    // parent = 'projects/my-project'; // Project to fetch recommendations for.
-    // recommenderId = 'google.compute.instance.MachineTypeRecommender';
+  // parent = 'projects/my-project'; // Project to fetch recommendations for.
+  // recommenderId = 'google.compute.instance.MachineTypeRecommender';
 
-    const [recommendations] = await recommender.listRecommendations({
-      parent: recommender.recommenderPath(project, 'global', recommenderId),
-    });
-    console.info(`recommendations for ${recommenderId}:`);
-    for (const recommendation of recommendations) {
-      console.info(recommendation);
-    }
-    return recommendations;
+  const [recommendations] = await recommender.listRecommendations({
+    parent: recommender.recommenderPath(project, 'global', recommenderId),
+  });
+  console.info(`recommendations for ${recommenderId}:`);
+  for (const recommendation of recommendations) {
+    console.info(recommendation);
   }
-  const recommendations = await listRecommendations();
+  return recommendations;
+}
+const recommendations = await listRecommendations();
 
 ```
 
