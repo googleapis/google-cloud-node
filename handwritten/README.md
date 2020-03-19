@@ -56,14 +56,14 @@ npm install @google-cloud/error-reporting
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const {ErrorReporting} = require('@google-cloud/error-reporting');
+// Imports the Google Cloud client library
+const {ErrorReporting} = require('@google-cloud/error-reporting');
 
-  // Instantiates a client
-  const errors = new ErrorReporting();
+// Instantiates a client
+const errors = new ErrorReporting();
 
-  // Reports a simple error
-  errors.report('Something broke!');
+// Reports a simple error
+errors.report('Something broke!');
 
 ```
 This module provides custom Stackdriver Error Reporting support for Node.js applications.
