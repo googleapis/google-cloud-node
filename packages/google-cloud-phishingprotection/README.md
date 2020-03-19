@@ -55,21 +55,21 @@ npm install @google-cloud/phishing-protection
 ### Using the client library
 
 ```javascript
-  const {
-    PhishingProtectionServiceV1Beta1Client,
-  } = require('@google-cloud/phishing-protection');
-  const client = new PhishingProtectionServiceV1Beta1Client();
+const {
+  PhishingProtectionServiceV1Beta1Client,
+} = require('@google-cloud/phishing-protection');
+const client = new PhishingProtectionServiceV1Beta1Client();
 
-  // the numeric project ID.
-  const formattedParent = client.projectPath(projectId);
-  const request = {
-    parent: formattedParent,
-    uri: uri, // the URI to report to Phishing API.
-  };
+// the numeric project ID.
+const formattedParent = client.projectPath(projectId);
+const request = {
+  parent: formattedParent,
+  uri: uri, // the URI to report to Phishing API.
+};
 
-  await client.reportPhishing(request);
+await client.reportPhishing(request);
 
-  console.info(`reported ${uri} to Phishing Protection API`);
+console.info(`reported ${uri} to Phishing Protection API`);
 
 ```
 
