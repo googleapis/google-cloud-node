@@ -55,26 +55,26 @@ npm install @google-cloud/billing
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const {CloudBillingClient} = require('@google-cloud/billing');
+// Imports the Google Cloud client library
+const {CloudBillingClient} = require('@google-cloud/billing');
 
-  // Creates a client
-  const client = new CloudBillingClient();
+// Creates a client
+const client = new CloudBillingClient();
 
-  // name = 'my-project' // Project name to list billing accounts for.
+// name = 'my-project' // Project name to list billing accounts for.
 
-  async function listBillingAccounts() {
-    const [accounts] = await client.listBillingAccounts({
-      name,
-    });
-    console.info(`found ${accounts.length} billing accounts:`);
-    for (const account of accounts) {
-      console.info(`${account.displayName}:`);
-      console.info(`\topen: ${account.open}`);
-      console.info(`\tparentBillingAccount: ${account.masterBillingAccount}`);
-    }
+async function listBillingAccounts() {
+  const [accounts] = await client.listBillingAccounts({
+    name,
+  });
+  console.info(`found ${accounts.length} billing accounts:`);
+  for (const account of accounts) {
+    console.info(`${account.displayName}:`);
+    console.info(`\topen: ${account.open}`);
+    console.info(`\tparentBillingAccount: ${account.masterBillingAccount}`);
   }
-  listBillingAccounts();
+}
+listBillingAccounts();
 
 ```
 
