@@ -56,26 +56,26 @@ npm install @google-cloud/grafeas
 
 ```javascript
 
-  // const projectId = 'my-project';
+// const projectId = 'my-project';
 
-  // instantiate the client.
-  const grpc = require('@grpc/grpc-js');
-  const {GrafeasClient} = require('@google-cloud/grafeas');
-  const client = new GrafeasClient({
-    sslCreds: grpc.credentials.createInsecure(), // or any other credentials object.
-    servicePath: '0.0.0.0', // overriding the service path.
-    port: 8080, // overriding the port.
-  });
+// instantiate the client.
+const grpc = require('@grpc/grpc-js');
+const {GrafeasClient} = require('@google-cloud/grafeas');
+const client = new GrafeasClient({
+  sslCreds: grpc.credentials.createInsecure(), // or any other credentials object.
+  servicePath: '0.0.0.0', // overriding the service path.
+  port: 8080, // overriding the port.
+});
 
-  // populate the request.
-  const formattedName = client.projectPath(projectId);
-  const request = {
-    parent: formattedName,
-  };
+// populate the request.
+const formattedName = client.projectPath(projectId);
+const request = {
+  parent: formattedName,
+};
 
-  // fetch the list of occurrences.
-  const [resp] = await client.listOccurrences(request);
-  console.info(resp);
+// fetch the list of occurrences.
+const [resp] = await client.listOccurrences(request);
+console.info(resp);
 
 ```
 
