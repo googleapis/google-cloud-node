@@ -61,26 +61,26 @@ npm install @google-cloud/storage
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const {Storage} = require('@google-cloud/storage');
+// Imports the Google Cloud client library
+const {Storage} = require('@google-cloud/storage');
 
-  // Creates a client
-  const storage = new Storage();
-  // Creates a client from a Google service account key.
-  // const storage = new Storage({keyFilename: "key.json"});
+// Creates a client
+const storage = new Storage();
+// Creates a client from a Google service account key.
+// const storage = new Storage({keyFilename: "key.json"});
 
-  /**
-   * TODO(developer): Uncomment these variables before running the sample.
-   */
-  // const bucketName = 'bucket-name';
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const bucketName = 'bucket-name';
 
-  async function createBucket() {
-    // Creates the new bucket
-    await storage.createBucket(bucketName);
-    console.log(`Bucket ${bucketName} created.`);
-  }
+async function createBucket() {
+  // Creates the new bucket
+  await storage.createBucket(bucketName);
+  console.log(`Bucket ${bucketName} created.`);
+}
 
-  createBucket().catch(console.error);
+createBucket().catch(console.error);
 
 ```
 
@@ -147,6 +147,7 @@ has instructions for running the samples.
 | Quickstart | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Release Event Based Hold | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/releaseEventBasedHold.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/releaseEventBasedHold.js,samples/README.md) |
 | Release Temporary Hold | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/releaseTemporaryHold.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/releaseTemporaryHold.js,samples/README.md) |
+| Remove Bucket Conditional Binding | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/removeBucketConditionalBinding.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/removeBucketConditionalBinding.js,samples/README.md) |
 | Remove Bucket Default Owner | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/removeBucketDefaultOwner.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/removeBucketDefaultOwner.js,samples/README.md) |
 | Remove Bucket Iam Member | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/removeBucketIamMember.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/removeBucketIamMember.js,samples/README.md) |
 | Remove Bucket Owner Acl | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/removeBucketOwnerAcl.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/removeBucketOwnerAcl.js,samples/README.md) |
@@ -189,6 +190,12 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 ## Contributing
 
 Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-storage/blob/master/CONTRIBUTING.md).
+
+Please note that this `README.md`, the `samples/README.md`,
+and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
+are generated from a central template. To edit one of these files, make an edit
+to its template in this
+[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
 
 ## License
 
