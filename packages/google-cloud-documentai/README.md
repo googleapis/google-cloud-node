@@ -55,52 +55,52 @@ npm install @google-cloud/documentai
 ### Using the client library
 
 ```javascript
-  /**
-   * TODO(developer): Uncomment these variables before running the sample.
-   */
-  // const projectId = 'YOUR_PROJECT_ID';
-  // const location = 'YOUR_PROJECT_LOCATION';
-  // const gcsInputUri = 'YOUR_SOURCE_PDF';
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const projectId = 'YOUR_PROJECT_ID';
+// const location = 'YOUR_PROJECT_LOCATION';
+// const gcsInputUri = 'YOUR_SOURCE_PDF';
 
-  const {
-    DocumentUnderstandingServiceClient,
-  } = require('@google-cloud/documentai');
-  const client = new DocumentUnderstandingServiceClient();
+const {
+  DocumentUnderstandingServiceClient,
+} = require('@google-cloud/documentai');
+const client = new DocumentUnderstandingServiceClient();
 
-  async function quickstart() {
-    // Configure the request for processing the PDF
-    const parent = `projects/${projectId}/locations/${location}`;
-    const request = {
-      parent,
-      inputConfig: {
-        gcsSource: {
-          uri: gcsInputUri,
-        },
-        mimeType: 'application/pdf',
+async function quickstart() {
+  // Configure the request for processing the PDF
+  const parent = `projects/${projectId}/locations/${location}`;
+  const request = {
+    parent,
+    inputConfig: {
+      gcsSource: {
+        uri: gcsInputUri,
       },
-    };
+      mimeType: 'application/pdf',
+    },
+  };
 
-    // Recognizes text entities in the PDF document
-    const [result] = await client.processDocument(request);
+  // Recognizes text entities in the PDF document
+  const [result] = await client.processDocument(request);
 
-    // Get all of the document text as one big string
-    const {text} = result;
+  // Get all of the document text as one big string
+  const {text} = result;
 
-    // Extract shards from the text field
-    function extractText(textAnchor) {
-      // First shard in document doesn't have startIndex property
-      const startIndex = textAnchor.textSegments[0].startIndex || 0;
-      const endIndex = textAnchor.textSegments[0].endIndex;
+  // Extract shards from the text field
+  function extractText(textAnchor) {
+    // First shard in document doesn't have startIndex property
+    const startIndex = textAnchor.textSegments[0].startIndex || 0;
+    const endIndex = textAnchor.textSegments[0].endIndex;
 
-      return text.substring(startIndex, endIndex);
-    }
-
-    for (const entity of result.entities) {
-      console.log(`\nEntity text: ${extractText(entity.textAnchor)}`);
-      console.log(`Entity type: ${entity.type}`);
-      console.log(`Entity mention text: ${entity.mentionText}`);
-    }
+    return text.substring(startIndex, endIndex);
   }
+
+  for (const entity of result.entities) {
+    console.log(`\nEntity text: ${extractText(entity.textAnchor)}`);
+    console.log(`Entity type: ${entity.type}`);
+    console.log(`Entity mention text: ${entity.mentionText}`);
+  }
+}
 
 ```
 
