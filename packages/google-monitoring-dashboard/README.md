@@ -55,26 +55,26 @@ npm install @google-cloud/monitoring-dashboards
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const {
-    DashboardsServiceClient,
-  } = require('@google-cloud/monitoring-dashboards');
+// Imports the Google Cloud client library
+const {
+  DashboardsServiceClient,
+} = require('@google-cloud/monitoring-dashboards');
 
-  // Creates a client
-  const ds = new DashboardsServiceClient();
+// Creates a client
+const ds = new DashboardsServiceClient();
 
-  // parent = 'projects/my-project', // Project to list dashboards for.
+// parent = 'projects/my-project', // Project to list dashboards for.
 
-  async function listDashboards() {
-    const [dashboards] = await ds.listDashboards({
-      parent,
-    });
-    console.info('Listing Dashboards:');
-    for (const dashboard of dashboards) {
-      console.info(`\t${dashboard.displayName}`);
-    }
+async function listDashboards() {
+  const [dashboards] = await ds.listDashboards({
+    parent,
+  });
+  console.info('Listing Dashboards:');
+  for (const dashboard of dashboards) {
+    console.info(`\t${dashboard.displayName}`);
   }
-  listDashboards();
+}
+listDashboards();
 
 ```
 
