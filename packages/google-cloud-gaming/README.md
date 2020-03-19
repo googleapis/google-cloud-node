@@ -55,38 +55,38 @@ npm install @google-cloud/game-servers
 ### Using the client library
 
 ```javascript
-  const {RealmsServiceClient} = require('@google-cloud/game-servers');
+const {RealmsServiceClient} = require('@google-cloud/game-servers');
 
-  async function quickstart() {
-    const client = new RealmsServiceClient();
+async function quickstart() {
+  const client = new RealmsServiceClient();
 
-    // TODO(developer): uncomment the following section, and add values
-    // const projectId = 'YOUR_PROJECT_ID';
-    // const location = 'us-central1;
-    // const realIm = 'DESIRED_REALM_ID';
+  // TODO(developer): uncomment the following section, and add values
+  // const projectId = 'YOUR_PROJECT_ID';
+  // const location = 'us-central1;
+  // const realmId = 'DESIRED_REALM_ID';
 
-    const request = {
-      parent: `projects/${projectId}/locations/${location}`,
-      realmId,
-      realm: {
-        // Must use a valid support time zone.
-        // See https://cloud.google.com/dataprep/docs/html/Supported-Time-Zone-Values_66194188
-        timeZone: 'US/Pacific',
-        description: 'My Game Server realm',
-      },
-    };
+  const request = {
+    parent: `projects/${projectId}/locations/${location}`,
+    realmId,
+    realm: {
+      // Must use a valid support time zone.
+      // See https://cloud.google.com/dataprep/docs/html/Supported-Time-Zone-Values_66194188
+      timeZone: 'US/Pacific',
+      description: 'My Game Server realm',
+    },
+  };
 
-    const [operation] = await client.createRealm(request);
-    const results = await operation.promise();
-    const [realm] = results;
+  const [operation] = await client.createRealm(request);
+  const results = await operation.promise();
+  const [realm] = results;
 
-    console.log('Realm created:');
+  console.log('Realm created:');
 
-    console.log(`\tRealm name: ${realm.name}`);
-    console.log(`\tRealm description: ${realm.description}`);
-    console.log(`\tRealm time zone: ${realm.timeZone}`);
-  }
-  quickstart();
+  console.log(`\tRealm name: ${realm.name}`);
+  console.log(`\tRealm description: ${realm.description}`);
+  console.log(`\tRealm time zone: ${realm.timeZone}`);
+}
+quickstart();
 
 ```
 
@@ -99,6 +99,10 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Create_realm | [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/create_realm.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/create_realm.js,samples/README.md) |
+| Delete_realm | [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/delete_realm.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/delete_realm.js,samples/README.md) |
+| Get_realm | [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/get_realm.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_realm.js,samples/README.md) |
+| List_realms | [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/list_realms.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/list_realms.js,samples/README.md) |
 | Create Game Server Realm | [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
@@ -127,6 +131,12 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 ## Contributing
 
 Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-game-servers/blob/master/CONTRIBUTING.md).
+
+Please note that this `README.md`, the `samples/README.md`,
+and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
+are generated from a central template. To edit one of these files, make an edit
+to its template in this
+[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
 
 ## License
 
