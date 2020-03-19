@@ -63,23 +63,23 @@ npm install @google-cloud/security-center
 ### Using the client library
 
 ```javascript
-  const sc = require('@google-cloud/security-center');
+const sc = require('@google-cloud/security-center');
 
-  // Create a client
-  const client = new sc.SecurityCenterClient();
+// Create a client
+const client = new sc.SecurityCenterClient();
 
-  async function quickstart() {
-    // TODO(developer): choose the organization to use
-    // const organization = 'your-organization';
-    const [source] = await client.createSource({
-      parent: client.organizationPath(organization),
-      source: {},
-    });
-    // The newly created source.
-    console.log('Source created.');
-    console.log(source);
-  }
-  quickstart();
+async function quickstart() {
+  // TODO(developer): choose the organization to use
+  // const organization = 'your-organization';
+  const [source] = await client.createSource({
+    parent: client.organizationPath(organization),
+    source: {},
+  });
+  // The newly created source.
+  console.log('Source created.');
+  console.log(source);
+}
+quickstart();
 
 ```
 
