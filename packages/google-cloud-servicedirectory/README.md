@@ -55,13 +55,13 @@ npm install @google-cloud/service-directory
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const {LookupServiceClient} = require('@google-cloud/service-directory');
+// Imports the Google Cloud client library
+const {LookupServiceClient} = require('@google-cloud/service-directory');
 
-  // Creates a client
-  const ls = new LookupServiceClient();
+// Creates a client
+const ls = new LookupServiceClient();
 
-  console.info(ls);
+console.info(ls);
 
 ```
 
