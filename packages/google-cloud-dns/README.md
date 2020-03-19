@@ -55,19 +55,19 @@ npm install @google-cloud/dns
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const {DNS} = require('@google-cloud/dns');
+// Imports the Google Cloud client library
+const {DNS} = require('@google-cloud/dns');
 
-  // Creates a client
-  const dns = new DNS();
+// Creates a client
+const dns = new DNS();
 
-  async function quickstart() {
-    // Lists all zones in the current project
-    const [zones] = await dns.getZones();
-    console.log('Zones:');
-    zones.forEach(zone => console.log(zone.name));
-  }
-  quickstart();
+async function quickstart() {
+  // Lists all zones in the current project
+  const [zones] = await dns.getZones();
+  console.log('Zones:');
+  zones.forEach(zone => console.log(zone.name));
+}
+quickstart();
 
 ```
 
