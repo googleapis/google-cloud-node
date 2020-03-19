@@ -55,17 +55,17 @@ npm install @google-cloud/datalabeling
 ### Using the client library
 
 ```javascript
-  const {DataLabelingServiceClient} = require('@google-cloud/datalabeling');
-  const client = new DataLabelingServiceClient();
+const {DataLabelingServiceClient} = require('@google-cloud/datalabeling');
+const client = new DataLabelingServiceClient();
 
-  async function quickstart() {
-    const projectId = await client.getProjectId();
-    const parent = client.projectPath(projectId);
-    const [result] = await client.listDatasets({parent});
-    console.log('Datasets:');
-    console.log(result);
-  }
-  quickstart();
+async function quickstart() {
+  const projectId = await client.getProjectId();
+  const parent = client.projectPath(projectId);
+  const [result] = await client.listDatasets({parent});
+  console.log('Datasets:');
+  console.log(result);
+}
+quickstart();
 
 ```
 
