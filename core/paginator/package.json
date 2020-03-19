@@ -43,7 +43,7 @@
     "c8": "^7.0.0",
     "proxyquire": "^2.0.1",
     "sinon": "^9.0.0",
-    "typescript": "3.6.4",
+    "typescript": "^3.8.3",
     "uuid": "^7.0.0"
   },
   "dependencies": {
@@ -51,6 +51,6 @@
     "extend": "^3.0.2"
   },
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10"
   }
 }
