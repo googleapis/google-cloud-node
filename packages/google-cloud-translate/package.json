@@ -49,13 +49,11 @@
     "arrify": "^2.0.0",
     "extend": "^3.0.2",
     "google-gax": "^1.11.1",
-    "is": "^3.2.1",
     "is-html": "^2.0.0",
     "protobufjs": "^6.8.8"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
-    "@types/is": "0.0.21",
     "@types/mocha": "^7.0.0",
     "@types/node": "^10.5.7",
     "@types/proxyquire": "^1.3.28",

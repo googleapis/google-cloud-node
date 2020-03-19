@@ -1,10 +1,10 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2017 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,6 @@ import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as extend from 'extend';
 import {GoogleAuthOptions} from 'google-auth-library';
-import * as is from 'is';
 
 const isHtml = require('is-html');
 import {
@@ -331,7 +330,7 @@ export class Translate extends Service {
     callback?: GetLanguagesCallback
   ): void | Promise<[LanguageResult[], Metadata]> {
     let target: string;
-    if (is.fn(targetOrCallback)) {
+    if (typeof targetOrCallback === 'function') {
       callback = targetOrCallback as GetLanguagesCallback;
       target = 'en';
     } else {
@@ -344,7 +343,7 @@ export class Translate extends Service {
       qs: {},
     } as DecorateRequestOptions;
 
-    if (target && is.string(target)) {
+    if (target && typeof target === 'string') {
       reqOpts.qs.target = target;
     }
 
@@ -516,7 +515,7 @@ export class Translate extends Service {
       format: options.format || (isHtml(input[0]) ? 'html' : 'text'),
     };
 
-    if (is.string(options)) {
+    if (typeof options === 'string') {
       body.target = options;
     } else {
       if (options.from) {
