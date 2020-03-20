@@ -108,8 +108,6 @@ export interface GetSignedUrlConfig {
   queryParams?: Query;
 }
 
-export type GetSignedUrlResponse = [GetSignedUrlResponse];
-
 export interface GetFileMetadataOptions {
   userProject?: string;
 }

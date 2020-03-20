@@ -87,7 +87,9 @@ export interface SignerGetSignedUrlConfig {
   contentType?: string;
 }
 
-export type GetSignedUrlResponse = string;
+export type SignerGetSignedUrlResponse = string;
+
+export type GetSignedUrlResponse = [SignerGetSignedUrlResponse];
 
 export interface GetSignedUrlCallback {
   (err: Error | null, url?: string): void;
@@ -119,7 +121,9 @@ export class URLSigner {
     this.authClient = authClient;
   }
 
-  getSignedUrl(cfg: SignerGetSignedUrlConfig): Promise<GetSignedUrlResponse> {
+  getSignedUrl(
+    cfg: SignerGetSignedUrlConfig
+  ): Promise<SignerGetSignedUrlResponse> {
     const expiresInSeconds = this.parseExpires(cfg.expires);
     const method = cfg.method;
 
