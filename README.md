@@ -36,6 +36,7 @@ applications that interact with individual Google Cloud services:
 | [Internet of Things (IoT) Core](https://github.com/googleapis/nodejs-iot) | [:notebook:](https://googleapis.dev/nodejs/iot/latest) | `npm i @google-cloud/iot` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=cloudiot.googleapis.com) | ✖ |
 | [Key Management Service](https://github.com/googleapis/nodejs-kms) | [:notebook:](https://googleapis.dev/nodejs/kms/latest) | `npm i @google-cloud/kms` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=kms.googleapis.com) | ✖ |
 | [Kubernetes Engine Cluster Manager API](https://github.com/googleapis/nodejs-cloud-container) | [:notebook:](https://googleapis.dev/nodejs/container/latest) | `npm i @google-cloud/container` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=container.googleapis.com) | ✖ |
+| [Media Translation](https://github.com/googleapis/nodejs-media-translation) | [:notebook:](https://googleapis.dev/nodejs/mediatranslation/latest) | `npm i @google-cloud/media-translation` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=mediatranslation.googleapis.com) | ✖ |
 | [Monitoring Dashboards](https://github.com/googleapis/nodejs-monitoring-dashboards) | [:notebook:](https://googleapis.dev/nodejs/monitoring-dashboards/latest) | `npm i @google-cloud/monitoring-dashboards` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=monitoring.googleapis.com) | ✖ |
 | [Natural Language](https://github.com/googleapis/nodejs-language) | [:notebook:](https://googleapis.dev/nodejs/language/latest) | `npm i @google-cloud/language` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=language.googleapis.com) | ✖ |
 | [OS Login](https://github.com/googleapis/nodejs-os-login) | [:notebook:](https://googleapis.dev/nodejs/oslogin/latest) | `npm i @google-cloud/os-login` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=oslogin.googleapis.com) | ✖ |
@@ -108,6 +109,27 @@ which is the authentication library used by all Google Cloud Node.js clients.
 - [hya-wave][hya-wave] - Cloud-based web sample editor. Part of the [hya-io][hya-io] family of products.
 - [gstore-node][gstore-node] - Google Datastore Entities Modeling library.
 - [gstore-api][gstore-api] - REST API builder for Google Datastore Entities.
+
+## Supported Node.js Versions
+
+Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Libraries are compatible with all current _active_ and _maintenance_ versions of
+Node.js.
+
+Client libraries targetting some end-of-life versions of Node.js are available, and
+can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+The dist-tags follow the naming convention `legacy-(version)`.
+
+_Legacy Node.js versions are supported as a best effort:_
+
+* Legacy versions will not be tested in continuous integration.
+* Some security patches may not be able to be backported.
+* Dependencies will not be kept up-to-date, and features will not be backported.
+
+#### Legacy tags available
+
+* `legacy-8`: install client libraries from this dist-tag for versions
+  compatible with Node.js 8.
 
 ## Versioning
 
