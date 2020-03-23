@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,16 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-const {assert} = require('chai');
-const {describe, it} = require('mocha');
-const cp = require('child_process');
-
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
-
-describe('quickstart samples', () => {
-  it('should run the quickstart', async () => {
-    const stdout = execSync('node quickstart.js');
-    assert.include(stdout, 'Well hello there, nodestronaut!');
-  });
-});
+const config = {
+  "enable-source-maps": true,
+  "throw-deprecation": true,
+  "timeout": 10000
+}
+if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
+  delete config['throw-deprecation'];
+}
+if (process.env.MOCHA_REPORTER) {
+  config.reporter = process.env.MOCHA_REPORTER;
+}
+if (process.env.MOCHA_REPORTER_OUTPUT) {
+  config['reporter-option'] = `output=${process.env.MOCHA_REPORTER_OUTPUT}`;
+}
+module.exports = config
