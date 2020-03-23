@@ -12,8 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* eslint-disable @typescript-eslint/no-empty-function,prefer-rest-params */
+
 import * as assert from 'assert';
-import {describe, it, afterEach} from 'mocha';
+import {describe, it, afterEach, beforeEach} from 'mocha';
 import * as sinon from 'sinon';
 import * as util from '../src';
 
@@ -24,13 +26,12 @@ describe('promisifyAll', () => {
   const fakeArgs = [null, 1, 2, 3];
   const fakeError = new Error('err.');
 
-  // tslint:disable-next-line
   let FakeClass: any;
 
   beforeEach(() => {
     FakeClass = class {
       methodName(callback: Function) {
-        callback.apply(null, fakeArgs);
+        callback(...fakeArgs);
       }
       methodSingle(callback: Function) {
         callback(null, fakeArgs[1]);
@@ -83,7 +84,6 @@ describe('promisifyAll', () => {
       });
     `);
   } catch (error) {
-    // tslint:disable-next-line ban
     it.skip('should work on ES classes');
   }
 
@@ -131,8 +131,7 @@ describe('promisify', () => {
 
   beforeEach(() => {
     fakeArgs = [null, 1, 2, 3];
-    func = util.promisify(function(this: {}, callback: () => void) {
-      // tslint:disable-next-line no-any
+    func = util.promisify(function (this: {}, callback: () => void) {
       (callback as any).apply(this, fakeArgs);
     });
   });
@@ -144,12 +143,13 @@ describe('promisify', () => {
   });
 
   it('should not return a promise in callback mode', done => {
-    let returnVal: {};
-    returnVal = func.call(fakeContext, function(this: {}) {
-      const args = [].slice.call(arguments);
+    let returnVal: any;
+    returnVal = func.call(fakeContext, function (this: {}) {
+      const args = [...arguments];
       assert.deepStrictEqual(args, fakeArgs);
       assert.strictEqual(this, fakeContext);
       assert(!returnVal);
+      returnVal = null; // this is to suppress prefer-const.
       done();
     });
   });
@@ -174,7 +174,6 @@ describe('promisify', () => {
   });
 
   it('should allow the Promise object to be overridden', () => {
-    // tslint:disable-next-line:variable-name
     const FakePromise = class {};
     const promise = func.call({Promise: FakePromise});
     assert(promise instanceof FakePromise);
@@ -185,7 +184,6 @@ describe('promisify', () => {
 
     func = util.promisify(
       (callback: () => void) => {
-        // tslint:disable-next-line no-any
         (callback as any).apply(func, [null, fakeArg]);
       },
       {
@@ -199,7 +197,6 @@ describe('promisify', () => {
   });
 
   it('should ignore singular when multiple args are present', () => {
-    // tslint:disable-next-line:no-any
     const fakeArgs: any[] = ['a', 'b'];
 
     func = util.promisify(
@@ -259,7 +256,6 @@ describe('callbackifyAll', () => {
   const fakeArgs = [1, 2, 3];
   const fakeError = new Error('err.');
 
-  // tslint:disable-next-line
   let FakeClass: any;
 
   beforeEach(() => {
@@ -313,7 +309,7 @@ describe('callbackify', () => {
   beforeEach(() => {
     fakeArgs = [1, 2, 3];
 
-    func = util.callbackify(async function(this: {}) {
+    func = util.callbackify(async (_this: {}) => {
       return fakeArgs;
     });
   });
@@ -331,7 +327,7 @@ describe('callbackify', () => {
   });
 
   it('should call the callback if it is provided', done => {
-    func(function(this: {}) {
+    func(function (this: {}) {
       const args = [].slice.call(arguments);
       assert.deepStrictEqual(args, [null, ...fakeArgs]);
       done();
@@ -339,7 +335,7 @@ describe('callbackify', () => {
   });
 
   it('should call the provided callback with undefined', done => {
-    func = util.callbackify(async function(this: {}) {});
+    func = util.callbackify(async (_this: {}) => {});
     func((err: Error, resp: {}) => {
       assert.strictEqual(err, null);
       assert.strictEqual(resp, undefined);
@@ -348,10 +344,10 @@ describe('callbackify', () => {
   });
 
   it('should call the provided callback with null', done => {
-    func = util.callbackify(async function(this: {}) {
+    func = util.callbackify(async (_this: {}) => {
       return null;
     });
-    func(function(this: {}) {
+    func(function (this: {}) {
       const args = [].slice.call(arguments);
       assert.deepStrictEqual(args, [null, null]);
       done();
