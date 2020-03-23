@@ -91,7 +91,7 @@ export class Paginator {
       Class.prototype[methodName + '_'] = originalMethod;
 
       // overwrite the original to auto-paginate
-      // tslint:disable-next-line:no-any
+      /* eslint-disable  @typescript-eslint/no-explicit-any */
       Class.prototype[methodName] = function(...args: any[]) {
         const parsedArguments = paginator.parseArguments_(args);
         return paginator.run_(parsedArguments, originalMethod.bind(this));
@@ -111,12 +111,12 @@ export class Paginator {
    * @param {string} methodName - Name of the method to streamify.
    * @return {function} - Wrapped function.
    */
-  // tslint:disable-next-line:no-any
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   streamify<T = any>(methodName: string) {
     return function(
       // tslint:disable-next-line:no-any
       this: {[index: string]: Function},
-      // tslint:disable-next-line:no-any
+      /* eslint-disable  @typescript-eslint/no-explicit-any */
       ...args: any[]
     ): ResourceStream<T> {
       const parsedArguments = paginator.parseArguments_(args);
@@ -134,7 +134,7 @@ export class Paginator {
    * @param {array} args - The original `arguments` pseduo-array that the original
    *     method received.
    */
-  // tslint:disable-next-line:no-any
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   parseArguments_(args: any[]) {
     let query: string | ParsedArguments | undefined;
     let autoPaginate = true;
@@ -255,7 +255,7 @@ export class Paginator {
    *     and returns `nextQuery` to receive more results.
    * @return {stream} - Readable object stream.
    */
-  // tslint:disable-next-line:no-any
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   runAsStream_<T = any>(
     parsedArguments: ParsedArguments,
     originalMethod: Function

@@ -47,7 +47,7 @@ export class ResourceStream<T> extends Transform implements ResourceEvents<T> {
     this._requestsMade = 0;
     this._resultsToSend = args.maxResults === -1 ? Infinity : args.maxResults!;
   }
-  // tslint:disable-next-line:no-any
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   end(...args: any[]) {
     this._ended = true;
     return super.end(...args);

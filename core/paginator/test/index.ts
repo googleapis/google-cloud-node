@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {PassThrough, Transform} from 'stream';
@@ -22,13 +22,16 @@ import * as P from '../src';
 import {paginator, ParsedArguments} from '../src';
 
 const util = {
-  noop: () => {},
+  noop: () => {
+    // do nothing
+  },
 };
 
 class FakeResourceStream extends Transform {
   calledWith: IArguments;
   constructor() {
     super({objectMode: true});
+    /* eslint-disable-next-line prefer-rest-params */
     this.calledWith = arguments;
   }
 }
@@ -39,18 +42,21 @@ const p = proxyquire('../src', {
 
 const sandbox = sinon.createSandbox();
 
+// eslint-disable-next-line no-undef
 afterEach(() => {
   sandbox.restore();
 });
 
-// tslint:disable-next-line no-any
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 function createFakeStream<T = any>() {
   return new PassThrough({objectMode: true}) as P.ResourceStream<T>;
 }
 
 describe('paginator', () => {
   const UUID = uuid.v1();
-  function FakeClass() {}
+  function FakeClass() {
+    // do nothing
+  }
 
   beforeEach(() => {
     FakeClass.prototype.methodToExtend = () => {
@@ -75,7 +81,6 @@ describe('paginator', () => {
 
     it('should accept an array or string method names', () => {
       const originalMethod = FakeClass.prototype.methodToExtend;
-      FakeClass.prototype.anotherMethodToExtend = () => {};
       const anotherMethod = FakeClass.prototype.anotherMethodToExtend;
       const methodsToExtend = ['methodToExtend', 'anotherMethodToExtend'];
       paginator.extend(FakeClass, methodsToExtend);
@@ -117,7 +122,7 @@ describe('paginator', () => {
         return this.uuid;
       };
 
-      // tslint:disable-next-line:no-any
+      /* eslint-disable  @typescript-eslint/no-explicit-any */
       const cls = new (FakeClass as any)();
       cls.uuid = uuid.v1();
 
@@ -159,7 +164,7 @@ describe('paginator', () => {
         return args as ParsedArguments;
       });
       sandbox.stub(paginator, 'runAsStream_').callsFake(createFakeStream);
-      FakeClass.prototype.streamMethod.apply(FakeClass.prototype, fakeArgs);
+      FakeClass.prototype.streamMethod(...fakeArgs);
     });
 
     it('should run the method as a stream', done => {
