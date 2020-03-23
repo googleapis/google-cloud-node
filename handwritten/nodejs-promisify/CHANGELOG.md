@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.4...v2.0.0) (2020-03-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to latest version of gts/typescript (#183)
+* drop Node 8 from engines field (#184)
+
+### Features
+
+* drop Node 8 from engines field ([#184](https://www.github.com/googleapis/nodejs-promisify/issues/184)) ([7e6d3c5](https://www.github.com/googleapis/nodejs-promisify/commit/7e6d3c54066d89530ed25c7f9722efd252f43fb8))
+
+
+### Build System
+
+* update to latest version of gts/typescript ([#183](https://www.github.com/googleapis/nodejs-promisify/issues/183)) ([9c3ed12](https://www.github.com/googleapis/nodejs-promisify/commit/9c3ed12c12f4bb1e17af7440c6371c4cefddcd59))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.3...v1.0.4) (2019-12-05)
 
 
