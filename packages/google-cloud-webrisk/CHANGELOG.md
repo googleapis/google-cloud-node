@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.6.0...v1.7.0) (2020-03-24)
+
+
+### Features
+
+* adds the v1 API surface ([#134](https://www.github.com/googleapis/nodejs-web-risk/issues/134)) ([34ca53c](https://www.github.com/googleapis/nodejs-web-risk/commit/34ca53c2fcb767874a011f9f86e9f24839398995))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.5.0...v1.6.0) (2020-03-06)
 
 
