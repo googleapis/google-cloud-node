@@ -19,6 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const assetserviceModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
@@ -38,7 +39,9 @@ export interface Callback {
 }
 
 export class Operation {
+  /* eslint-disable @typescript-eslint/no-empty-function */
   constructor() {}
+  /* eslint-disable @typescript-eslint/no-empty-function */
   promise() {}
 }
 function mockSimpleGrpcMethod(
@@ -158,8 +161,6 @@ describe('v1p4beta1.AssetServiceClient', () => {
       const request: protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest = {};
       request.analysisQuery = {};
       request.analysisQuery.parent = '';
-      // Mock response
-      const expectedResponse = {};
       // Mock gRPC layer
       client._innerApiCalls.analyzeIamPolicy = mockSimpleGrpcMethod(
         request,
@@ -219,8 +220,6 @@ describe('v1p4beta1.AssetServiceClient', () => {
       const request: protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest = {};
       request.analysisQuery = {};
       request.analysisQuery.parent = '';
-      // Mock response
-      const expectedResponse = {};
       // Mock gRPC layer
       client._innerApiCalls.exportIamPolicyAnalysis = mockLongRunningGrpcMethod(
         request,
