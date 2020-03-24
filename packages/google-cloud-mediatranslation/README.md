@@ -55,18 +55,18 @@ npm install @google-cloud/media-translation
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const {
-    SpeechTranslationServiceClient,
-  } = require('@google-cloud/media-translation');
+// Imports the Google Cloud client library
+const {
+  SpeechTranslationServiceClient,
+} = require('@google-cloud/media-translation');
 
-  // Creates a client
-  const translate = new SpeechTranslationServiceClient();
+// Creates a client
+const translate = new SpeechTranslationServiceClient();
 
-  // parent = 'projects/my-project', // Project to list dashboards for.
+// parent = 'projects/my-project', // Project to list dashboards for.
 
-  // TODO: add an actual sample.
-  console.info(translate);
+// TODO: add an actual sample.
+console.info(translate);
 
 
 ```
@@ -86,6 +86,27 @@ has instructions for running the samples.
 
 The [Cloud Media Translation Node.js Client API Reference][client-docs] documentation
 also contains samples.
+
+## Supported Node.js Versions
+
+Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Libraries are compatible with all current _active_ and _maintenance_ versions of
+Node.js.
+
+Client libraries targetting some end-of-life versions of Node.js are available, and
+can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+The dist-tags follow the naming convention `legacy-(version)`.
+
+_Legacy Node.js versions are supported as a best effort:_
+
+* Legacy versions will not be tested in continuous integration.
+* Some security patches may not be able to be backported.
+* Dependencies will not be kept up-to-date, and features will not be backported.
+
+#### Legacy tags available
+
+* `legacy-8`: install client libraries from this dist-tag for versions
+  compatible with Node.js 8.
 
 ## Versioning
 
