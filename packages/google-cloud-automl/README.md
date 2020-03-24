@@ -55,49 +55,49 @@ npm install @google-cloud/automl
 ### Using the client library
 
 ```javascript
-  const automl = require('@google-cloud/automl');
-  const fs = require('fs');
+const automl = require('@google-cloud/automl');
+const fs = require('fs');
 
-  // Create client for prediction service.
-  const client = new automl.PredictionServiceClient();
+// Create client for prediction service.
+const client = new automl.PredictionServiceClient();
 
-  /**
-   * TODO(developer): Uncomment the following line before running the sample.
-   */
-  // const projectId = `The GCLOUD_PROJECT string, e.g. "my-gcloud-project"`;
-  // const computeRegion = `region-name, e.g. "us-central1"`;
-  // const modelId = `id of the model, e.g. “ICN723541179344731436”`;
-  // const filePath = `local text file path of content to be classified, e.g. "./resources/flower.png"`;
-  // const scoreThreshold = `value between 0.0 and 1.0, e.g. "0.5"`;
+/**
+ * TODO(developer): Uncomment the following line before running the sample.
+ */
+// const projectId = `The GCLOUD_PROJECT string, e.g. "my-gcloud-project"`;
+// const computeRegion = `region-name, e.g. "us-central1"`;
+// const modelId = `id of the model, e.g. “ICN723541179344731436”`;
+// const filePath = `local text file path of content to be classified, e.g. "./resources/flower.png"`;
+// const scoreThreshold = `value between 0.0 and 1.0, e.g. "0.5"`;
 
-  // Get the full path of the model.
-  const modelFullId = client.modelPath(projectId, computeRegion, modelId);
+// Get the full path of the model.
+const modelFullId = client.modelPath(projectId, computeRegion, modelId);
 
-  // Read the file content for prediction.
-  const content = fs.readFileSync(filePath, 'base64');
+// Read the file content for prediction.
+const content = fs.readFileSync(filePath, 'base64');
 
-  const params = {};
+const params = {};
 
-  if (scoreThreshold) {
-    params.score_threshold = scoreThreshold;
-  }
+if (scoreThreshold) {
+  params.score_threshold = scoreThreshold;
+}
 
-  // Set the payload by giving the content and type of the file.
-  const payload = {};
-  payload.image = {imageBytes: content};
+// Set the payload by giving the content and type of the file.
+const payload = {};
+payload.image = {imageBytes: content};
 
-  // params is additional domain-specific parameters.
-  // currently there is no additional parameters supported.
-  const [response] = await client.predict({
-    name: modelFullId,
-    payload: payload,
-    params: params,
-  });
-  console.log(`Prediction results:`);
-  response.payload.forEach(result => {
-    console.log(`Predicted class name: ${result.displayName}`);
-    console.log(`Predicted class score: ${result.classification.score}`);
-  });
+// params is additional domain-specific parameters.
+// currently there is no additional parameters supported.
+const [response] = await client.predict({
+  name: modelFullId,
+  payload: payload,
+  params: params,
+});
+console.log(`Prediction results:`);
+response.payload.forEach(result => {
+  console.log(`Predicted class name: ${result.displayName}`);
+  console.log(`Predicted class score: ${result.classification.score}`);
+});
 
 ```
 
@@ -151,6 +151,27 @@ has instructions for running the samples.
 
 The [Cloud AutoML Node.js Client API Reference][client-docs] documentation
 also contains samples.
+
+## Supported Node.js Versions
+
+Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Libraries are compatible with all current _active_ and _maintenance_ versions of
+Node.js.
+
+Client libraries targetting some end-of-life versions of Node.js are available, and
+can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+The dist-tags follow the naming convention `legacy-(version)`.
+
+_Legacy Node.js versions are supported as a best effort:_
+
+* Legacy versions will not be tested in continuous integration.
+* Some security patches may not be able to be backported.
+* Dependencies will not be kept up-to-date, and features will not be backported.
+
+#### Legacy tags available
+
+* `legacy-8`: install client libraries from this dist-tag for versions
+  compatible with Node.js 8.
 
 ## Versioning
 
