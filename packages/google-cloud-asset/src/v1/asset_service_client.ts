@@ -163,6 +163,7 @@ export class AssetServiceClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          /* eslint-disable @typescript-eslint/no-var-requires */
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -227,6 +228,7 @@ export class AssetServiceClient {
             'google.cloud.asset.v1.AssetService'
           )
         : // tslint:disable-next-line no-any
+          /* eslint-disable @typescript-eslint/no-explicit-any */
           (this._protos as any).google.cloud.asset.v1.AssetService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -249,7 +251,8 @@ export class AssetServiceClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;

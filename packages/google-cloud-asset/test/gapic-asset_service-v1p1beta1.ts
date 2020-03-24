@@ -19,9 +19,9 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const assetserviceModule = require('../src');
 
-const FAKE_STATUS_CODE = 1;
 class FakeError {
   name: string;
   message: string;
@@ -32,13 +32,14 @@ class FakeError {
     this.code = n;
   }
 }
-const error = new FakeError(FAKE_STATUS_CODE);
 export interface Callback {
   (err: FakeError | null, response?: {} | null): void;
 }
 
 export class Operation {
+  /* eslint-disable @typescript-eslint/no-empty-function */
   constructor() {}
+  /* eslint-disable @typescript-eslint/no-empty-function */
   promise() {}
 }
 describe('v1p1beta1.AssetServiceClient', () => {

@@ -21,7 +21,7 @@ import {readFileSync} from 'fs';
 import {describe, it} from 'mocha';
 
 describe('typescript consumer tests', () => {
-  it('should have correct type signature for typescript users', async function() {
+  it('should have correct type signature for typescript users', async function () {
     this.timeout(300000);
     const options = {
       packageDir: process.cwd(), // path to your module.
@@ -35,7 +35,7 @@ describe('typescript consumer tests', () => {
     await packNTest(options); // will throw upon error.
   });
 
-  it('should have correct type signature for javascript users', async function() {
+  it('should have correct type signature for javascript users', async function () {
     this.timeout(300000);
     const options = {
       packageDir: process.cwd(), // path to your module.

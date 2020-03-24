@@ -19,6 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const assetserviceModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
@@ -38,7 +39,9 @@ export interface Callback {
 }
 
 export class Operation {
+  /* eslint-disable @typescript-eslint/no-empty-function */
   constructor() {}
+  /* eslint-disable @typescript-eslint/no-empty-function */
   promise() {}
 }
 function mockSimpleGrpcMethod(
@@ -135,8 +138,6 @@ describe('v1p2beta1.AssetServiceClient', () => {
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest = {};
       request.parent = '';
-      // Mock response
-      const expectedResponse = {};
       // Mock gRPC layer
       client._innerApiCalls.createFeed = mockSimpleGrpcMethod(
         request,
@@ -187,8 +188,6 @@ describe('v1p2beta1.AssetServiceClient', () => {
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest = {};
       request.name = '';
-      // Mock response
-      const expectedResponse = {};
       // Mock gRPC layer
       client._innerApiCalls.getFeed = mockSimpleGrpcMethod(
         request,
@@ -239,8 +238,6 @@ describe('v1p2beta1.AssetServiceClient', () => {
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest = {};
       request.parent = '';
-      // Mock response
-      const expectedResponse = {};
       // Mock gRPC layer
       client._innerApiCalls.listFeeds = mockSimpleGrpcMethod(
         request,
@@ -293,8 +290,6 @@ describe('v1p2beta1.AssetServiceClient', () => {
       const request: protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest = {};
       request.feed = {};
       request.feed.name = '';
-      // Mock response
-      const expectedResponse = {};
       // Mock gRPC layer
       client._innerApiCalls.updateFeed = mockSimpleGrpcMethod(
         request,
@@ -345,8 +340,6 @@ describe('v1p2beta1.AssetServiceClient', () => {
       // Mock request
       const request: protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest = {};
       request.name = '';
-      // Mock response
-      const expectedResponse = {};
       // Mock gRPC layer
       client._innerApiCalls.deleteFeed = mockSimpleGrpcMethod(
         request,
