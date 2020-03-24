@@ -6,6 +6,347 @@
           "nested": {
             "webrisk": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.WebRisk.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/webrisk/v1;webrisk",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "WebRiskProto",
+                    "java_package": "com.google.webrisk.v1",
+                    "objc_class_prefix": "GCWR",
+                    "php_namespace": "Google\\Cloud\\WebRisk\\V1"
+                  },
+                  "nested": {
+                    "WebRiskService": {
+                      "options": {
+                        "(google.api.default_host)": "webrisk.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ComputeThreatListDiff": {
+                          "requestType": "ComputeThreatListDiffRequest",
+                          "responseType": "ComputeThreatListDiffResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/threatLists:computeDiff",
+                            "(google.api.method_signature)": "threat_type,version_token,constraints"
+                          }
+                        },
+                        "SearchUris": {
+                          "requestType": "SearchUrisRequest",
+                          "responseType": "SearchUrisResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/uris:search",
+                            "(google.api.method_signature)": "uri,threat_types"
+                          }
+                        },
+                        "SearchHashes": {
+                          "requestType": "SearchHashesRequest",
+                          "responseType": "SearchHashesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/hashes:search",
+                            "(google.api.method_signature)": "hash_prefix,threat_types"
+                          }
+                        },
+                        "CreateSubmission": {
+                          "requestType": "CreateSubmissionRequest",
+                          "responseType": "Submission",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/submissions",
+                            "(google.api.http).body": "submission",
+                            "(google.api.method_signature)": "parent,submission"
+                          }
+                        }
+                      }
+                    },
+                    "ComputeThreatListDiffRequest": {
+                      "fields": {
+                        "threatType": {
+                          "type": "ThreatType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "versionToken": {
+                          "type": "bytes",
+                          "id": 2
+                        },
+                        "constraints": {
+                          "type": "Constraints",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Constraints": {
+                          "fields": {
+                            "maxDiffEntries": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "maxDatabaseEntries": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "supportedCompressions": {
+                              "rule": "repeated",
+                              "type": "CompressionType",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ComputeThreatListDiffResponse": {
+                      "fields": {
+                        "responseType": {
+                          "type": "ResponseType",
+                          "id": 4
+                        },
+                        "additions": {
+                          "type": "ThreatEntryAdditions",
+                          "id": 5
+                        },
+                        "removals": {
+                          "type": "ThreatEntryRemovals",
+                          "id": 6
+                        },
+                        "newVersionToken": {
+                          "type": "bytes",
+                          "id": 7
+                        },
+                        "checksum": {
+                          "type": "Checksum",
+                          "id": 8
+                        },
+                        "recommendedNextDiff": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Checksum": {
+                          "fields": {
+                            "sha256": {
+                              "type": "bytes",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ResponseType": {
+                          "values": {
+                            "RESPONSE_TYPE_UNSPECIFIED": 0,
+                            "DIFF": 1,
+                            "RESET": 2
+                          }
+                        }
+                      }
+                    },
+                    "SearchUrisRequest": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "threatTypes": {
+                          "rule": "repeated",
+                          "type": "ThreatType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SearchUrisResponse": {
+                      "fields": {
+                        "threat": {
+                          "type": "ThreatUri",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ThreatUri": {
+                          "fields": {
+                            "threatTypes": {
+                              "rule": "repeated",
+                              "type": "ThreatType",
+                              "id": 1
+                            },
+                            "expireTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchHashesRequest": {
+                      "fields": {
+                        "hashPrefix": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "threatTypes": {
+                          "rule": "repeated",
+                          "type": "ThreatType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SearchHashesResponse": {
+                      "fields": {
+                        "threats": {
+                          "rule": "repeated",
+                          "type": "ThreatHash",
+                          "id": 1
+                        },
+                        "negativeExpireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ThreatHash": {
+                          "fields": {
+                            "threatTypes": {
+                              "rule": "repeated",
+                              "type": "ThreatType",
+                              "id": 1
+                            },
+                            "hash": {
+                              "type": "bytes",
+                              "id": 2
+                            },
+                            "expireTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ThreatEntryAdditions": {
+                      "fields": {
+                        "rawHashes": {
+                          "rule": "repeated",
+                          "type": "RawHashes",
+                          "id": 1
+                        },
+                        "riceHashes": {
+                          "type": "RiceDeltaEncoding",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ThreatEntryRemovals": {
+                      "fields": {
+                        "rawIndices": {
+                          "type": "RawIndices",
+                          "id": 1
+                        },
+                        "riceIndices": {
+                          "type": "RiceDeltaEncoding",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ThreatType": {
+                      "values": {
+                        "THREAT_TYPE_UNSPECIFIED": 0,
+                        "MALWARE": 1,
+                        "SOCIAL_ENGINEERING": 2,
+                        "UNWANTED_SOFTWARE": 3
+                      }
+                    },
+                    "CompressionType": {
+                      "values": {
+                        "COMPRESSION_TYPE_UNSPECIFIED": 0,
+                        "RAW": 1,
+                        "RICE": 2
+                      }
+                    },
+                    "RawIndices": {
+                      "fields": {
+                        "indices": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RawHashes": {
+                      "fields": {
+                        "prefixSize": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "rawHashes": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RiceDeltaEncoding": {
+                      "fields": {
+                        "firstValue": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "riceParameter": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "entryCount": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "encodedData": {
+                          "type": "bytes",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Submission": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSubmissionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "submission": {
+                          "type": "Submission",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.WebRisk.V1Beta1",
@@ -316,7 +657,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -439,6 +780,72 @@
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }

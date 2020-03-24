@@ -19,7 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-const webriskservicev1beta1Module = require('../src');
+const webriskserviceModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
 class FakeError {
@@ -57,69 +57,58 @@ function mockSimpleGrpcMethod(
     }
   };
 }
-describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
+describe('v1.WebRiskServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =
-      webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client
-        .servicePath;
+      webriskserviceModule.v1.WebRiskServiceClient.servicePath;
     assert(servicePath);
   });
   it('has apiEndpoint', () => {
     const apiEndpoint =
-      webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client
-        .apiEndpoint;
+      webriskserviceModule.v1.WebRiskServiceClient.apiEndpoint;
     assert(apiEndpoint);
   });
   it('has port', () => {
-    const port =
-      webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client.port;
+    const port = webriskserviceModule.v1.WebRiskServiceClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
   it('should create a client with no option', () => {
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
+    const client = new webriskserviceModule.v1.WebRiskServiceClient();
     assert(client);
   });
   it('should create a client with gRPC fallback', () => {
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-      {
-        fallback: true,
-      }
-    );
+    const client = new webriskserviceModule.v1.WebRiskServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
-    assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
+    const client = new webriskserviceModule.v1.WebRiskServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.webRiskServiceStub, undefined);
     await client.initialize();
-    assert(client.webRiskServiceV1Beta1Stub);
+    assert(client.webRiskServiceStub);
   });
   it('has close method', () => {
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client = new webriskserviceModule.v1.WebRiskServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
     client.close();
   });
   describe('computeThreatListDiff', () => {
     it('invokes computeThreatListDiff without error', done => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest = {};
+      const request: protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -136,16 +125,14 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes computeThreatListDiff with error', done => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest = {};
+      const request: protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -164,16 +151,14 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
   });
   describe('searchUris', () => {
     it('invokes searchUris without error', done => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.webrisk.v1beta1.ISearchUrisRequest = {};
+      const request: protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -190,16 +175,14 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes searchUris with error', done => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.webrisk.v1beta1.ISearchUrisRequest = {};
+      const request: protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -218,16 +201,14 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
   });
   describe('searchHashes', () => {
     it('invokes searchHashes without error', done => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.webrisk.v1beta1.ISearchHashesRequest = {};
+      const request: protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -244,16 +225,14 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes searchHashes with error', done => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.webrisk.v1beta1.ISearchHashesRequest = {};
+      const request: protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -263,6 +242,58 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         error
       );
       client.searchHashes(request, (err: FakeError, response: {}) => {
+        assert(err instanceof FakeError);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+  describe('createSubmission', () => {
+    it('invokes createSubmission without error', done => {
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Initialize client before mocking
+      client.initialize();
+      // Mock request
+      const request: protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.createSubmission = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.createSubmission(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createSubmission with error', done => {
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Initialize client before mocking
+      client.initialize();
+      // Mock request
+      const request: protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest = {};
+      request.parent = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.createSubmission = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.createSubmission(request, (err: FakeError, response: {}) => {
         assert(err instanceof FakeError);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');

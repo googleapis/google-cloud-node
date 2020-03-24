@@ -57,6 +57,4402 @@
                  */
                 var webrisk = {};
     
+                webrisk.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.webrisk
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.WebRiskService = (function() {
+    
+                        /**
+                         * Constructs a new WebRiskService service.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a WebRiskService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function WebRiskService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (WebRiskService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = WebRiskService;
+    
+                        /**
+                         * Creates new WebRiskService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {WebRiskService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        WebRiskService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.webrisk.v1.WebRiskService#computeThreatListDiff}.
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @typedef ComputeThreatListDiffCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.webrisk.v1.ComputeThreatListDiffResponse} [response] ComputeThreatListDiffResponse
+                         */
+    
+                        /**
+                         * Calls ComputeThreatListDiff.
+                         * @function computeThreatListDiff
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffRequest} request ComputeThreatListDiffRequest message or plain object
+                         * @param {google.cloud.webrisk.v1.WebRiskService.ComputeThreatListDiffCallback} callback Node-style callback called with the error, if any, and ComputeThreatListDiffResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(WebRiskService.prototype.computeThreatListDiff = function computeThreatListDiff(request, callback) {
+                            return this.rpcCall(computeThreatListDiff, $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest, $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse, request, callback);
+                        }, "name", { value: "ComputeThreatListDiff" });
+    
+                        /**
+                         * Calls ComputeThreatListDiff.
+                         * @function computeThreatListDiff
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffRequest} request ComputeThreatListDiffRequest message or plain object
+                         * @returns {Promise<google.cloud.webrisk.v1.ComputeThreatListDiffResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.webrisk.v1.WebRiskService#searchUris}.
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @typedef SearchUrisCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.webrisk.v1.SearchUrisResponse} [response] SearchUrisResponse
+                         */
+    
+                        /**
+                         * Calls SearchUris.
+                         * @function searchUris
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.ISearchUrisRequest} request SearchUrisRequest message or plain object
+                         * @param {google.cloud.webrisk.v1.WebRiskService.SearchUrisCallback} callback Node-style callback called with the error, if any, and SearchUrisResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(WebRiskService.prototype.searchUris = function searchUris(request, callback) {
+                            return this.rpcCall(searchUris, $root.google.cloud.webrisk.v1.SearchUrisRequest, $root.google.cloud.webrisk.v1.SearchUrisResponse, request, callback);
+                        }, "name", { value: "SearchUris" });
+    
+                        /**
+                         * Calls SearchUris.
+                         * @function searchUris
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.ISearchUrisRequest} request SearchUrisRequest message or plain object
+                         * @returns {Promise<google.cloud.webrisk.v1.SearchUrisResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.webrisk.v1.WebRiskService#searchHashes}.
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @typedef SearchHashesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.webrisk.v1.SearchHashesResponse} [response] SearchHashesResponse
+                         */
+    
+                        /**
+                         * Calls SearchHashes.
+                         * @function searchHashes
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.ISearchHashesRequest} request SearchHashesRequest message or plain object
+                         * @param {google.cloud.webrisk.v1.WebRiskService.SearchHashesCallback} callback Node-style callback called with the error, if any, and SearchHashesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(WebRiskService.prototype.searchHashes = function searchHashes(request, callback) {
+                            return this.rpcCall(searchHashes, $root.google.cloud.webrisk.v1.SearchHashesRequest, $root.google.cloud.webrisk.v1.SearchHashesResponse, request, callback);
+                        }, "name", { value: "SearchHashes" });
+    
+                        /**
+                         * Calls SearchHashes.
+                         * @function searchHashes
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.ISearchHashesRequest} request SearchHashesRequest message or plain object
+                         * @returns {Promise<google.cloud.webrisk.v1.SearchHashesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.webrisk.v1.WebRiskService#createSubmission}.
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @typedef CreateSubmissionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.webrisk.v1.Submission} [response] Submission
+                         */
+    
+                        /**
+                         * Calls CreateSubmission.
+                         * @function createSubmission
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.ICreateSubmissionRequest} request CreateSubmissionRequest message or plain object
+                         * @param {google.cloud.webrisk.v1.WebRiskService.CreateSubmissionCallback} callback Node-style callback called with the error, if any, and Submission
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(WebRiskService.prototype.createSubmission = function createSubmission(request, callback) {
+                            return this.rpcCall(createSubmission, $root.google.cloud.webrisk.v1.CreateSubmissionRequest, $root.google.cloud.webrisk.v1.Submission, request, callback);
+                        }, "name", { value: "CreateSubmission" });
+    
+                        /**
+                         * Calls CreateSubmission.
+                         * @function createSubmission
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.ICreateSubmissionRequest} request CreateSubmissionRequest message or plain object
+                         * @returns {Promise<google.cloud.webrisk.v1.Submission>} Promise
+                         * @variation 2
+                         */
+    
+                        return WebRiskService;
+                    })();
+    
+                    v1.ComputeThreatListDiffRequest = (function() {
+    
+                        /**
+                         * Properties of a ComputeThreatListDiffRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IComputeThreatListDiffRequest
+                         * @property {google.cloud.webrisk.v1.ThreatType|null} [threatType] ComputeThreatListDiffRequest threatType
+                         * @property {Uint8Array|null} [versionToken] ComputeThreatListDiffRequest versionToken
+                         * @property {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.IConstraints|null} [constraints] ComputeThreatListDiffRequest constraints
+                         */
+    
+                        /**
+                         * Constructs a new ComputeThreatListDiffRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a ComputeThreatListDiffRequest.
+                         * @implements IComputeThreatListDiffRequest
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffRequest=} [properties] Properties to set
+                         */
+                        function ComputeThreatListDiffRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ComputeThreatListDiffRequest threatType.
+                         * @member {google.cloud.webrisk.v1.ThreatType} threatType
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @instance
+                         */
+                        ComputeThreatListDiffRequest.prototype.threatType = 0;
+    
+                        /**
+                         * ComputeThreatListDiffRequest versionToken.
+                         * @member {Uint8Array} versionToken
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @instance
+                         */
+                        ComputeThreatListDiffRequest.prototype.versionToken = $util.newBuffer([]);
+    
+                        /**
+                         * ComputeThreatListDiffRequest constraints.
+                         * @member {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.IConstraints|null|undefined} constraints
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @instance
+                         */
+                        ComputeThreatListDiffRequest.prototype.constraints = null;
+    
+                        /**
+                         * Creates a new ComputeThreatListDiffRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffRequest=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffRequest} ComputeThreatListDiffRequest instance
+                         */
+                        ComputeThreatListDiffRequest.create = function create(properties) {
+                            return new ComputeThreatListDiffRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeThreatListDiffRequest message. Does not implicitly {@link google.cloud.webrisk.v1.ComputeThreatListDiffRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffRequest} message ComputeThreatListDiffRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeThreatListDiffRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.threatType != null && message.hasOwnProperty("threatType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.threatType);
+                            if (message.versionToken != null && message.hasOwnProperty("versionToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.versionToken);
+                            if (message.constraints != null && message.hasOwnProperty("constraints"))
+                                $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints.encode(message.constraints, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeThreatListDiffRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ComputeThreatListDiffRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffRequest} message ComputeThreatListDiffRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeThreatListDiffRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ComputeThreatListDiffRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffRequest} ComputeThreatListDiffRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeThreatListDiffRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.threatType = reader.int32();
+                                    break;
+                                case 2:
+                                    message.versionToken = reader.bytes();
+                                    break;
+                                case 3:
+                                    message.constraints = $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ComputeThreatListDiffRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffRequest} ComputeThreatListDiffRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeThreatListDiffRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ComputeThreatListDiffRequest message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ComputeThreatListDiffRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.threatType != null && message.hasOwnProperty("threatType"))
+                                switch (message.threatType) {
+                                default:
+                                    return "threatType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.versionToken != null && message.hasOwnProperty("versionToken"))
+                                if (!(message.versionToken && typeof message.versionToken.length === "number" || $util.isString(message.versionToken)))
+                                    return "versionToken: buffer expected";
+                            if (message.constraints != null && message.hasOwnProperty("constraints")) {
+                                var error = $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints.verify(message.constraints);
+                                if (error)
+                                    return "constraints." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ComputeThreatListDiffRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffRequest} ComputeThreatListDiffRequest
+                         */
+                        ComputeThreatListDiffRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest();
+                            switch (object.threatType) {
+                            case "THREAT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.threatType = 0;
+                                break;
+                            case "MALWARE":
+                            case 1:
+                                message.threatType = 1;
+                                break;
+                            case "SOCIAL_ENGINEERING":
+                            case 2:
+                                message.threatType = 2;
+                                break;
+                            case "UNWANTED_SOFTWARE":
+                            case 3:
+                                message.threatType = 3;
+                                break;
+                            }
+                            if (object.versionToken != null)
+                                if (typeof object.versionToken === "string")
+                                    $util.base64.decode(object.versionToken, message.versionToken = $util.newBuffer($util.base64.length(object.versionToken)), 0);
+                                else if (object.versionToken.length)
+                                    message.versionToken = object.versionToken;
+                            if (object.constraints != null) {
+                                if (typeof object.constraints !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ComputeThreatListDiffRequest.constraints: object expected");
+                                message.constraints = $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints.fromObject(object.constraints);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ComputeThreatListDiffRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ComputeThreatListDiffRequest} message ComputeThreatListDiffRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ComputeThreatListDiffRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.threatType = options.enums === String ? "THREAT_TYPE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.versionToken = "";
+                                else {
+                                    object.versionToken = [];
+                                    if (options.bytes !== Array)
+                                        object.versionToken = $util.newBuffer(object.versionToken);
+                                }
+                                object.constraints = null;
+                            }
+                            if (message.threatType != null && message.hasOwnProperty("threatType"))
+                                object.threatType = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatType[message.threatType] : message.threatType;
+                            if (message.versionToken != null && message.hasOwnProperty("versionToken"))
+                                object.versionToken = options.bytes === String ? $util.base64.encode(message.versionToken, 0, message.versionToken.length) : options.bytes === Array ? Array.prototype.slice.call(message.versionToken) : message.versionToken;
+                            if (message.constraints != null && message.hasOwnProperty("constraints"))
+                                object.constraints = $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints.toObject(message.constraints, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ComputeThreatListDiffRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ComputeThreatListDiffRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        ComputeThreatListDiffRequest.Constraints = (function() {
+    
+                            /**
+                             * Properties of a Constraints.
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                             * @interface IConstraints
+                             * @property {number|null} [maxDiffEntries] Constraints maxDiffEntries
+                             * @property {number|null} [maxDatabaseEntries] Constraints maxDatabaseEntries
+                             * @property {Array.<google.cloud.webrisk.v1.CompressionType>|null} [supportedCompressions] Constraints supportedCompressions
+                             */
+    
+                            /**
+                             * Constructs a new Constraints.
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest
+                             * @classdesc Represents a Constraints.
+                             * @implements IConstraints
+                             * @constructor
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.IConstraints=} [properties] Properties to set
+                             */
+                            function Constraints(properties) {
+                                this.supportedCompressions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Constraints maxDiffEntries.
+                             * @member {number} maxDiffEntries
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @instance
+                             */
+                            Constraints.prototype.maxDiffEntries = 0;
+    
+                            /**
+                             * Constraints maxDatabaseEntries.
+                             * @member {number} maxDatabaseEntries
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @instance
+                             */
+                            Constraints.prototype.maxDatabaseEntries = 0;
+    
+                            /**
+                             * Constraints supportedCompressions.
+                             * @member {Array.<google.cloud.webrisk.v1.CompressionType>} supportedCompressions
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @instance
+                             */
+                            Constraints.prototype.supportedCompressions = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Constraints instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.IConstraints=} [properties] Properties to set
+                             * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints} Constraints instance
+                             */
+                            Constraints.create = function create(properties) {
+                                return new Constraints(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Constraints message. Does not implicitly {@link google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.IConstraints} message Constraints message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Constraints.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.maxDiffEntries != null && message.hasOwnProperty("maxDiffEntries"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxDiffEntries);
+                                if (message.maxDatabaseEntries != null && message.hasOwnProperty("maxDatabaseEntries"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxDatabaseEntries);
+                                if (message.supportedCompressions != null && message.supportedCompressions.length) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                    for (var i = 0; i < message.supportedCompressions.length; ++i)
+                                        writer.int32(message.supportedCompressions[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Constraints message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.IConstraints} message Constraints message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Constraints.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Constraints message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints} Constraints
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Constraints.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.maxDiffEntries = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.maxDatabaseEntries = reader.int32();
+                                        break;
+                                    case 3:
+                                        if (!(message.supportedCompressions && message.supportedCompressions.length))
+                                            message.supportedCompressions = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.supportedCompressions.push(reader.int32());
+                                        } else
+                                            message.supportedCompressions.push(reader.int32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Constraints message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints} Constraints
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Constraints.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Constraints message.
+                             * @function verify
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Constraints.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.maxDiffEntries != null && message.hasOwnProperty("maxDiffEntries"))
+                                    if (!$util.isInteger(message.maxDiffEntries))
+                                        return "maxDiffEntries: integer expected";
+                                if (message.maxDatabaseEntries != null && message.hasOwnProperty("maxDatabaseEntries"))
+                                    if (!$util.isInteger(message.maxDatabaseEntries))
+                                        return "maxDatabaseEntries: integer expected";
+                                if (message.supportedCompressions != null && message.hasOwnProperty("supportedCompressions")) {
+                                    if (!Array.isArray(message.supportedCompressions))
+                                        return "supportedCompressions: array expected";
+                                    for (var i = 0; i < message.supportedCompressions.length; ++i)
+                                        switch (message.supportedCompressions[i]) {
+                                        default:
+                                            return "supportedCompressions: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Constraints message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints} Constraints
+                             */
+                            Constraints.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints)
+                                    return object;
+                                var message = new $root.google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints();
+                                if (object.maxDiffEntries != null)
+                                    message.maxDiffEntries = object.maxDiffEntries | 0;
+                                if (object.maxDatabaseEntries != null)
+                                    message.maxDatabaseEntries = object.maxDatabaseEntries | 0;
+                                if (object.supportedCompressions) {
+                                    if (!Array.isArray(object.supportedCompressions))
+                                        throw TypeError(".google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints.supportedCompressions: array expected");
+                                    message.supportedCompressions = [];
+                                    for (var i = 0; i < object.supportedCompressions.length; ++i)
+                                        switch (object.supportedCompressions[i]) {
+                                        default:
+                                        case "COMPRESSION_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.supportedCompressions[i] = 0;
+                                            break;
+                                        case "RAW":
+                                        case 1:
+                                            message.supportedCompressions[i] = 1;
+                                            break;
+                                        case "RICE":
+                                        case 2:
+                                            message.supportedCompressions[i] = 2;
+                                            break;
+                                        }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Constraints message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints} message Constraints
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Constraints.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.supportedCompressions = [];
+                                if (options.defaults) {
+                                    object.maxDiffEntries = 0;
+                                    object.maxDatabaseEntries = 0;
+                                }
+                                if (message.maxDiffEntries != null && message.hasOwnProperty("maxDiffEntries"))
+                                    object.maxDiffEntries = message.maxDiffEntries;
+                                if (message.maxDatabaseEntries != null && message.hasOwnProperty("maxDatabaseEntries"))
+                                    object.maxDatabaseEntries = message.maxDatabaseEntries;
+                                if (message.supportedCompressions && message.supportedCompressions.length) {
+                                    object.supportedCompressions = [];
+                                    for (var j = 0; j < message.supportedCompressions.length; ++j)
+                                        object.supportedCompressions[j] = options.enums === String ? $root.google.cloud.webrisk.v1.CompressionType[message.supportedCompressions[j]] : message.supportedCompressions[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Constraints to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Constraints.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Constraints;
+                        })();
+    
+                        return ComputeThreatListDiffRequest;
+                    })();
+    
+                    v1.ComputeThreatListDiffResponse = (function() {
+    
+                        /**
+                         * Properties of a ComputeThreatListDiffResponse.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IComputeThreatListDiffResponse
+                         * @property {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.ResponseType|null} [responseType] ComputeThreatListDiffResponse responseType
+                         * @property {google.cloud.webrisk.v1.IThreatEntryAdditions|null} [additions] ComputeThreatListDiffResponse additions
+                         * @property {google.cloud.webrisk.v1.IThreatEntryRemovals|null} [removals] ComputeThreatListDiffResponse removals
+                         * @property {Uint8Array|null} [newVersionToken] ComputeThreatListDiffResponse newVersionToken
+                         * @property {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum|null} [checksum] ComputeThreatListDiffResponse checksum
+                         * @property {google.protobuf.ITimestamp|null} [recommendedNextDiff] ComputeThreatListDiffResponse recommendedNextDiff
+                         */
+    
+                        /**
+                         * Constructs a new ComputeThreatListDiffResponse.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a ComputeThreatListDiffResponse.
+                         * @implements IComputeThreatListDiffResponse
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffResponse=} [properties] Properties to set
+                         */
+                        function ComputeThreatListDiffResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ComputeThreatListDiffResponse responseType.
+                         * @member {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.ResponseType} responseType
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @instance
+                         */
+                        ComputeThreatListDiffResponse.prototype.responseType = 0;
+    
+                        /**
+                         * ComputeThreatListDiffResponse additions.
+                         * @member {google.cloud.webrisk.v1.IThreatEntryAdditions|null|undefined} additions
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @instance
+                         */
+                        ComputeThreatListDiffResponse.prototype.additions = null;
+    
+                        /**
+                         * ComputeThreatListDiffResponse removals.
+                         * @member {google.cloud.webrisk.v1.IThreatEntryRemovals|null|undefined} removals
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @instance
+                         */
+                        ComputeThreatListDiffResponse.prototype.removals = null;
+    
+                        /**
+                         * ComputeThreatListDiffResponse newVersionToken.
+                         * @member {Uint8Array} newVersionToken
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @instance
+                         */
+                        ComputeThreatListDiffResponse.prototype.newVersionToken = $util.newBuffer([]);
+    
+                        /**
+                         * ComputeThreatListDiffResponse checksum.
+                         * @member {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum|null|undefined} checksum
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @instance
+                         */
+                        ComputeThreatListDiffResponse.prototype.checksum = null;
+    
+                        /**
+                         * ComputeThreatListDiffResponse recommendedNextDiff.
+                         * @member {google.protobuf.ITimestamp|null|undefined} recommendedNextDiff
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @instance
+                         */
+                        ComputeThreatListDiffResponse.prototype.recommendedNextDiff = null;
+    
+                        /**
+                         * Creates a new ComputeThreatListDiffResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffResponse=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffResponse} ComputeThreatListDiffResponse instance
+                         */
+                        ComputeThreatListDiffResponse.create = function create(properties) {
+                            return new ComputeThreatListDiffResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeThreatListDiffResponse message. Does not implicitly {@link google.cloud.webrisk.v1.ComputeThreatListDiffResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffResponse} message ComputeThreatListDiffResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeThreatListDiffResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.recommendedNextDiff != null && message.hasOwnProperty("recommendedNextDiff"))
+                                $root.google.protobuf.Timestamp.encode(message.recommendedNextDiff, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.responseType != null && message.hasOwnProperty("responseType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.responseType);
+                            if (message.additions != null && message.hasOwnProperty("additions"))
+                                $root.google.cloud.webrisk.v1.ThreatEntryAdditions.encode(message.additions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.removals != null && message.hasOwnProperty("removals"))
+                                $root.google.cloud.webrisk.v1.ThreatEntryRemovals.encode(message.removals, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.newVersionToken != null && message.hasOwnProperty("newVersionToken"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.newVersionToken);
+                            if (message.checksum != null && message.hasOwnProperty("checksum"))
+                                $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum.encode(message.checksum, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ComputeThreatListDiffResponse message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ComputeThreatListDiffResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IComputeThreatListDiffResponse} message ComputeThreatListDiffResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ComputeThreatListDiffResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ComputeThreatListDiffResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffResponse} ComputeThreatListDiffResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeThreatListDiffResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4:
+                                    message.responseType = reader.int32();
+                                    break;
+                                case 5:
+                                    message.additions = $root.google.cloud.webrisk.v1.ThreatEntryAdditions.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.removals = $root.google.cloud.webrisk.v1.ThreatEntryRemovals.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.newVersionToken = reader.bytes();
+                                    break;
+                                case 8:
+                                    message.checksum = $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.recommendedNextDiff = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ComputeThreatListDiffResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffResponse} ComputeThreatListDiffResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ComputeThreatListDiffResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ComputeThreatListDiffResponse message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ComputeThreatListDiffResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.responseType != null && message.hasOwnProperty("responseType"))
+                                switch (message.responseType) {
+                                default:
+                                    return "responseType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.additions != null && message.hasOwnProperty("additions")) {
+                                var error = $root.google.cloud.webrisk.v1.ThreatEntryAdditions.verify(message.additions);
+                                if (error)
+                                    return "additions." + error;
+                            }
+                            if (message.removals != null && message.hasOwnProperty("removals")) {
+                                var error = $root.google.cloud.webrisk.v1.ThreatEntryRemovals.verify(message.removals);
+                                if (error)
+                                    return "removals." + error;
+                            }
+                            if (message.newVersionToken != null && message.hasOwnProperty("newVersionToken"))
+                                if (!(message.newVersionToken && typeof message.newVersionToken.length === "number" || $util.isString(message.newVersionToken)))
+                                    return "newVersionToken: buffer expected";
+                            if (message.checksum != null && message.hasOwnProperty("checksum")) {
+                                var error = $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum.verify(message.checksum);
+                                if (error)
+                                    return "checksum." + error;
+                            }
+                            if (message.recommendedNextDiff != null && message.hasOwnProperty("recommendedNextDiff")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.recommendedNextDiff);
+                                if (error)
+                                    return "recommendedNextDiff." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ComputeThreatListDiffResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffResponse} ComputeThreatListDiffResponse
+                         */
+                        ComputeThreatListDiffResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse();
+                            switch (object.responseType) {
+                            case "RESPONSE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.responseType = 0;
+                                break;
+                            case "DIFF":
+                            case 1:
+                                message.responseType = 1;
+                                break;
+                            case "RESET":
+                            case 2:
+                                message.responseType = 2;
+                                break;
+                            }
+                            if (object.additions != null) {
+                                if (typeof object.additions !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ComputeThreatListDiffResponse.additions: object expected");
+                                message.additions = $root.google.cloud.webrisk.v1.ThreatEntryAdditions.fromObject(object.additions);
+                            }
+                            if (object.removals != null) {
+                                if (typeof object.removals !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ComputeThreatListDiffResponse.removals: object expected");
+                                message.removals = $root.google.cloud.webrisk.v1.ThreatEntryRemovals.fromObject(object.removals);
+                            }
+                            if (object.newVersionToken != null)
+                                if (typeof object.newVersionToken === "string")
+                                    $util.base64.decode(object.newVersionToken, message.newVersionToken = $util.newBuffer($util.base64.length(object.newVersionToken)), 0);
+                                else if (object.newVersionToken.length)
+                                    message.newVersionToken = object.newVersionToken;
+                            if (object.checksum != null) {
+                                if (typeof object.checksum !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ComputeThreatListDiffResponse.checksum: object expected");
+                                message.checksum = $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum.fromObject(object.checksum);
+                            }
+                            if (object.recommendedNextDiff != null) {
+                                if (typeof object.recommendedNextDiff !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ComputeThreatListDiffResponse.recommendedNextDiff: object expected");
+                                message.recommendedNextDiff = $root.google.protobuf.Timestamp.fromObject(object.recommendedNextDiff);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ComputeThreatListDiffResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ComputeThreatListDiffResponse} message ComputeThreatListDiffResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ComputeThreatListDiffResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.recommendedNextDiff = null;
+                                object.responseType = options.enums === String ? "RESPONSE_TYPE_UNSPECIFIED" : 0;
+                                object.additions = null;
+                                object.removals = null;
+                                if (options.bytes === String)
+                                    object.newVersionToken = "";
+                                else {
+                                    object.newVersionToken = [];
+                                    if (options.bytes !== Array)
+                                        object.newVersionToken = $util.newBuffer(object.newVersionToken);
+                                }
+                                object.checksum = null;
+                            }
+                            if (message.recommendedNextDiff != null && message.hasOwnProperty("recommendedNextDiff"))
+                                object.recommendedNextDiff = $root.google.protobuf.Timestamp.toObject(message.recommendedNextDiff, options);
+                            if (message.responseType != null && message.hasOwnProperty("responseType"))
+                                object.responseType = options.enums === String ? $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.ResponseType[message.responseType] : message.responseType;
+                            if (message.additions != null && message.hasOwnProperty("additions"))
+                                object.additions = $root.google.cloud.webrisk.v1.ThreatEntryAdditions.toObject(message.additions, options);
+                            if (message.removals != null && message.hasOwnProperty("removals"))
+                                object.removals = $root.google.cloud.webrisk.v1.ThreatEntryRemovals.toObject(message.removals, options);
+                            if (message.newVersionToken != null && message.hasOwnProperty("newVersionToken"))
+                                object.newVersionToken = options.bytes === String ? $util.base64.encode(message.newVersionToken, 0, message.newVersionToken.length) : options.bytes === Array ? Array.prototype.slice.call(message.newVersionToken) : message.newVersionToken;
+                            if (message.checksum != null && message.hasOwnProperty("checksum"))
+                                object.checksum = $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum.toObject(message.checksum, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ComputeThreatListDiffResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ComputeThreatListDiffResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        ComputeThreatListDiffResponse.Checksum = (function() {
+    
+                            /**
+                             * Properties of a Checksum.
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                             * @interface IChecksum
+                             * @property {Uint8Array|null} [sha256] Checksum sha256
+                             */
+    
+                            /**
+                             * Constructs a new Checksum.
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse
+                             * @classdesc Represents a Checksum.
+                             * @implements IChecksum
+                             * @constructor
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum=} [properties] Properties to set
+                             */
+                            function Checksum(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Checksum sha256.
+                             * @member {Uint8Array} sha256
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @instance
+                             */
+                            Checksum.prototype.sha256 = $util.newBuffer([]);
+    
+                            /**
+                             * Creates a new Checksum instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum=} [properties] Properties to set
+                             * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum} Checksum instance
+                             */
+                            Checksum.create = function create(properties) {
+                                return new Checksum(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Checksum message. Does not implicitly {@link google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum} message Checksum message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Checksum.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.sha256);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Checksum message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum} message Checksum message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Checksum.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Checksum message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum} Checksum
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Checksum.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.sha256 = reader.bytes();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Checksum message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum} Checksum
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Checksum.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Checksum message.
+                             * @function verify
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Checksum.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                                    if (!(message.sha256 && typeof message.sha256.length === "number" || $util.isString(message.sha256)))
+                                        return "sha256: buffer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Checksum message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum} Checksum
+                             */
+                            Checksum.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum)
+                                    return object;
+                                var message = new $root.google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum();
+                                if (object.sha256 != null)
+                                    if (typeof object.sha256 === "string")
+                                        $util.base64.decode(object.sha256, message.sha256 = $util.newBuffer($util.base64.length(object.sha256)), 0);
+                                    else if (object.sha256.length)
+                                        message.sha256 = object.sha256;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Checksum message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum} message Checksum
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Checksum.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    if (options.bytes === String)
+                                        object.sha256 = "";
+                                    else {
+                                        object.sha256 = [];
+                                        if (options.bytes !== Array)
+                                            object.sha256 = $util.newBuffer(object.sha256);
+                                    }
+                                if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                                    object.sha256 = options.bytes === String ? $util.base64.encode(message.sha256, 0, message.sha256.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha256) : message.sha256;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Checksum to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Checksum.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Checksum;
+                        })();
+    
+                        /**
+                         * ResponseType enum.
+                         * @name google.cloud.webrisk.v1.ComputeThreatListDiffResponse.ResponseType
+                         * @enum {string}
+                         * @property {number} RESPONSE_TYPE_UNSPECIFIED=0 RESPONSE_TYPE_UNSPECIFIED value
+                         * @property {number} DIFF=1 DIFF value
+                         * @property {number} RESET=2 RESET value
+                         */
+                        ComputeThreatListDiffResponse.ResponseType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESPONSE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DIFF"] = 1;
+                            values[valuesById[2] = "RESET"] = 2;
+                            return values;
+                        })();
+    
+                        return ComputeThreatListDiffResponse;
+                    })();
+    
+                    v1.SearchUrisRequest = (function() {
+    
+                        /**
+                         * Properties of a SearchUrisRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface ISearchUrisRequest
+                         * @property {string|null} [uri] SearchUrisRequest uri
+                         * @property {Array.<google.cloud.webrisk.v1.ThreatType>|null} [threatTypes] SearchUrisRequest threatTypes
+                         */
+    
+                        /**
+                         * Constructs a new SearchUrisRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a SearchUrisRequest.
+                         * @implements ISearchUrisRequest
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.ISearchUrisRequest=} [properties] Properties to set
+                         */
+                        function SearchUrisRequest(properties) {
+                            this.threatTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchUrisRequest uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @instance
+                         */
+                        SearchUrisRequest.prototype.uri = "";
+    
+                        /**
+                         * SearchUrisRequest threatTypes.
+                         * @member {Array.<google.cloud.webrisk.v1.ThreatType>} threatTypes
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @instance
+                         */
+                        SearchUrisRequest.prototype.threatTypes = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SearchUrisRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchUrisRequest=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.SearchUrisRequest} SearchUrisRequest instance
+                         */
+                        SearchUrisRequest.create = function create(properties) {
+                            return new SearchUrisRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchUrisRequest message. Does not implicitly {@link google.cloud.webrisk.v1.SearchUrisRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchUrisRequest} message SearchUrisRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchUrisRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.threatTypes != null && message.threatTypes.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.threatTypes.length; ++i)
+                                    writer.int32(message.threatTypes[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchUrisRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SearchUrisRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchUrisRequest} message SearchUrisRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchUrisRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchUrisRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.SearchUrisRequest} SearchUrisRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchUrisRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.SearchUrisRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.uri = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.threatTypes && message.threatTypes.length))
+                                        message.threatTypes = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.threatTypes.push(reader.int32());
+                                    } else
+                                        message.threatTypes.push(reader.int32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchUrisRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.SearchUrisRequest} SearchUrisRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchUrisRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchUrisRequest message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchUrisRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
+                                if (!Array.isArray(message.threatTypes))
+                                    return "threatTypes: array expected";
+                                for (var i = 0; i < message.threatTypes.length; ++i)
+                                    switch (message.threatTypes[i]) {
+                                    default:
+                                        return "threatTypes: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchUrisRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.SearchUrisRequest} SearchUrisRequest
+                         */
+                        SearchUrisRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.SearchUrisRequest)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.SearchUrisRequest();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.threatTypes) {
+                                if (!Array.isArray(object.threatTypes))
+                                    throw TypeError(".google.cloud.webrisk.v1.SearchUrisRequest.threatTypes: array expected");
+                                message.threatTypes = [];
+                                for (var i = 0; i < object.threatTypes.length; ++i)
+                                    switch (object.threatTypes[i]) {
+                                    default:
+                                    case "THREAT_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.threatTypes[i] = 0;
+                                        break;
+                                    case "MALWARE":
+                                    case 1:
+                                        message.threatTypes[i] = 1;
+                                        break;
+                                    case "SOCIAL_ENGINEERING":
+                                    case 2:
+                                        message.threatTypes[i] = 2;
+                                        break;
+                                    case "UNWANTED_SOFTWARE":
+                                    case 3:
+                                        message.threatTypes[i] = 3;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchUrisRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.SearchUrisRequest} message SearchUrisRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchUrisRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.threatTypes = [];
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.threatTypes && message.threatTypes.length) {
+                                object.threatTypes = [];
+                                for (var j = 0; j < message.threatTypes.length; ++j)
+                                    object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchUrisRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.SearchUrisRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchUrisRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchUrisRequest;
+                    })();
+    
+                    v1.SearchUrisResponse = (function() {
+    
+                        /**
+                         * Properties of a SearchUrisResponse.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface ISearchUrisResponse
+                         * @property {google.cloud.webrisk.v1.SearchUrisResponse.IThreatUri|null} [threat] SearchUrisResponse threat
+                         */
+    
+                        /**
+                         * Constructs a new SearchUrisResponse.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a SearchUrisResponse.
+                         * @implements ISearchUrisResponse
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.ISearchUrisResponse=} [properties] Properties to set
+                         */
+                        function SearchUrisResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchUrisResponse threat.
+                         * @member {google.cloud.webrisk.v1.SearchUrisResponse.IThreatUri|null|undefined} threat
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @instance
+                         */
+                        SearchUrisResponse.prototype.threat = null;
+    
+                        /**
+                         * Creates a new SearchUrisResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchUrisResponse=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.SearchUrisResponse} SearchUrisResponse instance
+                         */
+                        SearchUrisResponse.create = function create(properties) {
+                            return new SearchUrisResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchUrisResponse message. Does not implicitly {@link google.cloud.webrisk.v1.SearchUrisResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchUrisResponse} message SearchUrisResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchUrisResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.threat != null && message.hasOwnProperty("threat"))
+                                $root.google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.encode(message.threat, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchUrisResponse message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SearchUrisResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchUrisResponse} message SearchUrisResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchUrisResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchUrisResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.SearchUrisResponse} SearchUrisResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchUrisResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.SearchUrisResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.threat = $root.google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchUrisResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.SearchUrisResponse} SearchUrisResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchUrisResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchUrisResponse message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchUrisResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.threat != null && message.hasOwnProperty("threat")) {
+                                var error = $root.google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.verify(message.threat);
+                                if (error)
+                                    return "threat." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchUrisResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.SearchUrisResponse} SearchUrisResponse
+                         */
+                        SearchUrisResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.SearchUrisResponse)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.SearchUrisResponse();
+                            if (object.threat != null) {
+                                if (typeof object.threat !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.SearchUrisResponse.threat: object expected");
+                                message.threat = $root.google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.fromObject(object.threat);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchUrisResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.SearchUrisResponse} message SearchUrisResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchUrisResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.threat = null;
+                            if (message.threat != null && message.hasOwnProperty("threat"))
+                                object.threat = $root.google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.toObject(message.threat, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchUrisResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchUrisResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        SearchUrisResponse.ThreatUri = (function() {
+    
+                            /**
+                             * Properties of a ThreatUri.
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                             * @interface IThreatUri
+                             * @property {Array.<google.cloud.webrisk.v1.ThreatType>|null} [threatTypes] ThreatUri threatTypes
+                             * @property {google.protobuf.ITimestamp|null} [expireTime] ThreatUri expireTime
+                             */
+    
+                            /**
+                             * Constructs a new ThreatUri.
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse
+                             * @classdesc Represents a ThreatUri.
+                             * @implements IThreatUri
+                             * @constructor
+                             * @param {google.cloud.webrisk.v1.SearchUrisResponse.IThreatUri=} [properties] Properties to set
+                             */
+                            function ThreatUri(properties) {
+                                this.threatTypes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ThreatUri threatTypes.
+                             * @member {Array.<google.cloud.webrisk.v1.ThreatType>} threatTypes
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @instance
+                             */
+                            ThreatUri.prototype.threatTypes = $util.emptyArray;
+    
+                            /**
+                             * ThreatUri expireTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @instance
+                             */
+                            ThreatUri.prototype.expireTime = null;
+    
+                            /**
+                             * Creates a new ThreatUri instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @static
+                             * @param {google.cloud.webrisk.v1.SearchUrisResponse.IThreatUri=} [properties] Properties to set
+                             * @returns {google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri} ThreatUri instance
+                             */
+                            ThreatUri.create = function create(properties) {
+                                return new ThreatUri(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ThreatUri message. Does not implicitly {@link google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @static
+                             * @param {google.cloud.webrisk.v1.SearchUrisResponse.IThreatUri} message ThreatUri message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThreatUri.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.threatTypes != null && message.threatTypes.length) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                    for (var i = 0; i < message.threatTypes.length; ++i)
+                                        writer.int32(message.threatTypes[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ThreatUri message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @static
+                             * @param {google.cloud.webrisk.v1.SearchUrisResponse.IThreatUri} message ThreatUri message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThreatUri.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ThreatUri message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri} ThreatUri
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThreatUri.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.threatTypes && message.threatTypes.length))
+                                            message.threatTypes = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.threatTypes.push(reader.int32());
+                                        } else
+                                            message.threatTypes.push(reader.int32());
+                                        break;
+                                    case 2:
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ThreatUri message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri} ThreatUri
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThreatUri.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ThreatUri message.
+                             * @function verify
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ThreatUri.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
+                                    if (!Array.isArray(message.threatTypes))
+                                        return "threatTypes: array expected";
+                                    for (var i = 0; i < message.threatTypes.length; ++i)
+                                        switch (message.threatTypes[i]) {
+                                        default:
+                                            return "threatTypes: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                }
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                    if (error)
+                                        return "expireTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ThreatUri message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri} ThreatUri
+                             */
+                            ThreatUri.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri)
+                                    return object;
+                                var message = new $root.google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri();
+                                if (object.threatTypes) {
+                                    if (!Array.isArray(object.threatTypes))
+                                        throw TypeError(".google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.threatTypes: array expected");
+                                    message.threatTypes = [];
+                                    for (var i = 0; i < object.threatTypes.length; ++i)
+                                        switch (object.threatTypes[i]) {
+                                        default:
+                                        case "THREAT_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.threatTypes[i] = 0;
+                                            break;
+                                        case "MALWARE":
+                                        case 1:
+                                            message.threatTypes[i] = 1;
+                                            break;
+                                        case "SOCIAL_ENGINEERING":
+                                        case 2:
+                                            message.threatTypes[i] = 2;
+                                            break;
+                                        case "UNWANTED_SOFTWARE":
+                                        case 3:
+                                            message.threatTypes[i] = 3;
+                                            break;
+                                        }
+                                }
+                                if (object.expireTime != null) {
+                                    if (typeof object.expireTime !== "object")
+                                        throw TypeError(".google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri.expireTime: object expected");
+                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ThreatUri message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @static
+                             * @param {google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri} message ThreatUri
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ThreatUri.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.threatTypes = [];
+                                if (options.defaults)
+                                    object.expireTime = null;
+                                if (message.threatTypes && message.threatTypes.length) {
+                                    object.threatTypes = [];
+                                    for (var j = 0; j < message.threatTypes.length; ++j)
+                                        object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
+                                }
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ThreatUri to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.webrisk.v1.SearchUrisResponse.ThreatUri
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ThreatUri.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ThreatUri;
+                        })();
+    
+                        return SearchUrisResponse;
+                    })();
+    
+                    v1.SearchHashesRequest = (function() {
+    
+                        /**
+                         * Properties of a SearchHashesRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface ISearchHashesRequest
+                         * @property {Uint8Array|null} [hashPrefix] SearchHashesRequest hashPrefix
+                         * @property {Array.<google.cloud.webrisk.v1.ThreatType>|null} [threatTypes] SearchHashesRequest threatTypes
+                         */
+    
+                        /**
+                         * Constructs a new SearchHashesRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a SearchHashesRequest.
+                         * @implements ISearchHashesRequest
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.ISearchHashesRequest=} [properties] Properties to set
+                         */
+                        function SearchHashesRequest(properties) {
+                            this.threatTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchHashesRequest hashPrefix.
+                         * @member {Uint8Array} hashPrefix
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @instance
+                         */
+                        SearchHashesRequest.prototype.hashPrefix = $util.newBuffer([]);
+    
+                        /**
+                         * SearchHashesRequest threatTypes.
+                         * @member {Array.<google.cloud.webrisk.v1.ThreatType>} threatTypes
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @instance
+                         */
+                        SearchHashesRequest.prototype.threatTypes = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SearchHashesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchHashesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.SearchHashesRequest} SearchHashesRequest instance
+                         */
+                        SearchHashesRequest.create = function create(properties) {
+                            return new SearchHashesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchHashesRequest message. Does not implicitly {@link google.cloud.webrisk.v1.SearchHashesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchHashesRequest} message SearchHashesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchHashesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hashPrefix != null && message.hasOwnProperty("hashPrefix"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.hashPrefix);
+                            if (message.threatTypes != null && message.threatTypes.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.threatTypes.length; ++i)
+                                    writer.int32(message.threatTypes[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchHashesRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SearchHashesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchHashesRequest} message SearchHashesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchHashesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchHashesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.SearchHashesRequest} SearchHashesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchHashesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.SearchHashesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.hashPrefix = reader.bytes();
+                                    break;
+                                case 2:
+                                    if (!(message.threatTypes && message.threatTypes.length))
+                                        message.threatTypes = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.threatTypes.push(reader.int32());
+                                    } else
+                                        message.threatTypes.push(reader.int32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchHashesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.SearchHashesRequest} SearchHashesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchHashesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchHashesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchHashesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hashPrefix != null && message.hasOwnProperty("hashPrefix"))
+                                if (!(message.hashPrefix && typeof message.hashPrefix.length === "number" || $util.isString(message.hashPrefix)))
+                                    return "hashPrefix: buffer expected";
+                            if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
+                                if (!Array.isArray(message.threatTypes))
+                                    return "threatTypes: array expected";
+                                for (var i = 0; i < message.threatTypes.length; ++i)
+                                    switch (message.threatTypes[i]) {
+                                    default:
+                                        return "threatTypes: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchHashesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.SearchHashesRequest} SearchHashesRequest
+                         */
+                        SearchHashesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.SearchHashesRequest)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.SearchHashesRequest();
+                            if (object.hashPrefix != null)
+                                if (typeof object.hashPrefix === "string")
+                                    $util.base64.decode(object.hashPrefix, message.hashPrefix = $util.newBuffer($util.base64.length(object.hashPrefix)), 0);
+                                else if (object.hashPrefix.length)
+                                    message.hashPrefix = object.hashPrefix;
+                            if (object.threatTypes) {
+                                if (!Array.isArray(object.threatTypes))
+                                    throw TypeError(".google.cloud.webrisk.v1.SearchHashesRequest.threatTypes: array expected");
+                                message.threatTypes = [];
+                                for (var i = 0; i < object.threatTypes.length; ++i)
+                                    switch (object.threatTypes[i]) {
+                                    default:
+                                    case "THREAT_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.threatTypes[i] = 0;
+                                        break;
+                                    case "MALWARE":
+                                    case 1:
+                                        message.threatTypes[i] = 1;
+                                        break;
+                                    case "SOCIAL_ENGINEERING":
+                                    case 2:
+                                        message.threatTypes[i] = 2;
+                                        break;
+                                    case "UNWANTED_SOFTWARE":
+                                    case 3:
+                                        message.threatTypes[i] = 3;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchHashesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.SearchHashesRequest} message SearchHashesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchHashesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.threatTypes = [];
+                            if (options.defaults)
+                                if (options.bytes === String)
+                                    object.hashPrefix = "";
+                                else {
+                                    object.hashPrefix = [];
+                                    if (options.bytes !== Array)
+                                        object.hashPrefix = $util.newBuffer(object.hashPrefix);
+                                }
+                            if (message.hashPrefix != null && message.hasOwnProperty("hashPrefix"))
+                                object.hashPrefix = options.bytes === String ? $util.base64.encode(message.hashPrefix, 0, message.hashPrefix.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashPrefix) : message.hashPrefix;
+                            if (message.threatTypes && message.threatTypes.length) {
+                                object.threatTypes = [];
+                                for (var j = 0; j < message.threatTypes.length; ++j)
+                                    object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchHashesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.SearchHashesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchHashesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchHashesRequest;
+                    })();
+    
+                    v1.SearchHashesResponse = (function() {
+    
+                        /**
+                         * Properties of a SearchHashesResponse.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface ISearchHashesResponse
+                         * @property {Array.<google.cloud.webrisk.v1.SearchHashesResponse.IThreatHash>|null} [threats] SearchHashesResponse threats
+                         * @property {google.protobuf.ITimestamp|null} [negativeExpireTime] SearchHashesResponse negativeExpireTime
+                         */
+    
+                        /**
+                         * Constructs a new SearchHashesResponse.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a SearchHashesResponse.
+                         * @implements ISearchHashesResponse
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.ISearchHashesResponse=} [properties] Properties to set
+                         */
+                        function SearchHashesResponse(properties) {
+                            this.threats = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchHashesResponse threats.
+                         * @member {Array.<google.cloud.webrisk.v1.SearchHashesResponse.IThreatHash>} threats
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @instance
+                         */
+                        SearchHashesResponse.prototype.threats = $util.emptyArray;
+    
+                        /**
+                         * SearchHashesResponse negativeExpireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} negativeExpireTime
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @instance
+                         */
+                        SearchHashesResponse.prototype.negativeExpireTime = null;
+    
+                        /**
+                         * Creates a new SearchHashesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchHashesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.SearchHashesResponse} SearchHashesResponse instance
+                         */
+                        SearchHashesResponse.create = function create(properties) {
+                            return new SearchHashesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchHashesResponse message. Does not implicitly {@link google.cloud.webrisk.v1.SearchHashesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchHashesResponse} message SearchHashesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchHashesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.threats != null && message.threats.length)
+                                for (var i = 0; i < message.threats.length; ++i)
+                                    $root.google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.encode(message.threats[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.negativeExpireTime != null && message.hasOwnProperty("negativeExpireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.negativeExpireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchHashesResponse message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SearchHashesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISearchHashesResponse} message SearchHashesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchHashesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchHashesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.SearchHashesResponse} SearchHashesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchHashesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.SearchHashesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.threats && message.threats.length))
+                                        message.threats = [];
+                                    message.threats.push($root.google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.negativeExpireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchHashesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.SearchHashesResponse} SearchHashesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchHashesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchHashesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchHashesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.threats != null && message.hasOwnProperty("threats")) {
+                                if (!Array.isArray(message.threats))
+                                    return "threats: array expected";
+                                for (var i = 0; i < message.threats.length; ++i) {
+                                    var error = $root.google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.verify(message.threats[i]);
+                                    if (error)
+                                        return "threats." + error;
+                                }
+                            }
+                            if (message.negativeExpireTime != null && message.hasOwnProperty("negativeExpireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.negativeExpireTime);
+                                if (error)
+                                    return "negativeExpireTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchHashesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.SearchHashesResponse} SearchHashesResponse
+                         */
+                        SearchHashesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.SearchHashesResponse)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.SearchHashesResponse();
+                            if (object.threats) {
+                                if (!Array.isArray(object.threats))
+                                    throw TypeError(".google.cloud.webrisk.v1.SearchHashesResponse.threats: array expected");
+                                message.threats = [];
+                                for (var i = 0; i < object.threats.length; ++i) {
+                                    if (typeof object.threats[i] !== "object")
+                                        throw TypeError(".google.cloud.webrisk.v1.SearchHashesResponse.threats: object expected");
+                                    message.threats[i] = $root.google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.fromObject(object.threats[i]);
+                                }
+                            }
+                            if (object.negativeExpireTime != null) {
+                                if (typeof object.negativeExpireTime !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.SearchHashesResponse.negativeExpireTime: object expected");
+                                message.negativeExpireTime = $root.google.protobuf.Timestamp.fromObject(object.negativeExpireTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchHashesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @static
+                         * @param {google.cloud.webrisk.v1.SearchHashesResponse} message SearchHashesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchHashesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.threats = [];
+                            if (options.defaults)
+                                object.negativeExpireTime = null;
+                            if (message.threats && message.threats.length) {
+                                object.threats = [];
+                                for (var j = 0; j < message.threats.length; ++j)
+                                    object.threats[j] = $root.google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.toObject(message.threats[j], options);
+                            }
+                            if (message.negativeExpireTime != null && message.hasOwnProperty("negativeExpireTime"))
+                                object.negativeExpireTime = $root.google.protobuf.Timestamp.toObject(message.negativeExpireTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchHashesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchHashesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        SearchHashesResponse.ThreatHash = (function() {
+    
+                            /**
+                             * Properties of a ThreatHash.
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                             * @interface IThreatHash
+                             * @property {Array.<google.cloud.webrisk.v1.ThreatType>|null} [threatTypes] ThreatHash threatTypes
+                             * @property {Uint8Array|null} [hash] ThreatHash hash
+                             * @property {google.protobuf.ITimestamp|null} [expireTime] ThreatHash expireTime
+                             */
+    
+                            /**
+                             * Constructs a new ThreatHash.
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse
+                             * @classdesc Represents a ThreatHash.
+                             * @implements IThreatHash
+                             * @constructor
+                             * @param {google.cloud.webrisk.v1.SearchHashesResponse.IThreatHash=} [properties] Properties to set
+                             */
+                            function ThreatHash(properties) {
+                                this.threatTypes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ThreatHash threatTypes.
+                             * @member {Array.<google.cloud.webrisk.v1.ThreatType>} threatTypes
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @instance
+                             */
+                            ThreatHash.prototype.threatTypes = $util.emptyArray;
+    
+                            /**
+                             * ThreatHash hash.
+                             * @member {Uint8Array} hash
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @instance
+                             */
+                            ThreatHash.prototype.hash = $util.newBuffer([]);
+    
+                            /**
+                             * ThreatHash expireTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @instance
+                             */
+                            ThreatHash.prototype.expireTime = null;
+    
+                            /**
+                             * Creates a new ThreatHash instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @static
+                             * @param {google.cloud.webrisk.v1.SearchHashesResponse.IThreatHash=} [properties] Properties to set
+                             * @returns {google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash} ThreatHash instance
+                             */
+                            ThreatHash.create = function create(properties) {
+                                return new ThreatHash(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ThreatHash message. Does not implicitly {@link google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @static
+                             * @param {google.cloud.webrisk.v1.SearchHashesResponse.IThreatHash} message ThreatHash message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThreatHash.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.threatTypes != null && message.threatTypes.length) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                    for (var i = 0; i < message.threatTypes.length; ++i)
+                                        writer.int32(message.threatTypes[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.hash != null && message.hasOwnProperty("hash"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.hash);
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ThreatHash message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @static
+                             * @param {google.cloud.webrisk.v1.SearchHashesResponse.IThreatHash} message ThreatHash message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThreatHash.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ThreatHash message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash} ThreatHash
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThreatHash.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.threatTypes && message.threatTypes.length))
+                                            message.threatTypes = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.threatTypes.push(reader.int32());
+                                        } else
+                                            message.threatTypes.push(reader.int32());
+                                        break;
+                                    case 2:
+                                        message.hash = reader.bytes();
+                                        break;
+                                    case 3:
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ThreatHash message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash} ThreatHash
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThreatHash.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ThreatHash message.
+                             * @function verify
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ThreatHash.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
+                                    if (!Array.isArray(message.threatTypes))
+                                        return "threatTypes: array expected";
+                                    for (var i = 0; i < message.threatTypes.length; ++i)
+                                        switch (message.threatTypes[i]) {
+                                        default:
+                                            return "threatTypes: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                }
+                                if (message.hash != null && message.hasOwnProperty("hash"))
+                                    if (!(message.hash && typeof message.hash.length === "number" || $util.isString(message.hash)))
+                                        return "hash: buffer expected";
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                    if (error)
+                                        return "expireTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ThreatHash message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash} ThreatHash
+                             */
+                            ThreatHash.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash)
+                                    return object;
+                                var message = new $root.google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash();
+                                if (object.threatTypes) {
+                                    if (!Array.isArray(object.threatTypes))
+                                        throw TypeError(".google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.threatTypes: array expected");
+                                    message.threatTypes = [];
+                                    for (var i = 0; i < object.threatTypes.length; ++i)
+                                        switch (object.threatTypes[i]) {
+                                        default:
+                                        case "THREAT_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.threatTypes[i] = 0;
+                                            break;
+                                        case "MALWARE":
+                                        case 1:
+                                            message.threatTypes[i] = 1;
+                                            break;
+                                        case "SOCIAL_ENGINEERING":
+                                        case 2:
+                                            message.threatTypes[i] = 2;
+                                            break;
+                                        case "UNWANTED_SOFTWARE":
+                                        case 3:
+                                            message.threatTypes[i] = 3;
+                                            break;
+                                        }
+                                }
+                                if (object.hash != null)
+                                    if (typeof object.hash === "string")
+                                        $util.base64.decode(object.hash, message.hash = $util.newBuffer($util.base64.length(object.hash)), 0);
+                                    else if (object.hash.length)
+                                        message.hash = object.hash;
+                                if (object.expireTime != null) {
+                                    if (typeof object.expireTime !== "object")
+                                        throw TypeError(".google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash.expireTime: object expected");
+                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ThreatHash message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @static
+                             * @param {google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash} message ThreatHash
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ThreatHash.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.threatTypes = [];
+                                if (options.defaults) {
+                                    if (options.bytes === String)
+                                        object.hash = "";
+                                    else {
+                                        object.hash = [];
+                                        if (options.bytes !== Array)
+                                            object.hash = $util.newBuffer(object.hash);
+                                    }
+                                    object.expireTime = null;
+                                }
+                                if (message.threatTypes && message.threatTypes.length) {
+                                    object.threatTypes = [];
+                                    for (var j = 0; j < message.threatTypes.length; ++j)
+                                        object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
+                                }
+                                if (message.hash != null && message.hasOwnProperty("hash"))
+                                    object.hash = options.bytes === String ? $util.base64.encode(message.hash, 0, message.hash.length) : options.bytes === Array ? Array.prototype.slice.call(message.hash) : message.hash;
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ThreatHash to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ThreatHash.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ThreatHash;
+                        })();
+    
+                        return SearchHashesResponse;
+                    })();
+    
+                    v1.ThreatEntryAdditions = (function() {
+    
+                        /**
+                         * Properties of a ThreatEntryAdditions.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IThreatEntryAdditions
+                         * @property {Array.<google.cloud.webrisk.v1.IRawHashes>|null} [rawHashes] ThreatEntryAdditions rawHashes
+                         * @property {google.cloud.webrisk.v1.IRiceDeltaEncoding|null} [riceHashes] ThreatEntryAdditions riceHashes
+                         */
+    
+                        /**
+                         * Constructs a new ThreatEntryAdditions.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a ThreatEntryAdditions.
+                         * @implements IThreatEntryAdditions
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IThreatEntryAdditions=} [properties] Properties to set
+                         */
+                        function ThreatEntryAdditions(properties) {
+                            this.rawHashes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ThreatEntryAdditions rawHashes.
+                         * @member {Array.<google.cloud.webrisk.v1.IRawHashes>} rawHashes
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @instance
+                         */
+                        ThreatEntryAdditions.prototype.rawHashes = $util.emptyArray;
+    
+                        /**
+                         * ThreatEntryAdditions riceHashes.
+                         * @member {google.cloud.webrisk.v1.IRiceDeltaEncoding|null|undefined} riceHashes
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @instance
+                         */
+                        ThreatEntryAdditions.prototype.riceHashes = null;
+    
+                        /**
+                         * Creates a new ThreatEntryAdditions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatEntryAdditions=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.ThreatEntryAdditions} ThreatEntryAdditions instance
+                         */
+                        ThreatEntryAdditions.create = function create(properties) {
+                            return new ThreatEntryAdditions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ThreatEntryAdditions message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatEntryAdditions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatEntryAdditions} message ThreatEntryAdditions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThreatEntryAdditions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rawHashes != null && message.rawHashes.length)
+                                for (var i = 0; i < message.rawHashes.length; ++i)
+                                    $root.google.cloud.webrisk.v1.RawHashes.encode(message.rawHashes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.riceHashes != null && message.hasOwnProperty("riceHashes"))
+                                $root.google.cloud.webrisk.v1.RiceDeltaEncoding.encode(message.riceHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ThreatEntryAdditions message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatEntryAdditions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatEntryAdditions} message ThreatEntryAdditions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThreatEntryAdditions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ThreatEntryAdditions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.ThreatEntryAdditions} ThreatEntryAdditions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThreatEntryAdditions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ThreatEntryAdditions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.rawHashes && message.rawHashes.length))
+                                        message.rawHashes = [];
+                                    message.rawHashes.push($root.google.cloud.webrisk.v1.RawHashes.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.riceHashes = $root.google.cloud.webrisk.v1.RiceDeltaEncoding.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ThreatEntryAdditions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.ThreatEntryAdditions} ThreatEntryAdditions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThreatEntryAdditions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ThreatEntryAdditions message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ThreatEntryAdditions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rawHashes != null && message.hasOwnProperty("rawHashes")) {
+                                if (!Array.isArray(message.rawHashes))
+                                    return "rawHashes: array expected";
+                                for (var i = 0; i < message.rawHashes.length; ++i) {
+                                    var error = $root.google.cloud.webrisk.v1.RawHashes.verify(message.rawHashes[i]);
+                                    if (error)
+                                        return "rawHashes." + error;
+                                }
+                            }
+                            if (message.riceHashes != null && message.hasOwnProperty("riceHashes")) {
+                                var error = $root.google.cloud.webrisk.v1.RiceDeltaEncoding.verify(message.riceHashes);
+                                if (error)
+                                    return "riceHashes." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ThreatEntryAdditions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.ThreatEntryAdditions} ThreatEntryAdditions
+                         */
+                        ThreatEntryAdditions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.ThreatEntryAdditions)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.ThreatEntryAdditions();
+                            if (object.rawHashes) {
+                                if (!Array.isArray(object.rawHashes))
+                                    throw TypeError(".google.cloud.webrisk.v1.ThreatEntryAdditions.rawHashes: array expected");
+                                message.rawHashes = [];
+                                for (var i = 0; i < object.rawHashes.length; ++i) {
+                                    if (typeof object.rawHashes[i] !== "object")
+                                        throw TypeError(".google.cloud.webrisk.v1.ThreatEntryAdditions.rawHashes: object expected");
+                                    message.rawHashes[i] = $root.google.cloud.webrisk.v1.RawHashes.fromObject(object.rawHashes[i]);
+                                }
+                            }
+                            if (object.riceHashes != null) {
+                                if (typeof object.riceHashes !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ThreatEntryAdditions.riceHashes: object expected");
+                                message.riceHashes = $root.google.cloud.webrisk.v1.RiceDeltaEncoding.fromObject(object.riceHashes);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ThreatEntryAdditions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ThreatEntryAdditions} message ThreatEntryAdditions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ThreatEntryAdditions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.rawHashes = [];
+                            if (options.defaults)
+                                object.riceHashes = null;
+                            if (message.rawHashes && message.rawHashes.length) {
+                                object.rawHashes = [];
+                                for (var j = 0; j < message.rawHashes.length; ++j)
+                                    object.rawHashes[j] = $root.google.cloud.webrisk.v1.RawHashes.toObject(message.rawHashes[j], options);
+                            }
+                            if (message.riceHashes != null && message.hasOwnProperty("riceHashes"))
+                                object.riceHashes = $root.google.cloud.webrisk.v1.RiceDeltaEncoding.toObject(message.riceHashes, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ThreatEntryAdditions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryAdditions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ThreatEntryAdditions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ThreatEntryAdditions;
+                    })();
+    
+                    v1.ThreatEntryRemovals = (function() {
+    
+                        /**
+                         * Properties of a ThreatEntryRemovals.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IThreatEntryRemovals
+                         * @property {google.cloud.webrisk.v1.IRawIndices|null} [rawIndices] ThreatEntryRemovals rawIndices
+                         * @property {google.cloud.webrisk.v1.IRiceDeltaEncoding|null} [riceIndices] ThreatEntryRemovals riceIndices
+                         */
+    
+                        /**
+                         * Constructs a new ThreatEntryRemovals.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a ThreatEntryRemovals.
+                         * @implements IThreatEntryRemovals
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IThreatEntryRemovals=} [properties] Properties to set
+                         */
+                        function ThreatEntryRemovals(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ThreatEntryRemovals rawIndices.
+                         * @member {google.cloud.webrisk.v1.IRawIndices|null|undefined} rawIndices
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @instance
+                         */
+                        ThreatEntryRemovals.prototype.rawIndices = null;
+    
+                        /**
+                         * ThreatEntryRemovals riceIndices.
+                         * @member {google.cloud.webrisk.v1.IRiceDeltaEncoding|null|undefined} riceIndices
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @instance
+                         */
+                        ThreatEntryRemovals.prototype.riceIndices = null;
+    
+                        /**
+                         * Creates a new ThreatEntryRemovals instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatEntryRemovals=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.ThreatEntryRemovals} ThreatEntryRemovals instance
+                         */
+                        ThreatEntryRemovals.create = function create(properties) {
+                            return new ThreatEntryRemovals(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ThreatEntryRemovals message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatEntryRemovals.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatEntryRemovals} message ThreatEntryRemovals message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThreatEntryRemovals.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rawIndices != null && message.hasOwnProperty("rawIndices"))
+                                $root.google.cloud.webrisk.v1.RawIndices.encode(message.rawIndices, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.riceIndices != null && message.hasOwnProperty("riceIndices"))
+                                $root.google.cloud.webrisk.v1.RiceDeltaEncoding.encode(message.riceIndices, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ThreatEntryRemovals message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatEntryRemovals.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatEntryRemovals} message ThreatEntryRemovals message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThreatEntryRemovals.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ThreatEntryRemovals message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.ThreatEntryRemovals} ThreatEntryRemovals
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThreatEntryRemovals.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ThreatEntryRemovals();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.rawIndices = $root.google.cloud.webrisk.v1.RawIndices.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.riceIndices = $root.google.cloud.webrisk.v1.RiceDeltaEncoding.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ThreatEntryRemovals message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.ThreatEntryRemovals} ThreatEntryRemovals
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThreatEntryRemovals.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ThreatEntryRemovals message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ThreatEntryRemovals.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rawIndices != null && message.hasOwnProperty("rawIndices")) {
+                                var error = $root.google.cloud.webrisk.v1.RawIndices.verify(message.rawIndices);
+                                if (error)
+                                    return "rawIndices." + error;
+                            }
+                            if (message.riceIndices != null && message.hasOwnProperty("riceIndices")) {
+                                var error = $root.google.cloud.webrisk.v1.RiceDeltaEncoding.verify(message.riceIndices);
+                                if (error)
+                                    return "riceIndices." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ThreatEntryRemovals message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.ThreatEntryRemovals} ThreatEntryRemovals
+                         */
+                        ThreatEntryRemovals.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.ThreatEntryRemovals)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.ThreatEntryRemovals();
+                            if (object.rawIndices != null) {
+                                if (typeof object.rawIndices !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ThreatEntryRemovals.rawIndices: object expected");
+                                message.rawIndices = $root.google.cloud.webrisk.v1.RawIndices.fromObject(object.rawIndices);
+                            }
+                            if (object.riceIndices != null) {
+                                if (typeof object.riceIndices !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ThreatEntryRemovals.riceIndices: object expected");
+                                message.riceIndices = $root.google.cloud.webrisk.v1.RiceDeltaEncoding.fromObject(object.riceIndices);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ThreatEntryRemovals message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ThreatEntryRemovals} message ThreatEntryRemovals
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ThreatEntryRemovals.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.rawIndices = null;
+                                object.riceIndices = null;
+                            }
+                            if (message.rawIndices != null && message.hasOwnProperty("rawIndices"))
+                                object.rawIndices = $root.google.cloud.webrisk.v1.RawIndices.toObject(message.rawIndices, options);
+                            if (message.riceIndices != null && message.hasOwnProperty("riceIndices"))
+                                object.riceIndices = $root.google.cloud.webrisk.v1.RiceDeltaEncoding.toObject(message.riceIndices, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ThreatEntryRemovals to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.ThreatEntryRemovals
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ThreatEntryRemovals.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ThreatEntryRemovals;
+                    })();
+    
+                    /**
+                     * ThreatType enum.
+                     * @name google.cloud.webrisk.v1.ThreatType
+                     * @enum {string}
+                     * @property {number} THREAT_TYPE_UNSPECIFIED=0 THREAT_TYPE_UNSPECIFIED value
+                     * @property {number} MALWARE=1 MALWARE value
+                     * @property {number} SOCIAL_ENGINEERING=2 SOCIAL_ENGINEERING value
+                     * @property {number} UNWANTED_SOFTWARE=3 UNWANTED_SOFTWARE value
+                     */
+                    v1.ThreatType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "THREAT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MALWARE"] = 1;
+                        values[valuesById[2] = "SOCIAL_ENGINEERING"] = 2;
+                        values[valuesById[3] = "UNWANTED_SOFTWARE"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * CompressionType enum.
+                     * @name google.cloud.webrisk.v1.CompressionType
+                     * @enum {string}
+                     * @property {number} COMPRESSION_TYPE_UNSPECIFIED=0 COMPRESSION_TYPE_UNSPECIFIED value
+                     * @property {number} RAW=1 RAW value
+                     * @property {number} RICE=2 RICE value
+                     */
+                    v1.CompressionType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPRESSION_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RAW"] = 1;
+                        values[valuesById[2] = "RICE"] = 2;
+                        return values;
+                    })();
+    
+                    v1.RawIndices = (function() {
+    
+                        /**
+                         * Properties of a RawIndices.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IRawIndices
+                         * @property {Array.<number>|null} [indices] RawIndices indices
+                         */
+    
+                        /**
+                         * Constructs a new RawIndices.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a RawIndices.
+                         * @implements IRawIndices
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IRawIndices=} [properties] Properties to set
+                         */
+                        function RawIndices(properties) {
+                            this.indices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RawIndices indices.
+                         * @member {Array.<number>} indices
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @instance
+                         */
+                        RawIndices.prototype.indices = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RawIndices instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRawIndices=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.RawIndices} RawIndices instance
+                         */
+                        RawIndices.create = function create(properties) {
+                            return new RawIndices(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RawIndices message. Does not implicitly {@link google.cloud.webrisk.v1.RawIndices.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRawIndices} message RawIndices message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawIndices.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.indices != null && message.indices.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.indices.length; ++i)
+                                    writer.int32(message.indices[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RawIndices message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.RawIndices.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRawIndices} message RawIndices message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawIndices.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RawIndices message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.RawIndices} RawIndices
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawIndices.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.RawIndices();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.indices && message.indices.length))
+                                        message.indices = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.indices.push(reader.int32());
+                                    } else
+                                        message.indices.push(reader.int32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RawIndices message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.RawIndices} RawIndices
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawIndices.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RawIndices message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RawIndices.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.indices != null && message.hasOwnProperty("indices")) {
+                                if (!Array.isArray(message.indices))
+                                    return "indices: array expected";
+                                for (var i = 0; i < message.indices.length; ++i)
+                                    if (!$util.isInteger(message.indices[i]))
+                                        return "indices: integer[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RawIndices message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.RawIndices} RawIndices
+                         */
+                        RawIndices.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.RawIndices)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.RawIndices();
+                            if (object.indices) {
+                                if (!Array.isArray(object.indices))
+                                    throw TypeError(".google.cloud.webrisk.v1.RawIndices.indices: array expected");
+                                message.indices = [];
+                                for (var i = 0; i < object.indices.length; ++i)
+                                    message.indices[i] = object.indices[i] | 0;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RawIndices message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @static
+                         * @param {google.cloud.webrisk.v1.RawIndices} message RawIndices
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RawIndices.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.indices = [];
+                            if (message.indices && message.indices.length) {
+                                object.indices = [];
+                                for (var j = 0; j < message.indices.length; ++j)
+                                    object.indices[j] = message.indices[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RawIndices to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.RawIndices
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RawIndices.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RawIndices;
+                    })();
+    
+                    v1.RawHashes = (function() {
+    
+                        /**
+                         * Properties of a RawHashes.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IRawHashes
+                         * @property {number|null} [prefixSize] RawHashes prefixSize
+                         * @property {Uint8Array|null} [rawHashes] RawHashes rawHashes
+                         */
+    
+                        /**
+                         * Constructs a new RawHashes.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a RawHashes.
+                         * @implements IRawHashes
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IRawHashes=} [properties] Properties to set
+                         */
+                        function RawHashes(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RawHashes prefixSize.
+                         * @member {number} prefixSize
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @instance
+                         */
+                        RawHashes.prototype.prefixSize = 0;
+    
+                        /**
+                         * RawHashes rawHashes.
+                         * @member {Uint8Array} rawHashes
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @instance
+                         */
+                        RawHashes.prototype.rawHashes = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new RawHashes instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRawHashes=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.RawHashes} RawHashes instance
+                         */
+                        RawHashes.create = function create(properties) {
+                            return new RawHashes(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RawHashes message. Does not implicitly {@link google.cloud.webrisk.v1.RawHashes.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRawHashes} message RawHashes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawHashes.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.prefixSize != null && message.hasOwnProperty("prefixSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.prefixSize);
+                            if (message.rawHashes != null && message.hasOwnProperty("rawHashes"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.rawHashes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RawHashes message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.RawHashes.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRawHashes} message RawHashes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawHashes.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RawHashes message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.RawHashes} RawHashes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawHashes.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.RawHashes();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.prefixSize = reader.int32();
+                                    break;
+                                case 2:
+                                    message.rawHashes = reader.bytes();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RawHashes message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.RawHashes} RawHashes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawHashes.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RawHashes message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RawHashes.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.prefixSize != null && message.hasOwnProperty("prefixSize"))
+                                if (!$util.isInteger(message.prefixSize))
+                                    return "prefixSize: integer expected";
+                            if (message.rawHashes != null && message.hasOwnProperty("rawHashes"))
+                                if (!(message.rawHashes && typeof message.rawHashes.length === "number" || $util.isString(message.rawHashes)))
+                                    return "rawHashes: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RawHashes message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.RawHashes} RawHashes
+                         */
+                        RawHashes.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.RawHashes)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.RawHashes();
+                            if (object.prefixSize != null)
+                                message.prefixSize = object.prefixSize | 0;
+                            if (object.rawHashes != null)
+                                if (typeof object.rawHashes === "string")
+                                    $util.base64.decode(object.rawHashes, message.rawHashes = $util.newBuffer($util.base64.length(object.rawHashes)), 0);
+                                else if (object.rawHashes.length)
+                                    message.rawHashes = object.rawHashes;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RawHashes message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @static
+                         * @param {google.cloud.webrisk.v1.RawHashes} message RawHashes
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RawHashes.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.prefixSize = 0;
+                                if (options.bytes === String)
+                                    object.rawHashes = "";
+                                else {
+                                    object.rawHashes = [];
+                                    if (options.bytes !== Array)
+                                        object.rawHashes = $util.newBuffer(object.rawHashes);
+                                }
+                            }
+                            if (message.prefixSize != null && message.hasOwnProperty("prefixSize"))
+                                object.prefixSize = message.prefixSize;
+                            if (message.rawHashes != null && message.hasOwnProperty("rawHashes"))
+                                object.rawHashes = options.bytes === String ? $util.base64.encode(message.rawHashes, 0, message.rawHashes.length) : options.bytes === Array ? Array.prototype.slice.call(message.rawHashes) : message.rawHashes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RawHashes to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.RawHashes
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RawHashes.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RawHashes;
+                    })();
+    
+                    v1.RiceDeltaEncoding = (function() {
+    
+                        /**
+                         * Properties of a RiceDeltaEncoding.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IRiceDeltaEncoding
+                         * @property {number|Long|null} [firstValue] RiceDeltaEncoding firstValue
+                         * @property {number|null} [riceParameter] RiceDeltaEncoding riceParameter
+                         * @property {number|null} [entryCount] RiceDeltaEncoding entryCount
+                         * @property {Uint8Array|null} [encodedData] RiceDeltaEncoding encodedData
+                         */
+    
+                        /**
+                         * Constructs a new RiceDeltaEncoding.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a RiceDeltaEncoding.
+                         * @implements IRiceDeltaEncoding
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IRiceDeltaEncoding=} [properties] Properties to set
+                         */
+                        function RiceDeltaEncoding(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RiceDeltaEncoding firstValue.
+                         * @member {number|Long} firstValue
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @instance
+                         */
+                        RiceDeltaEncoding.prototype.firstValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * RiceDeltaEncoding riceParameter.
+                         * @member {number} riceParameter
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @instance
+                         */
+                        RiceDeltaEncoding.prototype.riceParameter = 0;
+    
+                        /**
+                         * RiceDeltaEncoding entryCount.
+                         * @member {number} entryCount
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @instance
+                         */
+                        RiceDeltaEncoding.prototype.entryCount = 0;
+    
+                        /**
+                         * RiceDeltaEncoding encodedData.
+                         * @member {Uint8Array} encodedData
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @instance
+                         */
+                        RiceDeltaEncoding.prototype.encodedData = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new RiceDeltaEncoding instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRiceDeltaEncoding=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.RiceDeltaEncoding} RiceDeltaEncoding instance
+                         */
+                        RiceDeltaEncoding.create = function create(properties) {
+                            return new RiceDeltaEncoding(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RiceDeltaEncoding message. Does not implicitly {@link google.cloud.webrisk.v1.RiceDeltaEncoding.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRiceDeltaEncoding} message RiceDeltaEncoding message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RiceDeltaEncoding.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.firstValue != null && message.hasOwnProperty("firstValue"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.firstValue);
+                            if (message.riceParameter != null && message.hasOwnProperty("riceParameter"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.riceParameter);
+                            if (message.entryCount != null && message.hasOwnProperty("entryCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.entryCount);
+                            if (message.encodedData != null && message.hasOwnProperty("encodedData"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.encodedData);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RiceDeltaEncoding message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.RiceDeltaEncoding.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IRiceDeltaEncoding} message RiceDeltaEncoding message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RiceDeltaEncoding.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RiceDeltaEncoding message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.RiceDeltaEncoding} RiceDeltaEncoding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RiceDeltaEncoding.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.RiceDeltaEncoding();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.firstValue = reader.int64();
+                                    break;
+                                case 2:
+                                    message.riceParameter = reader.int32();
+                                    break;
+                                case 3:
+                                    message.entryCount = reader.int32();
+                                    break;
+                                case 4:
+                                    message.encodedData = reader.bytes();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RiceDeltaEncoding message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.RiceDeltaEncoding} RiceDeltaEncoding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RiceDeltaEncoding.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RiceDeltaEncoding message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RiceDeltaEncoding.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.firstValue != null && message.hasOwnProperty("firstValue"))
+                                if (!$util.isInteger(message.firstValue) && !(message.firstValue && $util.isInteger(message.firstValue.low) && $util.isInteger(message.firstValue.high)))
+                                    return "firstValue: integer|Long expected";
+                            if (message.riceParameter != null && message.hasOwnProperty("riceParameter"))
+                                if (!$util.isInteger(message.riceParameter))
+                                    return "riceParameter: integer expected";
+                            if (message.entryCount != null && message.hasOwnProperty("entryCount"))
+                                if (!$util.isInteger(message.entryCount))
+                                    return "entryCount: integer expected";
+                            if (message.encodedData != null && message.hasOwnProperty("encodedData"))
+                                if (!(message.encodedData && typeof message.encodedData.length === "number" || $util.isString(message.encodedData)))
+                                    return "encodedData: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RiceDeltaEncoding message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.RiceDeltaEncoding} RiceDeltaEncoding
+                         */
+                        RiceDeltaEncoding.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.RiceDeltaEncoding)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.RiceDeltaEncoding();
+                            if (object.firstValue != null)
+                                if ($util.Long)
+                                    (message.firstValue = $util.Long.fromValue(object.firstValue)).unsigned = false;
+                                else if (typeof object.firstValue === "string")
+                                    message.firstValue = parseInt(object.firstValue, 10);
+                                else if (typeof object.firstValue === "number")
+                                    message.firstValue = object.firstValue;
+                                else if (typeof object.firstValue === "object")
+                                    message.firstValue = new $util.LongBits(object.firstValue.low >>> 0, object.firstValue.high >>> 0).toNumber();
+                            if (object.riceParameter != null)
+                                message.riceParameter = object.riceParameter | 0;
+                            if (object.entryCount != null)
+                                message.entryCount = object.entryCount | 0;
+                            if (object.encodedData != null)
+                                if (typeof object.encodedData === "string")
+                                    $util.base64.decode(object.encodedData, message.encodedData = $util.newBuffer($util.base64.length(object.encodedData)), 0);
+                                else if (object.encodedData.length)
+                                    message.encodedData = object.encodedData;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RiceDeltaEncoding message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @static
+                         * @param {google.cloud.webrisk.v1.RiceDeltaEncoding} message RiceDeltaEncoding
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RiceDeltaEncoding.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.firstValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.firstValue = options.longs === String ? "0" : 0;
+                                object.riceParameter = 0;
+                                object.entryCount = 0;
+                                if (options.bytes === String)
+                                    object.encodedData = "";
+                                else {
+                                    object.encodedData = [];
+                                    if (options.bytes !== Array)
+                                        object.encodedData = $util.newBuffer(object.encodedData);
+                                }
+                            }
+                            if (message.firstValue != null && message.hasOwnProperty("firstValue"))
+                                if (typeof message.firstValue === "number")
+                                    object.firstValue = options.longs === String ? String(message.firstValue) : message.firstValue;
+                                else
+                                    object.firstValue = options.longs === String ? $util.Long.prototype.toString.call(message.firstValue) : options.longs === Number ? new $util.LongBits(message.firstValue.low >>> 0, message.firstValue.high >>> 0).toNumber() : message.firstValue;
+                            if (message.riceParameter != null && message.hasOwnProperty("riceParameter"))
+                                object.riceParameter = message.riceParameter;
+                            if (message.entryCount != null && message.hasOwnProperty("entryCount"))
+                                object.entryCount = message.entryCount;
+                            if (message.encodedData != null && message.hasOwnProperty("encodedData"))
+                                object.encodedData = options.bytes === String ? $util.base64.encode(message.encodedData, 0, message.encodedData.length) : options.bytes === Array ? Array.prototype.slice.call(message.encodedData) : message.encodedData;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RiceDeltaEncoding to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.RiceDeltaEncoding
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RiceDeltaEncoding.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RiceDeltaEncoding;
+                    })();
+    
+                    v1.Submission = (function() {
+    
+                        /**
+                         * Properties of a Submission.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface ISubmission
+                         * @property {string|null} [uri] Submission uri
+                         */
+    
+                        /**
+                         * Constructs a new Submission.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a Submission.
+                         * @implements ISubmission
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.ISubmission=} [properties] Properties to set
+                         */
+                        function Submission(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Submission uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @instance
+                         */
+                        Submission.prototype.uri = "";
+    
+                        /**
+                         * Creates a new Submission instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmission=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.Submission} Submission instance
+                         */
+                        Submission.create = function create(properties) {
+                            return new Submission(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Submission message. Does not implicitly {@link google.cloud.webrisk.v1.Submission.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmission} message Submission message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Submission.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Submission message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.Submission.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmission} message Submission message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Submission.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Submission message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.Submission} Submission
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Submission.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.Submission();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.uri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Submission message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.Submission} Submission
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Submission.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Submission message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Submission.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Submission message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.Submission} Submission
+                         */
+                        Submission.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.Submission)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.Submission();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Submission message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @static
+                         * @param {google.cloud.webrisk.v1.Submission} message Submission
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Submission.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Submission to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Submission.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Submission;
+                    })();
+    
+                    v1.CreateSubmissionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSubmissionRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface ICreateSubmissionRequest
+                         * @property {string|null} [parent] CreateSubmissionRequest parent
+                         * @property {google.cloud.webrisk.v1.ISubmission|null} [submission] CreateSubmissionRequest submission
+                         */
+    
+                        /**
+                         * Constructs a new CreateSubmissionRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a CreateSubmissionRequest.
+                         * @implements ICreateSubmissionRequest
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.ICreateSubmissionRequest=} [properties] Properties to set
+                         */
+                        function CreateSubmissionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSubmissionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @instance
+                         */
+                        CreateSubmissionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSubmissionRequest submission.
+                         * @member {google.cloud.webrisk.v1.ISubmission|null|undefined} submission
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @instance
+                         */
+                        CreateSubmissionRequest.prototype.submission = null;
+    
+                        /**
+                         * Creates a new CreateSubmissionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ICreateSubmissionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.CreateSubmissionRequest} CreateSubmissionRequest instance
+                         */
+                        CreateSubmissionRequest.create = function create(properties) {
+                            return new CreateSubmissionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubmissionRequest message. Does not implicitly {@link google.cloud.webrisk.v1.CreateSubmissionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ICreateSubmissionRequest} message CreateSubmissionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubmissionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.submission != null && message.hasOwnProperty("submission"))
+                                $root.google.cloud.webrisk.v1.Submission.encode(message.submission, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubmissionRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.CreateSubmissionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ICreateSubmissionRequest} message CreateSubmissionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubmissionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSubmissionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.CreateSubmissionRequest} CreateSubmissionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubmissionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.CreateSubmissionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.submission = $root.google.cloud.webrisk.v1.Submission.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSubmissionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.CreateSubmissionRequest} CreateSubmissionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubmissionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSubmissionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSubmissionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.submission != null && message.hasOwnProperty("submission")) {
+                                var error = $root.google.cloud.webrisk.v1.Submission.verify(message.submission);
+                                if (error)
+                                    return "submission." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSubmissionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.CreateSubmissionRequest} CreateSubmissionRequest
+                         */
+                        CreateSubmissionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.CreateSubmissionRequest)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.CreateSubmissionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.submission != null) {
+                                if (typeof object.submission !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.CreateSubmissionRequest.submission: object expected");
+                                message.submission = $root.google.cloud.webrisk.v1.Submission.fromObject(object.submission);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSubmissionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.CreateSubmissionRequest} message CreateSubmissionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSubmissionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.submission = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.submission != null && message.hasOwnProperty("submission"))
+                                object.submission = $root.google.cloud.webrisk.v1.Submission.toObject(message.submission, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSubmissionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.CreateSubmissionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSubmissionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateSubmissionRequest;
+                    })();
+    
+                    return v1;
+                })();
+    
                 webrisk.v1beta1 = (function() {
     
                     /**
@@ -4959,6 +9355,565 @@
                 return values;
             })();
     
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
+            })();
+    
             return api;
         })();
     
@@ -9130,6 +14085,7 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -9142,6 +14098,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -9317,6 +14274,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -9383,6 +14348,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -9481,6 +14449,11 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                message[".google.api.resourceDefinition"] = [];
+                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -9592,6 +14565,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -9669,6 +14651,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -9685,8 +14677,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -9754,6 +14748,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -9798,6 +14797,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -9857,6 +14857,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -9891,6 +14899,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -9941,6 +14951,9 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -9998,6 +15011,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -10031,6 +15049,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -10054,6 +15077,7 @@
                         object.noStandardDescriptorAccessor = false;
                         object.deprecated = false;
                         object.mapEntry = false;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -10068,6 +15092,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -10099,6 +15125,7 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -10183,6 +15210,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -10227,6 +15262,8 @@
                             writer.int32(message[".google.api.fieldBehavior"][i]);
                         writer.ldelim();
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -10293,6 +15330,9 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -10383,6 +15423,11 @@
                             case 5:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -10478,6 +15523,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -10505,6 +15555,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -10528,6 +15579,8 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     

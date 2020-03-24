@@ -17,10 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1beta1 from './v1beta1';
+import * as v1 from './v1';
 const WebRiskServiceV1Beta1Client = v1beta1.WebRiskServiceV1Beta1Client;
-export {v1beta1, WebRiskServiceV1Beta1Client};
+const WebRiskServiceClient = v1.WebRiskServiceClient;
+export {v1, v1beta1, WebRiskServiceV1Beta1Client, WebRiskServiceClient};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
-export default {v1beta1, WebRiskServiceV1Beta1Client};
+export default {v1, v1beta1, WebRiskServiceV1Beta1Client, WebRiskServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
