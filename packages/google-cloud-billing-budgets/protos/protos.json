@@ -51,7 +51,7 @@
                               "type": "ThresholdRule",
                               "id": 5,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "allUpdatesRule": {

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,12 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class BudgetServiceClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
@@ -225,7 +230,8 @@ export class BudgetServiceClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -414,6 +420,10 @@ export class BudgetServiceClient {
   /**
    * Updates a budget and returns the updated budget.
    *
+   * WARNING: There are some fields exposed on the Google Cloud Console that
+   * aren’t available on this API. Budget fields that are not exposed in
+   * this API will not be changed by this method.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.billing.budgets.v1beta1.Budget} request.budget
@@ -502,6 +512,11 @@ export class BudgetServiceClient {
   ): void;
   /**
    * Returns a budget.
+   *
+   * WARNING: There are some fields exposed on the Google Cloud Console that
+   * aren’t available on this API. When reading from the API, you will not
+   * see these fields in the return value, though they may have been set
+   * in the Cloud Console.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -663,6 +678,11 @@ export class BudgetServiceClient {
   ): void;
   /**
    * Returns a list of budgets for a billing account.
+   *
+   * WARNING: There are some fields exposed on the Google Cloud Console that
+   * aren’t available on this API. When reading from the API, you will not
+   * see these fields in the return value, though they may have been set
+   * in the Cloud Console.
    *
    * @param {Object} request
    *   The request object that will be sent.
