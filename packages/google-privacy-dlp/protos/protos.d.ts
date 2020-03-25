@@ -285,6 +285,20 @@ export namespace google {
                     public updateJobTrigger(request: google.privacy.dlp.v2.IUpdateJobTriggerRequest): Promise<google.privacy.dlp.v2.JobTrigger>;
 
                     /**
+                     * Calls HybridInspectJobTrigger.
+                     * @param request HybridInspectJobTriggerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and HybridInspectResponse
+                     */
+                    public hybridInspectJobTrigger(request: google.privacy.dlp.v2.IHybridInspectJobTriggerRequest, callback: google.privacy.dlp.v2.DlpService.HybridInspectJobTriggerCallback): void;
+
+                    /**
+                     * Calls HybridInspectJobTrigger.
+                     * @param request HybridInspectJobTriggerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public hybridInspectJobTrigger(request: google.privacy.dlp.v2.IHybridInspectJobTriggerRequest): Promise<google.privacy.dlp.v2.HybridInspectResponse>;
+
+                    /**
                      * Calls GetJobTrigger.
                      * @param request GetJobTriggerRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and JobTrigger
@@ -479,6 +493,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteStoredInfoType(request: google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls HybridInspectDlpJob.
+                     * @param request HybridInspectDlpJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and HybridInspectResponse
+                     */
+                    public hybridInspectDlpJob(request: google.privacy.dlp.v2.IHybridInspectDlpJobRequest, callback: google.privacy.dlp.v2.DlpService.HybridInspectDlpJobCallback): void;
+
+                    /**
+                     * Calls HybridInspectDlpJob.
+                     * @param request HybridInspectDlpJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public hybridInspectDlpJob(request: google.privacy.dlp.v2.IHybridInspectDlpJobRequest): Promise<google.privacy.dlp.v2.HybridInspectResponse>;
+
+                    /**
+                     * Calls FinishDlpJob.
+                     * @param request FinishDlpJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public finishDlpJob(request: google.privacy.dlp.v2.IFinishDlpJobRequest, callback: google.privacy.dlp.v2.DlpService.FinishDlpJobCallback): void;
+
+                    /**
+                     * Calls FinishDlpJob.
+                     * @param request FinishDlpJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public finishDlpJob(request: google.privacy.dlp.v2.IFinishDlpJobRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace DlpService {
@@ -603,6 +645,13 @@ export namespace google {
                     type UpdateJobTriggerCallback = (error: (Error|null), response?: google.privacy.dlp.v2.JobTrigger) => void;
 
                     /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService#hybridInspectJobTrigger}.
+                     * @param error Error, if any
+                     * @param [response] HybridInspectResponse
+                     */
+                    type HybridInspectJobTriggerCallback = (error: (Error|null), response?: google.privacy.dlp.v2.HybridInspectResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.privacy.dlp.v2.DlpService#getJobTrigger}.
                      * @param error Error, if any
                      * @param [response] JobTrigger
@@ -699,6 +748,20 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteStoredInfoTypeCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService#hybridInspectDlpJob}.
+                     * @param error Error, if any
+                     * @param [response] HybridInspectResponse
+                     */
+                    type HybridInspectDlpJobCallback = (error: (Error|null), response?: google.privacy.dlp.v2.HybridInspectResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService#finishDlpJob}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type FinishDlpJobCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of an ExcludeInfoTypes. */
@@ -804,7 +867,7 @@ export namespace google {
                     excludeInfoTypes?: (google.privacy.dlp.v2.IExcludeInfoTypes|null);
 
                     /** ExclusionRule matchingType */
-                    matchingType?: (google.privacy.dlp.v2.MatchingType|null);
+                    matchingType?: (google.privacy.dlp.v2.MatchingType|keyof typeof google.privacy.dlp.v2.MatchingType|null);
                 }
 
                 /** Represents an ExclusionRule. */
@@ -826,7 +889,7 @@ export namespace google {
                     public excludeInfoTypes?: (google.privacy.dlp.v2.IExcludeInfoTypes|null);
 
                     /** ExclusionRule matchingType. */
-                    public matchingType: google.privacy.dlp.v2.MatchingType;
+                    public matchingType: (google.privacy.dlp.v2.MatchingType|keyof typeof google.privacy.dlp.v2.MatchingType);
 
                     /** ExclusionRule type. */
                     public type?: ("dictionary"|"regex"|"excludeInfoTypes");
@@ -1104,7 +1167,7 @@ export namespace google {
                     infoTypes?: (google.privacy.dlp.v2.IInfoType[]|null);
 
                     /** InspectConfig minLikelihood */
-                    minLikelihood?: (google.privacy.dlp.v2.Likelihood|null);
+                    minLikelihood?: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood|null);
 
                     /** InspectConfig limits */
                     limits?: (google.privacy.dlp.v2.InspectConfig.IFindingLimits|null);
@@ -1138,7 +1201,7 @@ export namespace google {
                     public infoTypes: google.privacy.dlp.v2.IInfoType[];
 
                     /** InspectConfig minLikelihood. */
-                    public minLikelihood: google.privacy.dlp.v2.Likelihood;
+                    public minLikelihood: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood);
 
                     /** InspectConfig limits. */
                     public limits?: (google.privacy.dlp.v2.InspectConfig.IFindingLimits|null);
@@ -1437,10 +1500,10 @@ export namespace google {
                 interface IByteContentItem {
 
                     /** ByteContentItem type */
-                    type?: (google.privacy.dlp.v2.ByteContentItem.BytesType|null);
+                    type?: (google.privacy.dlp.v2.ByteContentItem.BytesType|keyof typeof google.privacy.dlp.v2.ByteContentItem.BytesType|null);
 
                     /** ByteContentItem data */
-                    data?: (Uint8Array|null);
+                    data?: (Uint8Array|string|null);
                 }
 
                 /** Represents a ByteContentItem. */
@@ -1453,10 +1516,10 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IByteContentItem);
 
                     /** ByteContentItem type. */
-                    public type: google.privacy.dlp.v2.ByteContentItem.BytesType;
+                    public type: (google.privacy.dlp.v2.ByteContentItem.BytesType|keyof typeof google.privacy.dlp.v2.ByteContentItem.BytesType);
 
                     /** ByteContentItem data. */
-                    public data: Uint8Array;
+                    public data: (Uint8Array|string);
 
                     /**
                      * Creates a new ByteContentItem instance using the specified properties.
@@ -1937,6 +2000,9 @@ export namespace google {
                 /** Properties of a Finding. */
                 interface IFinding {
 
+                    /** Finding name */
+                    name?: (string|null);
+
                     /** Finding quote */
                     quote?: (string|null);
 
@@ -1944,7 +2010,7 @@ export namespace google {
                     infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                     /** Finding likelihood */
-                    likelihood?: (google.privacy.dlp.v2.Likelihood|null);
+                    likelihood?: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood|null);
 
                     /** Finding location */
                     location?: (google.privacy.dlp.v2.ILocation|null);
@@ -1954,6 +2020,21 @@ export namespace google {
 
                     /** Finding quoteInfo */
                     quoteInfo?: (google.privacy.dlp.v2.IQuoteInfo|null);
+
+                    /** Finding resourceName */
+                    resourceName?: (string|null);
+
+                    /** Finding triggerName */
+                    triggerName?: (string|null);
+
+                    /** Finding labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Finding jobCreateTime */
+                    jobCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Finding jobName */
+                    jobName?: (string|null);
                 }
 
                 /** Represents a Finding. */
@@ -1965,6 +2046,9 @@ export namespace google {
                      */
                     constructor(properties?: google.privacy.dlp.v2.IFinding);
 
+                    /** Finding name. */
+                    public name: string;
+
                     /** Finding quote. */
                     public quote: string;
 
@@ -1972,7 +2056,7 @@ export namespace google {
                     public infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                     /** Finding likelihood. */
-                    public likelihood: google.privacy.dlp.v2.Likelihood;
+                    public likelihood: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood);
 
                     /** Finding location. */
                     public location?: (google.privacy.dlp.v2.ILocation|null);
@@ -1982,6 +2066,21 @@ export namespace google {
 
                     /** Finding quoteInfo. */
                     public quoteInfo?: (google.privacy.dlp.v2.IQuoteInfo|null);
+
+                    /** Finding resourceName. */
+                    public resourceName: string;
+
+                    /** Finding triggerName. */
+                    public triggerName: string;
+
+                    /** Finding labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Finding jobCreateTime. */
+                    public jobCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Finding jobName. */
+                    public jobName: string;
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -2065,6 +2164,9 @@ export namespace google {
 
                     /** Location contentLocations */
                     contentLocations?: (google.privacy.dlp.v2.IContentLocation[]|null);
+
+                    /** Location container */
+                    container?: (google.privacy.dlp.v2.IContainer|null);
                 }
 
                 /** Represents a Location. */
@@ -2084,6 +2186,9 @@ export namespace google {
 
                     /** Location contentLocations. */
                     public contentLocations: google.privacy.dlp.v2.IContentLocation[];
+
+                    /** Location container. */
+                    public container?: (google.privacy.dlp.v2.IContainer|null);
 
                     /**
                      * Creates a new Location instance using the specified properties.
@@ -2283,7 +2388,7 @@ export namespace google {
                 interface IDocumentLocation {
 
                     /** DocumentLocation fileOffset */
-                    fileOffset?: (number|Long|null);
+                    fileOffset?: (number|Long|string|null);
                 }
 
                 /** Represents a DocumentLocation. */
@@ -2296,7 +2401,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IDocumentLocation);
 
                     /** DocumentLocation fileOffset. */
-                    public fileOffset: (number|Long);
+                    public fileOffset: (number|Long|string);
 
                     /**
                      * Creates a new DocumentLocation instance using the specified properties.
@@ -2475,7 +2580,7 @@ export namespace google {
                 interface ITableLocation {
 
                     /** TableLocation rowIndex */
-                    rowIndex?: (number|Long|null);
+                    rowIndex?: (number|Long|string|null);
                 }
 
                 /** Represents a TableLocation. */
@@ -2488,7 +2593,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.ITableLocation);
 
                     /** TableLocation rowIndex. */
-                    public rowIndex: (number|Long);
+                    public rowIndex: (number|Long|string);
 
                     /**
                      * Creates a new TableLocation instance using the specified properties.
@@ -2561,14 +2666,140 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a Container. */
+                interface IContainer {
+
+                    /** Container type */
+                    type?: (string|null);
+
+                    /** Container projectId */
+                    projectId?: (string|null);
+
+                    /** Container fullPath */
+                    fullPath?: (string|null);
+
+                    /** Container rootPath */
+                    rootPath?: (string|null);
+
+                    /** Container relativePath */
+                    relativePath?: (string|null);
+
+                    /** Container updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Container version */
+                    version?: (string|null);
+                }
+
+                /** Represents a Container. */
+                class Container implements IContainer {
+
+                    /**
+                     * Constructs a new Container.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IContainer);
+
+                    /** Container type. */
+                    public type: string;
+
+                    /** Container projectId. */
+                    public projectId: string;
+
+                    /** Container fullPath. */
+                    public fullPath: string;
+
+                    /** Container rootPath. */
+                    public rootPath: string;
+
+                    /** Container relativePath. */
+                    public relativePath: string;
+
+                    /** Container updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Container version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new Container instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Container instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IContainer): google.privacy.dlp.v2.Container;
+
+                    /**
+                     * Encodes the specified Container message. Does not implicitly {@link google.privacy.dlp.v2.Container.verify|verify} messages.
+                     * @param message Container message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Container message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Container.verify|verify} messages.
+                     * @param message Container message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Container message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Container
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.Container;
+
+                    /**
+                     * Decodes a Container message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Container
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.Container;
+
+                    /**
+                     * Verifies a Container message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Container message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Container
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.Container;
+
+                    /**
+                     * Creates a plain object from a Container message. Also converts values to other types if specified.
+                     * @param message Container
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.Container, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Container to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Range. */
                 interface IRange {
 
                     /** Range start */
-                    start?: (number|Long|null);
+                    start?: (number|Long|string|null);
 
                     /** Range end */
-                    end?: (number|Long|null);
+                    end?: (number|Long|string|null);
                 }
 
                 /** Represents a Range. */
@@ -2581,10 +2812,10 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IRange);
 
                     /** Range start. */
-                    public start: (number|Long);
+                    public start: (number|Long|string);
 
                     /** Range end. */
-                    public end: (number|Long);
+                    public end: (number|Long|string);
 
                     /**
                      * Creates a new Range instance using the specified properties.
@@ -3189,7 +3420,7 @@ export namespace google {
                 interface IRedactImageResponse {
 
                     /** RedactImageResponse redactedImage */
-                    redactedImage?: (Uint8Array|null);
+                    redactedImage?: (Uint8Array|string|null);
 
                     /** RedactImageResponse extractedText */
                     extractedText?: (string|null);
@@ -3208,7 +3439,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IRedactImageResponse);
 
                     /** RedactImageResponse redactedImage. */
-                    public redactedImage: Uint8Array;
+                    public redactedImage: (Uint8Array|string);
 
                     /** RedactImageResponse extractedText. */
                     public extractedText: string;
@@ -3942,7 +4173,7 @@ export namespace google {
                     table?: (google.privacy.dlp.v2.IBigQueryTable|null);
 
                     /** OutputStorageConfig outputSchema */
-                    outputSchema?: (google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|null);
+                    outputSchema?: (google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|keyof typeof google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|null);
                 }
 
                 /** Represents an OutputStorageConfig. */
@@ -3958,7 +4189,7 @@ export namespace google {
                     public table?: (google.privacy.dlp.v2.IBigQueryTable|null);
 
                     /** OutputStorageConfig outputSchema. */
-                    public outputSchema: google.privacy.dlp.v2.OutputStorageConfig.OutputSchema;
+                    public outputSchema: (google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|keyof typeof google.privacy.dlp.v2.OutputStorageConfig.OutputSchema);
 
                     /** OutputStorageConfig type. */
                     public type?: "table";
@@ -4054,7 +4285,7 @@ export namespace google {
                     infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                     /** InfoTypeStats count */
-                    count?: (number|Long|null);
+                    count?: (number|Long|string|null);
                 }
 
                 /** Represents an InfoTypeStats. */
@@ -4070,7 +4301,7 @@ export namespace google {
                     public infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                     /** InfoTypeStats count. */
-                    public count: (number|Long);
+                    public count: (number|Long|string);
 
                     /**
                      * Creates a new InfoTypeStats instance using the specified properties.
@@ -4341,13 +4572,16 @@ export namespace google {
                     interface IResult {
 
                         /** Result processedBytes */
-                        processedBytes?: (number|Long|null);
+                        processedBytes?: (number|Long|string|null);
 
                         /** Result totalEstimatedBytes */
-                        totalEstimatedBytes?: (number|Long|null);
+                        totalEstimatedBytes?: (number|Long|string|null);
 
                         /** Result infoTypeStats */
                         infoTypeStats?: (google.privacy.dlp.v2.IInfoTypeStats[]|null);
+
+                        /** Result hybridStats */
+                        hybridStats?: (google.privacy.dlp.v2.IHybridInspectStatistics|null);
                     }
 
                     /** Represents a Result. */
@@ -4360,13 +4594,16 @@ export namespace google {
                         constructor(properties?: google.privacy.dlp.v2.InspectDataSourceDetails.IResult);
 
                         /** Result processedBytes. */
-                        public processedBytes: (number|Long);
+                        public processedBytes: (number|Long|string);
 
                         /** Result totalEstimatedBytes. */
-                        public totalEstimatedBytes: (number|Long);
+                        public totalEstimatedBytes: (number|Long|string);
 
                         /** Result infoTypeStats. */
                         public infoTypeStats: google.privacy.dlp.v2.IInfoTypeStats[];
+
+                        /** Result hybridStats. */
+                        public hybridStats?: (google.privacy.dlp.v2.IHybridInspectStatistics|null);
 
                         /**
                          * Creates a new Result instance using the specified properties.
@@ -4438,6 +4675,108 @@ export namespace google {
                          */
                         public toJSON(): { [k: string]: any };
                     }
+                }
+
+                /** Properties of a HybridInspectStatistics. */
+                interface IHybridInspectStatistics {
+
+                    /** HybridInspectStatistics processedCount */
+                    processedCount?: (number|Long|string|null);
+
+                    /** HybridInspectStatistics abortedCount */
+                    abortedCount?: (number|Long|string|null);
+
+                    /** HybridInspectStatistics pendingCount */
+                    pendingCount?: (number|Long|string|null);
+                }
+
+                /** Represents a HybridInspectStatistics. */
+                class HybridInspectStatistics implements IHybridInspectStatistics {
+
+                    /**
+                     * Constructs a new HybridInspectStatistics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IHybridInspectStatistics);
+
+                    /** HybridInspectStatistics processedCount. */
+                    public processedCount: (number|Long|string);
+
+                    /** HybridInspectStatistics abortedCount. */
+                    public abortedCount: (number|Long|string);
+
+                    /** HybridInspectStatistics pendingCount. */
+                    public pendingCount: (number|Long|string);
+
+                    /**
+                     * Creates a new HybridInspectStatistics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridInspectStatistics instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IHybridInspectStatistics): google.privacy.dlp.v2.HybridInspectStatistics;
+
+                    /**
+                     * Encodes the specified HybridInspectStatistics message. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectStatistics.verify|verify} messages.
+                     * @param message HybridInspectStatistics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IHybridInspectStatistics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridInspectStatistics message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectStatistics.verify|verify} messages.
+                     * @param message HybridInspectStatistics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IHybridInspectStatistics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridInspectStatistics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridInspectStatistics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.HybridInspectStatistics;
+
+                    /**
+                     * Decodes a HybridInspectStatistics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridInspectStatistics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.HybridInspectStatistics;
+
+                    /**
+                     * Verifies a HybridInspectStatistics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridInspectStatistics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridInspectStatistics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.HybridInspectStatistics;
+
+                    /**
+                     * Creates a plain object from a HybridInspectStatistics message. Also converts values to other types if specified.
+                     * @param message HybridInspectStatistics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.HybridInspectStatistics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridInspectStatistics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of an InfoTypeDescription. */
@@ -6506,19 +6845,19 @@ export namespace google {
                         interface ICategoricalStatsHistogramBucket {
 
                             /** CategoricalStatsHistogramBucket valueFrequencyLowerBound */
-                            valueFrequencyLowerBound?: (number|Long|null);
+                            valueFrequencyLowerBound?: (number|Long|string|null);
 
                             /** CategoricalStatsHistogramBucket valueFrequencyUpperBound */
-                            valueFrequencyUpperBound?: (number|Long|null);
+                            valueFrequencyUpperBound?: (number|Long|string|null);
 
                             /** CategoricalStatsHistogramBucket bucketSize */
-                            bucketSize?: (number|Long|null);
+                            bucketSize?: (number|Long|string|null);
 
                             /** CategoricalStatsHistogramBucket bucketValues */
                             bucketValues?: (google.privacy.dlp.v2.IValueFrequency[]|null);
 
                             /** CategoricalStatsHistogramBucket bucketValueCount */
-                            bucketValueCount?: (number|Long|null);
+                            bucketValueCount?: (number|Long|string|null);
                         }
 
                         /** Represents a CategoricalStatsHistogramBucket. */
@@ -6531,19 +6870,19 @@ export namespace google {
                             constructor(properties?: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.CategoricalStatsResult.ICategoricalStatsHistogramBucket);
 
                             /** CategoricalStatsHistogramBucket valueFrequencyLowerBound. */
-                            public valueFrequencyLowerBound: (number|Long);
+                            public valueFrequencyLowerBound: (number|Long|string);
 
                             /** CategoricalStatsHistogramBucket valueFrequencyUpperBound. */
-                            public valueFrequencyUpperBound: (number|Long);
+                            public valueFrequencyUpperBound: (number|Long|string);
 
                             /** CategoricalStatsHistogramBucket bucketSize. */
-                            public bucketSize: (number|Long);
+                            public bucketSize: (number|Long|string);
 
                             /** CategoricalStatsHistogramBucket bucketValues. */
                             public bucketValues: google.privacy.dlp.v2.IValueFrequency[];
 
                             /** CategoricalStatsHistogramBucket bucketValueCount. */
-                            public bucketValueCount: (number|Long);
+                            public bucketValueCount: (number|Long|string);
 
                             /**
                              * Creates a new CategoricalStatsHistogramBucket instance using the specified properties.
@@ -6716,7 +7055,7 @@ export namespace google {
                             quasiIdsValues?: (google.privacy.dlp.v2.IValue[]|null);
 
                             /** KAnonymityEquivalenceClass equivalenceClassSize */
-                            equivalenceClassSize?: (number|Long|null);
+                            equivalenceClassSize?: (number|Long|string|null);
                         }
 
                         /** Represents a KAnonymityEquivalenceClass. */
@@ -6732,7 +7071,7 @@ export namespace google {
                             public quasiIdsValues: google.privacy.dlp.v2.IValue[];
 
                             /** KAnonymityEquivalenceClass equivalenceClassSize. */
-                            public equivalenceClassSize: (number|Long);
+                            public equivalenceClassSize: (number|Long|string);
 
                             /**
                              * Creates a new KAnonymityEquivalenceClass instance using the specified properties.
@@ -6809,19 +7148,19 @@ export namespace google {
                         interface IKAnonymityHistogramBucket {
 
                             /** KAnonymityHistogramBucket equivalenceClassSizeLowerBound */
-                            equivalenceClassSizeLowerBound?: (number|Long|null);
+                            equivalenceClassSizeLowerBound?: (number|Long|string|null);
 
                             /** KAnonymityHistogramBucket equivalenceClassSizeUpperBound */
-                            equivalenceClassSizeUpperBound?: (number|Long|null);
+                            equivalenceClassSizeUpperBound?: (number|Long|string|null);
 
                             /** KAnonymityHistogramBucket bucketSize */
-                            bucketSize?: (number|Long|null);
+                            bucketSize?: (number|Long|string|null);
 
                             /** KAnonymityHistogramBucket bucketValues */
                             bucketValues?: (google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.IKAnonymityEquivalenceClass[]|null);
 
                             /** KAnonymityHistogramBucket bucketValueCount */
-                            bucketValueCount?: (number|Long|null);
+                            bucketValueCount?: (number|Long|string|null);
                         }
 
                         /** Represents a KAnonymityHistogramBucket. */
@@ -6834,19 +7173,19 @@ export namespace google {
                             constructor(properties?: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.IKAnonymityHistogramBucket);
 
                             /** KAnonymityHistogramBucket equivalenceClassSizeLowerBound. */
-                            public equivalenceClassSizeLowerBound: (number|Long);
+                            public equivalenceClassSizeLowerBound: (number|Long|string);
 
                             /** KAnonymityHistogramBucket equivalenceClassSizeUpperBound. */
-                            public equivalenceClassSizeUpperBound: (number|Long);
+                            public equivalenceClassSizeUpperBound: (number|Long|string);
 
                             /** KAnonymityHistogramBucket bucketSize. */
-                            public bucketSize: (number|Long);
+                            public bucketSize: (number|Long|string);
 
                             /** KAnonymityHistogramBucket bucketValues. */
                             public bucketValues: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.IKAnonymityEquivalenceClass[];
 
                             /** KAnonymityHistogramBucket bucketValueCount. */
-                            public bucketValueCount: (number|Long);
+                            public bucketValueCount: (number|Long|string);
 
                             /**
                              * Creates a new KAnonymityHistogramBucket instance using the specified properties.
@@ -7019,10 +7358,10 @@ export namespace google {
                             quasiIdsValues?: (google.privacy.dlp.v2.IValue[]|null);
 
                             /** LDiversityEquivalenceClass equivalenceClassSize */
-                            equivalenceClassSize?: (number|Long|null);
+                            equivalenceClassSize?: (number|Long|string|null);
 
                             /** LDiversityEquivalenceClass numDistinctSensitiveValues */
-                            numDistinctSensitiveValues?: (number|Long|null);
+                            numDistinctSensitiveValues?: (number|Long|string|null);
 
                             /** LDiversityEquivalenceClass topSensitiveValues */
                             topSensitiveValues?: (google.privacy.dlp.v2.IValueFrequency[]|null);
@@ -7041,10 +7380,10 @@ export namespace google {
                             public quasiIdsValues: google.privacy.dlp.v2.IValue[];
 
                             /** LDiversityEquivalenceClass equivalenceClassSize. */
-                            public equivalenceClassSize: (number|Long);
+                            public equivalenceClassSize: (number|Long|string);
 
                             /** LDiversityEquivalenceClass numDistinctSensitiveValues. */
-                            public numDistinctSensitiveValues: (number|Long);
+                            public numDistinctSensitiveValues: (number|Long|string);
 
                             /** LDiversityEquivalenceClass topSensitiveValues. */
                             public topSensitiveValues: google.privacy.dlp.v2.IValueFrequency[];
@@ -7124,19 +7463,19 @@ export namespace google {
                         interface ILDiversityHistogramBucket {
 
                             /** LDiversityHistogramBucket sensitiveValueFrequencyLowerBound */
-                            sensitiveValueFrequencyLowerBound?: (number|Long|null);
+                            sensitiveValueFrequencyLowerBound?: (number|Long|string|null);
 
                             /** LDiversityHistogramBucket sensitiveValueFrequencyUpperBound */
-                            sensitiveValueFrequencyUpperBound?: (number|Long|null);
+                            sensitiveValueFrequencyUpperBound?: (number|Long|string|null);
 
                             /** LDiversityHistogramBucket bucketSize */
-                            bucketSize?: (number|Long|null);
+                            bucketSize?: (number|Long|string|null);
 
                             /** LDiversityHistogramBucket bucketValues */
                             bucketValues?: (google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.ILDiversityEquivalenceClass[]|null);
 
                             /** LDiversityHistogramBucket bucketValueCount */
-                            bucketValueCount?: (number|Long|null);
+                            bucketValueCount?: (number|Long|string|null);
                         }
 
                         /** Represents a LDiversityHistogramBucket. */
@@ -7149,19 +7488,19 @@ export namespace google {
                             constructor(properties?: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.ILDiversityHistogramBucket);
 
                             /** LDiversityHistogramBucket sensitiveValueFrequencyLowerBound. */
-                            public sensitiveValueFrequencyLowerBound: (number|Long);
+                            public sensitiveValueFrequencyLowerBound: (number|Long|string);
 
                             /** LDiversityHistogramBucket sensitiveValueFrequencyUpperBound. */
-                            public sensitiveValueFrequencyUpperBound: (number|Long);
+                            public sensitiveValueFrequencyUpperBound: (number|Long|string);
 
                             /** LDiversityHistogramBucket bucketSize. */
-                            public bucketSize: (number|Long);
+                            public bucketSize: (number|Long|string);
 
                             /** LDiversityHistogramBucket bucketValues. */
                             public bucketValues: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.ILDiversityEquivalenceClass[];
 
                             /** LDiversityHistogramBucket bucketValueCount. */
-                            public bucketValueCount: (number|Long);
+                            public bucketValueCount: (number|Long|string);
 
                             /**
                              * Creates a new LDiversityHistogramBucket instance using the specified properties.
@@ -7334,7 +7673,7 @@ export namespace google {
                             quasiIdsValues?: (google.privacy.dlp.v2.IValue[]|null);
 
                             /** KMapEstimationQuasiIdValues estimatedAnonymity */
-                            estimatedAnonymity?: (number|Long|null);
+                            estimatedAnonymity?: (number|Long|string|null);
                         }
 
                         /** Represents a KMapEstimationQuasiIdValues. */
@@ -7350,7 +7689,7 @@ export namespace google {
                             public quasiIdsValues: google.privacy.dlp.v2.IValue[];
 
                             /** KMapEstimationQuasiIdValues estimatedAnonymity. */
-                            public estimatedAnonymity: (number|Long);
+                            public estimatedAnonymity: (number|Long|string);
 
                             /**
                              * Creates a new KMapEstimationQuasiIdValues instance using the specified properties.
@@ -7427,19 +7766,19 @@ export namespace google {
                         interface IKMapEstimationHistogramBucket {
 
                             /** KMapEstimationHistogramBucket minAnonymity */
-                            minAnonymity?: (number|Long|null);
+                            minAnonymity?: (number|Long|string|null);
 
                             /** KMapEstimationHistogramBucket maxAnonymity */
-                            maxAnonymity?: (number|Long|null);
+                            maxAnonymity?: (number|Long|string|null);
 
                             /** KMapEstimationHistogramBucket bucketSize */
-                            bucketSize?: (number|Long|null);
+                            bucketSize?: (number|Long|string|null);
 
                             /** KMapEstimationHistogramBucket bucketValues */
                             bucketValues?: (google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.IKMapEstimationQuasiIdValues[]|null);
 
                             /** KMapEstimationHistogramBucket bucketValueCount */
-                            bucketValueCount?: (number|Long|null);
+                            bucketValueCount?: (number|Long|string|null);
                         }
 
                         /** Represents a KMapEstimationHistogramBucket. */
@@ -7452,19 +7791,19 @@ export namespace google {
                             constructor(properties?: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.IKMapEstimationHistogramBucket);
 
                             /** KMapEstimationHistogramBucket minAnonymity. */
-                            public minAnonymity: (number|Long);
+                            public minAnonymity: (number|Long|string);
 
                             /** KMapEstimationHistogramBucket maxAnonymity. */
-                            public maxAnonymity: (number|Long);
+                            public maxAnonymity: (number|Long|string);
 
                             /** KMapEstimationHistogramBucket bucketSize. */
-                            public bucketSize: (number|Long);
+                            public bucketSize: (number|Long|string);
 
                             /** KMapEstimationHistogramBucket bucketValues. */
                             public bucketValues: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.IKMapEstimationQuasiIdValues[];
 
                             /** KMapEstimationHistogramBucket bucketValueCount. */
-                            public bucketValueCount: (number|Long);
+                            public bucketValueCount: (number|Long|string);
 
                             /**
                              * Creates a new KMapEstimationHistogramBucket instance using the specified properties.
@@ -7736,13 +8075,13 @@ export namespace google {
                             maxProbability?: (number|null);
 
                             /** DeltaPresenceEstimationHistogramBucket bucketSize */
-                            bucketSize?: (number|Long|null);
+                            bucketSize?: (number|Long|string|null);
 
                             /** DeltaPresenceEstimationHistogramBucket bucketValues */
                             bucketValues?: (google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.IDeltaPresenceEstimationQuasiIdValues[]|null);
 
                             /** DeltaPresenceEstimationHistogramBucket bucketValueCount */
-                            bucketValueCount?: (number|Long|null);
+                            bucketValueCount?: (number|Long|string|null);
                         }
 
                         /** Represents a DeltaPresenceEstimationHistogramBucket. */
@@ -7761,13 +8100,13 @@ export namespace google {
                             public maxProbability: number;
 
                             /** DeltaPresenceEstimationHistogramBucket bucketSize. */
-                            public bucketSize: (number|Long);
+                            public bucketSize: (number|Long|string);
 
                             /** DeltaPresenceEstimationHistogramBucket bucketValues. */
                             public bucketValues: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.IDeltaPresenceEstimationQuasiIdValues[];
 
                             /** DeltaPresenceEstimationHistogramBucket bucketValueCount. */
-                            public bucketValueCount: (number|Long);
+                            public bucketValueCount: (number|Long|string);
 
                             /**
                              * Creates a new DeltaPresenceEstimationHistogramBucket instance using the specified properties.
@@ -7849,7 +8188,7 @@ export namespace google {
                     value?: (google.privacy.dlp.v2.IValue|null);
 
                     /** ValueFrequency count */
-                    count?: (number|Long|null);
+                    count?: (number|Long|string|null);
                 }
 
                 /** Represents a ValueFrequency. */
@@ -7865,7 +8204,7 @@ export namespace google {
                     public value?: (google.privacy.dlp.v2.IValue|null);
 
                     /** ValueFrequency count. */
-                    public count: (number|Long);
+                    public count: (number|Long|string);
 
                     /**
                      * Creates a new ValueFrequency instance using the specified properties.
@@ -7942,7 +8281,7 @@ export namespace google {
                 interface IValue {
 
                     /** Value integerValue */
-                    integerValue?: (number|Long|null);
+                    integerValue?: (number|Long|string|null);
 
                     /** Value floatValue */
                     floatValue?: (number|null);
@@ -7963,7 +8302,7 @@ export namespace google {
                     dateValue?: (google.type.IDate|null);
 
                     /** Value dayOfWeekValue */
-                    dayOfWeekValue?: (google.type.DayOfWeek|null);
+                    dayOfWeekValue?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
                 }
 
                 /** Represents a Value. */
@@ -7976,7 +8315,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IValue);
 
                     /** Value integerValue. */
-                    public integerValue: (number|Long);
+                    public integerValue: (number|Long|string);
 
                     /** Value floatValue. */
                     public floatValue: number;
@@ -7997,7 +8336,7 @@ export namespace google {
                     public dateValue?: (google.type.IDate|null);
 
                     /** Value dayOfWeekValue. */
-                    public dayOfWeekValue: google.type.DayOfWeek;
+                    public dayOfWeekValue: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
 
                     /** Value type. */
                     public type?: ("integerValue"|"floatValue"|"stringValue"|"booleanValue"|"timestampValue"|"timeValue"|"dateValue"|"dayOfWeekValue");
@@ -8173,7 +8512,7 @@ export namespace google {
                     date?: (google.type.IDate|null);
 
                     /** DateTime dayOfWeek */
-                    dayOfWeek?: (google.type.DayOfWeek|null);
+                    dayOfWeek?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
 
                     /** DateTime time */
                     time?: (google.type.ITimeOfDay|null);
@@ -8195,7 +8534,7 @@ export namespace google {
                     public date?: (google.type.IDate|null);
 
                     /** DateTime dayOfWeek. */
-                    public dayOfWeek: google.type.DayOfWeek;
+                    public dayOfWeek: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
 
                     /** DateTime time. */
                     public time?: (google.type.ITimeOfDay|null);
@@ -8375,6 +8714,9 @@ export namespace google {
 
                     /** DeidentifyConfig recordTransformations */
                     recordTransformations?: (google.privacy.dlp.v2.IRecordTransformations|null);
+
+                    /** DeidentifyConfig transformationErrorHandling */
+                    transformationErrorHandling?: (google.privacy.dlp.v2.ITransformationErrorHandling|null);
                 }
 
                 /** Represents a DeidentifyConfig. */
@@ -8391,6 +8733,9 @@ export namespace google {
 
                     /** DeidentifyConfig recordTransformations. */
                     public recordTransformations?: (google.privacy.dlp.v2.IRecordTransformations|null);
+
+                    /** DeidentifyConfig transformationErrorHandling. */
+                    public transformationErrorHandling?: (google.privacy.dlp.v2.ITransformationErrorHandling|null);
 
                     /** DeidentifyConfig transformation. */
                     public transformation?: ("infoTypeTransformations"|"recordTransformations");
@@ -8464,6 +8809,276 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TransformationErrorHandling. */
+                interface ITransformationErrorHandling {
+
+                    /** TransformationErrorHandling throwError */
+                    throwError?: (google.privacy.dlp.v2.TransformationErrorHandling.IThrowError|null);
+
+                    /** TransformationErrorHandling leaveUntransformed */
+                    leaveUntransformed?: (google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed|null);
+                }
+
+                /** Represents a TransformationErrorHandling. */
+                class TransformationErrorHandling implements ITransformationErrorHandling {
+
+                    /**
+                     * Constructs a new TransformationErrorHandling.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ITransformationErrorHandling);
+
+                    /** TransformationErrorHandling throwError. */
+                    public throwError?: (google.privacy.dlp.v2.TransformationErrorHandling.IThrowError|null);
+
+                    /** TransformationErrorHandling leaveUntransformed. */
+                    public leaveUntransformed?: (google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed|null);
+
+                    /** TransformationErrorHandling mode. */
+                    public mode?: ("throwError"|"leaveUntransformed");
+
+                    /**
+                     * Creates a new TransformationErrorHandling instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransformationErrorHandling instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ITransformationErrorHandling): google.privacy.dlp.v2.TransformationErrorHandling;
+
+                    /**
+                     * Encodes the specified TransformationErrorHandling message. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.verify|verify} messages.
+                     * @param message TransformationErrorHandling message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ITransformationErrorHandling, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransformationErrorHandling message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.verify|verify} messages.
+                     * @param message TransformationErrorHandling message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ITransformationErrorHandling, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransformationErrorHandling message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransformationErrorHandling
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TransformationErrorHandling;
+
+                    /**
+                     * Decodes a TransformationErrorHandling message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransformationErrorHandling
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TransformationErrorHandling;
+
+                    /**
+                     * Verifies a TransformationErrorHandling message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransformationErrorHandling message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransformationErrorHandling
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TransformationErrorHandling;
+
+                    /**
+                     * Creates a plain object from a TransformationErrorHandling message. Also converts values to other types if specified.
+                     * @param message TransformationErrorHandling
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.TransformationErrorHandling, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransformationErrorHandling to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace TransformationErrorHandling {
+
+                    /** Properties of a ThrowError. */
+                    interface IThrowError {
+                    }
+
+                    /** Represents a ThrowError. */
+                    class ThrowError implements IThrowError {
+
+                        /**
+                         * Constructs a new ThrowError.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.TransformationErrorHandling.IThrowError);
+
+                        /**
+                         * Creates a new ThrowError instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ThrowError instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.TransformationErrorHandling.IThrowError): google.privacy.dlp.v2.TransformationErrorHandling.ThrowError;
+
+                        /**
+                         * Encodes the specified ThrowError message. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.verify|verify} messages.
+                         * @param message ThrowError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.TransformationErrorHandling.IThrowError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ThrowError message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.verify|verify} messages.
+                         * @param message ThrowError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.TransformationErrorHandling.IThrowError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ThrowError message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ThrowError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TransformationErrorHandling.ThrowError;
+
+                        /**
+                         * Decodes a ThrowError message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ThrowError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TransformationErrorHandling.ThrowError;
+
+                        /**
+                         * Verifies a ThrowError message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ThrowError message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ThrowError
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TransformationErrorHandling.ThrowError;
+
+                        /**
+                         * Creates a plain object from a ThrowError message. Also converts values to other types if specified.
+                         * @param message ThrowError
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.TransformationErrorHandling.ThrowError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ThrowError to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a LeaveUntransformed. */
+                    interface ILeaveUntransformed {
+                    }
+
+                    /** Represents a LeaveUntransformed. */
+                    class LeaveUntransformed implements ILeaveUntransformed {
+
+                        /**
+                         * Constructs a new LeaveUntransformed.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed);
+
+                        /**
+                         * Creates a new LeaveUntransformed instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LeaveUntransformed instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed): google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed;
+
+                        /**
+                         * Encodes the specified LeaveUntransformed message. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.verify|verify} messages.
+                         * @param message LeaveUntransformed message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LeaveUntransformed message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.verify|verify} messages.
+                         * @param message LeaveUntransformed message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LeaveUntransformed message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LeaveUntransformed
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed;
+
+                        /**
+                         * Decodes a LeaveUntransformed message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LeaveUntransformed
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed;
+
+                        /**
+                         * Verifies a LeaveUntransformed message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LeaveUntransformed message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LeaveUntransformed
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed;
+
+                        /**
+                         * Creates a plain object from a LeaveUntransformed message. Also converts values to other types if specified.
+                         * @param message LeaveUntransformed
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LeaveUntransformed to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Properties of a PrimitiveTransformation. */
@@ -8623,7 +9238,7 @@ export namespace google {
                 interface ITimePartConfig {
 
                     /** TimePartConfig partToExtract */
-                    partToExtract?: (google.privacy.dlp.v2.TimePartConfig.TimePart|null);
+                    partToExtract?: (google.privacy.dlp.v2.TimePartConfig.TimePart|keyof typeof google.privacy.dlp.v2.TimePartConfig.TimePart|null);
                 }
 
                 /** Represents a TimePartConfig. */
@@ -8636,7 +9251,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.ITimePartConfig);
 
                     /** TimePartConfig partToExtract. */
-                    public partToExtract: google.privacy.dlp.v2.TimePartConfig.TimePart;
+                    public partToExtract: (google.privacy.dlp.v2.TimePartConfig.TimePart|keyof typeof google.privacy.dlp.v2.TimePartConfig.TimePart);
 
                     /**
                      * Creates a new TimePartConfig instance using the specified properties.
@@ -9180,7 +9795,7 @@ export namespace google {
                     charactersToSkip?: (string|null);
 
                     /** CharsToIgnore commonCharactersToIgnore */
-                    commonCharactersToIgnore?: (google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore|null);
+                    commonCharactersToIgnore?: (google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore|keyof typeof google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore|null);
                 }
 
                 /** Represents a CharsToIgnore. */
@@ -9196,7 +9811,7 @@ export namespace google {
                     public charactersToSkip: string;
 
                     /** CharsToIgnore commonCharactersToIgnore. */
-                    public commonCharactersToIgnore: google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore;
+                    public commonCharactersToIgnore: (google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore|keyof typeof google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore);
 
                     /** CharsToIgnore characters. */
                     public characters?: ("charactersToSkip"|"commonCharactersToIgnore");
@@ -9700,7 +10315,7 @@ export namespace google {
                     context?: (google.privacy.dlp.v2.IFieldId|null);
 
                     /** CryptoReplaceFfxFpeConfig commonAlphabet */
-                    commonAlphabet?: (google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet|null);
+                    commonAlphabet?: (google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet|keyof typeof google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet|null);
 
                     /** CryptoReplaceFfxFpeConfig customAlphabet */
                     customAlphabet?: (string|null);
@@ -9728,7 +10343,7 @@ export namespace google {
                     public context?: (google.privacy.dlp.v2.IFieldId|null);
 
                     /** CryptoReplaceFfxFpeConfig commonAlphabet. */
-                    public commonAlphabet: google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet;
+                    public commonAlphabet: (google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet|keyof typeof google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet);
 
                     /** CryptoReplaceFfxFpeConfig customAlphabet. */
                     public customAlphabet: string;
@@ -10024,7 +10639,7 @@ export namespace google {
                 interface IUnwrappedCryptoKey {
 
                     /** UnwrappedCryptoKey key */
-                    key?: (Uint8Array|null);
+                    key?: (Uint8Array|string|null);
                 }
 
                 /** Represents an UnwrappedCryptoKey. */
@@ -10037,7 +10652,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IUnwrappedCryptoKey);
 
                     /** UnwrappedCryptoKey key. */
-                    public key: Uint8Array;
+                    public key: (Uint8Array|string);
 
                     /**
                      * Creates a new UnwrappedCryptoKey instance using the specified properties.
@@ -10114,7 +10729,7 @@ export namespace google {
                 interface IKmsWrappedCryptoKey {
 
                     /** KmsWrappedCryptoKey wrappedKey */
-                    wrappedKey?: (Uint8Array|null);
+                    wrappedKey?: (Uint8Array|string|null);
 
                     /** KmsWrappedCryptoKey cryptoKeyName */
                     cryptoKeyName?: (string|null);
@@ -10130,7 +10745,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IKmsWrappedCryptoKey);
 
                     /** KmsWrappedCryptoKey wrappedKey. */
-                    public wrappedKey: Uint8Array;
+                    public wrappedKey: (Uint8Array|string);
 
                     /** KmsWrappedCryptoKey cryptoKeyName. */
                     public cryptoKeyName: string;
@@ -10902,7 +11517,7 @@ export namespace google {
                         field?: (google.privacy.dlp.v2.IFieldId|null);
 
                         /** Condition operator */
-                        operator?: (google.privacy.dlp.v2.RelationalOperator|null);
+                        operator?: (google.privacy.dlp.v2.RelationalOperator|keyof typeof google.privacy.dlp.v2.RelationalOperator|null);
 
                         /** Condition value */
                         value?: (google.privacy.dlp.v2.IValue|null);
@@ -10921,7 +11536,7 @@ export namespace google {
                         public field?: (google.privacy.dlp.v2.IFieldId|null);
 
                         /** Condition operator. */
-                        public operator: google.privacy.dlp.v2.RelationalOperator;
+                        public operator: (google.privacy.dlp.v2.RelationalOperator|keyof typeof google.privacy.dlp.v2.RelationalOperator);
 
                         /** Condition value. */
                         public value?: (google.privacy.dlp.v2.IValue|null);
@@ -11091,7 +11706,7 @@ export namespace google {
                     interface IExpressions {
 
                         /** Expressions logicalOperator */
-                        logicalOperator?: (google.privacy.dlp.v2.RecordCondition.Expressions.LogicalOperator|null);
+                        logicalOperator?: (google.privacy.dlp.v2.RecordCondition.Expressions.LogicalOperator|keyof typeof google.privacy.dlp.v2.RecordCondition.Expressions.LogicalOperator|null);
 
                         /** Expressions conditions */
                         conditions?: (google.privacy.dlp.v2.RecordCondition.IConditions|null);
@@ -11107,7 +11722,7 @@ export namespace google {
                         constructor(properties?: google.privacy.dlp.v2.RecordCondition.IExpressions);
 
                         /** Expressions logicalOperator. */
-                        public logicalOperator: google.privacy.dlp.v2.RecordCondition.Expressions.LogicalOperator;
+                        public logicalOperator: (google.privacy.dlp.v2.RecordCondition.Expressions.LogicalOperator|keyof typeof google.privacy.dlp.v2.RecordCondition.Expressions.LogicalOperator);
 
                         /** Expressions conditions. */
                         public conditions?: (google.privacy.dlp.v2.RecordCondition.IConditions|null);
@@ -11200,7 +11815,7 @@ export namespace google {
                 interface ITransformationOverview {
 
                     /** TransformationOverview transformedBytes */
-                    transformedBytes?: (number|Long|null);
+                    transformedBytes?: (number|Long|string|null);
 
                     /** TransformationOverview transformationSummaries */
                     transformationSummaries?: (google.privacy.dlp.v2.ITransformationSummary[]|null);
@@ -11216,7 +11831,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.ITransformationOverview);
 
                     /** TransformationOverview transformedBytes. */
-                    public transformedBytes: (number|Long);
+                    public transformedBytes: (number|Long|string);
 
                     /** TransformationOverview transformationSummaries. */
                     public transformationSummaries: google.privacy.dlp.v2.ITransformationSummary[];
@@ -11314,7 +11929,7 @@ export namespace google {
                     results?: (google.privacy.dlp.v2.TransformationSummary.ISummaryResult[]|null);
 
                     /** TransformationSummary transformedBytes */
-                    transformedBytes?: (number|Long|null);
+                    transformedBytes?: (number|Long|string|null);
                 }
 
                 /** Represents a TransformationSummary. */
@@ -11345,7 +11960,7 @@ export namespace google {
                     public results: google.privacy.dlp.v2.TransformationSummary.ISummaryResult[];
 
                     /** TransformationSummary transformedBytes. */
-                    public transformedBytes: (number|Long);
+                    public transformedBytes: (number|Long|string);
 
                     /**
                      * Creates a new TransformationSummary instance using the specified properties.
@@ -11424,10 +12039,10 @@ export namespace google {
                     interface ISummaryResult {
 
                         /** SummaryResult count */
-                        count?: (number|Long|null);
+                        count?: (number|Long|string|null);
 
                         /** SummaryResult code */
-                        code?: (google.privacy.dlp.v2.TransformationSummary.TransformationResultCode|null);
+                        code?: (google.privacy.dlp.v2.TransformationSummary.TransformationResultCode|keyof typeof google.privacy.dlp.v2.TransformationSummary.TransformationResultCode|null);
 
                         /** SummaryResult details */
                         details?: (string|null);
@@ -11443,10 +12058,10 @@ export namespace google {
                         constructor(properties?: google.privacy.dlp.v2.TransformationSummary.ISummaryResult);
 
                         /** SummaryResult count. */
-                        public count: (number|Long);
+                        public count: (number|Long|string);
 
                         /** SummaryResult code. */
-                        public code: google.privacy.dlp.v2.TransformationSummary.TransformationResultCode;
+                        public code: (google.privacy.dlp.v2.TransformationSummary.TransformationResultCode|keyof typeof google.privacy.dlp.v2.TransformationSummary.TransformationResultCode);
 
                         /** SummaryResult details. */
                         public details: string;
@@ -11618,6 +12233,90 @@ export namespace google {
 
                     /**
                      * Converts this Schedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Manual. */
+                interface IManual {
+                }
+
+                /** Represents a Manual. */
+                class Manual implements IManual {
+
+                    /**
+                     * Constructs a new Manual.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IManual);
+
+                    /**
+                     * Creates a new Manual instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Manual instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IManual): google.privacy.dlp.v2.Manual;
+
+                    /**
+                     * Encodes the specified Manual message. Does not implicitly {@link google.privacy.dlp.v2.Manual.verify|verify} messages.
+                     * @param message Manual message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IManual, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Manual message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Manual.verify|verify} messages.
+                     * @param message Manual message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IManual, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Manual message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Manual
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.Manual;
+
+                    /**
+                     * Decodes a Manual message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Manual
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.Manual;
+
+                    /**
+                     * Verifies a Manual message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Manual message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Manual
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.Manual;
+
+                    /**
+                     * Creates a plain object from a Manual message. Also converts values to other types if specified.
+                     * @param message Manual
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.Manual, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Manual to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -11990,7 +12689,7 @@ export namespace google {
                     lastRunTime?: (google.protobuf.ITimestamp|null);
 
                     /** JobTrigger status */
-                    status?: (google.privacy.dlp.v2.JobTrigger.Status|null);
+                    status?: (google.privacy.dlp.v2.JobTrigger.Status|keyof typeof google.privacy.dlp.v2.JobTrigger.Status|null);
                 }
 
                 /** Represents a JobTrigger. */
@@ -12030,7 +12729,7 @@ export namespace google {
                     public lastRunTime?: (google.protobuf.ITimestamp|null);
 
                     /** JobTrigger status. */
-                    public status: google.privacy.dlp.v2.JobTrigger.Status;
+                    public status: (google.privacy.dlp.v2.JobTrigger.Status|keyof typeof google.privacy.dlp.v2.JobTrigger.Status);
 
                     /** JobTrigger job. */
                     public job?: "inspectJob";
@@ -12113,6 +12812,9 @@ export namespace google {
 
                         /** Trigger schedule */
                         schedule?: (google.privacy.dlp.v2.ISchedule|null);
+
+                        /** Trigger manual */
+                        manual?: (google.privacy.dlp.v2.IManual|null);
                     }
 
                     /** Represents a Trigger. */
@@ -12127,8 +12829,11 @@ export namespace google {
                         /** Trigger schedule. */
                         public schedule?: (google.privacy.dlp.v2.ISchedule|null);
 
+                        /** Trigger manual. */
+                        public manual?: (google.privacy.dlp.v2.IManual|null);
+
                         /** Trigger trigger. */
-                        public trigger?: "schedule";
+                        public trigger?: ("schedule"|"manual");
 
                         /**
                          * Creates a new Trigger instance using the specified properties.
@@ -14380,10 +15085,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** DlpJob type */
-                    type?: (google.privacy.dlp.v2.DlpJobType|null);
+                    type?: (google.privacy.dlp.v2.DlpJobType|keyof typeof google.privacy.dlp.v2.DlpJobType|null);
 
                     /** DlpJob state */
-                    state?: (google.privacy.dlp.v2.DlpJob.JobState|null);
+                    state?: (google.privacy.dlp.v2.DlpJob.JobState|keyof typeof google.privacy.dlp.v2.DlpJob.JobState|null);
 
                     /** DlpJob riskDetails */
                     riskDetails?: (google.privacy.dlp.v2.IAnalyzeDataSourceRiskDetails|null);
@@ -14420,10 +15125,10 @@ export namespace google {
                     public name: string;
 
                     /** DlpJob type. */
-                    public type: google.privacy.dlp.v2.DlpJobType;
+                    public type: (google.privacy.dlp.v2.DlpJobType|keyof typeof google.privacy.dlp.v2.DlpJobType);
 
                     /** DlpJob state. */
-                    public state: google.privacy.dlp.v2.DlpJob.JobState;
+                    public state: (google.privacy.dlp.v2.DlpJob.JobState|keyof typeof google.privacy.dlp.v2.DlpJob.JobState);
 
                     /** DlpJob riskDetails. */
                     public riskDetails?: (google.privacy.dlp.v2.IAnalyzeDataSourceRiskDetails|null);
@@ -14529,7 +15234,8 @@ export namespace google {
                         RUNNING = 2,
                         DONE = 3,
                         CANCELED = 4,
-                        FAILED = 5
+                        FAILED = 5,
+                        ACTIVE = 6
                     }
                 }
 
@@ -14639,7 +15345,7 @@ export namespace google {
                     pageToken?: (string|null);
 
                     /** ListDlpJobsRequest type */
-                    type?: (google.privacy.dlp.v2.DlpJobType|null);
+                    type?: (google.privacy.dlp.v2.DlpJobType|keyof typeof google.privacy.dlp.v2.DlpJobType|null);
 
                     /** ListDlpJobsRequest orderBy */
                     orderBy?: (string|null);
@@ -14670,7 +15376,7 @@ export namespace google {
                     public pageToken: string;
 
                     /** ListDlpJobsRequest type. */
-                    public type: google.privacy.dlp.v2.DlpJobType;
+                    public type: (google.privacy.dlp.v2.DlpJobType|keyof typeof google.privacy.dlp.v2.DlpJobType);
 
                     /** ListDlpJobsRequest orderBy. */
                     public orderBy: string;
@@ -14930,6 +15636,96 @@ export namespace google {
 
                     /**
                      * Converts this CancelDlpJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FinishDlpJobRequest. */
+                interface IFinishDlpJobRequest {
+
+                    /** FinishDlpJobRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a FinishDlpJobRequest. */
+                class FinishDlpJobRequest implements IFinishDlpJobRequest {
+
+                    /**
+                     * Constructs a new FinishDlpJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFinishDlpJobRequest);
+
+                    /** FinishDlpJobRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new FinishDlpJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FinishDlpJobRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFinishDlpJobRequest): google.privacy.dlp.v2.FinishDlpJobRequest;
+
+                    /**
+                     * Encodes the specified FinishDlpJobRequest message. Does not implicitly {@link google.privacy.dlp.v2.FinishDlpJobRequest.verify|verify} messages.
+                     * @param message FinishDlpJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFinishDlpJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FinishDlpJobRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FinishDlpJobRequest.verify|verify} messages.
+                     * @param message FinishDlpJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFinishDlpJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FinishDlpJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FinishDlpJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FinishDlpJobRequest;
+
+                    /**
+                     * Decodes a FinishDlpJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FinishDlpJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FinishDlpJobRequest;
+
+                    /**
+                     * Verifies a FinishDlpJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FinishDlpJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FinishDlpJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FinishDlpJobRequest;
+
+                    /**
+                     * Creates a plain object from a FinishDlpJobRequest message. Also converts values to other types if specified.
+                     * @param message FinishDlpJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FinishDlpJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FinishDlpJobRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -15734,7 +16530,7 @@ export namespace google {
                 interface ILargeCustomDictionaryStats {
 
                     /** LargeCustomDictionaryStats approxNumPhrases */
-                    approxNumPhrases?: (number|Long|null);
+                    approxNumPhrases?: (number|Long|string|null);
                 }
 
                 /** Represents a LargeCustomDictionaryStats. */
@@ -15747,7 +16543,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.ILargeCustomDictionaryStats);
 
                     /** LargeCustomDictionaryStats approxNumPhrases. */
-                    public approxNumPhrases: (number|Long);
+                    public approxNumPhrases: (number|Long|string);
 
                     /**
                      * Creates a new LargeCustomDictionaryStats instance using the specified properties.
@@ -15831,6 +16627,12 @@ export namespace google {
 
                     /** StoredInfoTypeConfig largeCustomDictionary */
                     largeCustomDictionary?: (google.privacy.dlp.v2.ILargeCustomDictionaryConfig|null);
+
+                    /** StoredInfoTypeConfig dictionary */
+                    dictionary?: (google.privacy.dlp.v2.CustomInfoType.IDictionary|null);
+
+                    /** StoredInfoTypeConfig regex */
+                    regex?: (google.privacy.dlp.v2.CustomInfoType.IRegex|null);
                 }
 
                 /** Represents a StoredInfoTypeConfig. */
@@ -15851,8 +16653,14 @@ export namespace google {
                     /** StoredInfoTypeConfig largeCustomDictionary. */
                     public largeCustomDictionary?: (google.privacy.dlp.v2.ILargeCustomDictionaryConfig|null);
 
+                    /** StoredInfoTypeConfig dictionary. */
+                    public dictionary?: (google.privacy.dlp.v2.CustomInfoType.IDictionary|null);
+
+                    /** StoredInfoTypeConfig regex. */
+                    public regex?: (google.privacy.dlp.v2.CustomInfoType.IRegex|null);
+
                     /** StoredInfoTypeConfig type. */
-                    public type?: "largeCustomDictionary";
+                    public type?: ("largeCustomDictionary"|"dictionary"|"regex");
 
                     /**
                      * Creates a new StoredInfoTypeConfig instance using the specified properties.
@@ -16028,7 +16836,7 @@ export namespace google {
                     createTime?: (google.protobuf.ITimestamp|null);
 
                     /** StoredInfoTypeVersion state */
-                    state?: (google.privacy.dlp.v2.StoredInfoTypeState|null);
+                    state?: (google.privacy.dlp.v2.StoredInfoTypeState|keyof typeof google.privacy.dlp.v2.StoredInfoTypeState|null);
 
                     /** StoredInfoTypeVersion errors */
                     errors?: (google.privacy.dlp.v2.IError[]|null);
@@ -16053,7 +16861,7 @@ export namespace google {
                     public createTime?: (google.protobuf.ITimestamp|null);
 
                     /** StoredInfoTypeVersion state. */
-                    public state: google.privacy.dlp.v2.StoredInfoTypeState;
+                    public state: (google.privacy.dlp.v2.StoredInfoTypeState|keyof typeof google.privacy.dlp.v2.StoredInfoTypeState);
 
                     /** StoredInfoTypeVersion errors. */
                     public errors: google.privacy.dlp.v2.IError[];
@@ -16834,6 +17642,492 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a HybridInspectJobTriggerRequest. */
+                interface IHybridInspectJobTriggerRequest {
+
+                    /** HybridInspectJobTriggerRequest name */
+                    name?: (string|null);
+
+                    /** HybridInspectJobTriggerRequest hybridItem */
+                    hybridItem?: (google.privacy.dlp.v2.IHybridContentItem|null);
+                }
+
+                /** Represents a HybridInspectJobTriggerRequest. */
+                class HybridInspectJobTriggerRequest implements IHybridInspectJobTriggerRequest {
+
+                    /**
+                     * Constructs a new HybridInspectJobTriggerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IHybridInspectJobTriggerRequest);
+
+                    /** HybridInspectJobTriggerRequest name. */
+                    public name: string;
+
+                    /** HybridInspectJobTriggerRequest hybridItem. */
+                    public hybridItem?: (google.privacy.dlp.v2.IHybridContentItem|null);
+
+                    /**
+                     * Creates a new HybridInspectJobTriggerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridInspectJobTriggerRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IHybridInspectJobTriggerRequest): google.privacy.dlp.v2.HybridInspectJobTriggerRequest;
+
+                    /**
+                     * Encodes the specified HybridInspectJobTriggerRequest message. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectJobTriggerRequest.verify|verify} messages.
+                     * @param message HybridInspectJobTriggerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IHybridInspectJobTriggerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridInspectJobTriggerRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectJobTriggerRequest.verify|verify} messages.
+                     * @param message HybridInspectJobTriggerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IHybridInspectJobTriggerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridInspectJobTriggerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridInspectJobTriggerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.HybridInspectJobTriggerRequest;
+
+                    /**
+                     * Decodes a HybridInspectJobTriggerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridInspectJobTriggerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.HybridInspectJobTriggerRequest;
+
+                    /**
+                     * Verifies a HybridInspectJobTriggerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridInspectJobTriggerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridInspectJobTriggerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.HybridInspectJobTriggerRequest;
+
+                    /**
+                     * Creates a plain object from a HybridInspectJobTriggerRequest message. Also converts values to other types if specified.
+                     * @param message HybridInspectJobTriggerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.HybridInspectJobTriggerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridInspectJobTriggerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a HybridInspectDlpJobRequest. */
+                interface IHybridInspectDlpJobRequest {
+
+                    /** HybridInspectDlpJobRequest name */
+                    name?: (string|null);
+
+                    /** HybridInspectDlpJobRequest hybridItem */
+                    hybridItem?: (google.privacy.dlp.v2.IHybridContentItem|null);
+                }
+
+                /** Represents a HybridInspectDlpJobRequest. */
+                class HybridInspectDlpJobRequest implements IHybridInspectDlpJobRequest {
+
+                    /**
+                     * Constructs a new HybridInspectDlpJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IHybridInspectDlpJobRequest);
+
+                    /** HybridInspectDlpJobRequest name. */
+                    public name: string;
+
+                    /** HybridInspectDlpJobRequest hybridItem. */
+                    public hybridItem?: (google.privacy.dlp.v2.IHybridContentItem|null);
+
+                    /**
+                     * Creates a new HybridInspectDlpJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridInspectDlpJobRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IHybridInspectDlpJobRequest): google.privacy.dlp.v2.HybridInspectDlpJobRequest;
+
+                    /**
+                     * Encodes the specified HybridInspectDlpJobRequest message. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectDlpJobRequest.verify|verify} messages.
+                     * @param message HybridInspectDlpJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IHybridInspectDlpJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridInspectDlpJobRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectDlpJobRequest.verify|verify} messages.
+                     * @param message HybridInspectDlpJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IHybridInspectDlpJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridInspectDlpJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridInspectDlpJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.HybridInspectDlpJobRequest;
+
+                    /**
+                     * Decodes a HybridInspectDlpJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridInspectDlpJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.HybridInspectDlpJobRequest;
+
+                    /**
+                     * Verifies a HybridInspectDlpJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridInspectDlpJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridInspectDlpJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.HybridInspectDlpJobRequest;
+
+                    /**
+                     * Creates a plain object from a HybridInspectDlpJobRequest message. Also converts values to other types if specified.
+                     * @param message HybridInspectDlpJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.HybridInspectDlpJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridInspectDlpJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a HybridContentItem. */
+                interface IHybridContentItem {
+
+                    /** HybridContentItem item */
+                    item?: (google.privacy.dlp.v2.IContentItem|null);
+
+                    /** HybridContentItem findingDetails */
+                    findingDetails?: (google.privacy.dlp.v2.IHybridFindingDetails|null);
+                }
+
+                /** Represents a HybridContentItem. */
+                class HybridContentItem implements IHybridContentItem {
+
+                    /**
+                     * Constructs a new HybridContentItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IHybridContentItem);
+
+                    /** HybridContentItem item. */
+                    public item?: (google.privacy.dlp.v2.IContentItem|null);
+
+                    /** HybridContentItem findingDetails. */
+                    public findingDetails?: (google.privacy.dlp.v2.IHybridFindingDetails|null);
+
+                    /**
+                     * Creates a new HybridContentItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridContentItem instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IHybridContentItem): google.privacy.dlp.v2.HybridContentItem;
+
+                    /**
+                     * Encodes the specified HybridContentItem message. Does not implicitly {@link google.privacy.dlp.v2.HybridContentItem.verify|verify} messages.
+                     * @param message HybridContentItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IHybridContentItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridContentItem message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridContentItem.verify|verify} messages.
+                     * @param message HybridContentItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IHybridContentItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridContentItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridContentItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.HybridContentItem;
+
+                    /**
+                     * Decodes a HybridContentItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridContentItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.HybridContentItem;
+
+                    /**
+                     * Verifies a HybridContentItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridContentItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridContentItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.HybridContentItem;
+
+                    /**
+                     * Creates a plain object from a HybridContentItem message. Also converts values to other types if specified.
+                     * @param message HybridContentItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.HybridContentItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridContentItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a HybridFindingDetails. */
+                interface IHybridFindingDetails {
+
+                    /** HybridFindingDetails containerDetails */
+                    containerDetails?: (google.privacy.dlp.v2.IContainer|null);
+
+                    /** HybridFindingDetails fileOffset */
+                    fileOffset?: (number|Long|string|null);
+
+                    /** HybridFindingDetails rowOffset */
+                    rowOffset?: (number|Long|string|null);
+
+                    /** HybridFindingDetails tableOptions */
+                    tableOptions?: (google.privacy.dlp.v2.ITableOptions|null);
+
+                    /** HybridFindingDetails labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a HybridFindingDetails. */
+                class HybridFindingDetails implements IHybridFindingDetails {
+
+                    /**
+                     * Constructs a new HybridFindingDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IHybridFindingDetails);
+
+                    /** HybridFindingDetails containerDetails. */
+                    public containerDetails?: (google.privacy.dlp.v2.IContainer|null);
+
+                    /** HybridFindingDetails fileOffset. */
+                    public fileOffset: (number|Long|string);
+
+                    /** HybridFindingDetails rowOffset. */
+                    public rowOffset: (number|Long|string);
+
+                    /** HybridFindingDetails tableOptions. */
+                    public tableOptions?: (google.privacy.dlp.v2.ITableOptions|null);
+
+                    /** HybridFindingDetails labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new HybridFindingDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridFindingDetails instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IHybridFindingDetails): google.privacy.dlp.v2.HybridFindingDetails;
+
+                    /**
+                     * Encodes the specified HybridFindingDetails message. Does not implicitly {@link google.privacy.dlp.v2.HybridFindingDetails.verify|verify} messages.
+                     * @param message HybridFindingDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IHybridFindingDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridFindingDetails message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridFindingDetails.verify|verify} messages.
+                     * @param message HybridFindingDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IHybridFindingDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridFindingDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridFindingDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.HybridFindingDetails;
+
+                    /**
+                     * Decodes a HybridFindingDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridFindingDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.HybridFindingDetails;
+
+                    /**
+                     * Verifies a HybridFindingDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridFindingDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridFindingDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.HybridFindingDetails;
+
+                    /**
+                     * Creates a plain object from a HybridFindingDetails message. Also converts values to other types if specified.
+                     * @param message HybridFindingDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.HybridFindingDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridFindingDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a HybridInspectResponse. */
+                interface IHybridInspectResponse {
+                }
+
+                /** Represents a HybridInspectResponse. */
+                class HybridInspectResponse implements IHybridInspectResponse {
+
+                    /**
+                     * Constructs a new HybridInspectResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IHybridInspectResponse);
+
+                    /**
+                     * Creates a new HybridInspectResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridInspectResponse instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IHybridInspectResponse): google.privacy.dlp.v2.HybridInspectResponse;
+
+                    /**
+                     * Encodes the specified HybridInspectResponse message. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectResponse.verify|verify} messages.
+                     * @param message HybridInspectResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IHybridInspectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridInspectResponse message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectResponse.verify|verify} messages.
+                     * @param message HybridInspectResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IHybridInspectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridInspectResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridInspectResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.HybridInspectResponse;
+
+                    /**
+                     * Decodes a HybridInspectResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridInspectResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.HybridInspectResponse;
+
+                    /**
+                     * Verifies a HybridInspectResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridInspectResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridInspectResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.HybridInspectResponse;
+
+                    /**
+                     * Creates a plain object from a HybridInspectResponse message. Also converts values to other types if specified.
+                     * @param message HybridInspectResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.HybridInspectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridInspectResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** RelationalOperator enum. */
                 enum RelationalOperator {
                     RELATIONAL_OPERATOR_UNSPECIFIED = 0,
@@ -17087,7 +18381,7 @@ export namespace google {
                     infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                     /** CustomInfoType likelihood */
-                    likelihood?: (google.privacy.dlp.v2.Likelihood|null);
+                    likelihood?: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood|null);
 
                     /** CustomInfoType dictionary */
                     dictionary?: (google.privacy.dlp.v2.CustomInfoType.IDictionary|null);
@@ -17105,7 +18399,7 @@ export namespace google {
                     detectionRules?: (google.privacy.dlp.v2.CustomInfoType.IDetectionRule[]|null);
 
                     /** CustomInfoType exclusionType */
-                    exclusionType?: (google.privacy.dlp.v2.CustomInfoType.ExclusionType|null);
+                    exclusionType?: (google.privacy.dlp.v2.CustomInfoType.ExclusionType|keyof typeof google.privacy.dlp.v2.CustomInfoType.ExclusionType|null);
                 }
 
                 /** Represents a CustomInfoType. */
@@ -17121,7 +18415,7 @@ export namespace google {
                     public infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                     /** CustomInfoType likelihood. */
-                    public likelihood: google.privacy.dlp.v2.Likelihood;
+                    public likelihood: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood);
 
                     /** CustomInfoType dictionary. */
                     public dictionary?: (google.privacy.dlp.v2.CustomInfoType.IDictionary|null);
@@ -17139,7 +18433,7 @@ export namespace google {
                     public detectionRules: google.privacy.dlp.v2.CustomInfoType.IDetectionRule[];
 
                     /** CustomInfoType exclusionType. */
-                    public exclusionType: google.privacy.dlp.v2.CustomInfoType.ExclusionType;
+                    public exclusionType: (google.privacy.dlp.v2.CustomInfoType.ExclusionType|keyof typeof google.privacy.dlp.v2.CustomInfoType.ExclusionType);
 
                     /** CustomInfoType type. */
                     public type?: ("dictionary"|"regex"|"surrogateType"|"storedType");
@@ -17784,7 +19078,7 @@ export namespace google {
                         interface ILikelihoodAdjustment {
 
                             /** LikelihoodAdjustment fixedLikelihood */
-                            fixedLikelihood?: (google.privacy.dlp.v2.Likelihood|null);
+                            fixedLikelihood?: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood|null);
 
                             /** LikelihoodAdjustment relativeLikelihood */
                             relativeLikelihood?: (number|null);
@@ -17800,7 +19094,7 @@ export namespace google {
                             constructor(properties?: google.privacy.dlp.v2.CustomInfoType.DetectionRule.ILikelihoodAdjustment);
 
                             /** LikelihoodAdjustment fixedLikelihood. */
-                            public fixedLikelihood: google.privacy.dlp.v2.Likelihood;
+                            public fixedLikelihood: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood);
 
                             /** LikelihoodAdjustment relativeLikelihood. */
                             public relativeLikelihood: number;
@@ -18470,7 +19764,7 @@ export namespace google {
                     fileSet?: (google.privacy.dlp.v2.CloudStorageOptions.IFileSet|null);
 
                     /** CloudStorageOptions bytesLimitPerFile */
-                    bytesLimitPerFile?: (number|Long|null);
+                    bytesLimitPerFile?: (number|Long|string|null);
 
                     /** CloudStorageOptions bytesLimitPerFilePercent */
                     bytesLimitPerFilePercent?: (number|null);
@@ -18479,7 +19773,7 @@ export namespace google {
                     fileTypes?: (google.privacy.dlp.v2.FileType[]|null);
 
                     /** CloudStorageOptions sampleMethod */
-                    sampleMethod?: (google.privacy.dlp.v2.CloudStorageOptions.SampleMethod|null);
+                    sampleMethod?: (google.privacy.dlp.v2.CloudStorageOptions.SampleMethod|keyof typeof google.privacy.dlp.v2.CloudStorageOptions.SampleMethod|null);
 
                     /** CloudStorageOptions filesLimitPercent */
                     filesLimitPercent?: (number|null);
@@ -18498,7 +19792,7 @@ export namespace google {
                     public fileSet?: (google.privacy.dlp.v2.CloudStorageOptions.IFileSet|null);
 
                     /** CloudStorageOptions bytesLimitPerFile. */
-                    public bytesLimitPerFile: (number|Long);
+                    public bytesLimitPerFile: (number|Long|string);
 
                     /** CloudStorageOptions bytesLimitPerFilePercent. */
                     public bytesLimitPerFilePercent: number;
@@ -18507,7 +19801,7 @@ export namespace google {
                     public fileTypes: google.privacy.dlp.v2.FileType[];
 
                     /** CloudStorageOptions sampleMethod. */
-                    public sampleMethod: google.privacy.dlp.v2.CloudStorageOptions.SampleMethod;
+                    public sampleMethod: (google.privacy.dlp.v2.CloudStorageOptions.SampleMethod|keyof typeof google.privacy.dlp.v2.CloudStorageOptions.SampleMethod);
 
                     /** CloudStorageOptions filesLimitPercent. */
                     public filesLimitPercent: number;
@@ -18879,13 +20173,13 @@ export namespace google {
                     identifyingFields?: (google.privacy.dlp.v2.IFieldId[]|null);
 
                     /** BigQueryOptions rowsLimit */
-                    rowsLimit?: (number|Long|null);
+                    rowsLimit?: (number|Long|string|null);
 
                     /** BigQueryOptions rowsLimitPercent */
                     rowsLimitPercent?: (number|null);
 
                     /** BigQueryOptions sampleMethod */
-                    sampleMethod?: (google.privacy.dlp.v2.BigQueryOptions.SampleMethod|null);
+                    sampleMethod?: (google.privacy.dlp.v2.BigQueryOptions.SampleMethod|keyof typeof google.privacy.dlp.v2.BigQueryOptions.SampleMethod|null);
 
                     /** BigQueryOptions excludedFields */
                     excludedFields?: (google.privacy.dlp.v2.IFieldId[]|null);
@@ -18907,13 +20201,13 @@ export namespace google {
                     public identifyingFields: google.privacy.dlp.v2.IFieldId[];
 
                     /** BigQueryOptions rowsLimit. */
-                    public rowsLimit: (number|Long);
+                    public rowsLimit: (number|Long|string);
 
                     /** BigQueryOptions rowsLimitPercent. */
                     public rowsLimitPercent: number;
 
                     /** BigQueryOptions sampleMethod. */
-                    public sampleMethod: google.privacy.dlp.v2.BigQueryOptions.SampleMethod;
+                    public sampleMethod: (google.privacy.dlp.v2.BigQueryOptions.SampleMethod|keyof typeof google.privacy.dlp.v2.BigQueryOptions.SampleMethod);
 
                     /** BigQueryOptions excludedFields. */
                     public excludedFields: google.privacy.dlp.v2.IFieldId[];
@@ -19011,6 +20305,9 @@ export namespace google {
                     /** StorageConfig bigQueryOptions */
                     bigQueryOptions?: (google.privacy.dlp.v2.IBigQueryOptions|null);
 
+                    /** StorageConfig hybridOptions */
+                    hybridOptions?: (google.privacy.dlp.v2.IHybridOptions|null);
+
                     /** StorageConfig timespanConfig */
                     timespanConfig?: (google.privacy.dlp.v2.StorageConfig.ITimespanConfig|null);
                 }
@@ -19033,11 +20330,14 @@ export namespace google {
                     /** StorageConfig bigQueryOptions. */
                     public bigQueryOptions?: (google.privacy.dlp.v2.IBigQueryOptions|null);
 
+                    /** StorageConfig hybridOptions. */
+                    public hybridOptions?: (google.privacy.dlp.v2.IHybridOptions|null);
+
                     /** StorageConfig timespanConfig. */
                     public timespanConfig?: (google.privacy.dlp.v2.StorageConfig.ITimespanConfig|null);
 
                     /** StorageConfig type. */
-                    public type?: ("datastoreOptions"|"cloudStorageOptions"|"bigQueryOptions");
+                    public type?: ("datastoreOptions"|"cloudStorageOptions"|"bigQueryOptions"|"hybridOptions");
 
                     /**
                      * Creates a new StorageConfig instance using the specified properties.
@@ -19230,6 +20530,114 @@ export namespace google {
                     AVRO = 7
                 }
 
+                /** Properties of a HybridOptions. */
+                interface IHybridOptions {
+
+                    /** HybridOptions description */
+                    description?: (string|null);
+
+                    /** HybridOptions requiredFindingLabelKeys */
+                    requiredFindingLabelKeys?: (string[]|null);
+
+                    /** HybridOptions labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** HybridOptions tableOptions */
+                    tableOptions?: (google.privacy.dlp.v2.ITableOptions|null);
+                }
+
+                /** Represents a HybridOptions. */
+                class HybridOptions implements IHybridOptions {
+
+                    /**
+                     * Constructs a new HybridOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IHybridOptions);
+
+                    /** HybridOptions description. */
+                    public description: string;
+
+                    /** HybridOptions requiredFindingLabelKeys. */
+                    public requiredFindingLabelKeys: string[];
+
+                    /** HybridOptions labels. */
+                    public labels: { [k: string]: string };
+
+                    /** HybridOptions tableOptions. */
+                    public tableOptions?: (google.privacy.dlp.v2.ITableOptions|null);
+
+                    /**
+                     * Creates a new HybridOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridOptions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IHybridOptions): google.privacy.dlp.v2.HybridOptions;
+
+                    /**
+                     * Encodes the specified HybridOptions message. Does not implicitly {@link google.privacy.dlp.v2.HybridOptions.verify|verify} messages.
+                     * @param message HybridOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IHybridOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridOptions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridOptions.verify|verify} messages.
+                     * @param message HybridOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IHybridOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.HybridOptions;
+
+                    /**
+                     * Decodes a HybridOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.HybridOptions;
+
+                    /**
+                     * Verifies a HybridOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.HybridOptions;
+
+                    /**
+                     * Creates a plain object from a HybridOptions message. Also converts values to other types if specified.
+                     * @param message HybridOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.HybridOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a BigQueryKey. */
                 interface IBigQueryKey {
 
@@ -19237,7 +20645,7 @@ export namespace google {
                     tableReference?: (google.privacy.dlp.v2.IBigQueryTable|null);
 
                     /** BigQueryKey rowNumber */
-                    rowNumber?: (number|Long|null);
+                    rowNumber?: (number|Long|string|null);
                 }
 
                 /** Represents a BigQueryKey. */
@@ -19253,7 +20661,7 @@ export namespace google {
                     public tableReference?: (google.privacy.dlp.v2.IBigQueryTable|null);
 
                     /** BigQueryKey rowNumber. */
-                    public rowNumber: (number|Long);
+                    public rowNumber: (number|Long|string);
 
                     /**
                      * Creates a new BigQueryKey instance using the specified properties.
@@ -19521,7 +20929,7 @@ export namespace google {
                         kind?: (string|null);
 
                         /** PathElement id */
-                        id?: (number|Long|null);
+                        id?: (number|Long|string|null);
 
                         /** PathElement name */
                         name?: (string|null);
@@ -19540,7 +20948,7 @@ export namespace google {
                         public kind: string;
 
                         /** PathElement id. */
-                        public id: (number|Long);
+                        public id: (number|Long|string);
 
                         /** PathElement name. */
                         public name: string;
@@ -20012,6 +21420,96 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
+
+                /** Properties of a TableOptions. */
+                interface ITableOptions {
+
+                    /** TableOptions identifyingFields */
+                    identifyingFields?: (google.privacy.dlp.v2.IFieldId[]|null);
+                }
+
+                /** Represents a TableOptions. */
+                class TableOptions implements ITableOptions {
+
+                    /**
+                     * Constructs a new TableOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ITableOptions);
+
+                    /** TableOptions identifyingFields. */
+                    public identifyingFields: google.privacy.dlp.v2.IFieldId[];
+
+                    /**
+                     * Creates a new TableOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TableOptions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ITableOptions): google.privacy.dlp.v2.TableOptions;
+
+                    /**
+                     * Encodes the specified TableOptions message. Does not implicitly {@link google.privacy.dlp.v2.TableOptions.verify|verify} messages.
+                     * @param message TableOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ITableOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TableOptions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TableOptions.verify|verify} messages.
+                     * @param message TableOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ITableOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TableOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TableOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TableOptions;
+
+                    /**
+                     * Decodes a TableOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TableOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TableOptions;
+
+                    /**
+                     * Verifies a TableOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TableOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TableOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TableOptions;
+
+                    /**
+                     * Creates a plain object from a TableOptions message. Also converts values to other types if specified.
+                     * @param message TableOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.TableOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TableOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
             }
         }
     }
@@ -20381,7 +21879,7 @@ export namespace google {
             nameField?: (string|null);
 
             /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|null);
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
 
             /** ResourceDescriptor plural */
             plural?: (string|null);
@@ -20409,7 +21907,7 @@ export namespace google {
             public nameField: string;
 
             /** ResourceDescriptor history. */
-            public history: google.api.ResourceDescriptor.History;
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
 
             /** ResourceDescriptor plural. */
             public plural: string;
@@ -21289,10 +22787,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -21329,10 +22827,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -22107,7 +23605,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -22183,7 +23681,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -22432,13 +23930,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -22469,13 +23967,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -22974,7 +24472,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -22999,7 +24497,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -23095,16 +24593,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -23126,16 +24624,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -23722,7 +25220,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -23738,7 +25236,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
@@ -23818,7 +25316,7 @@ export namespace google {
         interface IDuration {
 
             /** Duration seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Duration nanos */
             nanos?: (number|null);
@@ -23834,7 +25332,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IDuration);
 
             /** Duration seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Duration nanos. */
             public nanos: number;
@@ -24091,7 +25589,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -24107,7 +25605,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.

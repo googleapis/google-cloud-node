@@ -13,7 +13,9 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "DlpStorage",
                     "java_package": "com.google.privacy.dlp.v2",
-                    "php_namespace": "Google\\Cloud\\Dlp\\V2"
+                    "php_namespace": "Google\\Cloud\\Dlp\\V2",
+                    "(google.api.resource_definition).type": "dlp.googleapis.com/OrganizationLocation",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
                   },
                   "nested": {
                     "DlpService": {
@@ -191,6 +193,15 @@
                             "(google.api.method_signature)": "name,job_trigger,update_mask"
                           }
                         },
+                        "HybridInspectJobTrigger": {
+                          "requestType": "HybridInspectJobTriggerRequest",
+                          "responseType": "HybridInspectResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/jobTriggers/*}:hybridInspect",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
                         "GetJobTrigger": {
                           "requestType": "GetJobTriggerRequest",
                           "responseType": "JobTrigger",
@@ -323,6 +334,23 @@
                             "(google.api.http).delete": "/v2/{name=organizations/*/storedInfoTypes/*}",
                             "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
                             "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "HybridInspectDlpJob": {
+                          "requestType": "HybridInspectDlpJobRequest",
+                          "responseType": "HybridInspectResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:hybridInspect",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "FinishDlpJob": {
+                          "requestType": "FinishDlpJobRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:finish",
+                            "(google.api.http).body": "*"
                           }
                         }
                       }
@@ -562,7 +590,15 @@
                       }
                     },
                     "Finding": {
+                      "options": {
+                        "(google.api.resource).type": "dlp.googleapis.com/InspectFinding",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/findings/{finding}"
+                      },
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 14
+                        },
                         "quote": {
                           "type": "string",
                           "id": 1
@@ -586,6 +622,36 @@
                         "quoteInfo": {
                           "type": "QuoteInfo",
                           "id": 7
+                        },
+                        "resourceName": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/DlpJob"
+                          }
+                        },
+                        "triggerName": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/JobTrigger"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10
+                        },
+                        "jobCreateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11
+                        },
+                        "jobName": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/DlpJob"
+                          }
                         }
                       }
                     },
@@ -603,6 +669,10 @@
                           "rule": "repeated",
                           "type": "ContentLocation",
                           "id": 7
+                        },
+                        "container": {
+                          "type": "Container",
+                          "id": 8
                         }
                       }
                     },
@@ -672,6 +742,38 @@
                         "rowIndex": {
                           "type": "int64",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Container": {
+                      "fields": {
+                        "type": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "fullPath": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "rootPath": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "relativePath": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -1017,8 +1119,28 @@
                               "rule": "repeated",
                               "type": "InfoTypeStats",
                               "id": 3
+                            },
+                            "hybridStats": {
+                              "type": "HybridInspectStatistics",
+                              "id": 7
                             }
                           }
+                        }
+                      }
+                    },
+                    "HybridInspectStatistics": {
+                      "fields": {
+                        "processedCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "abortedCount": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "pendingCount": {
+                          "type": "int64",
+                          "id": 3
                         }
                       }
                     },
@@ -1789,6 +1911,38 @@
                         "recordTransformations": {
                           "type": "RecordTransformations",
                           "id": 2
+                        },
+                        "transformationErrorHandling": {
+                          "type": "TransformationErrorHandling",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TransformationErrorHandling": {
+                      "oneofs": {
+                        "mode": {
+                          "oneof": [
+                            "throwError",
+                            "leaveUntransformed"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "throwError": {
+                          "type": "ThrowError",
+                          "id": 1
+                        },
+                        "leaveUntransformed": {
+                          "type": "LeaveUntransformed",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ThrowError": {
+                          "fields": {}
+                        },
+                        "LeaveUntransformed": {
+                          "fields": {}
                         }
                       }
                     },
@@ -2409,10 +2563,13 @@
                         }
                       }
                     },
+                    "Manual": {
+                      "fields": {}
+                    },
                     "InspectTemplate": {
                       "options": {
                         "(google.api.resource).type": "dlp.googleapis.com/InspectTemplate",
-                        "(google.api.resource).pattern": "projects/{project}/inspectTemplates/{inspect_template}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/inspectTemplates/{inspect_template}"
                       },
                       "fields": {
                         "name": {
@@ -2453,7 +2610,7 @@
                     "DeidentifyTemplate": {
                       "options": {
                         "(google.api.resource).type": "dlp.googleapis.com/DeidentifyTemplate",
-                        "(google.api.resource).pattern": "projects/{project}/deidentifyTemplates/{deidentify_template}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}"
                       },
                       "fields": {
                         "name": {
@@ -2507,7 +2664,7 @@
                     "JobTrigger": {
                       "options": {
                         "(google.api.resource).type": "dlp.googleapis.com/JobTrigger",
-                        "(google.api.resource).pattern": "projects/{project}/jobTriggers/{job_trigger}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobTriggers/{job_trigger}"
                       },
                       "oneofs": {
                         "job": {
@@ -2580,7 +2737,8 @@
                           "oneofs": {
                             "trigger": {
                               "oneof": [
-                                "schedule"
+                                "schedule",
+                                "manual"
                               ]
                             }
                           },
@@ -2588,6 +2746,10 @@
                             "schedule": {
                               "type": "Schedule",
                               "id": 1
+                            },
+                            "manual": {
+                              "type": "Manual",
+                              "id": 2
                             }
                           }
                         },
@@ -2971,7 +3133,7 @@
                     "DlpJob": {
                       "options": {
                         "(google.api.resource).type": "dlp.googleapis.com/DlpJob",
-                        "(google.api.resource).pattern": "projects/{project}/dlpJobs/{dlp_job}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/dlpJobs/{dlp_job}"
                       },
                       "oneofs": {
                         "details": {
@@ -3032,7 +3194,8 @@
                             "RUNNING": 2,
                             "DONE": 3,
                             "CANCELED": 4,
-                            "FAILED": 5
+                            "FAILED": 5,
+                            "ACTIVE": 6
                           }
                         }
                       }
@@ -3099,6 +3262,18 @@
                       }
                     },
                     "CancelDlpJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/DlpJob"
+                          }
+                        }
+                      }
+                    },
+                    "FinishDlpJobRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -3270,7 +3445,9 @@
                       "oneofs": {
                         "type": {
                           "oneof": [
-                            "largeCustomDictionary"
+                            "largeCustomDictionary",
+                            "dictionary",
+                            "regex"
                           ]
                         }
                       },
@@ -3286,6 +3463,14 @@
                         "largeCustomDictionary": {
                           "type": "LargeCustomDictionaryConfig",
                           "id": 3
+                        },
+                        "dictionary": {
+                          "type": "CustomInfoType.Dictionary",
+                          "id": 4
+                        },
+                        "regex": {
+                          "type": "CustomInfoType.Regex",
+                          "id": 5
                         }
                       }
                     },
@@ -3332,7 +3517,7 @@
                     "StoredInfoType": {
                       "options": {
                         "(google.api.resource).type": "dlp.googleapis.com/StoredInfoType",
-                        "(google.api.resource).pattern": "projects/{project}/storedInfoTypes/{stored_info_type}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/storedInfoTypes/{stored_info_type}"
                       },
                       "fields": {
                         "name": {
@@ -3461,6 +3646,78 @@
                           }
                         }
                       }
+                    },
+                    "HybridInspectJobTriggerRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/JobTrigger"
+                          }
+                        },
+                        "hybridItem": {
+                          "type": "HybridContentItem",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "HybridInspectDlpJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/DlpJob"
+                          }
+                        },
+                        "hybridItem": {
+                          "type": "HybridContentItem",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "HybridContentItem": {
+                      "fields": {
+                        "item": {
+                          "type": "ContentItem",
+                          "id": 1
+                        },
+                        "findingDetails": {
+                          "type": "HybridFindingDetails",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "HybridFindingDetails": {
+                      "fields": {
+                        "containerDetails": {
+                          "type": "Container",
+                          "id": 1
+                        },
+                        "fileOffset": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "rowOffset": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "tableOptions": {
+                          "type": "TableOptions",
+                          "id": 4
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "HybridInspectResponse": {
+                      "fields": {}
                     },
                     "RelationalOperator": {
                       "values": {
@@ -3878,7 +4135,8 @@
                           "oneof": [
                             "datastoreOptions",
                             "cloudStorageOptions",
-                            "bigQueryOptions"
+                            "bigQueryOptions",
+                            "hybridOptions"
                           ]
                         }
                       },
@@ -3894,6 +4152,10 @@
                         "bigQueryOptions": {
                           "type": "BigQueryOptions",
                           "id": 4
+                        },
+                        "hybridOptions": {
+                          "type": "HybridOptions",
+                          "id": 9
                         },
                         "timespanConfig": {
                           "type": "TimespanConfig",
@@ -3930,6 +4192,28 @@
                         "TEXT_FILE": 2,
                         "IMAGE": 3,
                         "AVRO": 7
+                      }
+                    },
+                    "HybridOptions": {
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "requiredFindingLabelKeys": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "tableOptions": {
+                          "type": "TableOptions",
+                          "id": 4
+                        }
                       }
                     },
                     "BigQueryKey": {
@@ -4047,6 +4331,15 @@
                     "EntityId": {
                       "fields": {
                         "field": {
+                          "type": "FieldId",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TableOptions": {
+                      "fields": {
+                        "identifyingFields": {
+                          "rule": "repeated",
                           "type": "FieldId",
                           "id": 1
                         }

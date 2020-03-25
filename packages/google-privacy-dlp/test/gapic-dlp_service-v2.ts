@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -884,6 +884,61 @@ describe('v2.DlpServiceClient', () => {
       });
     });
   });
+  describe('hybridInspectJobTrigger', () => {
+    it('invokes hybridInspectJobTrigger without error', done => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Initialize client before mocking
+      client.initialize();
+      // Mock request
+      const request: protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.hybridInspectJobTrigger = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.hybridInspectJobTrigger(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes hybridInspectJobTrigger with error', done => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Initialize client before mocking
+      client.initialize();
+      // Mock request
+      const request: protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.hybridInspectJobTrigger = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.hybridInspectJobTrigger(
+        request,
+        (err: FakeError, response: {}) => {
+          assert(err instanceof FakeError);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          assert(typeof response === 'undefined');
+          done();
+        }
+      );
+    });
+  });
   describe('getJobTrigger', () => {
     it('invokes getJobTrigger without error', done => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
@@ -1449,6 +1504,110 @@ describe('v2.DlpServiceClient', () => {
         error
       );
       client.deleteStoredInfoType(request, (err: FakeError, response: {}) => {
+        assert(err instanceof FakeError);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+  describe('hybridInspectDlpJob', () => {
+    it('invokes hybridInspectDlpJob without error', done => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Initialize client before mocking
+      client.initialize();
+      // Mock request
+      const request: protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.hybridInspectDlpJob = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.hybridInspectDlpJob(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes hybridInspectDlpJob with error', done => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Initialize client before mocking
+      client.initialize();
+      // Mock request
+      const request: protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.hybridInspectDlpJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.hybridInspectDlpJob(request, (err: FakeError, response: {}) => {
+        assert(err instanceof FakeError);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+  describe('finishDlpJob', () => {
+    it('invokes finishDlpJob without error', done => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Initialize client before mocking
+      client.initialize();
+      // Mock request
+      const request: protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.finishDlpJob = mockSimpleGrpcMethod(
+        request,
+        expectedResponse,
+        null
+      );
+      client.finishDlpJob(request, (err: {}, response: {}) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes finishDlpJob with error', done => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Initialize client before mocking
+      client.initialize();
+      // Mock request
+      const request: protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest = {};
+      request.name = '';
+      // Mock response
+      const expectedResponse = {};
+      // Mock gRPC layer
+      client._innerApiCalls.finishDlpJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+      client.finishDlpJob(request, (err: FakeError, response: {}) => {
         assert(err instanceof FakeError);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');

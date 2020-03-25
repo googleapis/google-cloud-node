@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,7 +48,12 @@ const version = require('../../../package.json').version;
  * @memberof v2
  */
 export class DlpServiceClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
@@ -156,11 +161,8 @@ export class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      dlpJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/dlpJobs/{dlp_job}'
-      ),
-      jobTriggerPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/jobTriggers/{job_trigger}'
+      inspectFindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/findings/{finding}'
       ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
@@ -171,6 +173,15 @@ export class DlpServiceClient {
       organizationInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/inspectTemplates/{inspect_template}'
       ),
+      organizationLocationDeidentifyTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/deidentifyTemplates/{deidentify_template}'
+      ),
+      organizationLocationInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/inspectTemplates/{inspect_template}'
+      ),
+      organizationLocationStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/storedInfoTypes/{stored_info_type}'
+      ),
       organizationStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/storedInfoTypes/{stored_info_type}'
       ),
@@ -180,8 +191,29 @@ export class DlpServiceClient {
       projectDeidentifyTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/deidentifyTemplates/{deidentify_template}'
       ),
+      projectDlpJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/dlpJobs/{dlp_job}'
+      ),
       projectInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/inspectTemplates/{inspect_template}'
+      ),
+      projectJobTriggerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/jobTriggers/{job_trigger}'
+      ),
+      projectLocationDeidentifyTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}'
+      ),
+      projectLocationDlpJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dlpJobs/{dlp_job}'
+      ),
+      projectLocationInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/inspectTemplates/{inspect_template}'
+      ),
+      projectLocationJobTriggerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/jobTriggers/{job_trigger}'
+      ),
+      projectLocationStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/storedInfoTypes/{stored_info_type}'
       ),
       projectStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/storedInfoTypes/{stored_info_type}'
@@ -282,6 +314,7 @@ export class DlpServiceClient {
       'deleteDeidentifyTemplate',
       'createJobTrigger',
       'updateJobTrigger',
+      'hybridInspectJobTrigger',
       'getJobTrigger',
       'listJobTriggers',
       'deleteJobTrigger',
@@ -296,6 +329,8 @@ export class DlpServiceClient {
       'getStoredInfoType',
       'listStoredInfoTypes',
       'deleteStoredInfoType',
+      'hybridInspectDlpJob',
+      'finishDlpJob',
     ];
 
     for (const methodName of dlpServiceStubMethods) {
@@ -304,7 +339,8 @@ export class DlpServiceClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -981,8 +1017,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of organization and inspectTemplate to be updated, for
-   *   example `organizations/433245324/inspectTemplates/432452342` or
+   *   Required. Resource name of organization and inspectTemplate to be updated,
+   *   for example `organizations/433245324/inspectTemplates/432452342` or
    *   projects/project-id/inspectTemplates/432452342.
    * @param {google.privacy.dlp.v2.InspectTemplate} request.inspectTemplate
    *   New InspectTemplate value.
@@ -1069,8 +1105,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and inspectTemplate to be read, for
-   *   example `organizations/433245324/inspectTemplates/432452342` or
+   *   Required. Resource name of the organization and inspectTemplate to be read,
+   *   for example `organizations/433245324/inspectTemplates/432452342` or
    *   projects/project-id/inspectTemplates/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1149,9 +1185,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and inspectTemplate to be deleted, for
-   *   example `organizations/433245324/inspectTemplates/432452342` or
-   *   projects/project-id/inspectTemplates/432452342.
+   *   Required. Resource name of the organization and inspectTemplate to be
+   *   deleted, for example `organizations/433245324/inspectTemplates/432452342`
+   *   or projects/project-id/inspectTemplates/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1337,8 +1373,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of organization and deidentify template to be updated, for
-   *   example `organizations/433245324/deidentifyTemplates/432452342` or
+   *   Required. Resource name of organization and deidentify template to be
+   *   updated, for example
+   *   `organizations/433245324/deidentifyTemplates/432452342` or
    *   projects/project-id/deidentifyTemplates/432452342.
    * @param {google.privacy.dlp.v2.DeidentifyTemplate} request.deidentifyTemplate
    *   New DeidentifyTemplate value.
@@ -1430,9 +1467,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and deidentify template to be read, for
-   *   example `organizations/433245324/deidentifyTemplates/432452342` or
-   *   projects/project-id/deidentifyTemplates/432452342.
+   *   Required. Resource name of the organization and deidentify template to be
+   *   read, for example `organizations/433245324/deidentifyTemplates/432452342`
+   *   or projects/project-id/deidentifyTemplates/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1519,8 +1556,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and deidentify template to be deleted,
-   *   for example `organizations/433245324/deidentifyTemplates/432452342` or
+   *   Required. Resource name of the organization and deidentify template to be
+   *   deleted, for example
+   *   `organizations/433245324/deidentifyTemplates/432452342` or
    *   projects/project-id/deidentifyTemplates/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1740,6 +1778,99 @@ export class DlpServiceClient {
     });
     this.initialize();
     return this._innerApiCalls.updateJobTrigger(request, options, callback);
+  }
+  hybridInspectJobTrigger(
+    request: protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+      (
+        | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  hybridInspectJobTrigger(
+    request: protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+      | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+      | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Inspect hybrid content and store findings to a trigger. The inspection
+   * will be processed asynchronously. To review the findings monitor the
+   * jobs within the trigger.
+   * Early access feature is in a pre-release state and might change or have
+   * limited support. For more information, see
+   * https://cloud.google.com/products#product-launch-stages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the trigger to execute a hybrid inspect on, for
+   *   example `projects/dlp-test-project/jobTriggers/53234423`.
+   * @param {google.privacy.dlp.v2.HybridContentItem} request.hybridItem
+   *   The item to inspect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [HybridInspectResponse]{@link google.privacy.dlp.v2.HybridInspectResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  hybridInspectJobTrigger(
+    request: protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+          | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+          | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+      | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+      | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+      (
+        | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this._innerApiCalls.hybridInspectJobTrigger(
+      request,
+      options,
+      callback
+    );
   }
   getJobTrigger(
     request: protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest,
@@ -2407,8 +2538,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of organization and storedInfoType to be updated, for
-   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   Required. Resource name of organization and storedInfoType to be updated,
+   *   for example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
    *   Updated configuration for the storedInfoType. If not provided, a new
@@ -2494,8 +2625,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and storedInfoType to be read, for
-   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   Required. Resource name of the organization and storedInfoType to be read,
+   *   for example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2575,8 +2706,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the organization and storedInfoType to be deleted, for
-   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   Required. Resource name of the organization and storedInfoType to be
+   *   deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2628,6 +2759,163 @@ export class DlpServiceClient {
     });
     this.initialize();
     return this._innerApiCalls.deleteStoredInfoType(request, options, callback);
+  }
+  hybridInspectDlpJob(
+    request: protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+      protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  hybridInspectDlpJob(
+    request: protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+      protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Inspect hybrid content and store findings to a job.
+   * To review the findings inspect the job. Inspection will occur
+   * asynchronously.
+   * Early access feature is in a pre-release state and might change or have
+   * limited support. For more information, see
+   * https://cloud.google.com/products#product-launch-stages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the job to execute a hybrid inspect on, for
+   *   example `projects/dlp-test-project/dlpJob/53234423`.
+   * @param {google.privacy.dlp.v2.HybridContentItem} request.hybridItem
+   *   The item to inspect.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [HybridInspectResponse]{@link google.privacy.dlp.v2.HybridInspectResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  hybridInspectDlpJob(
+    request: protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+          | protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
+          | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+      protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
+      protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this._innerApiCalls.hybridInspectDlpJob(request, options, callback);
+  }
+  finishDlpJob(
+    request: protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protosTypes.google.protobuf.IEmpty,
+      protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  finishDlpJob(
+    request: protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protosTypes.google.protobuf.IEmpty,
+      protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Finish a running hybrid DlpJob. Triggers the finalization steps and running
+   * of any enabled actions that have not yet run.
+   * Early access feature is in a pre-release state and might change or have
+   * limited support. For more information, see
+   * https://cloud.google.com/products#product-launch-stages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DlpJob resource to be cancelled.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  finishDlpJob(
+    request: protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protosTypes.google.protobuf.IEmpty,
+          protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      protosTypes.google.protobuf.IEmpty,
+      protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      protosTypes.google.protobuf.IEmpty,
+      protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this._innerApiCalls.finishDlpJob(request, options, callback);
   }
 
   listInspectTemplates(
@@ -3637,77 +3925,58 @@ export class DlpServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified dlpJob resource name string.
+   * Return a fully-qualified inspectFinding resource name string.
    *
    * @param {string} project
-   * @param {string} dlp_job
+   * @param {string} location
+   * @param {string} finding
    * @returns {string} Resource name string.
    */
-  dlpJobPath(project: string, dlpJob: string) {
-    return this._pathTemplates.dlpJobPathTemplate.render({
+  inspectFindingPath(project: string, location: string, finding: string) {
+    return this._pathTemplates.inspectFindingPathTemplate.render({
       project,
-      dlp_job: dlpJob,
+      location,
+      finding,
     });
   }
 
   /**
-   * Parse the project from DlpJob resource.
+   * Parse the project from InspectFinding resource.
    *
-   * @param {string} dlpJobName
-   *   A fully-qualified path representing DlpJob resource.
+   * @param {string} inspectFindingName
+   *   A fully-qualified path representing InspectFinding resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDlpJobName(dlpJobName: string) {
-    return this._pathTemplates.dlpJobPathTemplate.match(dlpJobName).project;
+  matchProjectFromInspectFindingName(inspectFindingName: string) {
+    return this._pathTemplates.inspectFindingPathTemplate.match(
+      inspectFindingName
+    ).project;
   }
 
   /**
-   * Parse the dlp_job from DlpJob resource.
+   * Parse the location from InspectFinding resource.
    *
-   * @param {string} dlpJobName
-   *   A fully-qualified path representing DlpJob resource.
-   * @returns {string} A string representing the dlp_job.
+   * @param {string} inspectFindingName
+   *   A fully-qualified path representing InspectFinding resource.
+   * @returns {string} A string representing the location.
    */
-  matchDlpJobFromDlpJobName(dlpJobName: string) {
-    return this._pathTemplates.dlpJobPathTemplate.match(dlpJobName).dlp_job;
+  matchLocationFromInspectFindingName(inspectFindingName: string) {
+    return this._pathTemplates.inspectFindingPathTemplate.match(
+      inspectFindingName
+    ).location;
   }
 
   /**
-   * Return a fully-qualified jobTrigger resource name string.
+   * Parse the finding from InspectFinding resource.
    *
-   * @param {string} project
-   * @param {string} job_trigger
-   * @returns {string} Resource name string.
+   * @param {string} inspectFindingName
+   *   A fully-qualified path representing InspectFinding resource.
+   * @returns {string} A string representing the finding.
    */
-  jobTriggerPath(project: string, jobTrigger: string) {
-    return this._pathTemplates.jobTriggerPathTemplate.render({
-      project,
-      job_trigger: jobTrigger,
-    });
-  }
-
-  /**
-   * Parse the project from JobTrigger resource.
-   *
-   * @param {string} jobTriggerName
-   *   A fully-qualified path representing JobTrigger resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromJobTriggerName(jobTriggerName: string) {
-    return this._pathTemplates.jobTriggerPathTemplate.match(jobTriggerName)
-      .project;
-  }
-
-  /**
-   * Parse the job_trigger from JobTrigger resource.
-   *
-   * @param {string} jobTriggerName
-   *   A fully-qualified path representing JobTrigger resource.
-   * @returns {string} A string representing the job_trigger.
-   */
-  matchJobTriggerFromJobTriggerName(jobTriggerName: string) {
-    return this._pathTemplates.jobTriggerPathTemplate.match(jobTriggerName)
-      .job_trigger;
+  matchFindingFromInspectFindingName(inspectFindingName: string) {
+    return this._pathTemplates.inspectFindingPathTemplate.match(
+      inspectFindingName
+    ).finding;
   }
 
   /**
@@ -3831,6 +4100,207 @@ export class DlpServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationDeidentifyTemplate resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} deidentify_template
+   * @returns {string} Resource name string.
+   */
+  organizationLocationDeidentifyTemplatePath(
+    organization: string,
+    location: string,
+    deidentifyTemplate: string
+  ) {
+    return this._pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render(
+      {
+        organization,
+        location,
+        deidentify_template: deidentifyTemplate,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationDeidentifyTemplate resource.
+   *
+   * @param {string} organizationLocationDeidentifyTemplateName
+   *   A fully-qualified path representing organization_location_deidentify_template resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationDeidentifyTemplateName(
+    organizationLocationDeidentifyTemplateName: string
+  ) {
+    return this._pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+      organizationLocationDeidentifyTemplateName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationDeidentifyTemplate resource.
+   *
+   * @param {string} organizationLocationDeidentifyTemplateName
+   *   A fully-qualified path representing organization_location_deidentify_template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationDeidentifyTemplateName(
+    organizationLocationDeidentifyTemplateName: string
+  ) {
+    return this._pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+      organizationLocationDeidentifyTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the deidentify_template from OrganizationLocationDeidentifyTemplate resource.
+   *
+   * @param {string} organizationLocationDeidentifyTemplateName
+   *   A fully-qualified path representing organization_location_deidentify_template resource.
+   * @returns {string} A string representing the deidentify_template.
+   */
+  matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName(
+    organizationLocationDeidentifyTemplateName: string
+  ) {
+    return this._pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+      organizationLocationDeidentifyTemplateName
+    ).deidentify_template;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationInspectTemplate resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} inspect_template
+   * @returns {string} Resource name string.
+   */
+  organizationLocationInspectTemplatePath(
+    organization: string,
+    location: string,
+    inspectTemplate: string
+  ) {
+    return this._pathTemplates.organizationLocationInspectTemplatePathTemplate.render(
+      {
+        organization,
+        location,
+        inspect_template: inspectTemplate,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationInspectTemplate resource.
+   *
+   * @param {string} organizationLocationInspectTemplateName
+   *   A fully-qualified path representing organization_location_inspect_template resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationInspectTemplateName(
+    organizationLocationInspectTemplateName: string
+  ) {
+    return this._pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+      organizationLocationInspectTemplateName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationInspectTemplate resource.
+   *
+   * @param {string} organizationLocationInspectTemplateName
+   *   A fully-qualified path representing organization_location_inspect_template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationInspectTemplateName(
+    organizationLocationInspectTemplateName: string
+  ) {
+    return this._pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+      organizationLocationInspectTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the inspect_template from OrganizationLocationInspectTemplate resource.
+   *
+   * @param {string} organizationLocationInspectTemplateName
+   *   A fully-qualified path representing organization_location_inspect_template resource.
+   * @returns {string} A string representing the inspect_template.
+   */
+  matchInspectTemplateFromOrganizationLocationInspectTemplateName(
+    organizationLocationInspectTemplateName: string
+  ) {
+    return this._pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+      organizationLocationInspectTemplateName
+    ).inspect_template;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationStoredInfoType resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} stored_info_type
+   * @returns {string} Resource name string.
+   */
+  organizationLocationStoredInfoTypePath(
+    organization: string,
+    location: string,
+    storedInfoType: string
+  ) {
+    return this._pathTemplates.organizationLocationStoredInfoTypePathTemplate.render(
+      {
+        organization,
+        location,
+        stored_info_type: storedInfoType,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationStoredInfoType resource.
+   *
+   * @param {string} organizationLocationStoredInfoTypeName
+   *   A fully-qualified path representing organization_location_stored_info_type resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationStoredInfoTypeName(
+    organizationLocationStoredInfoTypeName: string
+  ) {
+    return this._pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
+      organizationLocationStoredInfoTypeName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationStoredInfoType resource.
+   *
+   * @param {string} organizationLocationStoredInfoTypeName
+   *   A fully-qualified path representing organization_location_stored_info_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationStoredInfoTypeName(
+    organizationLocationStoredInfoTypeName: string
+  ) {
+    return this._pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
+      organizationLocationStoredInfoTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the stored_info_type from OrganizationLocationStoredInfoType resource.
+   *
+   * @param {string} organizationLocationStoredInfoTypeName
+   *   A fully-qualified path representing organization_location_stored_info_type resource.
+   * @returns {string} A string representing the stored_info_type.
+   */
+  matchStoredInfoTypeFromOrganizationLocationStoredInfoTypeName(
+    organizationLocationStoredInfoTypeName: string
+  ) {
+    return this._pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
+      organizationLocationStoredInfoTypeName
+    ).stored_info_type;
+  }
+
+  /**
    * Return a fully-qualified organizationStoredInfoType resource name string.
    *
    * @param {string} organization
@@ -3942,6 +4412,46 @@ export class DlpServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectDlpJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} dlp_job
+   * @returns {string} Resource name string.
+   */
+  projectDlpJobPath(project: string, dlpJob: string) {
+    return this._pathTemplates.projectDlpJobPathTemplate.render({
+      project,
+      dlp_job: dlpJob,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectDlpJob resource.
+   *
+   * @param {string} projectDlpJobName
+   *   A fully-qualified path representing project_dlp_job resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectDlpJobName(projectDlpJobName: string) {
+    return this._pathTemplates.projectDlpJobPathTemplate.match(
+      projectDlpJobName
+    ).project;
+  }
+
+  /**
+   * Parse the dlp_job from ProjectDlpJob resource.
+   *
+   * @param {string} projectDlpJobName
+   *   A fully-qualified path representing project_dlp_job resource.
+   * @returns {string} A string representing the dlp_job.
+   */
+  matchDlpJobFromProjectDlpJobName(projectDlpJobName: string) {
+    return this._pathTemplates.projectDlpJobPathTemplate.match(
+      projectDlpJobName
+    ).dlp_job;
+  }
+
+  /**
    * Return a fully-qualified projectInspectTemplate resource name string.
    *
    * @param {string} project
@@ -3983,6 +4493,369 @@ export class DlpServiceClient {
     return this._pathTemplates.projectInspectTemplatePathTemplate.match(
       projectInspectTemplateName
     ).inspect_template;
+  }
+
+  /**
+   * Return a fully-qualified projectJobTrigger resource name string.
+   *
+   * @param {string} project
+   * @param {string} job_trigger
+   * @returns {string} Resource name string.
+   */
+  projectJobTriggerPath(project: string, jobTrigger: string) {
+    return this._pathTemplates.projectJobTriggerPathTemplate.render({
+      project,
+      job_trigger: jobTrigger,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectJobTrigger resource.
+   *
+   * @param {string} projectJobTriggerName
+   *   A fully-qualified path representing project_job_trigger resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectJobTriggerName(projectJobTriggerName: string) {
+    return this._pathTemplates.projectJobTriggerPathTemplate.match(
+      projectJobTriggerName
+    ).project;
+  }
+
+  /**
+   * Parse the job_trigger from ProjectJobTrigger resource.
+   *
+   * @param {string} projectJobTriggerName
+   *   A fully-qualified path representing project_job_trigger resource.
+   * @returns {string} A string representing the job_trigger.
+   */
+  matchJobTriggerFromProjectJobTriggerName(projectJobTriggerName: string) {
+    return this._pathTemplates.projectJobTriggerPathTemplate.match(
+      projectJobTriggerName
+    ).job_trigger;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDeidentifyTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deidentify_template
+   * @returns {string} Resource name string.
+   */
+  projectLocationDeidentifyTemplatePath(
+    project: string,
+    location: string,
+    deidentifyTemplate: string
+  ) {
+    return this._pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render(
+      {
+        project,
+        location,
+        deidentify_template: deidentifyTemplate,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDeidentifyTemplate resource.
+   *
+   * @param {string} projectLocationDeidentifyTemplateName
+   *   A fully-qualified path representing project_location_deidentify_template resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDeidentifyTemplateName(
+    projectLocationDeidentifyTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+      projectLocationDeidentifyTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDeidentifyTemplate resource.
+   *
+   * @param {string} projectLocationDeidentifyTemplateName
+   *   A fully-qualified path representing project_location_deidentify_template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDeidentifyTemplateName(
+    projectLocationDeidentifyTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+      projectLocationDeidentifyTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the deidentify_template from ProjectLocationDeidentifyTemplate resource.
+   *
+   * @param {string} projectLocationDeidentifyTemplateName
+   *   A fully-qualified path representing project_location_deidentify_template resource.
+   * @returns {string} A string representing the deidentify_template.
+   */
+  matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName(
+    projectLocationDeidentifyTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+      projectLocationDeidentifyTemplateName
+    ).deidentify_template;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDlpJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dlp_job
+   * @returns {string} Resource name string.
+   */
+  projectLocationDlpJobPath(project: string, location: string, dlpJob: string) {
+    return this._pathTemplates.projectLocationDlpJobPathTemplate.render({
+      project,
+      location,
+      dlp_job: dlpJob,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationDlpJob resource.
+   *
+   * @param {string} projectLocationDlpJobName
+   *   A fully-qualified path representing project_location_dlp_job resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDlpJobName(projectLocationDlpJobName: string) {
+    return this._pathTemplates.projectLocationDlpJobPathTemplate.match(
+      projectLocationDlpJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDlpJob resource.
+   *
+   * @param {string} projectLocationDlpJobName
+   *   A fully-qualified path representing project_location_dlp_job resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDlpJobName(
+    projectLocationDlpJobName: string
+  ) {
+    return this._pathTemplates.projectLocationDlpJobPathTemplate.match(
+      projectLocationDlpJobName
+    ).location;
+  }
+
+  /**
+   * Parse the dlp_job from ProjectLocationDlpJob resource.
+   *
+   * @param {string} projectLocationDlpJobName
+   *   A fully-qualified path representing project_location_dlp_job resource.
+   * @returns {string} A string representing the dlp_job.
+   */
+  matchDlpJobFromProjectLocationDlpJobName(projectLocationDlpJobName: string) {
+    return this._pathTemplates.projectLocationDlpJobPathTemplate.match(
+      projectLocationDlpJobName
+    ).dlp_job;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInspectTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} inspect_template
+   * @returns {string} Resource name string.
+   */
+  projectLocationInspectTemplatePath(
+    project: string,
+    location: string,
+    inspectTemplate: string
+  ) {
+    return this._pathTemplates.projectLocationInspectTemplatePathTemplate.render(
+      {
+        project,
+        location,
+        inspect_template: inspectTemplate,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInspectTemplate resource.
+   *
+   * @param {string} projectLocationInspectTemplateName
+   *   A fully-qualified path representing project_location_inspect_template resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInspectTemplateName(
+    projectLocationInspectTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+      projectLocationInspectTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInspectTemplate resource.
+   *
+   * @param {string} projectLocationInspectTemplateName
+   *   A fully-qualified path representing project_location_inspect_template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInspectTemplateName(
+    projectLocationInspectTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+      projectLocationInspectTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the inspect_template from ProjectLocationInspectTemplate resource.
+   *
+   * @param {string} projectLocationInspectTemplateName
+   *   A fully-qualified path representing project_location_inspect_template resource.
+   * @returns {string} A string representing the inspect_template.
+   */
+  matchInspectTemplateFromProjectLocationInspectTemplateName(
+    projectLocationInspectTemplateName: string
+  ) {
+    return this._pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+      projectLocationInspectTemplateName
+    ).inspect_template;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationJobTrigger resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} job_trigger
+   * @returns {string} Resource name string.
+   */
+  projectLocationJobTriggerPath(
+    project: string,
+    location: string,
+    jobTrigger: string
+  ) {
+    return this._pathTemplates.projectLocationJobTriggerPathTemplate.render({
+      project,
+      location,
+      job_trigger: jobTrigger,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationJobTrigger resource.
+   *
+   * @param {string} projectLocationJobTriggerName
+   *   A fully-qualified path representing project_location_job_trigger resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationJobTriggerName(
+    projectLocationJobTriggerName: string
+  ) {
+    return this._pathTemplates.projectLocationJobTriggerPathTemplate.match(
+      projectLocationJobTriggerName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationJobTrigger resource.
+   *
+   * @param {string} projectLocationJobTriggerName
+   *   A fully-qualified path representing project_location_job_trigger resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationJobTriggerName(
+    projectLocationJobTriggerName: string
+  ) {
+    return this._pathTemplates.projectLocationJobTriggerPathTemplate.match(
+      projectLocationJobTriggerName
+    ).location;
+  }
+
+  /**
+   * Parse the job_trigger from ProjectLocationJobTrigger resource.
+   *
+   * @param {string} projectLocationJobTriggerName
+   *   A fully-qualified path representing project_location_job_trigger resource.
+   * @returns {string} A string representing the job_trigger.
+   */
+  matchJobTriggerFromProjectLocationJobTriggerName(
+    projectLocationJobTriggerName: string
+  ) {
+    return this._pathTemplates.projectLocationJobTriggerPathTemplate.match(
+      projectLocationJobTriggerName
+    ).job_trigger;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationStoredInfoType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} stored_info_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationStoredInfoTypePath(
+    project: string,
+    location: string,
+    storedInfoType: string
+  ) {
+    return this._pathTemplates.projectLocationStoredInfoTypePathTemplate.render(
+      {
+        project,
+        location,
+        stored_info_type: storedInfoType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationStoredInfoType resource.
+   *
+   * @param {string} projectLocationStoredInfoTypeName
+   *   A fully-qualified path representing project_location_stored_info_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationStoredInfoTypeName(
+    projectLocationStoredInfoTypeName: string
+  ) {
+    return this._pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
+      projectLocationStoredInfoTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationStoredInfoType resource.
+   *
+   * @param {string} projectLocationStoredInfoTypeName
+   *   A fully-qualified path representing project_location_stored_info_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationStoredInfoTypeName(
+    projectLocationStoredInfoTypeName: string
+  ) {
+    return this._pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
+      projectLocationStoredInfoTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the stored_info_type from ProjectLocationStoredInfoType resource.
+   *
+   * @param {string} projectLocationStoredInfoTypeName
+   *   A fully-qualified path representing project_location_stored_info_type resource.
+   * @returns {string} A string representing the stored_info_type.
+   */
+  matchStoredInfoTypeFromProjectLocationStoredInfoTypeName(
+    projectLocationStoredInfoTypeName: string
+  ) {
+    return this._pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
+      projectLocationStoredInfoTypeName
+    ).stored_info_type;
   }
 
   /**

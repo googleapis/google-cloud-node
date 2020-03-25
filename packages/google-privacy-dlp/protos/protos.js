@@ -660,6 +660,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.privacy.dlp.v2.DlpService#hybridInspectJobTrigger}.
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @typedef HybridInspectJobTriggerCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.privacy.dlp.v2.HybridInspectResponse} [response] HybridInspectResponse
+                         */
+    
+                        /**
+                         * Calls HybridInspectJobTrigger.
+                         * @function hybridInspectJobTrigger
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @instance
+                         * @param {google.privacy.dlp.v2.IHybridInspectJobTriggerRequest} request HybridInspectJobTriggerRequest message or plain object
+                         * @param {google.privacy.dlp.v2.DlpService.HybridInspectJobTriggerCallback} callback Node-style callback called with the error, if any, and HybridInspectResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DlpService.prototype.hybridInspectJobTrigger = function hybridInspectJobTrigger(request, callback) {
+                            return this.rpcCall(hybridInspectJobTrigger, $root.google.privacy.dlp.v2.HybridInspectJobTriggerRequest, $root.google.privacy.dlp.v2.HybridInspectResponse, request, callback);
+                        }, "name", { value: "HybridInspectJobTrigger" });
+    
+                        /**
+                         * Calls HybridInspectJobTrigger.
+                         * @function hybridInspectJobTrigger
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @instance
+                         * @param {google.privacy.dlp.v2.IHybridInspectJobTriggerRequest} request HybridInspectJobTriggerRequest message or plain object
+                         * @returns {Promise<google.privacy.dlp.v2.HybridInspectResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.privacy.dlp.v2.DlpService#getJobTrigger}.
                          * @memberof google.privacy.dlp.v2.DlpService
                          * @typedef GetJobTriggerCallback
@@ -1117,6 +1150,72 @@
                          * @memberof google.privacy.dlp.v2.DlpService
                          * @instance
                          * @param {google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest} request DeleteStoredInfoTypeRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.privacy.dlp.v2.DlpService#hybridInspectDlpJob}.
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @typedef HybridInspectDlpJobCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.privacy.dlp.v2.HybridInspectResponse} [response] HybridInspectResponse
+                         */
+    
+                        /**
+                         * Calls HybridInspectDlpJob.
+                         * @function hybridInspectDlpJob
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @instance
+                         * @param {google.privacy.dlp.v2.IHybridInspectDlpJobRequest} request HybridInspectDlpJobRequest message or plain object
+                         * @param {google.privacy.dlp.v2.DlpService.HybridInspectDlpJobCallback} callback Node-style callback called with the error, if any, and HybridInspectResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DlpService.prototype.hybridInspectDlpJob = function hybridInspectDlpJob(request, callback) {
+                            return this.rpcCall(hybridInspectDlpJob, $root.google.privacy.dlp.v2.HybridInspectDlpJobRequest, $root.google.privacy.dlp.v2.HybridInspectResponse, request, callback);
+                        }, "name", { value: "HybridInspectDlpJob" });
+    
+                        /**
+                         * Calls HybridInspectDlpJob.
+                         * @function hybridInspectDlpJob
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @instance
+                         * @param {google.privacy.dlp.v2.IHybridInspectDlpJobRequest} request HybridInspectDlpJobRequest message or plain object
+                         * @returns {Promise<google.privacy.dlp.v2.HybridInspectResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.privacy.dlp.v2.DlpService#finishDlpJob}.
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @typedef FinishDlpJobCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls FinishDlpJob.
+                         * @function finishDlpJob
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @instance
+                         * @param {google.privacy.dlp.v2.IFinishDlpJobRequest} request FinishDlpJobRequest message or plain object
+                         * @param {google.privacy.dlp.v2.DlpService.FinishDlpJobCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DlpService.prototype.finishDlpJob = function finishDlpJob(request, callback) {
+                            return this.rpcCall(finishDlpJob, $root.google.privacy.dlp.v2.FinishDlpJobRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "FinishDlpJob" });
+    
+                        /**
+                         * Calls FinishDlpJob.
+                         * @function finishDlpJob
+                         * @memberof google.privacy.dlp.v2.DlpService
+                         * @instance
+                         * @param {google.privacy.dlp.v2.IFinishDlpJobRequest} request FinishDlpJobRequest message or plain object
                          * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
@@ -4370,12 +4469,18 @@
                          * Properties of a Finding.
                          * @memberof google.privacy.dlp.v2
                          * @interface IFinding
+                         * @property {string|null} [name] Finding name
                          * @property {string|null} [quote] Finding quote
                          * @property {google.privacy.dlp.v2.IInfoType|null} [infoType] Finding infoType
                          * @property {google.privacy.dlp.v2.Likelihood|null} [likelihood] Finding likelihood
                          * @property {google.privacy.dlp.v2.ILocation|null} [location] Finding location
                          * @property {google.protobuf.ITimestamp|null} [createTime] Finding createTime
                          * @property {google.privacy.dlp.v2.IQuoteInfo|null} [quoteInfo] Finding quoteInfo
+                         * @property {string|null} [resourceName] Finding resourceName
+                         * @property {string|null} [triggerName] Finding triggerName
+                         * @property {Object.<string,string>|null} [labels] Finding labels
+                         * @property {google.protobuf.ITimestamp|null} [jobCreateTime] Finding jobCreateTime
+                         * @property {string|null} [jobName] Finding jobName
                          */
     
                         /**
@@ -4387,11 +4492,20 @@
                          * @param {google.privacy.dlp.v2.IFinding=} [properties] Properties to set
                          */
                         function Finding(properties) {
+                            this.labels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * Finding name.
+                         * @member {string} name
+                         * @memberof google.privacy.dlp.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.name = "";
     
                         /**
                          * Finding quote.
@@ -4442,6 +4556,46 @@
                         Finding.prototype.quoteInfo = null;
     
                         /**
+                         * Finding resourceName.
+                         * @member {string} resourceName
+                         * @memberof google.privacy.dlp.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.resourceName = "";
+    
+                        /**
+                         * Finding triggerName.
+                         * @member {string} triggerName
+                         * @memberof google.privacy.dlp.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.triggerName = "";
+    
+                        /**
+                         * Finding labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.privacy.dlp.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Finding jobCreateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} jobCreateTime
+                         * @memberof google.privacy.dlp.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.jobCreateTime = null;
+    
+                        /**
+                         * Finding jobName.
+                         * @member {string} jobName
+                         * @memberof google.privacy.dlp.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.jobName = "";
+    
+                        /**
                          * Creates a new Finding instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.Finding
@@ -4477,6 +4631,19 @@
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.quoteInfo != null && message.hasOwnProperty("quoteInfo"))
                                 $root.google.privacy.dlp.v2.QuoteInfo.encode(message.quoteInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.resourceName);
+                            if (message.triggerName != null && message.hasOwnProperty("triggerName"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.triggerName);
+                            if (message.labels != null && message.hasOwnProperty("labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.jobCreateTime != null && message.hasOwnProperty("jobCreateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.jobCreateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.jobName != null && message.hasOwnProperty("jobName"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.jobName);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.name);
                             return writer;
                         };
     
@@ -4507,10 +4674,13 @@
                         Finding.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Finding();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Finding(), key;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 14:
+                                    message.name = reader.string();
+                                    break;
                                 case 1:
                                     message.quote = reader.string();
                                     break;
@@ -4528,6 +4698,26 @@
                                     break;
                                 case 7:
                                     message.quoteInfo = $root.google.privacy.dlp.v2.QuoteInfo.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.resourceName = reader.string();
+                                    break;
+                                case 9:
+                                    message.triggerName = reader.string();
+                                    break;
+                                case 10:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                case 11:
+                                    message.jobCreateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.jobName = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4564,6 +4754,9 @@
                         Finding.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             if (message.quote != null && message.hasOwnProperty("quote"))
                                 if (!$util.isString(message.quote))
                                     return "quote: string expected";
@@ -4599,6 +4792,28 @@
                                 if (error)
                                     return "quoteInfo." + error;
                             }
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                if (!$util.isString(message.resourceName))
+                                    return "resourceName: string expected";
+                            if (message.triggerName != null && message.hasOwnProperty("triggerName"))
+                                if (!$util.isString(message.triggerName))
+                                    return "triggerName: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.jobCreateTime != null && message.hasOwnProperty("jobCreateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.jobCreateTime);
+                                if (error)
+                                    return "jobCreateTime." + error;
+                            }
+                            if (message.jobName != null && message.hasOwnProperty("jobName"))
+                                if (!$util.isString(message.jobName))
+                                    return "jobName: string expected";
                             return null;
                         };
     
@@ -4614,6 +4829,8 @@
                             if (object instanceof $root.google.privacy.dlp.v2.Finding)
                                 return object;
                             var message = new $root.google.privacy.dlp.v2.Finding();
+                            if (object.name != null)
+                                message.name = String(object.name);
                             if (object.quote != null)
                                 message.quote = String(object.quote);
                             if (object.infoType != null) {
@@ -4662,6 +4879,24 @@
                                     throw TypeError(".google.privacy.dlp.v2.Finding.quoteInfo: object expected");
                                 message.quoteInfo = $root.google.privacy.dlp.v2.QuoteInfo.fromObject(object.quoteInfo);
                             }
+                            if (object.resourceName != null)
+                                message.resourceName = String(object.resourceName);
+                            if (object.triggerName != null)
+                                message.triggerName = String(object.triggerName);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.Finding.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.jobCreateTime != null) {
+                                if (typeof object.jobCreateTime !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.Finding.jobCreateTime: object expected");
+                                message.jobCreateTime = $root.google.protobuf.Timestamp.fromObject(object.jobCreateTime);
+                            }
+                            if (object.jobName != null)
+                                message.jobName = String(object.jobName);
                             return message;
                         };
     
@@ -4678,6 +4913,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
                             if (options.defaults) {
                                 object.quote = "";
                                 object.infoType = null;
@@ -4685,6 +4922,11 @@
                                 object.location = null;
                                 object.createTime = null;
                                 object.quoteInfo = null;
+                                object.resourceName = "";
+                                object.triggerName = "";
+                                object.jobCreateTime = null;
+                                object.jobName = "";
+                                object.name = "";
                             }
                             if (message.quote != null && message.hasOwnProperty("quote"))
                                 object.quote = message.quote;
@@ -4698,6 +4940,22 @@
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.quoteInfo != null && message.hasOwnProperty("quoteInfo"))
                                 object.quoteInfo = $root.google.privacy.dlp.v2.QuoteInfo.toObject(message.quoteInfo, options);
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                object.resourceName = message.resourceName;
+                            if (message.triggerName != null && message.hasOwnProperty("triggerName"))
+                                object.triggerName = message.triggerName;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.jobCreateTime != null && message.hasOwnProperty("jobCreateTime"))
+                                object.jobCreateTime = $root.google.protobuf.Timestamp.toObject(message.jobCreateTime, options);
+                            if (message.jobName != null && message.hasOwnProperty("jobName"))
+                                object.jobName = message.jobName;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     
@@ -4724,6 +4982,7 @@
                          * @property {google.privacy.dlp.v2.IRange|null} [byteRange] Location byteRange
                          * @property {google.privacy.dlp.v2.IRange|null} [codepointRange] Location codepointRange
                          * @property {Array.<google.privacy.dlp.v2.IContentLocation>|null} [contentLocations] Location contentLocations
+                         * @property {google.privacy.dlp.v2.IContainer|null} [container] Location container
                          */
     
                         /**
@@ -4767,6 +5026,14 @@
                         Location.prototype.contentLocations = $util.emptyArray;
     
                         /**
+                         * Location container.
+                         * @member {google.privacy.dlp.v2.IContainer|null|undefined} container
+                         * @memberof google.privacy.dlp.v2.Location
+                         * @instance
+                         */
+                        Location.prototype.container = null;
+    
+                        /**
                          * Creates a new Location instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.Location
@@ -4797,6 +5064,8 @@
                             if (message.contentLocations != null && message.contentLocations.length)
                                 for (var i = 0; i < message.contentLocations.length; ++i)
                                     $root.google.privacy.dlp.v2.ContentLocation.encode(message.contentLocations[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.container != null && message.hasOwnProperty("container"))
+                                $root.google.privacy.dlp.v2.Container.encode(message.container, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -4841,6 +5110,9 @@
                                     if (!(message.contentLocations && message.contentLocations.length))
                                         message.contentLocations = [];
                                     message.contentLocations.push($root.google.privacy.dlp.v2.ContentLocation.decode(reader, reader.uint32()));
+                                    break;
+                                case 8:
+                                    message.container = $root.google.privacy.dlp.v2.Container.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4896,6 +5168,11 @@
                                         return "contentLocations." + error;
                                 }
                             }
+                            if (message.container != null && message.hasOwnProperty("container")) {
+                                var error = $root.google.privacy.dlp.v2.Container.verify(message.container);
+                                if (error)
+                                    return "container." + error;
+                            }
                             return null;
                         };
     
@@ -4931,6 +5208,11 @@
                                     message.contentLocations[i] = $root.google.privacy.dlp.v2.ContentLocation.fromObject(object.contentLocations[i]);
                                 }
                             }
+                            if (object.container != null) {
+                                if (typeof object.container !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.Location.container: object expected");
+                                message.container = $root.google.privacy.dlp.v2.Container.fromObject(object.container);
+                            }
                             return message;
                         };
     
@@ -4952,6 +5234,7 @@
                             if (options.defaults) {
                                 object.byteRange = null;
                                 object.codepointRange = null;
+                                object.container = null;
                             }
                             if (message.byteRange != null && message.hasOwnProperty("byteRange"))
                                 object.byteRange = $root.google.privacy.dlp.v2.Range.toObject(message.byteRange, options);
@@ -4962,6 +5245,8 @@
                                 for (var j = 0; j < message.contentLocations.length; ++j)
                                     object.contentLocations[j] = $root.google.privacy.dlp.v2.ContentLocation.toObject(message.contentLocations[j], options);
                             }
+                            if (message.container != null && message.hasOwnProperty("container"))
+                                object.container = $root.google.privacy.dlp.v2.Container.toObject(message.container, options);
                             return object;
                         };
     
@@ -5978,6 +6263,331 @@
                         };
     
                         return TableLocation;
+                    })();
+    
+                    v2.Container = (function() {
+    
+                        /**
+                         * Properties of a Container.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IContainer
+                         * @property {string|null} [type] Container type
+                         * @property {string|null} [projectId] Container projectId
+                         * @property {string|null} [fullPath] Container fullPath
+                         * @property {string|null} [rootPath] Container rootPath
+                         * @property {string|null} [relativePath] Container relativePath
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Container updateTime
+                         * @property {string|null} [version] Container version
+                         */
+    
+                        /**
+                         * Constructs a new Container.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a Container.
+                         * @implements IContainer
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IContainer=} [properties] Properties to set
+                         */
+                        function Container(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Container type.
+                         * @member {string} type
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.type = "";
+    
+                        /**
+                         * Container projectId.
+                         * @member {string} projectId
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.projectId = "";
+    
+                        /**
+                         * Container fullPath.
+                         * @member {string} fullPath
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.fullPath = "";
+    
+                        /**
+                         * Container rootPath.
+                         * @member {string} rootPath
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.rootPath = "";
+    
+                        /**
+                         * Container relativePath.
+                         * @member {string} relativePath
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.relativePath = "";
+    
+                        /**
+                         * Container updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.updateTime = null;
+    
+                        /**
+                         * Container version.
+                         * @member {string} version
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.version = "";
+    
+                        /**
+                         * Creates a new Container instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @static
+                         * @param {google.privacy.dlp.v2.IContainer=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Container} Container instance
+                         */
+                        Container.create = function create(properties) {
+                            return new Container(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Container message. Does not implicitly {@link google.privacy.dlp.v2.Container.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @static
+                         * @param {google.privacy.dlp.v2.IContainer} message Container message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Container.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                            if (message.fullPath != null && message.hasOwnProperty("fullPath"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.fullPath);
+                            if (message.rootPath != null && message.hasOwnProperty("rootPath"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.rootPath);
+                            if (message.relativePath != null && message.hasOwnProperty("relativePath"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.relativePath);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.version);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Container message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Container.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @static
+                         * @param {google.privacy.dlp.v2.IContainer} message Container message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Container.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Container message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Container} Container
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Container.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Container();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.type = reader.string();
+                                    break;
+                                case 2:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.fullPath = reader.string();
+                                    break;
+                                case 4:
+                                    message.rootPath = reader.string();
+                                    break;
+                                case 5:
+                                    message.relativePath = reader.string();
+                                    break;
+                                case 6:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.version = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Container message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Container} Container
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Container.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Container message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Container.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.fullPath != null && message.hasOwnProperty("fullPath"))
+                                if (!$util.isString(message.fullPath))
+                                    return "fullPath: string expected";
+                            if (message.rootPath != null && message.hasOwnProperty("rootPath"))
+                                if (!$util.isString(message.rootPath))
+                                    return "rootPath: string expected";
+                            if (message.relativePath != null && message.hasOwnProperty("relativePath"))
+                                if (!$util.isString(message.relativePath))
+                                    return "relativePath: string expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Container message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Container} Container
+                         */
+                        Container.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Container)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.Container();
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.fullPath != null)
+                                message.fullPath = String(object.fullPath);
+                            if (object.rootPath != null)
+                                message.rootPath = String(object.rootPath);
+                            if (object.relativePath != null)
+                                message.relativePath = String(object.relativePath);
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.Container.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Container message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @static
+                         * @param {google.privacy.dlp.v2.Container} message Container
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Container.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = "";
+                                object.projectId = "";
+                                object.fullPath = "";
+                                object.rootPath = "";
+                                object.relativePath = "";
+                                object.updateTime = null;
+                                object.version = "";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.fullPath != null && message.hasOwnProperty("fullPath"))
+                                object.fullPath = message.fullPath;
+                            if (message.rootPath != null && message.hasOwnProperty("rootPath"))
+                                object.rootPath = message.rootPath;
+                            if (message.relativePath != null && message.hasOwnProperty("relativePath"))
+                                object.relativePath = message.relativePath;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Container to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Container
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Container.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Container;
                     })();
     
                     v2.Range = (function() {
@@ -10307,6 +10917,7 @@
                              * @property {number|Long|null} [processedBytes] Result processedBytes
                              * @property {number|Long|null} [totalEstimatedBytes] Result totalEstimatedBytes
                              * @property {Array.<google.privacy.dlp.v2.IInfoTypeStats>|null} [infoTypeStats] Result infoTypeStats
+                             * @property {google.privacy.dlp.v2.IHybridInspectStatistics|null} [hybridStats] Result hybridStats
                              */
     
                             /**
@@ -10350,6 +10961,14 @@
                             Result.prototype.infoTypeStats = $util.emptyArray;
     
                             /**
+                             * Result hybridStats.
+                             * @member {google.privacy.dlp.v2.IHybridInspectStatistics|null|undefined} hybridStats
+                             * @memberof google.privacy.dlp.v2.InspectDataSourceDetails.Result
+                             * @instance
+                             */
+                            Result.prototype.hybridStats = null;
+    
+                            /**
                              * Creates a new Result instance using the specified properties.
                              * @function create
                              * @memberof google.privacy.dlp.v2.InspectDataSourceDetails.Result
@@ -10380,6 +10999,8 @@
                                 if (message.infoTypeStats != null && message.infoTypeStats.length)
                                     for (var i = 0; i < message.infoTypeStats.length; ++i)
                                         $root.google.privacy.dlp.v2.InfoTypeStats.encode(message.infoTypeStats[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.hybridStats != null && message.hasOwnProperty("hybridStats"))
+                                    $root.google.privacy.dlp.v2.HybridInspectStatistics.encode(message.hybridStats, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -10424,6 +11045,9 @@
                                         if (!(message.infoTypeStats && message.infoTypeStats.length))
                                             message.infoTypeStats = [];
                                         message.infoTypeStats.push($root.google.privacy.dlp.v2.InfoTypeStats.decode(reader, reader.uint32()));
+                                        break;
+                                    case 7:
+                                        message.hybridStats = $root.google.privacy.dlp.v2.HybridInspectStatistics.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -10475,6 +11099,11 @@
                                             return "infoTypeStats." + error;
                                     }
                                 }
+                                if (message.hybridStats != null && message.hasOwnProperty("hybridStats")) {
+                                    var error = $root.google.privacy.dlp.v2.HybridInspectStatistics.verify(message.hybridStats);
+                                    if (error)
+                                        return "hybridStats." + error;
+                                }
                                 return null;
                             };
     
@@ -10518,6 +11147,11 @@
                                         message.infoTypeStats[i] = $root.google.privacy.dlp.v2.InfoTypeStats.fromObject(object.infoTypeStats[i]);
                                     }
                                 }
+                                if (object.hybridStats != null) {
+                                    if (typeof object.hybridStats !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.InspectDataSourceDetails.Result.hybridStats: object expected");
+                                    message.hybridStats = $root.google.privacy.dlp.v2.HybridInspectStatistics.fromObject(object.hybridStats);
+                                }
                                 return message;
                             };
     
@@ -10547,6 +11181,7 @@
                                         object.totalEstimatedBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                     } else
                                         object.totalEstimatedBytes = options.longs === String ? "0" : 0;
+                                    object.hybridStats = null;
                                 }
                                 if (message.processedBytes != null && message.hasOwnProperty("processedBytes"))
                                     if (typeof message.processedBytes === "number")
@@ -10563,6 +11198,8 @@
                                     for (var j = 0; j < message.infoTypeStats.length; ++j)
                                         object.infoTypeStats[j] = $root.google.privacy.dlp.v2.InfoTypeStats.toObject(message.infoTypeStats[j], options);
                                 }
+                                if (message.hybridStats != null && message.hasOwnProperty("hybridStats"))
+                                    object.hybridStats = $root.google.privacy.dlp.v2.HybridInspectStatistics.toObject(message.hybridStats, options);
                                 return object;
                             };
     
@@ -10581,6 +11218,280 @@
                         })();
     
                         return InspectDataSourceDetails;
+                    })();
+    
+                    v2.HybridInspectStatistics = (function() {
+    
+                        /**
+                         * Properties of a HybridInspectStatistics.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IHybridInspectStatistics
+                         * @property {number|Long|null} [processedCount] HybridInspectStatistics processedCount
+                         * @property {number|Long|null} [abortedCount] HybridInspectStatistics abortedCount
+                         * @property {number|Long|null} [pendingCount] HybridInspectStatistics pendingCount
+                         */
+    
+                        /**
+                         * Constructs a new HybridInspectStatistics.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a HybridInspectStatistics.
+                         * @implements IHybridInspectStatistics
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IHybridInspectStatistics=} [properties] Properties to set
+                         */
+                        function HybridInspectStatistics(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HybridInspectStatistics processedCount.
+                         * @member {number|Long} processedCount
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @instance
+                         */
+                        HybridInspectStatistics.prototype.processedCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * HybridInspectStatistics abortedCount.
+                         * @member {number|Long} abortedCount
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @instance
+                         */
+                        HybridInspectStatistics.prototype.abortedCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * HybridInspectStatistics pendingCount.
+                         * @member {number|Long} pendingCount
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @instance
+                         */
+                        HybridInspectStatistics.prototype.pendingCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new HybridInspectStatistics instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectStatistics=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.HybridInspectStatistics} HybridInspectStatistics instance
+                         */
+                        HybridInspectStatistics.create = function create(properties) {
+                            return new HybridInspectStatistics(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridInspectStatistics message. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectStatistics.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectStatistics} message HybridInspectStatistics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridInspectStatistics.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.processedCount != null && message.hasOwnProperty("processedCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.processedCount);
+                            if (message.abortedCount != null && message.hasOwnProperty("abortedCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.abortedCount);
+                            if (message.pendingCount != null && message.hasOwnProperty("pendingCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.pendingCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridInspectStatistics message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectStatistics.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectStatistics} message HybridInspectStatistics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridInspectStatistics.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridInspectStatistics message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.HybridInspectStatistics} HybridInspectStatistics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridInspectStatistics.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridInspectStatistics();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.processedCount = reader.int64();
+                                    break;
+                                case 2:
+                                    message.abortedCount = reader.int64();
+                                    break;
+                                case 3:
+                                    message.pendingCount = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridInspectStatistics message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.HybridInspectStatistics} HybridInspectStatistics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridInspectStatistics.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridInspectStatistics message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridInspectStatistics.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.processedCount != null && message.hasOwnProperty("processedCount"))
+                                if (!$util.isInteger(message.processedCount) && !(message.processedCount && $util.isInteger(message.processedCount.low) && $util.isInteger(message.processedCount.high)))
+                                    return "processedCount: integer|Long expected";
+                            if (message.abortedCount != null && message.hasOwnProperty("abortedCount"))
+                                if (!$util.isInteger(message.abortedCount) && !(message.abortedCount && $util.isInteger(message.abortedCount.low) && $util.isInteger(message.abortedCount.high)))
+                                    return "abortedCount: integer|Long expected";
+                            if (message.pendingCount != null && message.hasOwnProperty("pendingCount"))
+                                if (!$util.isInteger(message.pendingCount) && !(message.pendingCount && $util.isInteger(message.pendingCount.low) && $util.isInteger(message.pendingCount.high)))
+                                    return "pendingCount: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridInspectStatistics message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.HybridInspectStatistics} HybridInspectStatistics
+                         */
+                        HybridInspectStatistics.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.HybridInspectStatistics)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.HybridInspectStatistics();
+                            if (object.processedCount != null)
+                                if ($util.Long)
+                                    (message.processedCount = $util.Long.fromValue(object.processedCount)).unsigned = false;
+                                else if (typeof object.processedCount === "string")
+                                    message.processedCount = parseInt(object.processedCount, 10);
+                                else if (typeof object.processedCount === "number")
+                                    message.processedCount = object.processedCount;
+                                else if (typeof object.processedCount === "object")
+                                    message.processedCount = new $util.LongBits(object.processedCount.low >>> 0, object.processedCount.high >>> 0).toNumber();
+                            if (object.abortedCount != null)
+                                if ($util.Long)
+                                    (message.abortedCount = $util.Long.fromValue(object.abortedCount)).unsigned = false;
+                                else if (typeof object.abortedCount === "string")
+                                    message.abortedCount = parseInt(object.abortedCount, 10);
+                                else if (typeof object.abortedCount === "number")
+                                    message.abortedCount = object.abortedCount;
+                                else if (typeof object.abortedCount === "object")
+                                    message.abortedCount = new $util.LongBits(object.abortedCount.low >>> 0, object.abortedCount.high >>> 0).toNumber();
+                            if (object.pendingCount != null)
+                                if ($util.Long)
+                                    (message.pendingCount = $util.Long.fromValue(object.pendingCount)).unsigned = false;
+                                else if (typeof object.pendingCount === "string")
+                                    message.pendingCount = parseInt(object.pendingCount, 10);
+                                else if (typeof object.pendingCount === "number")
+                                    message.pendingCount = object.pendingCount;
+                                else if (typeof object.pendingCount === "object")
+                                    message.pendingCount = new $util.LongBits(object.pendingCount.low >>> 0, object.pendingCount.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridInspectStatistics message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @static
+                         * @param {google.privacy.dlp.v2.HybridInspectStatistics} message HybridInspectStatistics
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridInspectStatistics.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.processedCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.processedCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.abortedCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.abortedCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.pendingCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.pendingCount = options.longs === String ? "0" : 0;
+                            }
+                            if (message.processedCount != null && message.hasOwnProperty("processedCount"))
+                                if (typeof message.processedCount === "number")
+                                    object.processedCount = options.longs === String ? String(message.processedCount) : message.processedCount;
+                                else
+                                    object.processedCount = options.longs === String ? $util.Long.prototype.toString.call(message.processedCount) : options.longs === Number ? new $util.LongBits(message.processedCount.low >>> 0, message.processedCount.high >>> 0).toNumber() : message.processedCount;
+                            if (message.abortedCount != null && message.hasOwnProperty("abortedCount"))
+                                if (typeof message.abortedCount === "number")
+                                    object.abortedCount = options.longs === String ? String(message.abortedCount) : message.abortedCount;
+                                else
+                                    object.abortedCount = options.longs === String ? $util.Long.prototype.toString.call(message.abortedCount) : options.longs === Number ? new $util.LongBits(message.abortedCount.low >>> 0, message.abortedCount.high >>> 0).toNumber() : message.abortedCount;
+                            if (message.pendingCount != null && message.hasOwnProperty("pendingCount"))
+                                if (typeof message.pendingCount === "number")
+                                    object.pendingCount = options.longs === String ? String(message.pendingCount) : message.pendingCount;
+                                else
+                                    object.pendingCount = options.longs === String ? $util.Long.prototype.toString.call(message.pendingCount) : options.longs === Number ? new $util.LongBits(message.pendingCount.low >>> 0, message.pendingCount.high >>> 0).toNumber() : message.pendingCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HybridInspectStatistics to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.HybridInspectStatistics
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridInspectStatistics.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HybridInspectStatistics;
                     })();
     
                     v2.InfoTypeDescription = (function() {
@@ -20882,6 +21793,7 @@
                          * @interface IDeidentifyConfig
                          * @property {google.privacy.dlp.v2.IInfoTypeTransformations|null} [infoTypeTransformations] DeidentifyConfig infoTypeTransformations
                          * @property {google.privacy.dlp.v2.IRecordTransformations|null} [recordTransformations] DeidentifyConfig recordTransformations
+                         * @property {google.privacy.dlp.v2.ITransformationErrorHandling|null} [transformationErrorHandling] DeidentifyConfig transformationErrorHandling
                          */
     
                         /**
@@ -20914,6 +21826,14 @@
                          * @instance
                          */
                         DeidentifyConfig.prototype.recordTransformations = null;
+    
+                        /**
+                         * DeidentifyConfig transformationErrorHandling.
+                         * @member {google.privacy.dlp.v2.ITransformationErrorHandling|null|undefined} transformationErrorHandling
+                         * @memberof google.privacy.dlp.v2.DeidentifyConfig
+                         * @instance
+                         */
+                        DeidentifyConfig.prototype.transformationErrorHandling = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -20957,6 +21877,8 @@
                                 $root.google.privacy.dlp.v2.InfoTypeTransformations.encode(message.infoTypeTransformations, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.recordTransformations != null && message.hasOwnProperty("recordTransformations"))
                                 $root.google.privacy.dlp.v2.RecordTransformations.encode(message.recordTransformations, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.transformationErrorHandling != null && message.hasOwnProperty("transformationErrorHandling"))
+                                $root.google.privacy.dlp.v2.TransformationErrorHandling.encode(message.transformationErrorHandling, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -20996,6 +21918,9 @@
                                     break;
                                 case 2:
                                     message.recordTransformations = $root.google.privacy.dlp.v2.RecordTransformations.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.transformationErrorHandling = $root.google.privacy.dlp.v2.TransformationErrorHandling.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -21051,6 +21976,11 @@
                                         return "recordTransformations." + error;
                                 }
                             }
+                            if (message.transformationErrorHandling != null && message.hasOwnProperty("transformationErrorHandling")) {
+                                var error = $root.google.privacy.dlp.v2.TransformationErrorHandling.verify(message.transformationErrorHandling);
+                                if (error)
+                                    return "transformationErrorHandling." + error;
+                            }
                             return null;
                         };
     
@@ -21076,6 +22006,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.DeidentifyConfig.recordTransformations: object expected");
                                 message.recordTransformations = $root.google.privacy.dlp.v2.RecordTransformations.fromObject(object.recordTransformations);
                             }
+                            if (object.transformationErrorHandling != null) {
+                                if (typeof object.transformationErrorHandling !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.DeidentifyConfig.transformationErrorHandling: object expected");
+                                message.transformationErrorHandling = $root.google.privacy.dlp.v2.TransformationErrorHandling.fromObject(object.transformationErrorHandling);
+                            }
                             return message;
                         };
     
@@ -21092,6 +22027,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.transformationErrorHandling = null;
                             if (message.infoTypeTransformations != null && message.hasOwnProperty("infoTypeTransformations")) {
                                 object.infoTypeTransformations = $root.google.privacy.dlp.v2.InfoTypeTransformations.toObject(message.infoTypeTransformations, options);
                                 if (options.oneofs)
@@ -21102,6 +22039,8 @@
                                 if (options.oneofs)
                                     object.transformation = "recordTransformations";
                             }
+                            if (message.transformationErrorHandling != null && message.hasOwnProperty("transformationErrorHandling"))
+                                object.transformationErrorHandling = $root.google.privacy.dlp.v2.TransformationErrorHandling.toObject(message.transformationErrorHandling, options);
                             return object;
                         };
     
@@ -21117,6 +22056,571 @@
                         };
     
                         return DeidentifyConfig;
+                    })();
+    
+                    v2.TransformationErrorHandling = (function() {
+    
+                        /**
+                         * Properties of a TransformationErrorHandling.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ITransformationErrorHandling
+                         * @property {google.privacy.dlp.v2.TransformationErrorHandling.IThrowError|null} [throwError] TransformationErrorHandling throwError
+                         * @property {google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed|null} [leaveUntransformed] TransformationErrorHandling leaveUntransformed
+                         */
+    
+                        /**
+                         * Constructs a new TransformationErrorHandling.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a TransformationErrorHandling.
+                         * @implements ITransformationErrorHandling
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ITransformationErrorHandling=} [properties] Properties to set
+                         */
+                        function TransformationErrorHandling(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransformationErrorHandling throwError.
+                         * @member {google.privacy.dlp.v2.TransformationErrorHandling.IThrowError|null|undefined} throwError
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @instance
+                         */
+                        TransformationErrorHandling.prototype.throwError = null;
+    
+                        /**
+                         * TransformationErrorHandling leaveUntransformed.
+                         * @member {google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed|null|undefined} leaveUntransformed
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @instance
+                         */
+                        TransformationErrorHandling.prototype.leaveUntransformed = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TransformationErrorHandling mode.
+                         * @member {"throwError"|"leaveUntransformed"|undefined} mode
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @instance
+                         */
+                        Object.defineProperty(TransformationErrorHandling.prototype, "mode", {
+                            get: $util.oneOfGetter($oneOfFields = ["throwError", "leaveUntransformed"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new TransformationErrorHandling instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITransformationErrorHandling=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.TransformationErrorHandling} TransformationErrorHandling instance
+                         */
+                        TransformationErrorHandling.create = function create(properties) {
+                            return new TransformationErrorHandling(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransformationErrorHandling message. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITransformationErrorHandling} message TransformationErrorHandling message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransformationErrorHandling.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.throwError != null && message.hasOwnProperty("throwError"))
+                                $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.encode(message.throwError, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.leaveUntransformed != null && message.hasOwnProperty("leaveUntransformed"))
+                                $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.encode(message.leaveUntransformed, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransformationErrorHandling message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITransformationErrorHandling} message TransformationErrorHandling message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransformationErrorHandling.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransformationErrorHandling message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.TransformationErrorHandling} TransformationErrorHandling
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransformationErrorHandling.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationErrorHandling();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.throwError = $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.leaveUntransformed = $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransformationErrorHandling message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.TransformationErrorHandling} TransformationErrorHandling
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransformationErrorHandling.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransformationErrorHandling message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransformationErrorHandling.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.throwError != null && message.hasOwnProperty("throwError")) {
+                                properties.mode = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.verify(message.throwError);
+                                    if (error)
+                                        return "throwError." + error;
+                                }
+                            }
+                            if (message.leaveUntransformed != null && message.hasOwnProperty("leaveUntransformed")) {
+                                if (properties.mode === 1)
+                                    return "mode: multiple values";
+                                properties.mode = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.verify(message.leaveUntransformed);
+                                    if (error)
+                                        return "leaveUntransformed." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransformationErrorHandling message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.TransformationErrorHandling} TransformationErrorHandling
+                         */
+                        TransformationErrorHandling.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.TransformationErrorHandling)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.TransformationErrorHandling();
+                            if (object.throwError != null) {
+                                if (typeof object.throwError !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.TransformationErrorHandling.throwError: object expected");
+                                message.throwError = $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.fromObject(object.throwError);
+                            }
+                            if (object.leaveUntransformed != null) {
+                                if (typeof object.leaveUntransformed !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.TransformationErrorHandling.leaveUntransformed: object expected");
+                                message.leaveUntransformed = $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.fromObject(object.leaveUntransformed);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransformationErrorHandling message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @static
+                         * @param {google.privacy.dlp.v2.TransformationErrorHandling} message TransformationErrorHandling
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransformationErrorHandling.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.throwError != null && message.hasOwnProperty("throwError")) {
+                                object.throwError = $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.toObject(message.throwError, options);
+                                if (options.oneofs)
+                                    object.mode = "throwError";
+                            }
+                            if (message.leaveUntransformed != null && message.hasOwnProperty("leaveUntransformed")) {
+                                object.leaveUntransformed = $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.toObject(message.leaveUntransformed, options);
+                                if (options.oneofs)
+                                    object.mode = "leaveUntransformed";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransformationErrorHandling to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransformationErrorHandling.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        TransformationErrorHandling.ThrowError = (function() {
+    
+                            /**
+                             * Properties of a ThrowError.
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                             * @interface IThrowError
+                             */
+    
+                            /**
+                             * Constructs a new ThrowError.
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                             * @classdesc Represents a ThrowError.
+                             * @implements IThrowError
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.IThrowError=} [properties] Properties to set
+                             */
+                            function ThrowError(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ThrowError instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @static
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.IThrowError=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.TransformationErrorHandling.ThrowError} ThrowError instance
+                             */
+                            ThrowError.create = function create(properties) {
+                                return new ThrowError(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ThrowError message. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @static
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.IThrowError} message ThrowError message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThrowError.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ThrowError message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @static
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.IThrowError} message ThrowError message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThrowError.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ThrowError message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.TransformationErrorHandling.ThrowError} ThrowError
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThrowError.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ThrowError message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.TransformationErrorHandling.ThrowError} ThrowError
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThrowError.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ThrowError message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ThrowError.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ThrowError message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.TransformationErrorHandling.ThrowError} ThrowError
+                             */
+                            ThrowError.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError)
+                                    return object;
+                                return new $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ThrowError message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @static
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.ThrowError} message ThrowError
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ThrowError.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ThrowError to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.ThrowError
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ThrowError.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ThrowError;
+                        })();
+    
+                        TransformationErrorHandling.LeaveUntransformed = (function() {
+    
+                            /**
+                             * Properties of a LeaveUntransformed.
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                             * @interface ILeaveUntransformed
+                             */
+    
+                            /**
+                             * Constructs a new LeaveUntransformed.
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling
+                             * @classdesc Represents a LeaveUntransformed.
+                             * @implements ILeaveUntransformed
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed=} [properties] Properties to set
+                             */
+                            function LeaveUntransformed(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new LeaveUntransformed instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @static
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed} LeaveUntransformed instance
+                             */
+                            LeaveUntransformed.create = function create(properties) {
+                                return new LeaveUntransformed(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LeaveUntransformed message. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @static
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed} message LeaveUntransformed message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LeaveUntransformed.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LeaveUntransformed message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @static
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.ILeaveUntransformed} message LeaveUntransformed message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LeaveUntransformed.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LeaveUntransformed message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed} LeaveUntransformed
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LeaveUntransformed.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LeaveUntransformed message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed} LeaveUntransformed
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LeaveUntransformed.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LeaveUntransformed message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LeaveUntransformed.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LeaveUntransformed message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed} LeaveUntransformed
+                             */
+                            LeaveUntransformed.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed)
+                                    return object;
+                                return new $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed();
+                            };
+    
+                            /**
+                             * Creates a plain object from a LeaveUntransformed message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @static
+                             * @param {google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed} message LeaveUntransformed
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LeaveUntransformed.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this LeaveUntransformed to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LeaveUntransformed.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return LeaveUntransformed;
+                        })();
+    
+                        return TransformationErrorHandling;
                     })();
     
                     v2.PrimitiveTransformation = (function() {
@@ -28973,6 +30477,166 @@
                         return Schedule;
                     })();
     
+                    v2.Manual = (function() {
+    
+                        /**
+                         * Properties of a Manual.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IManual
+                         */
+    
+                        /**
+                         * Constructs a new Manual.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a Manual.
+                         * @implements IManual
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IManual=} [properties] Properties to set
+                         */
+                        function Manual(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new Manual instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @static
+                         * @param {google.privacy.dlp.v2.IManual=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Manual} Manual instance
+                         */
+                        Manual.create = function create(properties) {
+                            return new Manual(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Manual message. Does not implicitly {@link google.privacy.dlp.v2.Manual.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @static
+                         * @param {google.privacy.dlp.v2.IManual} message Manual message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Manual.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Manual message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Manual.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @static
+                         * @param {google.privacy.dlp.v2.IManual} message Manual message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Manual.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Manual message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Manual} Manual
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Manual.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Manual();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Manual message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Manual} Manual
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Manual.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Manual message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Manual.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Manual message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Manual} Manual
+                         */
+                        Manual.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Manual)
+                                return object;
+                            return new $root.google.privacy.dlp.v2.Manual();
+                        };
+    
+                        /**
+                         * Creates a plain object from a Manual message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @static
+                         * @param {google.privacy.dlp.v2.Manual} message Manual
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Manual.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this Manual to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Manual
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Manual.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Manual;
+                    })();
+    
                     v2.InspectTemplate = (function() {
     
                         /**
@@ -30332,6 +31996,7 @@
                              * @memberof google.privacy.dlp.v2.JobTrigger
                              * @interface ITrigger
                              * @property {google.privacy.dlp.v2.ISchedule|null} [schedule] Trigger schedule
+                             * @property {google.privacy.dlp.v2.IManual|null} [manual] Trigger manual
                              */
     
                             /**
@@ -30357,17 +32022,25 @@
                              */
                             Trigger.prototype.schedule = null;
     
+                            /**
+                             * Trigger manual.
+                             * @member {google.privacy.dlp.v2.IManual|null|undefined} manual
+                             * @memberof google.privacy.dlp.v2.JobTrigger.Trigger
+                             * @instance
+                             */
+                            Trigger.prototype.manual = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * Trigger trigger.
-                             * @member {"schedule"|undefined} trigger
+                             * @member {"schedule"|"manual"|undefined} trigger
                              * @memberof google.privacy.dlp.v2.JobTrigger.Trigger
                              * @instance
                              */
                             Object.defineProperty(Trigger.prototype, "trigger", {
-                                get: $util.oneOfGetter($oneOfFields = ["schedule"]),
+                                get: $util.oneOfGetter($oneOfFields = ["schedule", "manual"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -30397,6 +32070,8 @@
                                     writer = $Writer.create();
                                 if (message.schedule != null && message.hasOwnProperty("schedule"))
                                     $root.google.privacy.dlp.v2.Schedule.encode(message.schedule, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.manual != null && message.hasOwnProperty("manual"))
+                                    $root.google.privacy.dlp.v2.Manual.encode(message.manual, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 return writer;
                             };
     
@@ -30433,6 +32108,9 @@
                                     switch (tag >>> 3) {
                                     case 1:
                                         message.schedule = $root.google.privacy.dlp.v2.Schedule.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.manual = $root.google.privacy.dlp.v2.Manual.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -30478,6 +32156,16 @@
                                             return "schedule." + error;
                                     }
                                 }
+                                if (message.manual != null && message.hasOwnProperty("manual")) {
+                                    if (properties.trigger === 1)
+                                        return "trigger: multiple values";
+                                    properties.trigger = 1;
+                                    {
+                                        var error = $root.google.privacy.dlp.v2.Manual.verify(message.manual);
+                                        if (error)
+                                            return "manual." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -30497,6 +32185,11 @@
                                     if (typeof object.schedule !== "object")
                                         throw TypeError(".google.privacy.dlp.v2.JobTrigger.Trigger.schedule: object expected");
                                     message.schedule = $root.google.privacy.dlp.v2.Schedule.fromObject(object.schedule);
+                                }
+                                if (object.manual != null) {
+                                    if (typeof object.manual !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.JobTrigger.Trigger.manual: object expected");
+                                    message.manual = $root.google.privacy.dlp.v2.Manual.fromObject(object.manual);
                                 }
                                 return message;
                             };
@@ -30518,6 +32211,11 @@
                                     object.schedule = $root.google.privacy.dlp.v2.Schedule.toObject(message.schedule, options);
                                     if (options.oneofs)
                                         object.trigger = "schedule";
+                                }
+                                if (message.manual != null && message.hasOwnProperty("manual")) {
+                                    object.manual = $root.google.privacy.dlp.v2.Manual.toObject(message.manual, options);
+                                    if (options.oneofs)
+                                        object.trigger = "manual";
                                 }
                                 return object;
                             };
@@ -35826,6 +37524,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.riskDetails != null && message.hasOwnProperty("riskDetails")) {
@@ -35928,6 +37627,10 @@
                             case "FAILED":
                             case 5:
                                 message.state = 5;
+                                break;
+                            case "ACTIVE":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             if (object.riskDetails != null) {
@@ -36047,6 +37750,7 @@
                          * @property {number} DONE=3 DONE value
                          * @property {number} CANCELED=4 CANCELED value
                          * @property {number} FAILED=5 FAILED value
+                         * @property {number} ACTIVE=6 ACTIVE value
                          */
                         DlpJob.JobState = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -36056,6 +37760,7 @@
                             values[valuesById[3] = "DONE"] = 3;
                             values[valuesById[4] = "CANCELED"] = 4;
                             values[valuesById[5] = "FAILED"] = 5;
+                            values[valuesById[6] = "ACTIVE"] = 6;
                             return values;
                         })();
     
@@ -37003,6 +38708,193 @@
                         };
     
                         return CancelDlpJobRequest;
+                    })();
+    
+                    v2.FinishDlpJobRequest = (function() {
+    
+                        /**
+                         * Properties of a FinishDlpJobRequest.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IFinishDlpJobRequest
+                         * @property {string|null} [name] FinishDlpJobRequest name
+                         */
+    
+                        /**
+                         * Constructs a new FinishDlpJobRequest.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a FinishDlpJobRequest.
+                         * @implements IFinishDlpJobRequest
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IFinishDlpJobRequest=} [properties] Properties to set
+                         */
+                        function FinishDlpJobRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FinishDlpJobRequest name.
+                         * @member {string} name
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @instance
+                         */
+                        FinishDlpJobRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new FinishDlpJobRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFinishDlpJobRequest=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.FinishDlpJobRequest} FinishDlpJobRequest instance
+                         */
+                        FinishDlpJobRequest.create = function create(properties) {
+                            return new FinishDlpJobRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FinishDlpJobRequest message. Does not implicitly {@link google.privacy.dlp.v2.FinishDlpJobRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFinishDlpJobRequest} message FinishDlpJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FinishDlpJobRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FinishDlpJobRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FinishDlpJobRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFinishDlpJobRequest} message FinishDlpJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FinishDlpJobRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FinishDlpJobRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.FinishDlpJobRequest} FinishDlpJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FinishDlpJobRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FinishDlpJobRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FinishDlpJobRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.FinishDlpJobRequest} FinishDlpJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FinishDlpJobRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FinishDlpJobRequest message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FinishDlpJobRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FinishDlpJobRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.FinishDlpJobRequest} FinishDlpJobRequest
+                         */
+                        FinishDlpJobRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.FinishDlpJobRequest)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.FinishDlpJobRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FinishDlpJobRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.FinishDlpJobRequest} message FinishDlpJobRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FinishDlpJobRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FinishDlpJobRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.FinishDlpJobRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FinishDlpJobRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return FinishDlpJobRequest;
                     })();
     
                     v2.DeleteDlpJobRequest = (function() {
@@ -39057,6 +40949,8 @@
                          * @property {string|null} [displayName] StoredInfoTypeConfig displayName
                          * @property {string|null} [description] StoredInfoTypeConfig description
                          * @property {google.privacy.dlp.v2.ILargeCustomDictionaryConfig|null} [largeCustomDictionary] StoredInfoTypeConfig largeCustomDictionary
+                         * @property {google.privacy.dlp.v2.CustomInfoType.IDictionary|null} [dictionary] StoredInfoTypeConfig dictionary
+                         * @property {google.privacy.dlp.v2.CustomInfoType.IRegex|null} [regex] StoredInfoTypeConfig regex
                          */
     
                         /**
@@ -39098,17 +40992,33 @@
                          */
                         StoredInfoTypeConfig.prototype.largeCustomDictionary = null;
     
+                        /**
+                         * StoredInfoTypeConfig dictionary.
+                         * @member {google.privacy.dlp.v2.CustomInfoType.IDictionary|null|undefined} dictionary
+                         * @memberof google.privacy.dlp.v2.StoredInfoTypeConfig
+                         * @instance
+                         */
+                        StoredInfoTypeConfig.prototype.dictionary = null;
+    
+                        /**
+                         * StoredInfoTypeConfig regex.
+                         * @member {google.privacy.dlp.v2.CustomInfoType.IRegex|null|undefined} regex
+                         * @memberof google.privacy.dlp.v2.StoredInfoTypeConfig
+                         * @instance
+                         */
+                        StoredInfoTypeConfig.prototype.regex = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * StoredInfoTypeConfig type.
-                         * @member {"largeCustomDictionary"|undefined} type
+                         * @member {"largeCustomDictionary"|"dictionary"|"regex"|undefined} type
                          * @memberof google.privacy.dlp.v2.StoredInfoTypeConfig
                          * @instance
                          */
                         Object.defineProperty(StoredInfoTypeConfig.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["largeCustomDictionary"]),
+                            get: $util.oneOfGetter($oneOfFields = ["largeCustomDictionary", "dictionary", "regex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -39142,6 +41052,10 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
                             if (message.largeCustomDictionary != null && message.hasOwnProperty("largeCustomDictionary"))
                                 $root.google.privacy.dlp.v2.LargeCustomDictionaryConfig.encode(message.largeCustomDictionary, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.dictionary != null && message.hasOwnProperty("dictionary"))
+                                $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.encode(message.dictionary, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.regex != null && message.hasOwnProperty("regex"))
+                                $root.google.privacy.dlp.v2.CustomInfoType.Regex.encode(message.regex, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -39184,6 +41098,12 @@
                                     break;
                                 case 3:
                                     message.largeCustomDictionary = $root.google.privacy.dlp.v2.LargeCustomDictionaryConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.dictionary = $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.regex = $root.google.privacy.dlp.v2.CustomInfoType.Regex.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -39235,6 +41155,26 @@
                                         return "largeCustomDictionary." + error;
                                 }
                             }
+                            if (message.dictionary != null && message.hasOwnProperty("dictionary")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.verify(message.dictionary);
+                                    if (error)
+                                        return "dictionary." + error;
+                                }
+                            }
+                            if (message.regex != null && message.hasOwnProperty("regex")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.CustomInfoType.Regex.verify(message.regex);
+                                    if (error)
+                                        return "regex." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -39258,6 +41198,16 @@
                                 if (typeof object.largeCustomDictionary !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.StoredInfoTypeConfig.largeCustomDictionary: object expected");
                                 message.largeCustomDictionary = $root.google.privacy.dlp.v2.LargeCustomDictionaryConfig.fromObject(object.largeCustomDictionary);
+                            }
+                            if (object.dictionary != null) {
+                                if (typeof object.dictionary !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.StoredInfoTypeConfig.dictionary: object expected");
+                                message.dictionary = $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.fromObject(object.dictionary);
+                            }
+                            if (object.regex != null) {
+                                if (typeof object.regex !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.StoredInfoTypeConfig.regex: object expected");
+                                message.regex = $root.google.privacy.dlp.v2.CustomInfoType.Regex.fromObject(object.regex);
                             }
                             return message;
                         };
@@ -39287,6 +41237,16 @@
                                 object.largeCustomDictionary = $root.google.privacy.dlp.v2.LargeCustomDictionaryConfig.toObject(message.largeCustomDictionary, options);
                                 if (options.oneofs)
                                     object.type = "largeCustomDictionary";
+                            }
+                            if (message.dictionary != null && message.hasOwnProperty("dictionary")) {
+                                object.dictionary = $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.toObject(message.dictionary, options);
+                                if (options.oneofs)
+                                    object.type = "dictionary";
+                            }
+                            if (message.regex != null && message.hasOwnProperty("regex")) {
+                                object.regex = $root.google.privacy.dlp.v2.CustomInfoType.Regex.toObject(message.regex, options);
+                                if (options.oneofs)
+                                    object.type = "regex";
                             }
                             return object;
                         };
@@ -41496,6 +43456,1152 @@
                         };
     
                         return DeleteStoredInfoTypeRequest;
+                    })();
+    
+                    v2.HybridInspectJobTriggerRequest = (function() {
+    
+                        /**
+                         * Properties of a HybridInspectJobTriggerRequest.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IHybridInspectJobTriggerRequest
+                         * @property {string|null} [name] HybridInspectJobTriggerRequest name
+                         * @property {google.privacy.dlp.v2.IHybridContentItem|null} [hybridItem] HybridInspectJobTriggerRequest hybridItem
+                         */
+    
+                        /**
+                         * Constructs a new HybridInspectJobTriggerRequest.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a HybridInspectJobTriggerRequest.
+                         * @implements IHybridInspectJobTriggerRequest
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IHybridInspectJobTriggerRequest=} [properties] Properties to set
+                         */
+                        function HybridInspectJobTriggerRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HybridInspectJobTriggerRequest name.
+                         * @member {string} name
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @instance
+                         */
+                        HybridInspectJobTriggerRequest.prototype.name = "";
+    
+                        /**
+                         * HybridInspectJobTriggerRequest hybridItem.
+                         * @member {google.privacy.dlp.v2.IHybridContentItem|null|undefined} hybridItem
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @instance
+                         */
+                        HybridInspectJobTriggerRequest.prototype.hybridItem = null;
+    
+                        /**
+                         * Creates a new HybridInspectJobTriggerRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectJobTriggerRequest=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.HybridInspectJobTriggerRequest} HybridInspectJobTriggerRequest instance
+                         */
+                        HybridInspectJobTriggerRequest.create = function create(properties) {
+                            return new HybridInspectJobTriggerRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridInspectJobTriggerRequest message. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectJobTriggerRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectJobTriggerRequest} message HybridInspectJobTriggerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridInspectJobTriggerRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.hybridItem != null && message.hasOwnProperty("hybridItem"))
+                                $root.google.privacy.dlp.v2.HybridContentItem.encode(message.hybridItem, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridInspectJobTriggerRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectJobTriggerRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectJobTriggerRequest} message HybridInspectJobTriggerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridInspectJobTriggerRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridInspectJobTriggerRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.HybridInspectJobTriggerRequest} HybridInspectJobTriggerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridInspectJobTriggerRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridInspectJobTriggerRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.hybridItem = $root.google.privacy.dlp.v2.HybridContentItem.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridInspectJobTriggerRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.HybridInspectJobTriggerRequest} HybridInspectJobTriggerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridInspectJobTriggerRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridInspectJobTriggerRequest message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridInspectJobTriggerRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.hybridItem != null && message.hasOwnProperty("hybridItem")) {
+                                var error = $root.google.privacy.dlp.v2.HybridContentItem.verify(message.hybridItem);
+                                if (error)
+                                    return "hybridItem." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridInspectJobTriggerRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.HybridInspectJobTriggerRequest} HybridInspectJobTriggerRequest
+                         */
+                        HybridInspectJobTriggerRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.HybridInspectJobTriggerRequest)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.HybridInspectJobTriggerRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.hybridItem != null) {
+                                if (typeof object.hybridItem !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridInspectJobTriggerRequest.hybridItem: object expected");
+                                message.hybridItem = $root.google.privacy.dlp.v2.HybridContentItem.fromObject(object.hybridItem);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridInspectJobTriggerRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.HybridInspectJobTriggerRequest} message HybridInspectJobTriggerRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridInspectJobTriggerRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.hybridItem = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.hybridItem != null && message.hasOwnProperty("hybridItem"))
+                                object.hybridItem = $root.google.privacy.dlp.v2.HybridContentItem.toObject(message.hybridItem, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HybridInspectJobTriggerRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.HybridInspectJobTriggerRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridInspectJobTriggerRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HybridInspectJobTriggerRequest;
+                    })();
+    
+                    v2.HybridInspectDlpJobRequest = (function() {
+    
+                        /**
+                         * Properties of a HybridInspectDlpJobRequest.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IHybridInspectDlpJobRequest
+                         * @property {string|null} [name] HybridInspectDlpJobRequest name
+                         * @property {google.privacy.dlp.v2.IHybridContentItem|null} [hybridItem] HybridInspectDlpJobRequest hybridItem
+                         */
+    
+                        /**
+                         * Constructs a new HybridInspectDlpJobRequest.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a HybridInspectDlpJobRequest.
+                         * @implements IHybridInspectDlpJobRequest
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IHybridInspectDlpJobRequest=} [properties] Properties to set
+                         */
+                        function HybridInspectDlpJobRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HybridInspectDlpJobRequest name.
+                         * @member {string} name
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @instance
+                         */
+                        HybridInspectDlpJobRequest.prototype.name = "";
+    
+                        /**
+                         * HybridInspectDlpJobRequest hybridItem.
+                         * @member {google.privacy.dlp.v2.IHybridContentItem|null|undefined} hybridItem
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @instance
+                         */
+                        HybridInspectDlpJobRequest.prototype.hybridItem = null;
+    
+                        /**
+                         * Creates a new HybridInspectDlpJobRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectDlpJobRequest=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.HybridInspectDlpJobRequest} HybridInspectDlpJobRequest instance
+                         */
+                        HybridInspectDlpJobRequest.create = function create(properties) {
+                            return new HybridInspectDlpJobRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridInspectDlpJobRequest message. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectDlpJobRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectDlpJobRequest} message HybridInspectDlpJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridInspectDlpJobRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.hybridItem != null && message.hasOwnProperty("hybridItem"))
+                                $root.google.privacy.dlp.v2.HybridContentItem.encode(message.hybridItem, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridInspectDlpJobRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectDlpJobRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectDlpJobRequest} message HybridInspectDlpJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridInspectDlpJobRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridInspectDlpJobRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.HybridInspectDlpJobRequest} HybridInspectDlpJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridInspectDlpJobRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridInspectDlpJobRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.hybridItem = $root.google.privacy.dlp.v2.HybridContentItem.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridInspectDlpJobRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.HybridInspectDlpJobRequest} HybridInspectDlpJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridInspectDlpJobRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridInspectDlpJobRequest message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridInspectDlpJobRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.hybridItem != null && message.hasOwnProperty("hybridItem")) {
+                                var error = $root.google.privacy.dlp.v2.HybridContentItem.verify(message.hybridItem);
+                                if (error)
+                                    return "hybridItem." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridInspectDlpJobRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.HybridInspectDlpJobRequest} HybridInspectDlpJobRequest
+                         */
+                        HybridInspectDlpJobRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.HybridInspectDlpJobRequest)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.HybridInspectDlpJobRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.hybridItem != null) {
+                                if (typeof object.hybridItem !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridInspectDlpJobRequest.hybridItem: object expected");
+                                message.hybridItem = $root.google.privacy.dlp.v2.HybridContentItem.fromObject(object.hybridItem);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridInspectDlpJobRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @static
+                         * @param {google.privacy.dlp.v2.HybridInspectDlpJobRequest} message HybridInspectDlpJobRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridInspectDlpJobRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.hybridItem = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.hybridItem != null && message.hasOwnProperty("hybridItem"))
+                                object.hybridItem = $root.google.privacy.dlp.v2.HybridContentItem.toObject(message.hybridItem, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HybridInspectDlpJobRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.HybridInspectDlpJobRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridInspectDlpJobRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HybridInspectDlpJobRequest;
+                    })();
+    
+                    v2.HybridContentItem = (function() {
+    
+                        /**
+                         * Properties of a HybridContentItem.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IHybridContentItem
+                         * @property {google.privacy.dlp.v2.IContentItem|null} [item] HybridContentItem item
+                         * @property {google.privacy.dlp.v2.IHybridFindingDetails|null} [findingDetails] HybridContentItem findingDetails
+                         */
+    
+                        /**
+                         * Constructs a new HybridContentItem.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a HybridContentItem.
+                         * @implements IHybridContentItem
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IHybridContentItem=} [properties] Properties to set
+                         */
+                        function HybridContentItem(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HybridContentItem item.
+                         * @member {google.privacy.dlp.v2.IContentItem|null|undefined} item
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @instance
+                         */
+                        HybridContentItem.prototype.item = null;
+    
+                        /**
+                         * HybridContentItem findingDetails.
+                         * @member {google.privacy.dlp.v2.IHybridFindingDetails|null|undefined} findingDetails
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @instance
+                         */
+                        HybridContentItem.prototype.findingDetails = null;
+    
+                        /**
+                         * Creates a new HybridContentItem instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridContentItem=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.HybridContentItem} HybridContentItem instance
+                         */
+                        HybridContentItem.create = function create(properties) {
+                            return new HybridContentItem(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridContentItem message. Does not implicitly {@link google.privacy.dlp.v2.HybridContentItem.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridContentItem} message HybridContentItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridContentItem.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.item != null && message.hasOwnProperty("item"))
+                                $root.google.privacy.dlp.v2.ContentItem.encode(message.item, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.findingDetails != null && message.hasOwnProperty("findingDetails"))
+                                $root.google.privacy.dlp.v2.HybridFindingDetails.encode(message.findingDetails, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridContentItem message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridContentItem.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridContentItem} message HybridContentItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridContentItem.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridContentItem message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.HybridContentItem} HybridContentItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridContentItem.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridContentItem();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.item = $root.google.privacy.dlp.v2.ContentItem.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.findingDetails = $root.google.privacy.dlp.v2.HybridFindingDetails.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridContentItem message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.HybridContentItem} HybridContentItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridContentItem.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridContentItem message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridContentItem.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.item != null && message.hasOwnProperty("item")) {
+                                var error = $root.google.privacy.dlp.v2.ContentItem.verify(message.item);
+                                if (error)
+                                    return "item." + error;
+                            }
+                            if (message.findingDetails != null && message.hasOwnProperty("findingDetails")) {
+                                var error = $root.google.privacy.dlp.v2.HybridFindingDetails.verify(message.findingDetails);
+                                if (error)
+                                    return "findingDetails." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridContentItem message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.HybridContentItem} HybridContentItem
+                         */
+                        HybridContentItem.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.HybridContentItem)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.HybridContentItem();
+                            if (object.item != null) {
+                                if (typeof object.item !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridContentItem.item: object expected");
+                                message.item = $root.google.privacy.dlp.v2.ContentItem.fromObject(object.item);
+                            }
+                            if (object.findingDetails != null) {
+                                if (typeof object.findingDetails !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridContentItem.findingDetails: object expected");
+                                message.findingDetails = $root.google.privacy.dlp.v2.HybridFindingDetails.fromObject(object.findingDetails);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridContentItem message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @static
+                         * @param {google.privacy.dlp.v2.HybridContentItem} message HybridContentItem
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridContentItem.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.item = null;
+                                object.findingDetails = null;
+                            }
+                            if (message.item != null && message.hasOwnProperty("item"))
+                                object.item = $root.google.privacy.dlp.v2.ContentItem.toObject(message.item, options);
+                            if (message.findingDetails != null && message.hasOwnProperty("findingDetails"))
+                                object.findingDetails = $root.google.privacy.dlp.v2.HybridFindingDetails.toObject(message.findingDetails, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HybridContentItem to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.HybridContentItem
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridContentItem.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HybridContentItem;
+                    })();
+    
+                    v2.HybridFindingDetails = (function() {
+    
+                        /**
+                         * Properties of a HybridFindingDetails.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IHybridFindingDetails
+                         * @property {google.privacy.dlp.v2.IContainer|null} [containerDetails] HybridFindingDetails containerDetails
+                         * @property {number|Long|null} [fileOffset] HybridFindingDetails fileOffset
+                         * @property {number|Long|null} [rowOffset] HybridFindingDetails rowOffset
+                         * @property {google.privacy.dlp.v2.ITableOptions|null} [tableOptions] HybridFindingDetails tableOptions
+                         * @property {Object.<string,string>|null} [labels] HybridFindingDetails labels
+                         */
+    
+                        /**
+                         * Constructs a new HybridFindingDetails.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a HybridFindingDetails.
+                         * @implements IHybridFindingDetails
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IHybridFindingDetails=} [properties] Properties to set
+                         */
+                        function HybridFindingDetails(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HybridFindingDetails containerDetails.
+                         * @member {google.privacy.dlp.v2.IContainer|null|undefined} containerDetails
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @instance
+                         */
+                        HybridFindingDetails.prototype.containerDetails = null;
+    
+                        /**
+                         * HybridFindingDetails fileOffset.
+                         * @member {number|Long} fileOffset
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @instance
+                         */
+                        HybridFindingDetails.prototype.fileOffset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * HybridFindingDetails rowOffset.
+                         * @member {number|Long} rowOffset
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @instance
+                         */
+                        HybridFindingDetails.prototype.rowOffset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * HybridFindingDetails tableOptions.
+                         * @member {google.privacy.dlp.v2.ITableOptions|null|undefined} tableOptions
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @instance
+                         */
+                        HybridFindingDetails.prototype.tableOptions = null;
+    
+                        /**
+                         * HybridFindingDetails labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @instance
+                         */
+                        HybridFindingDetails.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new HybridFindingDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridFindingDetails=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.HybridFindingDetails} HybridFindingDetails instance
+                         */
+                        HybridFindingDetails.create = function create(properties) {
+                            return new HybridFindingDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridFindingDetails message. Does not implicitly {@link google.privacy.dlp.v2.HybridFindingDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridFindingDetails} message HybridFindingDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridFindingDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.containerDetails != null && message.hasOwnProperty("containerDetails"))
+                                $root.google.privacy.dlp.v2.Container.encode(message.containerDetails, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.fileOffset != null && message.hasOwnProperty("fileOffset"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.fileOffset);
+                            if (message.rowOffset != null && message.hasOwnProperty("rowOffset"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.rowOffset);
+                            if (message.tableOptions != null && message.hasOwnProperty("tableOptions"))
+                                $root.google.privacy.dlp.v2.TableOptions.encode(message.tableOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.labels != null && message.hasOwnProperty("labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridFindingDetails message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridFindingDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridFindingDetails} message HybridFindingDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridFindingDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridFindingDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.HybridFindingDetails} HybridFindingDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridFindingDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridFindingDetails(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.containerDetails = $root.google.privacy.dlp.v2.Container.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.fileOffset = reader.int64();
+                                    break;
+                                case 3:
+                                    message.rowOffset = reader.int64();
+                                    break;
+                                case 4:
+                                    message.tableOptions = $root.google.privacy.dlp.v2.TableOptions.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridFindingDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.HybridFindingDetails} HybridFindingDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridFindingDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridFindingDetails message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridFindingDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.containerDetails != null && message.hasOwnProperty("containerDetails")) {
+                                var error = $root.google.privacy.dlp.v2.Container.verify(message.containerDetails);
+                                if (error)
+                                    return "containerDetails." + error;
+                            }
+                            if (message.fileOffset != null && message.hasOwnProperty("fileOffset"))
+                                if (!$util.isInteger(message.fileOffset) && !(message.fileOffset && $util.isInteger(message.fileOffset.low) && $util.isInteger(message.fileOffset.high)))
+                                    return "fileOffset: integer|Long expected";
+                            if (message.rowOffset != null && message.hasOwnProperty("rowOffset"))
+                                if (!$util.isInteger(message.rowOffset) && !(message.rowOffset && $util.isInteger(message.rowOffset.low) && $util.isInteger(message.rowOffset.high)))
+                                    return "rowOffset: integer|Long expected";
+                            if (message.tableOptions != null && message.hasOwnProperty("tableOptions")) {
+                                var error = $root.google.privacy.dlp.v2.TableOptions.verify(message.tableOptions);
+                                if (error)
+                                    return "tableOptions." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridFindingDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.HybridFindingDetails} HybridFindingDetails
+                         */
+                        HybridFindingDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.HybridFindingDetails)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.HybridFindingDetails();
+                            if (object.containerDetails != null) {
+                                if (typeof object.containerDetails !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridFindingDetails.containerDetails: object expected");
+                                message.containerDetails = $root.google.privacy.dlp.v2.Container.fromObject(object.containerDetails);
+                            }
+                            if (object.fileOffset != null)
+                                if ($util.Long)
+                                    (message.fileOffset = $util.Long.fromValue(object.fileOffset)).unsigned = false;
+                                else if (typeof object.fileOffset === "string")
+                                    message.fileOffset = parseInt(object.fileOffset, 10);
+                                else if (typeof object.fileOffset === "number")
+                                    message.fileOffset = object.fileOffset;
+                                else if (typeof object.fileOffset === "object")
+                                    message.fileOffset = new $util.LongBits(object.fileOffset.low >>> 0, object.fileOffset.high >>> 0).toNumber();
+                            if (object.rowOffset != null)
+                                if ($util.Long)
+                                    (message.rowOffset = $util.Long.fromValue(object.rowOffset)).unsigned = false;
+                                else if (typeof object.rowOffset === "string")
+                                    message.rowOffset = parseInt(object.rowOffset, 10);
+                                else if (typeof object.rowOffset === "number")
+                                    message.rowOffset = object.rowOffset;
+                                else if (typeof object.rowOffset === "object")
+                                    message.rowOffset = new $util.LongBits(object.rowOffset.low >>> 0, object.rowOffset.high >>> 0).toNumber();
+                            if (object.tableOptions != null) {
+                                if (typeof object.tableOptions !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridFindingDetails.tableOptions: object expected");
+                                message.tableOptions = $root.google.privacy.dlp.v2.TableOptions.fromObject(object.tableOptions);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridFindingDetails.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridFindingDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @static
+                         * @param {google.privacy.dlp.v2.HybridFindingDetails} message HybridFindingDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridFindingDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.containerDetails = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.fileOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.fileOffset = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.rowOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.rowOffset = options.longs === String ? "0" : 0;
+                                object.tableOptions = null;
+                            }
+                            if (message.containerDetails != null && message.hasOwnProperty("containerDetails"))
+                                object.containerDetails = $root.google.privacy.dlp.v2.Container.toObject(message.containerDetails, options);
+                            if (message.fileOffset != null && message.hasOwnProperty("fileOffset"))
+                                if (typeof message.fileOffset === "number")
+                                    object.fileOffset = options.longs === String ? String(message.fileOffset) : message.fileOffset;
+                                else
+                                    object.fileOffset = options.longs === String ? $util.Long.prototype.toString.call(message.fileOffset) : options.longs === Number ? new $util.LongBits(message.fileOffset.low >>> 0, message.fileOffset.high >>> 0).toNumber() : message.fileOffset;
+                            if (message.rowOffset != null && message.hasOwnProperty("rowOffset"))
+                                if (typeof message.rowOffset === "number")
+                                    object.rowOffset = options.longs === String ? String(message.rowOffset) : message.rowOffset;
+                                else
+                                    object.rowOffset = options.longs === String ? $util.Long.prototype.toString.call(message.rowOffset) : options.longs === Number ? new $util.LongBits(message.rowOffset.low >>> 0, message.rowOffset.high >>> 0).toNumber() : message.rowOffset;
+                            if (message.tableOptions != null && message.hasOwnProperty("tableOptions"))
+                                object.tableOptions = $root.google.privacy.dlp.v2.TableOptions.toObject(message.tableOptions, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HybridFindingDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.HybridFindingDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridFindingDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HybridFindingDetails;
+                    })();
+    
+                    v2.HybridInspectResponse = (function() {
+    
+                        /**
+                         * Properties of a HybridInspectResponse.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IHybridInspectResponse
+                         */
+    
+                        /**
+                         * Constructs a new HybridInspectResponse.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a HybridInspectResponse.
+                         * @implements IHybridInspectResponse
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IHybridInspectResponse=} [properties] Properties to set
+                         */
+                        function HybridInspectResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new HybridInspectResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectResponse=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.HybridInspectResponse} HybridInspectResponse instance
+                         */
+                        HybridInspectResponse.create = function create(properties) {
+                            return new HybridInspectResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridInspectResponse message. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectResponse} message HybridInspectResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridInspectResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridInspectResponse message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridInspectResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridInspectResponse} message HybridInspectResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridInspectResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridInspectResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.HybridInspectResponse} HybridInspectResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridInspectResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridInspectResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridInspectResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.HybridInspectResponse} HybridInspectResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridInspectResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridInspectResponse message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridInspectResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridInspectResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.HybridInspectResponse} HybridInspectResponse
+                         */
+                        HybridInspectResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.HybridInspectResponse)
+                                return object;
+                            return new $root.google.privacy.dlp.v2.HybridInspectResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridInspectResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @static
+                         * @param {google.privacy.dlp.v2.HybridInspectResponse} message HybridInspectResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridInspectResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this HybridInspectResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.HybridInspectResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridInspectResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HybridInspectResponse;
                     })();
     
                     /**
@@ -46768,6 +49874,7 @@
                          * @property {google.privacy.dlp.v2.IDatastoreOptions|null} [datastoreOptions] StorageConfig datastoreOptions
                          * @property {google.privacy.dlp.v2.ICloudStorageOptions|null} [cloudStorageOptions] StorageConfig cloudStorageOptions
                          * @property {google.privacy.dlp.v2.IBigQueryOptions|null} [bigQueryOptions] StorageConfig bigQueryOptions
+                         * @property {google.privacy.dlp.v2.IHybridOptions|null} [hybridOptions] StorageConfig hybridOptions
                          * @property {google.privacy.dlp.v2.StorageConfig.ITimespanConfig|null} [timespanConfig] StorageConfig timespanConfig
                          */
     
@@ -46811,6 +49918,14 @@
                         StorageConfig.prototype.bigQueryOptions = null;
     
                         /**
+                         * StorageConfig hybridOptions.
+                         * @member {google.privacy.dlp.v2.IHybridOptions|null|undefined} hybridOptions
+                         * @memberof google.privacy.dlp.v2.StorageConfig
+                         * @instance
+                         */
+                        StorageConfig.prototype.hybridOptions = null;
+    
+                        /**
                          * StorageConfig timespanConfig.
                          * @member {google.privacy.dlp.v2.StorageConfig.ITimespanConfig|null|undefined} timespanConfig
                          * @memberof google.privacy.dlp.v2.StorageConfig
@@ -46823,12 +49938,12 @@
     
                         /**
                          * StorageConfig type.
-                         * @member {"datastoreOptions"|"cloudStorageOptions"|"bigQueryOptions"|undefined} type
+                         * @member {"datastoreOptions"|"cloudStorageOptions"|"bigQueryOptions"|"hybridOptions"|undefined} type
                          * @memberof google.privacy.dlp.v2.StorageConfig
                          * @instance
                          */
                         Object.defineProperty(StorageConfig.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["datastoreOptions", "cloudStorageOptions", "bigQueryOptions"]),
+                            get: $util.oneOfGetter($oneOfFields = ["datastoreOptions", "cloudStorageOptions", "bigQueryOptions", "hybridOptions"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -46864,6 +49979,8 @@
                                 $root.google.privacy.dlp.v2.BigQueryOptions.encode(message.bigQueryOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.timespanConfig != null && message.hasOwnProperty("timespanConfig"))
                                 $root.google.privacy.dlp.v2.StorageConfig.TimespanConfig.encode(message.timespanConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.hybridOptions != null && message.hasOwnProperty("hybridOptions"))
+                                $root.google.privacy.dlp.v2.HybridOptions.encode(message.hybridOptions, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -46906,6 +50023,9 @@
                                     break;
                                 case 4:
                                     message.bigQueryOptions = $root.google.privacy.dlp.v2.BigQueryOptions.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.hybridOptions = $root.google.privacy.dlp.v2.HybridOptions.decode(reader, reader.uint32());
                                     break;
                                 case 6:
                                     message.timespanConfig = $root.google.privacy.dlp.v2.StorageConfig.TimespanConfig.decode(reader, reader.uint32());
@@ -46974,6 +50094,16 @@
                                         return "bigQueryOptions." + error;
                                 }
                             }
+                            if (message.hybridOptions != null && message.hasOwnProperty("hybridOptions")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.HybridOptions.verify(message.hybridOptions);
+                                    if (error)
+                                        return "hybridOptions." + error;
+                                }
+                            }
                             if (message.timespanConfig != null && message.hasOwnProperty("timespanConfig")) {
                                 var error = $root.google.privacy.dlp.v2.StorageConfig.TimespanConfig.verify(message.timespanConfig);
                                 if (error)
@@ -47008,6 +50138,11 @@
                                 if (typeof object.bigQueryOptions !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.StorageConfig.bigQueryOptions: object expected");
                                 message.bigQueryOptions = $root.google.privacy.dlp.v2.BigQueryOptions.fromObject(object.bigQueryOptions);
+                            }
+                            if (object.hybridOptions != null) {
+                                if (typeof object.hybridOptions !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.StorageConfig.hybridOptions: object expected");
+                                message.hybridOptions = $root.google.privacy.dlp.v2.HybridOptions.fromObject(object.hybridOptions);
                             }
                             if (object.timespanConfig != null) {
                                 if (typeof object.timespanConfig !== "object")
@@ -47049,6 +50184,11 @@
                             }
                             if (message.timespanConfig != null && message.hasOwnProperty("timespanConfig"))
                                 object.timespanConfig = $root.google.privacy.dlp.v2.StorageConfig.TimespanConfig.toObject(message.timespanConfig, options);
+                            if (message.hybridOptions != null && message.hasOwnProperty("hybridOptions")) {
+                                object.hybridOptions = $root.google.privacy.dlp.v2.HybridOptions.toObject(message.hybridOptions, options);
+                                if (options.oneofs)
+                                    object.type = "hybridOptions";
+                            }
                             return object;
                         };
     
@@ -47353,6 +50493,304 @@
                         values[valuesById[3] = "IMAGE"] = 3;
                         values[valuesById[7] = "AVRO"] = 7;
                         return values;
+                    })();
+    
+                    v2.HybridOptions = (function() {
+    
+                        /**
+                         * Properties of a HybridOptions.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IHybridOptions
+                         * @property {string|null} [description] HybridOptions description
+                         * @property {Array.<string>|null} [requiredFindingLabelKeys] HybridOptions requiredFindingLabelKeys
+                         * @property {Object.<string,string>|null} [labels] HybridOptions labels
+                         * @property {google.privacy.dlp.v2.ITableOptions|null} [tableOptions] HybridOptions tableOptions
+                         */
+    
+                        /**
+                         * Constructs a new HybridOptions.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a HybridOptions.
+                         * @implements IHybridOptions
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IHybridOptions=} [properties] Properties to set
+                         */
+                        function HybridOptions(properties) {
+                            this.requiredFindingLabelKeys = [];
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HybridOptions description.
+                         * @member {string} description
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @instance
+                         */
+                        HybridOptions.prototype.description = "";
+    
+                        /**
+                         * HybridOptions requiredFindingLabelKeys.
+                         * @member {Array.<string>} requiredFindingLabelKeys
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @instance
+                         */
+                        HybridOptions.prototype.requiredFindingLabelKeys = $util.emptyArray;
+    
+                        /**
+                         * HybridOptions labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @instance
+                         */
+                        HybridOptions.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * HybridOptions tableOptions.
+                         * @member {google.privacy.dlp.v2.ITableOptions|null|undefined} tableOptions
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @instance
+                         */
+                        HybridOptions.prototype.tableOptions = null;
+    
+                        /**
+                         * Creates a new HybridOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridOptions=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.HybridOptions} HybridOptions instance
+                         */
+                        HybridOptions.create = function create(properties) {
+                            return new HybridOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridOptions message. Does not implicitly {@link google.privacy.dlp.v2.HybridOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridOptions} message HybridOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                            if (message.requiredFindingLabelKeys != null && message.requiredFindingLabelKeys.length)
+                                for (var i = 0; i < message.requiredFindingLabelKeys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.requiredFindingLabelKeys[i]);
+                            if (message.labels != null && message.hasOwnProperty("labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.tableOptions != null && message.hasOwnProperty("tableOptions"))
+                                $root.google.privacy.dlp.v2.TableOptions.encode(message.tableOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridOptions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.HybridOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @static
+                         * @param {google.privacy.dlp.v2.IHybridOptions} message HybridOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.HybridOptions} HybridOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridOptions(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.description = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.requiredFindingLabelKeys && message.requiredFindingLabelKeys.length))
+                                        message.requiredFindingLabelKeys = [];
+                                    message.requiredFindingLabelKeys.push(reader.string());
+                                    break;
+                                case 3:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                case 4:
+                                    message.tableOptions = $root.google.privacy.dlp.v2.TableOptions.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.HybridOptions} HybridOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridOptions message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.requiredFindingLabelKeys != null && message.hasOwnProperty("requiredFindingLabelKeys")) {
+                                if (!Array.isArray(message.requiredFindingLabelKeys))
+                                    return "requiredFindingLabelKeys: array expected";
+                                for (var i = 0; i < message.requiredFindingLabelKeys.length; ++i)
+                                    if (!$util.isString(message.requiredFindingLabelKeys[i]))
+                                        return "requiredFindingLabelKeys: string[] expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.tableOptions != null && message.hasOwnProperty("tableOptions")) {
+                                var error = $root.google.privacy.dlp.v2.TableOptions.verify(message.tableOptions);
+                                if (error)
+                                    return "tableOptions." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.HybridOptions} HybridOptions
+                         */
+                        HybridOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.HybridOptions)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.HybridOptions();
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.requiredFindingLabelKeys) {
+                                if (!Array.isArray(object.requiredFindingLabelKeys))
+                                    throw TypeError(".google.privacy.dlp.v2.HybridOptions.requiredFindingLabelKeys: array expected");
+                                message.requiredFindingLabelKeys = [];
+                                for (var i = 0; i < object.requiredFindingLabelKeys.length; ++i)
+                                    message.requiredFindingLabelKeys[i] = String(object.requiredFindingLabelKeys[i]);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridOptions.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.tableOptions != null) {
+                                if (typeof object.tableOptions !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.HybridOptions.tableOptions: object expected");
+                                message.tableOptions = $root.google.privacy.dlp.v2.TableOptions.fromObject(object.tableOptions);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @static
+                         * @param {google.privacy.dlp.v2.HybridOptions} message HybridOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requiredFindingLabelKeys = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.description = "";
+                                object.tableOptions = null;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.requiredFindingLabelKeys && message.requiredFindingLabelKeys.length) {
+                                object.requiredFindingLabelKeys = [];
+                                for (var j = 0; j < message.requiredFindingLabelKeys.length; ++j)
+                                    object.requiredFindingLabelKeys[j] = message.requiredFindingLabelKeys[j];
+                            }
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.tableOptions != null && message.hasOwnProperty("tableOptions"))
+                                object.tableOptions = $root.google.privacy.dlp.v2.TableOptions.toObject(message.tableOptions, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HybridOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.HybridOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HybridOptions;
                     })();
     
                     v2.BigQueryKey = (function() {
@@ -49204,6 +52642,214 @@
                         };
     
                         return EntityId;
+                    })();
+    
+                    v2.TableOptions = (function() {
+    
+                        /**
+                         * Properties of a TableOptions.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ITableOptions
+                         * @property {Array.<google.privacy.dlp.v2.IFieldId>|null} [identifyingFields] TableOptions identifyingFields
+                         */
+    
+                        /**
+                         * Constructs a new TableOptions.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a TableOptions.
+                         * @implements ITableOptions
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ITableOptions=} [properties] Properties to set
+                         */
+                        function TableOptions(properties) {
+                            this.identifyingFields = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TableOptions identifyingFields.
+                         * @member {Array.<google.privacy.dlp.v2.IFieldId>} identifyingFields
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @instance
+                         */
+                        TableOptions.prototype.identifyingFields = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TableOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITableOptions=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.TableOptions} TableOptions instance
+                         */
+                        TableOptions.create = function create(properties) {
+                            return new TableOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TableOptions message. Does not implicitly {@link google.privacy.dlp.v2.TableOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITableOptions} message TableOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.identifyingFields != null && message.identifyingFields.length)
+                                for (var i = 0; i < message.identifyingFields.length; ++i)
+                                    $root.google.privacy.dlp.v2.FieldId.encode(message.identifyingFields[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TableOptions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TableOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITableOptions} message TableOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TableOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.TableOptions} TableOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TableOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.identifyingFields && message.identifyingFields.length))
+                                        message.identifyingFields = [];
+                                    message.identifyingFields.push($root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TableOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.TableOptions} TableOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TableOptions message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TableOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.identifyingFields != null && message.hasOwnProperty("identifyingFields")) {
+                                if (!Array.isArray(message.identifyingFields))
+                                    return "identifyingFields: array expected";
+                                for (var i = 0; i < message.identifyingFields.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.FieldId.verify(message.identifyingFields[i]);
+                                    if (error)
+                                        return "identifyingFields." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TableOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.TableOptions} TableOptions
+                         */
+                        TableOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.TableOptions)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.TableOptions();
+                            if (object.identifyingFields) {
+                                if (!Array.isArray(object.identifyingFields))
+                                    throw TypeError(".google.privacy.dlp.v2.TableOptions.identifyingFields: array expected");
+                                message.identifyingFields = [];
+                                for (var i = 0; i < object.identifyingFields.length; ++i) {
+                                    if (typeof object.identifyingFields[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.TableOptions.identifyingFields: object expected");
+                                    message.identifyingFields[i] = $root.google.privacy.dlp.v2.FieldId.fromObject(object.identifyingFields[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TableOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @static
+                         * @param {google.privacy.dlp.v2.TableOptions} message TableOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TableOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.identifyingFields = [];
+                            if (message.identifyingFields && message.identifyingFields.length) {
+                                object.identifyingFields = [];
+                                for (var j = 0; j < message.identifyingFields.length; ++j)
+                                    object.identifyingFields[j] = $root.google.privacy.dlp.v2.FieldId.toObject(message.identifyingFields[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TableOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.TableOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TableOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TableOptions;
                     })();
     
                     return v2;
