@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,7 +42,12 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class CloudCatalogClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
@@ -227,7 +232,8 @@ export class CloudCatalogClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
