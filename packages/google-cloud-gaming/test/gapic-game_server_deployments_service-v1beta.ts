@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -110,6 +110,26 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.gameServerDeploymentsServiceStub, undefined);
+    await client.initialize();
+    assert(client.gameServerDeploymentsServiceStub);
+  });
+  it('has close method', () => {
+    const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('listGameServerDeployments', () => {
     it('invokes listGameServerDeployments without error', done => {
       const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
@@ -118,6 +138,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest = {};
       request.parent = '';
@@ -143,6 +165,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest = {};
       request.parent = '';
@@ -173,6 +197,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IGetGameServerDeploymentRequest = {};
       request.name = '';
@@ -198,6 +224,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IGetGameServerDeploymentRequest = {};
       request.name = '';
@@ -228,6 +256,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IGetGameServerDeploymentRolloutRequest = {};
       request.name = '';
@@ -256,6 +286,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IGetGameServerDeploymentRolloutRequest = {};
       request.name = '';
@@ -286,6 +318,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IPreviewGameServerDeploymentRolloutRequest = {};
       request.rollout = {};
@@ -315,6 +349,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IPreviewGameServerDeploymentRolloutRequest = {};
       request.rollout = {};
@@ -346,6 +382,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IFetchDeploymentStateRequest = {};
       request.name = '';
@@ -371,6 +409,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IFetchDeploymentStateRequest = {};
       request.name = '';
@@ -398,6 +438,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.ICreateGameServerDeploymentRequest = {};
       request.parent = '';
@@ -430,6 +472,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.ICreateGameServerDeploymentRequest = {};
       request.parent = '';
@@ -465,6 +509,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IDeleteGameServerDeploymentRequest = {};
       request.name = '';
@@ -497,6 +543,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IDeleteGameServerDeploymentRequest = {};
       request.name = '';
@@ -532,6 +580,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRequest = {};
       request.gameServerDeployment = {};
@@ -565,6 +615,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRequest = {};
       request.gameServerDeployment = {};
@@ -601,6 +653,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRolloutRequest = {};
       request.rollout = {};
@@ -634,6 +688,8 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRolloutRequest = {};
       request.rollout = {};

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -104,12 +104,30 @@ describe('v1beta.RealmsServiceClient', () => {
     });
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.realmsServiceStub, undefined);
+    await client.initialize();
+    assert(client.realmsServiceStub);
+  });
+  it('has close method', () => {
+    const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
   describe('listRealms', () => {
     it('invokes listRealms without error', done => {
       const client = new realmsserviceModule.v1beta.RealmsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IListRealmsRequest = {};
       request.parent = '';
@@ -133,6 +151,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IListRealmsRequest = {};
       request.parent = '';
@@ -158,6 +178,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IGetRealmRequest = {};
       request.name = '';
@@ -181,6 +203,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IGetRealmRequest = {};
       request.name = '';
@@ -206,6 +230,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IPreviewRealmUpdateRequest = {};
       request.realm = {};
@@ -230,6 +256,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IPreviewRealmUpdateRequest = {};
       request.realm = {};
@@ -256,6 +284,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.ICreateRealmRequest = {};
       request.parent = '';
@@ -286,6 +316,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.ICreateRealmRequest = {};
       request.parent = '';
@@ -319,6 +351,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IDeleteRealmRequest = {};
       request.name = '';
@@ -349,6 +383,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IDeleteRealmRequest = {};
       request.name = '';
@@ -382,6 +418,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IUpdateRealmRequest = {};
       request.realm = {};
@@ -413,6 +451,8 @@ describe('v1beta.RealmsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.gaming.v1beta.IUpdateRealmRequest = {};
       request.realm = {};

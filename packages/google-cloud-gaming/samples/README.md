@@ -12,6 +12,10 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Create_realm](#create_realm)
+  * [Delete_realm](#delete_realm)
+  * [Get_realm](#get_realm)
+  * [List_realms](#list_realms)
   * [Create Game Server Realm](#create-game-server-realm)
 
 ## Before you begin
@@ -26,6 +30,74 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Create_realm
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/create_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/create_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create_realm.js`
+
+
+-----
+
+
+
+
+### Delete_realm
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/delete_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/delete_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete_realm.js`
+
+
+-----
+
+
+
+
+### Get_realm
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/get_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get_realm.js`
+
+
+-----
+
+
+
+
+### List_realms
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/list_realms.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/list_realms.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list_realms.js`
+
+
+-----
+
 
 
 
