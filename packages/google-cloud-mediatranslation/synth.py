@@ -34,12 +34,12 @@ for version in versions:
     extra_proto_files=['google/cloud/common_resources.proto'],
     proto_path=f'/google/cloud/{name}/{version}',
     version=version)
-s.copy(library, excludes=['package.json', 'README.md'])
+s.copy(library, excludes=['linkinator.config.json', 'package.json', 'README.md'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, excludes=[])
+s.copy(templates, excludes=['linkinator.config.json'])
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
