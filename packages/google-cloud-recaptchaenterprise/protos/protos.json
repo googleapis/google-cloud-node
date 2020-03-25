@@ -6,6 +6,483 @@
           "nested": {
             "recaptchaenterprise": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.RecaptchaEnterprise.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/recaptchaenterprise/v1;recaptchaenterprise",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "RecaptchaEnterpriseProto",
+                    "java_package": "com.google.recaptchaenterprise.v1",
+                    "objc_class_prefix": "GCRE",
+                    "php_namespace": "Google\\Cloud\\RecaptchaEnterprise\\V1"
+                  },
+                  "nested": {
+                    "RecaptchaEnterpriseService": {
+                      "options": {
+                        "(google.api.default_host)": "recaptchaenterprise.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateAssessment": {
+                          "requestType": "CreateAssessmentRequest",
+                          "responseType": "Assessment",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/assessments",
+                            "(google.api.http).body": "assessment",
+                            "(google.api.method_signature)": "parent,assessment"
+                          }
+                        },
+                        "AnnotateAssessment": {
+                          "requestType": "AnnotateAssessmentRequest",
+                          "responseType": "AnnotateAssessmentResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/assessments/*}:annotate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,annotation"
+                          }
+                        },
+                        "CreateKey": {
+                          "requestType": "CreateKeyRequest",
+                          "responseType": "Key",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/keys",
+                            "(google.api.http).body": "key"
+                          }
+                        },
+                        "ListKeys": {
+                          "requestType": "ListKeysRequest",
+                          "responseType": "ListKeysResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/keys"
+                          }
+                        },
+                        "GetKey": {
+                          "requestType": "GetKeyRequest",
+                          "responseType": "Key",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/keys/*}"
+                          }
+                        },
+                        "UpdateKey": {
+                          "requestType": "UpdateKeyRequest",
+                          "responseType": "Key",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{key.name=projects/*/keys/*}",
+                            "(google.api.http).body": "key"
+                          }
+                        },
+                        "DeleteKey": {
+                          "requestType": "DeleteKeyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/keys/*}"
+                          }
+                        }
+                      }
+                    },
+                    "CreateAssessmentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "assessment": {
+                          "type": "Assessment",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AnnotateAssessmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Assessment"
+                          }
+                        },
+                        "annotation": {
+                          "type": "Annotation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Annotation": {
+                          "values": {
+                            "ANNOTATION_UNSPECIFIED": 0,
+                            "LEGITIMATE": 1,
+                            "FRAUDULENT": 2,
+                            "PASSWORD_CORRECT": 3,
+                            "PASSWORD_INCORRECT": 4
+                          }
+                        }
+                      }
+                    },
+                    "AnnotateAssessmentResponse": {
+                      "fields": {}
+                    },
+                    "Assessment": {
+                      "options": {
+                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Assessment",
+                        "(google.api.resource).pattern": "projects/{project}/assessments/{assessment}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "event": {
+                          "type": "Event",
+                          "id": 2
+                        },
+                        "riskAnalysis": {
+                          "type": "RiskAnalysis",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tokenProperties": {
+                          "type": "TokenProperties",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Event": {
+                      "fields": {
+                        "token": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "siteKey": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userAgent": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userIpAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "expectedAction": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RiskAnalysis": {
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "reasons": {
+                          "rule": "repeated",
+                          "type": "ClassificationReason",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ClassificationReason": {
+                          "values": {
+                            "CLASSIFICATION_REASON_UNSPECIFIED": 0,
+                            "AUTOMATION": 1,
+                            "UNEXPECTED_ENVIRONMENT": 2,
+                            "TOO_MUCH_TRAFFIC": 3,
+                            "UNEXPECTED_USAGE_PATTERNS": 4,
+                            "LOW_CONFIDENCE_SCORE": 5
+                          }
+                        }
+                      }
+                    },
+                    "TokenProperties": {
+                      "fields": {
+                        "valid": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "invalidReason": {
+                          "type": "InvalidReason",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "hostname": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "action": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "InvalidReason": {
+                          "values": {
+                            "INVALID_REASON_UNSPECIFIED": 0,
+                            "UNKNOWN_INVALID_REASON": 1,
+                            "MALFORMED": 2,
+                            "EXPIRED": 3,
+                            "DUPE": 4,
+                            "MISSING": 5
+                          }
+                        }
+                      }
+                    },
+                    "CreateKeyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "key": {
+                          "type": "Key",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListKeysRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListKeysResponse": {
+                      "fields": {
+                        "keys": {
+                          "rule": "repeated",
+                          "type": "Key",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateKeyRequest": {
+                      "fields": {
+                        "key": {
+                          "type": "Key",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        }
+                      }
+                    },
+                    "Key": {
+                      "options": {
+                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Key",
+                        "(google.api.resource).pattern": "projects/{project}/keys/{key}"
+                      },
+                      "oneofs": {
+                        "platformSettings": {
+                          "oneof": [
+                            "webSettings",
+                            "androidSettings",
+                            "iosSettings"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "webSettings": {
+                          "type": "WebKeySettings",
+                          "id": 3
+                        },
+                        "androidSettings": {
+                          "type": "AndroidKeySettings",
+                          "id": 4
+                        },
+                        "iosSettings": {
+                          "type": "IOSKeySettings",
+                          "id": 5
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "WebKeySettings": {
+                      "fields": {
+                        "allowAllDomains": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "allowedDomains": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "allowAmpTraffic": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "integrationType": {
+                          "type": "IntegrationType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "challengeSecurityPreference": {
+                          "type": "ChallengeSecurityPreference",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "IntegrationType": {
+                          "values": {
+                            "INTEGRATION_TYPE_UNSPECIFIED": 0,
+                            "SCORE": 1,
+                            "CHECKBOX": 2,
+                            "INVISIBLE": 3
+                          }
+                        },
+                        "ChallengeSecurityPreference": {
+                          "values": {
+                            "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED": 0,
+                            "USABILITY": 1,
+                            "BALANCE": 2,
+                            "SECURITY": 3
+                          }
+                        }
+                      }
+                    },
+                    "AndroidKeySettings": {
+                      "fields": {
+                        "allowedPackageNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "IOSKeySettings": {
+                      "fields": {
+                        "allowedBundleIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.RecaptchaEnterprise.V1Beta1",

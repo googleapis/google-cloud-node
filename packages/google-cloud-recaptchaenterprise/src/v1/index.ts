@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {RecaptchaEnterpriseServiceV1Beta1Client} from './recaptcha_enterprise_service_v1_beta1_client';
+export {RecaptchaEnterpriseServiceClient} from './recaptcha_enterprise_service_client';

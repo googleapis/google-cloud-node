@@ -22,9 +22,9 @@
 async function main(projectNumber) {
   // Create the reCAPTCHA client library.
   const {
-    RecaptchaEnterpriseServiceV1Beta1Client,
+    RecaptchaEnterpriseServiceClient,
   } = require('@google-cloud/recaptcha-enterprise');
-  const client = new RecaptchaEnterpriseServiceV1Beta1Client();
+  const client = new RecaptchaEnterpriseServiceClient();
 
   // format the path to the project (it should be prefaced with projects/).
   const formattedParent = client.projectPath(projectNumber);

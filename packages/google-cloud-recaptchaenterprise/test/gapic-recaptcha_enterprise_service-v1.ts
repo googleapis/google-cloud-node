@@ -19,7 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-const recaptchaenterpriseservicev1beta1Module = require('../src');
+const recaptchaenterpriseserviceModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
 class FakeError {
@@ -57,32 +57,31 @@ function mockSimpleGrpcMethod(
     }
   };
 }
-describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
+describe('v1.RecaptchaEnterpriseServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =
-      recaptchaenterpriseservicev1beta1Module.v1beta1
-        .RecaptchaEnterpriseServiceV1Beta1Client.servicePath;
+      recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient
+        .servicePath;
     assert(servicePath);
   });
   it('has apiEndpoint', () => {
     const apiEndpoint =
-      recaptchaenterpriseservicev1beta1Module.v1beta1
-        .RecaptchaEnterpriseServiceV1Beta1Client.apiEndpoint;
+      recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient
+        .apiEndpoint;
     assert(apiEndpoint);
   });
   it('has port', () => {
     const port =
-      recaptchaenterpriseservicev1beta1Module.v1beta1
-        .RecaptchaEnterpriseServiceV1Beta1Client.port;
+      recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
   it('should create a client with no option', () => {
-    const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client();
+    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient();
     assert(client);
   });
   it('should create a client with gRPC fallback', () => {
-    const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
       {
         fallback: true,
       }
@@ -90,18 +89,18 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
     assert(client);
   });
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
       {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       }
     );
-    assert.strictEqual(client.recaptchaEnterpriseServiceV1Beta1Stub, undefined);
+    assert.strictEqual(client.recaptchaEnterpriseServiceStub, undefined);
     await client.initialize();
-    assert(client.recaptchaEnterpriseServiceV1Beta1Stub);
+    assert(client.recaptchaEnterpriseServiceStub);
   });
   it('has close method', () => {
-    const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
       {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -111,7 +110,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
   describe('createAssessment', () => {
     it('invokes createAssessment without error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -120,7 +119,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest = {};
       request.parent = '';
       // Mock response
       const expectedResponse = {};
@@ -138,7 +137,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
     });
 
     it('invokes createAssessment with error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -147,7 +146,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest = {};
       request.parent = '';
       // Mock response
       const expectedResponse = {};
@@ -167,7 +166,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
   describe('annotateAssessment', () => {
     it('invokes annotateAssessment without error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -176,7 +175,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest = {};
       request.name = '';
       // Mock response
       const expectedResponse = {};
@@ -194,7 +193,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
     });
 
     it('invokes annotateAssessment with error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -203,7 +202,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest = {};
       request.name = '';
       // Mock response
       const expectedResponse = {};
@@ -223,7 +222,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
   describe('createKey', () => {
     it('invokes createKey without error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -232,7 +231,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest = {};
       request.parent = '';
       // Mock response
       const expectedResponse = {};
@@ -250,7 +249,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
     });
 
     it('invokes createKey with error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -259,7 +258,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest = {};
       request.parent = '';
       // Mock response
       const expectedResponse = {};
@@ -279,7 +278,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
   describe('getKey', () => {
     it('invokes getKey without error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -288,7 +287,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest = {};
       request.name = '';
       // Mock response
       const expectedResponse = {};
@@ -306,7 +305,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
     });
 
     it('invokes getKey with error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -315,7 +314,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest = {};
       request.name = '';
       // Mock response
       const expectedResponse = {};
@@ -331,7 +330,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
   describe('updateKey', () => {
     it('invokes updateKey without error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -340,7 +339,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest = {};
       request.key = {};
       request.key.name = '';
       // Mock response
@@ -359,7 +358,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
     });
 
     it('invokes updateKey with error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -368,7 +367,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest = {};
       request.key = {};
       request.key.name = '';
       // Mock response
@@ -389,7 +388,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
   describe('deleteKey', () => {
     it('invokes deleteKey without error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -398,7 +397,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest = {};
       request.name = '';
       // Mock response
       const expectedResponse = {};
@@ -416,7 +415,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
     });
 
     it('invokes deleteKey with error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -425,7 +424,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest = {};
       request.name = '';
       // Mock response
       const expectedResponse = {};
@@ -445,7 +444,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
   describe('listKeys', () => {
     it('invokes listKeys without error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -454,7 +453,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest = {};
       request.parent = '';
       // Mock response
       const expectedResponse = {};
@@ -476,7 +475,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
   describe('listKeysStream', () => {
     it('invokes listKeysStream without error', done => {
-      const client = new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -485,7 +484,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       // Initialize client before mocking
       client.initialize();
       // Mock request
-      const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest = {};
+      const request: protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest = {};
       request.parent = '';
       // Mock response
       const expectedResponse = {response: 'data'};

@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v1beta1']
+versions = ['v1', 'v1beta1']
 for version in versions:
   library = gapic.typescript_library(
     'recaptchaenterprise', version,
