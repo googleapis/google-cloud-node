@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-paginator/compare/v2.0.3...v3.0.0) (2020-03-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **dep:** upgrade gts 2.0.0 (#194)
+* **deps:** deprecated node 8 to 10; upgrade typescript
+
+### Miscellaneous Chores
+
+* **dep:** upgrade gts 2.0.0 ([#194](https://www.github.com/googleapis/nodejs-paginator/issues/194)) ([4eaf9be](https://www.github.com/googleapis/nodejs-paginator/commit/4eaf9bed1fcfd0f10e877ff15c1d0e968e3356c8))
+* **deps:** deprecated node 8 to 10; upgrade typescript ([f6434ab](https://www.github.com/googleapis/nodejs-paginator/commit/f6434ab9cacb6ab804c070f19c38b6072ca326b5))
+
 ### [2.0.3](https://www.github.com/googleapis/nodejs-paginator/compare/v2.0.2...v2.0.3) (2019-12-05)
 
 
