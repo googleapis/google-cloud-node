@@ -33,4 +33,4 @@ s.copy(templates)
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
-subprocess.run(['npm', 'compileProtos', 'run'])
+subprocess.run(['npx', 'compileProtos', 'src'])
