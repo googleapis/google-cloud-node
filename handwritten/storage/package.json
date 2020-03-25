@@ -61,7 +61,7 @@
     "date-and-time": "^0.13.0",
     "duplexify": "^3.5.0",
     "extend": "^3.0.2",
-    "gaxios": "^2.0.1",
+    "gaxios": "^3.0.0",
     "gcs-resumable-upload": "^2.2.4",
     "hash-stream-validation": "^0.2.2",
     "mime": "^2.2.0",
