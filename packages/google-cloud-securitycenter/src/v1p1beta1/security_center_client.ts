@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,12 @@ const version = require('../../../package.json').version;
  * @memberof v1p1beta1
  */
 export class SecurityCenterClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
@@ -162,13 +167,13 @@ export class SecurityCenterClient {
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
-      organizationAssetPathTemplate: new this._gaxModule.PathTemplate(
+      organizationAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/assets/{asset}/securityMarks'
       ),
       organizationSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/organizationSettings'
       ),
-      organizationSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
+      organizationSourceFindingSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
       ),
       sourcePathTemplate: new this._gaxModule.PathTemplate(
@@ -320,7 +325,8 @@ export class SecurityCenterClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -3746,42 +3752,48 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Return a fully-qualified organizationAsset resource name string.
+   * Return a fully-qualified organizationAssetSecurityMarks resource name string.
    *
    * @param {string} organization
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  organizationAssetPath(organization: string, asset: string) {
-    return this._pathTemplates.organizationAssetPathTemplate.render({
-      organization,
-      asset,
-    });
+  organizationAssetSecurityMarksPath(organization: string, asset: string) {
+    return this._pathTemplates.organizationAssetSecurityMarksPathTemplate.render(
+      {
+        organization,
+        asset,
+      }
+    );
   }
 
   /**
-   * Parse the organization from OrganizationAsset resource.
+   * Parse the organization from OrganizationAssetSecurityMarks resource.
    *
-   * @param {string} organizationAssetName
-   *   A fully-qualified path representing organization_asset resource.
+   * @param {string} organizationAssetSecurityMarksName
+   *   A fully-qualified path representing organization_asset_securityMarks resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAssetName(organizationAssetName: string) {
-    return this._pathTemplates.organizationAssetPathTemplate.match(
-      organizationAssetName
+  matchOrganizationFromOrganizationAssetSecurityMarksName(
+    organizationAssetSecurityMarksName: string
+  ) {
+    return this._pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
+      organizationAssetSecurityMarksName
     ).organization;
   }
 
   /**
-   * Parse the asset from OrganizationAsset resource.
+   * Parse the asset from OrganizationAssetSecurityMarks resource.
    *
-   * @param {string} organizationAssetName
-   *   A fully-qualified path representing organization_asset resource.
+   * @param {string} organizationAssetSecurityMarksName
+   *   A fully-qualified path representing organization_asset_securityMarks resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromOrganizationAssetName(organizationAssetName: string) {
-    return this._pathTemplates.organizationAssetPathTemplate.match(
-      organizationAssetName
+  matchAssetFromOrganizationAssetSecurityMarksName(
+    organizationAssetSecurityMarksName: string
+  ) {
+    return this._pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
+      organizationAssetSecurityMarksName
     ).asset;
   }
 
@@ -3813,67 +3825,69 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Return a fully-qualified organizationSourceFinding resource name string.
+   * Return a fully-qualified organizationSourceFindingSecurityMarks resource name string.
    *
    * @param {string} organization
    * @param {string} source
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  organizationSourceFindingPath(
+  organizationSourceFindingSecurityMarksPath(
     organization: string,
     source: string,
     finding: string
   ) {
-    return this._pathTemplates.organizationSourceFindingPathTemplate.render({
-      organization,
-      source,
-      finding,
-    });
+    return this._pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render(
+      {
+        organization,
+        source,
+        finding,
+      }
+    );
   }
 
   /**
-   * Parse the organization from OrganizationSourceFinding resource.
+   * Parse the organization from OrganizationSourceFindingSecurityMarks resource.
    *
-   * @param {string} organizationSourceFindingName
-   *   A fully-qualified path representing organization_source_finding resource.
+   * @param {string} organizationSourceFindingSecurityMarksName
+   *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSourceFindingName(
-    organizationSourceFindingName: string
+  matchOrganizationFromOrganizationSourceFindingSecurityMarksName(
+    organizationSourceFindingSecurityMarksName: string
   ) {
-    return this._pathTemplates.organizationSourceFindingPathTemplate.match(
-      organizationSourceFindingName
+    return this._pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
+      organizationSourceFindingSecurityMarksName
     ).organization;
   }
 
   /**
-   * Parse the source from OrganizationSourceFinding resource.
+   * Parse the source from OrganizationSourceFindingSecurityMarks resource.
    *
-   * @param {string} organizationSourceFindingName
-   *   A fully-qualified path representing organization_source_finding resource.
+   * @param {string} organizationSourceFindingSecurityMarksName
+   *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromOrganizationSourceFindingName(
-    organizationSourceFindingName: string
+  matchSourceFromOrganizationSourceFindingSecurityMarksName(
+    organizationSourceFindingSecurityMarksName: string
   ) {
-    return this._pathTemplates.organizationSourceFindingPathTemplate.match(
-      organizationSourceFindingName
+    return this._pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
+      organizationSourceFindingSecurityMarksName
     ).source;
   }
 
   /**
-   * Parse the finding from OrganizationSourceFinding resource.
+   * Parse the finding from OrganizationSourceFindingSecurityMarks resource.
    *
-   * @param {string} organizationSourceFindingName
-   *   A fully-qualified path representing organization_source_finding resource.
+   * @param {string} organizationSourceFindingSecurityMarksName
+   *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromOrganizationSourceFindingName(
-    organizationSourceFindingName: string
+  matchFindingFromOrganizationSourceFindingSecurityMarksName(
+    organizationSourceFindingSecurityMarksName: string
   ) {
-    return this._pathTemplates.organizationSourceFindingPathTemplate.match(
-      organizationSourceFindingName
+    return this._pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
+      organizationSourceFindingSecurityMarksName
     ).finding;
   }
 
