@@ -1,25 +1,11 @@
 {
-  "updateTime": "2020-02-14T12:07:28.113967Z",
+  "updateTime": "2020-03-22T11:09:08.391435Z",
   "sources": [
     {
       "git": {
-        "name": ".",
-        "remote": "https://github.com/googleapis/cloud-profiler-nodejs.git",
-        "sha": "fc1381c08a28ffd37aaddb4144a4987fe6122fa5"
-      }
-    },
-    {
-      "git": {
         "name": "synthtool",
-        "remote": "rpc://devrel/cloud/libraries/tools/autosynth",
-        "sha": "dd7cd93888cbeb1d4c56a1ca814491c7813160e8"
-      }
-    },
-    {
-      "template": {
-        "name": "node_library",
-        "origin": "synthtool.gcp",
-        "version": "2020.2.4"
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "7e98e1609c91082f4eeb63b530c6468aefd18cfd"
       }
     }
   ]
