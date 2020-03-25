@@ -61,8 +61,8 @@ npm install @google-cloud/web-risk
  */
 async function quickstart(uri) {
   // Create the WebRisk client library.
-  const {WebRiskServiceV1Beta1Client} = require('@google-cloud/web-risk');
-  const client = new WebRiskServiceV1Beta1Client();
+  const {WebRiskServiceClient} = require('@google-cloud/web-risk');
+  const client = new WebRiskServiceClient();
 
   // Create an API request to check for malware, social engineering,
   // and unwanted software.
