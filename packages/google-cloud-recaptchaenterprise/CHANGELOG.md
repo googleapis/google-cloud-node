@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.7.0...v1.8.0) (2020-03-25)
+
+
+### Features
+
+* add the v1 API surface ([#141](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/141)) ([bb1bd33](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/bb1bd33c1f51d37ca8db15ce7579259560250530))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.6.0...v1.7.0) (2020-03-10)
 
 
