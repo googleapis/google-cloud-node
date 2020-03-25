@@ -1,3 +1,31 @@
 {
-  "updateTime": "2020-03-06T20:03:38.307900Z"
+  "updateTime": "2020-03-22T11:23:41.160781Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "0be7105dc52590fa9a24e784052298ae37ce53aa",
+        "internalRef": "302154871"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "7e98e1609c91082f4eeb63b530c6468aefd18cfd"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "datastore",
+        "apiVersion": "v1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    }
+  ]
 }
