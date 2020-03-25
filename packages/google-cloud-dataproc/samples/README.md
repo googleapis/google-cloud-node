@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Create Cluster](#create-cluster)
+  * [Instantiate Inline Workflow Template](#instantiate-inline-workflow-template)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -40,6 +41,23 @@ __Usage:__
 
 
 `node samples/createCluster.js`
+
+
+-----
+
+
+
+
+### Instantiate Inline Workflow Template
+
+View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/instantiateInlineWorkflowTemplate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/instantiateInlineWorkflowTemplate.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/instantiateInlineWorkflowTemplate.js`
 
 
 -----
