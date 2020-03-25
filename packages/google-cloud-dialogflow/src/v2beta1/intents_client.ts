@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -71,7 +71,12 @@ const version = require('../../../package.json').version;
  * @memberof v2beta1
  */
 export class IntentsClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
@@ -179,16 +184,16 @@ export class IntentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new this._gaxModule.PathTemplate(
+      projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
-      projectIntentPathTemplate: new this._gaxModule.PathTemplate(
+      projectAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      projectLocationPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent'
       ),
-      projectLocationIntentPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/intents/{intent}'
       ),
     };
@@ -265,7 +270,8 @@ export class IntentsClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -1049,118 +1055,123 @@ export class IntentsClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified projectAgent resource name string.
    *
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
+  projectAgentPath(project: string) {
+    return this._pathTemplates.projectAgentPathTemplate.render({
       project,
     });
   }
 
   /**
-   * Parse the project from Project resource.
+   * Parse the project from ProjectAgent resource.
    *
-   * @param {string} projectName
-   *   A fully-qualified path representing project resource.
+   * @param {string} projectAgentName
+   *   A fully-qualified path representing project_agent resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  matchProjectFromProjectAgentName(projectAgentName: string) {
+    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+      .project;
   }
 
   /**
-   * Return a fully-qualified projectIntent resource name string.
+   * Return a fully-qualified projectAgentIntent resource name string.
    *
    * @param {string} project
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectIntentPath(project: string, intent: string) {
-    return this._pathTemplates.projectIntentPathTemplate.render({
+  projectAgentIntentPath(project: string, intent: string) {
+    return this._pathTemplates.projectAgentIntentPathTemplate.render({
       project,
       intent,
     });
   }
 
   /**
-   * Parse the project from ProjectIntent resource.
+   * Parse the project from ProjectAgentIntent resource.
    *
-   * @param {string} projectIntentName
-   *   A fully-qualified path representing project_intent resource.
+   * @param {string} projectAgentIntentName
+   *   A fully-qualified path representing project_agent_intent resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectIntentName(projectIntentName: string) {
-    return this._pathTemplates.projectIntentPathTemplate.match(
-      projectIntentName
+  matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
+    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
     ).project;
   }
 
   /**
-   * Parse the intent from ProjectIntent resource.
+   * Parse the intent from ProjectAgentIntent resource.
    *
-   * @param {string} projectIntentName
-   *   A fully-qualified path representing project_intent resource.
+   * @param {string} projectAgentIntentName
+   *   A fully-qualified path representing project_agent_intent resource.
    * @returns {string} A string representing the intent.
    */
-  matchIntentFromProjectIntentName(projectIntentName: string) {
-    return this._pathTemplates.projectIntentPathTemplate.match(
-      projectIntentName
+  matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
+    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
     ).intent;
   }
 
   /**
-   * Return a fully-qualified projectLocation resource name string.
+   * Return a fully-qualified projectLocationAgent resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationPath(project: string, location: string) {
-    return this._pathTemplates.projectLocationPathTemplate.render({
+  projectLocationAgentPath(project: string, location: string) {
+    return this._pathTemplates.projectLocationAgentPathTemplate.render({
       project,
       location,
     });
   }
 
   /**
-   * Parse the project from ProjectLocation resource.
+   * Parse the project from ProjectLocationAgent resource.
    *
-   * @param {string} projectLocationName
-   *   A fully-qualified path representing project_location resource.
+   * @param {string} projectLocationAgentName
+   *   A fully-qualified path representing project_location_agent resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationName(projectLocationName: string) {
-    return this._pathTemplates.projectLocationPathTemplate.match(
-      projectLocationName
+  matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
+    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
     ).project;
   }
 
   /**
-   * Parse the location from ProjectLocation resource.
+   * Parse the location from ProjectLocationAgent resource.
    *
-   * @param {string} projectLocationName
-   *   A fully-qualified path representing project_location resource.
+   * @param {string} projectLocationAgentName
+   *   A fully-qualified path representing project_location_agent resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationName(projectLocationName: string) {
-    return this._pathTemplates.projectLocationPathTemplate.match(
-      projectLocationName
+  matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
+    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
     ).location;
   }
 
   /**
-   * Return a fully-qualified projectLocationIntent resource name string.
+   * Return a fully-qualified projectLocationAgentIntent resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectLocationIntentPath(project: string, location: string, intent: string) {
-    return this._pathTemplates.projectLocationIntentPathTemplate.render({
+  projectLocationAgentIntentPath(
+    project: string,
+    location: string,
+    intent: string
+  ) {
+    return this._pathTemplates.projectLocationAgentIntentPathTemplate.render({
       project,
       location,
       intent,
@@ -1168,43 +1179,47 @@ export class IntentsClient {
   }
 
   /**
-   * Parse the project from ProjectLocationIntent resource.
+   * Parse the project from ProjectLocationAgentIntent resource.
    *
-   * @param {string} projectLocationIntentName
-   *   A fully-qualified path representing project_location_intent resource.
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationIntentName(projectLocationIntentName: string) {
-    return this._pathTemplates.projectLocationIntentPathTemplate.match(
-      projectLocationIntentName
+  matchProjectFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
     ).project;
   }
 
   /**
-   * Parse the location from ProjectLocationIntent resource.
+   * Parse the location from ProjectLocationAgentIntent resource.
    *
-   * @param {string} projectLocationIntentName
-   *   A fully-qualified path representing project_location_intent resource.
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationIntentName(
-    projectLocationIntentName: string
+  matchLocationFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationIntentPathTemplate.match(
-      projectLocationIntentName
+    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
     ).location;
   }
 
   /**
-   * Parse the intent from ProjectLocationIntent resource.
+   * Parse the intent from ProjectLocationAgentIntent resource.
    *
-   * @param {string} projectLocationIntentName
-   *   A fully-qualified path representing project_location_intent resource.
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the intent.
    */
-  matchIntentFromProjectLocationIntentName(projectLocationIntentName: string) {
-    return this._pathTemplates.projectLocationIntentPathTemplate.match(
-      projectLocationIntentName
+  matchIntentFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
     ).intent;
   }
 

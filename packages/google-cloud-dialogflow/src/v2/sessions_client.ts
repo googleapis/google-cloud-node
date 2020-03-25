@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,7 +40,12 @@ const version = require('../../../package.json').version;
  * @memberof v2
  */
 export class SessionsClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
@@ -160,11 +165,11 @@ export class SessionsClient {
       intentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      projectLocationSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/sessions/{session}'
-      ),
-      projectSessionPathTemplate: new this._gaxModule.PathTemplate(
+      projectAgentSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}'
+      ),
+      projectLocationAgentSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/sessions/{session}'
       ),
       sessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
@@ -232,7 +237,8 @@ export class SessionsClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -341,10 +347,14 @@ export class SessionsClient {
    *   The request object that will be sent.
    * @param {string} request.session
    *   Required. The name of the session this query is sent to. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
-   *   caller to choose an appropriate session ID. It can be a random number or
-   *   some type of user identifier (preferably hashed). The length of the session
-   *   ID must not exceed 36 bytes.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>`, or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+   *   default 'draft' environment. If `User ID` is not specified, we are using
+   *   "-". It's up to the API caller to choose an appropriate `Session ID` and
+   *   `User Id`. They can be a random number or some type of user and session
+   *   identifiers (preferably hashed). The length of the `Session ID` and
+   *   `User ID` must not exceed 36 characters.
    * @param {google.cloud.dialogflow.v2.QueryParameters} request.queryParams
    *   The parameters of this query.
    * @param {google.cloud.dialogflow.v2.QueryInput} request.queryInput
@@ -587,19 +597,59 @@ export class SessionsClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationSession resource name string.
+   * Return a fully-qualified projectAgentSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectAgentSessionPath(project: string, session: string) {
+    return this._pathTemplates.projectAgentSessionPathTemplate.render({
+      project,
+      session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentSession resource.
+   *
+   * @param {string} projectAgentSessionName
+   *   A fully-qualified path representing project_agent_session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentSessionName(projectAgentSessionName: string) {
+    return this._pathTemplates.projectAgentSessionPathTemplate.match(
+      projectAgentSessionName
+    ).project;
+  }
+
+  /**
+   * Parse the session from ProjectAgentSession resource.
+   *
+   * @param {string} projectAgentSessionName
+   *   A fully-qualified path representing project_agent_session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentSessionName(projectAgentSessionName: string) {
+    return this._pathTemplates.projectAgentSessionPathTemplate.match(
+      projectAgentSessionName
+    ).session;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentSession resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationSessionPath(
+  projectLocationAgentSessionPath(
     project: string,
     location: string,
     session: string
   ) {
-    return this._pathTemplates.projectLocationSessionPathTemplate.render({
+    return this._pathTemplates.projectLocationAgentSessionPathTemplate.render({
       project,
       location,
       session,
@@ -607,87 +657,47 @@ export class SessionsClient {
   }
 
   /**
-   * Parse the project from ProjectLocationSession resource.
+   * Parse the project from ProjectLocationAgentSession resource.
    *
-   * @param {string} projectLocationSessionName
-   *   A fully-qualified path representing project_location_session resource.
+   * @param {string} projectLocationAgentSessionName
+   *   A fully-qualified path representing project_location_agent_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSessionName(
-    projectLocationSessionName: string
+  matchProjectFromProjectLocationAgentSessionName(
+    projectLocationAgentSessionName: string
   ) {
-    return this._pathTemplates.projectLocationSessionPathTemplate.match(
-      projectLocationSessionName
+    return this._pathTemplates.projectLocationAgentSessionPathTemplate.match(
+      projectLocationAgentSessionName
     ).project;
   }
 
   /**
-   * Parse the location from ProjectLocationSession resource.
+   * Parse the location from ProjectLocationAgentSession resource.
    *
-   * @param {string} projectLocationSessionName
-   *   A fully-qualified path representing project_location_session resource.
+   * @param {string} projectLocationAgentSessionName
+   *   A fully-qualified path representing project_location_agent_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSessionName(
-    projectLocationSessionName: string
+  matchLocationFromProjectLocationAgentSessionName(
+    projectLocationAgentSessionName: string
   ) {
-    return this._pathTemplates.projectLocationSessionPathTemplate.match(
-      projectLocationSessionName
+    return this._pathTemplates.projectLocationAgentSessionPathTemplate.match(
+      projectLocationAgentSessionName
     ).location;
   }
 
   /**
-   * Parse the session from ProjectLocationSession resource.
+   * Parse the session from ProjectLocationAgentSession resource.
    *
-   * @param {string} projectLocationSessionName
-   *   A fully-qualified path representing project_location_session resource.
+   * @param {string} projectLocationAgentSessionName
+   *   A fully-qualified path representing project_location_agent_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationSessionName(
-    projectLocationSessionName: string
+  matchSessionFromProjectLocationAgentSessionName(
+    projectLocationAgentSessionName: string
   ) {
-    return this._pathTemplates.projectLocationSessionPathTemplate.match(
-      projectLocationSessionName
-    ).session;
-  }
-
-  /**
-   * Return a fully-qualified projectSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectSessionPath(project: string, session: string) {
-    return this._pathTemplates.projectSessionPathTemplate.render({
-      project,
-      session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectSession resource.
-   *
-   * @param {string} projectSessionName
-   *   A fully-qualified path representing project_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectSessionName(projectSessionName: string) {
-    return this._pathTemplates.projectSessionPathTemplate.match(
-      projectSessionName
-    ).project;
-  }
-
-  /**
-   * Parse the session from ProjectSession resource.
-   *
-   * @param {string} projectSessionName
-   *   A fully-qualified path representing project_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectSessionName(projectSessionName: string) {
-    return this._pathTemplates.projectSessionPathTemplate.match(
-      projectSessionName
+    return this._pathTemplates.projectLocationAgentSessionPathTemplate.match(
+      projectLocationAgentSessionName
     ).session;
   }
 

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -56,7 +56,12 @@ const version = require('../../../package.json').version;
  * @memberof v2
  */
 export class SessionEntityTypesClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
@@ -251,7 +256,8 @@ export class SessionEntityTypesClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -366,7 +372,11 @@ export class SessionEntityTypesClient {
    * @param {string} request.name
    *   Required. The name of the session entity type. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>`.
+   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+   *   Name>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -455,7 +465,11 @@ export class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to create a session entity type for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+   *   sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {google.cloud.dialogflow.v2.SessionEntityType} request.sessionEntityType
    *   Required. The session entity type to create.
    * @param {object} [options]
@@ -546,9 +560,7 @@ export class SessionEntityTypesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dialogflow.v2.SessionEntityType} request.sessionEntityType
-   *   Required. The entity type to update. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>`.
+   *   Required. The session entity type to update.
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
    * @param {object} [options]
@@ -641,7 +653,11 @@ export class SessionEntityTypesClient {
    * @param {string} request.name
    *   Required. The name of the entity type to delete. Format:
    *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>`.
+   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+   *   Name>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -728,7 +744,11 @@ export class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+   *   sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -814,7 +834,11 @@ export class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+   *   sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,7 +57,12 @@ const version = require('../../../package.json').version;
  * @memberof v2
  */
 export class ContextsClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
@@ -177,6 +182,12 @@ export class ContextsClient {
       intentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectAgentSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/sessions/{session}'
+      ),
       sessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
@@ -253,7 +264,8 @@ export class ContextsClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -359,7 +371,11 @@ export class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the context. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+   *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>/contexts/<Context ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -434,7 +450,11 @@ export class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to create a context for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {google.cloud.dialogflow.v2.Context} request.context
    *   Required. The context to create.
    * @param {object} [options]
@@ -585,7 +605,11 @@ export class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the context to delete. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+   *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>/contexts/<Context ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -663,7 +687,11 @@ export class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the session to delete all contexts from. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
+   *   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *   ID>`.
+   *   If `Environment ID` is not specified we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -742,7 +770,11 @@ export class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -824,7 +856,11 @@ export class ContextsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1004,6 +1040,69 @@ export class ContextsClient {
    */
   matchIntentFromIntentName(intentName: string) {
     return this._pathTemplates.intentPathTemplate.match(intentName).intent;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectAgentSessionPath(project: string, session: string) {
+    return this._pathTemplates.projectAgentSessionPathTemplate.render({
+      project,
+      session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentSession resource.
+   *
+   * @param {string} projectAgentSessionName
+   *   A fully-qualified path representing project_agent_session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentSessionName(projectAgentSessionName: string) {
+    return this._pathTemplates.projectAgentSessionPathTemplate.match(
+      projectAgentSessionName
+    ).project;
+  }
+
+  /**
+   * Parse the session from ProjectAgentSession resource.
+   *
+   * @param {string} projectAgentSessionName
+   *   A fully-qualified path representing project_agent_session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentSessionName(projectAgentSessionName: string) {
+    return this._pathTemplates.projectAgentSessionPathTemplate.match(
+      projectAgentSessionName
+    ).session;
   }
 
   /**

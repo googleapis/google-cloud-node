@@ -419,7 +419,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "languageCode": {
@@ -537,34 +538,24 @@
                         },
                         "enableWordInfo": {
                           "type": "bool",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 13
                         },
                         "phraseHints": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "deprecated": true
                           }
                         },
                         "speechContexts": {
                           "rule": "repeated",
                           "type": "SpeechContext",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 11
                         },
                         "model": {
                           "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 7
                         },
                         "modelVariant": {
                           "type": "SpeechModelVariant",
@@ -659,6 +650,7 @@
                           "responseType": "ListContextsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts",
                             "(google.api.method_signature)": "parent"
                           }
                         },
@@ -666,7 +658,9 @@
                           "requestType": "GetContextRequest",
                           "responseType": "Context",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=projects/*/agent/sessions/*/contexts/*}"
+                            "(google.api.http).get": "/v2/{name=projects/*/agent/sessions/*/contexts/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateContext": {
@@ -674,7 +668,10 @@
                           "responseType": "Context",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
-                            "(google.api.http).body": "context"
+                            "(google.api.http).body": "context",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts",
+                            "(google.api.http).additional_bindings.body": "context",
+                            "(google.api.method_signature)": "parent,context"
                           }
                         },
                         "UpdateContext": {
@@ -682,21 +679,28 @@
                           "responseType": "Context",
                           "options": {
                             "(google.api.http).patch": "/v2/{context.name=projects/*/agent/sessions/*/contexts/*}",
-                            "(google.api.http).body": "context"
+                            "(google.api.http).body": "context",
+                            "(google.api.http).additional_bindings.patch": "/v2/{context.name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}",
+                            "(google.api.http).additional_bindings.body": "context",
+                            "(google.api.method_signature)": "context,update_mask"
                           }
                         },
                         "DeleteContext": {
                           "requestType": "DeleteContextRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v2/{name=projects/*/agent/sessions/*/contexts/*}"
+                            "(google.api.http).delete": "/v2/{name=projects/*/agent/sessions/*/contexts/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "DeleteAllContexts": {
                           "requestType": "DeleteAllContextsRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v2/{parent=projects/*/agent/sessions/*}/contexts"
+                            "(google.api.http).delete": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
+                            "(google.api.http).additional_bindings.delete": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts",
+                            "(google.api.method_signature)": "parent"
                           }
                         }
                       }
@@ -786,7 +790,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Context"
                           }
                         },
                         "context": {
@@ -834,7 +839,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Context"
                           }
                         }
                       }
@@ -903,6 +909,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent}/entityTypes:batchDelete",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,entity_type_names",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
                           }
@@ -2642,6 +2649,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{session=projects/*/agent/sessions/*}:detectIntent",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{session=projects/*/agent/environments/*/users/*/sessions/*}:detectIntent",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "session,query_input"
                           }
                         },
@@ -2843,7 +2852,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Session"
                           }
                         },
                         "queryParams": {
@@ -3023,6 +3033,7 @@
                           "responseType": "ListSessionEntityTypesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/agent/sessions/*}/entityTypes",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/entityTypes",
                             "(google.api.method_signature)": "parent"
                           }
                         },
@@ -3030,7 +3041,9 @@
                           "requestType": "GetSessionEntityTypeRequest",
                           "responseType": "SessionEntityType",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=projects/*/agent/sessions/*/entityTypes/*}"
+                            "(google.api.http).get": "/v2/{name=projects/*/agent/sessions/*/entityTypes/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateSessionEntityType": {
@@ -3039,6 +3052,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/sessions/*}/entityTypes",
                             "(google.api.http).body": "session_entity_type",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/entityTypes",
+                            "(google.api.http).additional_bindings.body": "session_entity_type",
                             "(google.api.method_signature)": "parent,session_entity_type"
                           }
                         },
@@ -3048,7 +3063,9 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{session_entity_type.name=projects/*/agent/sessions/*/entityTypes/*}",
                             "(google.api.http).body": "session_entity_type",
-                            "(google.api.method_signature)": "session_entity_type"
+                            "(google.api.http).additional_bindings.patch": "/v2/{session_entity_type.name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
+                            "(google.api.http).additional_bindings.body": "session_entity_type",
+                            "(google.api.method_signature)": "session_entity_type,update_mask"
                           }
                         },
                         "DeleteSessionEntityType": {
@@ -3056,6 +3073,7 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/agent/sessions/*/entityTypes/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
                             "(google.api.method_signature)": "name"
                           }
                         }
