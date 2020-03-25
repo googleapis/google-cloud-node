@@ -476,6 +476,10 @@
                           "type": "string",
                           "id": 13
                         },
+                        "queueTtl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 40
+                        },
                         "artifacts": {
                           "type": "Artifacts",
                           "id": 37

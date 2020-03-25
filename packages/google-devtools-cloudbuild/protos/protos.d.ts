@@ -1535,6 +1535,9 @@ export namespace google {
                     /** Build images */
                     images?: (string[]|null);
 
+                    /** Build queueTtl */
+                    queueTtl?: (google.protobuf.IDuration|null);
+
                     /** Build artifacts */
                     artifacts?: (google.devtools.cloudbuild.v1.IArtifacts|null);
 
@@ -1610,6 +1613,9 @@ export namespace google {
 
                     /** Build images. */
                     public images: string[];
+
+                    /** Build queueTtl. */
+                    public queueTtl?: (google.protobuf.IDuration|null);
 
                     /** Build artifacts. */
                     public artifacts?: (google.devtools.cloudbuild.v1.IArtifacts|null);

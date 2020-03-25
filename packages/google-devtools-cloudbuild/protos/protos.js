@@ -3635,6 +3635,7 @@
                          * @property {google.protobuf.ITimestamp|null} [finishTime] Build finishTime
                          * @property {google.protobuf.IDuration|null} [timeout] Build timeout
                          * @property {Array.<string>|null} [images] Build images
+                         * @property {google.protobuf.IDuration|null} [queueTtl] Build queueTtl
                          * @property {google.devtools.cloudbuild.v1.IArtifacts|null} [artifacts] Build artifacts
                          * @property {string|null} [logsBucket] Build logsBucket
                          * @property {google.devtools.cloudbuild.v1.ISourceProvenance|null} [sourceProvenance] Build sourceProvenance
@@ -3763,6 +3764,14 @@
                          * @instance
                          */
                         Build.prototype.images = $util.emptyArray;
+    
+                        /**
+                         * Build queueTtl.
+                         * @member {google.protobuf.IDuration|null|undefined} queueTtl
+                         * @memberof google.devtools.cloudbuild.v1.Build
+                         * @instance
+                         */
+                        Build.prototype.queueTtl = null;
     
                         /**
                          * Build artifacts.
@@ -3920,6 +3929,8 @@
                                 }
                             if (message.artifacts != null && message.hasOwnProperty("artifacts"))
                                 $root.google.devtools.cloudbuild.v1.Artifacts.encode(message.artifacts, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
+                            if (message.queueTtl != null && message.hasOwnProperty("queueTtl"))
+                                $root.google.protobuf.Duration.encode(message.queueTtl, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             return writer;
                         };
     
@@ -3993,6 +4004,9 @@
                                     if (!(message.images && message.images.length))
                                         message.images = [];
                                     message.images.push(reader.string());
+                                    break;
+                                case 40:
+                                    message.queueTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 case 37:
                                     message.artifacts = $root.google.devtools.cloudbuild.v1.Artifacts.decode(reader, reader.uint32());
@@ -4142,6 +4156,11 @@
                                 for (var i = 0; i < message.images.length; ++i)
                                     if (!$util.isString(message.images[i]))
                                         return "images: string[] expected";
+                            }
+                            if (message.queueTtl != null && message.hasOwnProperty("queueTtl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.queueTtl);
+                                if (error)
+                                    return "queueTtl." + error;
                             }
                             if (message.artifacts != null && message.hasOwnProperty("artifacts")) {
                                 var error = $root.google.devtools.cloudbuild.v1.Artifacts.verify(message.artifacts);
@@ -4307,6 +4326,11 @@
                                 for (var i = 0; i < object.images.length; ++i)
                                     message.images[i] = String(object.images[i]);
                             }
+                            if (object.queueTtl != null) {
+                                if (typeof object.queueTtl !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Build.queueTtl: object expected");
+                                message.queueTtl = $root.google.protobuf.Duration.fromObject(object.queueTtl);
+                            }
                             if (object.artifacts != null) {
                                 if (typeof object.artifacts !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.Build.artifacts: object expected");
@@ -4405,6 +4429,7 @@
                                 object.statusDetail = "";
                                 object.logUrl = "";
                                 object.artifacts = null;
+                                object.queueTtl = null;
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
@@ -4469,6 +4494,8 @@
                             }
                             if (message.artifacts != null && message.hasOwnProperty("artifacts"))
                                 object.artifacts = $root.google.devtools.cloudbuild.v1.Artifacts.toObject(message.artifacts, options);
+                            if (message.queueTtl != null && message.hasOwnProperty("queueTtl"))
+                                object.queueTtl = $root.google.protobuf.Duration.toObject(message.queueTtl, options);
                             return object;
                         };
     
