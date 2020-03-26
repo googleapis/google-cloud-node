@@ -155,6 +155,12 @@ export {
   GetSignedPolicyCallback,
   GetSignedPolicyOptions,
   GetSignedPolicyResponse,
+  GenerateSignedPostPolicyV2Callback,
+  GenerateSignedPostPolicyV2Options,
+  GenerateSignedPostPolicyV2Response,
+  GenerateSignedPostPolicyV4Callback,
+  GenerateSignedPostPolicyV4Options,
+  GenerateSignedPostPolicyV4Response,
   GetSignedUrlConfig,
   MakeFilePrivateCallback,
   MakeFilePrivateOptions,
@@ -165,6 +171,7 @@ export {
   MoveOptions,
   MoveResponse,
   PolicyDocument,
+  PolicyFields,
   PredefinedAcl,
   RotateEncryptionKeyCallback,
   RotateEncryptionKeyOptions,
@@ -177,6 +184,7 @@ export {
   SetStorageClassCallback,
   SetStorageClassOptions,
   SetStorageClassResponse,
+  SignedPostPolicyV4Output,
 } from './file';
 export {
   HmacKey,

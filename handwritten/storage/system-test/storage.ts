@@ -16,7 +16,8 @@ import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import fetch from 'node-fetch';
+import fetch, {Request} from 'node-fetch';
+import * as FormData from 'form-data';
 const normalizeNewline = require('normalize-newline');
 import pLimit from 'p-limit';
 import {promisify} from 'util';
@@ -3387,12 +3388,8 @@ describe('storage', () => {
   describe('sign policy', () => {
     let file: File;
 
-    before(done => {
+    before(() => {
       file = bucket.file('LogoToSign.jpg');
-      fs.createReadStream(FILES.logo.path)
-        .pipe(file.createWriteStream())
-        .on('error', done)
-        .on('finish', done.bind(null, null));
     });
 
     beforeEach(function() {
@@ -3401,8 +3398,8 @@ describe('storage', () => {
       }
     });
 
-    it('should create a policy', done => {
-      const expires = new Date('10-25-2022');
+    it('should create a V2 policy', async () => {
+      const expires = Date.now() + 60 * 1000; // one minute
       const expectedExpiration = new Date(expires).toISOString();
 
       const options = {
@@ -3414,21 +3411,37 @@ describe('storage', () => {
         },
       };
 
-      file.getSignedPolicy(options, (err, policy) => {
-        assert.ifError(err);
+      const [policy] = await file.generateSignedPostPolicyV2(options);
 
-        let policyJson;
+      const policyJson = JSON.parse(policy!.string);
+      assert.strictEqual(policyJson.expiration, expectedExpiration);
+    });
 
-        try {
-          policyJson = JSON.parse(policy!.string);
-        } catch (e) {
-          done(e);
-          return;
-        }
+    it('should create a V4 policy', async () => {
+      const expires = Date.now() + 60 * 1000; // one minute
+      const options = {
+        expires,
+        contentLengthRange: {
+          min: 0,
+          max: 50000,
+        },
+        fields: {'x-goog-meta-test': 'data'},
+      };
 
-        assert.strictEqual(policyJson.expiration, expectedExpiration);
-        done();
-      });
+      const [policy] = await file.generateSignedPostPolicyV4(options);
+      const form = new FormData();
+      for (const [key, value] of Object.entries(policy.fields)) {
+        form.append(key, value);
+      }
+
+      const CONTENT = 'my-content';
+
+      form.append('file', CONTENT);
+      const res = await fetch(policy.url, {method: 'POST', body: form});
+      assert.strictEqual(res.status, 204);
+
+      const [buf] = await file.download();
+      assert.strictEqual(buf.toString(), CONTENT);
     });
   });
 

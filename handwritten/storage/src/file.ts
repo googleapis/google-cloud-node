@@ -26,6 +26,7 @@ import {promisifyAll} from '@google-cloud/promisify';
 import compressible = require('compressible');
 import concat = require('concat-stream');
 import * as crypto from 'crypto';
+import * as dateFormat from 'date-and-time';
 import * as extend from 'extend';
 import * as fs from 'fs';
 const hashStreamValidation = require('hash-stream-validation');
@@ -91,6 +92,37 @@ export interface GetSignedPolicyOptions {
   successRedirect?: string;
   successStatus?: string;
   contentLengthRange?: {min?: number; max?: number};
+}
+
+export interface GenerateSignedPostPolicyV2Options
+  extends GetSignedPolicyOptions {}
+
+export type GenerateSignedPostPolicyV2Response = GetSignedPolicyResponse;
+
+export interface GenerateSignedPostPolicyV2Callback
+  extends GetSignedPolicyCallback {}
+
+export interface PolicyFields {
+  [key: string]: string;
+}
+
+export interface GenerateSignedPostPolicyV4Options {
+  expires: string | number | Date;
+  bucketBoundHostname?: string;
+  virtualHostedStyle?: boolean;
+  conditions?: object[];
+  fields?: PolicyFields;
+}
+
+export interface GenerateSignedPostPolicyV4Callback {
+  (err: Error | null, output?: SignedPostPolicyV4Output): void;
+}
+
+export type GenerateSignedPostPolicyV4Response = [SignedPostPolicyV4Output];
+
+export interface SignedPostPolicyV4Output {
+  url: string;
+  fields: PolicyFields;
 }
 
 export interface GetSignedUrlConfig {
@@ -251,6 +283,12 @@ const STORAGE_UPLOAD_BASE_URL =
   'https://storage.googleapis.com/upload/storage/v1/b';
 
 /**
+ * @const {string}
+ * @private
+ */
+export const STORAGE_POST_POLICY_BASE_URL = 'https://storage.googleapis.com';
+
+/**
  * @const {RegExp}
  * @private
  */
@@ -344,6 +382,8 @@ class RequestError extends Error {
   code?: string;
   errors?: Error[];
 }
+
+const SEVEN_DAYS = 7 * 24 * 60 * 60;
 
 /**
  * A File object is created from your {@link Bucket} object using
@@ -2099,7 +2139,7 @@ class File extends ServiceObject<File> {
    * @param {object} policy The document policy.
    */
   /**
-   * Get a signed policy document to allow a user to upload data with a POST
+   * Get a v2 signed policy document to allow a user to upload data with a POST
    * request.
    *
    * In Google Cloud Platform environments, such as Cloud Functions and App
@@ -2113,6 +2153,12 @@ class File extends ServiceObject<File> {
    * enabled.
    *
    * @see [Policy Document Reference]{@link https://cloud.google.com/storage/docs/xml-api/post-object#policydocument}
+   *
+   * @deprecated `getSignedPolicy()` is deprecated in favor of
+   *     `generateSignedPostPolicyV2()` and `generateSignedPostPolicyV4()`.
+   *     Currently, this method is an alias to `getSignedPolicyV2()`,
+   *     and will be removed in a future major release.
+   *     We recommend signing new policies using v4.
    *
    * @throws {Error} If an expiration timestamp from the past is given.
    * @throws {Error} If options.equals has an array with less or more than two
@@ -2181,10 +2227,128 @@ class File extends ServiceObject<File> {
     optionsOrCallback?: GetSignedPolicyOptions | GetSignedPolicyCallback,
     cb?: GetSignedPolicyCallback
   ): void | Promise<GetSignedPolicyResponse> {
-    const args = normalize<GetSignedPolicyOptions>(optionsOrCallback, cb);
+    const args = normalize<GetSignedPolicyOptions, GetSignedPolicyCallback>(
+      optionsOrCallback,
+      cb
+    );
+    const options = args.options;
+    const callback = args.callback;
+    this.generateSignedPostPolicyV2(options, callback);
+  }
+
+  generateSignedPostPolicyV2(
+    options: GenerateSignedPostPolicyV2Options
+  ): Promise<GenerateSignedPostPolicyV2Response>;
+  generateSignedPostPolicyV2(
+    options: GenerateSignedPostPolicyV2Options,
+    callback: GenerateSignedPostPolicyV2Callback
+  ): void;
+  generateSignedPostPolicyV2(
+    callback: GenerateSignedPostPolicyV2Callback
+  ): void;
+  /**
+   * @typedef {array} GenerateSignedPostPolicyV2Response
+   * @property {object} 0 The document policy.
+   */
+  /**
+   * @callback GenerateSignedPostPolicyV2Callback
+   * @param {?Error} err Request error, if any.
+   * @param {object} policy The document policy.
+   */
+  /**
+   * Get a signed policy document to allow a user to upload data with a POST
+   * request.
+   *
+   * In Google Cloud Platform environments, such as Cloud Functions and App
+   * Engine, you usually don't provide a `keyFilename` or `credentials` during
+   * instantiation. In those environments, we call the
+   * [signBlob
+   * API](https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/signBlob#authorization-scopes)
+   * to create a signed policy. That API requires either the
+   * `https://www.googleapis.com/auth/iam` or
+   * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
+   * enabled.
+   *
+   * @see [POST Object with the V2 signing process]{@link https://cloud.google.com/storage/docs/xml-api/post-object-v2}
+   *
+   * @throws {Error} If an expiration timestamp from the past is given.
+   * @throws {Error} If options.equals has an array with less or more than two
+   *     members.
+   * @throws {Error} If options.startsWith has an array with less or more than two
+   *     members.
+   *
+   * @param {object} options Configuration options.
+   * @param {array|array[]} [options.equals] Array of request parameters and
+   *     their expected value (e.g. [['$<field>', '<value>']]). Values are
+   *     translated into equality constraints in the conditions field of the
+   *     policy document (e.g. ['eq', '$<field>', '<value>']). If only one
+   *     equality condition is to be specified, options.equals can be a one-
+   *     dimensional array (e.g. ['$<field>', '<value>']).
+   * @param {*} options.expires - A timestamp when this policy will expire. Any
+   *     value given is passed to `new Date()`.
+   * @param {array|array[]} [options.startsWith] Array of request parameters and
+   *     their expected prefixes (e.g. [['$<field>', '<value>']). Values are
+   *     translated into starts-with constraints in the conditions field of the
+   *     policy document (e.g. ['starts-with', '$<field>', '<value>']). If only
+   *     one prefix condition is to be specified, options.startsWith can be a
+   * one- dimensional array (e.g. ['$<field>', '<value>']).
+   * @param {string} [options.acl] ACL for the object from possibly predefined
+   *     ACLs.
+   * @param {string} [options.successRedirect] The URL to which the user client
+   *     is redirected if the upload is successful.
+   * @param {string} [options.successStatus] - The status of the Google Storage
+   *     response if the upload is successful (must be string).
+   * @param {object} [options.contentLengthRange]
+   * @param {number} [options.contentLengthRange.min] Minimum value for the
+   *     request's content length.
+   * @param {number} [options.contentLengthRange.max] Maximum value for the
+   *     request's content length.
+   * @param {GenerateSignedPostPolicyV2Callback} [callback] Callback function.
+   * @returns {Promise<GenerateSignedPostPolicyV2Response>}
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const myBucket = storage.bucket('my-bucket');
+   *
+   * const file = myBucket.file('my-file');
+   * const options = {
+   *   equals: ['$Content-Type', 'image/jpeg'],
+   *   expires: '10-25-2022',
+   *   contentLengthRange: {
+   *     min: 0,
+   *     max: 1024
+   *   }
+   * };
+   *
+   * file.generateSignedPostPolicyV2(options, function(err, policy) {
+   *   // policy.string: the policy document in plain text.
+   *   // policy.base64: the policy document in base64.
+   *   // policy.signature: the policy signature in base64.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * file.generateSignedPostPolicyV2(options).then(function(data) {
+   *   const policy = data[0];
+   * });
+   */
+  generateSignedPostPolicyV2(
+    optionsOrCallback?:
+      | GenerateSignedPostPolicyV2Options
+      | GenerateSignedPostPolicyV2Callback,
+    cb?: GenerateSignedPostPolicyV2Callback
+  ): void | Promise<GenerateSignedPostPolicyV2Response> {
+    const args = normalize<GenerateSignedPostPolicyV2Options>(
+      optionsOrCallback,
+      cb
+    );
     let options = args.options;
     const callback = args.callback;
-    const expires = new Date((options as GetSignedPolicyOptions).expires);
+    const expires = new Date(
+      (options as GenerateSignedPostPolicyV2Options).expires
+    );
 
     if (isNaN(expires.getTime())) {
       throw new Error('The expiration date provided was invalid.');
@@ -2278,6 +2442,201 @@ class File extends ServiceObject<File> {
         callback(new SigningError(err.message));
       }
     );
+  }
+
+  generateSignedPostPolicyV4(
+    options: GenerateSignedPostPolicyV4Options
+  ): Promise<GenerateSignedPostPolicyV4Response>;
+  generateSignedPostPolicyV4(
+    options: GenerateSignedPostPolicyV4Options,
+    callback: GenerateSignedPostPolicyV4Callback
+  ): void;
+  generateSignedPostPolicyV4(
+    callback: GenerateSignedPostPolicyV4Callback
+  ): void;
+  /**
+   * @typedef {object} SignedPostPolicyV4Output
+   * @property {string} url The request URL.
+   * @property {object} fields The form fields to include in the POST request.
+   */
+  /**
+   * @typedef {array} GenerateSignedPostPolicyV4Response
+   * @property {SignedPostPolicyV4Output} 0 An object containing the request URL and form fields.
+   */
+  /**
+   * @callback GenerateSignedPostPolicyV4Callback
+   * @param {?Error} err Request error, if any.
+   * @param {SignedPostPolicyV4Output} output An object containing the request URL and form fields.
+   */
+  /**
+   * Get a v4 signed policy document to allow a user to upload data with a POST
+   * request.
+   *
+   * In Google Cloud Platform environments, such as Cloud Functions and App
+   * Engine, you usually don't provide a `keyFilename` or `credentials` during
+   * instantiation. In those environments, we call the
+   * [signBlob
+   * API](https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/signBlob#authorization-scopes)
+   * to create a signed policy. That API requires either the
+   * `https://www.googleapis.com/auth/iam` or
+   * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
+   * enabled.
+   *
+   * @see [Policy Document Reference]{@link https://cloud.google.com/storage/docs/xml-api/post-object#policydocument}
+   *
+   * @param {object} options Configuration options.
+   * @param {Date|number|string} options.expires - A timestamp when this policy will expire. Any
+   *     value given is passed to `new Date()`.
+   * @param {boolean} [config.virtualHostedStyle=false] Use virtual hosted-style
+   *     URLs ('https://mybucket.storage.googleapis.com/...') instead of path-style
+   *     ('https://storage.googleapis.com/mybucket/...'). Virtual hosted-style URLs
+   *     should generally be preferred instaed of path-style URL.
+   *     Currently defaults to `false` for path-style, although this may change in a
+   *     future major-version release.
+   * @param {string} [config.bucketBoundHostname] The bucket-bound hostname to return in
+   *     the result, e.g. "https://cdn.example.com".
+   * @param {object} [config.fields] [Form fields]{@link https://cloud.google.com/storage/docs/xml-api/post-object#policydocument}
+   *     to include in the signed policy. Any fields with key beginning with 'x-ignore-'
+   *     will not be included in the policy to be signed.
+   * @param {object[]} [config.conditions] [Conditions]{@link https://cloud.google.com/storage/docs/authentication/signatures#policy-document}
+   *     to include in the signed policy. All fields given in `config.fields` are
+   *     automatically included in the conditions array, adding the same entry
+   *     in both `fields` and `conditions` will result in duplicate entries.
+   *
+   * @param {GenerateSignedPostPolicyV4Callback} [callback] Callback function.
+   * @returns {Promise<GenerateSignedPostPolicyV4Response>}
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const myBucket = storage.bucket('my-bucket');
+   *
+   * const file = myBucket.file('my-file');
+   * const options = {
+   *   expires: '10-25-2022',
+   *   conditions: [
+   *     ['eq', '$Content-Type', 'image/jpeg'],
+   *     ['content-length-range', 0, 1024],
+   *   ],
+   *   fields: {
+   *     acl: 'public-read',
+   *     'x-goog-meta-foo': 'bar',
+   *     'x-ignore-mykey': 'data'
+   *   }
+   * };
+   *
+   * file.generateSignedPostPolicyV4(options, function(err, response) {
+   *   // response.url The request URL
+   *   // response.fields The form fields (including the signature) to include
+   *   //     to be used to upload objects by HTML forms.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * file.generateSignedPostPolicyV4(options).then(function(data) {
+   *   const response = data[0];
+   *   // response.url The request URL
+   *   // response.fields The form fields (including the signature) to include
+   *   //     to be used to upload objects by HTML forms.
+   * });
+   */
+  generateSignedPostPolicyV4(
+    optionsOrCallback?:
+      | GenerateSignedPostPolicyV4Options
+      | GenerateSignedPostPolicyV4Callback,
+    cb?: GenerateSignedPostPolicyV4Callback
+  ): void | Promise<GenerateSignedPostPolicyV4Response> {
+    const args = normalize<
+      GenerateSignedPostPolicyV4Options,
+      GenerateSignedPostPolicyV4Callback
+    >(optionsOrCallback, cb);
+    let options = args.options;
+    const callback = args.callback;
+    const expires = new Date(
+      (options as GenerateSignedPostPolicyV4Options).expires
+    );
+
+    if (isNaN(expires.getTime())) {
+      throw new Error('The expiration date provided was invalid.');
+    }
+
+    if (expires.valueOf() < Date.now()) {
+      throw new Error('An expiration date cannot be in the past.');
+    }
+
+    if (expires.valueOf() - Date.now() > SEVEN_DAYS * 1000) {
+      throw new Error(
+        `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`
+      );
+    }
+
+    options = Object.assign({}, options);
+    let fields = Object.assign({}, options.fields);
+
+    const now = new Date();
+    const nowISO = dateFormat.format(now, 'YYYYMMDD[T]HHmmss[Z]', true);
+    const todayISO = dateFormat.format(now, 'YYYYMMDD', true);
+
+    const sign = async () => {
+      const {client_email} = await this.storage.authClient.getCredentials();
+      const credential = `${client_email}/${todayISO}/auto/storage/goog4_request`;
+
+      fields = {
+        ...fields,
+        key: this.name,
+        'x-goog-date': nowISO,
+        'x-goog-credential': credential,
+        'x-goog-algorithm': 'GOOG4-RSA-SHA256',
+      };
+
+      const conditions = options.conditions || [];
+
+      Object.entries(fields).forEach(([key, value]) => {
+        if (!key.startsWith('x-ignore-')) {
+          conditions.push({[key]: value});
+        }
+      });
+
+      const expiration = dateFormat.format(
+        expires,
+        'YYYY-MM-DD[T]HH:mm:ss[Z]',
+        true
+      );
+
+      const policy = {
+        conditions,
+        expiration,
+      };
+
+      const policyString = JSON.stringify(policy);
+      const policyBase64 = Buffer.from(policyString).toString('base64');
+
+      try {
+        const signature = await this.storage.authClient.sign(policyBase64);
+        const signatureHex = Buffer.from(signature, 'base64').toString('hex');
+        fields['policy'] = policyBase64;
+        fields['x-goog-signature'] = signatureHex;
+
+        let url: string;
+        if (options.virtualHostedStyle) {
+          url = `https://${this.bucket.name}.storage.googleapis.com/`;
+        } else if (options.bucketBoundHostname) {
+          url = `${options.bucketBoundHostname}/`;
+        } else {
+          url = `${STORAGE_POST_POLICY_BASE_URL}/${this.bucket.name}/`;
+        }
+
+        return {
+          url,
+          fields,
+        };
+      } catch (err) {
+        throw new SigningError(err.message);
+      }
+    };
+
+    sign().then(res => callback!(null, res), callback!);
   }
 
   getSignedUrl(cfg: GetSignedUrlConfig): Promise<GetSignedUrlResponse>;
