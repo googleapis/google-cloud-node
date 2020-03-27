@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [4.7.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.6.0...v4.7.0) (2020-03-26)
+
+
+### Features
+
+* add remove conditional binding ([#1107](https://www.github.com/googleapis/nodejs-storage/issues/1107)) ([2143705](https://www.github.com/googleapis/nodejs-storage/commit/21437053e9497aa95ef37a865ffbdbaf4134138f))
+* v4 POST with signed policy ([#1102](https://www.github.com/googleapis/nodejs-storage/issues/1102)) ([a3d5b88](https://www.github.com/googleapis/nodejs-storage/commit/a3d5b88b8d3d25b6e16808eb5c1425aa0a8c5ecc)), closes [#1125](https://www.github.com/googleapis/nodejs-storage/issues/1125)
+
+
+### Bug Fixes
+
+* **deps:** update dependency date-and-time to ^0.13.0 ([#1106](https://www.github.com/googleapis/nodejs-storage/issues/1106)) ([b759605](https://www.github.com/googleapis/nodejs-storage/commit/b7596058e130ee2d82dc2221f24220b83c04fdae))
+* **deps:** update dependency gaxios to v3 ([#1129](https://www.github.com/googleapis/nodejs-storage/issues/1129)) ([5561452](https://www.github.com/googleapis/nodejs-storage/commit/5561452cb0b6e5a1dcabea6973db57799422abb7))
+* **types:** wrap GetSignedUrlResponse ([#1119](https://www.github.com/googleapis/nodejs-storage/issues/1119)) ([0c7ac16](https://www.github.com/googleapis/nodejs-storage/commit/0c7ac161f808201562f60710b9ec7bce4fbf819f))
+
 ## [4.6.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.5.0...v4.6.0) (2020-03-13)
 
 
