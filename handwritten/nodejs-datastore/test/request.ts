@@ -377,13 +377,14 @@ describe('Request', () => {
 
       it('should emit an error from results decoding', done => {
         const largeInt = '922337203685477850';
+        const propertyName = 'points';
         request.request_ = (config: RequestConfig, callback: Function) => {
           callback(null, {
             found: [
               {
                 entity: {
                   properties: {
-                    points: {
+                    [propertyName]: {
                       integerValue: largeInt,
                       valueType: 'integerValue',
                     },
@@ -401,7 +402,7 @@ describe('Request', () => {
           .on('error', (err: Error) => {
             assert.deepStrictEqual(
               err,
-              outOfBoundsError({integerValue: largeInt})
+              outOfBoundsError({integerValue: largeInt, propertyName})
             );
             setImmediate(() => {
               assert.strictEqual(stream.destroyed, true);
@@ -990,6 +991,7 @@ describe('Request', () => {
 
       it('should emit an error from results decoding', done => {
         const largeInt = '922337203685477850';
+        const propertyName = 'points';
         sandbox.stub(entity, 'queryToQueryProto');
 
         request.request_ = (config: RequestConfig, callback: Function) => {
@@ -999,7 +1001,7 @@ describe('Request', () => {
                 {
                   entity: {
                     properties: {
-                      points: {
+                      [propertyName]: {
                         integerValue: largeInt,
                         valueType: 'integerValue',
                       },
@@ -1017,7 +1019,7 @@ describe('Request', () => {
           .on('error', (err: Error) => {
             assert.deepStrictEqual(
               err,
-              outOfBoundsError({integerValue: largeInt})
+              outOfBoundsError({integerValue: largeInt, propertyName})
             );
             setImmediate(() => {
               assert.strictEqual(stream.destroyed, true);

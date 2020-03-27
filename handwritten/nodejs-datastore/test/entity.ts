@@ -997,6 +997,12 @@ describe('entity', () => {
         decodeValueProtoStub.restore();
       });
 
+      it('should identify entity propertyName', () => {
+        entity.entityFromEntityProto(entityProto);
+        const valueProto = decodeValueProtoStub.getCall(0).args[0];
+        assert.strictEqual(valueProto.propertyName, 'number');
+      });
+
       it('should pass `wrapNumbers` to decodeValueProto as undefined by default', () => {
         entity.entityFromEntityProto(entityProto);
         wrapNumbers = decodeValueProtoStub.getCall(0).args[1];
