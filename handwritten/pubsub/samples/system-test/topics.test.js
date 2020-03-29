@@ -25,12 +25,14 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 describe('topics', () => {
   const projectId = process.env.GCLOUD_PROJECT;
   const pubsub = new PubSub({projectId});
-  const topicNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
-  const topicNameTwo = `nodejs-docs-samples-test-${uuid.v4()}`;
-  const subscriptionNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
-  const subscriptionNameTwo = `nodejs-docs-samples-test-${uuid.v4()}`;
-  const subscriptionNameThree = `nodejs-docs-samples-test-${uuid.v4()}`;
-  const subscriptionNameFour = `nodejs-docs-samples-test-${uuid.v4()}`;
+  const runId = uuid.v4();
+  console.log(`Topics runId: ${runId}`);
+  const topicNameOne = `top1-${runId}`;
+  const topicNameTwo = `top2-${runId}`;
+  const subscriptionNameOne = `sub1-${runId}`;
+  const subscriptionNameTwo = `sub2-${runId}`;
+  const subscriptionNameThree = `sub3-${runId}`;
+  const subscriptionNameFour = `sub4-${runId}`;
   const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
   const expectedMessage = {data: 'Hello, world!'};
 
@@ -38,19 +40,19 @@ describe('topics', () => {
     return `node ${action}.js`;
   }
 
-  before(() => {
-    return pubsub.createTopic(topicNameTwo).catch(console.error);
+  before(async () => {
+    await pubsub.createTopic(topicNameTwo);
   });
 
-  after(() => {
-    return Promise.all([
-      pubsub.subscription(subscriptionNameOne).delete(),
-      pubsub.topic(topicNameOne).delete(),
-      pubsub.topic(topicNameTwo).delete(),
-      pubsub.subscription(subscriptionNameTwo).delete(),
-      pubsub.subscription(subscriptionNameThree).delete(),
-      pubsub.subscription(subscriptionNameFour).delete(),
-    ]).catch(console.error);
+  after(async () => {
+    const [subscriptions] = await pubsub.getSubscriptions();
+    await Promise.all(
+      subscriptions.filter(x => x.name.endsWith(runId)).map(x => x.delete())
+    );
+    const [topics] = await pubsub.getTopics();
+    await Promise.all(
+      topics.filter(x => x.name.endsWith(runId)).map(x => x.delete())
+    );
   });
 
   // Helper function to pull one message.
@@ -73,7 +75,8 @@ describe('topics', () => {
     const output = execSync(`${commandFor('createTopic')} ${topicNameOne}`);
     assert.include(output, `Topic ${topicNameOne} created.`);
     const [topics] = await pubsub.getTopics();
-    assert(topics.some(t => t.name === fullTopicNameOne));
+    const exists = topics.some(t => t.name === fullTopicNameOne);
+    assert.ok(exists, 'Topic was created');
   });
 
   it('should list topics', async () => {
@@ -175,10 +178,14 @@ describe('topics', () => {
 
     const {data, publishTime} = await _pullOneMessage(subscription);
     const actualWait = publishTime.getTime() - startTime;
-    const acceptableLatency = 100;
+    const acceptableLatency = 150;
 
     assert.strictEqual(data.toString(), expectedMessage.data);
-    assert(actualWait <= waitTime + acceptableLatency);
+    assert.isAtMost(
+      actualWait,
+      waitTime + acceptableLatency,
+      'read is within acceptable latency'
+    );
   });
 
   it('should publish with retry settings', async () => {
