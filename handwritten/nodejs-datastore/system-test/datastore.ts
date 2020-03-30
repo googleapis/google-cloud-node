@@ -644,6 +644,31 @@ describe('Datastore', () => {
         });
     });
 
+    it('should run a datastore query as a stream via query#runStream', done => {
+      const q = datastore.createQuery('Character').hasAncestor(ancestor);
+      let resultsReturned = 0;
+      q.runStream()
+        .on('error', done)
+        .on('data', () => resultsReturned++)
+        .on('end', () => {
+          assert.strictEqual(resultsReturned, characters.length);
+          done();
+        });
+    });
+
+    it('should run a transaction query as a stream via query#runStream', done => {
+      const transaction = datastore.transaction();
+      const q = transaction.createQuery('Character').hasAncestor(ancestor);
+      let resultsReturned = 0;
+      q.runStream()
+        .on('error', done)
+        .on('data', () => resultsReturned++)
+        .on('end', () => {
+          assert.strictEqual(resultsReturned, characters.length);
+          done();
+        });
+    });
+
     it('should not go over a limit with a stream', done => {
       const limit = 3;
       const q = datastore

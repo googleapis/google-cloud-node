@@ -20,6 +20,7 @@ import {Datastore} from '.';
 import {Entity} from './entity';
 import {Transaction} from './transaction';
 import {CallOptions} from 'google-gax';
+import {RunQueryStreamOptions} from '../src/request';
 
 export type Operator = '=' | '<' | '>' | '<=' | '>=' | 'HAS_ANCESTOR';
 
@@ -498,11 +499,8 @@ class Query {
    *     this.end();
    *   });
    */
-  runStream() {
-    const query = this;
-    // tslint:disable-next-line no-any
-    const args: any = [query].concat([].slice.call(arguments));
-    return this.scope!.runQueryStream.apply(this.scope, args);
+  runStream(options?: RunQueryStreamOptions) {
+    return this.scope!.runQueryStream(this, options);
   }
 }
 
