@@ -305,20 +305,35 @@ describe('Query', () => {
   });
 
   describe('runStream', () => {
-    it('should call the parent instance runQueryStream correctly', () => {
-      const args = [0, 1, 2];
+    it('should not require options', () => {
       const runQueryReturnValue = {};
 
       query.scope.runQueryStream = function() {
         assert.strictEqual(this, query.scope);
         assert.strictEqual(arguments[0], query);
-        assert.strictEqual(arguments[1], args[0]);
-        assert.strictEqual(arguments[2], args[1]);
-        assert.strictEqual(arguments[3], args[2]);
         return runQueryReturnValue;
       };
 
-      const results = query.runStream.apply(query, args);
+      const results = query.runStream();
+      assert.strictEqual(results, runQueryReturnValue);
+    });
+
+    it('should call the parent instance runQueryStream correctly', () => {
+      const options = {
+        consistency: 'string',
+        gaxOptions: {},
+        wrapNumbers: true,
+      };
+      const runQueryReturnValue = {};
+
+      query.scope.runQueryStream = function() {
+        assert.strictEqual(this, query.scope);
+        assert.strictEqual(arguments[0], query);
+        assert.strictEqual(arguments[1], options);
+        return runQueryReturnValue;
+      };
+
+      const results = query.runStream(options);
       assert.strictEqual(results, runQueryReturnValue);
     });
   });
