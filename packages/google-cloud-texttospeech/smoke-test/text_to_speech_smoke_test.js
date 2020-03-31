@@ -14,8 +14,11 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('TextToSpeechSmokeTest', () => {
   it('successfully makes a call to the service', done => {
+    // eslint-disable-next-line node/no-missing-require
     const textToSpeech = require('../src');
 
     const client = new textToSpeech.v1beta1.TextToSpeechClient({

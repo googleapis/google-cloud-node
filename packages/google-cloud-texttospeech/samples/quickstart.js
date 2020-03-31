@@ -14,8 +14,7 @@
 
 'use strict';
 
-function main(
-){
+function main() {
   // [START tts_quickstart]
   // Imports the Google Cloud client library
   const textToSpeech = require('@google-cloud/text-to-speech');
@@ -26,7 +25,6 @@ function main(
   // Creates a client
   const client = new textToSpeech.TextToSpeechClient();
   async function quickStart() {
-
     // The text to synthesize
     const text = 'hello, world!';
 

@@ -19,7 +19,7 @@
 import {TextToSpeechClient} from '@google-cloud/text-to-speech';
 
 function main() {
-  const textToSpeechClient = new TextToSpeechClient();
+  new TextToSpeechClient();
 }
 
 main();

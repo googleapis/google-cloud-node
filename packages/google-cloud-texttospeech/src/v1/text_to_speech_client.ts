@@ -17,16 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './text_to_speech_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -37,13 +31,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class TextToSpeechClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -51,6 +38,13 @@ export class TextToSpeechClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   textToSpeechStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -142,7 +136,10 @@ export class TextToSpeechClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Put together the default options sent with requests.
@@ -156,7 +153,7 @@ export class TextToSpeechClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -183,7 +180,7 @@ export class TextToSpeechClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.texttospeech.v1.TextToSpeech'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.texttospeech.v1.TextToSpeech,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -191,9 +188,8 @@ export class TextToSpeechClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const textToSpeechStubMethods = ['listVoices', 'synthesizeSpeech'];
-
     for (const methodName of textToSpeechStubMethods) {
-      const innerCallPromise = this.textToSpeechStub.then(
+      const callPromise = this.textToSpeechStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -207,20 +203,14 @@ export class TextToSpeechClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.textToSpeechStub;
@@ -277,22 +267,30 @@ export class TextToSpeechClient {
   // -- Service calls --
   // -------------------
   listVoices(
-    request: protosTypes.google.cloud.texttospeech.v1.IListVoicesRequest,
+    request: protos.google.cloud.texttospeech.v1.IListVoicesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.texttospeech.v1.IListVoicesResponse,
-      protosTypes.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
+      protos.google.cloud.texttospeech.v1.IListVoicesResponse,
+      protos.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
       {} | undefined
     ]
   >;
   listVoices(
-    request: protosTypes.google.cloud.texttospeech.v1.IListVoicesRequest,
+    request: protos.google.cloud.texttospeech.v1.IListVoicesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.texttospeech.v1.IListVoicesResponse,
-      protosTypes.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
-      {} | undefined
+      protos.google.cloud.texttospeech.v1.IListVoicesResponse,
+      protos.google.cloud.texttospeech.v1.IListVoicesRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listVoices(
+    request: protos.google.cloud.texttospeech.v1.IListVoicesRequest,
+    callback: Callback<
+      protos.google.cloud.texttospeech.v1.IListVoicesResponse,
+      protos.google.cloud.texttospeech.v1.IListVoicesRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -316,24 +314,25 @@ export class TextToSpeechClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listVoices(
-    request: protosTypes.google.cloud.texttospeech.v1.IListVoicesRequest,
+    request: protos.google.cloud.texttospeech.v1.IListVoicesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.texttospeech.v1.IListVoicesResponse,
-          | protosTypes.google.cloud.texttospeech.v1.IListVoicesRequest
+          protos.google.cloud.texttospeech.v1.IListVoicesResponse,
+          | protos.google.cloud.texttospeech.v1.IListVoicesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.texttospeech.v1.IListVoicesResponse,
-      protosTypes.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
-      {} | undefined
+      protos.google.cloud.texttospeech.v1.IListVoicesResponse,
+      protos.google.cloud.texttospeech.v1.IListVoicesRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.texttospeech.v1.IListVoicesResponse,
-      protosTypes.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
+      protos.google.cloud.texttospeech.v1.IListVoicesResponse,
+      protos.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -347,29 +346,37 @@ export class TextToSpeechClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.listVoices(request, options, callback);
+    return this.innerApiCalls.listVoices(request, options, callback);
   }
   synthesizeSpeech(
-    request: protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest,
+    request: protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
-      (
-        | protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
-        | undefined
-      ),
+      protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
+      protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | undefined,
       {} | undefined
     ]
   >;
   synthesizeSpeech(
-    request: protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest,
+    request: protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
-      | protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+      protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
+      | protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  synthesizeSpeech(
+    request: protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest,
+    callback: Callback<
+      protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
+      | protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -391,28 +398,27 @@ export class TextToSpeechClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   synthesizeSpeech(
-    request: protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest,
+    request: protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
-          | protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+          protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
+          | protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
-      | protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+      protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
+      | protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
-      (
-        | protosTypes.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
-        | undefined
-      ),
+      protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
+      protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -426,7 +432,7 @@ export class TextToSpeechClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.synthesizeSpeech(request, options, callback);
+    return this.innerApiCalls.synthesizeSpeech(request, options, callback);
   }
 
   /**
