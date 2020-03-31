@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './cloud_tasks_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v2beta2
  */
 export class CloudTasksClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class CloudTasksClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   cloudTasksStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -147,13 +147,16 @@ export class CloudTasksClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -171,7 +174,7 @@ export class CloudTasksClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listQueues: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -195,7 +198,7 @@ export class CloudTasksClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -222,7 +225,7 @@ export class CloudTasksClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.tasks.v2beta2.CloudTasks'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.tasks.v2beta2.CloudTasks,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -251,9 +254,8 @@ export class CloudTasksClient {
       'cancelLease',
       'runTask',
     ];
-
     for (const methodName of cloudTasksStubMethods) {
-      const innerCallPromise = this.cloudTasksStub.then(
+      const callPromise = this.cloudTasksStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -267,20 +269,14 @@ export class CloudTasksClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.cloudTasksStub;
@@ -337,22 +333,30 @@ export class CloudTasksClient {
   // -- Service calls --
   // -------------------
   getQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IGetQueueRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IGetQueueRequest | undefined,
       {} | undefined
     ]
   >;
   getQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IGetQueueRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IGetQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQueue(
+    request: protos.google.cloud.tasks.v2beta2.IGetQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IGetQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -370,23 +374,23 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IGetQueueRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.IQueue,
-          protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest | undefined,
-          {} | undefined
+          protos.google.cloud.tasks.v2beta2.IQueue,
+          protos.google.cloud.tasks.v2beta2.IGetQueueRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IGetQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IGetQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IGetQueueRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -407,25 +411,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getQueue(request, options, callback);
+    return this.innerApiCalls.getQueue(request, options, callback);
   }
   createQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICreateQueueRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.ICreateQueueRequest | undefined,
       {} | undefined
     ]
   >;
   createQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICreateQueueRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.ICreateQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQueue(
+    request: protos.google.cloud.tasks.v2beta2.ICreateQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.ICreateQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -462,24 +474,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICreateQueueRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.IQueue,
-          | protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest
+          protos.google.cloud.tasks.v2beta2.IQueue,
+          | protos.google.cloud.tasks.v2beta2.ICreateQueueRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.ICreateQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.ICreateQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.ICreateQueueRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -500,25 +513,33 @@ export class CloudTasksClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createQueue(request, options, callback);
+    return this.innerApiCalls.createQueue(request, options, callback);
   }
   updateQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest | undefined,
       {} | undefined
     ]
   >;
   updateQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateQueue(
+    request: protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -559,24 +580,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.IQueue,
-          | protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest
+          protos.google.cloud.tasks.v2beta2.IQueue,
+          | protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IUpdateQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -597,25 +619,33 @@ export class CloudTasksClient {
       'queue.name': request.queue!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateQueue(request, options, callback);
+    return this.innerApiCalls.updateQueue(request, options, callback);
   }
   deleteQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest | undefined,
       {} | undefined
     ]
   >;
   deleteQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQueue(
+    request: protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -645,24 +675,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.tasks.v2beta2.IDeleteQueueRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -683,25 +714,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteQueue(request, options, callback);
+    return this.innerApiCalls.deleteQueue(request, options, callback);
   }
   purgeQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest | undefined,
       {} | undefined
     ]
   >;
   purgeQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeQueue(
+    request: protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -724,23 +763,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   purgeQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.IQueue,
-          protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest | undefined,
-          {} | undefined
+          protos.google.cloud.tasks.v2beta2.IQueue,
+          | protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IPurgeQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -761,25 +802,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.purgeQueue(request, options, callback);
+    return this.innerApiCalls.purgeQueue(request, options, callback);
   }
   pauseQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IPauseQueueRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPauseQueueRequest | undefined,
       {} | undefined
     ]
   >;
   pauseQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IPauseQueueRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPauseQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseQueue(
+    request: protos.google.cloud.tasks.v2beta2.IPauseQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPauseQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -803,23 +852,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   pauseQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IPauseQueueRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.IQueue,
-          protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest | undefined,
-          {} | undefined
+          protos.google.cloud.tasks.v2beta2.IQueue,
+          | protos.google.cloud.tasks.v2beta2.IPauseQueueRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPauseQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IPauseQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IPauseQueueRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -840,25 +891,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.pauseQueue(request, options, callback);
+    return this.innerApiCalls.pauseQueue(request, options, callback);
   }
   resumeQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IResumeQueueRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IResumeQueueRequest | undefined,
       {} | undefined
     ]
   >;
   resumeQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IResumeQueueRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IResumeQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeQueue(
+    request: protos.google.cloud.tasks.v2beta2.IResumeQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IResumeQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -888,24 +947,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   resumeQueue(
-    request: protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest,
+    request: protos.google.cloud.tasks.v2beta2.IResumeQueueRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.IQueue,
-          | protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest
+          protos.google.cloud.tasks.v2beta2.IQueue,
+          | protos.google.cloud.tasks.v2beta2.IResumeQueueRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IResumeQueueRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue,
-      protosTypes.google.cloud.tasks.v2beta2.IResumeQueueRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue,
+      protos.google.cloud.tasks.v2beta2.IResumeQueueRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -926,25 +986,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.resumeQueue(request, options, callback);
+    return this.innerApiCalls.resumeQueue(request, options, callback);
   }
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -967,23 +1035,23 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1004,25 +1072,33 @@ export class CloudTasksClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.getIamPolicy(request, options, callback);
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1047,23 +1123,23 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1084,25 +1160,33 @@ export class CloudTasksClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.setIamPolicy(request, options, callback);
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   >;
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1123,23 +1207,23 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-          protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1160,25 +1244,33 @@ export class CloudTasksClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.testIamPermissions(request, options, callback);
+    return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
   getTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IGetTaskRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IGetTaskRequest | undefined,
       {} | undefined
     ]
   >;
   getTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IGetTaskRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTask(
+    request: protos.google.cloud.tasks.v2beta2.IGetTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IGetTaskRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1209,23 +1301,23 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IGetTaskRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.ITask,
-          protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest | undefined,
-          {} | undefined
+          protos.google.cloud.tasks.v2beta2.ITask,
+          protos.google.cloud.tasks.v2beta2.IGetTaskRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IGetTaskRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IGetTaskRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IGetTaskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1246,25 +1338,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getTask(request, options, callback);
+    return this.innerApiCalls.getTask(request, options, callback);
   }
   createTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICreateTaskRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICreateTaskRequest | undefined,
       {} | undefined
     ]
   >;
   createTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICreateTaskRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICreateTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createTask(
+    request: protos.google.cloud.tasks.v2beta2.ICreateTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICreateTaskRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1337,23 +1437,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICreateTaskRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.ITask,
-          protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest | undefined,
-          {} | undefined
+          protos.google.cloud.tasks.v2beta2.ITask,
+          | protos.google.cloud.tasks.v2beta2.ICreateTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICreateTaskRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.ICreateTaskRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICreateTaskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1374,25 +1476,33 @@ export class CloudTasksClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createTask(request, options, callback);
+    return this.innerApiCalls.createTask(request, options, callback);
   }
   deleteTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest | undefined,
       {} | undefined
     ]
   >;
   deleteTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteTask(
+    request: protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1414,23 +1524,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest | undefined,
-          {} | undefined
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.tasks.v2beta2.IDeleteTaskRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1451,25 +1563,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteTask(request, options, callback);
+    return this.innerApiCalls.deleteTask(request, options, callback);
   }
   leaseTasks(
-    request: protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
+    request: protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
-      protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest | undefined,
       {} | undefined
     ]
   >;
   leaseTasks(
-    request: protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
+    request: protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
-      protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  leaseTasks(
+    request: protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1582,23 +1702,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   leaseTasks(
-    request: protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
+    request: protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
-          protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest | undefined,
-          {} | undefined
+          protos.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
+          | protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
-      protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
-      protosTypes.google.cloud.tasks.v2beta2.ILeaseTasksRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksResponse,
+      protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1619,29 +1741,37 @@ export class CloudTasksClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.leaseTasks(request, options, callback);
+    return this.innerApiCalls.leaseTasks(request, options, callback);
   }
   acknowledgeTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest | undefined,
       {} | undefined
     ]
   >;
   acknowledgeTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  acknowledgeTask(
+    request: protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1677,28 +1807,27 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   acknowledgeTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1719,25 +1848,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.acknowledgeTask(request, options, callback);
+    return this.innerApiCalls.acknowledgeTask(request, options, callback);
   }
   renewLease(
-    request: protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
+    request: protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest | undefined,
       {} | undefined
     ]
   >;
   renewLease(
-    request: protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
+    request: protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renewLease(
+    request: protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1784,23 +1921,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   renewLease(
-    request: protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
+    request: protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.ITask,
-          protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest | undefined,
-          {} | undefined
+          protos.google.cloud.tasks.v2beta2.ITask,
+          | protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IRenewLeaseRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1821,25 +1960,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.renewLease(request, options, callback);
+    return this.innerApiCalls.renewLease(request, options, callback);
   }
   cancelLease(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest | undefined,
       {} | undefined
     ]
   >;
   cancelLease(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelLease(
+    request: protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1881,24 +2028,25 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   cancelLease(
-    request: protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
+    request: protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.ITask,
-          | protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest
+          protos.google.cloud.tasks.v2beta2.ITask,
+          | protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.ICancelLeaseRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1919,25 +2067,33 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.cancelLease(request, options, callback);
+    return this.innerApiCalls.cancelLease(request, options, callback);
   }
   runTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IRunTaskRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRunTaskRequest | undefined,
       {} | undefined
     ]
   >;
   runTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IRunTaskRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runTask(
+    request: protos.google.cloud.tasks.v2beta2.IRunTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRunTaskRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1994,23 +2150,23 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   runTask(
-    request: protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest,
+    request: protos.google.cloud.tasks.v2beta2.IRunTaskRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.ITask,
-          protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest | undefined,
-          {} | undefined
+          protos.google.cloud.tasks.v2beta2.ITask,
+          protos.google.cloud.tasks.v2beta2.IRunTaskRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest | undefined,
-      {} | undefined
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRunTaskRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask,
-      protosTypes.google.cloud.tasks.v2beta2.IRunTaskRequest | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask,
+      protos.google.cloud.tasks.v2beta2.IRunTaskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2031,26 +2187,34 @@ export class CloudTasksClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.runTask(request, options, callback);
+    return this.innerApiCalls.runTask(request, options, callback);
   }
 
   listQueues(
-    request: protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest,
+    request: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue[],
-      protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest | null,
-      protosTypes.google.cloud.tasks.v2beta2.IListQueuesResponse
+      protos.google.cloud.tasks.v2beta2.IQueue[],
+      protos.google.cloud.tasks.v2beta2.IListQueuesRequest | null,
+      protos.google.cloud.tasks.v2beta2.IListQueuesResponse
     ]
   >;
   listQueues(
-    request: protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest,
+    request: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue[],
-      protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest | null,
-      protosTypes.google.cloud.tasks.v2beta2.IListQueuesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
+      protos.google.cloud.tasks.v2beta2.IListQueuesResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue
+    >
+  ): void;
+  listQueues(
+    request: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
+      protos.google.cloud.tasks.v2beta2.IListQueuesResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue
     >
   ): void;
   /**
@@ -2111,24 +2275,26 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listQueues(
-    request: protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest,
+    request: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.IQueue[],
-          protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest | null,
-          protosTypes.google.cloud.tasks.v2beta2.IListQueuesResponse
+      | PaginationCallback<
+          protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
+          | protos.google.cloud.tasks.v2beta2.IListQueuesResponse
+          | null
+          | undefined,
+          protos.google.cloud.tasks.v2beta2.IQueue
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.IQueue[],
-      protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest | null,
-      protosTypes.google.cloud.tasks.v2beta2.IListQueuesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
+      protos.google.cloud.tasks.v2beta2.IListQueuesResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta2.IQueue
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.IQueue[],
-      protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest | null,
-      protosTypes.google.cloud.tasks.v2beta2.IListQueuesResponse
+      protos.google.cloud.tasks.v2beta2.IQueue[],
+      protos.google.cloud.tasks.v2beta2.IListQueuesRequest | null,
+      protos.google.cloud.tasks.v2beta2.IListQueuesResponse
     ]
   > | void {
     request = request || {};
@@ -2148,7 +2314,7 @@ export class CloudTasksClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listQueues(request, options, callback);
+    return this.innerApiCalls.listQueues(request, options, callback);
   }
 
   /**
@@ -2204,7 +2370,7 @@ export class CloudTasksClient {
    *   An object stream which emits an object representing [Queue]{@link google.cloud.tasks.v2beta2.Queue} on 'data' event.
    */
   listQueuesStream(
-    request?: protosTypes.google.cloud.tasks.v2beta2.IListQueuesRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2218,29 +2384,104 @@ export class CloudTasksClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listQueues.createStream(
-      this._innerApiCalls.listQueues as gax.GaxCall,
+    return this.descriptors.page.listQueues.createStream(
+      this.innerApiCalls.listQueues as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listQueues}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The location name.
+   *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
+   * @param {string} request.filter
+   *   `filter` can be used to specify a subset of queues. Any {@link google.cloud.tasks.v2beta2.Queue|Queue}
+   *   field can be used as a filter and several operators as supported.
+   *   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
+   *   described in
+   *   [Stackdriver's Advanced Logs
+   *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+   *
+   *   Sample filter "app_engine_http_target: *".
+   *
+   *   Note that using filters might cause fewer queues than the
+   *   requested_page size to be returned.
+   * @param {number} request.pageSize
+   *   Requested page size.
+   *
+   *   The maximum page size is 9800. If unspecified, the page size will
+   *   be the maximum. Fewer queues than requested might be returned,
+   *   even if more queues exist; use the
+   *   {@link google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token} in the
+   *   response to determine if more queues exist.
+   * @param {string} request.pageToken
+   *   A token identifying the page of results to return.
+   *
+   *   To request the first page results, page_token must be empty. To
+   *   request the next page of results, page_token must be the value of
+   *   {@link google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token} returned
+   *   from the previous call to {@link google.cloud.tasks.v2beta2.CloudTasks.ListQueues|ListQueues}
+   *   method. It is an error to switch the value of the
+   *   {@link google.cloud.tasks.v2beta2.ListQueuesRequest.filter|filter} while iterating through pages.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listQueuesAsync(
+    request?: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.tasks.v2beta2.IQueue> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listQueues.asyncIterate(
+      this.innerApiCalls['listQueues'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.tasks.v2beta2.IQueue>;
+  }
   listTasks(
-    request: protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest,
+    request: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask[],
-      protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest | null,
-      protosTypes.google.cloud.tasks.v2beta2.IListTasksResponse
+      protos.google.cloud.tasks.v2beta2.ITask[],
+      protos.google.cloud.tasks.v2beta2.IListTasksRequest | null,
+      protos.google.cloud.tasks.v2beta2.IListTasksResponse
     ]
   >;
   listTasks(
-    request: protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest,
+    request: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask[],
-      protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest | null,
-      protosTypes.google.cloud.tasks.v2beta2.IListTasksResponse
+    callback: PaginationCallback<
+      protos.google.cloud.tasks.v2beta2.IListTasksRequest,
+      protos.google.cloud.tasks.v2beta2.IListTasksResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask
+    >
+  ): void;
+  listTasks(
+    request: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.tasks.v2beta2.IListTasksRequest,
+      protos.google.cloud.tasks.v2beta2.IListTasksResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask
     >
   ): void;
   /**
@@ -2310,24 +2551,26 @@ export class CloudTasksClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listTasks(
-    request: protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest,
+    request: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.tasks.v2beta2.ITask[],
-          protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest | null,
-          protosTypes.google.cloud.tasks.v2beta2.IListTasksResponse
+      | PaginationCallback<
+          protos.google.cloud.tasks.v2beta2.IListTasksRequest,
+          | protos.google.cloud.tasks.v2beta2.IListTasksResponse
+          | null
+          | undefined,
+          protos.google.cloud.tasks.v2beta2.ITask
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.tasks.v2beta2.ITask[],
-      protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest | null,
-      protosTypes.google.cloud.tasks.v2beta2.IListTasksResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.tasks.v2beta2.IListTasksRequest,
+      protos.google.cloud.tasks.v2beta2.IListTasksResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta2.ITask
     >
   ): Promise<
     [
-      protosTypes.google.cloud.tasks.v2beta2.ITask[],
-      protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest | null,
-      protosTypes.google.cloud.tasks.v2beta2.IListTasksResponse
+      protos.google.cloud.tasks.v2beta2.ITask[],
+      protos.google.cloud.tasks.v2beta2.IListTasksRequest | null,
+      protos.google.cloud.tasks.v2beta2.IListTasksResponse
     ]
   > | void {
     request = request || {};
@@ -2347,7 +2590,7 @@ export class CloudTasksClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listTasks(request, options, callback);
+    return this.innerApiCalls.listTasks(request, options, callback);
   }
 
   /**
@@ -2406,7 +2649,7 @@ export class CloudTasksClient {
    *   An object stream which emits an object representing [Task]{@link google.cloud.tasks.v2beta2.Task} on 'data' event.
    */
   listTasksStream(
-    request?: protosTypes.google.cloud.tasks.v2beta2.IListTasksRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2420,11 +2663,81 @@ export class CloudTasksClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listTasks.createStream(
-      this._innerApiCalls.listTasks as gax.GaxCall,
+    return this.descriptors.page.listTasks.createStream(
+      this.innerApiCalls.listTasks as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listTasks}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The queue name. For example:
+   *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
+   *   The response_view specifies which subset of the {@link google.cloud.tasks.v2beta2.Task|Task} will be
+   *   returned.
+   *
+   *   By default response_view is {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all
+   *   information is retrieved by default because some data, such as
+   *   payloads, might be desirable to return only when needed because
+   *   of its large size or because of the sensitivity of data that it
+   *   contains.
+   *
+   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL} requires
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   * @param {number} request.pageSize
+   *   Maximum page size.
+   *
+   *   Fewer tasks than requested might be returned, even if more tasks exist; use
+   *   {@link google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token} in the response to
+   *   determine if more tasks exist.
+   *
+   *   The maximum page size is 1000. If unspecified, the page size will be the
+   *   maximum.
+   * @param {string} request.pageToken
+   *   A token identifying the page of results to return.
+   *
+   *   To request the first page results, page_token must be empty. To
+   *   request the next page of results, page_token must be the value of
+   *   {@link google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token} returned
+   *   from the previous call to {@link google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks}
+   *   method.
+   *
+   *   The page token is valid for only 2 hours.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listTasksAsync(
+    request?: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.tasks.v2beta2.ITask> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listTasks.asyncIterate(
+      this.innerApiCalls['listTasks'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.tasks.v2beta2.ITask>;
   }
   // --------------------
   // -- Path templates --
@@ -2438,9 +2751,9 @@ export class CloudTasksClient {
    * @returns {string} Resource name string.
    */
   locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -2452,7 +2765,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -2463,8 +2776,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -2474,8 +2786,8 @@ export class CloudTasksClient {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -2487,7 +2799,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -2499,10 +2811,10 @@ export class CloudTasksClient {
    * @returns {string} Resource name string.
    */
   queuePath(project: string, location: string, queue: string) {
-    return this._pathTemplates.queuePathTemplate.render({
-      project,
-      location,
-      queue,
+    return this.pathTemplates.queuePathTemplate.render({
+      project: project,
+      location: location,
+      queue: queue,
     });
   }
 
@@ -2514,7 +2826,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromQueueName(queueName: string) {
-    return this._pathTemplates.queuePathTemplate.match(queueName).project;
+    return this.pathTemplates.queuePathTemplate.match(queueName).project;
   }
 
   /**
@@ -2525,7 +2837,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromQueueName(queueName: string) {
-    return this._pathTemplates.queuePathTemplate.match(queueName).location;
+    return this.pathTemplates.queuePathTemplate.match(queueName).location;
   }
 
   /**
@@ -2536,7 +2848,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the queue.
    */
   matchQueueFromQueueName(queueName: string) {
-    return this._pathTemplates.queuePathTemplate.match(queueName).queue;
+    return this.pathTemplates.queuePathTemplate.match(queueName).queue;
   }
 
   /**
@@ -2549,11 +2861,11 @@ export class CloudTasksClient {
    * @returns {string} Resource name string.
    */
   taskPath(project: string, location: string, queue: string, task: string) {
-    return this._pathTemplates.taskPathTemplate.render({
-      project,
-      location,
-      queue,
-      task,
+    return this.pathTemplates.taskPathTemplate.render({
+      project: project,
+      location: location,
+      queue: queue,
+      task: task,
     });
   }
 
@@ -2565,7 +2877,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTaskName(taskName: string) {
-    return this._pathTemplates.taskPathTemplate.match(taskName).project;
+    return this.pathTemplates.taskPathTemplate.match(taskName).project;
   }
 
   /**
@@ -2576,7 +2888,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTaskName(taskName: string) {
-    return this._pathTemplates.taskPathTemplate.match(taskName).location;
+    return this.pathTemplates.taskPathTemplate.match(taskName).location;
   }
 
   /**
@@ -2587,7 +2899,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the queue.
    */
   matchQueueFromTaskName(taskName: string) {
-    return this._pathTemplates.taskPathTemplate.match(taskName).queue;
+    return this.pathTemplates.taskPathTemplate.match(taskName).queue;
   }
 
   /**
@@ -2598,7 +2910,7 @@ export class CloudTasksClient {
    * @returns {string} A string representing the task.
    */
   matchTaskFromTaskName(taskName: string) {
-    return this._pathTemplates.taskPathTemplate.match(taskName).task;
+    return this.pathTemplates.taskPathTemplate.match(taskName).task;
   }
 
   /**
