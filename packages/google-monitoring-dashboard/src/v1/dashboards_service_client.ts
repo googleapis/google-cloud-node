@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './dashboards_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,13 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class DashboardsServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -55,6 +48,13 @@ export class DashboardsServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   dashboardsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -146,13 +146,16 @@ export class DashboardsServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listDashboards: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -171,7 +174,7 @@ export class DashboardsServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -198,7 +201,7 @@ export class DashboardsServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.monitoring.dashboard.v1.DashboardsService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.dashboard.v1
             .DashboardsService,
       this._opts
@@ -213,9 +216,8 @@ export class DashboardsServiceClient {
       'deleteDashboard',
       'updateDashboard',
     ];
-
     for (const methodName of dashboardsServiceStubMethods) {
-      const innerCallPromise = this.dashboardsServiceStub.then(
+      const callPromise = this.dashboardsServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -229,20 +231,14 @@ export class DashboardsServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.dashboardsServiceStub;
@@ -304,26 +300,34 @@ export class DashboardsServiceClient {
   // -- Service calls --
   // -------------------
   createDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.ICreateDashboardRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      (
-        | protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest
-        | undefined
-      ),
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      protos.google.monitoring.dashboard.v1.ICreateDashboardRequest | undefined,
       {} | undefined
     ]
   >;
   createDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.ICreateDashboardRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      | protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.ICreateDashboardRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createDashboard(
+    request: protos.google.monitoring.dashboard.v1.ICreateDashboardRequest,
+    callback: Callback<
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.ICreateDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -348,28 +352,27 @@ export class DashboardsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.ICreateDashboardRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.dashboard.v1.IDashboard,
-          | protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          | protos.google.monitoring.dashboard.v1.ICreateDashboardRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      | protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.ICreateDashboardRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      (
-        | protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest
-        | undefined
-      ),
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      protos.google.monitoring.dashboard.v1.ICreateDashboardRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -390,29 +393,37 @@ export class DashboardsServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createDashboard(request, options, callback);
+    return this.innerApiCalls.createDashboard(request, options, callback);
   }
   getDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IGetDashboardRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      (
-        | protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest
-        | undefined
-      ),
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      protos.google.monitoring.dashboard.v1.IGetDashboardRequest | undefined,
       {} | undefined
     ]
   >;
   getDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IGetDashboardRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      | protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.IGetDashboardRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getDashboard(
+    request: protos.google.monitoring.dashboard.v1.IGetDashboardRequest,
+    callback: Callback<
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.IGetDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -436,28 +447,27 @@ export class DashboardsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IGetDashboardRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.dashboard.v1.IDashboard,
-          | protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          | protos.google.monitoring.dashboard.v1.IGetDashboardRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      | protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.IGetDashboardRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      (
-        | protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest
-        | undefined
-      ),
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      protos.google.monitoring.dashboard.v1.IGetDashboardRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -478,29 +488,37 @@ export class DashboardsServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getDashboard(request, options, callback);
+    return this.innerApiCalls.getDashboard(request, options, callback);
   }
   deleteDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest | undefined,
       {} | undefined
     ]
   >;
   deleteDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteDashboard(
+    request: protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -522,28 +540,27 @@ export class DashboardsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -564,29 +581,37 @@ export class DashboardsServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteDashboard(request, options, callback);
+    return this.innerApiCalls.deleteDashboard(request, options, callback);
   }
   updateDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      (
-        | protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest
-        | undefined
-      ),
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest | undefined,
       {} | undefined
     ]
   >;
   updateDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      | protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateDashboard(
+    request: protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
+    callback: Callback<
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -607,28 +632,27 @@ export class DashboardsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateDashboard(
-    request: protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
+    request: protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.dashboard.v1.IDashboard,
-          | protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          | protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      | protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      | protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.dashboard.v1.IDashboard,
-      (
-        | protosTypes.google.monitoring.dashboard.v1.IUpdateDashboardRequest
-        | undefined
-      ),
+      protos.google.monitoring.dashboard.v1.IDashboard,
+      protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -649,26 +673,38 @@ export class DashboardsServiceClient {
       'dashboard.name': request.dashboard!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateDashboard(request, options, callback);
+    return this.innerApiCalls.updateDashboard(request, options, callback);
   }
 
   listDashboards(
-    request: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest,
+    request: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.dashboard.v1.IDashboard[],
-      protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-      protosTypes.google.monitoring.dashboard.v1.IListDashboardsResponse
+      protos.google.monitoring.dashboard.v1.IDashboard[],
+      protos.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
+      protos.google.monitoring.dashboard.v1.IListDashboardsResponse
     ]
   >;
   listDashboards(
-    request: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest,
+    request: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.monitoring.dashboard.v1.IDashboard[],
-      protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-      protosTypes.google.monitoring.dashboard.v1.IListDashboardsResponse
+    callback: PaginationCallback<
+      protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+      | protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+      | null
+      | undefined,
+      protos.google.monitoring.dashboard.v1.IDashboard
+    >
+  ): void;
+  listDashboards(
+    request: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+      | protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+      | null
+      | undefined,
+      protos.google.monitoring.dashboard.v1.IDashboard
     >
   ): void;
   /**
@@ -709,24 +745,28 @@ export class DashboardsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listDashboards(
-    request: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest,
+    request: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.monitoring.dashboard.v1.IDashboard[],
-          protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-          protosTypes.google.monitoring.dashboard.v1.IListDashboardsResponse
+      | PaginationCallback<
+          protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+          | protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+          | null
+          | undefined,
+          protos.google.monitoring.dashboard.v1.IDashboard
         >,
-    callback?: Callback<
-      protosTypes.google.monitoring.dashboard.v1.IDashboard[],
-      protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-      protosTypes.google.monitoring.dashboard.v1.IListDashboardsResponse
+    callback?: PaginationCallback<
+      protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+      | protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+      | null
+      | undefined,
+      protos.google.monitoring.dashboard.v1.IDashboard
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.dashboard.v1.IDashboard[],
-      protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-      protosTypes.google.monitoring.dashboard.v1.IListDashboardsResponse
+      protos.google.monitoring.dashboard.v1.IDashboard[],
+      protos.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
+      protos.google.monitoring.dashboard.v1.IListDashboardsResponse
     ]
   > | void {
     request = request || {};
@@ -746,7 +786,7 @@ export class DashboardsServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listDashboards(request, options, callback);
+    return this.innerApiCalls.listDashboards(request, options, callback);
   }
 
   /**
@@ -780,7 +820,7 @@ export class DashboardsServiceClient {
    *   An object stream which emits an object representing [Dashboard]{@link google.monitoring.dashboard.v1.Dashboard} on 'data' event.
    */
   listDashboardsStream(
-    request?: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest,
+    request?: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -794,11 +834,56 @@ export class DashboardsServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listDashboards.createStream(
-      this._innerApiCalls.listDashboards as gax.GaxCall,
+    return this.descriptors.page.listDashboards.createStream(
+      this.innerApiCalls.listDashboards as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listDashboards}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The scope of the dashboards to list. A project scope must be
+   *   specified in the form of `"projects/{project_id_or_number}"`.
+   * @param {number} request.pageSize
+   *   A positive number that is the maximum number of results to return.
+   *   If unspecified, a default of 1000 is used.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listDashboardsAsync(
+    request?: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.monitoring.dashboard.v1.IDashboard> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listDashboards.asyncIterate(
+      this.innerApiCalls['listDashboards'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.monitoring.dashboard.v1.IDashboard>;
   }
 
   /**
