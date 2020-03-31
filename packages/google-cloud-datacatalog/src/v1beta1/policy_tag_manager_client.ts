@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './policy_tag_manager_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class PolicyTagManagerClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class PolicyTagManagerClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   policyTagManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -147,13 +147,16 @@ export class PolicyTagManagerClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       entryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
       ),
@@ -186,7 +189,7 @@ export class PolicyTagManagerClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listTaxonomies: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -210,7 +213,7 @@ export class PolicyTagManagerClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -237,7 +240,7 @@ export class PolicyTagManagerClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.datacatalog.v1beta1.PolicyTagManager'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.datacatalog.v1beta1
             .PolicyTagManager,
       this._opts
@@ -260,9 +263,8 @@ export class PolicyTagManagerClient {
       'setIamPolicy',
       'testIamPermissions',
     ];
-
     for (const methodName of policyTagManagerStubMethods) {
-      const innerCallPromise = this.policyTagManagerStub.then(
+      const callPromise = this.policyTagManagerStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -276,20 +278,14 @@ export class PolicyTagManagerClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.policyTagManagerStub;
@@ -346,26 +342,37 @@ export class PolicyTagManagerClient {
   // -- Service calls --
   // -------------------
   createTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+        | protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-      | protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createTaxonomy(
+    request: protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -384,26 +391,28 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-          | protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+          protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+          | protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-      | protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
+        | protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
         | undefined
       ),
       {} | undefined
@@ -426,29 +435,40 @@ export class PolicyTagManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createTaxonomy(request, options, callback);
+    return this.innerApiCalls.createTaxonomy(request, options, callback);
   }
   deleteTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+        | protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteTaxonomy(
+    request: protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -467,26 +487,28 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
+        | protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
         | undefined
       ),
       {} | undefined
@@ -509,29 +531,40 @@ export class PolicyTagManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteTaxonomy(request, options, callback);
+    return this.innerApiCalls.deleteTaxonomy(request, options, callback);
   }
   updateTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+        | protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateTaxonomy(
+    request: protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -554,26 +587,28 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-          | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+          protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+          | protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
+        | protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
         | undefined
       ),
       {} | undefined
@@ -596,29 +631,37 @@ export class PolicyTagManagerClient {
       'taxonomy.name': request.taxonomy!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateTaxonomy(request, options, callback);
+    return this.innerApiCalls.updateTaxonomy(request, options, callback);
   }
   getTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-      (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
-        | undefined
-      ),
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest | undefined,
       {} | undefined
     ]
   >;
   getTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getTaxonomy(
+    request: protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -635,28 +678,27 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getTaxonomy(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-          | protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
+          protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+          | protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy,
-      (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
-        | undefined
-      ),
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
+      protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -677,29 +719,40 @@ export class PolicyTagManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getTaxonomy(request, options, callback);
+    return this.innerApiCalls.getTaxonomy(request, options, callback);
   }
   createPolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+        | protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createPolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-      | protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createPolicyTag(
+    request: protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -718,26 +771,28 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createPolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-          | protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+          protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+          | protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-      | protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
+        | protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
         | undefined
       ),
       {} | undefined
@@ -760,29 +815,40 @@ export class PolicyTagManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createPolicyTag(request, options, callback);
+    return this.innerApiCalls.createPolicyTag(request, options, callback);
   }
   deletePolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+        | protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deletePolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deletePolicyTag(
+    request: protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -800,26 +866,28 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deletePolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
+        | protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
         | undefined
       ),
       {} | undefined
@@ -842,29 +910,40 @@ export class PolicyTagManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deletePolicyTag(request, options, callback);
+    return this.innerApiCalls.deletePolicyTag(request, options, callback);
   }
   updatePolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+        | protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updatePolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updatePolicyTag(
+    request: protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -890,26 +969,28 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updatePolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-          | protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+          protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+          | protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
       (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
+        | protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
         | undefined
       ),
       {} | undefined
@@ -932,29 +1013,37 @@ export class PolicyTagManagerClient {
       'policy_tag.name': request.policyTag!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updatePolicyTag(request, options, callback);
+    return this.innerApiCalls.updatePolicyTag(request, options, callback);
   }
   getPolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-      (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
-        | undefined
-      ),
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest | undefined,
       {} | undefined
     ]
   >;
   getPolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getPolicyTag(
+    request: protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -971,28 +1060,27 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getPolicyTag(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-          | protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
+          protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+          | protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-      | protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      | protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag,
-      (
-        | protosTypes.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
-        | undefined
-      ),
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
+      protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1013,25 +1101,33 @@ export class PolicyTagManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getPolicyTag(request, options, callback);
+    return this.innerApiCalls.getPolicyTag(request, options, callback);
   }
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1046,23 +1142,23 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1083,25 +1179,33 @@ export class PolicyTagManagerClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.getIamPolicy(request, options, callback);
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1116,23 +1220,23 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1153,25 +1257,33 @@ export class PolicyTagManagerClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.setIamPolicy(request, options, callback);
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   >;
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1187,23 +1299,23 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-          protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1224,26 +1336,38 @@ export class PolicyTagManagerClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.testIamPermissions(request, options, callback);
+    return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
   listTaxonomies(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy[],
-      protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest | null,
-      protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy[],
+      protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest | null,
+      protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
     ]
   >;
   listTaxonomies(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy[],
-      protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest | null,
-      protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+      | protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy
+    >
+  ): void;
+  listTaxonomies(
+    request: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+      | protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy
     >
   ): void;
   /**
@@ -1279,24 +1403,28 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listTaxonomies(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy[],
-          protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest | null,
-          protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+          | protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.v1beta1.ITaxonomy
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy[],
-      protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest | null,
-      protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+      | protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy
     >
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.ITaxonomy[],
-      protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest | null,
-      protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
+      protos.google.cloud.datacatalog.v1beta1.ITaxonomy[],
+      protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest | null,
+      protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
     ]
   > | void {
     request = request || {};
@@ -1316,7 +1444,7 @@ export class PolicyTagManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listTaxonomies(request, options, callback);
+    return this.innerApiCalls.listTaxonomies(request, options, callback);
   }
 
   /**
@@ -1348,7 +1476,7 @@ export class PolicyTagManagerClient {
    *   An object stream which emits an object representing [Taxonomy]{@link google.cloud.datacatalog.v1beta1.Taxonomy} on 'data' event.
    */
   listTaxonomiesStream(
-    request?: protosTypes.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+    request?: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1362,29 +1490,84 @@ export class PolicyTagManagerClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listTaxonomies.createStream(
-      this._innerApiCalls.listTaxonomies as gax.GaxCall,
+    return this.descriptors.page.listTaxonomies.createStream(
+      this.innerApiCalls.listTaxonomies as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listTaxonomies}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the project to list the taxonomies of.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return. Must be a value between 1 and 1000.
+   *   If not set, defaults to 50.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any. If
+   *   not set, defaults to an empty string.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listTaxonomiesAsync(
+    request?: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.datacatalog.v1beta1.ITaxonomy> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listTaxonomies.asyncIterate(
+      this.innerApiCalls['listTaxonomies'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.ITaxonomy>;
+  }
   listPolicyTags(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag[],
-      protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest | null,
-      protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag[],
+      protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest | null,
+      protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
     ]
   >;
   listPolicyTags(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag[],
-      protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest | null,
-      protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+      | protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag
+    >
+  ): void;
+  listPolicyTags(
+    request: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+      | protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag
     >
   ): void;
   /**
@@ -1419,24 +1602,28 @@ export class PolicyTagManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listPolicyTags(
-    request: protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+    request: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag[],
-          protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest | null,
-          protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+          | protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.v1beta1.IPolicyTag
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag[],
-      protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest | null,
-      protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+      | protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag
     >
   ): Promise<
     [
-      protosTypes.google.cloud.datacatalog.v1beta1.IPolicyTag[],
-      protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest | null,
-      protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
+      protos.google.cloud.datacatalog.v1beta1.IPolicyTag[],
+      protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest | null,
+      protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
     ]
   > | void {
     request = request || {};
@@ -1456,7 +1643,7 @@ export class PolicyTagManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listPolicyTags(request, options, callback);
+    return this.innerApiCalls.listPolicyTags(request, options, callback);
   }
 
   /**
@@ -1488,7 +1675,7 @@ export class PolicyTagManagerClient {
    *   An object stream which emits an object representing [PolicyTag]{@link google.cloud.datacatalog.v1beta1.PolicyTag} on 'data' event.
    */
   listPolicyTagsStream(
-    request?: protosTypes.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+    request?: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1502,11 +1689,54 @@ export class PolicyTagManagerClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listPolicyTags.createStream(
-      this._innerApiCalls.listPolicyTags as gax.GaxCall,
+    return this.descriptors.page.listPolicyTags.createStream(
+      this.innerApiCalls.listPolicyTags as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listPolicyTags}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the taxonomy to list the policy tags of.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return. Must be a value between 1 and 1000.
+   *   If not set, defaults to 50.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request, if any. If
+   *   not set, defaults to an empty string.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listPolicyTagsAsync(
+    request?: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IPolicyTag> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listPolicyTags.asyncIterate(
+      this.innerApiCalls['listPolicyTags'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IPolicyTag>;
   }
   // --------------------
   // -- Path templates --
@@ -1527,11 +1757,11 @@ export class PolicyTagManagerClient {
     entryGroup: string,
     entry: string
   ) {
-    return this._pathTemplates.entryPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.entryPathTemplate.render({
+      project: project,
+      location: location,
       entry_group: entryGroup,
-      entry,
+      entry: entry,
     });
   }
 
@@ -1543,7 +1773,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryName(entryName: string) {
-    return this._pathTemplates.entryPathTemplate.match(entryName).project;
+    return this.pathTemplates.entryPathTemplate.match(entryName).project;
   }
 
   /**
@@ -1554,7 +1784,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryName(entryName: string) {
-    return this._pathTemplates.entryPathTemplate.match(entryName).location;
+    return this.pathTemplates.entryPathTemplate.match(entryName).location;
   }
 
   /**
@@ -1565,7 +1795,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryName(entryName: string) {
-    return this._pathTemplates.entryPathTemplate.match(entryName).entry_group;
+    return this.pathTemplates.entryPathTemplate.match(entryName).entry_group;
   }
 
   /**
@@ -1576,7 +1806,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the entry.
    */
   matchEntryFromEntryName(entryName: string) {
-    return this._pathTemplates.entryPathTemplate.match(entryName).entry;
+    return this.pathTemplates.entryPathTemplate.match(entryName).entry;
   }
 
   /**
@@ -1588,9 +1818,9 @@ export class PolicyTagManagerClient {
    * @returns {string} Resource name string.
    */
   entryGroupPath(project: string, location: string, entryGroup: string) {
-    return this._pathTemplates.entryGroupPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.entryGroupPathTemplate.render({
+      project: project,
+      location: location,
       entry_group: entryGroup,
     });
   }
@@ -1603,7 +1833,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryGroupName(entryGroupName: string) {
-    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
       .project;
   }
 
@@ -1615,7 +1845,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryGroupName(entryGroupName: string) {
-    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
       .location;
   }
 
@@ -1627,7 +1857,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryGroupName(entryGroupName: string) {
-    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
       .entry_group;
   }
 
@@ -1639,9 +1869,9 @@ export class PolicyTagManagerClient {
    * @returns {string} Resource name string.
    */
   locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -1653,7 +1883,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -1664,8 +1894,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -1683,10 +1912,10 @@ export class PolicyTagManagerClient {
     taxonomy: string,
     policyTag: string
   ) {
-    return this._pathTemplates.policyTagPathTemplate.render({
-      project,
-      location,
-      taxonomy,
+    return this.pathTemplates.policyTagPathTemplate.render({
+      project: project,
+      location: location,
+      taxonomy: taxonomy,
       policy_tag: policyTag,
     });
   }
@@ -1699,7 +1928,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPolicyTagName(policyTagName: string) {
-    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+    return this.pathTemplates.policyTagPathTemplate.match(policyTagName)
       .project;
   }
 
@@ -1711,7 +1940,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPolicyTagName(policyTagName: string) {
-    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+    return this.pathTemplates.policyTagPathTemplate.match(policyTagName)
       .location;
   }
 
@@ -1723,7 +1952,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the taxonomy.
    */
   matchTaxonomyFromPolicyTagName(policyTagName: string) {
-    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+    return this.pathTemplates.policyTagPathTemplate.match(policyTagName)
       .taxonomy;
   }
 
@@ -1735,7 +1964,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the policy_tag.
    */
   matchPolicyTagFromPolicyTagName(policyTagName: string) {
-    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+    return this.pathTemplates.policyTagPathTemplate.match(policyTagName)
       .policy_tag;
   }
 
@@ -1746,8 +1975,8 @@ export class PolicyTagManagerClient {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -1759,7 +1988,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -1779,12 +2008,12 @@ export class PolicyTagManagerClient {
     entry: string,
     tag: string
   ) {
-    return this._pathTemplates.tagPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.tagPathTemplate.render({
+      project: project,
+      location: location,
       entry_group: entryGroup,
-      entry,
-      tag,
+      entry: entry,
+      tag: tag,
     });
   }
 
@@ -1796,7 +2025,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTagName(tagName: string) {
-    return this._pathTemplates.tagPathTemplate.match(tagName).project;
+    return this.pathTemplates.tagPathTemplate.match(tagName).project;
   }
 
   /**
@@ -1807,7 +2036,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTagName(tagName: string) {
-    return this._pathTemplates.tagPathTemplate.match(tagName).location;
+    return this.pathTemplates.tagPathTemplate.match(tagName).location;
   }
 
   /**
@@ -1818,7 +2047,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromTagName(tagName: string) {
-    return this._pathTemplates.tagPathTemplate.match(tagName).entry_group;
+    return this.pathTemplates.tagPathTemplate.match(tagName).entry_group;
   }
 
   /**
@@ -1829,7 +2058,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the entry.
    */
   matchEntryFromTagName(tagName: string) {
-    return this._pathTemplates.tagPathTemplate.match(tagName).entry;
+    return this.pathTemplates.tagPathTemplate.match(tagName).entry;
   }
 
   /**
@@ -1840,7 +2069,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the tag.
    */
   matchTagFromTagName(tagName: string) {
-    return this._pathTemplates.tagPathTemplate.match(tagName).tag;
+    return this.pathTemplates.tagPathTemplate.match(tagName).tag;
   }
 
   /**
@@ -1852,9 +2081,9 @@ export class PolicyTagManagerClient {
    * @returns {string} Resource name string.
    */
   tagTemplatePath(project: string, location: string, tagTemplate: string) {
-    return this._pathTemplates.tagTemplatePathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.tagTemplatePathTemplate.render({
+      project: project,
+      location: location,
       tag_template: tagTemplate,
     });
   }
@@ -1867,7 +2096,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTagTemplateName(tagTemplateName: string) {
-    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+    return this.pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
       .project;
   }
 
@@ -1879,7 +2108,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTagTemplateName(tagTemplateName: string) {
-    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+    return this.pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
       .location;
   }
 
@@ -1891,7 +2120,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the tag_template.
    */
   matchTagTemplateFromTagTemplateName(tagTemplateName: string) {
-    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
+    return this.pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
       .tag_template;
   }
 
@@ -1910,11 +2139,11 @@ export class PolicyTagManagerClient {
     tagTemplate: string,
     field: string
   ) {
-    return this._pathTemplates.tagTemplateFieldPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.tagTemplateFieldPathTemplate.render({
+      project: project,
+      location: location,
       tag_template: tagTemplate,
-      field,
+      field: field,
     });
   }
 
@@ -1926,7 +2155,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTagTemplateFieldName(tagTemplateFieldName: string) {
-    return this._pathTemplates.tagTemplateFieldPathTemplate.match(
+    return this.pathTemplates.tagTemplateFieldPathTemplate.match(
       tagTemplateFieldName
     ).project;
   }
@@ -1939,7 +2168,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTagTemplateFieldName(tagTemplateFieldName: string) {
-    return this._pathTemplates.tagTemplateFieldPathTemplate.match(
+    return this.pathTemplates.tagTemplateFieldPathTemplate.match(
       tagTemplateFieldName
     ).location;
   }
@@ -1952,7 +2181,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the tag_template.
    */
   matchTagTemplateFromTagTemplateFieldName(tagTemplateFieldName: string) {
-    return this._pathTemplates.tagTemplateFieldPathTemplate.match(
+    return this.pathTemplates.tagTemplateFieldPathTemplate.match(
       tagTemplateFieldName
     ).tag_template;
   }
@@ -1965,7 +2194,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the field.
    */
   matchFieldFromTagTemplateFieldName(tagTemplateFieldName: string) {
-    return this._pathTemplates.tagTemplateFieldPathTemplate.match(
+    return this.pathTemplates.tagTemplateFieldPathTemplate.match(
       tagTemplateFieldName
     ).field;
   }
@@ -1979,10 +2208,10 @@ export class PolicyTagManagerClient {
    * @returns {string} Resource name string.
    */
   taxonomyPath(project: string, location: string, taxonomy: string) {
-    return this._pathTemplates.taxonomyPathTemplate.render({
-      project,
-      location,
-      taxonomy,
+    return this.pathTemplates.taxonomyPathTemplate.render({
+      project: project,
+      location: location,
+      taxonomy: taxonomy,
     });
   }
 
@@ -1994,7 +2223,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTaxonomyName(taxonomyName: string) {
-    return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName).project;
+    return this.pathTemplates.taxonomyPathTemplate.match(taxonomyName).project;
   }
 
   /**
@@ -2005,8 +2234,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTaxonomyName(taxonomyName: string) {
-    return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName)
-      .location;
+    return this.pathTemplates.taxonomyPathTemplate.match(taxonomyName).location;
   }
 
   /**
@@ -2017,8 +2245,7 @@ export class PolicyTagManagerClient {
    * @returns {string} A string representing the taxonomy.
    */
   matchTaxonomyFromTaxonomyName(taxonomyName: string) {
-    return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName)
-      .taxonomy;
+    return this.pathTemplates.taxonomyPathTemplate.match(taxonomyName).taxonomy;
   }
 
   /**

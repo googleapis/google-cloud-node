@@ -25,18 +25,19 @@
     "Google Cloud Data Catalog API"
   ],
   "dependencies": {
-    "google-gax": "^1.7.5"
+    "google-gax": "^2.0.1"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.0",
     "@types/node": "^10.0.3",
+    "@types/sinon": "^7.5.2",
     "c8": "^7.0.0",
     "chai": "^4.2.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "gts": "^1.1.0",
+    "gts": "2.0.0-alpha.9",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
@@ -44,7 +45,8 @@
     "mocha": "^7.0.0",
     "pack-n-play": "^1.0.0-2",
     "prettier": "^1.17.0",
-    "typescript": "3.6.4"
+    "sinon": "^9.0.1",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
@@ -62,6 +64,6 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10"
   }
 }
