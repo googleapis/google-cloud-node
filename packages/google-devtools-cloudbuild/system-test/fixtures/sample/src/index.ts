@@ -19,7 +19,7 @@
 import {CloudBuildClient} from '@google-cloud/cloudbuild';
 
 function main() {
-  const cloudBuildClient = new CloudBuildClient();
+  new CloudBuildClient();
 }
 
 main();
