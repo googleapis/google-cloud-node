@@ -19,7 +19,7 @@
 import {CloudRedisClient} from '@google-cloud/redis';
 
 function main() {
-  const cloudRedisClient = new CloudRedisClient();
+  new CloudRedisClient();
 }
 
 main();
