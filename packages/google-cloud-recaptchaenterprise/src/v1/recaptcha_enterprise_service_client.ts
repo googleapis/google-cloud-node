@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './recaptcha_enterprise_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -40,14 +40,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class RecaptchaEnterpriseServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -55,6 +47,14 @@ export class RecaptchaEnterpriseServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   recaptchaEnterpriseServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -148,13 +148,16 @@ export class RecaptchaEnterpriseServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       assessmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/assessments/{assessment}'
       ),
@@ -169,7 +172,7 @@ export class RecaptchaEnterpriseServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listKeys: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -188,7 +191,7 @@ export class RecaptchaEnterpriseServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -215,7 +218,7 @@ export class RecaptchaEnterpriseServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.recaptchaenterprise.v1
             .RecaptchaEnterpriseService,
       this._opts
@@ -232,9 +235,8 @@ export class RecaptchaEnterpriseServiceClient {
       'updateKey',
       'deleteKey',
     ];
-
     for (const methodName of recaptchaEnterpriseServiceStubMethods) {
-      const innerCallPromise = this.recaptchaEnterpriseServiceStub.then(
+      const callPromise = this.recaptchaEnterpriseServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -248,20 +250,14 @@ export class RecaptchaEnterpriseServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.recaptchaEnterpriseServiceStub;
@@ -318,26 +314,37 @@ export class RecaptchaEnterpriseServiceClient {
   // -- Service calls --
   // -------------------
   createAssessment(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IAssessment,
+      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
       (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+        | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createAssessment(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IAssessment,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createAssessment(
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -357,26 +364,28 @@ export class RecaptchaEnterpriseServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createAssessment(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recaptchaenterprise.v1.IAssessment,
-          | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+          protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+          | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IAssessment,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IAssessment,
+      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
       (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+        | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
         | undefined
       ),
       {} | undefined
@@ -399,29 +408,40 @@ export class RecaptchaEnterpriseServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createAssessment(request, options, callback);
+    return this.innerApiCalls.createAssessment(request, options, callback);
   }
   annotateAssessment(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
       (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+        | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   annotateAssessment(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  annotateAssessment(
+    request: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -442,26 +462,28 @@ export class RecaptchaEnterpriseServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   annotateAssessment(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-          | protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
       (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+        | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
         | undefined
       ),
       {} | undefined
@@ -484,29 +506,37 @@ export class RecaptchaEnterpriseServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.annotateAssessment(request, options, callback);
+    return this.innerApiCalls.annotateAssessment(request, options, callback);
   }
   createKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
-        | undefined
-      ),
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest | undefined,
       {} | undefined
     ]
   >;
   createKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createKey(
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -526,28 +556,27 @@ export class RecaptchaEnterpriseServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-          | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
-        | undefined
-      ),
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -568,29 +597,37 @@ export class RecaptchaEnterpriseServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createKey(request, options, callback);
+    return this.innerApiCalls.createKey(request, options, callback);
   }
   getKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
-        | undefined
-      ),
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
       {} | undefined
     ]
   >;
   getKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getKey(
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -608,28 +645,27 @@ export class RecaptchaEnterpriseServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-          | protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
-        | undefined
-      ),
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -650,29 +686,37 @@ export class RecaptchaEnterpriseServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getKey(request, options, callback);
+    return this.innerApiCalls.getKey(request, options, callback);
   }
   updateKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
-        | undefined
-      ),
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest | undefined,
       {} | undefined
     ]
   >;
   updateKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateKey(
+    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -692,28 +736,27 @@ export class RecaptchaEnterpriseServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-          | protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey,
-      (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
-        | undefined
-      ),
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -734,29 +777,37 @@ export class RecaptchaEnterpriseServiceClient {
       'key.name': request.key!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateKey(request, options, callback);
+    return this.innerApiCalls.updateKey(request, options, callback);
   }
   deleteKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest | undefined,
       {} | undefined
     ]
   >;
   deleteKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteKey(
+    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -774,28 +825,27 @@ export class RecaptchaEnterpriseServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteKey(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -816,26 +866,38 @@ export class RecaptchaEnterpriseServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteKey(request, options, callback);
+    return this.innerApiCalls.deleteKey(request, options, callback);
   }
 
   listKeys(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey[],
-      protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      protos.google.cloud.recaptchaenterprise.v1.IKey[],
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
     ]
   >;
   listKeys(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey[],
-      protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IKey
+    >
+  ): void;
+  listKeys(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IKey
     >
   ): void;
   /**
@@ -871,24 +933,28 @@ export class RecaptchaEnterpriseServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listKeys(
-    request: protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+    request: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.recaptchaenterprise.v1.IKey[],
-          protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-          protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IKey
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey[],
-      protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IKey
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recaptchaenterprise.v1.IKey[],
-      protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      protos.google.cloud.recaptchaenterprise.v1.IKey[],
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
     ]
   > | void {
     request = request || {};
@@ -908,7 +974,7 @@ export class RecaptchaEnterpriseServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listKeys(request, options, callback);
+    return this.innerApiCalls.listKeys(request, options, callback);
   }
 
   /**
@@ -941,7 +1007,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   An object stream which emits an object representing [Key]{@link google.cloud.recaptchaenterprise.v1.Key} on 'data' event.
    */
   listKeysStream(
-    request?: protosTypes.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -955,11 +1021,55 @@ export class RecaptchaEnterpriseServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listKeys.createStream(
-      this._innerApiCalls.listKeys as gax.GaxCall,
+    return this.descriptors.page.listKeys.createStream(
+      this.innerApiCalls.listKeys as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listKeys}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project that contains the keys that will be
+   *   listed, in the format "projects/{project}".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of keys to return. Default is 10. Max limit is
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous.
+   *   ListKeysRequest, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listKeysAsync(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listKeys.asyncIterate(
+      this.innerApiCalls['listKeys'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey>;
   }
   // --------------------
   // -- Path templates --
@@ -973,9 +1083,9 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} Resource name string.
    */
   assessmentPath(project: string, assessment: string) {
-    return this._pathTemplates.assessmentPathTemplate.render({
-      project,
-      assessment,
+    return this.pathTemplates.assessmentPathTemplate.render({
+      project: project,
+      assessment: assessment,
     });
   }
 
@@ -987,7 +1097,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAssessmentName(assessmentName: string) {
-    return this._pathTemplates.assessmentPathTemplate.match(assessmentName)
+    return this.pathTemplates.assessmentPathTemplate.match(assessmentName)
       .project;
   }
 
@@ -999,7 +1109,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the assessment.
    */
   matchAssessmentFromAssessmentName(assessmentName: string) {
-    return this._pathTemplates.assessmentPathTemplate.match(assessmentName)
+    return this.pathTemplates.assessmentPathTemplate.match(assessmentName)
       .assessment;
   }
 
@@ -1011,9 +1121,9 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} Resource name string.
    */
   keyPath(project: string, key: string) {
-    return this._pathTemplates.keyPathTemplate.render({
-      project,
-      key,
+    return this.pathTemplates.keyPathTemplate.render({
+      project: project,
+      key: key,
     });
   }
 
@@ -1025,7 +1135,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromKeyName(keyName: string) {
-    return this._pathTemplates.keyPathTemplate.match(keyName).project;
+    return this.pathTemplates.keyPathTemplate.match(keyName).project;
   }
 
   /**
@@ -1036,7 +1146,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the key.
    */
   matchKeyFromKeyName(keyName: string) {
-    return this._pathTemplates.keyPathTemplate.match(keyName).key;
+    return this.pathTemplates.keyPathTemplate.match(keyName).key;
   }
 
   /**
@@ -1046,8 +1156,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -1059,7 +1169,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**

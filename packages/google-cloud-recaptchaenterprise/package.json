@@ -25,17 +25,18 @@
     "reCAPTCHA Enterprise API"
   ],
   "dependencies": {
-    "google-gax": "^1.9.0"
+    "google-gax": "^2.0.1"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.0",
     "@types/node": "^12.0.0",
+    "@types/sinon": "^7.5.2",
     "c8": "^7.0.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "gts": "^1.0.0",
+    "gts": "2.0.0-alpha.9",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
@@ -44,8 +45,9 @@
     "null-loader": "^3.0.0",
     "pack-n-play": "^1.0.0-2",
     "prettier": "^1.17.1",
+    "sinon": "^9.0.1",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.0",
+    "typescript": "^3.8.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
@@ -66,6 +68,6 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10"
   }
 }
