@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
+  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './cloud_catalog_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -42,14 +42,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class CloudCatalogClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -57,6 +49,14 @@ export class CloudCatalogClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   cloudCatalogStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -148,13 +148,16 @@ export class CloudCatalogClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       servicePathTemplate: new this._gaxModule.PathTemplate(
         'services/{service}'
       ),
@@ -166,7 +169,7 @@ export class CloudCatalogClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listServices: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -190,7 +193,7 @@ export class CloudCatalogClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -217,7 +220,7 @@ export class CloudCatalogClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.billing.v1.CloudCatalog'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.billing.v1.CloudCatalog,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -225,9 +228,8 @@ export class CloudCatalogClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const cloudCatalogStubMethods = ['listServices', 'listSkus'];
-
     for (const methodName of cloudCatalogStubMethods) {
-      const innerCallPromise = this.cloudCatalogStub.then(
+      const callPromise = this.cloudCatalogStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -241,20 +243,14 @@ export class CloudCatalogClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.cloudCatalogStub;
@@ -312,22 +308,30 @@ export class CloudCatalogClient {
   // -------------------
 
   listServices(
-    request: protosTypes.google.cloud.billing.v1.IListServicesRequest,
+    request: protos.google.cloud.billing.v1.IListServicesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IService[],
-      protosTypes.google.cloud.billing.v1.IListServicesRequest | null,
-      protosTypes.google.cloud.billing.v1.IListServicesResponse
+      protos.google.cloud.billing.v1.IService[],
+      protos.google.cloud.billing.v1.IListServicesRequest | null,
+      protos.google.cloud.billing.v1.IListServicesResponse
     ]
   >;
   listServices(
-    request: protosTypes.google.cloud.billing.v1.IListServicesRequest,
+    request: protos.google.cloud.billing.v1.IListServicesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.billing.v1.IService[],
-      protosTypes.google.cloud.billing.v1.IListServicesRequest | null,
-      protosTypes.google.cloud.billing.v1.IListServicesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListServicesRequest,
+      protos.google.cloud.billing.v1.IListServicesResponse | null | undefined,
+      protos.google.cloud.billing.v1.IService
+    >
+  ): void;
+  listServices(
+    request: protos.google.cloud.billing.v1.IListServicesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListServicesRequest,
+      protos.google.cloud.billing.v1.IListServicesResponse | null | undefined,
+      protos.google.cloud.billing.v1.IService
     >
   ): void;
   /**
@@ -360,24 +364,26 @@ export class CloudCatalogClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listServices(
-    request: protosTypes.google.cloud.billing.v1.IListServicesRequest,
+    request: protos.google.cloud.billing.v1.IListServicesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.billing.v1.IService[],
-          protosTypes.google.cloud.billing.v1.IListServicesRequest | null,
-          protosTypes.google.cloud.billing.v1.IListServicesResponse
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListServicesRequest,
+          | protos.google.cloud.billing.v1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.v1.IService
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.billing.v1.IService[],
-      protosTypes.google.cloud.billing.v1.IListServicesRequest | null,
-      protosTypes.google.cloud.billing.v1.IListServicesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.billing.v1.IListServicesRequest,
+      protos.google.cloud.billing.v1.IListServicesResponse | null | undefined,
+      protos.google.cloud.billing.v1.IService
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IService[],
-      protosTypes.google.cloud.billing.v1.IListServicesRequest | null,
-      protosTypes.google.cloud.billing.v1.IListServicesResponse
+      protos.google.cloud.billing.v1.IService[],
+      protos.google.cloud.billing.v1.IListServicesRequest | null,
+      protos.google.cloud.billing.v1.IListServicesResponse
     ]
   > | void {
     request = request || {};
@@ -390,7 +396,7 @@ export class CloudCatalogClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.listServices(request, options, callback);
+    return this.innerApiCalls.listServices(request, options, callback);
   }
 
   /**
@@ -420,36 +426,78 @@ export class CloudCatalogClient {
    *   An object stream which emits an object representing [Service]{@link google.cloud.billing.v1.Service} on 'data' event.
    */
   listServicesStream(
-    request?: protosTypes.google.cloud.billing.v1.IListServicesRequest,
+    request?: protos.google.cloud.billing.v1.IListServicesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listServices.createStream(
-      this._innerApiCalls.listServices as gax.GaxCall,
+    return this.descriptors.page.listServices.createStream(
+      this.innerApiCalls.listServices as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listServices}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListServices`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listServicesAsync(
+    request?: protos.google.cloud.billing.v1.IListServicesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.billing.v1.IService> {
+    request = request || {};
+    options = options || {};
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listServices.asyncIterate(
+      this.innerApiCalls['listServices'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.billing.v1.IService>;
+  }
   listSkus(
-    request: protosTypes.google.cloud.billing.v1.IListSkusRequest,
+    request: protos.google.cloud.billing.v1.IListSkusRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.ISku[],
-      protosTypes.google.cloud.billing.v1.IListSkusRequest | null,
-      protosTypes.google.cloud.billing.v1.IListSkusResponse
+      protos.google.cloud.billing.v1.ISku[],
+      protos.google.cloud.billing.v1.IListSkusRequest | null,
+      protos.google.cloud.billing.v1.IListSkusResponse
     ]
   >;
   listSkus(
-    request: protosTypes.google.cloud.billing.v1.IListSkusRequest,
+    request: protos.google.cloud.billing.v1.IListSkusRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.billing.v1.ISku[],
-      protosTypes.google.cloud.billing.v1.IListSkusRequest | null,
-      protosTypes.google.cloud.billing.v1.IListSkusResponse
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListSkusRequest,
+      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.billing.v1.ISku
+    >
+  ): void;
+  listSkus(
+    request: protos.google.cloud.billing.v1.IListSkusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListSkusRequest,
+      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.billing.v1.ISku
     >
   ): void;
   /**
@@ -503,24 +551,24 @@ export class CloudCatalogClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listSkus(
-    request: protosTypes.google.cloud.billing.v1.IListSkusRequest,
+    request: protos.google.cloud.billing.v1.IListSkusRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.billing.v1.ISku[],
-          protosTypes.google.cloud.billing.v1.IListSkusRequest | null,
-          protosTypes.google.cloud.billing.v1.IListSkusResponse
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListSkusRequest,
+          protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+          protos.google.cloud.billing.v1.ISku
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.billing.v1.ISku[],
-      protosTypes.google.cloud.billing.v1.IListSkusRequest | null,
-      protosTypes.google.cloud.billing.v1.IListSkusResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.billing.v1.IListSkusRequest,
+      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.billing.v1.ISku
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.ISku[],
-      protosTypes.google.cloud.billing.v1.IListSkusRequest | null,
-      protosTypes.google.cloud.billing.v1.IListSkusResponse
+      protos.google.cloud.billing.v1.ISku[],
+      protos.google.cloud.billing.v1.IListSkusRequest | null,
+      protos.google.cloud.billing.v1.IListSkusResponse
     ]
   > | void {
     request = request || {};
@@ -540,7 +588,7 @@ export class CloudCatalogClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listSkus(request, options, callback);
+    return this.innerApiCalls.listSkus(request, options, callback);
   }
 
   /**
@@ -591,7 +639,7 @@ export class CloudCatalogClient {
    *   An object stream which emits an object representing [Sku]{@link google.cloud.billing.v1.Sku} on 'data' event.
    */
   listSkusStream(
-    request?: protosTypes.google.cloud.billing.v1.IListSkusRequest,
+    request?: protos.google.cloud.billing.v1.IListSkusRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -605,11 +653,73 @@ export class CloudCatalogClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listSkus.createStream(
-      this._innerApiCalls.listSkus as gax.GaxCall,
+    return this.descriptors.page.listSkus.createStream(
+      this.innerApiCalls.listSkus as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listSkus}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the service.
+   *   Example: "services/DA34-426B-A397"
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   Optional inclusive start time of the time range for which the pricing
+   *   versions will be returned. Timestamps in the future are not allowed.
+   *   The time range has to be within a single calendar month in
+   *   America/Los_Angeles timezone. Time range as a whole is optional. If not
+   *   specified, the latest pricing will be returned (up to 12 hours old at
+   *   most).
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   Optional exclusive end time of the time range for which the pricing
+   *   versions will be returned. Timestamps in the future are not allowed.
+   *   The time range has to be within a single calendar month in
+   *   America/Los_Angeles timezone. Time range as a whole is optional. If not
+   *   specified, the latest pricing will be returned (up to 12 hours old at
+   *   most).
+   * @param {string} request.currencyCode
+   *   The ISO 4217 currency code for the pricing info in the response proto.
+   *   Will use the conversion rate as of start_time.
+   *   Optional. If not specified USD will be used.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListSkus`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listSkusAsync(
+    request?: protos.google.cloud.billing.v1.IListSkusRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.billing.v1.ISku> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listSkus.asyncIterate(
+      this.innerApiCalls['listSkus'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.billing.v1.ISku>;
   }
   // --------------------
   // -- Path templates --
@@ -622,8 +732,8 @@ export class CloudCatalogClient {
    * @returns {string} Resource name string.
    */
   servicePath(service: string) {
-    return this._pathTemplates.servicePathTemplate.render({
-      service,
+    return this.pathTemplates.servicePathTemplate.render({
+      service: service,
     });
   }
 
@@ -635,7 +745,7 @@ export class CloudCatalogClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).service;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).service;
   }
 
   /**
@@ -646,9 +756,9 @@ export class CloudCatalogClient {
    * @returns {string} Resource name string.
    */
   skuPath(service: string, sku: string) {
-    return this._pathTemplates.skuPathTemplate.render({
-      service,
-      sku,
+    return this.pathTemplates.skuPathTemplate.render({
+      service: service,
+      sku: sku,
     });
   }
 
@@ -660,7 +770,7 @@ export class CloudCatalogClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromSkuName(skuName: string) {
-    return this._pathTemplates.skuPathTemplate.match(skuName).service;
+    return this.pathTemplates.skuPathTemplate.match(skuName).service;
   }
 
   /**
@@ -671,7 +781,7 @@ export class CloudCatalogClient {
    * @returns {string} A string representing the sku.
    */
   matchSkuFromSkuName(skuName: string) {
-    return this._pathTemplates.skuPathTemplate.match(skuName).sku;
+    return this.pathTemplates.skuPathTemplate.match(skuName).sku;
   }
 
   /**

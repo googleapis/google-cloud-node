@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
+  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './cloud_billing_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -40,14 +40,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class CloudBillingClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -55,6 +47,14 @@ export class CloudBillingClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   cloudBillingStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -146,13 +146,16 @@ export class CloudBillingClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       billingAccountPathTemplate: new this._gaxModule.PathTemplate(
         'billingAccounts/{billing_account}'
       ),
@@ -167,7 +170,7 @@ export class CloudBillingClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listBillingAccounts: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -191,7 +194,7 @@ export class CloudBillingClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -218,7 +221,7 @@ export class CloudBillingClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.billing.v1.CloudBilling'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.billing.v1.CloudBilling,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -237,9 +240,8 @@ export class CloudBillingClient {
       'setIamPolicy',
       'testIamPermissions',
     ];
-
     for (const methodName of cloudBillingStubMethods) {
-      const innerCallPromise = this.cloudBillingStub.then(
+      const callPromise = this.cloudBillingStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -253,20 +255,14 @@ export class CloudBillingClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.cloudBillingStub;
@@ -323,22 +319,34 @@ export class CloudBillingClient {
   // -- Service calls --
   // -------------------
   getBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.IGetBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.IGetBillingAccountRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      protosTypes.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
+      protos.google.cloud.billing.v1.IBillingAccount,
+      protos.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
       {} | undefined
     ]
   >;
   getBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.IGetBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.IGetBillingAccountRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      protosTypes.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
-      {} | undefined
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IGetBillingAccountRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBillingAccount(
+    request: protos.google.cloud.billing.v1.IGetBillingAccountRequest,
+    callback: Callback<
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IGetBillingAccountRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -358,24 +366,27 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.IGetBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.IGetBillingAccountRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.billing.v1.IBillingAccount,
-          | protosTypes.google.cloud.billing.v1.IGetBillingAccountRequest
+          protos.google.cloud.billing.v1.IBillingAccount,
+          | protos.google.cloud.billing.v1.IGetBillingAccountRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      protosTypes.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
-      {} | undefined
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IGetBillingAccountRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      protosTypes.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
+      protos.google.cloud.billing.v1.IBillingAccount,
+      protos.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -396,29 +407,37 @@ export class CloudBillingClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getBillingAccount(request, options, callback);
+    return this.innerApiCalls.getBillingAccount(request, options, callback);
   }
   updateBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.IUpdateBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.IUpdateBillingAccountRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      (
-        | protosTypes.google.cloud.billing.v1.IUpdateBillingAccountRequest
-        | undefined
-      ),
+      protos.google.cloud.billing.v1.IBillingAccount,
+      protos.google.cloud.billing.v1.IUpdateBillingAccountRequest | undefined,
       {} | undefined
     ]
   >;
   updateBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.IUpdateBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.IUpdateBillingAccountRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      | protosTypes.google.cloud.billing.v1.IUpdateBillingAccountRequest
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IUpdateBillingAccountRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateBillingAccount(
+    request: protos.google.cloud.billing.v1.IUpdateBillingAccountRequest,
+    callback: Callback<
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IUpdateBillingAccountRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -445,28 +464,27 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.IUpdateBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.IUpdateBillingAccountRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.billing.v1.IBillingAccount,
-          | protosTypes.google.cloud.billing.v1.IUpdateBillingAccountRequest
+          protos.google.cloud.billing.v1.IBillingAccount,
+          | protos.google.cloud.billing.v1.IUpdateBillingAccountRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      | protosTypes.google.cloud.billing.v1.IUpdateBillingAccountRequest
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.IUpdateBillingAccountRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      (
-        | protosTypes.google.cloud.billing.v1.IUpdateBillingAccountRequest
-        | undefined
-      ),
+      protos.google.cloud.billing.v1.IBillingAccount,
+      protos.google.cloud.billing.v1.IUpdateBillingAccountRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -487,29 +505,37 @@ export class CloudBillingClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateBillingAccount(request, options, callback);
+    return this.innerApiCalls.updateBillingAccount(request, options, callback);
   }
   createBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.ICreateBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.ICreateBillingAccountRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      (
-        | protosTypes.google.cloud.billing.v1.ICreateBillingAccountRequest
-        | undefined
-      ),
+      protos.google.cloud.billing.v1.IBillingAccount,
+      protos.google.cloud.billing.v1.ICreateBillingAccountRequest | undefined,
       {} | undefined
     ]
   >;
   createBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.ICreateBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.ICreateBillingAccountRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      | protosTypes.google.cloud.billing.v1.ICreateBillingAccountRequest
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.ICreateBillingAccountRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createBillingAccount(
+    request: protos.google.cloud.billing.v1.ICreateBillingAccountRequest,
+    callback: Callback<
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.ICreateBillingAccountRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -538,28 +564,27 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createBillingAccount(
-    request: protosTypes.google.cloud.billing.v1.ICreateBillingAccountRequest,
+    request: protos.google.cloud.billing.v1.ICreateBillingAccountRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.billing.v1.IBillingAccount,
-          | protosTypes.google.cloud.billing.v1.ICreateBillingAccountRequest
+          protos.google.cloud.billing.v1.IBillingAccount,
+          | protos.google.cloud.billing.v1.ICreateBillingAccountRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      | protosTypes.google.cloud.billing.v1.ICreateBillingAccountRequest
+      protos.google.cloud.billing.v1.IBillingAccount,
+      | protos.google.cloud.billing.v1.ICreateBillingAccountRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IBillingAccount,
-      (
-        | protosTypes.google.cloud.billing.v1.ICreateBillingAccountRequest
-        | undefined
-      ),
+      protos.google.cloud.billing.v1.IBillingAccount,
+      protos.google.cloud.billing.v1.ICreateBillingAccountRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -573,29 +598,37 @@ export class CloudBillingClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.createBillingAccount(request, options, callback);
+    return this.innerApiCalls.createBillingAccount(request, options, callback);
   }
   getProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IGetProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
-      (
-        | protosTypes.google.cloud.billing.v1.IGetProjectBillingInfoRequest
-        | undefined
-      ),
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
+      protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest | undefined,
       {} | undefined
     ]
   >;
   getProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IGetProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
-      | protosTypes.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
+      | protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getProjectBillingInfo(
+    request: protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest,
+    callback: Callback<
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
+      | protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -616,28 +649,27 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IGetProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
-          | protosTypes.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+          protos.google.cloud.billing.v1.IProjectBillingInfo,
+          | protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
-      | protosTypes.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
+      | protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
-      (
-        | protosTypes.google.cloud.billing.v1.IGetProjectBillingInfoRequest
-        | undefined
-      ),
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
+      protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -658,33 +690,40 @@ export class CloudBillingClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getProjectBillingInfo(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.getProjectBillingInfo(request, options, callback);
   }
   updateProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
       (
-        | protosTypes.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+        | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
-      | protosTypes.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
+      | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateProjectBillingInfo(
+    request: protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest,
+    callback: Callback<
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
+      | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -735,26 +774,28 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
-          | protosTypes.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+          protos.google.cloud.billing.v1.IProjectBillingInfo,
+          | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
-      | protosTypes.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
+      | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo,
+      protos.google.cloud.billing.v1.IProjectBillingInfo,
       (
-        | protosTypes.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
+        | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
         | undefined
       ),
       {} | undefined
@@ -777,29 +818,37 @@ export class CloudBillingClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateProjectBillingInfo(
+    return this.innerApiCalls.updateProjectBillingInfo(
       request,
       options,
       callback
     );
   }
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -817,23 +866,23 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -854,25 +903,33 @@ export class CloudBillingClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.getIamPolicy(request, options, callback);
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -891,23 +948,23 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -928,25 +985,33 @@ export class CloudBillingClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.setIamPolicy(request, options, callback);
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   >;
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -963,23 +1028,23 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-          protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1000,26 +1065,38 @@ export class CloudBillingClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.testIamPermissions(request, options, callback);
+    return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
   listBillingAccounts(
-    request: protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest,
+    request: protos.google.cloud.billing.v1.IListBillingAccountsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IBillingAccount[],
-      protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest | null,
-      protosTypes.google.cloud.billing.v1.IListBillingAccountsResponse
+      protos.google.cloud.billing.v1.IBillingAccount[],
+      protos.google.cloud.billing.v1.IListBillingAccountsRequest | null,
+      protos.google.cloud.billing.v1.IListBillingAccountsResponse
     ]
   >;
   listBillingAccounts(
-    request: protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest,
+    request: protos.google.cloud.billing.v1.IListBillingAccountsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.billing.v1.IBillingAccount[],
-      protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest | null,
-      protosTypes.google.cloud.billing.v1.IListBillingAccountsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListBillingAccountsRequest,
+      | protos.google.cloud.billing.v1.IListBillingAccountsResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.v1.IBillingAccount
+    >
+  ): void;
+  listBillingAccounts(
+    request: protos.google.cloud.billing.v1.IListBillingAccountsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListBillingAccountsRequest,
+      | protos.google.cloud.billing.v1.IListBillingAccountsResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.v1.IBillingAccount
     >
   ): void;
   /**
@@ -1062,24 +1139,28 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listBillingAccounts(
-    request: protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest,
+    request: protos.google.cloud.billing.v1.IListBillingAccountsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.billing.v1.IBillingAccount[],
-          protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest | null,
-          protosTypes.google.cloud.billing.v1.IListBillingAccountsResponse
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListBillingAccountsRequest,
+          | protos.google.cloud.billing.v1.IListBillingAccountsResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.v1.IBillingAccount
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.billing.v1.IBillingAccount[],
-      protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest | null,
-      protosTypes.google.cloud.billing.v1.IListBillingAccountsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.billing.v1.IListBillingAccountsRequest,
+      | protos.google.cloud.billing.v1.IListBillingAccountsResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.v1.IBillingAccount
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IBillingAccount[],
-      protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest | null,
-      protosTypes.google.cloud.billing.v1.IListBillingAccountsResponse
+      protos.google.cloud.billing.v1.IBillingAccount[],
+      protos.google.cloud.billing.v1.IListBillingAccountsRequest | null,
+      protos.google.cloud.billing.v1.IListBillingAccountsResponse
     ]
   > | void {
     request = request || {};
@@ -1092,7 +1173,7 @@ export class CloudBillingClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.listBillingAccounts(request, options, callback);
+    return this.innerApiCalls.listBillingAccounts(request, options, callback);
   }
 
   /**
@@ -1130,36 +1211,90 @@ export class CloudBillingClient {
    *   An object stream which emits an object representing [BillingAccount]{@link google.cloud.billing.v1.BillingAccount} on 'data' event.
    */
   listBillingAccountsStream(
-    request?: protosTypes.google.cloud.billing.v1.IListBillingAccountsRequest,
+    request?: protos.google.cloud.billing.v1.IListBillingAccountsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listBillingAccounts.createStream(
-      this._innerApiCalls.listBillingAccounts as gax.GaxCall,
+    return this.descriptors.page.listBillingAccounts.createStream(
+      this.innerApiCalls.listBillingAccounts as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listBillingAccounts}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   Requested page size. The maximum page size is 100; this is also the
+   *   default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListBillingAccounts`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {string} request.filter
+   *   Options for how to filter the returned billing accounts.
+   *   Currently this only supports filtering for
+   *   [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
+   *   single provided reseller billing account.
+   *   (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
+   *   Boolean algebra and other fields are not currently supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listBillingAccountsAsync(
+    request?: protos.google.cloud.billing.v1.IListBillingAccountsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.billing.v1.IBillingAccount> {
+    request = request || {};
+    options = options || {};
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listBillingAccounts.asyncIterate(
+      this.innerApiCalls['listBillingAccounts'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.billing.v1.IBillingAccount>;
+  }
   listProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo[],
-      protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
-      protosTypes.google.cloud.billing.v1.IListProjectBillingInfoResponse
+      protos.google.cloud.billing.v1.IProjectBillingInfo[],
+      protos.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
+      protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
     ]
   >;
   listProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo[],
-      protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
-      protosTypes.google.cloud.billing.v1.IListProjectBillingInfoResponse
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+      | protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.v1.IProjectBillingInfo
+    >
+  ): void;
+  listProjectBillingInfo(
+    request: protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+      | protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.v1.IProjectBillingInfo
     >
   ): void;
   /**
@@ -1199,24 +1334,28 @@ export class CloudBillingClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listProjectBillingInfo(
-    request: protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+    request: protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.billing.v1.IProjectBillingInfo[],
-          protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
-          protosTypes.google.cloud.billing.v1.IListProjectBillingInfoResponse
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+          | protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.v1.IProjectBillingInfo
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo[],
-      protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
-      protosTypes.google.cloud.billing.v1.IListProjectBillingInfoResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+      | protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.v1.IProjectBillingInfo
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.v1.IProjectBillingInfo[],
-      protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
-      protosTypes.google.cloud.billing.v1.IListProjectBillingInfoResponse
+      protos.google.cloud.billing.v1.IProjectBillingInfo[],
+      protos.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
+      protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
     ]
   > | void {
     request = request || {};
@@ -1236,7 +1375,7 @@ export class CloudBillingClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.listProjectBillingInfo(
+    return this.innerApiCalls.listProjectBillingInfo(
       request,
       options,
       callback
@@ -1274,7 +1413,7 @@ export class CloudBillingClient {
    *   An object stream which emits an object representing [ProjectBillingInfo]{@link google.cloud.billing.v1.ProjectBillingInfo} on 'data' event.
    */
   listProjectBillingInfoStream(
-    request?: protosTypes.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+    request?: protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1288,11 +1427,56 @@ export class CloudBillingClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listProjectBillingInfo.createStream(
-      this._innerApiCalls.listProjectBillingInfo as gax.GaxCall,
+    return this.descriptors.page.listProjectBillingInfo.createStream(
+      this.innerApiCalls.listProjectBillingInfo as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listProjectBillingInfo}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the billing account associated with the projects that
+   *   you want to list. For example, `billingAccounts/012345-567890-ABCDEF`.
+   * @param {number} request.pageSize
+   *   Requested page size. The maximum page size is 100; this is also the
+   *   default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to be returned. This should be a
+   *   `next_page_token` value returned from a previous `ListProjectBillingInfo`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listProjectBillingInfoAsync(
+    request?: protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.billing.v1.IProjectBillingInfo> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listProjectBillingInfo.asyncIterate(
+      this.innerApiCalls['listProjectBillingInfo'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.billing.v1.IProjectBillingInfo>;
   }
   // --------------------
   // -- Path templates --
@@ -1305,7 +1489,7 @@ export class CloudBillingClient {
    * @returns {string} Resource name string.
    */
   billingAccountPath(billingAccount: string) {
-    return this._pathTemplates.billingAccountPathTemplate.render({
+    return this.pathTemplates.billingAccountPathTemplate.render({
       billing_account: billingAccount,
     });
   }
@@ -1318,7 +1502,7 @@ export class CloudBillingClient {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountName(billingAccountName: string) {
-    return this._pathTemplates.billingAccountPathTemplate.match(
+    return this.pathTemplates.billingAccountPathTemplate.match(
       billingAccountName
     ).billing_account;
   }
@@ -1330,8 +1514,8 @@ export class CloudBillingClient {
    * @returns {string} Resource name string.
    */
   servicePath(service: string) {
-    return this._pathTemplates.servicePathTemplate.render({
-      service,
+    return this.pathTemplates.servicePathTemplate.render({
+      service: service,
     });
   }
 
@@ -1343,7 +1527,7 @@ export class CloudBillingClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).service;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).service;
   }
 
   /**
@@ -1354,9 +1538,9 @@ export class CloudBillingClient {
    * @returns {string} Resource name string.
    */
   skuPath(service: string, sku: string) {
-    return this._pathTemplates.skuPathTemplate.render({
-      service,
-      sku,
+    return this.pathTemplates.skuPathTemplate.render({
+      service: service,
+      sku: sku,
     });
   }
 
@@ -1368,7 +1552,7 @@ export class CloudBillingClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromSkuName(skuName: string) {
-    return this._pathTemplates.skuPathTemplate.match(skuName).service;
+    return this.pathTemplates.skuPathTemplate.match(skuName).service;
   }
 
   /**
@@ -1379,7 +1563,7 @@ export class CloudBillingClient {
    * @returns {string} A string representing the sku.
    */
   matchSkuFromSkuName(skuName: string) {
-    return this._pathTemplates.skuPathTemplate.match(skuName).sku;
+    return this.pathTemplates.skuPathTemplate.match(skuName).sku;
   }
 
   /**
