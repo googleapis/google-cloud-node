@@ -16,6 +16,7 @@ import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import {TranslationServiceClient} from '../src';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const http2spy = require('http2spy');
 const API_KEY = process.env.TRANSLATE_API_KEY;
 
@@ -137,9 +138,11 @@ describe('translate', () => {
     });
 
     it('should populate x-goog-user-project header, and succeed if valid project', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const {GoogleAuth} = require('google-auth-library');
       const auth = new GoogleAuth({
         credentials: Object.assign(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require(process.env.GOOGLE_APPLICATION_CREDENTIALS || ''),
           {
             quota_project_id: process.env.GCLOUD_PROJECT,
@@ -171,9 +174,11 @@ describe('translate', () => {
     });
 
     it('should populate x-goog-user-project header, and fail if invalid project', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const {GoogleAuth} = require('google-auth-library');
       const auth = new GoogleAuth({
         credentials: Object.assign(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require(process.env.GOOGLE_APPLICATION_CREDENTIALS || ''),
           {
             quota_project_id: 'my-fake-billing-project',

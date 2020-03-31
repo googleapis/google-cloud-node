@@ -18,12 +18,14 @@ import arrify = require('arrify');
 import * as extend from 'extend';
 import {GoogleAuthOptions} from 'google-auth-library';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const isHtml = require('is-html');
 import {
   DecorateRequestOptions,
   BodyResponseCallback,
 } from '@google-cloud/common/build/src/util';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const PKG = require('../../../package.json');
 
 export interface TranslateRequest {

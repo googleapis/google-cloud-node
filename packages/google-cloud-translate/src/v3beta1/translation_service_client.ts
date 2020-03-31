@@ -18,19 +18,19 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   LROperation,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './translation_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v3beta1
  */
 export class TranslationServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class TranslationServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   translationServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -148,13 +148,16 @@ export class TranslationServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       glossaryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/glossaries/{glossary}'
       ),
@@ -166,7 +169,7 @@ export class TranslationServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listGlossaries: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -179,6 +182,7 @@ export class TranslationServiceClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -208,7 +212,7 @@ export class TranslationServiceClient {
       '.google.cloud.translation.v3beta1.DeleteGlossaryMetadata'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       batchTranslateText: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchTranslateTextResponse.decode.bind(batchTranslateTextResponse),
@@ -237,7 +241,7 @@ export class TranslationServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -264,7 +268,7 @@ export class TranslationServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.translation.v3beta1.TranslationService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.translation.v3beta1
             .TranslationService,
       this._opts
@@ -282,9 +286,8 @@ export class TranslationServiceClient {
       'getGlossary',
       'deleteGlossary',
     ];
-
     for (const methodName of translationServiceStubMethods) {
-      const innerCallPromise = this.translationServiceStub.then(
+      const callPromise = this.translationServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -298,20 +301,14 @@ export class TranslationServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.translationServiceStub;
@@ -371,26 +368,34 @@ export class TranslationServiceClient {
   // -- Service calls --
   // -------------------
   translateText(
-    request: protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest,
+    request: protos.google.cloud.translation.v3beta1.ITranslateTextRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.ITranslateTextResponse,
-      (
-        | protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest
-        | undefined
-      ),
+      protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
+      protos.google.cloud.translation.v3beta1.ITranslateTextRequest | undefined,
       {} | undefined
     ]
   >;
   translateText(
-    request: protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest,
+    request: protos.google.cloud.translation.v3beta1.ITranslateTextRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.translation.v3beta1.ITranslateTextResponse,
-      | protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest
+      protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
+      | protos.google.cloud.translation.v3beta1.ITranslateTextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  translateText(
+    request: protos.google.cloud.translation.v3beta1.ITranslateTextRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
+      | protos.google.cloud.translation.v3beta1.ITranslateTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -467,28 +472,27 @@ export class TranslationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   translateText(
-    request: protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest,
+    request: protos.google.cloud.translation.v3beta1.ITranslateTextRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.translation.v3beta1.ITranslateTextResponse,
-          | protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest
+          protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
+          | protos.google.cloud.translation.v3beta1.ITranslateTextRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.translation.v3beta1.ITranslateTextResponse,
-      | protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest
+      protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
+      | protos.google.cloud.translation.v3beta1.ITranslateTextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.ITranslateTextResponse,
-      (
-        | protosTypes.google.cloud.translation.v3beta1.ITranslateTextRequest
-        | undefined
-      ),
+      protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
+      protos.google.cloud.translation.v3beta1.ITranslateTextRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -509,29 +513,40 @@ export class TranslationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.translateText(request, options, callback);
+    return this.innerApiCalls.translateText(request, options, callback);
   }
   detectLanguage(
-    request: protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest,
+    request: protos.google.cloud.translation.v3beta1.IDetectLanguageRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.IDetectLanguageResponse,
+      protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
       (
-        | protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest
+        | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   detectLanguage(
-    request: protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest,
+    request: protos.google.cloud.translation.v3beta1.IDetectLanguageRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.translation.v3beta1.IDetectLanguageResponse,
-      | protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest
+      protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
+      | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  detectLanguage(
+    request: protos.google.cloud.translation.v3beta1.IDetectLanguageRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
+      | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -582,26 +597,28 @@ export class TranslationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   detectLanguage(
-    request: protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest,
+    request: protos.google.cloud.translation.v3beta1.IDetectLanguageRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.translation.v3beta1.IDetectLanguageResponse,
-          | protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest
+          protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
+          | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.translation.v3beta1.IDetectLanguageResponse,
-      | protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest
+      protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
+      | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.IDetectLanguageResponse,
+      protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
       (
-        | protosTypes.google.cloud.translation.v3beta1.IDetectLanguageRequest
+        | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
         | undefined
       ),
       {} | undefined
@@ -624,29 +641,40 @@ export class TranslationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.detectLanguage(request, options, callback);
+    return this.innerApiCalls.detectLanguage(request, options, callback);
   }
   getSupportedLanguages(
-    request: protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest,
+    request: protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.ISupportedLanguages,
+      protos.google.cloud.translation.v3beta1.ISupportedLanguages,
       (
-        | protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+        | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getSupportedLanguages(
-    request: protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest,
+    request: protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.translation.v3beta1.ISupportedLanguages,
-      | protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+      protos.google.cloud.translation.v3beta1.ISupportedLanguages,
+      | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getSupportedLanguages(
+    request: protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3beta1.ISupportedLanguages,
+      | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -694,26 +722,28 @@ export class TranslationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getSupportedLanguages(
-    request: protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest,
+    request: protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.translation.v3beta1.ISupportedLanguages,
-          | protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+          protos.google.cloud.translation.v3beta1.ISupportedLanguages,
+          | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.translation.v3beta1.ISupportedLanguages,
-      | protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+      protos.google.cloud.translation.v3beta1.ISupportedLanguages,
+      | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.ISupportedLanguages,
+      protos.google.cloud.translation.v3beta1.ISupportedLanguages,
       (
-        | protosTypes.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+        | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
         | undefined
       ),
       {} | undefined
@@ -736,33 +766,37 @@ export class TranslationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.getSupportedLanguages(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.getSupportedLanguages(request, options, callback);
   }
   getGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.IGetGlossaryRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.IGlossary,
-      (
-        | protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest
-        | undefined
-      ),
+      protos.google.cloud.translation.v3beta1.IGlossary,
+      protos.google.cloud.translation.v3beta1.IGetGlossaryRequest | undefined,
       {} | undefined
     ]
   >;
   getGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.IGetGlossaryRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.translation.v3beta1.IGlossary,
-      | protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest
+      protos.google.cloud.translation.v3beta1.IGlossary,
+      | protos.google.cloud.translation.v3beta1.IGetGlossaryRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getGlossary(
+    request: protos.google.cloud.translation.v3beta1.IGetGlossaryRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3beta1.IGlossary,
+      | protos.google.cloud.translation.v3beta1.IGetGlossaryRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -780,28 +814,27 @@ export class TranslationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.IGetGlossaryRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.translation.v3beta1.IGlossary,
-          | protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest
+          protos.google.cloud.translation.v3beta1.IGlossary,
+          | protos.google.cloud.translation.v3beta1.IGetGlossaryRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.translation.v3beta1.IGlossary,
-      | protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest
+      protos.google.cloud.translation.v3beta1.IGlossary,
+      | protos.google.cloud.translation.v3beta1.IGetGlossaryRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.IGlossary,
-      (
-        | protosTypes.google.cloud.translation.v3beta1.IGetGlossaryRequest
-        | undefined
-      ),
+      protos.google.cloud.translation.v3beta1.IGlossary,
+      protos.google.cloud.translation.v3beta1.IGetGlossaryRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -822,32 +855,43 @@ export class TranslationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getGlossary(request, options, callback);
+    return this.innerApiCalls.getGlossary(request, options, callback);
   }
 
   batchTranslateText(
-    request: protosTypes.google.cloud.translation.v3beta1.IBatchTranslateTextRequest,
+    request: protos.google.cloud.translation.v3beta1.IBatchTranslateTextRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IBatchTranslateResponse,
-        protosTypes.google.cloud.translation.v3beta1.IBatchTranslateMetadata
+        protos.google.cloud.translation.v3beta1.IBatchTranslateResponse,
+        protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   batchTranslateText(
-    request: protosTypes.google.cloud.translation.v3beta1.IBatchTranslateTextRequest,
+    request: protos.google.cloud.translation.v3beta1.IBatchTranslateTextRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IBatchTranslateResponse,
-        protosTypes.google.cloud.translation.v3beta1.IBatchTranslateMetadata
+        protos.google.cloud.translation.v3beta1.IBatchTranslateResponse,
+        protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchTranslateText(
+    request: protos.google.cloud.translation.v3beta1.IBatchTranslateTextRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3beta1.IBatchTranslateResponse,
+        protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -920,32 +964,32 @@ export class TranslationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchTranslateText(
-    request: protosTypes.google.cloud.translation.v3beta1.IBatchTranslateTextRequest,
+    request: protos.google.cloud.translation.v3beta1.IBatchTranslateTextRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.translation.v3beta1.IBatchTranslateResponse,
-            protosTypes.google.cloud.translation.v3beta1.IBatchTranslateMetadata
+            protos.google.cloud.translation.v3beta1.IBatchTranslateResponse,
+            protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IBatchTranslateResponse,
-        protosTypes.google.cloud.translation.v3beta1.IBatchTranslateMetadata
+        protos.google.cloud.translation.v3beta1.IBatchTranslateResponse,
+        protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IBatchTranslateResponse,
-        protosTypes.google.cloud.translation.v3beta1.IBatchTranslateMetadata
+        protos.google.cloud.translation.v3beta1.IBatchTranslateResponse,
+        protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -966,31 +1010,42 @@ export class TranslationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchTranslateText(request, options, callback);
+    return this.innerApiCalls.batchTranslateText(request, options, callback);
   }
   createGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.ICreateGlossaryRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IGlossary,
-        protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
+        protos.google.cloud.translation.v3beta1.IGlossary,
+        protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   createGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.ICreateGlossaryRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IGlossary,
-        protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
+        protos.google.cloud.translation.v3beta1.IGlossary,
+        protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createGlossary(
+    request: protos.google.cloud.translation.v3beta1.ICreateGlossaryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3beta1.IGlossary,
+        protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1010,32 +1065,32 @@ export class TranslationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.ICreateGlossaryRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.translation.v3beta1.IGlossary,
-            protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
+            protos.google.cloud.translation.v3beta1.IGlossary,
+            protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IGlossary,
-        protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
+        protos.google.cloud.translation.v3beta1.IGlossary,
+        protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IGlossary,
-        protosTypes.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
+        protos.google.cloud.translation.v3beta1.IGlossary,
+        protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1056,31 +1111,42 @@ export class TranslationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createGlossary(request, options, callback);
+    return this.innerApiCalls.createGlossary(request, options, callback);
   }
   deleteGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.IDeleteGlossaryRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
-        protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deleteGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.IDeleteGlossaryRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
-        protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteGlossary(
+    request: protos.google.cloud.translation.v3beta1.IDeleteGlossaryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1099,32 +1165,32 @@ export class TranslationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteGlossary(
-    request: protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryRequest,
+    request: protos.google.cloud.translation.v3beta1.IDeleteGlossaryRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
-            protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
+            protos.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
+            protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
-        protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
-        protosTypes.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
+        protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1145,25 +1211,37 @@ export class TranslationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteGlossary(request, options, callback);
+    return this.innerApiCalls.deleteGlossary(request, options, callback);
   }
   listGlossaries(
-    request: protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest,
+    request: protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.IGlossary[],
-      protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
-      protosTypes.google.cloud.translation.v3beta1.IListGlossariesResponse
+      protos.google.cloud.translation.v3beta1.IGlossary[],
+      protos.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
+      protos.google.cloud.translation.v3beta1.IListGlossariesResponse
     ]
   >;
   listGlossaries(
-    request: protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest,
+    request: protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.translation.v3beta1.IGlossary[],
-      protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
-      protosTypes.google.cloud.translation.v3beta1.IListGlossariesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
+      | protos.google.cloud.translation.v3beta1.IListGlossariesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3beta1.IGlossary
+    >
+  ): void;
+  listGlossaries(
+    request: protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
+      | protos.google.cloud.translation.v3beta1.IListGlossariesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3beta1.IGlossary
     >
   ): void;
   /**
@@ -1205,24 +1283,28 @@ export class TranslationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listGlossaries(
-    request: protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest,
+    request: protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.translation.v3beta1.IGlossary[],
-          protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
-          protosTypes.google.cloud.translation.v3beta1.IListGlossariesResponse
+      | PaginationCallback<
+          protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
+          | protos.google.cloud.translation.v3beta1.IListGlossariesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3beta1.IGlossary
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.translation.v3beta1.IGlossary[],
-      protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
-      protosTypes.google.cloud.translation.v3beta1.IListGlossariesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
+      | protos.google.cloud.translation.v3beta1.IListGlossariesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3beta1.IGlossary
     >
   ): Promise<
     [
-      protosTypes.google.cloud.translation.v3beta1.IGlossary[],
-      protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
-      protosTypes.google.cloud.translation.v3beta1.IListGlossariesResponse
+      protos.google.cloud.translation.v3beta1.IGlossary[],
+      protos.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
+      protos.google.cloud.translation.v3beta1.IListGlossariesResponse
     ]
   > | void {
     request = request || {};
@@ -1242,7 +1324,7 @@ export class TranslationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listGlossaries(request, options, callback);
+    return this.innerApiCalls.listGlossaries(request, options, callback);
   }
 
   /**
@@ -1280,7 +1362,7 @@ export class TranslationServiceClient {
    *   An object stream which emits an object representing [Glossary]{@link google.cloud.translation.v3beta1.Glossary} on 'data' event.
    */
   listGlossariesStream(
-    request?: protosTypes.google.cloud.translation.v3beta1.IListGlossariesRequest,
+    request?: protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1294,11 +1376,60 @@ export class TranslationServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listGlossaries.createStream(
-      this._innerApiCalls.listGlossaries as gax.GaxCall,
+    return this.descriptors.page.listGlossaries.createStream(
+      this.innerApiCalls.listGlossaries as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listGlossaries}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project from which to list all of the glossaries.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server may return fewer glossaries than
+   *   requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of [ListGlossariesResponse.next_page_token]
+   *   returned from the previous call to `ListGlossaries` method.
+   *   The first page is returned if `page_token`is empty or missing.
+   * @param {string} [request.filter]
+   *   Optional. Filter specifying constraints of a list operation.
+   *   Filtering is not supported yet, and the parameter currently has no effect.
+   *   If missing, no filtering is performed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listGlossariesAsync(
+    request?: protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.translation.v3beta1.IGlossary> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listGlossaries.asyncIterate(
+      this.innerApiCalls['listGlossaries'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.translation.v3beta1.IGlossary>;
   }
   // --------------------
   // -- Path templates --
@@ -1313,10 +1444,10 @@ export class TranslationServiceClient {
    * @returns {string} Resource name string.
    */
   glossaryPath(project: string, location: string, glossary: string) {
-    return this._pathTemplates.glossaryPathTemplate.render({
-      project,
-      location,
-      glossary,
+    return this.pathTemplates.glossaryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
     });
   }
 
@@ -1328,7 +1459,7 @@ export class TranslationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGlossaryName(glossaryName: string) {
-    return this._pathTemplates.glossaryPathTemplate.match(glossaryName).project;
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).project;
   }
 
   /**
@@ -1339,8 +1470,7 @@ export class TranslationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGlossaryName(glossaryName: string) {
-    return this._pathTemplates.glossaryPathTemplate.match(glossaryName)
-      .location;
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).location;
   }
 
   /**
@@ -1351,8 +1481,7 @@ export class TranslationServiceClient {
    * @returns {string} A string representing the glossary.
    */
   matchGlossaryFromGlossaryName(glossaryName: string) {
-    return this._pathTemplates.glossaryPathTemplate.match(glossaryName)
-      .glossary;
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).glossary;
   }
 
   /**
@@ -1363,9 +1492,9 @@ export class TranslationServiceClient {
    * @returns {string} Resource name string.
    */
   locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -1377,7 +1506,7 @@ export class TranslationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -1388,8 +1517,7 @@ export class TranslationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**

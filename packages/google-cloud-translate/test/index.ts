@@ -19,13 +19,14 @@ import {
 } from '@google-cloud/common/build/src/util';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as r from 'request';
 
 import * as orig from '../src';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkgJson = require('../../package.json');
 
 // tslint:disable-next-line no-any
@@ -57,6 +58,7 @@ class FakeService {
   calledWith_: IArguments;
   request?: Function;
   constructor() {
+    // eslint-disable-next-line prefer-rest-params
     this.calledWith_ = arguments;
   }
 }
