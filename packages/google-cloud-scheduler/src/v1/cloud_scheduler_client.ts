@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './cloud_scheduler_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class CloudSchedulerClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class CloudSchedulerClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   cloudSchedulerStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -147,13 +147,16 @@ export class CloudSchedulerClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}'
       ),
@@ -168,7 +171,7 @@ export class CloudSchedulerClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -187,7 +190,7 @@ export class CloudSchedulerClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -214,7 +217,7 @@ export class CloudSchedulerClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.scheduler.v1.CloudScheduler'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.scheduler.v1.CloudScheduler,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -231,9 +234,8 @@ export class CloudSchedulerClient {
       'resumeJob',
       'runJob',
     ];
-
     for (const methodName of cloudSchedulerStubMethods) {
-      const innerCallPromise = this.cloudSchedulerStub.then(
+      const callPromise = this.cloudSchedulerStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -247,20 +249,14 @@ export class CloudSchedulerClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.cloudSchedulerStub;
@@ -317,22 +313,30 @@ export class CloudSchedulerClient {
   // -- Service calls --
   // -------------------
   getJob(
-    request: protosTypes.google.cloud.scheduler.v1.IGetJobRequest,
+    request: protos.google.cloud.scheduler.v1.IGetJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IGetJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IGetJobRequest | undefined,
       {} | undefined
     ]
   >;
   getJob(
-    request: protosTypes.google.cloud.scheduler.v1.IGetJobRequest,
+    request: protos.google.cloud.scheduler.v1.IGetJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IGetJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IGetJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getJob(
+    request: protos.google.cloud.scheduler.v1.IGetJobRequest,
+    callback: Callback<
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IGetJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -350,23 +354,23 @@ export class CloudSchedulerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getJob(
-    request: protosTypes.google.cloud.scheduler.v1.IGetJobRequest,
+    request: protos.google.cloud.scheduler.v1.IGetJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.scheduler.v1.IJob,
-          protosTypes.google.cloud.scheduler.v1.IGetJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.scheduler.v1.IJob,
+          protos.google.cloud.scheduler.v1.IGetJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IGetJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IGetJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IGetJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IGetJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -387,25 +391,33 @@ export class CloudSchedulerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getJob(request, options, callback);
+    return this.innerApiCalls.getJob(request, options, callback);
   }
   createJob(
-    request: protosTypes.google.cloud.scheduler.v1.ICreateJobRequest,
+    request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
       {} | undefined
     ]
   >;
   createJob(
-    request: protosTypes.google.cloud.scheduler.v1.ICreateJobRequest,
+    request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.ICreateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createJob(
+    request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
+    callback: Callback<
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.ICreateJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -429,23 +441,23 @@ export class CloudSchedulerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createJob(
-    request: protosTypes.google.cloud.scheduler.v1.ICreateJobRequest,
+    request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.scheduler.v1.IJob,
-          protosTypes.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.scheduler.v1.IJob,
+          protos.google.cloud.scheduler.v1.ICreateJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.ICreateJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -466,25 +478,33 @@ export class CloudSchedulerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createJob(request, options, callback);
+    return this.innerApiCalls.createJob(request, options, callback);
   }
   updateJob(
-    request: protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest,
+    request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
       {} | undefined
     ]
   >;
   updateJob(
-    request: protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest,
+    request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateJob(
+    request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
+    callback: Callback<
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -514,23 +534,23 @@ export class CloudSchedulerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateJob(
-    request: protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest,
+    request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.scheduler.v1.IJob,
-          protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.scheduler.v1.IJob,
+          protos.google.cloud.scheduler.v1.IUpdateJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -551,25 +571,33 @@ export class CloudSchedulerClient {
       'job.name': request.job!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateJob(request, options, callback);
+    return this.innerApiCalls.updateJob(request, options, callback);
   }
   deleteJob(
-    request: protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest,
+    request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
       {} | undefined
     ]
   >;
   deleteJob(
-    request: protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest,
+    request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.scheduler.v1.IDeleteJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteJob(
+    request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.scheduler.v1.IDeleteJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -587,23 +615,23 @@ export class CloudSchedulerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteJob(
-    request: protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest,
+    request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
-          {} | undefined
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.scheduler.v1.IDeleteJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.scheduler.v1.IDeleteJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -624,25 +652,33 @@ export class CloudSchedulerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteJob(request, options, callback);
+    return this.innerApiCalls.deleteJob(request, options, callback);
   }
   pauseJob(
-    request: protosTypes.google.cloud.scheduler.v1.IPauseJobRequest,
+    request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
       {} | undefined
     ]
   >;
   pauseJob(
-    request: protosTypes.google.cloud.scheduler.v1.IPauseJobRequest,
+    request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IPauseJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseJob(
+    request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
+    callback: Callback<
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IPauseJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -666,23 +702,23 @@ export class CloudSchedulerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   pauseJob(
-    request: protosTypes.google.cloud.scheduler.v1.IPauseJobRequest,
+    request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.scheduler.v1.IJob,
-          protosTypes.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.scheduler.v1.IJob,
+          protos.google.cloud.scheduler.v1.IPauseJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IPauseJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -703,25 +739,33 @@ export class CloudSchedulerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.pauseJob(request, options, callback);
+    return this.innerApiCalls.pauseJob(request, options, callback);
   }
   resumeJob(
-    request: protosTypes.google.cloud.scheduler.v1.IResumeJobRequest,
+    request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
       {} | undefined
     ]
   >;
   resumeJob(
-    request: protosTypes.google.cloud.scheduler.v1.IResumeJobRequest,
+    request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IResumeJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeJob(
+    request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
+    callback: Callback<
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IResumeJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -744,23 +788,23 @@ export class CloudSchedulerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   resumeJob(
-    request: protosTypes.google.cloud.scheduler.v1.IResumeJobRequest,
+    request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.scheduler.v1.IJob,
-          protosTypes.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.scheduler.v1.IJob,
+          protos.google.cloud.scheduler.v1.IResumeJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IResumeJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -781,25 +825,33 @@ export class CloudSchedulerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.resumeJob(request, options, callback);
+    return this.innerApiCalls.resumeJob(request, options, callback);
   }
   runJob(
-    request: protosTypes.google.cloud.scheduler.v1.IRunJobRequest,
+    request: protos.google.cloud.scheduler.v1.IRunJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IRunJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IRunJobRequest | undefined,
       {} | undefined
     ]
   >;
   runJob(
-    request: protosTypes.google.cloud.scheduler.v1.IRunJobRequest,
+    request: protos.google.cloud.scheduler.v1.IRunJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IRunJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IRunJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runJob(
+    request: protos.google.cloud.scheduler.v1.IRunJobRequest,
+    callback: Callback<
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IRunJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -820,23 +872,23 @@ export class CloudSchedulerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   runJob(
-    request: protosTypes.google.cloud.scheduler.v1.IRunJobRequest,
+    request: protos.google.cloud.scheduler.v1.IRunJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.scheduler.v1.IJob,
-          protosTypes.google.cloud.scheduler.v1.IRunJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.scheduler.v1.IJob,
+          protos.google.cloud.scheduler.v1.IRunJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IRunJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IRunJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob,
-      protosTypes.google.cloud.scheduler.v1.IRunJobRequest | undefined,
+      protos.google.cloud.scheduler.v1.IJob,
+      protos.google.cloud.scheduler.v1.IRunJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -857,26 +909,34 @@ export class CloudSchedulerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.runJob(request, options, callback);
+    return this.innerApiCalls.runJob(request, options, callback);
   }
 
   listJobs(
-    request: protosTypes.google.cloud.scheduler.v1.IListJobsRequest,
+    request: protos.google.cloud.scheduler.v1.IListJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob[],
-      protosTypes.google.cloud.scheduler.v1.IListJobsRequest | null,
-      protosTypes.google.cloud.scheduler.v1.IListJobsResponse
+      protos.google.cloud.scheduler.v1.IJob[],
+      protos.google.cloud.scheduler.v1.IListJobsRequest | null,
+      protos.google.cloud.scheduler.v1.IListJobsResponse
     ]
   >;
   listJobs(
-    request: protosTypes.google.cloud.scheduler.v1.IListJobsRequest,
+    request: protos.google.cloud.scheduler.v1.IListJobsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob[],
-      protosTypes.google.cloud.scheduler.v1.IListJobsRequest | null,
-      protosTypes.google.cloud.scheduler.v1.IListJobsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.scheduler.v1.IListJobsRequest,
+      protos.google.cloud.scheduler.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.scheduler.v1.IJob
+    >
+  ): void;
+  listJobs(
+    request: protos.google.cloud.scheduler.v1.IListJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.scheduler.v1.IListJobsRequest,
+      protos.google.cloud.scheduler.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.scheduler.v1.IJob
     >
   ): void;
   /**
@@ -921,24 +981,24 @@ export class CloudSchedulerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listJobs(
-    request: protosTypes.google.cloud.scheduler.v1.IListJobsRequest,
+    request: protos.google.cloud.scheduler.v1.IListJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.scheduler.v1.IJob[],
-          protosTypes.google.cloud.scheduler.v1.IListJobsRequest | null,
-          protosTypes.google.cloud.scheduler.v1.IListJobsResponse
+      | PaginationCallback<
+          protos.google.cloud.scheduler.v1.IListJobsRequest,
+          protos.google.cloud.scheduler.v1.IListJobsResponse | null | undefined,
+          protos.google.cloud.scheduler.v1.IJob
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.scheduler.v1.IJob[],
-      protosTypes.google.cloud.scheduler.v1.IListJobsRequest | null,
-      protosTypes.google.cloud.scheduler.v1.IListJobsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.scheduler.v1.IListJobsRequest,
+      protos.google.cloud.scheduler.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.scheduler.v1.IJob
     >
   ): Promise<
     [
-      protosTypes.google.cloud.scheduler.v1.IJob[],
-      protosTypes.google.cloud.scheduler.v1.IListJobsRequest | null,
-      protosTypes.google.cloud.scheduler.v1.IListJobsResponse
+      protos.google.cloud.scheduler.v1.IJob[],
+      protos.google.cloud.scheduler.v1.IListJobsRequest | null,
+      protos.google.cloud.scheduler.v1.IListJobsResponse
     ]
   > | void {
     request = request || {};
@@ -958,7 +1018,7 @@ export class CloudSchedulerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listJobs(request, options, callback);
+    return this.innerApiCalls.listJobs(request, options, callback);
   }
 
   /**
@@ -1000,7 +1060,7 @@ export class CloudSchedulerClient {
    *   An object stream which emits an object representing [Job]{@link google.cloud.scheduler.v1.Job} on 'data' event.
    */
   listJobsStream(
-    request?: protosTypes.google.cloud.scheduler.v1.IListJobsRequest,
+    request?: protos.google.cloud.scheduler.v1.IListJobsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1014,11 +1074,64 @@ export class CloudSchedulerClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listJobs.createStream(
-      this._innerApiCalls.listJobs as gax.GaxCall,
+    return this.descriptors.page.listJobs.createStream(
+      this.innerApiCalls.listJobs as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listJobs}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The location name. For example:
+   *   `projects/PROJECT_ID/locations/LOCATION_ID`.
+   * @param {number} request.pageSize
+   *   Requested page size.
+   *
+   *   The maximum page size is 500. If unspecified, the page size will
+   *   be the maximum. Fewer jobs than requested might be returned,
+   *   even if more jobs exist; use next_page_token to determine if more
+   *   jobs exist.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server will return. To
+   *   request the first page results, page_token must be empty. To
+   *   request the next page of results, page_token must be the value of
+   *   {@link google.cloud.scheduler.v1.ListJobsResponse.next_page_token|next_page_token} returned from
+   *   the previous call to {@link google.cloud.scheduler.v1.CloudScheduler.ListJobs|ListJobs}. It is an error to
+   *   switch the value of {@link google.cloud.scheduler.v1.ListJobsRequest.filter|filter} or
+   *   {@link google.cloud.scheduler.v1.ListJobsRequest.order_by|order_by} while iterating through pages.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listJobsAsync(
+    request?: protos.google.cloud.scheduler.v1.IListJobsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.scheduler.v1.IJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listJobs.asyncIterate(
+      this.innerApiCalls['listJobs'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.scheduler.v1.IJob>;
   }
   // --------------------
   // -- Path templates --
@@ -1033,10 +1146,10 @@ export class CloudSchedulerClient {
    * @returns {string} Resource name string.
    */
   jobPath(project: string, location: string, job: string) {
-    return this._pathTemplates.jobPathTemplate.render({
-      project,
-      location,
-      job,
+    return this.pathTemplates.jobPathTemplate.render({
+      project: project,
+      location: location,
+      job: job,
     });
   }
 
@@ -1048,7 +1161,7 @@ export class CloudSchedulerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromJobName(jobName: string) {
-    return this._pathTemplates.jobPathTemplate.match(jobName).project;
+    return this.pathTemplates.jobPathTemplate.match(jobName).project;
   }
 
   /**
@@ -1059,7 +1172,7 @@ export class CloudSchedulerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromJobName(jobName: string) {
-    return this._pathTemplates.jobPathTemplate.match(jobName).location;
+    return this.pathTemplates.jobPathTemplate.match(jobName).location;
   }
 
   /**
@@ -1070,7 +1183,7 @@ export class CloudSchedulerClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromJobName(jobName: string) {
-    return this._pathTemplates.jobPathTemplate.match(jobName).job;
+    return this.pathTemplates.jobPathTemplate.match(jobName).job;
   }
 
   /**
@@ -1081,9 +1194,9 @@ export class CloudSchedulerClient {
    * @returns {string} Resource name string.
    */
   locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -1095,7 +1208,7 @@ export class CloudSchedulerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -1106,8 +1219,7 @@ export class CloudSchedulerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -1117,8 +1229,8 @@ export class CloudSchedulerClient {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -1130,7 +1242,7 @@ export class CloudSchedulerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
