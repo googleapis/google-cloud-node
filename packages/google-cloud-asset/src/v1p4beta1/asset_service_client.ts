@@ -18,7 +18,7 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
+  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
@@ -27,7 +27,7 @@ import {
 } from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './asset_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -38,13 +38,6 @@ const version = require('../../../package.json').version;
  * @memberof v1p4beta1
  */
 export class AssetServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -52,6 +45,13 @@ export class AssetServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   operationsClient: gax.OperationsClient;
   assetServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -144,7 +144,10 @@ export class AssetServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "long-running operations", which return a
@@ -152,7 +155,7 @@ export class AssetServiceClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
-          /* eslint-disable @typescript-eslint/no-var-requires */
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -170,7 +173,7 @@ export class AssetServiceClient {
       '.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       exportIamPolicyAnalysis: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportIamPolicyAnalysisResponse.decode.bind(
@@ -193,7 +196,7 @@ export class AssetServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -220,8 +223,7 @@ export class AssetServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.asset.v1p4beta1.AssetService'
           )
-        : // tslint:disable-next-line no-any
-          /* eslint-disable @typescript-eslint/no-explicit-any */
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.asset.v1p4beta1.AssetService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -232,9 +234,8 @@ export class AssetServiceClient {
       'analyzeIamPolicy',
       'exportIamPolicyAnalysis',
     ];
-
     for (const methodName of assetServiceStubMethods) {
-      const innerCallPromise = this.assetServiceStub.then(
+      const callPromise = this.assetServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -248,20 +249,14 @@ export class AssetServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.assetServiceStub;
@@ -318,26 +313,34 @@ export class AssetServiceClient {
   // -- Service calls --
   // -------------------
   analyzeIamPolicy(
-    request: protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
+    request: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
-      (
-        | protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
-        | undefined
-      ),
+      protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
+      protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   analyzeIamPolicy(
-    request: protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
+    request: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
-      | protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
+      protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
+      | protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  analyzeIamPolicy(
+    request: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
+      | protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -357,28 +360,27 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   analyzeIamPolicy(
-    request: protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
+    request: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
-          | protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
+          protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
+          | protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
-      | protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
+      protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
+      | protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
-      (
-        | protosTypes.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest
-        | undefined
-      ),
+      protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
+      protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -399,32 +401,43 @@ export class AssetServiceClient {
       'analysis_query.parent': request.analysisQuery!.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.analyzeIamPolicy(request, options, callback);
+    return this.innerApiCalls.analyzeIamPolicy(request, options, callback);
   }
 
   exportIamPolicyAnalysis(
-    request: protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
+    request: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
-        protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   exportIamPolicyAnalysis(
-    request: protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
+    request: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
-        protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportIamPolicyAnalysis(
+    request: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -448,32 +461,32 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   exportIamPolicyAnalysis(
-    request: protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
+    request: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
-            protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
+            protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
+            protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
-        protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
-        protosTypes.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse,
+        protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -494,7 +507,7 @@ export class AssetServiceClient {
       'analysis_query.parent': request.analysisQuery!.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.exportIamPolicyAnalysis(
+    return this.innerApiCalls.exportIamPolicyAnalysis(
       request,
       options,
       callback

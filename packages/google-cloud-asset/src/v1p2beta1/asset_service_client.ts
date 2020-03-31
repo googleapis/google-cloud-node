@@ -18,7 +18,7 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
+  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
@@ -26,7 +26,7 @@ import {
 } from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './asset_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -37,14 +37,6 @@ const version = require('../../../package.json').version;
  * @memberof v1p2beta1
  */
 export class AssetServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -52,6 +44,14 @@ export class AssetServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   assetServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -143,13 +143,16 @@ export class AssetServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       folderFeedPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/feeds/{feed}'
       ),
@@ -172,7 +175,7 @@ export class AssetServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -199,8 +202,7 @@ export class AssetServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.asset.v1p2beta1.AssetService'
           )
-        : // tslint:disable-next-line no-any
-          /* eslint-disable @typescript-eslint/no-explicit-any */
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.asset.v1p2beta1.AssetService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -214,9 +216,8 @@ export class AssetServiceClient {
       'updateFeed',
       'deleteFeed',
     ];
-
     for (const methodName of assetServiceStubMethods) {
-      const innerCallPromise = this.assetServiceStub.then(
+      const callPromise = this.assetServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -230,20 +231,14 @@ export class AssetServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.assetServiceStub;
@@ -300,22 +295,30 @@ export class AssetServiceClient {
   // -- Service calls --
   // -------------------
   createFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
       {} | undefined
     ]
   >;
   createFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
-      {} | undefined
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFeed(
+    request: protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
+    callback: Callback<
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -346,24 +349,25 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-          | protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          | protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
-      {} | undefined
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -384,25 +388,33 @@ export class AssetServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createFeed(request, options, callback);
+    return this.innerApiCalls.createFeed(request, options, callback);
   }
   getFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IGetFeedRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
       {} | undefined
     ]
   >;
   getFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IGetFeedRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
-      {} | undefined
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFeed(
+    request: protos.google.cloud.asset.v1p2beta1.IGetFeedRequest,
+    callback: Callback<
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -422,23 +434,25 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IGetFeedRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-          protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
-          {} | undefined
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          | protos.google.cloud.asset.v1p2beta1.IGetFeedRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
-      {} | undefined
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -459,25 +473,33 @@ export class AssetServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getFeed(request, options, callback);
+    return this.innerApiCalls.getFeed(request, options, callback);
   }
   listFeeds(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IListFeedsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p2beta1.IListFeedsResponse,
-      protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
+      protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
+      protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
       {} | undefined
     ]
   >;
   listFeeds(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IListFeedsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.asset.v1p2beta1.IListFeedsResponse,
-      protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
-      {} | undefined
+      protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
+      protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listFeeds(
+    request: protos.google.cloud.asset.v1p2beta1.IListFeedsRequest,
+    callback: Callback<
+      protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
+      protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -496,24 +518,25 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listFeeds(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IListFeedsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.asset.v1p2beta1.IListFeedsResponse,
-          | protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest
+          protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
+          | protos.google.cloud.asset.v1p2beta1.IListFeedsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.asset.v1p2beta1.IListFeedsResponse,
-      protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
-      {} | undefined
+      protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
+      protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p2beta1.IListFeedsResponse,
-      protosTypes.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
+      protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
+      protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -534,25 +557,33 @@ export class AssetServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listFeeds(request, options, callback);
+    return this.innerApiCalls.listFeeds(request, options, callback);
   }
   updateFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
       {} | undefined
     ]
   >;
   updateFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
-      {} | undefined
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFeed(
+    request: protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
+    callback: Callback<
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -577,24 +608,25 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-          | protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          | protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
-      {} | undefined
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p2beta1.IFeed,
-      protosTypes.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
+      protos.google.cloud.asset.v1p2beta1.IFeed,
+      protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -615,25 +647,33 @@ export class AssetServiceClient {
       'feed.name': request.feed!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateFeed(request, options, callback);
+    return this.innerApiCalls.updateFeed(request, options, callback);
   }
   deleteFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
       {} | undefined
     ]
   >;
   deleteFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFeed(
+    request: protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -653,24 +693,25 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteFeed(
-    request: protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
+    request: protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -691,7 +732,7 @@ export class AssetServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteFeed(request, options, callback);
+    return this.innerApiCalls.deleteFeed(request, options, callback);
   }
 
   // --------------------
@@ -706,9 +747,9 @@ export class AssetServiceClient {
    * @returns {string} Resource name string.
    */
   folderFeedPath(folder: string, feed: string) {
-    return this._pathTemplates.folderFeedPathTemplate.render({
-      folder,
-      feed,
+    return this.pathTemplates.folderFeedPathTemplate.render({
+      folder: folder,
+      feed: feed,
     });
   }
 
@@ -720,7 +761,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderFeedName(folderFeedName: string) {
-    return this._pathTemplates.folderFeedPathTemplate.match(folderFeedName)
+    return this.pathTemplates.folderFeedPathTemplate.match(folderFeedName)
       .folder;
   }
 
@@ -732,8 +773,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the feed.
    */
   matchFeedFromFolderFeedName(folderFeedName: string) {
-    return this._pathTemplates.folderFeedPathTemplate.match(folderFeedName)
-      .feed;
+    return this.pathTemplates.folderFeedPathTemplate.match(folderFeedName).feed;
   }
 
   /**
@@ -744,9 +784,9 @@ export class AssetServiceClient {
    * @returns {string} Resource name string.
    */
   organizationFeedPath(organization: string, feed: string) {
-    return this._pathTemplates.organizationFeedPathTemplate.render({
-      organization,
-      feed,
+    return this.pathTemplates.organizationFeedPathTemplate.render({
+      organization: organization,
+      feed: feed,
     });
   }
 
@@ -758,7 +798,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationFeedName(organizationFeedName: string) {
-    return this._pathTemplates.organizationFeedPathTemplate.match(
+    return this.pathTemplates.organizationFeedPathTemplate.match(
       organizationFeedName
     ).organization;
   }
@@ -771,7 +811,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the feed.
    */
   matchFeedFromOrganizationFeedName(organizationFeedName: string) {
-    return this._pathTemplates.organizationFeedPathTemplate.match(
+    return this.pathTemplates.organizationFeedPathTemplate.match(
       organizationFeedName
     ).feed;
   }
@@ -784,9 +824,9 @@ export class AssetServiceClient {
    * @returns {string} Resource name string.
    */
   projectFeedPath(project: string, feed: string) {
-    return this._pathTemplates.projectFeedPathTemplate.render({
-      project,
-      feed,
+    return this.pathTemplates.projectFeedPathTemplate.render({
+      project: project,
+      feed: feed,
     });
   }
 
@@ -798,7 +838,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectFeedName(projectFeedName: string) {
-    return this._pathTemplates.projectFeedPathTemplate.match(projectFeedName)
+    return this.pathTemplates.projectFeedPathTemplate.match(projectFeedName)
       .project;
   }
 
@@ -810,7 +850,7 @@ export class AssetServiceClient {
    * @returns {string} A string representing the feed.
    */
   matchFeedFromProjectFeedName(projectFeedName: string) {
-    return this._pathTemplates.projectFeedPathTemplate.match(projectFeedName)
+    return this.pathTemplates.projectFeedPathTemplate.match(projectFeedName)
       .feed;
   }
 
