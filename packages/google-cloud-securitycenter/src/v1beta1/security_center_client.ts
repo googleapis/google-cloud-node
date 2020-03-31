@@ -18,19 +18,19 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   LROperation,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './security_center_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class SecurityCenterClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class SecurityCenterClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   securityCenterStub?: Promise<{[name: string]: Function}>;
 
@@ -148,13 +148,16 @@ export class SecurityCenterClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       findingPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
@@ -178,7 +181,7 @@ export class SecurityCenterClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       groupAssets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -211,6 +214,7 @@ export class SecurityCenterClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -228,7 +232,7 @@ export class SecurityCenterClient {
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       runAssetDiscovery: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runAssetDiscoveryResponse.decode.bind(runAssetDiscoveryResponse),
@@ -247,7 +251,7 @@ export class SecurityCenterClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -274,7 +278,7 @@ export class SecurityCenterClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.securitycenter.v1beta1.SecurityCenter'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.securitycenter.v1beta1
             .SecurityCenter,
       this._opts
@@ -302,9 +306,8 @@ export class SecurityCenterClient {
       'updateSource',
       'updateSecurityMarks',
     ];
-
     for (const methodName of securityCenterStubMethods) {
-      const innerCallPromise = this.securityCenterStub.then(
+      const callPromise = this.securityCenterStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -318,20 +321,14 @@ export class SecurityCenterClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.securityCenterStub;
@@ -388,26 +385,37 @@ export class SecurityCenterClient {
   // -- Service calls --
   // -------------------
   createSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
+      protos.google.cloud.securitycenter.v1beta1.ISource,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+        | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-      | protosTypes.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createSource(
+    request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -428,26 +436,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-          | protosTypes.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-      | protosTypes.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
+      protos.google.cloud.securitycenter.v1beta1.ISource,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
+        | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
         | undefined
       ),
       {} | undefined
@@ -470,29 +480,40 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createSource(request, options, callback);
+    return this.innerApiCalls.createSource(request, options, callback);
   }
   createFinding(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+        | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createFinding(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-      | protosTypes.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createFinding(
+    request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -518,26 +539,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createFinding(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-          | protosTypes.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-      | protosTypes.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
+        | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
         | undefined
       ),
       {} | undefined
@@ -560,25 +583,33 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createFinding(request, options, callback);
+    return this.innerApiCalls.createFinding(request, options, callback);
   }
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -593,23 +624,23 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -630,29 +661,40 @@ export class SecurityCenterClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.getIamPolicy(request, options, callback);
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   getOrganizationSettings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+        | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getOrganizationSettings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getOrganizationSettings(
+    request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -670,26 +712,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getOrganizationSettings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-          | protosTypes.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+          | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
+        | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
         | undefined
       ),
       {} | undefined
@@ -712,33 +756,41 @@ export class SecurityCenterClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getOrganizationSettings(
+    return this.innerApiCalls.getOrganizationSettings(
       request,
       options,
       callback
     );
   }
   getSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-      (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IGetSourceRequest
-        | undefined
-      ),
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest | undefined,
       {} | undefined
     ]
   >;
   getSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IGetSourceRequest
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getSource(
+    request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -756,28 +808,27 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-          | protosTypes.google.cloud.securitycenter.v1beta1.IGetSourceRequest
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IGetSourceRequest
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-      (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IGetSourceRequest
-        | undefined
-      ),
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -798,29 +849,40 @@ export class SecurityCenterClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getSource(request, options, callback);
+    return this.innerApiCalls.getSource(request, options, callback);
   }
   setFindingState(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+        | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   setFindingState(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-      | protosTypes.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  setFindingState(
+    request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -844,26 +906,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setFindingState(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-          | protosTypes.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-      | protosTypes.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
+        | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
         | undefined
       ),
       {} | undefined
@@ -886,25 +950,33 @@ export class SecurityCenterClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setFindingState(request, options, callback);
+    return this.innerApiCalls.setFindingState(request, options, callback);
   }
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -919,23 +991,23 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -956,25 +1028,33 @@ export class SecurityCenterClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.setIamPolicy(request, options, callback);
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   >;
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -989,23 +1069,23 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-          protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1026,29 +1106,40 @@ export class SecurityCenterClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.testIamPermissions(request, options, callback);
+    return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
   updateFinding(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+        | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateFinding(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateFinding(
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1074,26 +1165,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateFinding(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-          | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding,
+      protos.google.cloud.securitycenter.v1beta1.IFinding,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
+        | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
         | undefined
       ),
       {} | undefined
@@ -1116,29 +1209,40 @@ export class SecurityCenterClient {
       'finding.name': request.finding!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateFinding(request, options, callback);
+    return this.innerApiCalls.updateFinding(request, options, callback);
   }
   updateOrganizationSettings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+        | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateOrganizationSettings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateOrganizationSettings(
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1157,26 +1261,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateOrganizationSettings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-          | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+          | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
+        | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
         | undefined
       ),
       {} | undefined
@@ -1199,33 +1305,44 @@ export class SecurityCenterClient {
       'organization_settings.name': request.organizationSettings!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateOrganizationSettings(
+    return this.innerApiCalls.updateOrganizationSettings(
       request,
       options,
       callback
     );
   }
   updateSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
+      protos.google.cloud.securitycenter.v1beta1.ISource,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+        | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateSource(
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1244,26 +1361,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateSource(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-          | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+      protos.google.cloud.securitycenter.v1beta1.ISource,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource,
+      protos.google.cloud.securitycenter.v1beta1.ISource,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
+        | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
         | undefined
       ),
       {} | undefined
@@ -1286,29 +1405,40 @@ export class SecurityCenterClient {
       'source.name': request.source!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateSource(request, options, callback);
+    return this.innerApiCalls.updateSource(request, options, callback);
   }
   updateSecurityMarks(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+        | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateSecurityMarks(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateSecurityMarks(
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1329,26 +1459,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateSecurityMarks(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-          | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+          protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+          | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-      | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+      | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
       (
-        | protosTypes.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
+        | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
         | undefined
       ),
       {} | undefined
@@ -1371,32 +1503,34 @@ export class SecurityCenterClient {
       'security_marks.name': request.securityMarks!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateSecurityMarks(request, options, callback);
+    return this.innerApiCalls.updateSecurityMarks(request, options, callback);
   }
 
   runAssetDiscovery(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.protobuf.IEmpty
-      >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   runAssetDiscovery(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
     options: gax.CallOptions,
     callback: Callback<
-      LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.protobuf.IEmpty
-      >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runAssetDiscovery(
+    request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
+    callback: Callback<
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1419,32 +1553,26 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   runAssetDiscovery(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.protobuf.IEmpty,
-            protosTypes.google.protobuf.IEmpty
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IEmpty
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.protobuf.IEmpty
-      >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.protobuf.IEmpty
-      >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1465,25 +1593,37 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.runAssetDiscovery(request, options, callback);
+    return this.innerApiCalls.runAssetDiscovery(request, options, callback);
   }
   groupAssets(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
     ]
   >;
   groupAssets(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult
+    >
+  ): void;
+  groupAssets(
+    request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult
     >
   ): void;
   /**
@@ -1591,24 +1731,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   groupAssets(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-          protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-          protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+          | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
     ]
   > | void {
     request = request || {};
@@ -1628,7 +1772,7 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.groupAssets(request, options, callback);
+    return this.innerApiCalls.groupAssets(request, options, callback);
   }
 
   /**
@@ -1732,7 +1876,7 @@ export class SecurityCenterClient {
    *   An object stream which emits an object representing [GroupResult]{@link google.cloud.securitycenter.v1beta1.GroupResult} on 'data' event.
    */
   groupAssetsStream(
-    request?: protosTypes.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+    request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1746,29 +1890,156 @@ export class SecurityCenterClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.groupAssets.createStream(
-      this._innerApiCalls.groupAssets as gax.GaxCall,
+    return this.descriptors.page.groupAssets.createStream(
+      this.innerApiCalls.groupAssets as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link groupAssets}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the organization to groupBy. Its format is
+   *   "organizations/[organization_id]".
+   * @param {string} request.filter
+   *   Expression that defines the filter to apply across assets.
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`.
+   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+   *
+   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+   *   character in front of them to indicate negation. The fields map to those
+   *   defined in the Asset resource. Examples include:
+   *
+   *   * name
+   *   * security_center_properties.resource_name
+   *   * resource_properties.a_property
+   *   * security_marks.marks.marka
+   *
+   *   The supported operators are:
+   *
+   *   * `=` for all value types.
+   *   * `>`, `<`, `>=`, `<=` for integer values.
+   *   * `:`, meaning substring matching, for strings.
+   *
+   *   The supported value types are:
+   *
+   *   * string literals in quotes.
+   *   * integer literals without quotes.
+   *   * boolean literals `true` and `false` without quotes.
+   *
+   *   For example, `resource_properties.size = 100` is a valid filter string.
+   * @param {string} request.groupBy
+   *   Required. Expression that defines what assets fields to use for grouping. The string
+   *   value should follow SQL syntax: comma separated list of fields. For
+   *   example:
+   *   "security_center_properties.resource_project,security_center_properties.project".
+   *
+   *   The following fields are supported when compare_duration is not set:
+   *
+   *   * security_center_properties.resource_project
+   *   * security_center_properties.resource_type
+   *   * security_center_properties.resource_parent
+   *
+   *   The following fields are supported when compare_duration is set:
+   *
+   *   * security_center_properties.resource_type
+   * @param {google.protobuf.Duration} request.compareDuration
+   *   When compare_duration is set, the Asset's "state" property is updated to
+   *   indicate whether the asset was added, removed, or remained present during
+   *   the compare_duration period of time that precedes the read_time. This is
+   *   the time between (read_time - compare_duration) and read_time.
+   *
+   *   The state value is derived based on the presence of the asset at the two
+   *   points in time. Intermediate state changes between the two times don't
+   *   affect the result. For example, the results aren't affected if the asset is
+   *   removed and re-created again.
+   *
+   *   Possible "state" values when compare_duration is specified:
+   *
+   *   * "ADDED": indicates that the asset was not present before
+   *                compare_duration, but present at reference_time.
+   *   * "REMOVED": indicates that the asset was present at the start of
+   *                compare_duration, but not present at reference_time.
+   *   * "ACTIVE": indicates that the asset was present at both the
+   *                start and the end of the time period defined by
+   *                compare_duration and reference_time.
+   *
+   *   This field is ignored if `state` is not a field in `group_by`.
+   * @param {google.protobuf.Timestamp} request.readTime
+   *   Time used as a reference point when filtering assets. The filter is limited
+   *   to assets existing at the supplied time and their values are those at that
+   *   specific time. Absence of this field will default to the API's version of
+   *   NOW.
+   * @param {string} request.pageToken
+   *   The value returned by the last `GroupAssetsResponse`; indicates
+   *   that this is a continuation of a prior `GroupAssets` call, and that the
+   *   system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  groupAssetsAsync(
+    request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.groupAssets.asyncIterate(
+      this.innerApiCalls['groupAssets'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult>;
+  }
   groupFindings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
     ]
   >;
   groupFindings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult
+    >
+  ): void;
+  groupFindings(
+    request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult
     >
   ): void;
   /**
@@ -1854,24 +2125,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   groupFindings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-          protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-          protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+          | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
     ]
   > | void {
     request = request || {};
@@ -1891,7 +2166,7 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.groupFindings(request, options, callback);
+    return this.innerApiCalls.groupFindings(request, options, callback);
   }
 
   /**
@@ -1970,7 +2245,7 @@ export class SecurityCenterClient {
    *   An object stream which emits an object representing [GroupResult]{@link google.cloud.securitycenter.v1beta1.GroupResult} on 'data' event.
    */
   groupFindingsStream(
-    request?: protosTypes.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+    request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1984,29 +2259,131 @@ export class SecurityCenterClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.groupFindings.createStream(
-      this._innerApiCalls.groupFindings as gax.GaxCall,
+    return this.descriptors.page.groupFindings.createStream(
+      this.innerApiCalls.groupFindings as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link groupFindings}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the source to groupBy. Its format is
+   *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
+   *   all sources provide a source_id of `-`. For example:
+   *   organizations/{organization_id}/sources/-
+   * @param {string} request.filter
+   *   Expression that defines the filter to apply across findings.
+   *   The expression is a list of one or more restrictions combined via logical
+   *   operators `AND` and `OR`.
+   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+   *
+   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+   *   character in front of them to indicate negation. Examples include:
+   *
+   *    * name
+   *    * source_properties.a_property
+   *    * security_marks.marks.marka
+   *
+   *   The supported operators are:
+   *
+   *   * `=` for all value types.
+   *   * `>`, `<`, `>=`, `<=` for integer values.
+   *   * `:`, meaning substring matching, for strings.
+   *
+   *   The supported value types are:
+   *
+   *   * string literals in quotes.
+   *   * integer literals without quotes.
+   *   * boolean literals `true` and `false` without quotes.
+   *
+   *   For example, `source_properties.size = 100` is a valid filter string.
+   * @param {string} request.groupBy
+   *   Required. Expression that defines what assets fields to use for grouping (including
+   *   `state`). The string value should follow SQL syntax: comma separated list
+   *   of fields. For example:
+   *   "parent,resource_name".
+   *
+   *   The following fields are supported:
+   *
+   *   * resource_name
+   *   * category
+   *   * state
+   *   * parent
+   * @param {google.protobuf.Timestamp} request.readTime
+   *   Time used as a reference point when filtering findings. The filter is
+   *   limited to findings existing at the supplied time and their values are
+   *   those at that specific time. Absence of this field will default to the
+   *   API's version of NOW.
+   * @param {string} request.pageToken
+   *   The value returned by the last `GroupFindingsResponse`; indicates
+   *   that this is a continuation of a prior `GroupFindings` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  groupFindingsAsync(
+    request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.groupFindings.asyncIterate(
+      this.innerApiCalls['groupFindings'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult>;
+  }
   listAssets(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
     ]
   >;
   listAssets(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
+    >
+  ): void;
+  listAssets(
+    request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
     >
   ): void;
   /**
@@ -2113,24 +2490,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listAssets(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
-          protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-          protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+          | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
     ]
   > | void {
     request = request || {};
@@ -2150,7 +2531,7 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listAssets(request, options, callback);
+    return this.innerApiCalls.listAssets(request, options, callback);
   }
 
   /**
@@ -2254,7 +2635,7 @@ export class SecurityCenterClient {
    *   An object stream which emits an object representing [ListAssetsResult]{@link google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult} on 'data' event.
    */
   listAssetsStream(
-    request?: protosTypes.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+    request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2268,29 +2649,160 @@ export class SecurityCenterClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listAssets.createStream(
-      this._innerApiCalls.listAssets as gax.GaxCall,
+    return this.descriptors.page.listAssets.createStream(
+      this.innerApiCalls.listAssets as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listAssets}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the organization assets should belong to. Its format is
+   *   "organizations/[organization_id]".
+   * @param {string} request.filter
+   *   Expression that defines the filter to apply across assets.
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`.
+   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+   *
+   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+   *   character in front of them to indicate negation. The fields map to those
+   *   defined in the Asset resource. Examples include:
+   *
+   *   * name
+   *   * security_center_properties.resource_name
+   *   * resource_properties.a_property
+   *   * security_marks.marks.marka
+   *
+   *   The supported operators are:
+   *
+   *   * `=` for all value types.
+   *   * `>`, `<`, `>=`, `<=` for integer values.
+   *   * `:`, meaning substring matching, for strings.
+   *
+   *   The supported value types are:
+   *
+   *   * string literals in quotes.
+   *   * integer literals without quotes.
+   *   * boolean literals `true` and `false` without quotes.
+   *
+   *   For example, `resource_properties.size = 100` is a valid filter string.
+   * @param {string} request.orderBy
+   *   Expression that defines what fields and order to use for sorting. The
+   *   string value should follow SQL syntax: comma separated list of fields. For
+   *   example: "name,resource_properties.a_property". The default sorting order
+   *   is ascending. To specify descending order for a field, a suffix " desc"
+   *   should be appended to the field name. For example: "name
+   *   desc,resource_properties.a_property". Redundant space characters in the
+   *   syntax are insignificant. "name desc,resource_properties.a_property" and "
+   *   name     desc  ,   resource_properties.a_property  " are equivalent.
+   * @param {google.protobuf.Timestamp} request.readTime
+   *   Time used as a reference point when filtering assets. The filter is limited
+   *   to assets existing at the supplied time and their values are those at that
+   *   specific time. Absence of this field will default to the API's version of
+   *   NOW.
+   * @param {google.protobuf.Duration} request.compareDuration
+   *   When compare_duration is set, the ListAssetResult's "state" attribute is
+   *   updated to indicate whether the asset was added, removed, or remained
+   *   present during the compare_duration period of time that precedes the
+   *   read_time. This is the time between (read_time -
+   *   compare_duration) and read_time.
+   *
+   *   The state value is derived based on the presence of the asset at the two
+   *   points in time. Intermediate state changes between the two times don't
+   *   affect the result. For example, the results aren't affected if the asset is
+   *   removed and re-created again.
+   *
+   *   Possible "state" values when compare_duration is specified:
+   *
+   *   * "ADDED": indicates that the asset was not present before
+   *                compare_duration, but present at read_time.
+   *   * "REMOVED": indicates that the asset was present at the start of
+   *                compare_duration, but not present at read_time.
+   *   * "ACTIVE": indicates that the asset was present at both the
+   *                start and the end of the time period defined by
+   *                compare_duration and read_time.
+   *
+   *   If compare_duration is not specified, then the only possible state is
+   *   "UNUSED", which indicates that the asset is present at read_time.
+   * @param {google.protobuf.FieldMask} [request.fieldMask]
+   *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
+   *   response.
+   *   An empty field mask will list all fields.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListAssetsResponse`; indicates
+   *   that this is a continuation of a prior `ListAssets` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listAssetsAsync(
+    request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<
+    protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
+  > {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listAssets.asyncIterate(
+      this.innerApiCalls['listAssets'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<
+      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
+    >;
+  }
   listFindings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      protos.google.cloud.securitycenter.v1beta1.IFinding[],
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
     ]
   >;
   listFindings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IFinding
+    >
+  ): void;
+  listFindings(
+    request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IFinding
     >
   ): void;
   /**
@@ -2375,24 +2887,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listFindings(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.IFinding[],
-          protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-          protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+          | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1beta1.IFinding
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.IFinding
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.IFinding[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      protos.google.cloud.securitycenter.v1beta1.IFinding[],
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
     ]
   > | void {
     request = request || {};
@@ -2412,7 +2928,7 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listFindings(request, options, callback);
+    return this.innerApiCalls.listFindings(request, options, callback);
   }
 
   /**
@@ -2491,7 +3007,7 @@ export class SecurityCenterClient {
    *   An object stream which emits an object representing [Finding]{@link google.cloud.securitycenter.v1beta1.Finding} on 'data' event.
    */
   listFindingsStream(
-    request?: protosTypes.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+    request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2505,29 +3021,131 @@ export class SecurityCenterClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listFindings.createStream(
-      this._innerApiCalls.listFindings as gax.GaxCall,
+    return this.descriptors.page.listFindings.createStream(
+      this.innerApiCalls.listFindings as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listFindings}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the source the findings belong to. Its format is
+   *   "organizations/[organization_id]/sources/[source_id]". To list across all
+   *   sources provide a source_id of `-`. For example:
+   *   organizations/{organization_id}/sources/-
+   * @param {string} request.filter
+   *   Expression that defines the filter to apply across findings.
+   *   The expression is a list of one or more restrictions combined via logical
+   *   operators `AND` and `OR`.
+   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+   *
+   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+   *   character in front of them to indicate negation. Examples include:
+   *
+   *    * name
+   *    * source_properties.a_property
+   *    * security_marks.marks.marka
+   *
+   *   The supported operators are:
+   *
+   *   * `=` for all value types.
+   *   * `>`, `<`, `>=`, `<=` for integer values.
+   *   * `:`, meaning substring matching, for strings.
+   *
+   *   The supported value types are:
+   *
+   *   * string literals in quotes.
+   *   * integer literals without quotes.
+   *   * boolean literals `true` and `false` without quotes.
+   *
+   *   For example, `source_properties.size = 100` is a valid filter string.
+   * @param {string} request.orderBy
+   *   Expression that defines what fields and order to use for sorting. The
+   *   string value should follow SQL syntax: comma separated list of fields. For
+   *   example: "name,resource_properties.a_property". The default sorting order
+   *   is ascending. To specify descending order for a field, a suffix " desc"
+   *   should be appended to the field name. For example: "name
+   *   desc,source_properties.a_property". Redundant space characters in the
+   *   syntax are insignificant. "name desc,source_properties.a_property" and "
+   *   name     desc  ,   source_properties.a_property  " are equivalent.
+   * @param {google.protobuf.Timestamp} request.readTime
+   *   Time used as a reference point when filtering findings. The filter is
+   *   limited to findings existing at the supplied time and their values are
+   *   those at that specific time. Absence of this field will default to the
+   *   API's version of NOW.
+   * @param {google.protobuf.FieldMask} [request.fieldMask]
+   *   Optional. A field mask to specify the Finding fields to be listed in the response.
+   *   An empty field mask will list all fields.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListFindingsResponse`; indicates
+   *   that this is a continuation of a prior `ListFindings` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listFindingsAsync(
+    request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IFinding> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listFindings.asyncIterate(
+      this.innerApiCalls['listFindings'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IFinding>;
+  }
   listSources(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      protos.google.cloud.securitycenter.v1beta1.ISource[],
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
     ]
   >;
   listSources(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.ISource
+    >
+  ): void;
+  listSources(
+    request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.ISource
     >
   ): void;
   /**
@@ -2564,24 +3182,28 @@ export class SecurityCenterClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listSources(
-    request: protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+    request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.securitycenter.v1beta1.ISource[],
-          protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-          protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+          | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1beta1.ISource
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1beta1.ISource
     >
   ): Promise<
     [
-      protosTypes.google.cloud.securitycenter.v1beta1.ISource[],
-      protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-      protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      protos.google.cloud.securitycenter.v1beta1.ISource[],
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
     ]
   > | void {
     request = request || {};
@@ -2601,7 +3223,7 @@ export class SecurityCenterClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listSources(request, options, callback);
+    return this.innerApiCalls.listSources(request, options, callback);
   }
 
   /**
@@ -2635,7 +3257,7 @@ export class SecurityCenterClient {
    *   An object stream which emits an object representing [Source]{@link google.cloud.securitycenter.v1beta1.Source} on 'data' event.
    */
   listSourcesStream(
-    request?: protosTypes.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+    request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2649,11 +3271,56 @@ export class SecurityCenterClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listSources.createStream(
-      this._innerApiCalls.listSources as gax.GaxCall,
+    return this.descriptors.page.listSources.createStream(
+      this.innerApiCalls.listSources as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listSources}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent of sources to list. Its format should be
+   *   "organizations/[organization_id]".
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListSourcesResponse`; indicates
+   *   that this is a continuation of a prior `ListSources` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listSourcesAsync(
+    request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ISource> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listSources.asyncIterate(
+      this.innerApiCalls['listSources'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ISource>;
   }
   // --------------------
   // -- Path templates --
@@ -2668,10 +3335,10 @@ export class SecurityCenterClient {
    * @returns {string} Resource name string.
    */
   findingPath(organization: string, source: string, finding: string) {
-    return this._pathTemplates.findingPathTemplate.render({
-      organization,
-      source,
-      finding,
+    return this.pathTemplates.findingPathTemplate.render({
+      organization: organization,
+      source: source,
+      finding: finding,
     });
   }
 
@@ -2683,7 +3350,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromFindingName(findingName: string) {
-    return this._pathTemplates.findingPathTemplate.match(findingName)
+    return this.pathTemplates.findingPathTemplate.match(findingName)
       .organization;
   }
 
@@ -2695,7 +3362,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the source.
    */
   matchSourceFromFindingName(findingName: string) {
-    return this._pathTemplates.findingPathTemplate.match(findingName).source;
+    return this.pathTemplates.findingPathTemplate.match(findingName).source;
   }
 
   /**
@@ -2706,7 +3373,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the finding.
    */
   matchFindingFromFindingName(findingName: string) {
-    return this._pathTemplates.findingPathTemplate.match(findingName).finding;
+    return this.pathTemplates.findingPathTemplate.match(findingName).finding;
   }
 
   /**
@@ -2716,8 +3383,8 @@ export class SecurityCenterClient {
    * @returns {string} Resource name string.
    */
   organizationPath(organization: string) {
-    return this._pathTemplates.organizationPathTemplate.render({
-      organization,
+    return this.pathTemplates.organizationPathTemplate.render({
+      organization: organization,
     });
   }
 
@@ -2729,7 +3396,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this._pathTemplates.organizationPathTemplate.match(organizationName)
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
       .organization;
   }
 
@@ -2741,10 +3408,10 @@ export class SecurityCenterClient {
    * @returns {string} Resource name string.
    */
   organizationAssetSecurityMarksPath(organization: string, asset: string) {
-    return this._pathTemplates.organizationAssetSecurityMarksPathTemplate.render(
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.render(
       {
-        organization,
-        asset,
+        organization: organization,
+        asset: asset,
       }
     );
   }
@@ -2759,7 +3426,7 @@ export class SecurityCenterClient {
   matchOrganizationFromOrganizationAssetSecurityMarksName(
     organizationAssetSecurityMarksName: string
   ) {
-    return this._pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
       organizationAssetSecurityMarksName
     ).organization;
   }
@@ -2774,7 +3441,7 @@ export class SecurityCenterClient {
   matchAssetFromOrganizationAssetSecurityMarksName(
     organizationAssetSecurityMarksName: string
   ) {
-    return this._pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
       organizationAssetSecurityMarksName
     ).asset;
   }
@@ -2786,8 +3453,8 @@ export class SecurityCenterClient {
    * @returns {string} Resource name string.
    */
   organizationSettingsPath(organization: string) {
-    return this._pathTemplates.organizationSettingsPathTemplate.render({
-      organization,
+    return this.pathTemplates.organizationSettingsPathTemplate.render({
+      organization: organization,
     });
   }
 
@@ -2801,7 +3468,7 @@ export class SecurityCenterClient {
   matchOrganizationFromOrganizationSettingsName(
     organizationSettingsName: string
   ) {
-    return this._pathTemplates.organizationSettingsPathTemplate.match(
+    return this.pathTemplates.organizationSettingsPathTemplate.match(
       organizationSettingsName
     ).organization;
   }
@@ -2819,11 +3486,11 @@ export class SecurityCenterClient {
     source: string,
     finding: string
   ) {
-    return this._pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render(
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render(
       {
-        organization,
-        source,
-        finding,
+        organization: organization,
+        source: source,
+        finding: finding,
       }
     );
   }
@@ -2838,7 +3505,7 @@ export class SecurityCenterClient {
   matchOrganizationFromOrganizationSourceFindingSecurityMarksName(
     organizationSourceFindingSecurityMarksName: string
   ) {
-    return this._pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
       organizationSourceFindingSecurityMarksName
     ).organization;
   }
@@ -2853,7 +3520,7 @@ export class SecurityCenterClient {
   matchSourceFromOrganizationSourceFindingSecurityMarksName(
     organizationSourceFindingSecurityMarksName: string
   ) {
-    return this._pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
       organizationSourceFindingSecurityMarksName
     ).source;
   }
@@ -2868,7 +3535,7 @@ export class SecurityCenterClient {
   matchFindingFromOrganizationSourceFindingSecurityMarksName(
     organizationSourceFindingSecurityMarksName: string
   ) {
-    return this._pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
       organizationSourceFindingSecurityMarksName
     ).finding;
   }
@@ -2881,9 +3548,9 @@ export class SecurityCenterClient {
    * @returns {string} Resource name string.
    */
   sourcePath(organization: string, source: string) {
-    return this._pathTemplates.sourcePathTemplate.render({
-      organization,
-      source,
+    return this.pathTemplates.sourcePathTemplate.render({
+      organization: organization,
+      source: source,
     });
   }
 
@@ -2895,8 +3562,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromSourceName(sourceName: string) {
-    return this._pathTemplates.sourcePathTemplate.match(sourceName)
-      .organization;
+    return this.pathTemplates.sourcePathTemplate.match(sourceName).organization;
   }
 
   /**
@@ -2907,7 +3573,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the source.
    */
   matchSourceFromSourceName(sourceName: string) {
-    return this._pathTemplates.sourcePathTemplate.match(sourceName).source;
+    return this.pathTemplates.sourcePathTemplate.match(sourceName).source;
   }
 
   /**
