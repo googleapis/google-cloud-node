@@ -26,31 +26,33 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../"
   },
   "dependencies": {
-    "google-gax": "^1.14.1"
+    "google-gax": "^2.0.1"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.1",
     "@types/node": "^13.7.1",
+    "@types/sinon": "^7.5.2",
     "c8": "^7.1.0",
-    "gts": "^1.1.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "gts": "2.0.0-alpha.9",
     "jsdoc": "^3.6.3",
     "jsdoc-fresh": "^1.0.2",
     "jsdoc-region-tag": "^1.0.4",
     "linkinator": "^2.0.1",
     "mocha": "^7.0.1",
-    "pack-n-play": "^1.0.0-2",
     "null-loader": "^3.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "prettier": "^1.19.1",
+    "sinon": "^9.0.1",
     "ts-loader": "^6.2.1",
-    "typescript": "~3.7.5",
+    "typescript": "^3.8.3",
     "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^1.19.1"
+    "webpack-cli": "^3.3.11"
   },
   "engines": {
-    "node": ">=8.13.0"
+    "node": ">=10"
   }
 }

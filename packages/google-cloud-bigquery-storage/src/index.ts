@@ -19,8 +19,6 @@
 import * as v1beta1 from './v1beta1';
 const BigQueryStorageClient = v1beta1.BigQueryStorageClient;
 export {v1beta1, BigQueryStorageClient};
-// For compatibility with JavaScript libraries we need to provide this default export:
-// tslint:disable-next-line no-default-export
 export default {v1beta1, BigQueryStorageClient};
 import * as protos from '../protos/protos';
 export {protos};

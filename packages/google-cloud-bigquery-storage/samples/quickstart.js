@@ -116,7 +116,7 @@ async function main() {
     client
       .readRows(readRowsRequest)
       .on('error', console.error)
-      .on('data', function(data) {
+      .on('data', data => {
         try {
           const decodedData = avroType.decode(
             data.avroRows.serializedBinaryRows
@@ -133,7 +133,7 @@ async function main() {
           console.log(error);
         }
       })
-      .on('end', function() {
+      .on('end', () => {
         console.log(
           `Got ${names.size} unique names in states: ${Object.keys(states)}`
         );

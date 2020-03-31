@@ -26,7 +26,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('Quickstart', () => {
   it('quickstart should create a dataset', async () => {
-    const output = execSync(`node quickstart`);
+    const output = execSync('node quickstart');
     assert.match(output, /unique names in states/);
     assert.match(output, /Last offset:/);
   });
