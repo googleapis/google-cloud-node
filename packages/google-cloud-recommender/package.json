@@ -26,17 +26,18 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^1.12.0"
+    "google-gax": "^2.0.1"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.0",
     "@types/node": "^12.0.0",
+    "@types/sinon": "^7.5.2",
     "c8": "^7.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "gts": "^1.0.0",
+    "gts": "2.0.0-alpha.9",
     "jsdoc": "^3.5.5",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
@@ -45,8 +46,9 @@
     "null-loader": "^3.0.0",
     "pack-n-play": "^1.0.0-2",
     "prettier": "^1.19.1",
+    "sinon": "^9.0.1",
     "ts-loader": "^6.2.1",
-    "typescript": "~3.6.4",
+    "typescript": "^3.8.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },

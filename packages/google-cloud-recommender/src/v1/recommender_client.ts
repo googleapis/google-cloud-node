@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './recommender_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -43,14 +43,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class RecommenderClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -58,6 +50,14 @@ export class RecommenderClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   recommenderStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -149,13 +149,16 @@ export class RecommenderClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       recommendationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
       ),
@@ -167,7 +170,7 @@ export class RecommenderClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listRecommendations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -186,7 +189,7 @@ export class RecommenderClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -213,7 +216,7 @@ export class RecommenderClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.recommender.v1.Recommender'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.recommender.v1.Recommender,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -227,9 +230,8 @@ export class RecommenderClient {
       'markRecommendationSucceeded',
       'markRecommendationFailed',
     ];
-
     for (const methodName of recommenderStubMethods) {
-      const innerCallPromise = this.recommenderStub.then(
+      const callPromise = this.recommenderStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -243,20 +245,14 @@ export class RecommenderClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.recommenderStub;
@@ -313,26 +309,34 @@ export class RecommenderClient {
   // -- Service calls --
   // -------------------
   getRecommendation(
-    request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest,
+    request: protos.google.cloud.recommender.v1.IGetRecommendationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      (
-        | protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest
-        | undefined
-      ),
+      protos.google.cloud.recommender.v1.IRecommendation,
+      protos.google.cloud.recommender.v1.IGetRecommendationRequest | undefined,
       {} | undefined
     ]
   >;
   getRecommendation(
-    request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest,
+    request: protos.google.cloud.recommender.v1.IGetRecommendationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      | protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IGetRecommendationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getRecommendation(
+    request: protos.google.cloud.recommender.v1.IGetRecommendationRequest,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IGetRecommendationRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -350,28 +354,27 @@ export class RecommenderClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getRecommendation(
-    request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest,
+    request: protos.google.cloud.recommender.v1.IGetRecommendationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recommender.v1.IRecommendation,
-          | protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IGetRecommendationRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      | protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IGetRecommendationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      (
-        | protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest
-        | undefined
-      ),
+      protos.google.cloud.recommender.v1.IRecommendation,
+      protos.google.cloud.recommender.v1.IGetRecommendationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -392,29 +395,40 @@ export class RecommenderClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getRecommendation(request, options, callback);
+    return this.innerApiCalls.getRecommendation(request, options, callback);
   }
   markRecommendationClaimed(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
+      protos.google.cloud.recommender.v1.IRecommendation,
       (
-        | protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+        | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   markRecommendationClaimed(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      | protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  markRecommendationClaimed(
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -447,26 +461,28 @@ export class RecommenderClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   markRecommendationClaimed(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recommender.v1.IRecommendation,
-          | protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      | protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
+      protos.google.cloud.recommender.v1.IRecommendation,
       (
-        | protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+        | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
         | undefined
       ),
       {} | undefined
@@ -489,33 +505,44 @@ export class RecommenderClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.markRecommendationClaimed(
+    return this.innerApiCalls.markRecommendationClaimed(
       request,
       options,
       callback
     );
   }
   markRecommendationSucceeded(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
+      protos.google.cloud.recommender.v1.IRecommendation,
       (
-        | protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+        | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   markRecommendationSucceeded(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      | protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  markRecommendationSucceeded(
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -548,26 +575,28 @@ export class RecommenderClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   markRecommendationSucceeded(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recommender.v1.IRecommendation,
-          | protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      | protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
+      protos.google.cloud.recommender.v1.IRecommendation,
       (
-        | protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+        | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
         | undefined
       ),
       {} | undefined
@@ -590,33 +619,44 @@ export class RecommenderClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.markRecommendationSucceeded(
+    return this.innerApiCalls.markRecommendationSucceeded(
       request,
       options,
       callback
     );
   }
   markRecommendationFailed(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
+      protos.google.cloud.recommender.v1.IRecommendation,
       (
-        | protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+        | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   markRecommendationFailed(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      | protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  markRecommendationFailed(
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -649,26 +689,28 @@ export class RecommenderClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   markRecommendationFailed(
-    request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest,
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.recommender.v1.IRecommendation,
-          | protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
-      | protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation,
+      protos.google.cloud.recommender.v1.IRecommendation,
       (
-        | protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+        | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
         | undefined
       ),
       {} | undefined
@@ -691,7 +733,7 @@ export class RecommenderClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.markRecommendationFailed(
+    return this.innerApiCalls.markRecommendationFailed(
       request,
       options,
       callback
@@ -699,22 +741,34 @@ export class RecommenderClient {
   }
 
   listRecommendations(
-    request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest,
+    request: protos.google.cloud.recommender.v1.IListRecommendationsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation[],
-      protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest | null,
-      protosTypes.google.cloud.recommender.v1.IListRecommendationsResponse
+      protos.google.cloud.recommender.v1.IRecommendation[],
+      protos.google.cloud.recommender.v1.IListRecommendationsRequest | null,
+      protos.google.cloud.recommender.v1.IListRecommendationsResponse
     ]
   >;
   listRecommendations(
-    request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest,
+    request: protos.google.cloud.recommender.v1.IListRecommendationsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation[],
-      protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest | null,
-      protosTypes.google.cloud.recommender.v1.IListRecommendationsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.recommender.v1.IListRecommendationsRequest,
+      | protos.google.cloud.recommender.v1.IListRecommendationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recommender.v1.IRecommendation
+    >
+  ): void;
+  listRecommendations(
+    request: protos.google.cloud.recommender.v1.IListRecommendationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.recommender.v1.IListRecommendationsRequest,
+      | protos.google.cloud.recommender.v1.IListRecommendationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recommender.v1.IRecommendation
     >
   ): void;
   /**
@@ -764,24 +818,28 @@ export class RecommenderClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listRecommendations(
-    request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest,
+    request: protos.google.cloud.recommender.v1.IListRecommendationsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.recommender.v1.IRecommendation[],
-          protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest | null,
-          protosTypes.google.cloud.recommender.v1.IListRecommendationsResponse
+      | PaginationCallback<
+          protos.google.cloud.recommender.v1.IListRecommendationsRequest,
+          | protos.google.cloud.recommender.v1.IListRecommendationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recommender.v1.IRecommendation
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.recommender.v1.IRecommendation[],
-      protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest | null,
-      protosTypes.google.cloud.recommender.v1.IListRecommendationsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.recommender.v1.IListRecommendationsRequest,
+      | protos.google.cloud.recommender.v1.IListRecommendationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recommender.v1.IRecommendation
     >
   ): Promise<
     [
-      protosTypes.google.cloud.recommender.v1.IRecommendation[],
-      protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest | null,
-      protosTypes.google.cloud.recommender.v1.IListRecommendationsResponse
+      protos.google.cloud.recommender.v1.IRecommendation[],
+      protos.google.cloud.recommender.v1.IListRecommendationsRequest | null,
+      protos.google.cloud.recommender.v1.IListRecommendationsResponse
     ]
   > | void {
     request = request || {};
@@ -801,7 +859,7 @@ export class RecommenderClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listRecommendations(request, options, callback);
+    return this.innerApiCalls.listRecommendations(request, options, callback);
   }
 
   /**
@@ -847,7 +905,7 @@ export class RecommenderClient {
    *   An object stream which emits an object representing [Recommendation]{@link google.cloud.recommender.v1.Recommendation} on 'data' event.
    */
   listRecommendationsStream(
-    request?: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest,
+    request?: protos.google.cloud.recommender.v1.IListRecommendationsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -861,11 +919,68 @@ export class RecommenderClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listRecommendations.createStream(
-      this._innerApiCalls.listRecommendations as gax.GaxCall,
+    return this.descriptors.page.listRecommendations.createStream(
+      this.innerApiCalls.listRecommendations as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listRecommendations}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The container resource on which to execute the request.
+   *   Acceptable formats:
+   *
+   *   1.
+   *   "projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]",
+   *
+   *   LOCATION here refers to GCP Locations:
+   *   https://cloud.google.com/about/locations/
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return from this request.  Non-positive
+   *   values are ignored. If not specified, the server will determine the number
+   *   of results to return.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, retrieves the next batch of results from the preceding call to
+   *   this method. `page_token` must be the value of `next_page_token` from the
+   *   previous response. The values of other method parameters must be identical
+   *   to those in the previous call.
+   * @param {string} request.filter
+   *   Filter expression to restrict the recommendations returned. Supported
+   *   filter fields: state_info.state
+   *   Eg: `state_info.state:"DISMISSED" or state_info.state:"FAILED"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listRecommendationsAsync(
+    request?: protos.google.cloud.recommender.v1.IListRecommendationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.recommender.v1.IRecommendation> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listRecommendations.asyncIterate(
+      this.innerApiCalls['listRecommendations'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.recommender.v1.IRecommendation>;
   }
   // --------------------
   // -- Path templates --
@@ -886,11 +1001,11 @@ export class RecommenderClient {
     recommender: string,
     recommendation: string
   ) {
-    return this._pathTemplates.recommendationPathTemplate.render({
-      project,
-      location,
-      recommender,
-      recommendation,
+    return this.pathTemplates.recommendationPathTemplate.render({
+      project: project,
+      location: location,
+      recommender: recommender,
+      recommendation: recommendation,
     });
   }
 
@@ -902,7 +1017,7 @@ export class RecommenderClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRecommendationName(recommendationName: string) {
-    return this._pathTemplates.recommendationPathTemplate.match(
+    return this.pathTemplates.recommendationPathTemplate.match(
       recommendationName
     ).project;
   }
@@ -915,7 +1030,7 @@ export class RecommenderClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRecommendationName(recommendationName: string) {
-    return this._pathTemplates.recommendationPathTemplate.match(
+    return this.pathTemplates.recommendationPathTemplate.match(
       recommendationName
     ).location;
   }
@@ -928,7 +1043,7 @@ export class RecommenderClient {
    * @returns {string} A string representing the recommender.
    */
   matchRecommenderFromRecommendationName(recommendationName: string) {
-    return this._pathTemplates.recommendationPathTemplate.match(
+    return this.pathTemplates.recommendationPathTemplate.match(
       recommendationName
     ).recommender;
   }
@@ -941,7 +1056,7 @@ export class RecommenderClient {
    * @returns {string} A string representing the recommendation.
    */
   matchRecommendationFromRecommendationName(recommendationName: string) {
-    return this._pathTemplates.recommendationPathTemplate.match(
+    return this.pathTemplates.recommendationPathTemplate.match(
       recommendationName
     ).recommendation;
   }
@@ -955,10 +1070,10 @@ export class RecommenderClient {
    * @returns {string} Resource name string.
    */
   recommenderPath(project: string, location: string, recommender: string) {
-    return this._pathTemplates.recommenderPathTemplate.render({
-      project,
-      location,
-      recommender,
+    return this.pathTemplates.recommenderPathTemplate.render({
+      project: project,
+      location: location,
+      recommender: recommender,
     });
   }
 
@@ -970,7 +1085,7 @@ export class RecommenderClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRecommenderName(recommenderName: string) {
-    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
+    return this.pathTemplates.recommenderPathTemplate.match(recommenderName)
       .project;
   }
 
@@ -982,7 +1097,7 @@ export class RecommenderClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRecommenderName(recommenderName: string) {
-    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
+    return this.pathTemplates.recommenderPathTemplate.match(recommenderName)
       .location;
   }
 
@@ -994,7 +1109,7 @@ export class RecommenderClient {
    * @returns {string} A string representing the recommender.
    */
   matchRecommenderFromRecommenderName(recommenderName: string) {
-    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
+    return this.pathTemplates.recommenderPathTemplate.match(recommenderName)
       .recommender;
   }
 

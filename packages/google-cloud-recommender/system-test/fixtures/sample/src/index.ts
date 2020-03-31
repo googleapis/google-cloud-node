@@ -19,7 +19,7 @@
 import {RecommenderClient} from '@google-cloud/recommender';
 
 function main() {
-  const recommenderClient = new RecommenderClient();
+  new RecommenderClient();
 }
 
 main();
