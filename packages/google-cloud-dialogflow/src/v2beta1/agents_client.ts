@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './agents_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -67,14 +67,6 @@ const version = require('../../../package.json').version;
  * @memberof v2beta1
  */
 export class AgentsClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -82,6 +74,14 @@ export class AgentsClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   agentsStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -173,13 +173,16 @@ export class AgentsClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -197,7 +200,7 @@ export class AgentsClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       searchAgents: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -216,7 +219,7 @@ export class AgentsClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -243,7 +246,7 @@ export class AgentsClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2beta1.Agents'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2beta1.Agents,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -261,9 +264,8 @@ export class AgentsClient {
       'restoreAgent',
       'getValidationResult',
     ];
-
     for (const methodName of agentsStubMethods) {
-      const innerCallPromise = this.agentsStub.then(
+      const callPromise = this.agentsStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -277,20 +279,14 @@ export class AgentsClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.agentsStub;
@@ -350,22 +346,34 @@ export class AgentsClient {
   // -- Service calls --
   // -------------------
   getAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-      protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest | undefined,
       {} | undefined
     ]
   >;
   getAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-      protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest | undefined,
-      {} | undefined
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      | protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      | protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -383,24 +391,27 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest
+          protos.google.cloud.dialogflow.v2beta1.IAgent,
+          | protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-      protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest | undefined,
-      {} | undefined
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      | protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-      protosTypes.google.cloud.dialogflow.v2beta1.IGetAgentRequest | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      protos.google.cloud.dialogflow.v2beta1.IGetAgentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -421,25 +432,37 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.getAgent(request, options, callback);
+    return this.innerApiCalls.getAgent(request, options, callback);
   }
   setAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-      protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest | undefined,
       {} | undefined
     ]
   >;
   setAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-      protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest | undefined,
-      {} | undefined
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      | protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      | protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -458,24 +481,27 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-          | protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest
+          protos.google.cloud.dialogflow.v2beta1.IAgent,
+          | protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-      protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest | undefined,
-      {} | undefined
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      | protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent,
-      protosTypes.google.cloud.dialogflow.v2beta1.ISetAgentRequest | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IAgent,
+      protos.google.cloud.dialogflow.v2beta1.ISetAgentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -496,29 +522,37 @@ export class AgentsClient {
       'agent.parent': request.agent!.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.setAgent(request, options, callback);
+    return this.innerApiCalls.setAgent(request, options, callback);
   }
   deleteAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest | undefined,
       {} | undefined
     ]
   >;
   deleteAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -536,28 +570,27 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2beta1.IDeleteAgentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -578,29 +611,37 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteAgent(request, options, callback);
+    return this.innerApiCalls.deleteAgent(request, options, callback);
   }
   trainAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
-        | undefined
-      ),
+      protos.google.longrunning.IOperation,
+      protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest | undefined,
       {} | undefined
     ]
   >;
   trainAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  trainAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -621,28 +662,27 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   trainAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
-        | undefined
-      ),
+      protos.google.longrunning.IOperation,
+      protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -663,29 +703,37 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.trainAgent(request, options, callback);
+    return this.innerApiCalls.trainAgent(request, options, callback);
   }
   exportAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest
-        | undefined
-      ),
+      protos.google.longrunning.IOperation,
+      protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest | undefined,
       {} | undefined
     ]
   >;
   exportAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  exportAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -712,28 +760,27 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   exportAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IExportAgentRequest
-        | undefined
-      ),
+      protos.google.longrunning.IOperation,
+      protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -754,29 +801,37 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.exportAgent(request, options, callback);
+    return this.innerApiCalls.exportAgent(request, options, callback);
   }
   importAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest
-        | undefined
-      ),
+      protos.google.longrunning.IOperation,
+      protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest | undefined,
       {} | undefined
     ]
   >;
   importAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  importAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -806,28 +861,27 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   importAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IImportAgentRequest
-        | undefined
-      ),
+      protos.google.longrunning.IOperation,
+      protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -848,29 +902,37 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.importAgent(request, options, callback);
+    return this.innerApiCalls.importAgent(request, options, callback);
   }
   restoreAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
-        | undefined
-      ),
+      protos.google.longrunning.IOperation,
+      protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest | undefined,
       {} | undefined
     ]
   >;
   restoreAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  restoreAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -899,28 +961,27 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   restoreAgent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
-        | undefined
-      ),
+      protos.google.longrunning.IOperation,
+      protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -941,29 +1002,40 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.restoreAgent(request, options, callback);
+    return this.innerApiCalls.restoreAgent(request, options, callback);
   }
   getValidationResult(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IValidationResult,
+      protos.google.cloud.dialogflow.v2beta1.IValidationResult,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+        | protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getValidationResult(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IValidationResult,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+      protos.google.cloud.dialogflow.v2beta1.IValidationResult,
+      | protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getValidationResult(
+    request: protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IValidationResult,
+      | protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -988,26 +1060,28 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getValidationResult(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IValidationResult,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+          protos.google.cloud.dialogflow.v2beta1.IValidationResult,
+          | protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IValidationResult,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+      protos.google.cloud.dialogflow.v2beta1.IValidationResult,
+      | protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IValidationResult,
+      protos.google.cloud.dialogflow.v2beta1.IValidationResult,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
+        | protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest
         | undefined
       ),
       {} | undefined
@@ -1030,26 +1104,38 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.getValidationResult(request, options, callback);
+    return this.innerApiCalls.getValidationResult(request, options, callback);
   }
 
   searchAgents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent[],
-      protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+      protos.google.cloud.dialogflow.v2beta1.IAgent[],
+      protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
     ]
   >;
   searchAgents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent[],
-      protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IAgent
+    >
+  ): void;
+  searchAgents(
+    request: protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IAgent
     >
   ): void;
   /**
@@ -1090,24 +1176,28 @@ export class AgentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   searchAgents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IAgent[],
-          protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest | null,
-          protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+          | protos.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IAgent
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent[],
-      protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IAgent
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IAgent[],
-      protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
+      protos.google.cloud.dialogflow.v2beta1.IAgent[],
+      protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.ISearchAgentsResponse
     ]
   > | void {
     request = request || {};
@@ -1127,7 +1217,7 @@ export class AgentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.searchAgents(request, options, callback);
+    return this.innerApiCalls.searchAgents(request, options, callback);
   }
 
   /**
@@ -1159,7 +1249,7 @@ export class AgentsClient {
    *   An object stream which emits an object representing [Agent]{@link google.cloud.dialogflow.v2beta1.Agent} on 'data' event.
    */
   searchAgentsStream(
-    request?: protosTypes.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1173,11 +1263,54 @@ export class AgentsClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.searchAgents.createStream(
-      this._innerApiCalls.searchAgents as gax.GaxCall,
+    return this.descriptors.page.searchAgents.createStream(
+      this.innerApiCalls.searchAgents as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link searchAgents}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to list agents from.
+   *   Format: `projects/<Project ID or '-'>`.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  searchAgentsAsync(
+    request?: protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IAgent> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAgents.asyncIterate(
+      this.innerApiCalls['searchAgents'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IAgent>;
   }
   // --------------------
   // -- Path templates --
@@ -1190,8 +1323,8 @@ export class AgentsClient {
    * @returns {string} Resource name string.
    */
   projectAgentPath(project: string) {
-    return this._pathTemplates.projectAgentPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAgentPathTemplate.render({
+      project: project,
     });
   }
 
@@ -1203,7 +1336,7 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
   }
 
@@ -1215,9 +1348,9 @@ export class AgentsClient {
    * @returns {string} Resource name string.
    */
   projectAgentIntentPath(project: string, intent: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.render({
-      project,
-      intent,
+    return this.pathTemplates.projectAgentIntentPathTemplate.render({
+      project: project,
+      intent: intent,
     });
   }
 
@@ -1229,7 +1362,7 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).project;
   }
@@ -1242,7 +1375,7 @@ export class AgentsClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).intent;
   }
@@ -1255,9 +1388,9 @@ export class AgentsClient {
    * @returns {string} Resource name string.
    */
   projectLocationAgentPath(project: string, location: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.projectLocationAgentPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -1269,7 +1402,7 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).project;
   }
@@ -1282,7 +1415,7 @@ export class AgentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).location;
   }
@@ -1300,10 +1433,10 @@ export class AgentsClient {
     location: string,
     intent: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.render({
-      project,
-      location,
-      intent,
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
+      project: project,
+      location: location,
+      intent: intent,
     });
   }
 
@@ -1317,7 +1450,7 @@ export class AgentsClient {
   matchProjectFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).project;
   }
@@ -1332,7 +1465,7 @@ export class AgentsClient {
   matchLocationFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).location;
   }
@@ -1347,7 +1480,7 @@ export class AgentsClient {
   matchIntentFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).intent;
   }

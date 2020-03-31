@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './session_entity_types_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -56,14 +56,6 @@ const version = require('../../../package.json').version;
  * @memberof v2beta1
  */
 export class SessionEntityTypesClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -71,6 +63,14 @@ export class SessionEntityTypesClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   sessionEntityTypesStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -162,13 +162,16 @@ export class SessionEntityTypesClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -186,7 +189,7 @@ export class SessionEntityTypesClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listSessionEntityTypes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -205,7 +208,7 @@ export class SessionEntityTypesClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -232,7 +235,7 @@ export class SessionEntityTypesClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2beta1.SessionEntityTypes'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2beta1
             .SessionEntityTypes,
       this._opts
@@ -247,9 +250,8 @@ export class SessionEntityTypesClient {
       'updateSessionEntityType',
       'deleteSessionEntityType',
     ];
-
     for (const methodName of sessionEntityTypesStubMethods) {
-      const innerCallPromise = this.sessionEntityTypesStub.then(
+      const callPromise = this.sessionEntityTypesStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -263,20 +265,14 @@ export class SessionEntityTypesClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.sessionEntityTypesStub;
@@ -336,26 +332,37 @@ export class SessionEntityTypesClient {
   // -- Service calls --
   // -------------------
   getSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getSessionEntityType(
+    request: protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -381,26 +388,28 @@ export class SessionEntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+          protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+          | protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IGetSessionEntityTypeRequest
         | undefined
       ),
       {} | undefined
@@ -423,29 +432,40 @@ export class SessionEntityTypesClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getSessionEntityType(request, options, callback);
+    return this.innerApiCalls.getSessionEntityType(request, options, callback);
   }
   createSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createSessionEntityType(
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -476,26 +496,28 @@ export class SessionEntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-          | protosTypes.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+          protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+          | protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.ICreateSessionEntityTypeRequest
         | undefined
       ),
       {} | undefined
@@ -518,33 +540,44 @@ export class SessionEntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createSessionEntityType(
+    return this.innerApiCalls.createSessionEntityType(
       request,
       options,
       callback
     );
   }
   updateSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateSessionEntityType(
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -572,26 +605,28 @@ export class SessionEntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+          protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IUpdateSessionEntityTypeRequest
         | undefined
       ),
       {} | undefined
@@ -614,33 +649,44 @@ export class SessionEntityTypesClient {
       'session_entity_type.name': request.sessionEntityType!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateSessionEntityType(
+    return this.innerApiCalls.updateSessionEntityType(
       request,
       options,
       callback
     );
   }
   deleteSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteSessionEntityType(
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -666,26 +712,28 @@ export class SessionEntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteSessionEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteSessionEntityTypeRequest
         | undefined
       ),
       {} | undefined
@@ -708,7 +756,7 @@ export class SessionEntityTypesClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteSessionEntityType(
+    return this.innerApiCalls.deleteSessionEntityType(
       request,
       options,
       callback
@@ -716,22 +764,34 @@ export class SessionEntityTypesClient {
   }
 
   listSessionEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType[],
+      protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
     ]
   >;
   listSessionEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType
+    >
+  ): void;
+  listSessionEntityTypes(
+    request: protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType
     >
   ): void;
   /**
@@ -774,24 +834,28 @@ export class SessionEntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listSessionEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType[],
-          protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest | null,
-          protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.ISessionEntityType
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.ISessionEntityType[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType[],
+      protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesResponse
     ]
   > | void {
     request = request || {};
@@ -811,7 +875,7 @@ export class SessionEntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listSessionEntityTypes(
+    return this.innerApiCalls.listSessionEntityTypes(
       request,
       options,
       callback
@@ -851,7 +915,7 @@ export class SessionEntityTypesClient {
    *   An object stream which emits an object representing [SessionEntityType]{@link google.cloud.dialogflow.v2beta1.SessionEntityType} on 'data' event.
    */
   listSessionEntityTypesStream(
-    request?: protosTypes.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -865,11 +929,60 @@ export class SessionEntityTypesClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listSessionEntityTypes.createStream(
-      this._innerApiCalls.listSessionEntityTypes as gax.GaxCall,
+    return this.descriptors.page.listSessionEntityTypes.createStream(
+      this.innerApiCalls.listSessionEntityTypes as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listSessionEntityTypes}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The session to list all session entity types from.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+   *   sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listSessionEntityTypesAsync(
+    request?: protos.google.cloud.dialogflow.v2beta1.IListSessionEntityTypesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2beta1.ISessionEntityType> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listSessionEntityTypes.asyncIterate(
+      this.innerApiCalls['listSessionEntityTypes'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<
+      protos.google.cloud.dialogflow.v2beta1.ISessionEntityType
+    >;
   }
   // --------------------
   // -- Path templates --
@@ -882,8 +995,8 @@ export class SessionEntityTypesClient {
    * @returns {string} Resource name string.
    */
   projectAgentPath(project: string) {
-    return this._pathTemplates.projectAgentPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAgentPathTemplate.render({
+      project: project,
     });
   }
 
@@ -895,7 +1008,7 @@ export class SessionEntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
   }
 
@@ -907,9 +1020,9 @@ export class SessionEntityTypesClient {
    * @returns {string} Resource name string.
    */
   projectAgentIntentPath(project: string, intent: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.render({
-      project,
-      intent,
+    return this.pathTemplates.projectAgentIntentPathTemplate.render({
+      project: project,
+      intent: intent,
     });
   }
 
@@ -921,7 +1034,7 @@ export class SessionEntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).project;
   }
@@ -934,7 +1047,7 @@ export class SessionEntityTypesClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).intent;
   }
@@ -947,9 +1060,9 @@ export class SessionEntityTypesClient {
    * @returns {string} Resource name string.
    */
   projectLocationAgentPath(project: string, location: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.projectLocationAgentPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -961,7 +1074,7 @@ export class SessionEntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).project;
   }
@@ -974,7 +1087,7 @@ export class SessionEntityTypesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).location;
   }
@@ -992,10 +1105,10 @@ export class SessionEntityTypesClient {
     location: string,
     intent: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.render({
-      project,
-      location,
-      intent,
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
+      project: project,
+      location: location,
+      intent: intent,
     });
   }
 
@@ -1009,7 +1122,7 @@ export class SessionEntityTypesClient {
   matchProjectFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).project;
   }
@@ -1024,7 +1137,7 @@ export class SessionEntityTypesClient {
   matchLocationFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).location;
   }
@@ -1039,7 +1152,7 @@ export class SessionEntityTypesClient {
   matchIntentFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).intent;
   }

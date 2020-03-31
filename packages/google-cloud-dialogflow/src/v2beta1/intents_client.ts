@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './intents_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -71,14 +71,6 @@ const version = require('../../../package.json').version;
  * @memberof v2beta1
  */
 export class IntentsClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -86,6 +78,14 @@ export class IntentsClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   intentsStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -177,13 +177,16 @@ export class IntentsClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -201,7 +204,7 @@ export class IntentsClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listIntents: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -220,7 +223,7 @@ export class IntentsClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -247,7 +250,7 @@ export class IntentsClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2beta1.Intents'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2beta1.Intents,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -263,9 +266,8 @@ export class IntentsClient {
       'batchUpdateIntents',
       'batchDeleteIntents',
     ];
-
     for (const methodName of intentsStubMethods) {
-      const innerCallPromise = this.intentsStub.then(
+      const callPromise = this.intentsStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -279,20 +281,14 @@ export class IntentsClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.intentsStub;
@@ -352,22 +348,34 @@ export class IntentsClient {
   // -- Service calls --
   // -------------------
   getIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      protosTypes.google.cloud.dialogflow.v2beta1.IGetIntentRequest | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest | undefined,
       {} | undefined
     ]
   >;
   getIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      protosTypes.google.cloud.dialogflow.v2beta1.IGetIntentRequest | undefined,
-      {} | undefined
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIntent(
+    request: protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -394,24 +402,27 @@ export class IntentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IGetIntentRequest
+          protos.google.cloud.dialogflow.v2beta1.IIntent,
+          | protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      protosTypes.google.cloud.dialogflow.v2beta1.IGetIntentRequest | undefined,
-      {} | undefined
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      protosTypes.google.cloud.dialogflow.v2beta1.IGetIntentRequest | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -432,29 +443,37 @@ export class IntentsClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getIntent(request, options, callback);
+    return this.innerApiCalls.getIntent(request, options, callback);
   }
   createIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest | undefined,
       {} | undefined
     ]
   >;
   createIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createIntent(
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -483,28 +502,27 @@ export class IntentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-          | protosTypes.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
+          protos.google.cloud.dialogflow.v2beta1.IIntent,
+          | protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateIntentRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -525,29 +543,37 @@ export class IntentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createIntent(request, options, callback);
+    return this.innerApiCalls.createIntent(request, options, callback);
   }
   updateIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest | undefined,
       {} | undefined
     ]
   >;
   updateIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateIntent(
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -575,28 +601,27 @@ export class IntentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
+          protos.google.cloud.dialogflow.v2beta1.IIntent,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IIntent,
+      protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -617,29 +642,37 @@ export class IntentsClient {
       'intent.name': request.intent!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateIntent(request, options, callback);
+    return this.innerApiCalls.updateIntent(request, options, callback);
   }
   deleteIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest | undefined,
       {} | undefined
     ]
   >;
   deleteIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteIntent(
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -659,28 +692,27 @@ export class IntentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteIntent(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -701,29 +733,40 @@ export class IntentsClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteIntent(request, options, callback);
+    return this.innerApiCalls.deleteIntent(request, options, callback);
   }
   batchUpdateIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchUpdateIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchUpdateIntents(
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -760,26 +803,28 @@ export class IntentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchUpdateIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateIntentsRequest
         | undefined
       ),
       {} | undefined
@@ -802,29 +847,40 @@ export class IntentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchUpdateIntents(request, options, callback);
+    return this.innerApiCalls.batchUpdateIntents(request, options, callback);
   }
   batchDeleteIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchDeleteIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteIntents(
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -847,26 +903,28 @@ export class IntentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchDeleteIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteIntentsRequest
         | undefined
       ),
       {} | undefined
@@ -889,26 +947,38 @@ export class IntentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchDeleteIntents(request, options, callback);
+    return this.innerApiCalls.batchDeleteIntents(request, options, callback);
   }
 
   listIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+      protos.google.cloud.dialogflow.v2beta1.IIntent[],
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse
     ]
   >;
   listIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IIntent
+    >
+  ): void;
+  listIntents(
+    request: protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IIntent
     >
   ): void;
   /**
@@ -952,24 +1022,28 @@ export class IntentsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listIntents(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IIntent[],
-          protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
-          protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IIntent
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IIntent
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IIntent[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+      protos.google.cloud.dialogflow.v2beta1.IIntent[],
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse
     ]
   > | void {
     request = request || {};
@@ -989,7 +1063,7 @@ export class IntentsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listIntents(request, options, callback);
+    return this.innerApiCalls.listIntents(request, options, callback);
   }
 
   /**
@@ -1030,7 +1104,7 @@ export class IntentsClient {
    *   An object stream which emits an object representing [Intent]{@link google.cloud.dialogflow.v2beta1.Intent} on 'data' event.
    */
   listIntentsStream(
-    request?: protosTypes.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1044,11 +1118,63 @@ export class IntentsClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listIntents.createStream(
-      this._innerApiCalls.listIntents as gax.GaxCall,
+    return this.descriptors.page.listIntents.createStream(
+      this.innerApiCalls.listIntents as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listIntents}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all intents from.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {string} request.languageCode
+   *   Optional. The language to list training phrases, parameters and rich
+   *   messages for. If not specified, the agent's default language is used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
+   * @param {google.cloud.dialogflow.v2beta1.IntentView} request.intentView
+   *   Optional. The resource view to apply to the returned intent.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listIntentsAsync(
+    request?: protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IIntent> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listIntents.asyncIterate(
+      this.innerApiCalls['listIntents'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IIntent>;
   }
   // --------------------
   // -- Path templates --
@@ -1061,8 +1187,8 @@ export class IntentsClient {
    * @returns {string} Resource name string.
    */
   projectAgentPath(project: string) {
-    return this._pathTemplates.projectAgentPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAgentPathTemplate.render({
+      project: project,
     });
   }
 
@@ -1074,7 +1200,7 @@ export class IntentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
   }
 
@@ -1086,9 +1212,9 @@ export class IntentsClient {
    * @returns {string} Resource name string.
    */
   projectAgentIntentPath(project: string, intent: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.render({
-      project,
-      intent,
+    return this.pathTemplates.projectAgentIntentPathTemplate.render({
+      project: project,
+      intent: intent,
     });
   }
 
@@ -1100,7 +1226,7 @@ export class IntentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).project;
   }
@@ -1113,7 +1239,7 @@ export class IntentsClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).intent;
   }
@@ -1126,9 +1252,9 @@ export class IntentsClient {
    * @returns {string} Resource name string.
    */
   projectLocationAgentPath(project: string, location: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.projectLocationAgentPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -1140,7 +1266,7 @@ export class IntentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).project;
   }
@@ -1153,7 +1279,7 @@ export class IntentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).location;
   }
@@ -1171,10 +1297,10 @@ export class IntentsClient {
     location: string,
     intent: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.render({
-      project,
-      location,
-      intent,
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
+      project: project,
+      location: location,
+      intent: intent,
     });
   }
 
@@ -1188,7 +1314,7 @@ export class IntentsClient {
   matchProjectFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).project;
   }
@@ -1203,7 +1329,7 @@ export class IntentsClient {
   matchLocationFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).location;
   }
@@ -1218,7 +1344,7 @@ export class IntentsClient {
   matchIntentFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).intent;
   }

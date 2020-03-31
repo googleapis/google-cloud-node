@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './knowledge_bases_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -42,14 +42,6 @@ const version = require('../../../package.json').version;
  * @memberof v2beta1
  */
 export class KnowledgeBasesClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -57,6 +49,14 @@ export class KnowledgeBasesClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   knowledgeBasesStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -148,13 +148,16 @@ export class KnowledgeBasesClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -172,7 +175,7 @@ export class KnowledgeBasesClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listKnowledgeBases: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -191,7 +194,7 @@ export class KnowledgeBasesClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -218,7 +221,7 @@ export class KnowledgeBasesClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2beta1.KnowledgeBases'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2beta1.KnowledgeBases,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -232,9 +235,8 @@ export class KnowledgeBasesClient {
       'deleteKnowledgeBase',
       'updateKnowledgeBase',
     ];
-
     for (const methodName of knowledgeBasesStubMethods) {
-      const innerCallPromise = this.knowledgeBasesStub.then(
+      const callPromise = this.knowledgeBasesStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -248,20 +250,14 @@ export class KnowledgeBasesClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.knowledgeBasesStub;
@@ -321,26 +317,37 @@ export class KnowledgeBasesClient {
   // -- Service calls --
   // -------------------
   getKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+        | protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getKnowledgeBase(
+    request: protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -361,26 +368,28 @@ export class KnowledgeBasesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+          protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+          | protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
+        | protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
         | undefined
       ),
       {} | undefined
@@ -403,29 +412,40 @@ export class KnowledgeBasesClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getKnowledgeBase(request, options, callback);
+    return this.innerApiCalls.getKnowledgeBase(request, options, callback);
   }
   createKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+        | protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createKnowledgeBase(
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -448,26 +468,28 @@ export class KnowledgeBasesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-          | protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+          protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+          | protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
+        | protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
         | undefined
       ),
       {} | undefined
@@ -490,29 +512,40 @@ export class KnowledgeBasesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createKnowledgeBase(request, options, callback);
+    return this.innerApiCalls.createKnowledgeBase(request, options, callback);
   }
   deleteKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteKnowledgeBase(
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -536,26 +569,28 @@ export class KnowledgeBasesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
         | undefined
       ),
       {} | undefined
@@ -578,29 +613,40 @@ export class KnowledgeBasesClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteKnowledgeBase(request, options, callback);
+    return this.innerApiCalls.deleteKnowledgeBase(request, options, callback);
   }
   updateKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+        | protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateKnowledgeBase(
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -624,26 +670,28 @@ export class KnowledgeBasesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateKnowledgeBase(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+          protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
+        | protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
         | undefined
       ),
       {} | undefined
@@ -666,26 +714,38 @@ export class KnowledgeBasesClient {
       'knowledge_base.name': request.knowledgeBase!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateKnowledgeBase(request, options, callback);
+    return this.innerApiCalls.updateKnowledgeBase(request, options, callback);
   }
 
   listKnowledgeBases(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
     ]
   >;
   listKnowledgeBases(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase
+    >
+  ): void;
+  listKnowledgeBases(
+    request: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase
     >
   ): void;
   /**
@@ -723,24 +783,28 @@ export class KnowledgeBasesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listKnowledgeBases(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
-          protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
-          protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
     ]
   > | void {
     request = request || {};
@@ -760,7 +824,7 @@ export class KnowledgeBasesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listKnowledgeBases(request, options, callback);
+    return this.innerApiCalls.listKnowledgeBases(request, options, callback);
   }
 
   /**
@@ -792,7 +856,7 @@ export class KnowledgeBasesClient {
    *   An object stream which emits an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase} on 'data' event.
    */
   listKnowledgeBasesStream(
-    request?: protosTypes.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -806,11 +870,54 @@ export class KnowledgeBasesClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listKnowledgeBases.createStream(
-      this._innerApiCalls.listKnowledgeBases as gax.GaxCall,
+    return this.descriptors.page.listKnowledgeBases.createStream(
+      this.innerApiCalls.listKnowledgeBases as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listKnowledgeBases}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to list of knowledge bases for.
+   *   Format: `projects/<Project ID>`.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 10 and at most 100.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listKnowledgeBasesAsync(
+    request?: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listKnowledgeBases.asyncIterate(
+      this.innerApiCalls['listKnowledgeBases'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase>;
   }
   // --------------------
   // -- Path templates --
@@ -823,8 +930,8 @@ export class KnowledgeBasesClient {
    * @returns {string} Resource name string.
    */
   projectAgentPath(project: string) {
-    return this._pathTemplates.projectAgentPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAgentPathTemplate.render({
+      project: project,
     });
   }
 
@@ -836,7 +943,7 @@ export class KnowledgeBasesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
   }
 
@@ -848,9 +955,9 @@ export class KnowledgeBasesClient {
    * @returns {string} Resource name string.
    */
   projectAgentIntentPath(project: string, intent: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.render({
-      project,
-      intent,
+    return this.pathTemplates.projectAgentIntentPathTemplate.render({
+      project: project,
+      intent: intent,
     });
   }
 
@@ -862,7 +969,7 @@ export class KnowledgeBasesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).project;
   }
@@ -875,7 +982,7 @@ export class KnowledgeBasesClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).intent;
   }
@@ -888,9 +995,9 @@ export class KnowledgeBasesClient {
    * @returns {string} Resource name string.
    */
   projectLocationAgentPath(project: string, location: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.projectLocationAgentPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -902,7 +1009,7 @@ export class KnowledgeBasesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).project;
   }
@@ -915,7 +1022,7 @@ export class KnowledgeBasesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).location;
   }
@@ -933,10 +1040,10 @@ export class KnowledgeBasesClient {
     location: string,
     intent: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.render({
-      project,
-      location,
-      intent,
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
+      project: project,
+      location: location,
+      intent: intent,
     });
   }
 
@@ -950,7 +1057,7 @@ export class KnowledgeBasesClient {
   matchProjectFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).project;
   }
@@ -965,7 +1072,7 @@ export class KnowledgeBasesClient {
   matchLocationFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).location;
   }
@@ -980,7 +1087,7 @@ export class KnowledgeBasesClient {
   matchIntentFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).intent;
   }

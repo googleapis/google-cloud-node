@@ -17,16 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './sessions_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -40,14 +34,6 @@ const version = require('../../../package.json').version;
  * @memberof v2
  */
 export class SessionsClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -55,6 +41,14 @@ export class SessionsClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   sessionsStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -146,13 +140,16 @@ export class SessionsClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -178,7 +175,7 @@ export class SessionsClient {
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
-    this._descriptors.stream = {
+    this.descriptors.stream = {
       streamingDetectIntent: new this._gaxModule.StreamDescriptor(
         gax.StreamType.BIDI_STREAMING
       ),
@@ -195,7 +192,7 @@ export class SessionsClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -222,7 +219,7 @@ export class SessionsClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2.Sessions'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2.Sessions,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -230,9 +227,8 @@ export class SessionsClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const sessionsStubMethods = ['detectIntent', 'streamingDetectIntent'];
-
     for (const methodName of sessionsStubMethods) {
-      const innerCallPromise = this.sessionsStub.then(
+      const callPromise = this.sessionsStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -246,20 +242,14 @@ export class SessionsClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.sessionsStub;
@@ -319,22 +309,30 @@ export class SessionsClient {
   // -- Service calls --
   // -------------------
   detectIntent(
-    request: protosTypes.google.cloud.dialogflow.v2.IDetectIntentRequest,
+    request: protos.google.cloud.dialogflow.v2.IDetectIntentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2.IDetectIntentResponse,
-      protosTypes.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
+      protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
+      protos.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
       {} | undefined
     ]
   >;
   detectIntent(
-    request: protosTypes.google.cloud.dialogflow.v2.IDetectIntentRequest,
+    request: protos.google.cloud.dialogflow.v2.IDetectIntentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2.IDetectIntentResponse,
-      protosTypes.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
-      {} | undefined
+      protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
+      protos.google.cloud.dialogflow.v2.IDetectIntentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  detectIntent(
+    request: protos.google.cloud.dialogflow.v2.IDetectIntentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
+      protos.google.cloud.dialogflow.v2.IDetectIntentRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -388,24 +386,25 @@ export class SessionsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   detectIntent(
-    request: protosTypes.google.cloud.dialogflow.v2.IDetectIntentRequest,
+    request: protos.google.cloud.dialogflow.v2.IDetectIntentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2.IDetectIntentResponse,
-          | protosTypes.google.cloud.dialogflow.v2.IDetectIntentRequest
+          protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
+          | protos.google.cloud.dialogflow.v2.IDetectIntentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2.IDetectIntentResponse,
-      protosTypes.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
-      {} | undefined
+      protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
+      protos.google.cloud.dialogflow.v2.IDetectIntentRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2.IDetectIntentResponse,
-      protosTypes.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
+      protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
+      protos.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -426,7 +425,7 @@ export class SessionsClient {
       session: request.session || '',
     });
     this.initialize();
-    return this._innerApiCalls.detectIntent(request, options, callback);
+    return this.innerApiCalls.detectIntent(request, options, callback);
   }
 
   /**
@@ -443,7 +442,7 @@ export class SessionsClient {
    */
   streamingDetectIntent(options?: gax.CallOptions): gax.CancellableStream {
     this.initialize();
-    return this._innerApiCalls.streamingDetectIntent(options);
+    return this.innerApiCalls.streamingDetectIntent(options);
   }
 
   // --------------------
@@ -457,8 +456,8 @@ export class SessionsClient {
    * @returns {string} Resource name string.
    */
   agentPath(project: string) {
-    return this._pathTemplates.agentPathTemplate.render({
-      project,
+    return this.pathTemplates.agentPathTemplate.render({
+      project: project,
     });
   }
 
@@ -470,7 +469,7 @@ export class SessionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAgentName(agentName: string) {
-    return this._pathTemplates.agentPathTemplate.match(agentName).project;
+    return this.pathTemplates.agentPathTemplate.match(agentName).project;
   }
 
   /**
@@ -482,10 +481,10 @@ export class SessionsClient {
    * @returns {string} Resource name string.
    */
   contextPath(project: string, session: string, context: string) {
-    return this._pathTemplates.contextPathTemplate.render({
-      project,
-      session,
-      context,
+    return this.pathTemplates.contextPathTemplate.render({
+      project: project,
+      session: session,
+      context: context,
     });
   }
 
@@ -497,7 +496,7 @@ export class SessionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromContextName(contextName: string) {
-    return this._pathTemplates.contextPathTemplate.match(contextName).project;
+    return this.pathTemplates.contextPathTemplate.match(contextName).project;
   }
 
   /**
@@ -508,7 +507,7 @@ export class SessionsClient {
    * @returns {string} A string representing the session.
    */
   matchSessionFromContextName(contextName: string) {
-    return this._pathTemplates.contextPathTemplate.match(contextName).session;
+    return this.pathTemplates.contextPathTemplate.match(contextName).session;
   }
 
   /**
@@ -519,7 +518,7 @@ export class SessionsClient {
    * @returns {string} A string representing the context.
    */
   matchContextFromContextName(contextName: string) {
-    return this._pathTemplates.contextPathTemplate.match(contextName).context;
+    return this.pathTemplates.contextPathTemplate.match(contextName).context;
   }
 
   /**
@@ -530,8 +529,8 @@ export class SessionsClient {
    * @returns {string} Resource name string.
    */
   entityTypePath(project: string, entityType: string) {
-    return this._pathTemplates.entityTypePathTemplate.render({
-      project,
+    return this.pathTemplates.entityTypePathTemplate.render({
+      project: project,
       entity_type: entityType,
     });
   }
@@ -544,7 +543,7 @@ export class SessionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this._pathTemplates.entityTypePathTemplate.match(entityTypeName)
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
       .project;
   }
 
@@ -556,7 +555,7 @@ export class SessionsClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this._pathTemplates.entityTypePathTemplate.match(entityTypeName)
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
       .entity_type;
   }
 
@@ -568,9 +567,9 @@ export class SessionsClient {
    * @returns {string} Resource name string.
    */
   intentPath(project: string, intent: string) {
-    return this._pathTemplates.intentPathTemplate.render({
-      project,
-      intent,
+    return this.pathTemplates.intentPathTemplate.render({
+      project: project,
+      intent: intent,
     });
   }
 
@@ -582,7 +581,7 @@ export class SessionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIntentName(intentName: string) {
-    return this._pathTemplates.intentPathTemplate.match(intentName).project;
+    return this.pathTemplates.intentPathTemplate.match(intentName).project;
   }
 
   /**
@@ -593,7 +592,7 @@ export class SessionsClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromIntentName(intentName: string) {
-    return this._pathTemplates.intentPathTemplate.match(intentName).intent;
+    return this.pathTemplates.intentPathTemplate.match(intentName).intent;
   }
 
   /**
@@ -604,9 +603,9 @@ export class SessionsClient {
    * @returns {string} Resource name string.
    */
   projectAgentSessionPath(project: string, session: string) {
-    return this._pathTemplates.projectAgentSessionPathTemplate.render({
-      project,
-      session,
+    return this.pathTemplates.projectAgentSessionPathTemplate.render({
+      project: project,
+      session: session,
     });
   }
 
@@ -618,7 +617,7 @@ export class SessionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentSessionName(projectAgentSessionName: string) {
-    return this._pathTemplates.projectAgentSessionPathTemplate.match(
+    return this.pathTemplates.projectAgentSessionPathTemplate.match(
       projectAgentSessionName
     ).project;
   }
@@ -631,7 +630,7 @@ export class SessionsClient {
    * @returns {string} A string representing the session.
    */
   matchSessionFromProjectAgentSessionName(projectAgentSessionName: string) {
-    return this._pathTemplates.projectAgentSessionPathTemplate.match(
+    return this.pathTemplates.projectAgentSessionPathTemplate.match(
       projectAgentSessionName
     ).session;
   }
@@ -649,10 +648,10 @@ export class SessionsClient {
     location: string,
     session: string
   ) {
-    return this._pathTemplates.projectLocationAgentSessionPathTemplate.render({
-      project,
-      location,
-      session,
+    return this.pathTemplates.projectLocationAgentSessionPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
     });
   }
 
@@ -666,7 +665,7 @@ export class SessionsClient {
   matchProjectFromProjectLocationAgentSessionName(
     projectLocationAgentSessionName: string
   ) {
-    return this._pathTemplates.projectLocationAgentSessionPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(
       projectLocationAgentSessionName
     ).project;
   }
@@ -681,7 +680,7 @@ export class SessionsClient {
   matchLocationFromProjectLocationAgentSessionName(
     projectLocationAgentSessionName: string
   ) {
-    return this._pathTemplates.projectLocationAgentSessionPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(
       projectLocationAgentSessionName
     ).location;
   }
@@ -696,7 +695,7 @@ export class SessionsClient {
   matchSessionFromProjectLocationAgentSessionName(
     projectLocationAgentSessionName: string
   ) {
-    return this._pathTemplates.projectLocationAgentSessionPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(
       projectLocationAgentSessionName
     ).session;
   }
@@ -710,9 +709,9 @@ export class SessionsClient {
    * @returns {string} Resource name string.
    */
   sessionEntityTypePath(project: string, session: string, entityType: string) {
-    return this._pathTemplates.sessionEntityTypePathTemplate.render({
-      project,
-      session,
+    return this.pathTemplates.sessionEntityTypePathTemplate.render({
+      project: project,
+      session: session,
       entity_type: entityType,
     });
   }
@@ -725,7 +724,7 @@ export class SessionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSessionEntityTypeName(sessionEntityTypeName: string) {
-    return this._pathTemplates.sessionEntityTypePathTemplate.match(
+    return this.pathTemplates.sessionEntityTypePathTemplate.match(
       sessionEntityTypeName
     ).project;
   }
@@ -738,7 +737,7 @@ export class SessionsClient {
    * @returns {string} A string representing the session.
    */
   matchSessionFromSessionEntityTypeName(sessionEntityTypeName: string) {
-    return this._pathTemplates.sessionEntityTypePathTemplate.match(
+    return this.pathTemplates.sessionEntityTypePathTemplate.match(
       sessionEntityTypeName
     ).session;
   }
@@ -751,7 +750,7 @@ export class SessionsClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromSessionEntityTypeName(sessionEntityTypeName: string) {
-    return this._pathTemplates.sessionEntityTypePathTemplate.match(
+    return this.pathTemplates.sessionEntityTypePathTemplate.match(
       sessionEntityTypeName
     ).entity_type;
   }

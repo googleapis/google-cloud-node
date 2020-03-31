@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './contexts_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -57,14 +57,6 @@ const version = require('../../../package.json').version;
  * @memberof v2beta1
  */
 export class ContextsClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -72,6 +64,14 @@ export class ContextsClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   contextsStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -163,13 +163,16 @@ export class ContextsClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -187,7 +190,7 @@ export class ContextsClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listContexts: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -206,7 +209,7 @@ export class ContextsClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -233,7 +236,7 @@ export class ContextsClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2beta1.Contexts'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2beta1.Contexts,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -248,9 +251,8 @@ export class ContextsClient {
       'deleteContext',
       'deleteAllContexts',
     ];
-
     for (const methodName of contextsStubMethods) {
-      const innerCallPromise = this.contextsStub.then(
+      const callPromise = this.contextsStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -264,20 +266,14 @@ export class ContextsClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.contextsStub;
@@ -337,26 +333,34 @@ export class ContextsClient {
   // -- Service calls --
   // -------------------
   getContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetContextRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetContextRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      protos.google.cloud.dialogflow.v2beta1.IGetContextRequest | undefined,
       {} | undefined
     ]
   >;
   getContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetContextRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetContextRequest
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.IGetContextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getContext(
+    request: protos.google.cloud.dialogflow.v2beta1.IGetContextRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.IGetContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -378,28 +382,27 @@ export class ContextsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetContextRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IGetContextRequest
+          protos.google.cloud.dialogflow.v2beta1.IContext,
+          | protos.google.cloud.dialogflow.v2beta1.IGetContextRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetContextRequest
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.IGetContextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetContextRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      protos.google.cloud.dialogflow.v2beta1.IGetContextRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -420,29 +423,37 @@ export class ContextsClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getContext(request, options, callback);
+    return this.innerApiCalls.getContext(request, options, callback);
   }
   createContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateContextRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest | undefined,
       {} | undefined
     ]
   >;
   createContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateContextRequest
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createContext(
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -468,28 +479,27 @@ export class ContextsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-          | protosTypes.google.cloud.dialogflow.v2beta1.ICreateContextRequest
+          protos.google.cloud.dialogflow.v2beta1.IContext,
+          | protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateContextRequest
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateContextRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -510,29 +520,37 @@ export class ContextsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createContext(request, options, callback);
+    return this.innerApiCalls.createContext(request, options, callback);
   }
   updateContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest | undefined,
       {} | undefined
     ]
   >;
   updateContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateContext(
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -551,28 +569,27 @@ export class ContextsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
+          protos.google.cloud.dialogflow.v2beta1.IContext,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateContextRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IContext,
+      protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -593,29 +610,37 @@ export class ContextsClient {
       'context.name': request.context!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateContext(request, options, callback);
+    return this.innerApiCalls.updateContext(request, options, callback);
   }
   deleteContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest | undefined,
       {} | undefined
     ]
   >;
   deleteContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteContext(
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -637,28 +662,27 @@ export class ContextsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteContext(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteContextRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteContextRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -679,29 +703,40 @@ export class ContextsClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteContext(request, options, callback);
+    return this.innerApiCalls.deleteContext(request, options, callback);
   }
   deleteAllContexts(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteAllContexts(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteAllContexts(
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -722,26 +757,28 @@ export class ContextsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteAllContexts(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
         | undefined
       ),
       {} | undefined
@@ -764,26 +801,38 @@ export class ContextsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteAllContexts(request, options, callback);
+    return this.innerApiCalls.deleteAllContexts(request, options, callback);
   }
 
   listContexts(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListContextsResponse
+      protos.google.cloud.dialogflow.v2beta1.IContext[],
+      protos.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListContextsResponse
     ]
   >;
   listContexts(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListContextsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListContextsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IContext
+    >
+  ): void;
+  listContexts(
+    request: protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListContextsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IContext
     >
   ): void;
   /**
@@ -822,24 +871,28 @@ export class ContextsClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listContexts(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IContext[],
-          protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
-          protosTypes.google.cloud.dialogflow.v2beta1.IListContextsResponse
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListContextsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IContext
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListContextsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListContextsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IContext
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IContext[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListContextsResponse
+      protos.google.cloud.dialogflow.v2beta1.IContext[],
+      protos.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListContextsResponse
     ]
   > | void {
     request = request || {};
@@ -859,7 +912,7 @@ export class ContextsClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listContexts(request, options, callback);
+    return this.innerApiCalls.listContexts(request, options, callback);
   }
 
   /**
@@ -895,7 +948,7 @@ export class ContextsClient {
    *   An object stream which emits an object representing [Context]{@link google.cloud.dialogflow.v2beta1.Context} on 'data' event.
    */
   listContextsStream(
-    request?: protosTypes.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -909,11 +962,58 @@ export class ContextsClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listContexts.createStream(
-      this._innerApiCalls.listContexts as gax.GaxCall,
+    return this.descriptors.page.listContexts.createStream(
+      this.innerApiCalls.listContexts as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listContexts}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The session to list all contexts from.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+   *   default 'draft' environment. If `User ID` is not specified, we assume
+   *   default '-' user.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listContextsAsync(
+    request?: protos.google.cloud.dialogflow.v2beta1.IListContextsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IContext> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listContexts.asyncIterate(
+      this.innerApiCalls['listContexts'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IContext>;
   }
   // --------------------
   // -- Path templates --
@@ -926,8 +1026,8 @@ export class ContextsClient {
    * @returns {string} Resource name string.
    */
   projectAgentPath(project: string) {
-    return this._pathTemplates.projectAgentPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAgentPathTemplate.render({
+      project: project,
     });
   }
 
@@ -939,7 +1039,7 @@ export class ContextsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
   }
 
@@ -951,9 +1051,9 @@ export class ContextsClient {
    * @returns {string} Resource name string.
    */
   projectAgentIntentPath(project: string, intent: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.render({
-      project,
-      intent,
+    return this.pathTemplates.projectAgentIntentPathTemplate.render({
+      project: project,
+      intent: intent,
     });
   }
 
@@ -965,7 +1065,7 @@ export class ContextsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).project;
   }
@@ -978,7 +1078,7 @@ export class ContextsClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).intent;
   }
@@ -991,9 +1091,9 @@ export class ContextsClient {
    * @returns {string} Resource name string.
    */
   projectLocationAgentPath(project: string, location: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.projectLocationAgentPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -1005,7 +1105,7 @@ export class ContextsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).project;
   }
@@ -1018,7 +1118,7 @@ export class ContextsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).location;
   }
@@ -1036,10 +1136,10 @@ export class ContextsClient {
     location: string,
     intent: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.render({
-      project,
-      location,
-      intent,
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
+      project: project,
+      location: location,
+      intent: intent,
     });
   }
 
@@ -1053,7 +1153,7 @@ export class ContextsClient {
   matchProjectFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).project;
   }
@@ -1068,7 +1168,7 @@ export class ContextsClient {
   matchLocationFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).location;
   }
@@ -1083,7 +1183,7 @@ export class ContextsClient {
   matchIntentFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).intent;
   }

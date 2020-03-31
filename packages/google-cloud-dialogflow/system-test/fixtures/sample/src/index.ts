@@ -16,7 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AgentsClient, ContextsClient, EntityTypesClient, IntentsClient, SessionEntityTypesClient, SessionsClient, DocumentsClient, KnowledgeBasesClient} from '@google-cloud/dialogflow';
+import {
+  AgentsClient,
+  ContextsClient,
+  EntityTypesClient,
+  IntentsClient,
+  SessionEntityTypesClient,
+  SessionsClient,
+  DocumentsClient,
+  KnowledgeBasesClient,
+} from '@google-cloud/dialogflow';
 
 function main() {
   const agentsClient = new AgentsClient();

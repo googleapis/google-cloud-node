@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './entity_types_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -67,14 +67,6 @@ const version = require('../../../package.json').version;
  * @memberof v2beta1
  */
 export class EntityTypesClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -82,6 +74,14 @@ export class EntityTypesClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   entityTypesStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -173,13 +173,16 @@ export class EntityTypesClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -197,7 +200,7 @@ export class EntityTypesClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listEntityTypes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -216,7 +219,7 @@ export class EntityTypesClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -243,7 +246,7 @@ export class EntityTypesClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.dialogflow.v2beta1.EntityTypes'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2beta1.EntityTypes,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -262,9 +265,8 @@ export class EntityTypesClient {
       'batchUpdateEntities',
       'batchDeleteEntities',
     ];
-
     for (const methodName of entityTypesStubMethods) {
-      const innerCallPromise = this.entityTypesStub.then(
+      const callPromise = this.entityTypesStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -278,20 +280,14 @@ export class EntityTypesClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.entityTypesStub;
@@ -351,26 +347,34 @@ export class EntityTypesClient {
   // -- Service calls --
   // -------------------
   getEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest | undefined,
       {} | undefined
     ]
   >;
   getEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getEntityType(
+    request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -395,28 +399,27 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+          protos.google.cloud.dialogflow.v2beta1.IEntityType,
+          | protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-      (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
-        | undefined
-      ),
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -437,29 +440,40 @@ export class EntityTypesClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getEntityType(request, options, callback);
+    return this.innerApiCalls.getEntityType(request, options, callback);
   }
   createEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createEntityType(
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -486,26 +500,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-          | protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+          protos.google.cloud.dialogflow.v2beta1.IEntityType,
+          | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
         | undefined
       ),
       {} | undefined
@@ -528,29 +544,40 @@ export class EntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createEntityType(request, options, callback);
+    return this.innerApiCalls.createEntityType(request, options, callback);
   }
   updateEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateEntityType(
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -576,26 +603,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+          protos.google.cloud.dialogflow.v2beta1.IEntityType,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
         | undefined
       ),
       {} | undefined
@@ -618,29 +647,40 @@ export class EntityTypesClient {
       'entity_type.name': request.entityType!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateEntityType(request, options, callback);
+    return this.innerApiCalls.updateEntityType(request, options, callback);
   }
   deleteEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteEntityType(
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -658,26 +698,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteEntityType(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
         | undefined
       ),
       {} | undefined
@@ -700,29 +742,40 @@ export class EntityTypesClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteEntityType(request, options, callback);
+    return this.innerApiCalls.deleteEntityType(request, options, callback);
   }
   batchUpdateEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchUpdateEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchUpdateEntityTypes(
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -758,26 +811,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchUpdateEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
         | undefined
       ),
       {} | undefined
@@ -800,33 +855,44 @@ export class EntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchUpdateEntityTypes(
+    return this.innerApiCalls.batchUpdateEntityTypes(
       request,
       options,
       callback
     );
   }
   batchDeleteEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchDeleteEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteEntityTypes(
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -849,26 +915,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchDeleteEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
         | undefined
       ),
       {} | undefined
@@ -891,33 +959,44 @@ export class EntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchDeleteEntityTypes(
+    return this.innerApiCalls.batchDeleteEntityTypes(
       request,
       options,
       callback
     );
   }
   batchCreateEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchCreateEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateEntities(
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -946,26 +1025,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchCreateEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
         | undefined
       ),
       {} | undefined
@@ -988,29 +1069,40 @@ export class EntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchCreateEntities(request, options, callback);
+    return this.innerApiCalls.batchCreateEntities(request, options, callback);
   }
   batchUpdateEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchUpdateEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchUpdateEntities(
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1043,26 +1135,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchUpdateEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
         | undefined
       ),
       {} | undefined
@@ -1085,29 +1179,40 @@ export class EntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchUpdateEntities(request, options, callback);
+    return this.innerApiCalls.batchUpdateEntities(request, options, callback);
   }
   batchDeleteEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchDeleteEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteEntities(
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1138,26 +1243,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchDeleteEntities(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.longrunning.IOperation,
-          | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+          protos.google.longrunning.IOperation,
+          | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.longrunning.IOperation,
-      | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.longrunning.IOperation,
+      protos.google.longrunning.IOperation,
       (
-        | protosTypes.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
         | undefined
       ),
       {} | undefined
@@ -1180,26 +1287,38 @@ export class EntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchDeleteEntities(request, options, callback);
+    return this.innerApiCalls.batchDeleteEntities(request, options, callback);
   }
 
   listEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      protos.google.cloud.dialogflow.v2beta1.IEntityType[],
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
     ]
   >;
   listEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType
+    >
+  ): void;
+  listEntityTypes(
+    request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType
     >
   ): void;
   /**
@@ -1241,24 +1360,28 @@ export class EntityTypesClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listEntityTypes(
-    request: protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.dialogflow.v2beta1.IEntityType[],
-          protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
-          protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IEntityType
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType
     >
   ): Promise<
     [
-      protosTypes.google.cloud.dialogflow.v2beta1.IEntityType[],
-      protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
-      protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      protos.google.cloud.dialogflow.v2beta1.IEntityType[],
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
     ]
   > | void {
     request = request || {};
@@ -1278,7 +1401,7 @@ export class EntityTypesClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listEntityTypes(request, options, callback);
+    return this.innerApiCalls.listEntityTypes(request, options, callback);
   }
 
   /**
@@ -1317,7 +1440,7 @@ export class EntityTypesClient {
    *   An object stream which emits an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType} on 'data' event.
    */
   listEntityTypesStream(
-    request?: protosTypes.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1331,11 +1454,61 @@ export class EntityTypesClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listEntityTypes.createStream(
-      this._innerApiCalls.listEntityTypes as gax.GaxCall,
+    return this.descriptors.page.listEntityTypes.createStream(
+      this.innerApiCalls.listEntityTypes as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listEntityTypes}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all entity types from.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {string} request.languageCode
+   *   Optional. The language to list entity synonyms for. If not specified,
+   *   the agent's default language is used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listEntityTypesAsync(
+    request?: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IEntityType> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listEntityTypes.asyncIterate(
+      this.innerApiCalls['listEntityTypes'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IEntityType>;
   }
   // --------------------
   // -- Path templates --
@@ -1348,8 +1521,8 @@ export class EntityTypesClient {
    * @returns {string} Resource name string.
    */
   projectAgentPath(project: string) {
-    return this._pathTemplates.projectAgentPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAgentPathTemplate.render({
+      project: project,
     });
   }
 
@@ -1361,7 +1534,7 @@ export class EntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
   }
 
@@ -1373,9 +1546,9 @@ export class EntityTypesClient {
    * @returns {string} Resource name string.
    */
   projectAgentIntentPath(project: string, intent: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.render({
-      project,
-      intent,
+    return this.pathTemplates.projectAgentIntentPathTemplate.render({
+      project: project,
+      intent: intent,
     });
   }
 
@@ -1387,7 +1560,7 @@ export class EntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).project;
   }
@@ -1400,7 +1573,7 @@ export class EntityTypesClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this._pathTemplates.projectAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
       projectAgentIntentName
     ).intent;
   }
@@ -1413,9 +1586,9 @@ export class EntityTypesClient {
    * @returns {string} Resource name string.
    */
   projectLocationAgentPath(project: string, location: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.projectLocationAgentPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -1427,7 +1600,7 @@ export class EntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).project;
   }
@@ -1440,7 +1613,7 @@ export class EntityTypesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this._pathTemplates.projectLocationAgentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).location;
   }
@@ -1458,10 +1631,10 @@ export class EntityTypesClient {
     location: string,
     intent: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.render({
-      project,
-      location,
-      intent,
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
+      project: project,
+      location: location,
+      intent: intent,
     });
   }
 
@@ -1475,7 +1648,7 @@ export class EntityTypesClient {
   matchProjectFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).project;
   }
@@ -1490,7 +1663,7 @@ export class EntityTypesClient {
   matchLocationFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).location;
   }
@@ -1505,7 +1678,7 @@ export class EntityTypesClient {
   matchIntentFromProjectLocationAgentIntentName(
     projectLocationAgentIntentName: string
   ) {
-    return this._pathTemplates.projectLocationAgentIntentPathTemplate.match(
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).intent;
   }
