@@ -14,6 +14,8 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('DeviceManagerSmokeTest', () => {
   if (!process.env.GCLOUD_PROJECT) {
     throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
@@ -21,6 +23,7 @@ describe('DeviceManagerSmokeTest', () => {
   const projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service using promises', done => {
+    // eslint-disable-next-line node/no-missing-require
     const iot = require('../src');
 
     const client = new iot.v1.DeviceManagerClient({
@@ -43,6 +46,7 @@ describe('DeviceManagerSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using callbacks', done => {
+    // eslint-disable-next-line node/no-missing-require
     const iot = require('../src');
 
     const client = new iot.v1.DeviceManagerClient({
@@ -76,6 +80,7 @@ describe('DeviceManagerSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using streaming', done => {
+    // eslint-disable-next-line node/no-missing-require
     const iot = require('../src');
 
     const client = new iot.v1.DeviceManagerClient({

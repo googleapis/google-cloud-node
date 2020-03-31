@@ -19,7 +19,7 @@
 import {DeviceManagerClient} from '@google-cloud/iot';
 
 function main() {
-  const deviceManagerClient = new DeviceManagerClient();
+  new DeviceManagerClient();
 }
 
 main();
