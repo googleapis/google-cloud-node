@@ -18,16 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
+  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
+  PaginationCallback,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './asset_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -38,13 +40,6 @@ const version = require('../../../package.json').version;
  * @memberof v1p1beta1
  */
 export class AssetServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -52,6 +47,13 @@ export class AssetServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   assetServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -143,13 +145,16 @@ export class AssetServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       searchAllResources: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -173,7 +178,7 @@ export class AssetServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -200,8 +205,7 @@ export class AssetServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.asset.v1p1beta1.AssetService'
           )
-        : // tslint:disable-next-line no-any
-          /* eslint-disable @typescript-eslint/no-explicit-any */
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.asset.v1p1beta1.AssetService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -212,9 +216,8 @@ export class AssetServiceClient {
       'searchAllResources',
       'searchAllIamPolicies',
     ];
-
     for (const methodName of assetServiceStubMethods) {
-      const innerCallPromise = this.assetServiceStub.then(
+      const callPromise = this.assetServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -228,20 +231,14 @@ export class AssetServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.assetServiceStub;
@@ -299,22 +296,34 @@ export class AssetServiceClient {
   // -------------------
 
   searchAllResources(
-    request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
     ]
   >;
   searchAllResources(
-    request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
+    >
+  ): void;
+  searchAllResources(
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
     >
   ): void;
   /**
@@ -367,24 +376,28 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   searchAllResources(
-    request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
-          protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
-          protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      | PaginationCallback<
+          protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+          | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
     >
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
     ]
   > | void {
     request = request || {};
@@ -404,7 +417,7 @@ export class AssetServiceClient {
       scope: request.scope || '',
     });
     this.initialize();
-    return this._innerApiCalls.searchAllResources(request, options, callback);
+    return this.innerApiCalls.searchAllResources(request, options, callback);
   }
 
   /**
@@ -449,7 +462,7 @@ export class AssetServiceClient {
    *   An object stream which emits an object representing [StandardResourceMetadata]{@link google.cloud.asset.v1p1beta1.StandardResourceMetadata} on 'data' event.
    */
   searchAllResourcesStream(
-    request?: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -463,29 +476,101 @@ export class AssetServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.searchAllResources.createStream(
-      this._innerApiCalls.searchAllResources as gax.GaxCall,
+    return this.descriptors.page.searchAllResources.createStream(
+      this.innerApiCalls.searchAllResources as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link searchAllResources}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scope
+   *   Required. The relative name of an asset. The search is limited to the resources
+   *   within the `scope`. The allowed value must be:
+   *   * Organization number (such as "organizations/123")
+   *   * Folder number(such as "folders/1234")
+   *   * Project number (such as "projects/12345")
+   * @param {string} [request.query]
+   *   Optional. The query statement.
+   * @param {string[]} [request.assetTypes]
+   *   Optional. A list of asset types that this request searches for. If empty, it will
+   *   search all the supported asset types.
+   * @param {number} [request.pageSize]
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, then retrieve the next batch of results from the preceding call
+   *   to this method.  `page_token` must be the value of `next_page_token` from
+   *   the previous response. The values of all other method parameters, must be
+   *   identical to those in the previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  searchAllResourcesAsync(
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<
+    protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
+  > {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAllResources.asyncIterate(
+      this.innerApiCalls['searchAllResources'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
+    >;
+  }
   searchAllIamPolicies(
-    request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
     ]
   >;
   searchAllIamPolicies(
-    request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
+    >
+  ): void;
+  searchAllIamPolicies(
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
     >
   ): void;
   /**
@@ -538,24 +623,28 @@ export class AssetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   searchAllIamPolicies(
-    request: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
-          protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
-          protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      | PaginationCallback<
+          protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+          | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
     >
   ): Promise<
     [
-      protosTypes.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
-      protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
     ]
   > | void {
     request = request || {};
@@ -575,7 +664,7 @@ export class AssetServiceClient {
       scope: request.scope || '',
     });
     this.initialize();
-    return this._innerApiCalls.searchAllIamPolicies(request, options, callback);
+    return this.innerApiCalls.searchAllIamPolicies(request, options, callback);
   }
 
   /**
@@ -620,7 +709,7 @@ export class AssetServiceClient {
    *   An object stream which emits an object representing [IamPolicySearchResult]{@link google.cloud.asset.v1p1beta1.IamPolicySearchResult} on 'data' event.
    */
   searchAllIamPoliciesStream(
-    request?: protosTypes.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -634,11 +723,69 @@ export class AssetServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.searchAllIamPolicies.createStream(
-      this._innerApiCalls.searchAllIamPolicies as gax.GaxCall,
+    return this.descriptors.page.searchAllIamPolicies.createStream(
+      this.innerApiCalls.searchAllIamPolicies as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link searchAllIamPolicies}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scope
+   *   Required. The relative name of an asset. The search is limited to the resources
+   *   within the `scope`. The allowed value must be:
+   *   * Organization number (such as "organizations/123")
+   *   * Folder number(such as "folders/1234")
+   *   * Project number (such as "projects/12345")
+   * @param {string} [request.query]
+   *   Optional. The query statement.
+   *   Examples:
+   *   * "policy:myuser@mydomain.com"
+   *   * "policy:(myuser@mydomain.com viewer)"
+   * @param {number} [request.pageSize]
+   *   Optional. The page size for search result pagination. Page size is capped at 500 even
+   *   if a larger value is given. If set to zero, server will pick an appropriate
+   *   default. Returned results may be fewer than requested. When this happens,
+   *   there could be more results as long as `next_page_token` is returned.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, retrieve the next batch of results from the preceding call to
+   *   this method. `page_token` must be the value of `next_page_token` from the
+   *   previous response. The values of all other method parameters must be
+   *   identical to those in the previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  searchAllIamPoliciesAsync(
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAllIamPolicies.asyncIterate(
+      this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
+    >;
   }
 
   /**

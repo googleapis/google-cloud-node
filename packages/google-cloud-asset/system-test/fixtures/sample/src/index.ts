@@ -19,7 +19,7 @@
 import {AssetServiceClient} from '@google-cloud/asset';
 
 function main() {
-  new AssetServiceClient();
+  const assetServiceClient = new AssetServiceClient();
 }
 
 main();
