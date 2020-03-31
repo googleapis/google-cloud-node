@@ -11,13 +11,14 @@
   ],
   "devDependencies": {
     "@types/mocha": "^7.0.0",
+    "@types/sinon": "^7.5.2",
     "c8": "^7.0.0",
     "chai": "^4.2.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "gts": "^1.1.0",
+    "gts": "2.0.0-alpha.9",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.2",
     "jsdoc-region-tag": "^1.0.2",
@@ -25,7 +26,8 @@
     "mocha": "^7.0.0",
     "pack-n-play": "^1.0.0-2",
     "prettier": "^1.17.0",
-    "typescript": "~3.6.0"
+    "sinon": "^9.0.1",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "predocs": "npm run compile",
@@ -46,9 +48,9 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10"
   },
   "dependencies": {
-    "google-gax": "^1.7.5"
+    "google-gax": "^2.0.1"
   }
 }

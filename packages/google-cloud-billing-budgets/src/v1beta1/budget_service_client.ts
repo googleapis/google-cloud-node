@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
+  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './budget_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class BudgetServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class BudgetServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   budgetServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -147,13 +147,16 @@ export class BudgetServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       budgetPathTemplate: new this._gaxModule.PathTemplate(
         'billingAccounts/{billing_account}/budgets/{budget}'
       ),
@@ -162,7 +165,7 @@ export class BudgetServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listBudgets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -181,7 +184,7 @@ export class BudgetServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -208,7 +211,7 @@ export class BudgetServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.billing.budgets.v1beta1.BudgetService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.billing.budgets.v1beta1
             .BudgetService,
       this._opts
@@ -223,9 +226,8 @@ export class BudgetServiceClient {
       'listBudgets',
       'deleteBudget',
     ];
-
     for (const methodName of budgetServiceStubMethods) {
-      const innerCallPromise = this.budgetServiceStub.then(
+      const callPromise = this.budgetServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -239,20 +241,14 @@ export class BudgetServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.budgetServiceStub;
@@ -309,26 +305,37 @@ export class BudgetServiceClient {
   // -- Service calls --
   // -------------------
   createBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
       (
-        | protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+        | protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-      | protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createBudget(
+    request: protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest,
+    callback: Callback<
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -350,26 +357,28 @@ export class BudgetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-          | protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+          protos.google.cloud.billing.budgets.v1beta1.IBudget,
+          | protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-      | protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
       (
-        | protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
+        | protos.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
         | undefined
       ),
       {} | undefined
@@ -392,29 +401,40 @@ export class BudgetServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createBudget(request, options, callback);
+    return this.innerApiCalls.createBudget(request, options, callback);
   }
   updateBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
       (
-        | protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+        | protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-      | protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateBudget(
+    request: protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest,
+    callback: Callback<
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -443,26 +463,28 @@ export class BudgetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-          | protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+          protos.google.cloud.billing.budgets.v1beta1.IBudget,
+          | protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-      | protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
       (
-        | protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
+        | protos.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
         | undefined
       ),
       {} | undefined
@@ -485,29 +507,37 @@ export class BudgetServiceClient {
       'budget.name': request.budget!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateBudget(request, options, callback);
+    return this.innerApiCalls.updateBudget(request, options, callback);
   }
   getBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-      (
-        | protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
-        | undefined
-      ),
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest | undefined,
       {} | undefined
     ]
   >;
   getBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-      | protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getBudget(
+    request: protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest,
+    callback: Callback<
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -530,28 +560,27 @@ export class BudgetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-          | protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
+          protos.google.cloud.billing.budgets.v1beta1.IBudget,
+          | protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-      | protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      | protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-      (
-        | protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
-        | undefined
-      ),
+      protos.google.cloud.billing.budgets.v1beta1.IBudget,
+      protos.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -572,29 +601,40 @@ export class BudgetServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getBudget(request, options, callback);
+    return this.innerApiCalls.getBudget(request, options, callback);
   }
   deleteBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+        | protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteBudget(
+    request: protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -612,26 +652,28 @@ export class BudgetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteBudget(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
+        | protos.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
         | undefined
       ),
       {} | undefined
@@ -654,26 +696,38 @@ export class BudgetServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteBudget(request, options, callback);
+    return this.innerApiCalls.deleteBudget(request, options, callback);
   }
 
   listBudgets(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget[],
-      protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest | null,
-      protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+      protos.google.cloud.billing.budgets.v1beta1.IBudget[],
+      protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest | null,
+      protos.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
     ]
   >;
   listBudgets(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget[],
-      protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest | null,
-      protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+      | protos.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.budgets.v1beta1.IBudget
+    >
+  ): void;
+  listBudgets(
+    request: protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+      | protos.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.budgets.v1beta1.IBudget
     >
   ): void;
   /**
@@ -715,24 +769,28 @@ export class BudgetServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listBudgets(
-    request: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+    request: protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.billing.budgets.v1beta1.IBudget[],
-          protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest | null,
-          protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+      | PaginationCallback<
+          protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+          | protos.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.budgets.v1beta1.IBudget
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget[],
-      protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest | null,
-      protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+      | protos.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.billing.budgets.v1beta1.IBudget
     >
   ): Promise<
     [
-      protosTypes.google.cloud.billing.budgets.v1beta1.IBudget[],
-      protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest | null,
-      protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
+      protos.google.cloud.billing.budgets.v1beta1.IBudget[],
+      protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest | null,
+      protos.google.cloud.billing.budgets.v1beta1.IListBudgetsResponse
     ]
   > | void {
     request = request || {};
@@ -752,7 +810,7 @@ export class BudgetServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listBudgets(request, options, callback);
+    return this.innerApiCalls.listBudgets(request, options, callback);
   }
 
   /**
@@ -786,7 +844,7 @@ export class BudgetServiceClient {
    *   An object stream which emits an object representing [Budget]{@link google.cloud.billing.budgets.v1beta1.Budget} on 'data' event.
    */
   listBudgetsStream(
-    request?: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+    request?: protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -800,11 +858,56 @@ export class BudgetServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listBudgets.createStream(
-      this._innerApiCalls.listBudgets as gax.GaxCall,
+    return this.descriptors.page.listBudgets.createStream(
+      this.innerApiCalls.listBudgets as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listBudgets}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of billing account to list budgets under. Values
+   *   are of the form `billingAccounts/{billingAccountId}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of budgets to return per page.
+   *   The default and maximum value are 100.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListBudgetsResponse` which
+   *   indicates that this is a continuation of a prior `ListBudgets` call,
+   *   and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listBudgetsAsync(
+    request?: protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.billing.budgets.v1beta1.IBudget> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listBudgets.asyncIterate(
+      this.innerApiCalls['listBudgets'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.billing.budgets.v1beta1.IBudget>;
   }
   // --------------------
   // -- Path templates --
@@ -818,9 +921,9 @@ export class BudgetServiceClient {
    * @returns {string} Resource name string.
    */
   budgetPath(billingAccount: string, budget: string) {
-    return this._pathTemplates.budgetPathTemplate.render({
+    return this.pathTemplates.budgetPathTemplate.render({
       billing_account: billingAccount,
-      budget,
+      budget: budget,
     });
   }
 
@@ -832,7 +935,7 @@ export class BudgetServiceClient {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBudgetName(budgetName: string) {
-    return this._pathTemplates.budgetPathTemplate.match(budgetName)
+    return this.pathTemplates.budgetPathTemplate.match(budgetName)
       .billing_account;
   }
 
@@ -844,7 +947,7 @@ export class BudgetServiceClient {
    * @returns {string} A string representing the budget.
    */
   matchBudgetFromBudgetName(budgetName: string) {
-    return this._pathTemplates.budgetPathTemplate.match(budgetName).budget;
+    return this.pathTemplates.budgetPathTemplate.match(budgetName).budget;
   }
 
   /**
