@@ -17,16 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './web_risk_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -38,13 +32,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class WebRiskServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -52,6 +39,13 @@ export class WebRiskServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   webRiskServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -143,7 +137,10 @@ export class WebRiskServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Put together the default options sent with requests.
@@ -157,7 +154,7 @@ export class WebRiskServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -184,7 +181,7 @@ export class WebRiskServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.webrisk.v1.WebRiskService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.webrisk.v1.WebRiskService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -197,9 +194,8 @@ export class WebRiskServiceClient {
       'searchHashes',
       'createSubmission',
     ];
-
     for (const methodName of webRiskServiceStubMethods) {
-      const innerCallPromise = this.webRiskServiceStub.then(
+      const callPromise = this.webRiskServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -213,20 +209,14 @@ export class WebRiskServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.webRiskServiceStub;
@@ -283,26 +273,34 @@ export class WebRiskServiceClient {
   // -- Service calls --
   // -------------------
   computeThreatListDiff(
-    request: protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
+    request: protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
-      (
-        | protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
-        | undefined
-      ),
+      protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
+      protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest | undefined,
       {} | undefined
     ]
   >;
   computeThreatListDiff(
-    request: protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
+    request: protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
-      | protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
+      protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
+      | protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  computeThreatListDiff(
+    request: protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
+    callback: Callback<
+      protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
+      | protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -332,28 +330,27 @@ export class WebRiskServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   computeThreatListDiff(
-    request: protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
+    request: protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
-          | protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
+          protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
+          | protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
-      | protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
+      protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
+      | protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
-      (
-        | protosTypes.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
-        | undefined
-      ),
+      protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
+      protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -367,29 +364,33 @@ export class WebRiskServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.computeThreatListDiff(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.computeThreatListDiff(request, options, callback);
   }
   searchUris(
-    request: protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest,
+    request: protos.google.cloud.webrisk.v1.ISearchUrisRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.webrisk.v1.ISearchUrisResponse,
-      protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
+      protos.google.cloud.webrisk.v1.ISearchUrisResponse,
+      protos.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
       {} | undefined
     ]
   >;
   searchUris(
-    request: protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest,
+    request: protos.google.cloud.webrisk.v1.ISearchUrisRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.webrisk.v1.ISearchUrisResponse,
-      protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
-      {} | undefined
+      protos.google.cloud.webrisk.v1.ISearchUrisResponse,
+      protos.google.cloud.webrisk.v1.ISearchUrisRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchUris(
+    request: protos.google.cloud.webrisk.v1.ISearchUrisRequest,
+    callback: Callback<
+      protos.google.cloud.webrisk.v1.ISearchUrisResponse,
+      protos.google.cloud.webrisk.v1.ISearchUrisRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -412,23 +413,23 @@ export class WebRiskServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   searchUris(
-    request: protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest,
+    request: protos.google.cloud.webrisk.v1.ISearchUrisRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.webrisk.v1.ISearchUrisResponse,
-          protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
-          {} | undefined
+          protos.google.cloud.webrisk.v1.ISearchUrisResponse,
+          protos.google.cloud.webrisk.v1.ISearchUrisRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.webrisk.v1.ISearchUrisResponse,
-      protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
-      {} | undefined
+      protos.google.cloud.webrisk.v1.ISearchUrisResponse,
+      protos.google.cloud.webrisk.v1.ISearchUrisRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.webrisk.v1.ISearchUrisResponse,
-      protosTypes.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
+      protos.google.cloud.webrisk.v1.ISearchUrisResponse,
+      protos.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -442,25 +443,33 @@ export class WebRiskServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.searchUris(request, options, callback);
+    return this.innerApiCalls.searchUris(request, options, callback);
   }
   searchHashes(
-    request: protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest,
+    request: protos.google.cloud.webrisk.v1.ISearchHashesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.webrisk.v1.ISearchHashesResponse,
-      protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
+      protos.google.cloud.webrisk.v1.ISearchHashesResponse,
+      protos.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
       {} | undefined
     ]
   >;
   searchHashes(
-    request: protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest,
+    request: protos.google.cloud.webrisk.v1.ISearchHashesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.webrisk.v1.ISearchHashesResponse,
-      protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
-      {} | undefined
+      protos.google.cloud.webrisk.v1.ISearchHashesResponse,
+      protos.google.cloud.webrisk.v1.ISearchHashesRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchHashes(
+    request: protos.google.cloud.webrisk.v1.ISearchHashesRequest,
+    callback: Callback<
+      protos.google.cloud.webrisk.v1.ISearchHashesResponse,
+      protos.google.cloud.webrisk.v1.ISearchHashesRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -484,23 +493,25 @@ export class WebRiskServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   searchHashes(
-    request: protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest,
+    request: protos.google.cloud.webrisk.v1.ISearchHashesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.webrisk.v1.ISearchHashesResponse,
-          protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
-          {} | undefined
+          protos.google.cloud.webrisk.v1.ISearchHashesResponse,
+          | protos.google.cloud.webrisk.v1.ISearchHashesRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.webrisk.v1.ISearchHashesResponse,
-      protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
-      {} | undefined
+      protos.google.cloud.webrisk.v1.ISearchHashesResponse,
+      protos.google.cloud.webrisk.v1.ISearchHashesRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.webrisk.v1.ISearchHashesResponse,
-      protosTypes.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
+      protos.google.cloud.webrisk.v1.ISearchHashesResponse,
+      protos.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -514,25 +525,37 @@ export class WebRiskServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.searchHashes(request, options, callback);
+    return this.innerApiCalls.searchHashes(request, options, callback);
   }
   createSubmission(
-    request: protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest,
+    request: protos.google.cloud.webrisk.v1.ICreateSubmissionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.webrisk.v1.ISubmission,
-      protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
+      protos.google.cloud.webrisk.v1.ISubmission,
+      protos.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
       {} | undefined
     ]
   >;
   createSubmission(
-    request: protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest,
+    request: protos.google.cloud.webrisk.v1.ICreateSubmissionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.webrisk.v1.ISubmission,
-      protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
-      {} | undefined
+      protos.google.cloud.webrisk.v1.ISubmission,
+      | protos.google.cloud.webrisk.v1.ICreateSubmissionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSubmission(
+    request: protos.google.cloud.webrisk.v1.ICreateSubmissionRequest,
+    callback: Callback<
+      protos.google.cloud.webrisk.v1.ISubmission,
+      | protos.google.cloud.webrisk.v1.ICreateSubmissionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -557,24 +580,27 @@ export class WebRiskServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createSubmission(
-    request: protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest,
+    request: protos.google.cloud.webrisk.v1.ICreateSubmissionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.webrisk.v1.ISubmission,
-          | protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest
+          protos.google.cloud.webrisk.v1.ISubmission,
+          | protos.google.cloud.webrisk.v1.ICreateSubmissionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.webrisk.v1.ISubmission,
-      protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
-      {} | undefined
+      protos.google.cloud.webrisk.v1.ISubmission,
+      | protos.google.cloud.webrisk.v1.ICreateSubmissionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.webrisk.v1.ISubmission,
-      protosTypes.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
+      protos.google.cloud.webrisk.v1.ISubmission,
+      protos.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -595,7 +621,7 @@ export class WebRiskServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createSubmission(request, options, callback);
+    return this.innerApiCalls.createSubmission(request, options, callback);
   }
 
   /**

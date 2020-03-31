@@ -15,6 +15,7 @@
 import * as protoTypes from '../protos/protos';
 import {assert} from 'chai';
 import {describe, it} from 'mocha';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const http2spy = require('http2spy');
 const {WebRiskServiceV1Beta1Client} = http2spy.require(
   require.resolve('../src/v1beta1')

@@ -17,6 +17,7 @@ import {describe, it} from 'mocha';
 
 describe('WebRiskSmokeTest', () => {
   it('searches threat database for URI', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const {WebRiskServiceV1Beta1Client} = require('../src/v1beta1');
     const client = new WebRiskServiceV1Beta1Client();
     const request = {
