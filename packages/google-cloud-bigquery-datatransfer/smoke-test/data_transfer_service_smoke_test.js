@@ -23,6 +23,7 @@ describe('DataTransferServiceSmokeTest', () => {
   const projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service using promises', done => {
+    // eslint-disable-next-line node/no-missing-require
     const bigqueryDataTransfer = require('../src');
 
     const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
@@ -45,6 +46,7 @@ describe('DataTransferServiceSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using callbacks', done => {
+    // eslint-disable-next-line node/no-missing-require
     const bigqueryDataTransfer = require('../src');
 
     const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
@@ -78,6 +80,7 @@ describe('DataTransferServiceSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using streaming', done => {
+    // eslint-disable-next-line node/no-missing-require
     const bigqueryDataTransfer = require('../src');
 
     const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
