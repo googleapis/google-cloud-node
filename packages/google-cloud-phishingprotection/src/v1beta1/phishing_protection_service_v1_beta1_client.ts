@@ -17,16 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './phishing_protection_service_v1_beta1_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -37,14 +31,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class PhishingProtectionServiceV1Beta1Client {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -52,6 +38,14 @@ export class PhishingProtectionServiceV1Beta1Client {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   phishingProtectionServiceV1Beta1Stub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -145,13 +139,16 @@ export class PhishingProtectionServiceV1Beta1Client {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -168,7 +165,7 @@ export class PhishingProtectionServiceV1Beta1Client {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -195,7 +192,7 @@ export class PhishingProtectionServiceV1Beta1Client {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.phishingprotection.v1beta1.PhishingProtectionServiceV1Beta1'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.phishingprotection.v1beta1
             .PhishingProtectionServiceV1Beta1,
       this._opts
@@ -204,9 +201,8 @@ export class PhishingProtectionServiceV1Beta1Client {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const phishingProtectionServiceV1Beta1StubMethods = ['reportPhishing'];
-
     for (const methodName of phishingProtectionServiceV1Beta1StubMethods) {
-      const innerCallPromise = this.phishingProtectionServiceV1Beta1Stub.then(
+      const callPromise = this.phishingProtectionServiceV1Beta1Stub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -220,20 +216,14 @@ export class PhishingProtectionServiceV1Beta1Client {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.phishingProtectionServiceV1Beta1Stub;
@@ -290,26 +280,37 @@ export class PhishingProtectionServiceV1Beta1Client {
   // -- Service calls --
   // -------------------
   reportPhishing(
-    request: protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
+    request: protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
+      protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
       (
-        | protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+        | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   reportPhishing(
-    request: protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
+    request: protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
-      | protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+      protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
+      | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  reportPhishing(
+    request: protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
+    callback: Callback<
+      protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
+      | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -335,26 +336,28 @@ export class PhishingProtectionServiceV1Beta1Client {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   reportPhishing(
-    request: protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
+    request: protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
-          | protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+          protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
+          | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
-      | protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+      protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
+      | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
+      protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
       (
-        | protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+        | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
         | undefined
       ),
       {} | undefined
@@ -377,7 +380,7 @@ export class PhishingProtectionServiceV1Beta1Client {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.reportPhishing(request, options, callback);
+    return this.innerApiCalls.reportPhishing(request, options, callback);
   }
 
   // --------------------
@@ -391,8 +394,8 @@ export class PhishingProtectionServiceV1Beta1Client {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -404,7 +407,7 @@ export class PhishingProtectionServiceV1Beta1Client {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**

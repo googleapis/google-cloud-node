@@ -12,10 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {describe, it} from 'mocha';
+
 const PROJECT_ID = '1046198160504';
 
 describe('PhishingProtection', () => {
   it('submits a URI to the phishing protection API', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const {PhishingProtectionServiceV1Beta1Client} = require('../src/v1beta1');
     const client = new PhishingProtectionServiceV1Beta1Client();
 
