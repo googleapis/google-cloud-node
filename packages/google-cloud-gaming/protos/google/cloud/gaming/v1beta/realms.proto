@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC.
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
 syntax = "proto3";
 
@@ -25,6 +24,7 @@ import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 
 option go_package = "google.golang.org/genproto/googleapis/cloud/gaming/v1beta;gaming";
+
 option java_multiple_files = true;
 option java_package = "com.google.cloud.gaming.v1beta";
 
@@ -35,7 +35,7 @@ message ListRealmsRequest {
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      type: "gameservices.googleapis.com/Realm"
+      child_type: "gameservices.googleapis.com/Realm"
     }
   ];
 
@@ -90,7 +90,7 @@ message CreateRealmRequest {
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      type: "gameservices.googleapis.com/Realm"
+      child_type: "gameservices.googleapis.com/Realm"
     }
   ];
 

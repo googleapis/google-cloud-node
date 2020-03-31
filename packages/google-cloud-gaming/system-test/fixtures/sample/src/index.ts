@@ -16,13 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {GameServerClustersServiceClient, GameServerConfigsServiceClient, GameServerDeploymentsServiceClient, RealmsServiceClient} from '@google-cloud/game-servers';
+import {
+  GameServerClustersServiceClient,
+  GameServerConfigsServiceClient,
+  GameServerDeploymentsServiceClient,
+  RealmsServiceClient,
+} from '@google-cloud/game-servers';
 
 function main() {
-  const gameServerClustersServiceClient = new GameServerClustersServiceClient();
-  const gameServerConfigsServiceClient = new GameServerConfigsServiceClient();
-  const gameServerDeploymentsServiceClient = new GameServerDeploymentsServiceClient();
-  const realmsServiceClient = new RealmsServiceClient();
+  new GameServerClustersServiceClient();
+  new GameServerConfigsServiceClient();
+  new GameServerDeploymentsServiceClient();
+  new RealmsServiceClient();
 }
 
 main();

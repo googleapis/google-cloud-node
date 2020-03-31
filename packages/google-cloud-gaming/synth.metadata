@@ -1,23 +1,5 @@
 {
-  "updateTime": "2020-03-22T11:29:25.571404Z",
-  "sources": [
-    {
-      "git": {
-        "name": "googleapis-private",
-        "remote": "https://github.com/googleapis/googleapis-private.git",
-        "sha": "e6378caa596533251006a9eb318f3f9e71984f2b",
-        "internalRef": "301441701",
-        "log": "e6378caa596533251006a9eb318f3f9e71984f2b\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 301441701\n\nf557255ffc2382115850c7e4832b5505676ae63b\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 299734673\n\n27f8117872914cb033c33f2351bee19d34f7b0cc\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 298524614\n\n71a4d0fafde0d09abd8ab93773eedfb4490f1e40\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 298477635\n\n"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "7e98e1609c91082f4eeb63b530c6468aefd18cfd"
-      }
-    }
-  ],
+  "updateTime": "2020-03-31T19:38:20.766291Z",
   "destinations": [
     {
       "client": {

@@ -18,7 +18,6 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
@@ -27,7 +26,7 @@ import {
 } from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './game_server_configs_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -38,14 +37,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta
  */
 export class GameServerConfigsServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -53,6 +44,14 @@ export class GameServerConfigsServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   gameServerConfigsServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -147,13 +146,16 @@ export class GameServerConfigsServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       gameServerClusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}'
       ),
@@ -176,6 +178,7 @@ export class GameServerConfigsServiceClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -199,7 +202,7 @@ export class GameServerConfigsServiceClient {
       '.google.cloud.gaming.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       createGameServerConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createGameServerConfigResponse.decode.bind(
@@ -231,7 +234,7 @@ export class GameServerConfigsServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -258,7 +261,7 @@ export class GameServerConfigsServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.gaming.v1beta.GameServerConfigsService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.gaming.v1beta
             .GameServerConfigsService,
       this._opts
@@ -272,9 +275,8 @@ export class GameServerConfigsServiceClient {
       'createGameServerConfig',
       'deleteGameServerConfig',
     ];
-
     for (const methodName of gameServerConfigsServiceStubMethods) {
-      const innerCallPromise = this.gameServerConfigsServiceStub.then(
+      const callPromise = this.gameServerConfigsServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -288,20 +290,14 @@ export class GameServerConfigsServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.gameServerConfigsServiceStub;
@@ -358,26 +354,37 @@ export class GameServerConfigsServiceClient {
   // -- Service calls --
   // -------------------
   listGameServerConfigs(
-    request: protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+    request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
       (
-        | protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+        | protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   listGameServerConfigs(
-    request: protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+    request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
-      | protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
+      | protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  listGameServerConfigs(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+    callback: Callback<
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
+      | protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -393,26 +400,28 @@ export class GameServerConfigsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listGameServerConfigs(
-    request: protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+    request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
-          | protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+          protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
+          | protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
-      | protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
+      | protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse,
       (
-        | protosTypes.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
+        | protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest
         | undefined
       ),
       {} | undefined
@@ -435,33 +444,37 @@ export class GameServerConfigsServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listGameServerConfigs(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.listGameServerConfigs(request, options, callback);
   }
   getGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-      (
-        | protosTypes.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
-        | undefined
-      ),
+      protos.google.cloud.gaming.v1beta.IGameServerConfig,
+      protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest | undefined,
       {} | undefined
     ]
   >;
   getGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-      | protosTypes.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
+      protos.google.cloud.gaming.v1beta.IGameServerConfig,
+      | protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getGameServerConfig(
+    request: protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
+    callback: Callback<
+      protos.google.cloud.gaming.v1beta.IGameServerConfig,
+      | protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -476,28 +489,27 @@ export class GameServerConfigsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-          | protosTypes.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
+          protos.google.cloud.gaming.v1beta.IGameServerConfig,
+          | protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-      | protosTypes.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
+      protos.google.cloud.gaming.v1beta.IGameServerConfig,
+      | protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-      (
-        | protosTypes.google.cloud.gaming.v1beta.IGetGameServerConfigRequest
-        | undefined
-      ),
+      protos.google.cloud.gaming.v1beta.IGameServerConfig,
+      protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -518,32 +530,43 @@ export class GameServerConfigsServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getGameServerConfig(request, options, callback);
+    return this.innerApiCalls.getGameServerConfig(request, options, callback);
   }
 
   createGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-        protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   createGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-        protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createGameServerConfig(
+    request: protos.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -560,32 +583,32 @@ export class GameServerConfigsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-            protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+            protos.google.cloud.gaming.v1beta.IGameServerConfig,
+            protos.google.cloud.gaming.v1beta.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-        protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-        protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -606,35 +629,46 @@ export class GameServerConfigsServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createGameServerConfig(
+    return this.innerApiCalls.createGameServerConfig(
       request,
       options,
       callback
     );
   }
   deleteGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-        protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deleteGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-        protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteGameServerConfig(
+    request: protos.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -650,32 +684,32 @@ export class GameServerConfigsServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteGameServerConfig(
-    request: protosTypes.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
+    request: protos.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-            protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+            protos.google.cloud.gaming.v1beta.IGameServerConfig,
+            protos.google.cloud.gaming.v1beta.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-        protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.gaming.v1beta.IGameServerConfig,
-        protosTypes.google.cloud.gaming.v1beta.IOperationMetadata
+        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -696,7 +730,7 @@ export class GameServerConfigsServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteGameServerConfig(
+    return this.innerApiCalls.deleteGameServerConfig(
       request,
       options,
       callback
@@ -721,11 +755,11 @@ export class GameServerConfigsServiceClient {
     realm: string,
     cluster: string
   ) {
-    return this._pathTemplates.gameServerClusterPathTemplate.render({
-      project,
-      location,
-      realm,
-      cluster,
+    return this.pathTemplates.gameServerClusterPathTemplate.render({
+      project: project,
+      location: location,
+      realm: realm,
+      cluster: cluster,
     });
   }
 
@@ -737,7 +771,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGameServerClusterName(gameServerClusterName: string) {
-    return this._pathTemplates.gameServerClusterPathTemplate.match(
+    return this.pathTemplates.gameServerClusterPathTemplate.match(
       gameServerClusterName
     ).project;
   }
@@ -750,7 +784,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGameServerClusterName(gameServerClusterName: string) {
-    return this._pathTemplates.gameServerClusterPathTemplate.match(
+    return this.pathTemplates.gameServerClusterPathTemplate.match(
       gameServerClusterName
     ).location;
   }
@@ -763,7 +797,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the realm.
    */
   matchRealmFromGameServerClusterName(gameServerClusterName: string) {
-    return this._pathTemplates.gameServerClusterPathTemplate.match(
+    return this.pathTemplates.gameServerClusterPathTemplate.match(
       gameServerClusterName
     ).realm;
   }
@@ -776,7 +810,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the cluster.
    */
   matchClusterFromGameServerClusterName(gameServerClusterName: string) {
-    return this._pathTemplates.gameServerClusterPathTemplate.match(
+    return this.pathTemplates.gameServerClusterPathTemplate.match(
       gameServerClusterName
     ).cluster;
   }
@@ -796,11 +830,11 @@ export class GameServerConfigsServiceClient {
     deployment: string,
     config: string
   ) {
-    return this._pathTemplates.gameServerConfigPathTemplate.render({
-      project,
-      location,
-      deployment,
-      config,
+    return this.pathTemplates.gameServerConfigPathTemplate.render({
+      project: project,
+      location: location,
+      deployment: deployment,
+      config: config,
     });
   }
 
@@ -812,7 +846,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGameServerConfigName(gameServerConfigName: string) {
-    return this._pathTemplates.gameServerConfigPathTemplate.match(
+    return this.pathTemplates.gameServerConfigPathTemplate.match(
       gameServerConfigName
     ).project;
   }
@@ -825,7 +859,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGameServerConfigName(gameServerConfigName: string) {
-    return this._pathTemplates.gameServerConfigPathTemplate.match(
+    return this.pathTemplates.gameServerConfigPathTemplate.match(
       gameServerConfigName
     ).location;
   }
@@ -838,7 +872,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromGameServerConfigName(gameServerConfigName: string) {
-    return this._pathTemplates.gameServerConfigPathTemplate.match(
+    return this.pathTemplates.gameServerConfigPathTemplate.match(
       gameServerConfigName
     ).deployment;
   }
@@ -851,7 +885,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the config.
    */
   matchConfigFromGameServerConfigName(gameServerConfigName: string) {
-    return this._pathTemplates.gameServerConfigPathTemplate.match(
+    return this.pathTemplates.gameServerConfigPathTemplate.match(
       gameServerConfigName
     ).config;
   }
@@ -869,10 +903,10 @@ export class GameServerConfigsServiceClient {
     location: string,
     deployment: string
   ) {
-    return this._pathTemplates.gameServerDeploymentPathTemplate.render({
-      project,
-      location,
-      deployment,
+    return this.pathTemplates.gameServerDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      deployment: deployment,
     });
   }
 
@@ -884,7 +918,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGameServerDeploymentName(gameServerDeploymentName: string) {
-    return this._pathTemplates.gameServerDeploymentPathTemplate.match(
+    return this.pathTemplates.gameServerDeploymentPathTemplate.match(
       gameServerDeploymentName
     ).project;
   }
@@ -897,7 +931,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGameServerDeploymentName(gameServerDeploymentName: string) {
-    return this._pathTemplates.gameServerDeploymentPathTemplate.match(
+    return this.pathTemplates.gameServerDeploymentPathTemplate.match(
       gameServerDeploymentName
     ).location;
   }
@@ -912,7 +946,7 @@ export class GameServerConfigsServiceClient {
   matchDeploymentFromGameServerDeploymentName(
     gameServerDeploymentName: string
   ) {
-    return this._pathTemplates.gameServerDeploymentPathTemplate.match(
+    return this.pathTemplates.gameServerDeploymentPathTemplate.match(
       gameServerDeploymentName
     ).deployment;
   }
@@ -930,10 +964,10 @@ export class GameServerConfigsServiceClient {
     location: string,
     deployment: string
   ) {
-    return this._pathTemplates.gameServerDeploymentRolloutPathTemplate.render({
-      project,
-      location,
-      deployment,
+    return this.pathTemplates.gameServerDeploymentRolloutPathTemplate.render({
+      project: project,
+      location: location,
+      deployment: deployment,
     });
   }
 
@@ -947,7 +981,7 @@ export class GameServerConfigsServiceClient {
   matchProjectFromGameServerDeploymentRolloutName(
     gameServerDeploymentRolloutName: string
   ) {
-    return this._pathTemplates.gameServerDeploymentRolloutPathTemplate.match(
+    return this.pathTemplates.gameServerDeploymentRolloutPathTemplate.match(
       gameServerDeploymentRolloutName
     ).project;
   }
@@ -962,7 +996,7 @@ export class GameServerConfigsServiceClient {
   matchLocationFromGameServerDeploymentRolloutName(
     gameServerDeploymentRolloutName: string
   ) {
-    return this._pathTemplates.gameServerDeploymentRolloutPathTemplate.match(
+    return this.pathTemplates.gameServerDeploymentRolloutPathTemplate.match(
       gameServerDeploymentRolloutName
     ).location;
   }
@@ -977,7 +1011,7 @@ export class GameServerConfigsServiceClient {
   matchDeploymentFromGameServerDeploymentRolloutName(
     gameServerDeploymentRolloutName: string
   ) {
-    return this._pathTemplates.gameServerDeploymentRolloutPathTemplate.match(
+    return this.pathTemplates.gameServerDeploymentRolloutPathTemplate.match(
       gameServerDeploymentRolloutName
     ).deployment;
   }
@@ -991,10 +1025,10 @@ export class GameServerConfigsServiceClient {
    * @returns {string} Resource name string.
    */
   realmPath(project: string, location: string, realm: string) {
-    return this._pathTemplates.realmPathTemplate.render({
-      project,
-      location,
-      realm,
+    return this.pathTemplates.realmPathTemplate.render({
+      project: project,
+      location: location,
+      realm: realm,
     });
   }
 
@@ -1006,7 +1040,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRealmName(realmName: string) {
-    return this._pathTemplates.realmPathTemplate.match(realmName).project;
+    return this.pathTemplates.realmPathTemplate.match(realmName).project;
   }
 
   /**
@@ -1017,7 +1051,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRealmName(realmName: string) {
-    return this._pathTemplates.realmPathTemplate.match(realmName).location;
+    return this.pathTemplates.realmPathTemplate.match(realmName).location;
   }
 
   /**
@@ -1028,7 +1062,7 @@ export class GameServerConfigsServiceClient {
    * @returns {string} A string representing the realm.
    */
   matchRealmFromRealmName(realmName: string) {
-    return this._pathTemplates.realmPathTemplate.match(realmName).realm;
+    return this.pathTemplates.realmPathTemplate.match(realmName).realm;
   }
 
   /**
