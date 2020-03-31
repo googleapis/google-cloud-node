@@ -19,7 +19,7 @@
 import {OsLoginServiceClient} from '@google-cloud/os-login';
 
 function main() {
-  const osLoginServiceClient = new OsLoginServiceClient();
+  new OsLoginServiceClient();
 }
 
 main();
