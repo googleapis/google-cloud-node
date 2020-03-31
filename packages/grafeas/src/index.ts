@@ -19,8 +19,6 @@
 import * as v1 from './v1';
 const GrafeasClient = v1.GrafeasClient;
 export {v1, GrafeasClient};
-// For compatibility with JavaScript libraries we need to provide this default export:
-// tslint:disable-next-line no-default-export
 export default {v1, GrafeasClient};
 import * as protos from '../protos/protos';
 export {protos};
