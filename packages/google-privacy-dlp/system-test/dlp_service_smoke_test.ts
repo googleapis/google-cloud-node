@@ -16,6 +16,7 @@ import {describe, it} from 'mocha';
 
 describe('DlpServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const dlp = require('../src');
 
     const projectId = process.env['GCLOUD_PROJECT'];

@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './dlp_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -48,14 +48,6 @@ const version = require('../../../package.json').version;
  * @memberof v2
  */
 export class DlpServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -63,6 +55,14 @@ export class DlpServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   dlpServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -154,13 +154,16 @@ export class DlpServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       inspectFindingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/findings/{finding}'
       ),
@@ -223,7 +226,7 @@ export class DlpServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listInspectTemplates: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -262,7 +265,7 @@ export class DlpServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -289,7 +292,7 @@ export class DlpServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.privacy.dlp.v2.DlpService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.privacy.dlp.v2.DlpService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -332,9 +335,8 @@ export class DlpServiceClient {
       'hybridInspectDlpJob',
       'finishDlpJob',
     ];
-
     for (const methodName of dlpServiceStubMethods) {
-      const innerCallPromise = this.dlpServiceStub.then(
+      const callPromise = this.dlpServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -348,20 +350,14 @@ export class DlpServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.dlpServiceStub;
@@ -418,22 +414,30 @@ export class DlpServiceClient {
   // -- Service calls --
   // -------------------
   inspectContent(
-    request: protosTypes.google.privacy.dlp.v2.IInspectContentRequest,
+    request: protos.google.privacy.dlp.v2.IInspectContentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectContentResponse,
-      protosTypes.google.privacy.dlp.v2.IInspectContentRequest | undefined,
+      protos.google.privacy.dlp.v2.IInspectContentResponse,
+      protos.google.privacy.dlp.v2.IInspectContentRequest | undefined,
       {} | undefined
     ]
   >;
   inspectContent(
-    request: protosTypes.google.privacy.dlp.v2.IInspectContentRequest,
+    request: protos.google.privacy.dlp.v2.IInspectContentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectContentResponse,
-      protosTypes.google.privacy.dlp.v2.IInspectContentRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IInspectContentResponse,
+      protos.google.privacy.dlp.v2.IInspectContentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  inspectContent(
+    request: protos.google.privacy.dlp.v2.IInspectContentRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IInspectContentResponse,
+      protos.google.privacy.dlp.v2.IInspectContentRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -472,23 +476,25 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   inspectContent(
-    request: protosTypes.google.privacy.dlp.v2.IInspectContentRequest,
+    request: protos.google.privacy.dlp.v2.IInspectContentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IInspectContentResponse,
-          protosTypes.google.privacy.dlp.v2.IInspectContentRequest | undefined,
-          {} | undefined
+          protos.google.privacy.dlp.v2.IInspectContentResponse,
+          | protos.google.privacy.dlp.v2.IInspectContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectContentResponse,
-      protosTypes.google.privacy.dlp.v2.IInspectContentRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IInspectContentResponse,
+      protos.google.privacy.dlp.v2.IInspectContentRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectContentResponse,
-      protosTypes.google.privacy.dlp.v2.IInspectContentRequest | undefined,
+      protos.google.privacy.dlp.v2.IInspectContentResponse,
+      protos.google.privacy.dlp.v2.IInspectContentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -509,25 +515,33 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.inspectContent(request, options, callback);
+    return this.innerApiCalls.inspectContent(request, options, callback);
   }
   redactImage(
-    request: protosTypes.google.privacy.dlp.v2.IRedactImageRequest,
+    request: protos.google.privacy.dlp.v2.IRedactImageRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IRedactImageResponse,
-      protosTypes.google.privacy.dlp.v2.IRedactImageRequest | undefined,
+      protos.google.privacy.dlp.v2.IRedactImageResponse,
+      protos.google.privacy.dlp.v2.IRedactImageRequest | undefined,
       {} | undefined
     ]
   >;
   redactImage(
-    request: protosTypes.google.privacy.dlp.v2.IRedactImageRequest,
+    request: protos.google.privacy.dlp.v2.IRedactImageRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IRedactImageResponse,
-      protosTypes.google.privacy.dlp.v2.IRedactImageRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IRedactImageResponse,
+      protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  redactImage(
+    request: protos.google.privacy.dlp.v2.IRedactImageRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IRedactImageResponse,
+      protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -563,23 +577,23 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   redactImage(
-    request: protosTypes.google.privacy.dlp.v2.IRedactImageRequest,
+    request: protos.google.privacy.dlp.v2.IRedactImageRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IRedactImageResponse,
-          protosTypes.google.privacy.dlp.v2.IRedactImageRequest | undefined,
-          {} | undefined
+          protos.google.privacy.dlp.v2.IRedactImageResponse,
+          protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IRedactImageResponse,
-      protosTypes.google.privacy.dlp.v2.IRedactImageRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IRedactImageResponse,
+      protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IRedactImageResponse,
-      protosTypes.google.privacy.dlp.v2.IRedactImageRequest | undefined,
+      protos.google.privacy.dlp.v2.IRedactImageResponse,
+      protos.google.privacy.dlp.v2.IRedactImageRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -600,25 +614,33 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.redactImage(request, options, callback);
+    return this.innerApiCalls.redactImage(request, options, callback);
   }
   deidentifyContent(
-    request: protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest,
+    request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
+      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
       {} | undefined
     ]
   >;
   deidentifyContent(
-    request: protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest,
+    request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deidentifyContent(
+    request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -667,24 +689,25 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deidentifyContent(
-    request: protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest,
+    request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IDeidentifyContentResponse,
-          | protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest
+          protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+          | protos.google.privacy.dlp.v2.IDeidentifyContentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
+      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -705,25 +728,33 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.deidentifyContent(request, options, callback);
+    return this.innerApiCalls.deidentifyContent(request, options, callback);
   }
   reidentifyContent(
-    request: protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest,
+    request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
+      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
       {} | undefined
     ]
   >;
   reidentifyContent(
-    request: protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest,
+    request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IReidentifyContentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  reidentifyContent(
+    request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IReidentifyContentRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -774,24 +805,25 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   reidentifyContent(
-    request: protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest,
+    request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IReidentifyContentResponse,
-          | protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest
+          protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+          | protos.google.privacy.dlp.v2.IReidentifyContentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IReidentifyContentRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
+      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+      protos.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -812,25 +844,33 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.reidentifyContent(request, options, callback);
+    return this.innerApiCalls.reidentifyContent(request, options, callback);
   }
   listInfoTypes(
-    request: protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest,
+    request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
+      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+      protos.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
       {} | undefined
     ]
   >;
   listInfoTypes(
-    request: protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest,
+    request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+      protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listInfoTypes(
+    request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+      protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -857,23 +897,23 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listInfoTypes(
-    request: protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest,
+    request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IListInfoTypesResponse,
-          protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
-          {} | undefined
+          protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+          protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+      protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protosTypes.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
+      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+      protos.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -887,29 +927,37 @@ export class DlpServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.listInfoTypes(request, options, callback);
+    return this.innerApiCalls.listInfoTypes(request, options, callback);
   }
   createInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest | undefined,
       {} | undefined
     ]
   >;
   createInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      | protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createInspectTemplate(
+    request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -939,28 +987,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-          | protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      | protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -981,33 +1028,37 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createInspectTemplate(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.createInspectTemplate(request, options, callback);
   }
   updateInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest | undefined,
       {} | undefined
     ]
   >;
   updateInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      | protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateInspectTemplate(
+    request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1031,28 +1082,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-          | protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      | protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1073,29 +1123,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateInspectTemplate(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.updateInspectTemplate(request, options, callback);
   }
   getInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      protos.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
       {} | undefined
     ]
   >;
   getInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getInspectTemplate(
+    request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1115,24 +1173,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-          | protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate,
-      protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
+      protos.google.privacy.dlp.v2.IInspectTemplate,
+      protos.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1153,29 +1214,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getInspectTemplate(request, options, callback);
+    return this.innerApiCalls.getInspectTemplate(request, options, callback);
   }
   deleteInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest | undefined,
       {} | undefined
     ]
   >;
   deleteInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteInspectTemplate(
+    request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1195,28 +1264,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteInspectTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1237,33 +1305,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteInspectTemplate(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.deleteInspectTemplate(request, options, callback);
   }
   createDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest | undefined,
       {} | undefined
     ]
   >;
   createDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createDeidentifyTemplate(
+    request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1294,28 +1366,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1336,33 +1407,41 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createDeidentifyTemplate(
+    return this.innerApiCalls.createDeidentifyTemplate(
       request,
       options,
       callback
     );
   }
   updateDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest | undefined,
       {} | undefined
     ]
   >;
   updateDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateDeidentifyTemplate(
+    request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1388,28 +1467,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1430,33 +1508,41 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateDeidentifyTemplate(
+    return this.innerApiCalls.updateDeidentifyTemplate(
       request,
       options,
       callback
     );
   }
   getDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest | undefined,
       {} | undefined
     ]
   >;
   getDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getDeidentifyTemplate(
+    request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1477,28 +1563,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate,
-      (
-        | protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+      protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1519,33 +1604,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getDeidentifyTemplate(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.getDeidentifyTemplate(request, options, callback);
   }
   deleteDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest | undefined,
       {} | undefined
     ]
   >;
   deleteDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteDeidentifyTemplate(
+    request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1567,28 +1656,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteDeidentifyTemplate(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1609,29 +1697,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteDeidentifyTemplate(
+    return this.innerApiCalls.deleteDeidentifyTemplate(
       request,
       options,
       callback
     );
   }
   createJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
       {} | undefined
     ]
   >;
   createJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createJobTrigger(
+    request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1660,24 +1756,25 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IJobTrigger,
-          | protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          | protos.google.privacy.dlp.v2.ICreateJobTriggerRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1698,25 +1795,33 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createJobTrigger(request, options, callback);
+    return this.innerApiCalls.createJobTrigger(request, options, callback);
   }
   updateJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
       {} | undefined
     ]
   >;
   updateJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateJobTrigger(
+    request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1739,24 +1844,25 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IJobTrigger,
-          | protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          | protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1777,29 +1883,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateJobTrigger(request, options, callback);
+    return this.innerApiCalls.updateJobTrigger(request, options, callback);
   }
   hybridInspectJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-      (
-        | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest | undefined,
       {} | undefined
     ]
   >;
   hybridInspectJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-      | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  hybridInspectJobTrigger(
+    request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1824,28 +1938,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   hybridInspectJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-          | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+          protos.google.privacy.dlp.v2.IHybridInspectResponse,
+          | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-      | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-      (
-        | protosTypes.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1866,29 +1979,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.hybridInspectJobTrigger(
+    return this.innerApiCalls.hybridInspectJobTrigger(
       request,
       options,
       callback
     );
   }
   getJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
       {} | undefined
     ]
   >;
   getJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getJobTrigger(
+    request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1907,23 +2028,23 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IJobTrigger,
-          protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
-          {} | undefined
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IJobTrigger,
-      protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger,
+      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1944,25 +2065,33 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getJobTrigger(request, options, callback);
+    return this.innerApiCalls.getJobTrigger(request, options, callback);
   }
   deleteJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
       {} | undefined
     ]
   >;
   deleteJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteJobTrigger(
+    request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1981,24 +2110,25 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2019,25 +2149,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteJobTrigger(request, options, callback);
+    return this.innerApiCalls.deleteJobTrigger(request, options, callback);
   }
   activateJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
       {} | undefined
     ]
   >;
   activateJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IDlpJob,
+      | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  activateJobTrigger(
+    request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDlpJob,
+      | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2056,24 +2198,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   activateJobTrigger(
-    request: protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+    request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IDlpJob,
-          | protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest
+          protos.google.privacy.dlp.v2.IDlpJob,
+          | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IDlpJob,
+      | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2094,25 +2239,33 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.activateJobTrigger(request, options, callback);
+    return this.innerApiCalls.activateJobTrigger(request, options, callback);
   }
   createDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
       {} | undefined
     ]
   >;
   createDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDlpJob(
+    request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2147,23 +2300,23 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IDlpJob,
-          protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
-          {} | undefined
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2184,25 +2337,33 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createDlpJob(request, options, callback);
+    return this.innerApiCalls.createDlpJob(request, options, callback);
   }
   getDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
       {} | undefined
     ]
   >;
   getDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDlpJob(
+    request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2221,23 +2382,23 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IDlpJob,
-          protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
-          {} | undefined
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDlpJob,
-      protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob,
+      protos.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2258,25 +2419,33 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getDlpJob(request, options, callback);
+    return this.innerApiCalls.getDlpJob(request, options, callback);
   }
   deleteDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
       {} | undefined
     ]
   >;
   deleteDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDlpJob(
+    request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2297,23 +2466,23 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
-          {} | undefined
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2334,25 +2503,33 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteDlpJob(request, options, callback);
+    return this.innerApiCalls.deleteDlpJob(request, options, callback);
   }
   cancelDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
       {} | undefined
     ]
   >;
   cancelDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelDlpJob(
+    request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2373,23 +2550,23 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   cancelDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
-          {} | undefined
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2410,29 +2587,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.cancelDlpJob(request, options, callback);
+    return this.innerApiCalls.cancelDlpJob(request, options, callback);
   }
   createStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      (
-        | protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest | undefined,
       {} | undefined
     ]
   >;
   createStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      | protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createStoredInfoType(
+    request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2462,28 +2647,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-          | protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      | protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      (
-        | protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2504,29 +2688,37 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createStoredInfoType(request, options, callback);
+    return this.innerApiCalls.createStoredInfoType(request, options, callback);
   }
   updateStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      (
-        | protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest | undefined,
       {} | undefined
     ]
   >;
   updateStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      | protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateStoredInfoType(
+    request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2554,28 +2746,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-          | protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      | protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      (
-        | protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
-        | undefined
-      ),
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2596,25 +2787,33 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateStoredInfoType(request, options, callback);
+    return this.innerApiCalls.updateStoredInfoType(request, options, callback);
   }
   getStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
       {} | undefined
     ]
   >;
   getStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getStoredInfoType(
+    request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2635,24 +2834,25 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-          | protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          | protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType,
-      protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
+      protos.google.privacy.dlp.v2.IStoredInfoType,
+      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2673,29 +2873,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getStoredInfoType(request, options, callback);
+    return this.innerApiCalls.getStoredInfoType(request, options, callback);
   }
   deleteStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest | undefined,
       {} | undefined
     ]
   >;
   deleteStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteStoredInfoType(
+    request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2716,28 +2924,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteStoredInfoType(
-    request: protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+    request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2758,25 +2965,37 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteStoredInfoType(request, options, callback);
+    return this.innerApiCalls.deleteStoredInfoType(request, options, callback);
   }
   hybridInspectDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-      protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
       {} | undefined
     ]
   >;
   hybridInspectDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-      protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  hybridInspectDlpJob(
+    request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2801,24 +3020,27 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   hybridInspectDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-          | protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
+          protos.google.privacy.dlp.v2.IHybridInspectResponse,
+          | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-      protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IHybridInspectResponse,
-      protosTypes.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
+      protos.google.privacy.dlp.v2.IHybridInspectResponse,
+      protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2839,25 +3061,33 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.hybridInspectDlpJob(request, options, callback);
+    return this.innerApiCalls.hybridInspectDlpJob(request, options, callback);
   }
   finishDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
       {} | undefined
     ]
   >;
   finishDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  finishDlpJob(
+    request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2878,23 +3108,23 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   finishDlpJob(
-    request: protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
-          {} | undefined
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2915,26 +3145,38 @@ export class DlpServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.finishDlpJob(request, options, callback);
+    return this.innerApiCalls.finishDlpJob(request, options, callback);
   }
 
   listInspectTemplates(
-    request: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+    request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate[],
-      protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      protos.google.privacy.dlp.v2.IInspectTemplate[],
+      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
+      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
     ]
   >;
   listInspectTemplates(
-    request: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+    request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate[],
-      protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListInspectTemplatesResponse
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IInspectTemplate
+    >
+  ): void;
+  listInspectTemplates(
+    request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IInspectTemplate
     >
   ): void;
   /**
@@ -2988,24 +3230,28 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listInspectTemplates(
-    request: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+    request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.privacy.dlp.v2.IInspectTemplate[],
-          protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-          protosTypes.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+          | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IInspectTemplate
         >,
-    callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate[],
-      protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListInspectTemplatesResponse
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IInspectTemplate
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IInspectTemplate[],
-      protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      protos.google.privacy.dlp.v2.IInspectTemplate[],
+      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
+      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
     ]
   > | void {
     request = request || {};
@@ -3025,7 +3271,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listInspectTemplates(request, options, callback);
+    return this.innerApiCalls.listInspectTemplates(request, options, callback);
   }
 
   /**
@@ -3075,7 +3321,7 @@ export class DlpServiceClient {
    *   An object stream which emits an object representing [InspectTemplate]{@link google.privacy.dlp.v2.InspectTemplate} on 'data' event.
    */
   listInspectTemplatesStream(
-    request?: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+    request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -3089,29 +3335,102 @@ export class DlpServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listInspectTemplates.createStream(
-      this._innerApiCalls.listInspectTemplates as gax.GaxCall,
+    return this.descriptors.page.listInspectTemplates.createStream(
+      this.innerApiCalls.listInspectTemplates as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listInspectTemplates}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, for example projects/my-project-id or
+   *   organizations/my-org-id.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval. Comes from previous call
+   *   to `ListInspectTemplates`.
+   * @param {number} request.pageSize
+   *   Size of the page, can be limited by server. If zero server returns
+   *   a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the template was created.
+   *   - `update_time`: corresponds to time the template was last updated.
+   *   - `name`: corresponds to template's name.
+   *   - `display_name`: corresponds to template's display name.
+   * @param {string} request.locationId
+   *   The geographic location where inspection templates will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listInspectTemplatesAsync(
+    request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IInspectTemplate> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listInspectTemplates.asyncIterate(
+      this.innerApiCalls['listInspectTemplates'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IInspectTemplate>;
+  }
   listDeidentifyTemplates(
-    request: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+    request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate[],
-      protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
     ]
   >;
   listDeidentifyTemplates(
-    request: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+    request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate[],
-      protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate
+    >
+  ): void;
+  listDeidentifyTemplates(
+    request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate
     >
   ): void;
   /**
@@ -3166,24 +3485,28 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listDeidentifyTemplates(
-    request: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+    request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate[],
-          protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-          protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+          | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate
         >,
-    callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate[],
-      protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDeidentifyTemplate[],
-      protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
     ]
   > | void {
     request = request || {};
@@ -3203,7 +3526,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listDeidentifyTemplates(
+    return this.innerApiCalls.listDeidentifyTemplates(
       request,
       options,
       callback
@@ -3257,7 +3580,7 @@ export class DlpServiceClient {
    *   An object stream which emits an object representing [DeidentifyTemplate]{@link google.privacy.dlp.v2.DeidentifyTemplate} on 'data' event.
    */
   listDeidentifyTemplatesStream(
-    request?: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+    request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -3271,29 +3594,98 @@ export class DlpServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listDeidentifyTemplates.createStream(
-      this._innerApiCalls.listDeidentifyTemplates as gax.GaxCall,
+    return this.descriptors.page.listDeidentifyTemplates.createStream(
+      this.innerApiCalls.listDeidentifyTemplates as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listDeidentifyTemplates}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, for example projects/my-project-id or
+   *   organizations/my-org-id.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval. Comes from previous call
+   *   to `ListDeidentifyTemplates`.
+   * @param {number} request.pageSize
+   *   Size of the page, can be limited by server. If zero server returns
+   *   a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the template was created.
+   *   - `update_time`: corresponds to time the template was last updated.
+   *   - `name`: corresponds to template's name.
+   *   - `display_name`: corresponds to template's display name.
+   * @param {string} request.locationId
+   *   The geographic location where deidentifications templates will be retrieved
+   *   from. Use `-` for all locations. Reserved for future extensions.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listDeidentifyTemplatesAsync(
+    request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IDeidentifyTemplate> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listDeidentifyTemplates.asyncIterate(
+      this.innerApiCalls['listDeidentifyTemplates'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IDeidentifyTemplate>;
+  }
   listJobTriggers(
-    request: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest,
+    request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IJobTrigger[],
-      protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListJobTriggersResponse
+      protos.google.privacy.dlp.v2.IJobTrigger[],
+      protos.google.privacy.dlp.v2.IListJobTriggersRequest | null,
+      protos.google.privacy.dlp.v2.IListJobTriggersResponse
     ]
   >;
   listJobTriggers(
-    request: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest,
+    request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IJobTrigger[],
-      protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListJobTriggersResponse
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      protos.google.privacy.dlp.v2.IListJobTriggersResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger
+    >
+  ): void;
+  listJobTriggers(
+    request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      protos.google.privacy.dlp.v2.IListJobTriggersResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger
     >
   ): void;
   /**
@@ -3373,24 +3765,26 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listJobTriggers(
-    request: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest,
+    request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.privacy.dlp.v2.IJobTrigger[],
-          protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-          protosTypes.google.privacy.dlp.v2.IListJobTriggersResponse
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+          | protos.google.privacy.dlp.v2.IListJobTriggersResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IJobTrigger
         >,
-    callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IJobTrigger[],
-      protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListJobTriggersResponse
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      protos.google.privacy.dlp.v2.IListJobTriggersResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IJobTrigger[],
-      protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListJobTriggersResponse
+      protos.google.privacy.dlp.v2.IJobTrigger[],
+      protos.google.privacy.dlp.v2.IListJobTriggersRequest | null,
+      protos.google.privacy.dlp.v2.IListJobTriggersResponse
     ]
   > | void {
     request = request || {};
@@ -3410,7 +3804,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listJobTriggers(request, options, callback);
+    return this.innerApiCalls.listJobTriggers(request, options, callback);
   }
 
   /**
@@ -3486,7 +3880,7 @@ export class DlpServiceClient {
    *   An object stream which emits an object representing [JobTrigger]{@link google.privacy.dlp.v2.JobTrigger} on 'data' event.
    */
   listJobTriggersStream(
-    request?: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest,
+    request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -3500,29 +3894,124 @@ export class DlpServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listJobTriggers.createStream(
-      this._innerApiCalls.listJobTriggers as gax.GaxCall,
+    return this.descriptors.page.listJobTriggers.createStream(
+      this.innerApiCalls.listJobTriggers as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listJobTriggers}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, for example `projects/my-project-id`.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval. Comes from previous call
+   *   to ListJobTriggers. `order_by` field must not
+   *   change for subsequent calls.
+   * @param {number} request.pageSize
+   *   Size of the page, can be limited by a server.
+   * @param {string} request.orderBy
+   *   Comma separated list of triggeredJob fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the JobTrigger was created.
+   *   - `update_time`: corresponds to time the JobTrigger was last updated.
+   *   - `last_run_time`: corresponds to the last time the JobTrigger ran.
+   *   - `name`: corresponds to JobTrigger's name.
+   *   - `display_name`: corresponds to JobTrigger's display name.
+   *   - `status`: corresponds to JobTrigger's status.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values for inspect jobs:
+   *       - `status` - HEALTHY|PAUSED|CANCELLED
+   *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+   *       - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
+   *       quotation marks. Nanoseconds are ignored.
+   *       - 'error_count' - Number of errors that have occurred while running.
+   *   * The operator must be `=` or `!=` for status and inspected_storage.
+   *
+   *   Examples:
+   *
+   *   * inspected_storage = cloud_storage AND status = HEALTHY
+   *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+   *   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
+   *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {string} request.locationId
+   *   The geographic location where job triggers will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listJobTriggersAsync(
+    request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listJobTriggers.asyncIterate(
+      this.innerApiCalls['listJobTriggers'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger>;
+  }
   listDlpJobs(
-    request: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest,
+    request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDlpJob[],
-      protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListDlpJobsResponse
+      protos.google.privacy.dlp.v2.IDlpJob[],
+      protos.google.privacy.dlp.v2.IListDlpJobsRequest | null,
+      protos.google.privacy.dlp.v2.IListDlpJobsResponse
     ]
   >;
   listDlpJobs(
-    request: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest,
+    request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IDlpJob[],
-      protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListDlpJobsResponse
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob
+    >
+  ): void;
+  listDlpJobs(
+    request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob
     >
   ): void;
   /**
@@ -3605,24 +4094,24 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listDlpJobs(
-    request: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest,
+    request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.privacy.dlp.v2.IDlpJob[],
-          protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-          protosTypes.google.privacy.dlp.v2.IListDlpJobsResponse
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+          protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
+          protos.google.privacy.dlp.v2.IDlpJob
         >,
-    callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IDlpJob[],
-      protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListDlpJobsResponse
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IDlpJob
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IDlpJob[],
-      protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListDlpJobsResponse
+      protos.google.privacy.dlp.v2.IDlpJob[],
+      protos.google.privacy.dlp.v2.IListDlpJobsRequest | null,
+      protos.google.privacy.dlp.v2.IListDlpJobsResponse
     ]
   > | void {
     request = request || {};
@@ -3642,7 +4131,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listDlpJobs(request, options, callback);
+    return this.innerApiCalls.listDlpJobs(request, options, callback);
   }
 
   /**
@@ -3720,7 +4209,7 @@ export class DlpServiceClient {
    *   An object stream which emits an object representing [DlpJob]{@link google.privacy.dlp.v2.DlpJob} on 'data' event.
    */
   listDlpJobsStream(
-    request?: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest,
+    request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -3734,29 +4223,130 @@ export class DlpServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listDlpJobs.createStream(
-      this._innerApiCalls.listDlpJobs as gax.GaxCall,
+    return this.descriptors.page.listDlpJobs.createStream(
+      this.innerApiCalls.listDlpJobs as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listDlpJobs}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, for example projects/my-project-id.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values for inspect jobs:
+   *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
+   *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+   *       - `trigger_name` - The resource name of the trigger that created job.
+   *       - 'end_time` - Corresponds to time the job finished.
+   *       - 'start_time` - Corresponds to time the job finished.
+   *   * Supported fields for risk analysis jobs:
+   *       - `state` - RUNNING|CANCELED|FINISHED|FAILED
+   *       - 'end_time` - Corresponds to time the job finished.
+   *       - 'start_time` - Corresponds to time the job finished.
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * inspected_storage = cloud_storage AND state = done
+   *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+   *   * inspected_storage = cloud_storage AND (state = done OR state = canceled)
+   *   * end_time > \"2017-12-12T00:00:00+00:00\"
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.privacy.dlp.v2.DlpJobType} request.type
+   *   The type of job. Defaults to `DlpJobType.INSPECT`
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc, end_time asc, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the job was created.
+   *   - `end_time`: corresponds to time the job ended.
+   *   - `name`: corresponds to job's name.
+   *   - `state`: corresponds to `state`
+   * @param {string} request.locationId
+   *   The geographic location where jobs will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listDlpJobsAsync(
+    request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IDlpJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listDlpJobs.asyncIterate(
+      this.innerApiCalls['listDlpJobs'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IDlpJob>;
+  }
   listStoredInfoTypes(
-    request: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+    request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType[],
-      protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      protos.google.privacy.dlp.v2.IStoredInfoType[],
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
     ]
   >;
   listStoredInfoTypes(
-    request: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+    request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType[],
-      protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IStoredInfoType
+    >
+  ): void;
+  listStoredInfoTypes(
+    request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IStoredInfoType
     >
   ): void;
   /**
@@ -3812,24 +4402,28 @@ export class DlpServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listStoredInfoTypes(
-    request: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+    request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.privacy.dlp.v2.IStoredInfoType[],
-          protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-          protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+          | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IStoredInfoType
         >,
-    callback?: Callback<
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType[],
-      protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IStoredInfoType
     >
   ): Promise<
     [
-      protosTypes.google.privacy.dlp.v2.IStoredInfoType[],
-      protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-      protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      protos.google.privacy.dlp.v2.IStoredInfoType[],
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
     ]
   > | void {
     request = request || {};
@@ -3849,7 +4443,7 @@ export class DlpServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listStoredInfoTypes(request, options, callback);
+    return this.innerApiCalls.listStoredInfoTypes(request, options, callback);
   }
 
   /**
@@ -3900,7 +4494,7 @@ export class DlpServiceClient {
    *   An object stream which emits an object representing [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType} on 'data' event.
    */
   listStoredInfoTypesStream(
-    request?: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+    request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -3914,11 +4508,73 @@ export class DlpServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listStoredInfoTypes.createStream(
-      this._innerApiCalls.listStoredInfoTypes as gax.GaxCall,
+    return this.descriptors.page.listStoredInfoTypes.createStream(
+      this.innerApiCalls.listStoredInfoTypes as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listStoredInfoTypes}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, for example projects/my-project-id or
+   *   organizations/my-org-id.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval. Comes from previous call
+   *   to `ListStoredInfoTypes`.
+   * @param {number} request.pageSize
+   *   Size of the page, can be limited by server. If zero server returns
+   *   a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc, display_name, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the most recent version of the
+   *   resource was created.
+   *   - `state`: corresponds to the state of the resource.
+   *   - `name`: corresponds to resource name.
+   *   - `display_name`: corresponds to info type's display name.
+   * @param {string} request.locationId
+   *   The geographic location where stored infoTypes will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listStoredInfoTypesAsync(
+    request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listStoredInfoTypes.asyncIterate(
+      this.innerApiCalls['listStoredInfoTypes'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType>;
   }
   // --------------------
   // -- Path templates --
@@ -3933,10 +4589,10 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   inspectFindingPath(project: string, location: string, finding: string) {
-    return this._pathTemplates.inspectFindingPathTemplate.render({
-      project,
-      location,
-      finding,
+    return this.pathTemplates.inspectFindingPathTemplate.render({
+      project: project,
+      location: location,
+      finding: finding,
     });
   }
 
@@ -3948,7 +4604,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInspectFindingName(inspectFindingName: string) {
-    return this._pathTemplates.inspectFindingPathTemplate.match(
+    return this.pathTemplates.inspectFindingPathTemplate.match(
       inspectFindingName
     ).project;
   }
@@ -3961,7 +4617,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInspectFindingName(inspectFindingName: string) {
-    return this._pathTemplates.inspectFindingPathTemplate.match(
+    return this.pathTemplates.inspectFindingPathTemplate.match(
       inspectFindingName
     ).location;
   }
@@ -3974,7 +4630,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the finding.
    */
   matchFindingFromInspectFindingName(inspectFindingName: string) {
-    return this._pathTemplates.inspectFindingPathTemplate.match(
+    return this.pathTemplates.inspectFindingPathTemplate.match(
       inspectFindingName
     ).finding;
   }
@@ -3986,8 +4642,8 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   organizationPath(organization: string) {
-    return this._pathTemplates.organizationPathTemplate.render({
-      organization,
+    return this.pathTemplates.organizationPathTemplate.render({
+      organization: organization,
     });
   }
 
@@ -3999,7 +4655,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this._pathTemplates.organizationPathTemplate.match(organizationName)
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
       .organization;
   }
 
@@ -4014,9 +4670,9 @@ export class DlpServiceClient {
     organization: string,
     deidentifyTemplate: string
   ) {
-    return this._pathTemplates.organizationDeidentifyTemplatePathTemplate.render(
+    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.render(
       {
-        organization,
+        organization: organization,
         deidentify_template: deidentifyTemplate,
       }
     );
@@ -4032,7 +4688,7 @@ export class DlpServiceClient {
   matchOrganizationFromOrganizationDeidentifyTemplateName(
     organizationDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.organizationDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.match(
       organizationDeidentifyTemplateName
     ).organization;
   }
@@ -4047,7 +4703,7 @@ export class DlpServiceClient {
   matchDeidentifyTemplateFromOrganizationDeidentifyTemplateName(
     organizationDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.organizationDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.match(
       organizationDeidentifyTemplateName
     ).deidentify_template;
   }
@@ -4063,8 +4719,8 @@ export class DlpServiceClient {
     organization: string,
     inspectTemplate: string
   ) {
-    return this._pathTemplates.organizationInspectTemplatePathTemplate.render({
-      organization,
+    return this.pathTemplates.organizationInspectTemplatePathTemplate.render({
+      organization: organization,
       inspect_template: inspectTemplate,
     });
   }
@@ -4079,7 +4735,7 @@ export class DlpServiceClient {
   matchOrganizationFromOrganizationInspectTemplateName(
     organizationInspectTemplateName: string
   ) {
-    return this._pathTemplates.organizationInspectTemplatePathTemplate.match(
+    return this.pathTemplates.organizationInspectTemplatePathTemplate.match(
       organizationInspectTemplateName
     ).organization;
   }
@@ -4094,7 +4750,7 @@ export class DlpServiceClient {
   matchInspectTemplateFromOrganizationInspectTemplateName(
     organizationInspectTemplateName: string
   ) {
-    return this._pathTemplates.organizationInspectTemplatePathTemplate.match(
+    return this.pathTemplates.organizationInspectTemplatePathTemplate.match(
       organizationInspectTemplateName
     ).inspect_template;
   }
@@ -4112,10 +4768,10 @@ export class DlpServiceClient {
     location: string,
     deidentifyTemplate: string
   ) {
-    return this._pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render(
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render(
       {
-        organization,
-        location,
+        organization: organization,
+        location: location,
         deidentify_template: deidentifyTemplate,
       }
     );
@@ -4131,7 +4787,7 @@ export class DlpServiceClient {
   matchOrganizationFromOrganizationLocationDeidentifyTemplateName(
     organizationLocationDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
       organizationLocationDeidentifyTemplateName
     ).organization;
   }
@@ -4146,7 +4802,7 @@ export class DlpServiceClient {
   matchLocationFromOrganizationLocationDeidentifyTemplateName(
     organizationLocationDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
       organizationLocationDeidentifyTemplateName
     ).location;
   }
@@ -4161,7 +4817,7 @@ export class DlpServiceClient {
   matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName(
     organizationLocationDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
       organizationLocationDeidentifyTemplateName
     ).deidentify_template;
   }
@@ -4179,10 +4835,10 @@ export class DlpServiceClient {
     location: string,
     inspectTemplate: string
   ) {
-    return this._pathTemplates.organizationLocationInspectTemplatePathTemplate.render(
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.render(
       {
-        organization,
-        location,
+        organization: organization,
+        location: location,
         inspect_template: inspectTemplate,
       }
     );
@@ -4198,7 +4854,7 @@ export class DlpServiceClient {
   matchOrganizationFromOrganizationLocationInspectTemplateName(
     organizationLocationInspectTemplateName: string
   ) {
-    return this._pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
       organizationLocationInspectTemplateName
     ).organization;
   }
@@ -4213,7 +4869,7 @@ export class DlpServiceClient {
   matchLocationFromOrganizationLocationInspectTemplateName(
     organizationLocationInspectTemplateName: string
   ) {
-    return this._pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
       organizationLocationInspectTemplateName
     ).location;
   }
@@ -4228,7 +4884,7 @@ export class DlpServiceClient {
   matchInspectTemplateFromOrganizationLocationInspectTemplateName(
     organizationLocationInspectTemplateName: string
   ) {
-    return this._pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
       organizationLocationInspectTemplateName
     ).inspect_template;
   }
@@ -4246,10 +4902,10 @@ export class DlpServiceClient {
     location: string,
     storedInfoType: string
   ) {
-    return this._pathTemplates.organizationLocationStoredInfoTypePathTemplate.render(
+    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.render(
       {
-        organization,
-        location,
+        organization: organization,
+        location: location,
         stored_info_type: storedInfoType,
       }
     );
@@ -4265,7 +4921,7 @@ export class DlpServiceClient {
   matchOrganizationFromOrganizationLocationStoredInfoTypeName(
     organizationLocationStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
       organizationLocationStoredInfoTypeName
     ).organization;
   }
@@ -4280,7 +4936,7 @@ export class DlpServiceClient {
   matchLocationFromOrganizationLocationStoredInfoTypeName(
     organizationLocationStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
       organizationLocationStoredInfoTypeName
     ).location;
   }
@@ -4295,7 +4951,7 @@ export class DlpServiceClient {
   matchStoredInfoTypeFromOrganizationLocationStoredInfoTypeName(
     organizationLocationStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
       organizationLocationStoredInfoTypeName
     ).stored_info_type;
   }
@@ -4308,8 +4964,8 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   organizationStoredInfoTypePath(organization: string, storedInfoType: string) {
-    return this._pathTemplates.organizationStoredInfoTypePathTemplate.render({
-      organization,
+    return this.pathTemplates.organizationStoredInfoTypePathTemplate.render({
+      organization: organization,
       stored_info_type: storedInfoType,
     });
   }
@@ -4324,7 +4980,7 @@ export class DlpServiceClient {
   matchOrganizationFromOrganizationStoredInfoTypeName(
     organizationStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.organizationStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.organizationStoredInfoTypePathTemplate.match(
       organizationStoredInfoTypeName
     ).organization;
   }
@@ -4339,7 +4995,7 @@ export class DlpServiceClient {
   matchStoredInfoTypeFromOrganizationStoredInfoTypeName(
     organizationStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.organizationStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.organizationStoredInfoTypePathTemplate.match(
       organizationStoredInfoTypeName
     ).stored_info_type;
   }
@@ -4351,8 +5007,8 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -4364,7 +5020,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -4375,8 +5031,8 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   projectDeidentifyTemplatePath(project: string, deidentifyTemplate: string) {
-    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.render({
-      project,
+    return this.pathTemplates.projectDeidentifyTemplatePathTemplate.render({
+      project: project,
       deidentify_template: deidentifyTemplate,
     });
   }
@@ -4391,7 +5047,7 @@ export class DlpServiceClient {
   matchProjectFromProjectDeidentifyTemplateName(
     projectDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.projectDeidentifyTemplatePathTemplate.match(
       projectDeidentifyTemplateName
     ).project;
   }
@@ -4406,7 +5062,7 @@ export class DlpServiceClient {
   matchDeidentifyTemplateFromProjectDeidentifyTemplateName(
     projectDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.projectDeidentifyTemplatePathTemplate.match(
       projectDeidentifyTemplateName
     ).deidentify_template;
   }
@@ -4419,8 +5075,8 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   projectDlpJobPath(project: string, dlpJob: string) {
-    return this._pathTemplates.projectDlpJobPathTemplate.render({
-      project,
+    return this.pathTemplates.projectDlpJobPathTemplate.render({
+      project: project,
       dlp_job: dlpJob,
     });
   }
@@ -4433,9 +5089,8 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectDlpJobName(projectDlpJobName: string) {
-    return this._pathTemplates.projectDlpJobPathTemplate.match(
-      projectDlpJobName
-    ).project;
+    return this.pathTemplates.projectDlpJobPathTemplate.match(projectDlpJobName)
+      .project;
   }
 
   /**
@@ -4446,9 +5101,8 @@ export class DlpServiceClient {
    * @returns {string} A string representing the dlp_job.
    */
   matchDlpJobFromProjectDlpJobName(projectDlpJobName: string) {
-    return this._pathTemplates.projectDlpJobPathTemplate.match(
-      projectDlpJobName
-    ).dlp_job;
+    return this.pathTemplates.projectDlpJobPathTemplate.match(projectDlpJobName)
+      .dlp_job;
   }
 
   /**
@@ -4459,8 +5113,8 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   projectInspectTemplatePath(project: string, inspectTemplate: string) {
-    return this._pathTemplates.projectInspectTemplatePathTemplate.render({
-      project,
+    return this.pathTemplates.projectInspectTemplatePathTemplate.render({
+      project: project,
       inspect_template: inspectTemplate,
     });
   }
@@ -4475,7 +5129,7 @@ export class DlpServiceClient {
   matchProjectFromProjectInspectTemplateName(
     projectInspectTemplateName: string
   ) {
-    return this._pathTemplates.projectInspectTemplatePathTemplate.match(
+    return this.pathTemplates.projectInspectTemplatePathTemplate.match(
       projectInspectTemplateName
     ).project;
   }
@@ -4490,7 +5144,7 @@ export class DlpServiceClient {
   matchInspectTemplateFromProjectInspectTemplateName(
     projectInspectTemplateName: string
   ) {
-    return this._pathTemplates.projectInspectTemplatePathTemplate.match(
+    return this.pathTemplates.projectInspectTemplatePathTemplate.match(
       projectInspectTemplateName
     ).inspect_template;
   }
@@ -4503,8 +5157,8 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   projectJobTriggerPath(project: string, jobTrigger: string) {
-    return this._pathTemplates.projectJobTriggerPathTemplate.render({
-      project,
+    return this.pathTemplates.projectJobTriggerPathTemplate.render({
+      project: project,
       job_trigger: jobTrigger,
     });
   }
@@ -4517,7 +5171,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectJobTriggerName(projectJobTriggerName: string) {
-    return this._pathTemplates.projectJobTriggerPathTemplate.match(
+    return this.pathTemplates.projectJobTriggerPathTemplate.match(
       projectJobTriggerName
     ).project;
   }
@@ -4530,7 +5184,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the job_trigger.
    */
   matchJobTriggerFromProjectJobTriggerName(projectJobTriggerName: string) {
-    return this._pathTemplates.projectJobTriggerPathTemplate.match(
+    return this.pathTemplates.projectJobTriggerPathTemplate.match(
       projectJobTriggerName
     ).job_trigger;
   }
@@ -4548,10 +5202,10 @@ export class DlpServiceClient {
     location: string,
     deidentifyTemplate: string
   ) {
-    return this._pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render(
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render(
       {
-        project,
-        location,
+        project: project,
+        location: location,
         deidentify_template: deidentifyTemplate,
       }
     );
@@ -4567,7 +5221,7 @@ export class DlpServiceClient {
   matchProjectFromProjectLocationDeidentifyTemplateName(
     projectLocationDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
       projectLocationDeidentifyTemplateName
     ).project;
   }
@@ -4582,7 +5236,7 @@ export class DlpServiceClient {
   matchLocationFromProjectLocationDeidentifyTemplateName(
     projectLocationDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
       projectLocationDeidentifyTemplateName
     ).location;
   }
@@ -4597,7 +5251,7 @@ export class DlpServiceClient {
   matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName(
     projectLocationDeidentifyTemplateName: string
   ) {
-    return this._pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
       projectLocationDeidentifyTemplateName
     ).deidentify_template;
   }
@@ -4611,9 +5265,9 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   projectLocationDlpJobPath(project: string, location: string, dlpJob: string) {
-    return this._pathTemplates.projectLocationDlpJobPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.projectLocationDlpJobPathTemplate.render({
+      project: project,
+      location: location,
       dlp_job: dlpJob,
     });
   }
@@ -4626,7 +5280,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationDlpJobName(projectLocationDlpJobName: string) {
-    return this._pathTemplates.projectLocationDlpJobPathTemplate.match(
+    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(
       projectLocationDlpJobName
     ).project;
   }
@@ -4641,7 +5295,7 @@ export class DlpServiceClient {
   matchLocationFromProjectLocationDlpJobName(
     projectLocationDlpJobName: string
   ) {
-    return this._pathTemplates.projectLocationDlpJobPathTemplate.match(
+    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(
       projectLocationDlpJobName
     ).location;
   }
@@ -4654,7 +5308,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the dlp_job.
    */
   matchDlpJobFromProjectLocationDlpJobName(projectLocationDlpJobName: string) {
-    return this._pathTemplates.projectLocationDlpJobPathTemplate.match(
+    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(
       projectLocationDlpJobName
     ).dlp_job;
   }
@@ -4672,10 +5326,10 @@ export class DlpServiceClient {
     location: string,
     inspectTemplate: string
   ) {
-    return this._pathTemplates.projectLocationInspectTemplatePathTemplate.render(
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.render(
       {
-        project,
-        location,
+        project: project,
+        location: location,
         inspect_template: inspectTemplate,
       }
     );
@@ -4691,7 +5345,7 @@ export class DlpServiceClient {
   matchProjectFromProjectLocationInspectTemplateName(
     projectLocationInspectTemplateName: string
   ) {
-    return this._pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
       projectLocationInspectTemplateName
     ).project;
   }
@@ -4706,7 +5360,7 @@ export class DlpServiceClient {
   matchLocationFromProjectLocationInspectTemplateName(
     projectLocationInspectTemplateName: string
   ) {
-    return this._pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
       projectLocationInspectTemplateName
     ).location;
   }
@@ -4721,7 +5375,7 @@ export class DlpServiceClient {
   matchInspectTemplateFromProjectLocationInspectTemplateName(
     projectLocationInspectTemplateName: string
   ) {
-    return this._pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
       projectLocationInspectTemplateName
     ).inspect_template;
   }
@@ -4739,9 +5393,9 @@ export class DlpServiceClient {
     location: string,
     jobTrigger: string
   ) {
-    return this._pathTemplates.projectLocationJobTriggerPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.projectLocationJobTriggerPathTemplate.render({
+      project: project,
+      location: location,
       job_trigger: jobTrigger,
     });
   }
@@ -4756,7 +5410,7 @@ export class DlpServiceClient {
   matchProjectFromProjectLocationJobTriggerName(
     projectLocationJobTriggerName: string
   ) {
-    return this._pathTemplates.projectLocationJobTriggerPathTemplate.match(
+    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(
       projectLocationJobTriggerName
     ).project;
   }
@@ -4771,7 +5425,7 @@ export class DlpServiceClient {
   matchLocationFromProjectLocationJobTriggerName(
     projectLocationJobTriggerName: string
   ) {
-    return this._pathTemplates.projectLocationJobTriggerPathTemplate.match(
+    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(
       projectLocationJobTriggerName
     ).location;
   }
@@ -4786,7 +5440,7 @@ export class DlpServiceClient {
   matchJobTriggerFromProjectLocationJobTriggerName(
     projectLocationJobTriggerName: string
   ) {
-    return this._pathTemplates.projectLocationJobTriggerPathTemplate.match(
+    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(
       projectLocationJobTriggerName
     ).job_trigger;
   }
@@ -4804,13 +5458,11 @@ export class DlpServiceClient {
     location: string,
     storedInfoType: string
   ) {
-    return this._pathTemplates.projectLocationStoredInfoTypePathTemplate.render(
-      {
-        project,
-        location,
-        stored_info_type: storedInfoType,
-      }
-    );
+    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.render({
+      project: project,
+      location: location,
+      stored_info_type: storedInfoType,
+    });
   }
 
   /**
@@ -4823,7 +5475,7 @@ export class DlpServiceClient {
   matchProjectFromProjectLocationStoredInfoTypeName(
     projectLocationStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
       projectLocationStoredInfoTypeName
     ).project;
   }
@@ -4838,7 +5490,7 @@ export class DlpServiceClient {
   matchLocationFromProjectLocationStoredInfoTypeName(
     projectLocationStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
       projectLocationStoredInfoTypeName
     ).location;
   }
@@ -4853,7 +5505,7 @@ export class DlpServiceClient {
   matchStoredInfoTypeFromProjectLocationStoredInfoTypeName(
     projectLocationStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
       projectLocationStoredInfoTypeName
     ).stored_info_type;
   }
@@ -4866,8 +5518,8 @@ export class DlpServiceClient {
    * @returns {string} Resource name string.
    */
   projectStoredInfoTypePath(project: string, storedInfoType: string) {
-    return this._pathTemplates.projectStoredInfoTypePathTemplate.render({
-      project,
+    return this.pathTemplates.projectStoredInfoTypePathTemplate.render({
+      project: project,
       stored_info_type: storedInfoType,
     });
   }
@@ -4880,7 +5532,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectStoredInfoTypeName(projectStoredInfoTypeName: string) {
-    return this._pathTemplates.projectStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.projectStoredInfoTypePathTemplate.match(
       projectStoredInfoTypeName
     ).project;
   }
@@ -4895,7 +5547,7 @@ export class DlpServiceClient {
   matchStoredInfoTypeFromProjectStoredInfoTypeName(
     projectStoredInfoTypeName: string
   ) {
-    return this._pathTemplates.projectStoredInfoTypePathTemplate.match(
+    return this.pathTemplates.projectStoredInfoTypePathTemplate.match(
       projectStoredInfoTypeName
     ).stored_info_type;
   }
