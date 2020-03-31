@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
+  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './cluster_manager_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -40,13 +40,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class ClusterManagerClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -54,6 +47,13 @@ export class ClusterManagerClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   clusterManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -145,13 +145,16 @@ export class ClusterManagerClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listUsableSubnetworks: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -170,7 +173,7 @@ export class ClusterManagerClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -197,7 +200,7 @@ export class ClusterManagerClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.container.v1.ClusterManager'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.container.v1.ClusterManager,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -237,9 +240,8 @@ export class ClusterManagerClient {
       'setMaintenancePolicy',
       'listUsableSubnetworks',
     ];
-
     for (const methodName of clusterManagerStubMethods) {
-      const innerCallPromise = this.clusterManagerStub.then(
+      const callPromise = this.clusterManagerStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -253,20 +255,14 @@ export class ClusterManagerClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.clusterManagerStub;
@@ -323,22 +319,30 @@ export class ClusterManagerClient {
   // -- Service calls --
   // -------------------
   listClusters(
-    request: protosTypes.google.container.v1.IListClustersRequest,
+    request: protos.google.container.v1.IListClustersRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IListClustersResponse,
-      protosTypes.google.container.v1.IListClustersRequest | undefined,
+      protos.google.container.v1.IListClustersResponse,
+      protos.google.container.v1.IListClustersRequest | undefined,
       {} | undefined
     ]
   >;
   listClusters(
-    request: protosTypes.google.container.v1.IListClustersRequest,
+    request: protos.google.container.v1.IListClustersRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IListClustersResponse,
-      protosTypes.google.container.v1.IListClustersRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IListClustersResponse,
+      protos.google.container.v1.IListClustersRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listClusters(
+    request: protos.google.container.v1.IListClustersRequest,
+    callback: Callback<
+      protos.google.container.v1.IListClustersResponse,
+      protos.google.container.v1.IListClustersRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -367,23 +371,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listClusters(
-    request: protosTypes.google.container.v1.IListClustersRequest,
+    request: protos.google.container.v1.IListClustersRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IListClustersResponse,
-          protosTypes.google.container.v1.IListClustersRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IListClustersResponse,
+          protos.google.container.v1.IListClustersRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IListClustersResponse,
-      protosTypes.google.container.v1.IListClustersRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IListClustersResponse,
+      protos.google.container.v1.IListClustersRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IListClustersResponse,
-      protosTypes.google.container.v1.IListClustersRequest | undefined,
+      protos.google.container.v1.IListClustersResponse,
+      protos.google.container.v1.IListClustersRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -404,25 +408,33 @@ export class ClusterManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listClusters(request, options, callback);
+    return this.innerApiCalls.listClusters(request, options, callback);
   }
   getCluster(
-    request: protosTypes.google.container.v1.IGetClusterRequest,
+    request: protos.google.container.v1.IGetClusterRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.ICluster,
-      protosTypes.google.container.v1.IGetClusterRequest | undefined,
+      protos.google.container.v1.ICluster,
+      protos.google.container.v1.IGetClusterRequest | undefined,
       {} | undefined
     ]
   >;
   getCluster(
-    request: protosTypes.google.container.v1.IGetClusterRequest,
+    request: protos.google.container.v1.IGetClusterRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.ICluster,
-      protosTypes.google.container.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.ICluster,
+      protos.google.container.v1.IGetClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCluster(
+    request: protos.google.container.v1.IGetClusterRequest,
+    callback: Callback<
+      protos.google.container.v1.ICluster,
+      protos.google.container.v1.IGetClusterRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -452,23 +464,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getCluster(
-    request: protosTypes.google.container.v1.IGetClusterRequest,
+    request: protos.google.container.v1.IGetClusterRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.ICluster,
-          protosTypes.google.container.v1.IGetClusterRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.ICluster,
+          protos.google.container.v1.IGetClusterRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.ICluster,
-      protosTypes.google.container.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.ICluster,
+      protos.google.container.v1.IGetClusterRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.ICluster,
-      protosTypes.google.container.v1.IGetClusterRequest | undefined,
+      protos.google.container.v1.ICluster,
+      protos.google.container.v1.IGetClusterRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -489,25 +501,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getCluster(request, options, callback);
+    return this.innerApiCalls.getCluster(request, options, callback);
   }
   createCluster(
-    request: protosTypes.google.container.v1.ICreateClusterRequest,
+    request: protos.google.container.v1.ICreateClusterRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICreateClusterRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateClusterRequest | undefined,
       {} | undefined
     ]
   >;
   createCluster(
-    request: protosTypes.google.container.v1.ICreateClusterRequest,
+    request: protos.google.container.v1.ICreateClusterRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICreateClusterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCluster(
+    request: protos.google.container.v1.ICreateClusterRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateClusterRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -549,23 +569,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createCluster(
-    request: protosTypes.google.container.v1.ICreateClusterRequest,
+    request: protos.google.container.v1.ICreateClusterRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ICreateClusterRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICreateClusterRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICreateClusterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateClusterRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICreateClusterRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateClusterRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -586,25 +606,33 @@ export class ClusterManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createCluster(request, options, callback);
+    return this.innerApiCalls.createCluster(request, options, callback);
   }
   updateCluster(
-    request: protosTypes.google.container.v1.IUpdateClusterRequest,
+    request: protos.google.container.v1.IUpdateClusterRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateClusterRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateClusterRequest | undefined,
       {} | undefined
     ]
   >;
   updateCluster(
-    request: protosTypes.google.container.v1.IUpdateClusterRequest,
+    request: protos.google.container.v1.IUpdateClusterRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateClusterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCluster(
+    request: protos.google.container.v1.IUpdateClusterRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -636,23 +664,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateCluster(
-    request: protosTypes.google.container.v1.IUpdateClusterRequest,
+    request: protos.google.container.v1.IUpdateClusterRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.IUpdateClusterRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateClusterRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateClusterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateClusterRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateClusterRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -673,25 +701,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateCluster(request, options, callback);
+    return this.innerApiCalls.updateCluster(request, options, callback);
   }
   updateNodePool(
-    request: protosTypes.google.container.v1.IUpdateNodePoolRequest,
+    request: protos.google.container.v1.IUpdateNodePoolRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateNodePoolRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateNodePoolRequest | undefined,
       {} | undefined
     ]
   >;
   updateNodePool(
-    request: protosTypes.google.container.v1.IUpdateNodePoolRequest,
+    request: protos.google.container.v1.IUpdateNodePoolRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateNodePoolRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateNodePool(
+    request: protos.google.container.v1.IUpdateNodePoolRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -739,23 +775,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateNodePool(
-    request: protosTypes.google.container.v1.IUpdateNodePoolRequest,
+    request: protos.google.container.v1.IUpdateNodePoolRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.IUpdateNodePoolRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateNodePoolRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateNodePoolRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateNodePoolRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -776,29 +812,37 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateNodePool(request, options, callback);
+    return this.innerApiCalls.updateNodePool(request, options, callback);
   }
   setNodePoolAutoscaling(
-    request: protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest,
+    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      (
-        | protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest
-        | undefined
-      ),
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolAutoscalingRequest | undefined,
       {} | undefined
     ]
   >;
   setNodePoolAutoscaling(
-    request: protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest,
+    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      | protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  setNodePoolAutoscaling(
+    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -834,28 +878,27 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setNodePoolAutoscaling(
-    request: protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest,
+    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          | protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ISetNodePoolAutoscalingRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      | protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      (
-        | protosTypes.google.container.v1.ISetNodePoolAutoscalingRequest
-        | undefined
-      ),
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolAutoscalingRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -876,29 +919,37 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setNodePoolAutoscaling(
+    return this.innerApiCalls.setNodePoolAutoscaling(
       request,
       options,
       callback
     );
   }
   setLoggingService(
-    request: protosTypes.google.container.v1.ISetLoggingServiceRequest,
+    request: protos.google.container.v1.ISetLoggingServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLoggingServiceRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLoggingServiceRequest | undefined,
       {} | undefined
     ]
   >;
   setLoggingService(
-    request: protosTypes.google.container.v1.ISetLoggingServiceRequest,
+    request: protos.google.container.v1.ISetLoggingServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLoggingServiceRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setLoggingService(
+    request: protos.google.container.v1.ISetLoggingServiceRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -934,23 +985,25 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setLoggingService(
-    request: protosTypes.google.container.v1.ISetLoggingServiceRequest,
+    request: protos.google.container.v1.ISetLoggingServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ISetLoggingServiceRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ISetLoggingServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLoggingServiceRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLoggingServiceRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLoggingServiceRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -971,25 +1024,37 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setLoggingService(request, options, callback);
+    return this.innerApiCalls.setLoggingService(request, options, callback);
   }
   setMonitoringService(
-    request: protosTypes.google.container.v1.ISetMonitoringServiceRequest,
+    request: protos.google.container.v1.ISetMonitoringServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMonitoringServiceRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMonitoringServiceRequest | undefined,
       {} | undefined
     ]
   >;
   setMonitoringService(
-    request: protosTypes.google.container.v1.ISetMonitoringServiceRequest,
+    request: protos.google.container.v1.ISetMonitoringServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetMonitoringServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setMonitoringService(
+    request: protos.google.container.v1.ISetMonitoringServiceRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetMonitoringServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1027,24 +1092,27 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setMonitoringService(
-    request: protosTypes.google.container.v1.ISetMonitoringServiceRequest,
+    request: protos.google.container.v1.ISetMonitoringServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          | protosTypes.google.container.v1.ISetMonitoringServiceRequest
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ISetMonitoringServiceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetMonitoringServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMonitoringServiceRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMonitoringServiceRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1065,25 +1133,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setMonitoringService(request, options, callback);
+    return this.innerApiCalls.setMonitoringService(request, options, callback);
   }
   setAddonsConfig(
-    request: protosTypes.google.container.v1.ISetAddonsConfigRequest,
+    request: protos.google.container.v1.ISetAddonsConfigRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetAddonsConfigRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetAddonsConfigRequest | undefined,
       {} | undefined
     ]
   >;
   setAddonsConfig(
-    request: protosTypes.google.container.v1.ISetAddonsConfigRequest,
+    request: protos.google.container.v1.ISetAddonsConfigRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetAddonsConfigRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setAddonsConfig(
+    request: protos.google.container.v1.ISetAddonsConfigRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1116,23 +1192,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setAddonsConfig(
-    request: protosTypes.google.container.v1.ISetAddonsConfigRequest,
+    request: protos.google.container.v1.ISetAddonsConfigRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ISetAddonsConfigRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetAddonsConfigRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetAddonsConfigRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetAddonsConfigRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1153,25 +1229,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setAddonsConfig(request, options, callback);
+    return this.innerApiCalls.setAddonsConfig(request, options, callback);
   }
   setLocations(
-    request: protosTypes.google.container.v1.ISetLocationsRequest,
+    request: protos.google.container.v1.ISetLocationsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLocationsRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLocationsRequest | undefined,
       {} | undefined
     ]
   >;
   setLocations(
-    request: protosTypes.google.container.v1.ISetLocationsRequest,
+    request: protos.google.container.v1.ISetLocationsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLocationsRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLocationsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setLocations(
+    request: protos.google.container.v1.ISetLocationsRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLocationsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1209,23 +1293,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setLocations(
-    request: protosTypes.google.container.v1.ISetLocationsRequest,
+    request: protos.google.container.v1.ISetLocationsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ISetLocationsRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLocationsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLocationsRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLocationsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLocationsRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLocationsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1246,25 +1330,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setLocations(request, options, callback);
+    return this.innerApiCalls.setLocations(request, options, callback);
   }
   updateMaster(
-    request: protosTypes.google.container.v1.IUpdateMasterRequest,
+    request: protos.google.container.v1.IUpdateMasterRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateMasterRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateMasterRequest | undefined,
       {} | undefined
     ]
   >;
   updateMaster(
-    request: protosTypes.google.container.v1.IUpdateMasterRequest,
+    request: protos.google.container.v1.IUpdateMasterRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateMasterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMaster(
+    request: protos.google.container.v1.IUpdateMasterRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1305,23 +1397,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateMaster(
-    request: protosTypes.google.container.v1.IUpdateMasterRequest,
+    request: protos.google.container.v1.IUpdateMasterRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.IUpdateMasterRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IUpdateMasterRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateMasterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IUpdateMasterRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateMasterRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1342,25 +1434,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateMaster(request, options, callback);
+    return this.innerApiCalls.updateMaster(request, options, callback);
   }
   setMasterAuth(
-    request: protosTypes.google.container.v1.ISetMasterAuthRequest,
+    request: protos.google.container.v1.ISetMasterAuthRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMasterAuthRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMasterAuthRequest | undefined,
       {} | undefined
     ]
   >;
   setMasterAuth(
-    request: protosTypes.google.container.v1.ISetMasterAuthRequest,
+    request: protos.google.container.v1.ISetMasterAuthRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMasterAuthRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setMasterAuth(
+    request: protos.google.container.v1.ISetMasterAuthRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1396,23 +1496,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setMasterAuth(
-    request: protosTypes.google.container.v1.ISetMasterAuthRequest,
+    request: protos.google.container.v1.ISetMasterAuthRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ISetMasterAuthRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMasterAuthRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMasterAuthRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMasterAuthRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1433,25 +1533,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setMasterAuth(request, options, callback);
+    return this.innerApiCalls.setMasterAuth(request, options, callback);
   }
   deleteCluster(
-    request: protosTypes.google.container.v1.IDeleteClusterRequest,
+    request: protos.google.container.v1.IDeleteClusterRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IDeleteClusterRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteClusterRequest | undefined,
       {} | undefined
     ]
   >;
   deleteCluster(
-    request: protosTypes.google.container.v1.IDeleteClusterRequest,
+    request: protos.google.container.v1.IDeleteClusterRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IDeleteClusterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCluster(
+    request: protos.google.container.v1.IDeleteClusterRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1489,23 +1597,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteCluster(
-    request: protosTypes.google.container.v1.IDeleteClusterRequest,
+    request: protos.google.container.v1.IDeleteClusterRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.IDeleteClusterRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IDeleteClusterRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IDeleteClusterRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IDeleteClusterRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteClusterRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1526,25 +1634,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteCluster(request, options, callback);
+    return this.innerApiCalls.deleteCluster(request, options, callback);
   }
   listOperations(
-    request: protosTypes.google.container.v1.IListOperationsRequest,
+    request: protos.google.container.v1.IListOperationsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IListOperationsResponse,
-      protosTypes.google.container.v1.IListOperationsRequest | undefined,
+      protos.google.container.v1.IListOperationsResponse,
+      protos.google.container.v1.IListOperationsRequest | undefined,
       {} | undefined
     ]
   >;
   listOperations(
-    request: protosTypes.google.container.v1.IListOperationsRequest,
+    request: protos.google.container.v1.IListOperationsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IListOperationsResponse,
-      protosTypes.google.container.v1.IListOperationsRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IListOperationsResponse,
+      protos.google.container.v1.IListOperationsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listOperations(
+    request: protos.google.container.v1.IListOperationsRequest,
+    callback: Callback<
+      protos.google.container.v1.IListOperationsResponse,
+      protos.google.container.v1.IListOperationsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1571,23 +1687,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listOperations(
-    request: protosTypes.google.container.v1.IListOperationsRequest,
+    request: protos.google.container.v1.IListOperationsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IListOperationsResponse,
-          protosTypes.google.container.v1.IListOperationsRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IListOperationsResponse,
+          protos.google.container.v1.IListOperationsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IListOperationsResponse,
-      protosTypes.google.container.v1.IListOperationsRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IListOperationsResponse,
+      protos.google.container.v1.IListOperationsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IListOperationsResponse,
-      protosTypes.google.container.v1.IListOperationsRequest | undefined,
+      protos.google.container.v1.IListOperationsResponse,
+      protos.google.container.v1.IListOperationsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1608,25 +1724,33 @@ export class ClusterManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listOperations(request, options, callback);
+    return this.innerApiCalls.listOperations(request, options, callback);
   }
   getOperation(
-    request: protosTypes.google.container.v1.IGetOperationRequest,
+    request: protos.google.container.v1.IGetOperationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IGetOperationRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IGetOperationRequest | undefined,
       {} | undefined
     ]
   >;
   getOperation(
-    request: protosTypes.google.container.v1.IGetOperationRequest,
+    request: protos.google.container.v1.IGetOperationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IGetOperationRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IGetOperationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getOperation(
+    request: protos.google.container.v1.IGetOperationRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IGetOperationRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1656,23 +1780,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getOperation(
-    request: protosTypes.google.container.v1.IGetOperationRequest,
+    request: protos.google.container.v1.IGetOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.IGetOperationRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IGetOperationRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IGetOperationRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IGetOperationRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IGetOperationRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IGetOperationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1693,25 +1817,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getOperation(request, options, callback);
+    return this.innerApiCalls.getOperation(request, options, callback);
   }
   cancelOperation(
-    request: protosTypes.google.container.v1.ICancelOperationRequest,
+    request: protos.google.container.v1.ICancelOperationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.container.v1.ICancelOperationRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.container.v1.ICancelOperationRequest | undefined,
       {} | undefined
     ]
   >;
   cancelOperation(
-    request: protosTypes.google.container.v1.ICancelOperationRequest,
+    request: protos.google.container.v1.ICancelOperationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.container.v1.ICancelOperationRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.container.v1.ICancelOperationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelOperation(
+    request: protos.google.container.v1.ICancelOperationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.container.v1.ICancelOperationRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1740,23 +1872,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   cancelOperation(
-    request: protosTypes.google.container.v1.ICancelOperationRequest,
+    request: protos.google.container.v1.ICancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          protosTypes.google.container.v1.ICancelOperationRequest | undefined,
-          {} | undefined
+          protos.google.protobuf.IEmpty,
+          protos.google.container.v1.ICancelOperationRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.container.v1.ICancelOperationRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.container.v1.ICancelOperationRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.container.v1.ICancelOperationRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.container.v1.ICancelOperationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1777,25 +1909,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.cancelOperation(request, options, callback);
+    return this.innerApiCalls.cancelOperation(request, options, callback);
   }
   getServerConfig(
-    request: protosTypes.google.container.v1.IGetServerConfigRequest,
+    request: protos.google.container.v1.IGetServerConfigRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IServerConfig,
-      protosTypes.google.container.v1.IGetServerConfigRequest | undefined,
+      protos.google.container.v1.IServerConfig,
+      protos.google.container.v1.IGetServerConfigRequest | undefined,
       {} | undefined
     ]
   >;
   getServerConfig(
-    request: protosTypes.google.container.v1.IGetServerConfigRequest,
+    request: protos.google.container.v1.IGetServerConfigRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IServerConfig,
-      protosTypes.google.container.v1.IGetServerConfigRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IServerConfig,
+      protos.google.container.v1.IGetServerConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getServerConfig(
+    request: protos.google.container.v1.IGetServerConfigRequest,
+    callback: Callback<
+      protos.google.container.v1.IServerConfig,
+      protos.google.container.v1.IGetServerConfigRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1821,23 +1961,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getServerConfig(
-    request: protosTypes.google.container.v1.IGetServerConfigRequest,
+    request: protos.google.container.v1.IGetServerConfigRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IServerConfig,
-          protosTypes.google.container.v1.IGetServerConfigRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IServerConfig,
+          protos.google.container.v1.IGetServerConfigRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IServerConfig,
-      protosTypes.google.container.v1.IGetServerConfigRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IServerConfig,
+      protos.google.container.v1.IGetServerConfigRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IServerConfig,
-      protosTypes.google.container.v1.IGetServerConfigRequest | undefined,
+      protos.google.container.v1.IServerConfig,
+      protos.google.container.v1.IGetServerConfigRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1858,25 +1998,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getServerConfig(request, options, callback);
+    return this.innerApiCalls.getServerConfig(request, options, callback);
   }
   listNodePools(
-    request: protosTypes.google.container.v1.IListNodePoolsRequest,
+    request: protos.google.container.v1.IListNodePoolsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IListNodePoolsResponse,
-      protosTypes.google.container.v1.IListNodePoolsRequest | undefined,
+      protos.google.container.v1.IListNodePoolsResponse,
+      protos.google.container.v1.IListNodePoolsRequest | undefined,
       {} | undefined
     ]
   >;
   listNodePools(
-    request: protosTypes.google.container.v1.IListNodePoolsRequest,
+    request: protos.google.container.v1.IListNodePoolsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IListNodePoolsResponse,
-      protosTypes.google.container.v1.IListNodePoolsRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IListNodePoolsResponse,
+      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listNodePools(
+    request: protos.google.container.v1.IListNodePoolsRequest,
+    callback: Callback<
+      protos.google.container.v1.IListNodePoolsResponse,
+      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1906,23 +2054,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listNodePools(
-    request: protosTypes.google.container.v1.IListNodePoolsRequest,
+    request: protos.google.container.v1.IListNodePoolsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IListNodePoolsResponse,
-          protosTypes.google.container.v1.IListNodePoolsRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IListNodePoolsResponse,
+          protos.google.container.v1.IListNodePoolsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IListNodePoolsResponse,
-      protosTypes.google.container.v1.IListNodePoolsRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IListNodePoolsResponse,
+      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IListNodePoolsResponse,
-      protosTypes.google.container.v1.IListNodePoolsRequest | undefined,
+      protos.google.container.v1.IListNodePoolsResponse,
+      protos.google.container.v1.IListNodePoolsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1943,25 +2091,33 @@ export class ClusterManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listNodePools(request, options, callback);
+    return this.innerApiCalls.listNodePools(request, options, callback);
   }
   getNodePool(
-    request: protosTypes.google.container.v1.IGetNodePoolRequest,
+    request: protos.google.container.v1.IGetNodePoolRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.INodePool,
-      protosTypes.google.container.v1.IGetNodePoolRequest | undefined,
+      protos.google.container.v1.INodePool,
+      protos.google.container.v1.IGetNodePoolRequest | undefined,
       {} | undefined
     ]
   >;
   getNodePool(
-    request: protosTypes.google.container.v1.IGetNodePoolRequest,
+    request: protos.google.container.v1.IGetNodePoolRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.INodePool,
-      protosTypes.google.container.v1.IGetNodePoolRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.INodePool,
+      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNodePool(
+    request: protos.google.container.v1.IGetNodePoolRequest,
+    callback: Callback<
+      protos.google.container.v1.INodePool,
+      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1995,23 +2151,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getNodePool(
-    request: protosTypes.google.container.v1.IGetNodePoolRequest,
+    request: protos.google.container.v1.IGetNodePoolRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.INodePool,
-          protosTypes.google.container.v1.IGetNodePoolRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.INodePool,
+          protos.google.container.v1.IGetNodePoolRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.INodePool,
-      protosTypes.google.container.v1.IGetNodePoolRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.INodePool,
+      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.INodePool,
-      protosTypes.google.container.v1.IGetNodePoolRequest | undefined,
+      protos.google.container.v1.INodePool,
+      protos.google.container.v1.IGetNodePoolRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2032,25 +2188,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getNodePool(request, options, callback);
+    return this.innerApiCalls.getNodePool(request, options, callback);
   }
   createNodePool(
-    request: protosTypes.google.container.v1.ICreateNodePoolRequest,
+    request: protos.google.container.v1.ICreateNodePoolRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICreateNodePoolRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateNodePoolRequest | undefined,
       {} | undefined
     ]
   >;
   createNodePool(
-    request: protosTypes.google.container.v1.ICreateNodePoolRequest,
+    request: protos.google.container.v1.ICreateNodePoolRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICreateNodePoolRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNodePool(
+    request: protos.google.container.v1.ICreateNodePoolRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2083,23 +2247,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createNodePool(
-    request: protosTypes.google.container.v1.ICreateNodePoolRequest,
+    request: protos.google.container.v1.ICreateNodePoolRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ICreateNodePoolRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICreateNodePoolRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICreateNodePoolRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateNodePoolRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2120,25 +2284,33 @@ export class ClusterManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createNodePool(request, options, callback);
+    return this.innerApiCalls.createNodePool(request, options, callback);
   }
   deleteNodePool(
-    request: protosTypes.google.container.v1.IDeleteNodePoolRequest,
+    request: protos.google.container.v1.IDeleteNodePoolRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IDeleteNodePoolRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteNodePoolRequest | undefined,
       {} | undefined
     ]
   >;
   deleteNodePool(
-    request: protosTypes.google.container.v1.IDeleteNodePoolRequest,
+    request: protos.google.container.v1.IDeleteNodePoolRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IDeleteNodePoolRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNodePool(
+    request: protos.google.container.v1.IDeleteNodePoolRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2172,23 +2344,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteNodePool(
-    request: protosTypes.google.container.v1.IDeleteNodePoolRequest,
+    request: protos.google.container.v1.IDeleteNodePoolRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.IDeleteNodePoolRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IDeleteNodePoolRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IDeleteNodePoolRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteNodePoolRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2209,29 +2381,37 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteNodePool(request, options, callback);
+    return this.innerApiCalls.deleteNodePool(request, options, callback);
   }
   rollbackNodePoolUpgrade(
-    request: protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest,
+    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      (
-        | protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest
-        | undefined
-      ),
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IRollbackNodePoolUpgradeRequest | undefined,
       {} | undefined
     ]
   >;
   rollbackNodePoolUpgrade(
-    request: protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest,
+    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      | protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  rollbackNodePoolUpgrade(
+    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2266,28 +2446,27 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   rollbackNodePoolUpgrade(
-    request: protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest,
+    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          | protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      | protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      (
-        | protosTypes.google.container.v1.IRollbackNodePoolUpgradeRequest
-        | undefined
-      ),
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IRollbackNodePoolUpgradeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2308,29 +2487,41 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.rollbackNodePoolUpgrade(
+    return this.innerApiCalls.rollbackNodePoolUpgrade(
       request,
       options,
       callback
     );
   }
   setNodePoolManagement(
-    request: protosTypes.google.container.v1.ISetNodePoolManagementRequest,
+    request: protos.google.container.v1.ISetNodePoolManagementRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNodePoolManagementRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolManagementRequest | undefined,
       {} | undefined
     ]
   >;
   setNodePoolManagement(
-    request: protosTypes.google.container.v1.ISetNodePoolManagementRequest,
+    request: protos.google.container.v1.ISetNodePoolManagementRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolManagementRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setNodePoolManagement(
+    request: protos.google.container.v1.ISetNodePoolManagementRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolManagementRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2366,24 +2557,27 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setNodePoolManagement(
-    request: protosTypes.google.container.v1.ISetNodePoolManagementRequest,
+    request: protos.google.container.v1.ISetNodePoolManagementRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          | protosTypes.google.container.v1.ISetNodePoolManagementRequest
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ISetNodePoolManagementRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolManagementRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNodePoolManagementRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolManagementRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2404,29 +2598,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setNodePoolManagement(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.setNodePoolManagement(request, options, callback);
   }
   setLabels(
-    request: protosTypes.google.container.v1.ISetLabelsRequest,
+    request: protos.google.container.v1.ISetLabelsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLabelsRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLabelsRequest | undefined,
       {} | undefined
     ]
   >;
   setLabels(
-    request: protosTypes.google.container.v1.ISetLabelsRequest,
+    request: protos.google.container.v1.ISetLabelsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLabelsRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLabelsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setLabels(
+    request: protos.google.container.v1.ISetLabelsRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLabelsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2465,23 +2663,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setLabels(
-    request: protosTypes.google.container.v1.ISetLabelsRequest,
+    request: protos.google.container.v1.ISetLabelsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ISetLabelsRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLabelsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLabelsRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLabelsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLabelsRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLabelsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2502,25 +2700,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setLabels(request, options, callback);
+    return this.innerApiCalls.setLabels(request, options, callback);
   }
   setLegacyAbac(
-    request: protosTypes.google.container.v1.ISetLegacyAbacRequest,
+    request: protos.google.container.v1.ISetLegacyAbacRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLegacyAbacRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLegacyAbacRequest | undefined,
       {} | undefined
     ]
   >;
   setLegacyAbac(
-    request: protosTypes.google.container.v1.ISetLegacyAbacRequest,
+    request: protos.google.container.v1.ISetLegacyAbacRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLegacyAbacRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setLegacyAbac(
+    request: protos.google.container.v1.ISetLegacyAbacRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2552,23 +2758,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setLegacyAbac(
-    request: protosTypes.google.container.v1.ISetLegacyAbacRequest,
+    request: protos.google.container.v1.ISetLegacyAbacRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ISetLegacyAbacRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLegacyAbacRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetLegacyAbacRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLegacyAbacRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2589,25 +2795,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setLegacyAbac(request, options, callback);
+    return this.innerApiCalls.setLegacyAbac(request, options, callback);
   }
   startIPRotation(
-    request: protosTypes.google.container.v1.IStartIPRotationRequest,
+    request: protos.google.container.v1.IStartIPRotationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IStartIPRotationRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IStartIPRotationRequest | undefined,
       {} | undefined
     ]
   >;
   startIPRotation(
-    request: protosTypes.google.container.v1.IStartIPRotationRequest,
+    request: protos.google.container.v1.IStartIPRotationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IStartIPRotationRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startIPRotation(
+    request: protos.google.container.v1.IStartIPRotationRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2639,23 +2853,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   startIPRotation(
-    request: protosTypes.google.container.v1.IStartIPRotationRequest,
+    request: protos.google.container.v1.IStartIPRotationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.IStartIPRotationRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.IStartIPRotationRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IStartIPRotationRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.IStartIPRotationRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IStartIPRotationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2676,25 +2890,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.startIPRotation(request, options, callback);
+    return this.innerApiCalls.startIPRotation(request, options, callback);
   }
   completeIPRotation(
-    request: protosTypes.google.container.v1.ICompleteIPRotationRequest,
+    request: protos.google.container.v1.ICompleteIPRotationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICompleteIPRotationRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICompleteIPRotationRequest | undefined,
       {} | undefined
     ]
   >;
   completeIPRotation(
-    request: protosTypes.google.container.v1.ICompleteIPRotationRequest,
+    request: protos.google.container.v1.ICompleteIPRotationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICompleteIPRotationRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  completeIPRotation(
+    request: protos.google.container.v1.ICompleteIPRotationRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2724,24 +2946,25 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   completeIPRotation(
-    request: protosTypes.google.container.v1.ICompleteIPRotationRequest,
+    request: protos.google.container.v1.ICompleteIPRotationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          | protosTypes.google.container.v1.ICompleteIPRotationRequest
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ICompleteIPRotationRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICompleteIPRotationRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ICompleteIPRotationRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICompleteIPRotationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2762,25 +2985,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.completeIPRotation(request, options, callback);
+    return this.innerApiCalls.completeIPRotation(request, options, callback);
   }
   setNodePoolSize(
-    request: protosTypes.google.container.v1.ISetNodePoolSizeRequest,
+    request: protos.google.container.v1.ISetNodePoolSizeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNodePoolSizeRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolSizeRequest | undefined,
       {} | undefined
     ]
   >;
   setNodePoolSize(
-    request: protosTypes.google.container.v1.ISetNodePoolSizeRequest,
+    request: protos.google.container.v1.ISetNodePoolSizeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setNodePoolSize(
+    request: protos.google.container.v1.ISetNodePoolSizeRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2816,23 +3047,23 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setNodePoolSize(
-    request: protosTypes.google.container.v1.ISetNodePoolSizeRequest,
+    request: protos.google.container.v1.ISetNodePoolSizeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ISetNodePoolSizeRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNodePoolSizeRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolSizeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2853,25 +3084,33 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setNodePoolSize(request, options, callback);
+    return this.innerApiCalls.setNodePoolSize(request, options, callback);
   }
   setNetworkPolicy(
-    request: protosTypes.google.container.v1.ISetNetworkPolicyRequest,
+    request: protos.google.container.v1.ISetNetworkPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNetworkPolicyRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNetworkPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   setNetworkPolicy(
-    request: protosTypes.google.container.v1.ISetNetworkPolicyRequest,
+    request: protos.google.container.v1.ISetNetworkPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setNetworkPolicy(
+    request: protos.google.container.v1.ISetNetworkPolicyRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2903,23 +3142,25 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setNetworkPolicy(
-    request: protosTypes.google.container.v1.ISetNetworkPolicyRequest,
+    request: protos.google.container.v1.ISetNetworkPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          protosTypes.google.container.v1.ISetNetworkPolicyRequest | undefined,
-          {} | undefined
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ISetNetworkPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetNetworkPolicyRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNetworkPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2940,25 +3181,37 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setNetworkPolicy(request, options, callback);
+    return this.innerApiCalls.setNetworkPolicy(request, options, callback);
   }
   setMaintenancePolicy(
-    request: protosTypes.google.container.v1.ISetMaintenancePolicyRequest,
+    request: protos.google.container.v1.ISetMaintenancePolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMaintenancePolicyRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMaintenancePolicyRequest | undefined,
       {} | undefined
     ]
   >;
   setMaintenancePolicy(
-    request: protosTypes.google.container.v1.ISetMaintenancePolicyRequest,
+    request: protos.google.container.v1.ISetMaintenancePolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMaintenancePolicyRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetMaintenancePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setMaintenancePolicy(
+    request: protos.google.container.v1.ISetMaintenancePolicyRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetMaintenancePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -2989,24 +3242,27 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setMaintenancePolicy(
-    request: protosTypes.google.container.v1.ISetMaintenancePolicyRequest,
+    request: protos.google.container.v1.ISetMaintenancePolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.container.v1.IOperation,
-          | protosTypes.google.container.v1.ISetMaintenancePolicyRequest
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ISetMaintenancePolicyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMaintenancePolicyRequest | undefined,
-      {} | undefined
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetMaintenancePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IOperation,
-      protosTypes.google.container.v1.ISetMaintenancePolicyRequest | undefined,
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMaintenancePolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -3027,26 +3283,38 @@ export class ClusterManagerClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.setMaintenancePolicy(request, options, callback);
+    return this.innerApiCalls.setMaintenancePolicy(request, options, callback);
   }
 
   listUsableSubnetworks(
-    request: protosTypes.google.container.v1.IListUsableSubnetworksRequest,
+    request: protos.google.container.v1.IListUsableSubnetworksRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.container.v1.IUsableSubnetwork[],
-      protosTypes.google.container.v1.IListUsableSubnetworksRequest | null,
-      protosTypes.google.container.v1.IListUsableSubnetworksResponse
+      protos.google.container.v1.IUsableSubnetwork[],
+      protos.google.container.v1.IListUsableSubnetworksRequest | null,
+      protos.google.container.v1.IListUsableSubnetworksResponse
     ]
   >;
   listUsableSubnetworks(
-    request: protosTypes.google.container.v1.IListUsableSubnetworksRequest,
+    request: protos.google.container.v1.IListUsableSubnetworksRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.container.v1.IUsableSubnetwork[],
-      protosTypes.google.container.v1.IListUsableSubnetworksRequest | null,
-      protosTypes.google.container.v1.IListUsableSubnetworksResponse
+    callback: PaginationCallback<
+      protos.google.container.v1.IListUsableSubnetworksRequest,
+      | protos.google.container.v1.IListUsableSubnetworksResponse
+      | null
+      | undefined,
+      protos.google.container.v1.IUsableSubnetwork
+    >
+  ): void;
+  listUsableSubnetworks(
+    request: protos.google.container.v1.IListUsableSubnetworksRequest,
+    callback: PaginationCallback<
+      protos.google.container.v1.IListUsableSubnetworksRequest,
+      | protos.google.container.v1.IListUsableSubnetworksResponse
+      | null
+      | undefined,
+      protos.google.container.v1.IUsableSubnetwork
     >
   ): void;
   /**
@@ -3089,24 +3357,28 @@ export class ClusterManagerClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listUsableSubnetworks(
-    request: protosTypes.google.container.v1.IListUsableSubnetworksRequest,
+    request: protos.google.container.v1.IListUsableSubnetworksRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.container.v1.IUsableSubnetwork[],
-          protosTypes.google.container.v1.IListUsableSubnetworksRequest | null,
-          protosTypes.google.container.v1.IListUsableSubnetworksResponse
+      | PaginationCallback<
+          protos.google.container.v1.IListUsableSubnetworksRequest,
+          | protos.google.container.v1.IListUsableSubnetworksResponse
+          | null
+          | undefined,
+          protos.google.container.v1.IUsableSubnetwork
         >,
-    callback?: Callback<
-      protosTypes.google.container.v1.IUsableSubnetwork[],
-      protosTypes.google.container.v1.IListUsableSubnetworksRequest | null,
-      protosTypes.google.container.v1.IListUsableSubnetworksResponse
+    callback?: PaginationCallback<
+      protos.google.container.v1.IListUsableSubnetworksRequest,
+      | protos.google.container.v1.IListUsableSubnetworksResponse
+      | null
+      | undefined,
+      protos.google.container.v1.IUsableSubnetwork
     >
   ): Promise<
     [
-      protosTypes.google.container.v1.IUsableSubnetwork[],
-      protosTypes.google.container.v1.IListUsableSubnetworksRequest | null,
-      protosTypes.google.container.v1.IListUsableSubnetworksResponse
+      protos.google.container.v1.IUsableSubnetwork[],
+      protos.google.container.v1.IListUsableSubnetworksRequest | null,
+      protos.google.container.v1.IListUsableSubnetworksResponse
     ]
   > | void {
     request = request || {};
@@ -3126,11 +3398,7 @@ export class ClusterManagerClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listUsableSubnetworks(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.listUsableSubnetworks(request, options, callback);
   }
 
   /**
@@ -3170,7 +3438,7 @@ export class ClusterManagerClient {
    *   An object stream which emits an object representing [UsableSubnetwork]{@link google.container.v1.UsableSubnetwork} on 'data' event.
    */
   listUsableSubnetworksStream(
-    request?: protosTypes.google.container.v1.IListUsableSubnetworksRequest,
+    request?: protos.google.container.v1.IListUsableSubnetworksRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -3184,11 +3452,62 @@ export class ClusterManagerClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listUsableSubnetworks.createStream(
-      this._innerApiCalls.listUsableSubnetworks as gax.GaxCall,
+    return this.descriptors.page.listUsableSubnetworks.createStream(
+      this.innerApiCalls.listUsableSubnetworks as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listUsableSubnetworks}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent project where subnetworks are usable.
+   *   Specified in the format 'projects/*'.
+   * @param {string} request.filter
+   *   Filtering currently only supports equality on the networkProjectId and must
+   *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+   *   is the project which owns the listed subnetworks. This defaults to the
+   *   parent project ID.
+   * @param {number} request.pageSize
+   *   The max number of results per page that should be returned. If the number
+   *   of available results is larger than `page_size`, a `next_page_token` is
+   *   returned which can be used to get the next page of results in subsequent
+   *   requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set this to the nextPageToken returned by
+   *   previous list requests to get the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listUsableSubnetworksAsync(
+    request?: protos.google.container.v1.IListUsableSubnetworksRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.container.v1.IUsableSubnetwork> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listUsableSubnetworks.asyncIterate(
+      this.innerApiCalls['listUsableSubnetworks'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.container.v1.IUsableSubnetwork>;
   }
 
   /**

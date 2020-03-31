@@ -13,6 +13,7 @@
 // limitations under the License.
 
 'use strict';
+const {describe, it} = require('mocha');
 
 describe('ClusterManagerSmokeTest', () => {
   if (!process.env.GCLOUD_PROJECT) {
@@ -21,6 +22,7 @@ describe('ClusterManagerSmokeTest', () => {
   const projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service', done => {
+    // eslint-disable-next-line node/no-missing-require
     const container = require('../src');
 
     const client = new container.v1.ClusterManagerClient({
