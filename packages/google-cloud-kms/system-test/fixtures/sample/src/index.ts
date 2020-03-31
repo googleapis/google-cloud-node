@@ -19,7 +19,7 @@
 import {KeyManagementServiceClient} from '@google-cloud/kms';
 
 function main() {
-  const keyManagementServiceClient = new KeyManagementServiceClient();
+  new KeyManagementServiceClient();
 }
 
 main();

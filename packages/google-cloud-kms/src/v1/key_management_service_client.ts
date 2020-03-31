@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './key_management_service_client_config.json';
 import {IamClient} from '../helper';
 
@@ -52,14 +52,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class KeyManagementServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _iamClient: IamClient;
   private _opts: ClientOptions;
@@ -68,6 +60,14 @@ export class KeyManagementServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   keyManagementServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -161,13 +161,16 @@ export class KeyManagementServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
@@ -188,7 +191,7 @@ export class KeyManagementServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listKeyRings: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -222,7 +225,7 @@ export class KeyManagementServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -249,7 +252,7 @@ export class KeyManagementServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.kms.v1.KeyManagementService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.kms.v1.KeyManagementService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -281,9 +284,8 @@ export class KeyManagementServiceClient {
       'destroyCryptoKeyVersion',
       'restoreCryptoKeyVersion',
     ];
-
     for (const methodName of keyManagementServiceStubMethods) {
-      const innerCallPromise = this.keyManagementServiceStub.then(
+      const callPromise = this.keyManagementServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -297,20 +299,14 @@ export class KeyManagementServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.keyManagementServiceStub;
@@ -370,22 +366,30 @@ export class KeyManagementServiceClient {
   // -- Service calls --
   // -------------------
   getKeyRing(
-    request: protosTypes.google.cloud.kms.v1.IGetKeyRingRequest,
+    request: protos.google.cloud.kms.v1.IGetKeyRingRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IKeyRing,
-      protosTypes.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
       {} | undefined
     ]
   >;
   getKeyRing(
-    request: protosTypes.google.cloud.kms.v1.IGetKeyRingRequest,
+    request: protos.google.cloud.kms.v1.IGetKeyRingRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IKeyRing,
-      protosTypes.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getKeyRing(
+    request: protos.google.cloud.kms.v1.IGetKeyRingRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -402,23 +406,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getKeyRing(
-    request: protosTypes.google.cloud.kms.v1.IGetKeyRingRequest,
+    request: protos.google.cloud.kms.v1.IGetKeyRingRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IKeyRing,
-          protosTypes.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IKeyRing,
-      protosTypes.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IKeyRing,
-      protosTypes.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -439,25 +443,33 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getKeyRing(request, options, callback);
+    return this.innerApiCalls.getKeyRing(request, options, callback);
   }
   getCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
       {} | undefined
     ]
   >;
   getCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCryptoKey(
+    request: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -475,23 +487,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKey,
-          protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -512,25 +524,33 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getCryptoKey(request, options, callback);
+    return this.innerApiCalls.getCryptoKey(request, options, callback);
   }
   getCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   >;
   getCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -547,24 +567,25 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      protosTypes.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -585,25 +606,33 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getCryptoKeyVersion(request, options, callback);
+    return this.innerApiCalls.getCryptoKeyVersion(request, options, callback);
   }
   getPublicKey(
-    request: protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest,
+    request: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IPublicKey,
-      protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
+      protos.google.cloud.kms.v1.IPublicKey,
+      protos.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
       {} | undefined
     ]
   >;
   getPublicKey(
-    request: protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest,
+    request: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IPublicKey,
-      protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IPublicKey,
+      protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPublicKey(
+    request: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IPublicKey,
+      protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -624,23 +653,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getPublicKey(
-    request: protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest,
+    request: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IPublicKey,
-          protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IPublicKey,
+          protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IPublicKey,
-      protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IPublicKey,
+      protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IPublicKey,
-      protosTypes.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
+      protos.google.cloud.kms.v1.IPublicKey,
+      protos.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -661,25 +690,33 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getPublicKey(request, options, callback);
+    return this.innerApiCalls.getPublicKey(request, options, callback);
   }
   getImportJob(
-    request: protosTypes.google.cloud.kms.v1.IGetImportJobRequest,
+    request: protos.google.cloud.kms.v1.IGetImportJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IImportJob,
-      protosTypes.google.cloud.kms.v1.IGetImportJobRequest | undefined,
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.IGetImportJobRequest | undefined,
       {} | undefined
     ]
   >;
   getImportJob(
-    request: protosTypes.google.cloud.kms.v1.IGetImportJobRequest,
+    request: protos.google.cloud.kms.v1.IGetImportJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IImportJob,
-      protosTypes.google.cloud.kms.v1.IGetImportJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getImportJob(
+    request: protos.google.cloud.kms.v1.IGetImportJobRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -696,23 +733,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getImportJob(
-    request: protosTypes.google.cloud.kms.v1.IGetImportJobRequest,
+    request: protos.google.cloud.kms.v1.IGetImportJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IImportJob,
-          protosTypes.google.cloud.kms.v1.IGetImportJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IImportJob,
-      protosTypes.google.cloud.kms.v1.IGetImportJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IImportJob,
-      protosTypes.google.cloud.kms.v1.IGetImportJobRequest | undefined,
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.IGetImportJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -733,25 +770,33 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getImportJob(request, options, callback);
+    return this.innerApiCalls.getImportJob(request, options, callback);
   }
   createKeyRing(
-    request: protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest,
+    request: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IKeyRing,
-      protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
       {} | undefined
     ]
   >;
   createKeyRing(
-    request: protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest,
+    request: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IKeyRing,
-      protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createKeyRing(
+    request: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -774,23 +819,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createKeyRing(
-    request: protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest,
+    request: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IKeyRing,
-          protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IKeyRing,
-      protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IKeyRing,
-      protosTypes.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
+      protos.google.cloud.kms.v1.IKeyRing,
+      protos.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -811,25 +856,33 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createKeyRing(request, options, callback);
+    return this.innerApiCalls.createKeyRing(request, options, callback);
   }
   createCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
       {} | undefined
     ]
   >;
   createCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCryptoKey(
+    request: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -862,23 +915,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKey,
-          protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -899,29 +952,37 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createCryptoKey(request, options, callback);
+    return this.innerApiCalls.createCryptoKey(request, options, callback);
   }
   createCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   >;
   createCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -945,28 +1006,27 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -987,33 +1047,41 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createCryptoKeyVersion(
+    return this.innerApiCalls.createCryptoKeyVersion(
       request,
       options,
       callback
     );
   }
   importCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   >;
   importCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  importCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1067,28 +1135,27 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   importCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1109,29 +1176,37 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.importCryptoKeyVersion(
+    return this.innerApiCalls.importCryptoKeyVersion(
       request,
       options,
       callback
     );
   }
   createImportJob(
-    request: protosTypes.google.cloud.kms.v1.ICreateImportJobRequest,
+    request: protos.google.cloud.kms.v1.ICreateImportJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IImportJob,
-      protosTypes.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
       {} | undefined
     ]
   >;
   createImportJob(
-    request: protosTypes.google.cloud.kms.v1.ICreateImportJobRequest,
+    request: protos.google.cloud.kms.v1.ICreateImportJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IImportJob,
-      protosTypes.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createImportJob(
+    request: protos.google.cloud.kms.v1.ICreateImportJobRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1156,23 +1231,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createImportJob(
-    request: protosTypes.google.cloud.kms.v1.ICreateImportJobRequest,
+    request: protos.google.cloud.kms.v1.ICreateImportJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IImportJob,
-          protosTypes.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IImportJob,
-      protosTypes.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IImportJob,
-      protosTypes.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
+      protos.google.cloud.kms.v1.IImportJob,
+      protos.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1193,25 +1268,33 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createImportJob(request, options, callback);
+    return this.innerApiCalls.createImportJob(request, options, callback);
   }
   updateCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
       {} | undefined
     ]
   >;
   updateCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCryptoKey(
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1230,23 +1313,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateCryptoKey(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKey,
-          protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1267,29 +1350,37 @@ export class KeyManagementServiceClient {
       'crypto_key.name': request.cryptoKey!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateCryptoKey(request, options, callback);
+    return this.innerApiCalls.updateCryptoKey(request, options, callback);
   }
   updateCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   >;
   updateCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1314,28 +1405,27 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1356,29 +1446,37 @@ export class KeyManagementServiceClient {
       'crypto_key_version.name': request.cryptoKeyVersion!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateCryptoKeyVersion(
+    return this.innerApiCalls.updateCryptoKeyVersion(
       request,
       options,
       callback
     );
   }
   encrypt(
-    request: protosTypes.google.cloud.kms.v1.IEncryptRequest,
+    request: protos.google.cloud.kms.v1.IEncryptRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IEncryptResponse,
-      protosTypes.google.cloud.kms.v1.IEncryptRequest | undefined,
+      protos.google.cloud.kms.v1.IEncryptResponse,
+      protos.google.cloud.kms.v1.IEncryptRequest | undefined,
       {} | undefined
     ]
   >;
   encrypt(
-    request: protosTypes.google.cloud.kms.v1.IEncryptRequest,
+    request: protos.google.cloud.kms.v1.IEncryptRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IEncryptResponse,
-      protosTypes.google.cloud.kms.v1.IEncryptRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IEncryptResponse,
+      protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  encrypt(
+    request: protos.google.cloud.kms.v1.IEncryptRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IEncryptResponse,
+      protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1420,23 +1518,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   encrypt(
-    request: protosTypes.google.cloud.kms.v1.IEncryptRequest,
+    request: protos.google.cloud.kms.v1.IEncryptRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IEncryptResponse,
-          protosTypes.google.cloud.kms.v1.IEncryptRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IEncryptResponse,
+          protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IEncryptResponse,
-      protosTypes.google.cloud.kms.v1.IEncryptRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IEncryptResponse,
+      protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IEncryptResponse,
-      protosTypes.google.cloud.kms.v1.IEncryptRequest | undefined,
+      protos.google.cloud.kms.v1.IEncryptResponse,
+      protos.google.cloud.kms.v1.IEncryptRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1457,25 +1555,33 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.encrypt(request, options, callback);
+    return this.innerApiCalls.encrypt(request, options, callback);
   }
   decrypt(
-    request: protosTypes.google.cloud.kms.v1.IDecryptRequest,
+    request: protos.google.cloud.kms.v1.IDecryptRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IDecryptResponse,
-      protosTypes.google.cloud.kms.v1.IDecryptRequest | undefined,
+      protos.google.cloud.kms.v1.IDecryptResponse,
+      protos.google.cloud.kms.v1.IDecryptRequest | undefined,
       {} | undefined
     ]
   >;
   decrypt(
-    request: protosTypes.google.cloud.kms.v1.IDecryptRequest,
+    request: protos.google.cloud.kms.v1.IDecryptRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IDecryptResponse,
-      protosTypes.google.cloud.kms.v1.IDecryptRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IDecryptResponse,
+      protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  decrypt(
+    request: protos.google.cloud.kms.v1.IDecryptRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IDecryptResponse,
+      protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1500,23 +1606,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   decrypt(
-    request: protosTypes.google.cloud.kms.v1.IDecryptRequest,
+    request: protos.google.cloud.kms.v1.IDecryptRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IDecryptResponse,
-          protosTypes.google.cloud.kms.v1.IDecryptRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IDecryptResponse,
+          protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IDecryptResponse,
-      protosTypes.google.cloud.kms.v1.IDecryptRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IDecryptResponse,
+      protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IDecryptResponse,
-      protosTypes.google.cloud.kms.v1.IDecryptRequest | undefined,
+      protos.google.cloud.kms.v1.IDecryptResponse,
+      protos.google.cloud.kms.v1.IDecryptRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1537,25 +1643,33 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.decrypt(request, options, callback);
+    return this.innerApiCalls.decrypt(request, options, callback);
   }
   asymmetricSign(
-    request: protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest,
+    request: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
+      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+      protos.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
       {} | undefined
     ]
   >;
   asymmetricSign(
-    request: protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest,
+    request: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+      protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  asymmetricSign(
+    request: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+      protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1578,23 +1692,23 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   asymmetricSign(
-    request: protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest,
+    request: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IAsymmetricSignResponse,
-          protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+          protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+      protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protosTypes.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
+      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+      protos.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1615,25 +1729,33 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.asymmetricSign(request, options, callback);
+    return this.innerApiCalls.asymmetricSign(request, options, callback);
   }
   asymmetricDecrypt(
-    request: protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest,
+    request: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
+      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
       {} | undefined
     ]
   >;
   asymmetricDecrypt(
-    request: protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest,
+    request: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  asymmetricDecrypt(
+    request: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1656,23 +1778,25 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   asymmetricDecrypt(
-    request: protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest,
+    request: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-          protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
-          {} | undefined
+          protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+          | protos.google.cloud.kms.v1.IAsymmetricDecryptRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
-      {} | undefined
+      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protosTypes.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
+      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1693,29 +1817,40 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.asymmetricDecrypt(request, options, callback);
+    return this.innerApiCalls.asymmetricDecrypt(request, options, callback);
   }
   updateCryptoKeyPrimaryVersion(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.ICryptoKey,
       (
-        | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+        | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateCryptoKeyPrimaryVersion(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKey,
+      | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateCryptoKeyPrimaryVersion(
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKey,
+      | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1736,26 +1871,28 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateCryptoKeyPrimaryVersion(
-    request: protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
+    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKey,
-          | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+          protos.google.cloud.kms.v1.ICryptoKey,
+          | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
-      | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKey,
+      | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey,
+      protos.google.cloud.kms.v1.ICryptoKey,
       (
-        | protosTypes.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+        | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
         | undefined
       ),
       {} | undefined
@@ -1778,33 +1915,41 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateCryptoKeyPrimaryVersion(
+    return this.innerApiCalls.updateCryptoKeyPrimaryVersion(
       request,
       options,
       callback
     );
   }
   destroyCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   >;
   destroyCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  destroyCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1832,28 +1977,27 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   destroyCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1874,33 +2018,41 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.destroyCryptoKeyVersion(
+    return this.innerApiCalls.destroyCryptoKeyVersion(
       request,
       options,
       callback
     );
   }
   restoreCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   >;
   restoreCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  restoreCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1923,28 +2075,27 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   restoreCryptoKeyVersion(
-    request: protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
+    request: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion,
-      (
-        | protosTypes.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
-        | undefined
-      ),
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1965,7 +2116,7 @@ export class KeyManagementServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.restoreCryptoKeyVersion(
+    return this.innerApiCalls.restoreCryptoKeyVersion(
       request,
       options,
       callback
@@ -1973,22 +2124,30 @@ export class KeyManagementServiceClient {
   }
 
   listKeyRings(
-    request: protosTypes.google.cloud.kms.v1.IListKeyRingsRequest,
+    request: protos.google.cloud.kms.v1.IListKeyRingsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IKeyRing[],
-      protosTypes.google.cloud.kms.v1.IListKeyRingsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListKeyRingsResponse
+      protos.google.cloud.kms.v1.IKeyRing[],
+      protos.google.cloud.kms.v1.IListKeyRingsRequest | null,
+      protos.google.cloud.kms.v1.IListKeyRingsResponse
     ]
   >;
   listKeyRings(
-    request: protosTypes.google.cloud.kms.v1.IListKeyRingsRequest,
+    request: protos.google.cloud.kms.v1.IListKeyRingsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.kms.v1.IKeyRing[],
-      protosTypes.google.cloud.kms.v1.IListKeyRingsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListKeyRingsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
+      protos.google.cloud.kms.v1.IKeyRing
+    >
+  ): void;
+  listKeyRings(
+    request: protos.google.cloud.kms.v1.IListKeyRingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
+      protos.google.cloud.kms.v1.IKeyRing
     >
   ): void;
   /**
@@ -2036,24 +2195,24 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listKeyRings(
-    request: protosTypes.google.cloud.kms.v1.IListKeyRingsRequest,
+    request: protos.google.cloud.kms.v1.IListKeyRingsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.kms.v1.IKeyRing[],
-          protosTypes.google.cloud.kms.v1.IListKeyRingsRequest | null,
-          protosTypes.google.cloud.kms.v1.IListKeyRingsResponse
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListKeyRingsRequest,
+          protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
+          protos.google.cloud.kms.v1.IKeyRing
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IKeyRing[],
-      protosTypes.google.cloud.kms.v1.IListKeyRingsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListKeyRingsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
+      protos.google.cloud.kms.v1.IKeyRing
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IKeyRing[],
-      protosTypes.google.cloud.kms.v1.IListKeyRingsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListKeyRingsResponse
+      protos.google.cloud.kms.v1.IKeyRing[],
+      protos.google.cloud.kms.v1.IListKeyRingsRequest | null,
+      protos.google.cloud.kms.v1.IListKeyRingsResponse
     ]
   > | void {
     request = request || {};
@@ -2073,7 +2232,7 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listKeyRings(request, options, callback);
+    return this.innerApiCalls.listKeyRings(request, options, callback);
   }
 
   /**
@@ -2118,7 +2277,7 @@ export class KeyManagementServiceClient {
    *   An object stream which emits an object representing [KeyRing]{@link google.cloud.kms.v1.KeyRing} on 'data' event.
    */
   listKeyRingsStream(
-    request?: protosTypes.google.cloud.kms.v1.IListKeyRingsRequest,
+    request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2132,29 +2291,93 @@ export class KeyManagementServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listKeyRings.createStream(
-      this._innerApiCalls.listKeyRings as gax.GaxCall,
+    return this.descriptors.page.listKeyRings.createStream(
+      this.innerApiCalls.listKeyRings as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listKeyRings}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location associated with the
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the
+   *   response.  Further {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token} in a subsequent
+   *   request.  If unspecified, the server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. Optional pagination token, returned earlier via
+   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.  For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listKeyRingsAsync(
+    request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.kms.v1.IKeyRing> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listKeyRings.asyncIterate(
+      this.innerApiCalls['listKeyRings'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.kms.v1.IKeyRing>;
+  }
   listCryptoKeys(
-    request: protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest,
+    request: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey[],
-      protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-      protosTypes.google.cloud.kms.v1.IListCryptoKeysResponse
+      protos.google.cloud.kms.v1.ICryptoKey[],
+      protos.google.cloud.kms.v1.IListCryptoKeysRequest | null,
+      protos.google.cloud.kms.v1.IListCryptoKeysResponse
     ]
   >;
   listCryptoKeys(
-    request: protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest,
+    request: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey[],
-      protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-      protosTypes.google.cloud.kms.v1.IListCryptoKeysResponse
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey
+    >
+  ): void;
+  listCryptoKeys(
+    request: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey
     >
   ): void;
   /**
@@ -2204,24 +2427,24 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listCryptoKeys(
-    request: protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest,
+    request: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKey[],
-          protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-          protosTypes.google.cloud.kms.v1.IListCryptoKeysResponse
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+          protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
+          protos.google.cloud.kms.v1.ICryptoKey
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKey[],
-      protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-      protosTypes.google.cloud.kms.v1.IListCryptoKeysResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
+      protos.google.cloud.kms.v1.ICryptoKey
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKey[],
-      protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-      protosTypes.google.cloud.kms.v1.IListCryptoKeysResponse
+      protos.google.cloud.kms.v1.ICryptoKey[],
+      protos.google.cloud.kms.v1.IListCryptoKeysRequest | null,
+      protos.google.cloud.kms.v1.IListCryptoKeysResponse
     ]
   > | void {
     request = request || {};
@@ -2241,7 +2464,7 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listCryptoKeys(request, options, callback);
+    return this.innerApiCalls.listCryptoKeys(request, options, callback);
   }
 
   /**
@@ -2288,7 +2511,7 @@ export class KeyManagementServiceClient {
    *   An object stream which emits an object representing [CryptoKey]{@link google.cloud.kms.v1.CryptoKey} on 'data' event.
    */
   listCryptoKeysStream(
-    request?: protosTypes.google.cloud.kms.v1.IListCryptoKeysRequest,
+    request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2302,29 +2525,99 @@ export class KeyManagementServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listCryptoKeys.createStream(
-      this._innerApiCalls.listCryptoKeys as gax.GaxCall,
+    return this.descriptors.page.listCryptoKeys.createStream(
+      this.innerApiCalls.listCryptoKeys as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listCryptoKeys}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
+   *   `projects/* /locations/* /keyRings/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the
+   *   response.  Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token} in a subsequent
+   *   request.  If unspecified, the server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. Optional pagination token, returned earlier via
+   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
+   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
+   *   The fields of the primary version to include in the response.
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listCryptoKeysAsync(
+    request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.kms.v1.ICryptoKey> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listCryptoKeys.asyncIterate(
+      this.innerApiCalls['listCryptoKeys'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.kms.v1.ICryptoKey>;
+  }
   listCryptoKeyVersions(
-    request: protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+    request: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion[],
-      protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      protos.google.cloud.kms.v1.ICryptoKeyVersion[],
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
     ]
   >;
   listCryptoKeyVersions(
-    request: protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+    request: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion[],
-      protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.kms.v1.ICryptoKeyVersion
+    >
+  ): void;
+  listCryptoKeyVersions(
+    request: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.kms.v1.ICryptoKeyVersion
     >
   ): void;
   /**
@@ -2375,24 +2668,28 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listCryptoKeyVersions(
-    request: protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+    request: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.kms.v1.ICryptoKeyVersion[],
-          protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-          protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+          | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.kms.v1.ICryptoKeyVersion
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion[],
-      protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.kms.v1.ICryptoKeyVersion
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.ICryptoKeyVersion[],
-      protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      protos.google.cloud.kms.v1.ICryptoKeyVersion[],
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
     ]
   > | void {
     request = request || {};
@@ -2412,11 +2709,7 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listCryptoKeyVersions(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.listCryptoKeyVersions(request, options, callback);
   }
 
   /**
@@ -2464,7 +2757,7 @@ export class KeyManagementServiceClient {
    *   An object stream which emits an object representing [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion} on 'data' event.
    */
   listCryptoKeyVersionsStream(
-    request?: protosTypes.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+    request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2478,29 +2771,96 @@ export class KeyManagementServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listCryptoKeyVersions.createStream(
-      this._innerApiCalls.listCryptoKeyVersions as gax.GaxCall,
+    return this.descriptors.page.listCryptoKeyVersions.createStream(
+      this.innerApiCalls.listCryptoKeyVersions as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listCryptoKeyVersions}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
+   *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to
+   *   include in the response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} can
+   *   subsequently be obtained by including the
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token} in a subsequent request.
+   *   If unspecified, the server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. Optional pagination token, returned earlier via
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
+   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
+   *   The fields to include in the response.
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listCryptoKeyVersionsAsync(
+    request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.kms.v1.ICryptoKeyVersion> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listCryptoKeyVersions.asyncIterate(
+      this.innerApiCalls['listCryptoKeyVersions'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.kms.v1.ICryptoKeyVersion>;
+  }
   listImportJobs(
-    request: protosTypes.google.cloud.kms.v1.IListImportJobsRequest,
+    request: protos.google.cloud.kms.v1.IListImportJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IImportJob[],
-      protosTypes.google.cloud.kms.v1.IListImportJobsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListImportJobsResponse
+      protos.google.cloud.kms.v1.IImportJob[],
+      protos.google.cloud.kms.v1.IListImportJobsRequest | null,
+      protos.google.cloud.kms.v1.IListImportJobsResponse
     ]
   >;
   listImportJobs(
-    request: protosTypes.google.cloud.kms.v1.IListImportJobsRequest,
+    request: protos.google.cloud.kms.v1.IListImportJobsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.kms.v1.IImportJob[],
-      protosTypes.google.cloud.kms.v1.IListImportJobsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListImportJobsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListImportJobsRequest,
+      protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
+      protos.google.cloud.kms.v1.IImportJob
+    >
+  ): void;
+  listImportJobs(
+    request: protos.google.cloud.kms.v1.IListImportJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListImportJobsRequest,
+      protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
+      protos.google.cloud.kms.v1.IImportJob
     >
   ): void;
   /**
@@ -2548,24 +2908,24 @@ export class KeyManagementServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listImportJobs(
-    request: protosTypes.google.cloud.kms.v1.IListImportJobsRequest,
+    request: protos.google.cloud.kms.v1.IListImportJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.kms.v1.IImportJob[],
-          protosTypes.google.cloud.kms.v1.IListImportJobsRequest | null,
-          protosTypes.google.cloud.kms.v1.IListImportJobsResponse
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListImportJobsRequest,
+          protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
+          protos.google.cloud.kms.v1.IImportJob
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.kms.v1.IImportJob[],
-      protosTypes.google.cloud.kms.v1.IListImportJobsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListImportJobsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.kms.v1.IListImportJobsRequest,
+      protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
+      protos.google.cloud.kms.v1.IImportJob
     >
   ): Promise<
     [
-      protosTypes.google.cloud.kms.v1.IImportJob[],
-      protosTypes.google.cloud.kms.v1.IListImportJobsRequest | null,
-      protosTypes.google.cloud.kms.v1.IListImportJobsResponse
+      protos.google.cloud.kms.v1.IImportJob[],
+      protos.google.cloud.kms.v1.IListImportJobsRequest | null,
+      protos.google.cloud.kms.v1.IListImportJobsResponse
     ]
   > | void {
     request = request || {};
@@ -2585,7 +2945,7 @@ export class KeyManagementServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listImportJobs(request, options, callback);
+    return this.innerApiCalls.listImportJobs(request, options, callback);
   }
 
   /**
@@ -2630,7 +2990,7 @@ export class KeyManagementServiceClient {
    *   An object stream which emits an object representing [ImportJob]{@link google.cloud.kms.v1.ImportJob} on 'data' event.
    */
   listImportJobsStream(
-    request?: protosTypes.google.cloud.kms.v1.IListImportJobsRequest,
+    request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2644,11 +3004,67 @@ export class KeyManagementServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listImportJobs.createStream(
-      this._innerApiCalls.listImportJobs as gax.GaxCall,
+    return this.descriptors.page.listImportJobs.createStream(
+      this.innerApiCalls.listImportJobs as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listImportJobs}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
+   *   `projects/* /locations/* /keyRings/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the
+   *   response. Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be obtained by
+   *   including the {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token} in a subsequent
+   *   request. If unspecified, the server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. Optional pagination token, returned earlier via
+   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listImportJobsAsync(
+    request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.kms.v1.IImportJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listImportJobs.asyncIterate(
+      this.innerApiCalls['listImportJobs'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.kms.v1.IImportJob>;
   }
   // --------------------
   // -- Path templates --
@@ -2669,9 +3085,9 @@ export class KeyManagementServiceClient {
     keyRing: string,
     cryptoKey: string
   ) {
-    return this._pathTemplates.cryptoKeyPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
       key_ring: keyRing,
       crypto_key: cryptoKey,
     });
@@ -2685,7 +3101,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
       .project;
   }
 
@@ -2697,7 +3113,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
       .location;
   }
 
@@ -2709,7 +3125,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
       .key_ring;
   }
 
@@ -2721,7 +3137,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
       .crypto_key;
   }
 
@@ -2742,9 +3158,9 @@ export class KeyManagementServiceClient {
     cryptoKey: string,
     cryptoKeyVersion: string
   ) {
-    return this._pathTemplates.cryptoKeyVersionPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
+      project: project,
+      location: location,
       key_ring: keyRing,
       crypto_key: cryptoKey,
       crypto_key_version: cryptoKeyVersion,
@@ -2759,7 +3175,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this._pathTemplates.cryptoKeyVersionPathTemplate.match(
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).project;
   }
@@ -2772,7 +3188,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this._pathTemplates.cryptoKeyVersionPathTemplate.match(
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).location;
   }
@@ -2785,7 +3201,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this._pathTemplates.cryptoKeyVersionPathTemplate.match(
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).key_ring;
   }
@@ -2798,7 +3214,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this._pathTemplates.cryptoKeyVersionPathTemplate.match(
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).crypto_key;
   }
@@ -2811,7 +3227,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the crypto_key_version.
    */
   matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this._pathTemplates.cryptoKeyVersionPathTemplate.match(
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).crypto_key_version;
   }
@@ -2831,9 +3247,9 @@ export class KeyManagementServiceClient {
     keyRing: string,
     importJob: string
   ) {
-    return this._pathTemplates.importJobPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.importJobPathTemplate.render({
+      project: project,
+      location: location,
       key_ring: keyRing,
       import_job: importJob,
     });
@@ -2847,7 +3263,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromImportJobName(importJobName: string) {
-    return this._pathTemplates.importJobPathTemplate.match(importJobName)
+    return this.pathTemplates.importJobPathTemplate.match(importJobName)
       .project;
   }
 
@@ -2859,7 +3275,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromImportJobName(importJobName: string) {
-    return this._pathTemplates.importJobPathTemplate.match(importJobName)
+    return this.pathTemplates.importJobPathTemplate.match(importJobName)
       .location;
   }
 
@@ -2871,7 +3287,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromImportJobName(importJobName: string) {
-    return this._pathTemplates.importJobPathTemplate.match(importJobName)
+    return this.pathTemplates.importJobPathTemplate.match(importJobName)
       .key_ring;
   }
 
@@ -2883,7 +3299,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the import_job.
    */
   matchImportJobFromImportJobName(importJobName: string) {
-    return this._pathTemplates.importJobPathTemplate.match(importJobName)
+    return this.pathTemplates.importJobPathTemplate.match(importJobName)
       .import_job;
   }
 
@@ -2896,9 +3312,9 @@ export class KeyManagementServiceClient {
    * @returns {string} Resource name string.
    */
   keyRingPath(project: string, location: string, keyRing: string) {
-    return this._pathTemplates.keyRingPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.keyRingPathTemplate.render({
+      project: project,
+      location: location,
       key_ring: keyRing,
     });
   }
@@ -2911,7 +3327,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromKeyRingName(keyRingName: string) {
-    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).project;
+    return this.pathTemplates.keyRingPathTemplate.match(keyRingName).project;
   }
 
   /**
@@ -2922,7 +3338,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromKeyRingName(keyRingName: string) {
-    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).location;
+    return this.pathTemplates.keyRingPathTemplate.match(keyRingName).location;
   }
 
   /**
@@ -2933,7 +3349,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromKeyRingName(keyRingName: string) {
-    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).key_ring;
+    return this.pathTemplates.keyRingPathTemplate.match(keyRingName).key_ring;
   }
 
   /**
@@ -2944,9 +3360,9 @@ export class KeyManagementServiceClient {
    * @returns {string} Resource name string.
    */
   locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -2958,7 +3374,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -2969,8 +3385,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -3000,23 +3415,23 @@ export class KeyManagementServiceClient {
    */
 
   getIamPolicy(
-    request: protosTypes.google.iam.v1.GetIamPolicyRequest,
+    request: protos.google.iam.v1.GetIamPolicyRequest,
     options: gax.CallOptions,
-    callback: protosTypes.google.iam.v1.IAMPolicy.GetIamPolicyCallback
+    callback: protos.google.iam.v1.IAMPolicy.GetIamPolicyCallback
   ) {
     return this._iamClient.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
-    request: protosTypes.google.iam.v1.SetIamPolicyRequest,
+    request: protos.google.iam.v1.SetIamPolicyRequest,
     options: gax.CallOptions,
-    callback: protosTypes.google.iam.v1.IAMPolicy.SetIamPolicyCallback
+    callback: protos.google.iam.v1.IAMPolicy.SetIamPolicyCallback
   ) {
     return this._iamClient.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protosTypes.google.iam.v1.TestIamPermissionsRequest,
+    request: protos.google.iam.v1.TestIamPermissionsRequest,
     options: gax.CallOptions,
-    callback?: protosTypes.google.iam.v1.IAMPolicy.TestIamPermissionsCallback
+    callback?: protos.google.iam.v1.IAMPolicy.TestIamPermissionsCallback
   ) {
     return this._iamClient.testIamPermissions(request, options, callback);
   }

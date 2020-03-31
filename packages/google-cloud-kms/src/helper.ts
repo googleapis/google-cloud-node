@@ -20,8 +20,10 @@ import * as gax from 'google-gax';
 import {Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 import * as gapicConfig from './iam_policy_service_client_config.json';
+// eslint-disable-next-line node/no-extraneous-import
 import {ProjectIdCallback} from 'google-auth-library';
 import * as protosTypes from '../protos/protos';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const {version} = require('../../package.json');
 /**
  *  Google Cloud IAM Client.
@@ -95,7 +97,7 @@ export class IamClient {
     const iamPolicyStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService('google.iam.v1.IAMPolicy')
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (protos as any).google.iam.v1.IAMPolicy,
       opts
     ) as Promise<{[method: string]: Function}>;
@@ -114,7 +116,8 @@ export class IamClient {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;

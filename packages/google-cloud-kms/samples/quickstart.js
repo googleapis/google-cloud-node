@@ -36,7 +36,7 @@ async function quickstart(
     console.log('Key rings:');
     keyRings.forEach(keyRing => console.log(keyRing.name));
   } else {
-    console.log(`No key rings found.`);
+    console.log('No key rings found.');
   }
 }
 // [END kms_quickstart]

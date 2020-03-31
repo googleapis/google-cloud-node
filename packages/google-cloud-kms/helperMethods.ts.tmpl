@@ -10,23 +10,23 @@
    */
 
   getIamPolicy(
-    request: protosTypes.google.iam.v1.GetIamPolicyRequest,
+    request: protos.google.iam.v1.GetIamPolicyRequest,
     options: gax.CallOptions,
-    callback: protosTypes.google.iam.v1.IAMPolicy.GetIamPolicyCallback
+    callback: protos.google.iam.v1.IAMPolicy.GetIamPolicyCallback
   ) {
     return this._iamClient.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
-    request: protosTypes.google.iam.v1.SetIamPolicyRequest,
+    request: protos.google.iam.v1.SetIamPolicyRequest,
     options: gax.CallOptions,
-    callback: protosTypes.google.iam.v1.IAMPolicy.SetIamPolicyCallback
+    callback: protos.google.iam.v1.IAMPolicy.SetIamPolicyCallback
   ) {
     return this._iamClient.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protosTypes.google.iam.v1.TestIamPermissionsRequest,
+    request: protos.google.iam.v1.TestIamPermissionsRequest,
     options: gax.CallOptions,
-    callback?: protosTypes.google.iam.v1.IAMPolicy.TestIamPermissionsCallback
+    callback?: protos.google.iam.v1.IAMPolicy.TestIamPermissionsCallback
   ) {
     return this._iamClient.testIamPermissions(request, options, callback);
   }
