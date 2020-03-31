@@ -1,24 +1,5 @@
 {
-  "updateTime": "2020-03-25T11:20:29.318Z",
-  "sources": [
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "551cf1e6e3addcc63740427c4f9b40dedd3dac27",
-        "internalRef": "302792195",
-        "log": "551cf1e6e3addcc63740427c4f9b40dedd3dac27\nfeat: Add OS Config AgentEndpointService v1 PatchJobs and Tasks APIs.\n\nPiperOrigin-RevId: 302792195\n\n1df117114c73299b614dfd3ba3632bf246669336\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 302753982\n\n71d6c56a14bb433beb1237dccb48dabcd9597924\nRefresh monitoring client libraries.\nRename to Cloud Monitoring API.\nAdded support for TimeSeriesQueryLanguageCondition condition type in alert policies.\n\nPiperOrigin-RevId: 302735422\n\n25a1781c096974df99d556cc5888fefa82bc6425\nbazel: migrate all go_gapic_library targets to microgenerator implementation\n\n* update rules_go and gazelle bazel dependencies\n* update gapic-generator bazel dependency (with build file generator changes)\n\nPiperOrigin-RevId: 302730217\n\n36c0febd0fa7267ab66d14408eec2afd1b6bec4e\nUpdate GAPIC configurations to v2 .yaml.\n\nPiperOrigin-RevId: 302639621\n\n078f222366ed344509a48f2f084944ef61476613\nFix containeranalysis v1beta1 assembly target name\n\nPiperOrigin-RevId: 302529186\n\n"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ee4330a0e5f4b93978e8683fbda8e6d4148326b7",
-        "log": "ee4330a0e5f4b93978e8683fbda8e6d4148326b7\nchore(java_templates): mark version bumps of current library as a chore (#452)\n\nWith the samples/install-without-bom/pom.xml referencing the latest released library, we want to mark updates of this version as a chore for renovate bot.\na0d3133a5d45544a66345059eebf76933265c099\nfix(java): run mvn install with retry (#453)\n\n* fix(java): run mvn install with retry\n\n* fix invocation of command\n6a17abc7652e2fe563e1288c6e8c23fc260dda97\ndocs: document the release schedule we follow (#454)\n\n\n"
-      }
-    }
-  ],
+  "updateTime": "2020-03-31T19:32:15.911887Z",
   "destinations": [
     {
       "client": {

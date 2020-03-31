@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
-    "node": ">=8.13.0"
+    "node": ">=10"
   },
   "repository": "googleapis/nodejs-dataproc",
   "main": "build/src/index.js",
@@ -42,19 +42,20 @@
     "prepare": "npm run compile"
   },
   "dependencies": {
-    "google-gax": "^1.14.1",
+    "google-gax": "^2.0.1",
     "protobufjs": "^6.8.6"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.1",
     "@types/node": "^12.0.0",
+    "@types/sinon": "^7.5.2",
     "c8": "^7.1.0",
     "codecov": "^3.0.2",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "gts": "^1.0.0",
+    "gts": "2.0.0-alpha.9",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
@@ -63,8 +64,9 @@
     "null-loader": "^3.0.0",
     "pack-n-play": "^1.0.0-2",
     "prettier": "^1.13.3",
+    "sinon": "^9.0.1",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.0",
+    "typescript": "^3.8.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   }

@@ -19,10 +19,10 @@
 import {AutoscalingPolicyServiceClient, ClusterControllerClient, JobControllerClient, WorkflowTemplateServiceClient} from '@google-cloud/dataproc';
 
 function main() {
-  const autoscalingPolicyServiceClient = new AutoscalingPolicyServiceClient();
-  const clusterControllerClient = new ClusterControllerClient();
-  const jobControllerClient = new JobControllerClient();
-  const workflowTemplateServiceClient = new WorkflowTemplateServiceClient();
+  new AutoscalingPolicyServiceClient();
+  new ClusterControllerClient();
+  new JobControllerClient();
+  new WorkflowTemplateServiceClient();
 }
 
 main();
