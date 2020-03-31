@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './profile_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v4beta1
  */
 export class ProfileServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class ProfileServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   profileServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -147,13 +147,16 @@ export class ProfileServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
       ),
@@ -180,7 +183,7 @@ export class ProfileServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listProfiles: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -199,7 +202,7 @@ export class ProfileServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -226,7 +229,7 @@ export class ProfileServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.talent.v4beta1.ProfileService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.talent.v4beta1.ProfileService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -241,9 +244,8 @@ export class ProfileServiceClient {
       'deleteProfile',
       'searchProfiles',
     ];
-
     for (const methodName of profileServiceStubMethods) {
-      const innerCallPromise = this.profileServiceStub.then(
+      const callPromise = this.profileServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -257,20 +259,14 @@ export class ProfileServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.profileServiceStub;
@@ -330,22 +326,34 @@ export class ProfileServiceClient {
   // -- Service calls --
   // -------------------
   createProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.ICreateProfileRequest | undefined,
       {} | undefined
     ]
   >;
   createProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IProfile,
+      | protos.google.cloud.talent.v4beta1.ICreateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createProfile(
+    request: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IProfile,
+      | protos.google.cloud.talent.v4beta1.ICreateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -367,24 +375,27 @@ export class ProfileServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IProfile,
-          | protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest
+          protos.google.cloud.talent.v4beta1.IProfile,
+          | protos.google.cloud.talent.v4beta1.ICreateProfileRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IProfile,
+      | protos.google.cloud.talent.v4beta1.ICreateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.ICreateProfileRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.ICreateProfileRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -405,25 +416,33 @@ export class ProfileServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createProfile(request, options, callback);
+    return this.innerApiCalls.createProfile(request, options, callback);
   }
   getProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.IGetProfileRequest | undefined,
       {} | undefined
     ]
   >;
   getProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.IGetProfileRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProfile(
+    request: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.IGetProfileRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -444,24 +463,25 @@ export class ProfileServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IProfile,
-          | protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest
+          protos.google.cloud.talent.v4beta1.IProfile,
+          | protos.google.cloud.talent.v4beta1.IGetProfileRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.IGetProfileRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.IGetProfileRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.IGetProfileRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -482,25 +502,37 @@ export class ProfileServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getProfile(request, options, callback);
+    return this.innerApiCalls.getProfile(request, options, callback);
   }
   updateProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.IUpdateProfileRequest | undefined,
       {} | undefined
     ]
   >;
   updateProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IProfile,
+      | protos.google.cloud.talent.v4beta1.IUpdateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateProfile(
+    request: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IProfile,
+      | protos.google.cloud.talent.v4beta1.IUpdateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -521,24 +553,27 @@ export class ProfileServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IProfile,
-          | protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest
+          protos.google.cloud.talent.v4beta1.IProfile,
+          | protos.google.cloud.talent.v4beta1.IUpdateProfileRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IProfile,
+      | protos.google.cloud.talent.v4beta1.IUpdateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IProfile,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateProfileRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile,
+      protos.google.cloud.talent.v4beta1.IUpdateProfileRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -559,25 +594,37 @@ export class ProfileServiceClient {
       'profile.name': request.profile!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateProfile(request, options, callback);
+    return this.innerApiCalls.updateProfile(request, options, callback);
   }
   deleteProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteProfileRequest | undefined,
       {} | undefined
     ]
   >;
   deleteProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteProfile(
+    request: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -600,24 +647,27 @@ export class ProfileServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteProfile(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.talent.v4beta1.IDeleteProfileRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteProfileRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteProfileRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -638,29 +688,37 @@ export class ProfileServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteProfile(request, options, callback);
+    return this.innerApiCalls.deleteProfile(request, options, callback);
   }
   searchProfiles(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ISearchProfilesResponse,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest
-        | undefined
-      ),
+      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+      protos.google.cloud.talent.v4beta1.ISearchProfilesRequest | undefined,
       {} | undefined
     ]
   >;
   searchProfiles(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ISearchProfilesResponse,
-      | protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest
+      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+      | protos.google.cloud.talent.v4beta1.ISearchProfilesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  searchProfiles(
+    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+      | protos.google.cloud.talent.v4beta1.ISearchProfilesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -852,28 +910,27 @@ export class ProfileServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   searchProfiles(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.ISearchProfilesResponse,
-          | protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest
+          protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+          | protos.google.cloud.talent.v4beta1.ISearchProfilesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ISearchProfilesResponse,
-      | protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest
+      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+      | protos.google.cloud.talent.v4beta1.ISearchProfilesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ISearchProfilesResponse,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.ISearchProfilesRequest
-        | undefined
-      ),
+      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+      protos.google.cloud.talent.v4beta1.ISearchProfilesRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -894,26 +951,38 @@ export class ProfileServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.searchProfiles(request, options, callback);
+    return this.innerApiCalls.searchProfiles(request, options, callback);
   }
 
   listProfiles(
-    request: protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest,
+    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IProfile[],
-      protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListProfilesResponse
+      protos.google.cloud.talent.v4beta1.IProfile[],
+      protos.google.cloud.talent.v4beta1.IListProfilesRequest | null,
+      protos.google.cloud.talent.v4beta1.IListProfilesResponse
     ]
   >;
   listProfiles(
-    request: protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest,
+    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IProfile[],
-      protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListProfilesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+      | protos.google.cloud.talent.v4beta1.IListProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile
+    >
+  ): void;
+  listProfiles(
+    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+      | protos.google.cloud.talent.v4beta1.IListProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile
     >
   ): void;
   /**
@@ -979,24 +1048,28 @@ export class ProfileServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listProfiles(
-    request: protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest,
+    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IProfile[],
-          protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest | null,
-          protosTypes.google.cloud.talent.v4beta1.IListProfilesResponse
+      | PaginationCallback<
+          protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+          | protos.google.cloud.talent.v4beta1.IListProfilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.talent.v4beta1.IProfile
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IProfile[],
-      protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListProfilesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+      | protos.google.cloud.talent.v4beta1.IListProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IProfile[],
-      protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListProfilesResponse
+      protos.google.cloud.talent.v4beta1.IProfile[],
+      protos.google.cloud.talent.v4beta1.IListProfilesRequest | null,
+      protos.google.cloud.talent.v4beta1.IListProfilesResponse
     ]
   > | void {
     request = request || {};
@@ -1016,7 +1089,7 @@ export class ProfileServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listProfiles(request, options, callback);
+    return this.innerApiCalls.listProfiles(request, options, callback);
   }
 
   /**
@@ -1079,7 +1152,7 @@ export class ProfileServiceClient {
    *   An object stream which emits an object representing [Profile]{@link google.cloud.talent.v4beta1.Profile} on 'data' event.
    */
   listProfilesStream(
-    request?: protosTypes.google.cloud.talent.v4beta1.IListProfilesRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1093,11 +1166,85 @@ export class ProfileServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listProfiles.createStream(
-      this._innerApiCalls.listProfiles as gax.GaxCall,
+    return this.descriptors.page.listProfiles.createStream(
+      this.innerApiCalls.listProfiles as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listProfiles}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the tenant under which the profile is created.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenants/bar".
+   * @param {string} request.filter
+   *   The filter string specifies the profiles to be enumerated.
+   *
+   *   Supported operator: =, AND
+   *
+   *   The field(s) eligible for filtering are:
+   *
+   *   * `externalId`
+   *   * `groupId`
+   *
+   *   externalId and groupId cannot be specified at the same time. If both
+   *   externalId and groupId are provided, the API will return a bad request
+   *   error.
+   *
+   *   Sample Query:
+   *
+   *   * externalId = "externalId-1"
+   *   * groupId = "groupId-1"
+   * @param {string} request.pageToken
+   *   The token that specifies the current offset (that is, starting result).
+   *
+   *   Please set the value to {@link google.cloud.talent.v4beta1.ListProfilesResponse.next_page_token|ListProfilesResponse.next_page_token} to
+   *   continue the list.
+   * @param {number} request.pageSize
+   *   The maximum number of profiles to be returned, at most 100.
+   *
+   *   Default is 100 unless a positive number smaller than 100 is specified.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   A field mask to specify the profile fields to be listed in response.
+   *   All fields are listed if it is unset.
+   *
+   *   Valid values are:
+   *
+   *   * name
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listProfilesAsync(
+    request?: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.talent.v4beta1.IProfile> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listProfiles.asyncIterate(
+      this.innerApiCalls['listProfiles'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.talent.v4beta1.IProfile>;
   }
   // --------------------
   // -- Path templates --
@@ -1118,11 +1265,11 @@ export class ProfileServiceClient {
     profile: string,
     application: string
   ) {
-    return this._pathTemplates.applicationPathTemplate.render({
-      project,
-      tenant,
-      profile,
-      application,
+    return this.pathTemplates.applicationPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
+      application: application,
     });
   }
 
@@ -1134,7 +1281,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .project;
   }
 
@@ -1146,7 +1293,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .tenant;
   }
 
@@ -1158,7 +1305,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the profile.
    */
   matchProfileFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .profile;
   }
 
@@ -1170,7 +1317,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
   }
 
@@ -1183,10 +1330,10 @@ export class ProfileServiceClient {
    * @returns {string} Resource name string.
    */
   profilePath(project: string, tenant: string, profile: string) {
-    return this._pathTemplates.profilePathTemplate.render({
-      project,
-      tenant,
-      profile,
+    return this.pathTemplates.profilePathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
     });
   }
 
@@ -1198,7 +1345,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).project;
+    return this.pathTemplates.profilePathTemplate.match(profileName).project;
   }
 
   /**
@@ -1209,7 +1356,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).tenant;
+    return this.pathTemplates.profilePathTemplate.match(profileName).tenant;
   }
 
   /**
@@ -1220,7 +1367,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the profile.
    */
   matchProfileFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).profile;
+    return this.pathTemplates.profilePathTemplate.match(profileName).profile;
   }
 
   /**
@@ -1231,9 +1378,9 @@ export class ProfileServiceClient {
    * @returns {string} Resource name string.
    */
   projectCompanyPath(project: string, company: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.render({
-      project,
-      company,
+    return this.pathTemplates.projectCompanyPathTemplate.render({
+      project: project,
+      company: company,
     });
   }
 
@@ -1245,7 +1392,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectCompanyName(projectCompanyName: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.match(
+    return this.pathTemplates.projectCompanyPathTemplate.match(
       projectCompanyName
     ).project;
   }
@@ -1258,7 +1405,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the company.
    */
   matchCompanyFromProjectCompanyName(projectCompanyName: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.match(
+    return this.pathTemplates.projectCompanyPathTemplate.match(
       projectCompanyName
     ).company;
   }
@@ -1271,9 +1418,9 @@ export class ProfileServiceClient {
    * @returns {string} Resource name string.
    */
   projectJobPath(project: string, job: string) {
-    return this._pathTemplates.projectJobPathTemplate.render({
-      project,
-      job,
+    return this.pathTemplates.projectJobPathTemplate.render({
+      project: project,
+      job: job,
     });
   }
 
@@ -1285,7 +1432,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectJobName(projectJobName: string) {
-    return this._pathTemplates.projectJobPathTemplate.match(projectJobName)
+    return this.pathTemplates.projectJobPathTemplate.match(projectJobName)
       .project;
   }
 
@@ -1297,7 +1444,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromProjectJobName(projectJobName: string) {
-    return this._pathTemplates.projectJobPathTemplate.match(projectJobName).job;
+    return this.pathTemplates.projectJobPathTemplate.match(projectJobName).job;
   }
 
   /**
@@ -1309,10 +1456,10 @@ export class ProfileServiceClient {
    * @returns {string} Resource name string.
    */
   projectTenantCompanyPath(project: string, tenant: string, company: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.render({
-      project,
-      tenant,
-      company,
+    return this.pathTemplates.projectTenantCompanyPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      company: company,
     });
   }
 
@@ -1324,7 +1471,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).project;
   }
@@ -1337,7 +1484,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).tenant;
   }
@@ -1350,7 +1497,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the company.
    */
   matchCompanyFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).company;
   }
@@ -1364,10 +1511,10 @@ export class ProfileServiceClient {
    * @returns {string} Resource name string.
    */
   projectTenantJobPath(project: string, tenant: string, job: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.render({
-      project,
-      tenant,
-      job,
+    return this.pathTemplates.projectTenantJobPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      job: job,
     });
   }
 
@@ -1379,7 +1526,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).project;
   }
@@ -1392,7 +1539,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).tenant;
   }
@@ -1405,7 +1552,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).job;
   }
@@ -1418,9 +1565,9 @@ export class ProfileServiceClient {
    * @returns {string} Resource name string.
    */
   tenantPath(project: string, tenant: string) {
-    return this._pathTemplates.tenantPathTemplate.render({
-      project,
-      tenant,
+    return this.pathTemplates.tenantPathTemplate.render({
+      project: project,
+      tenant: tenant,
     });
   }
 
@@ -1432,7 +1579,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTenantName(tenantName: string) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
+    return this.pathTemplates.tenantPathTemplate.match(tenantName).project;
   }
 
   /**
@@ -1443,7 +1590,7 @@ export class ProfileServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromTenantName(tenantName: string) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
+    return this.pathTemplates.tenantPathTemplate.match(tenantName).tenant;
   }
 
   /**

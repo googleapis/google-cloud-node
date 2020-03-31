@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './application_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v4beta1
  */
 export class ApplicationServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class ApplicationServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   applicationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -147,13 +147,16 @@ export class ApplicationServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
       ),
@@ -180,7 +183,7 @@ export class ApplicationServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listApplications: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -199,7 +202,7 @@ export class ApplicationServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -226,7 +229,7 @@ export class ApplicationServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.talent.v4beta1.ApplicationService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.talent.v4beta1.ApplicationService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -240,9 +243,8 @@ export class ApplicationServiceClient {
       'deleteApplication',
       'listApplications',
     ];
-
     for (const methodName of applicationServiceStubMethods) {
-      const innerCallPromise = this.applicationServiceStub.then(
+      const callPromise = this.applicationServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -256,20 +258,14 @@ export class ApplicationServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.applicationServiceStub;
@@ -329,26 +325,34 @@ export class ApplicationServiceClient {
   // -- Service calls --
   // -------------------
   createApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateApplicationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest
-        | undefined
-      ),
+      protos.google.cloud.talent.v4beta1.IApplication,
+      protos.google.cloud.talent.v4beta1.ICreateApplicationRequest | undefined,
       {} | undefined
     ]
   >;
   createApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateApplicationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      | protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.ICreateApplicationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createApplication(
+    request: protos.google.cloud.talent.v4beta1.ICreateApplicationRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.ICreateApplicationRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -371,28 +375,27 @@ export class ApplicationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateApplicationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IApplication,
-          | protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest
+          protos.google.cloud.talent.v4beta1.IApplication,
+          | protos.google.cloud.talent.v4beta1.ICreateApplicationRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      | protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.ICreateApplicationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.ICreateApplicationRequest
-        | undefined
-      ),
+      protos.google.cloud.talent.v4beta1.IApplication,
+      protos.google.cloud.talent.v4beta1.ICreateApplicationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -413,29 +416,37 @@ export class ApplicationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createApplication(request, options, callback);
+    return this.innerApiCalls.createApplication(request, options, callback);
   }
   getApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetApplicationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest
-        | undefined
-      ),
+      protos.google.cloud.talent.v4beta1.IApplication,
+      protos.google.cloud.talent.v4beta1.IGetApplicationRequest | undefined,
       {} | undefined
     ]
   >;
   getApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetApplicationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      | protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.IGetApplicationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getApplication(
+    request: protos.google.cloud.talent.v4beta1.IGetApplicationRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.IGetApplicationRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -456,28 +467,27 @@ export class ApplicationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetApplicationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IApplication,
-          | protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest
+          protos.google.cloud.talent.v4beta1.IApplication,
+          | protos.google.cloud.talent.v4beta1.IGetApplicationRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      | protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.IGetApplicationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.IGetApplicationRequest
-        | undefined
-      ),
+      protos.google.cloud.talent.v4beta1.IApplication,
+      protos.google.cloud.talent.v4beta1.IGetApplicationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -498,29 +508,37 @@ export class ApplicationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getApplication(request, options, callback);
+    return this.innerApiCalls.getApplication(request, options, callback);
   }
   updateApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest
-        | undefined
-      ),
+      protos.google.cloud.talent.v4beta1.IApplication,
+      protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest | undefined,
       {} | undefined
     ]
   >;
   updateApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      | protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateApplication(
+    request: protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -545,28 +563,27 @@ export class ApplicationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IApplication,
-          | protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest
+          protos.google.cloud.talent.v4beta1.IApplication,
+          | protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      | protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest
+      protos.google.cloud.talent.v4beta1.IApplication,
+      | protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IApplication,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.IUpdateApplicationRequest
-        | undefined
-      ),
+      protos.google.cloud.talent.v4beta1.IApplication,
+      protos.google.cloud.talent.v4beta1.IUpdateApplicationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -587,29 +604,37 @@ export class ApplicationServiceClient {
       'application.name': request.application!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateApplication(request, options, callback);
+    return this.innerApiCalls.updateApplication(request, options, callback);
   }
   deleteApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest | undefined,
       {} | undefined
     ]
   >;
   deleteApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteApplication(
+    request: protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -630,28 +655,27 @@ export class ApplicationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteApplication(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.IDeleteApplicationRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteApplicationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -672,26 +696,38 @@ export class ApplicationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteApplication(request, options, callback);
+    return this.innerApiCalls.deleteApplication(request, options, callback);
   }
 
   listApplications(
-    request: protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest,
+    request: protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IApplication[],
-      protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListApplicationsResponse
+      protos.google.cloud.talent.v4beta1.IApplication[],
+      protos.google.cloud.talent.v4beta1.IListApplicationsRequest | null,
+      protos.google.cloud.talent.v4beta1.IListApplicationsResponse
     ]
   >;
   listApplications(
-    request: protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest,
+    request: protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IApplication[],
-      protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListApplicationsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
+      | protos.google.cloud.talent.v4beta1.IListApplicationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.IApplication
+    >
+  ): void;
+  listApplications(
+    request: protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
+      | protos.google.cloud.talent.v4beta1.IListApplicationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.IApplication
     >
   ): void;
   /**
@@ -729,24 +765,28 @@ export class ApplicationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listApplications(
-    request: protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest,
+    request: protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IApplication[],
-          protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest | null,
-          protosTypes.google.cloud.talent.v4beta1.IListApplicationsResponse
+      | PaginationCallback<
+          protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
+          | protos.google.cloud.talent.v4beta1.IListApplicationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.talent.v4beta1.IApplication
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IApplication[],
-      protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListApplicationsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
+      | protos.google.cloud.talent.v4beta1.IListApplicationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.IApplication
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IApplication[],
-      protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListApplicationsResponse
+      protos.google.cloud.talent.v4beta1.IApplication[],
+      protos.google.cloud.talent.v4beta1.IListApplicationsRequest | null,
+      protos.google.cloud.talent.v4beta1.IListApplicationsResponse
     ]
   > | void {
     request = request || {};
@@ -766,7 +806,7 @@ export class ApplicationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listApplications(request, options, callback);
+    return this.innerApiCalls.listApplications(request, options, callback);
   }
 
   /**
@@ -801,7 +841,7 @@ export class ApplicationServiceClient {
    *   An object stream which emits an object representing [Application]{@link google.cloud.talent.v4beta1.Application} on 'data' event.
    */
   listApplicationsStream(
-    request?: protosTypes.google.cloud.talent.v4beta1.IListApplicationsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -815,11 +855,57 @@ export class ApplicationServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listApplications.createStream(
-      this._innerApiCalls.listApplications as gax.GaxCall,
+    return this.descriptors.page.listApplications.createStream(
+      this.innerApiCalls.listApplications as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listApplications}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the profile under which the application is created.
+   *
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
+   *   example, "projects/foo/tenants/bar/profiles/baz".
+   * @param {string} request.pageToken
+   *   The starting indicator from which to return results.
+   * @param {number} request.pageSize
+   *   The maximum number of applications to be returned, at most 100.
+   *   Default is 100 if a non-positive number is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listApplicationsAsync(
+    request?: protos.google.cloud.talent.v4beta1.IListApplicationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.talent.v4beta1.IApplication> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listApplications.asyncIterate(
+      this.innerApiCalls['listApplications'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.talent.v4beta1.IApplication>;
   }
   // --------------------
   // -- Path templates --
@@ -840,11 +926,11 @@ export class ApplicationServiceClient {
     profile: string,
     application: string
   ) {
-    return this._pathTemplates.applicationPathTemplate.render({
-      project,
-      tenant,
-      profile,
-      application,
+    return this.pathTemplates.applicationPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
+      application: application,
     });
   }
 
@@ -856,7 +942,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .project;
   }
 
@@ -868,7 +954,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .tenant;
   }
 
@@ -880,7 +966,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the profile.
    */
   matchProfileFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .profile;
   }
 
@@ -892,7 +978,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
   }
 
@@ -905,10 +991,10 @@ export class ApplicationServiceClient {
    * @returns {string} Resource name string.
    */
   profilePath(project: string, tenant: string, profile: string) {
-    return this._pathTemplates.profilePathTemplate.render({
-      project,
-      tenant,
-      profile,
+    return this.pathTemplates.profilePathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
     });
   }
 
@@ -920,7 +1006,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).project;
+    return this.pathTemplates.profilePathTemplate.match(profileName).project;
   }
 
   /**
@@ -931,7 +1017,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).tenant;
+    return this.pathTemplates.profilePathTemplate.match(profileName).tenant;
   }
 
   /**
@@ -942,7 +1028,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the profile.
    */
   matchProfileFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).profile;
+    return this.pathTemplates.profilePathTemplate.match(profileName).profile;
   }
 
   /**
@@ -953,9 +1039,9 @@ export class ApplicationServiceClient {
    * @returns {string} Resource name string.
    */
   projectCompanyPath(project: string, company: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.render({
-      project,
-      company,
+    return this.pathTemplates.projectCompanyPathTemplate.render({
+      project: project,
+      company: company,
     });
   }
 
@@ -967,7 +1053,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectCompanyName(projectCompanyName: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.match(
+    return this.pathTemplates.projectCompanyPathTemplate.match(
       projectCompanyName
     ).project;
   }
@@ -980,7 +1066,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the company.
    */
   matchCompanyFromProjectCompanyName(projectCompanyName: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.match(
+    return this.pathTemplates.projectCompanyPathTemplate.match(
       projectCompanyName
     ).company;
   }
@@ -993,9 +1079,9 @@ export class ApplicationServiceClient {
    * @returns {string} Resource name string.
    */
   projectJobPath(project: string, job: string) {
-    return this._pathTemplates.projectJobPathTemplate.render({
-      project,
-      job,
+    return this.pathTemplates.projectJobPathTemplate.render({
+      project: project,
+      job: job,
     });
   }
 
@@ -1007,7 +1093,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectJobName(projectJobName: string) {
-    return this._pathTemplates.projectJobPathTemplate.match(projectJobName)
+    return this.pathTemplates.projectJobPathTemplate.match(projectJobName)
       .project;
   }
 
@@ -1019,7 +1105,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromProjectJobName(projectJobName: string) {
-    return this._pathTemplates.projectJobPathTemplate.match(projectJobName).job;
+    return this.pathTemplates.projectJobPathTemplate.match(projectJobName).job;
   }
 
   /**
@@ -1031,10 +1117,10 @@ export class ApplicationServiceClient {
    * @returns {string} Resource name string.
    */
   projectTenantCompanyPath(project: string, tenant: string, company: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.render({
-      project,
-      tenant,
-      company,
+    return this.pathTemplates.projectTenantCompanyPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      company: company,
     });
   }
 
@@ -1046,7 +1132,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).project;
   }
@@ -1059,7 +1145,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).tenant;
   }
@@ -1072,7 +1158,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the company.
    */
   matchCompanyFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).company;
   }
@@ -1086,10 +1172,10 @@ export class ApplicationServiceClient {
    * @returns {string} Resource name string.
    */
   projectTenantJobPath(project: string, tenant: string, job: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.render({
-      project,
-      tenant,
-      job,
+    return this.pathTemplates.projectTenantJobPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      job: job,
     });
   }
 
@@ -1101,7 +1187,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).project;
   }
@@ -1114,7 +1200,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).tenant;
   }
@@ -1127,7 +1213,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).job;
   }
@@ -1140,9 +1226,9 @@ export class ApplicationServiceClient {
    * @returns {string} Resource name string.
    */
   tenantPath(project: string, tenant: string) {
-    return this._pathTemplates.tenantPathTemplate.render({
-      project,
-      tenant,
+    return this.pathTemplates.tenantPathTemplate.render({
+      project: project,
+      tenant: tenant,
     });
   }
 
@@ -1154,7 +1240,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTenantName(tenantName: string) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
+    return this.pathTemplates.tenantPathTemplate.match(tenantName).project;
   }
 
   /**
@@ -1165,7 +1251,7 @@ export class ApplicationServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromTenantName(tenantName: string) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
+    return this.pathTemplates.tenantPathTemplate.match(tenantName).tenant;
   }
 
   /**

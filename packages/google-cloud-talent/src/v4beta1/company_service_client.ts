@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './company_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -40,14 +40,6 @@ const version = require('../../../package.json').version;
  * @memberof v4beta1
  */
 export class CompanyServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -55,6 +47,14 @@ export class CompanyServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   companyServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -146,13 +146,16 @@ export class CompanyServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
       ),
@@ -179,7 +182,7 @@ export class CompanyServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listCompanies: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -198,7 +201,7 @@ export class CompanyServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -225,7 +228,7 @@ export class CompanyServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.talent.v4beta1.CompanyService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.talent.v4beta1.CompanyService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -239,9 +242,8 @@ export class CompanyServiceClient {
       'deleteCompany',
       'listCompanies',
     ];
-
     for (const methodName of companyServiceStubMethods) {
-      const innerCallPromise = this.companyServiceStub.then(
+      const callPromise = this.companyServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -255,20 +257,14 @@ export class CompanyServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.companyServiceStub;
@@ -328,22 +324,34 @@ export class CompanyServiceClient {
   // -- Service calls --
   // -------------------
   createCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateCompanyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
       {} | undefined
     ]
   >;
   createCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateCompanyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.ICompany,
+      | protos.google.cloud.talent.v4beta1.ICreateCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCompany(
+    request: protos.google.cloud.talent.v4beta1.ICreateCompanyRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.ICompany,
+      | protos.google.cloud.talent.v4beta1.ICreateCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -366,24 +374,27 @@ export class CompanyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateCompanyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.ICompany,
-          | protosTypes.google.cloud.talent.v4beta1.ICreateCompanyRequest
+          protos.google.cloud.talent.v4beta1.ICompany,
+          | protos.google.cloud.talent.v4beta1.ICreateCompanyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.ICompany,
+      | protos.google.cloud.talent.v4beta1.ICreateCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -404,25 +415,33 @@ export class CompanyServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createCompany(request, options, callback);
+    return this.innerApiCalls.createCompany(request, options, callback);
   }
   getCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetCompanyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
       {} | undefined
     ]
   >;
   getCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetCompanyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.IGetCompanyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCompany(
+    request: protos.google.cloud.talent.v4beta1.IGetCompanyRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.IGetCompanyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -446,24 +465,25 @@ export class CompanyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetCompanyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.ICompany,
-          | protosTypes.google.cloud.talent.v4beta1.IGetCompanyRequest
+          protos.google.cloud.talent.v4beta1.ICompany,
+          | protos.google.cloud.talent.v4beta1.IGetCompanyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.IGetCompanyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -484,25 +504,37 @@ export class CompanyServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getCompany(request, options, callback);
+    return this.innerApiCalls.getCompany(request, options, callback);
   }
   updateCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
       {} | undefined
     ]
   >;
   updateCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.ICompany,
+      | protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCompany(
+    request: protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.ICompany,
+      | protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -527,24 +559,27 @@ export class CompanyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.ICompany,
-          | protosTypes.google.cloud.talent.v4beta1.IUpdateCompanyRequest
+          protos.google.cloud.talent.v4beta1.ICompany,
+          | protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.ICompany,
+      | protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ICompany,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany,
+      protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -565,25 +600,37 @@ export class CompanyServiceClient {
       'company.name': request.company!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateCompany(request, options, callback);
+    return this.innerApiCalls.updateCompany(request, options, callback);
   }
   deleteCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
       {} | undefined
     ]
   >;
   deleteCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCompany(
+    request: protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -608,24 +655,27 @@ export class CompanyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteCompany(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteCompanyRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.talent.v4beta1.IDeleteCompanyRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -646,26 +696,38 @@ export class CompanyServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteCompany(request, options, callback);
+    return this.innerApiCalls.deleteCompany(request, options, callback);
   }
 
   listCompanies(
-    request: protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest,
+    request: protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ICompany[],
-      protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListCompaniesResponse
+      protos.google.cloud.talent.v4beta1.ICompany[],
+      protos.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
+      protos.google.cloud.talent.v4beta1.IListCompaniesResponse
     ]
   >;
   listCompanies(
-    request: protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest,
+    request: protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ICompany[],
-      protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListCompaniesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
+      | protos.google.cloud.talent.v4beta1.IListCompaniesResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany
+    >
+  ): void;
+  listCompanies(
+    request: protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
+      | protos.google.cloud.talent.v4beta1.IListCompaniesResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany
     >
   ): void;
   /**
@@ -712,24 +774,28 @@ export class CompanyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listCompanies(
-    request: protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest,
+    request: protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.talent.v4beta1.ICompany[],
-          protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
-          protosTypes.google.cloud.talent.v4beta1.IListCompaniesResponse
+      | PaginationCallback<
+          protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
+          | protos.google.cloud.talent.v4beta1.IListCompaniesResponse
+          | null
+          | undefined,
+          protos.google.cloud.talent.v4beta1.ICompany
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ICompany[],
-      protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListCompaniesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
+      | protos.google.cloud.talent.v4beta1.IListCompaniesResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.ICompany
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ICompany[],
-      protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListCompaniesResponse
+      protos.google.cloud.talent.v4beta1.ICompany[],
+      protos.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
+      protos.google.cloud.talent.v4beta1.IListCompaniesResponse
     ]
   > | void {
     request = request || {};
@@ -749,7 +815,7 @@ export class CompanyServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listCompanies(request, options, callback);
+    return this.innerApiCalls.listCompanies(request, options, callback);
   }
 
   /**
@@ -793,7 +859,7 @@ export class CompanyServiceClient {
    *   An object stream which emits an object representing [Company]{@link google.cloud.talent.v4beta1.Company} on 'data' event.
    */
   listCompaniesStream(
-    request?: protosTypes.google.cloud.talent.v4beta1.IListCompaniesRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -807,11 +873,66 @@ export class CompanyServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listCompanies.createStream(
-      this._innerApiCalls.listCompanies as gax.GaxCall,
+    return this.descriptors.page.listCompanies.createStream(
+      this.innerApiCalls.listCompanies as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listCompanies}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the tenant under which the company is created.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/foo/tenant/bar".
+   *
+   *   If tenant id is unspecified, the default tenant will be used, for
+   *   example, "projects/foo".
+   * @param {string} request.pageToken
+   *   The starting indicator from which to return results.
+   * @param {number} request.pageSize
+   *   The maximum number of companies to be returned, at most 100.
+   *   Default is 100 if a non-positive number is provided.
+   * @param {boolean} request.requireOpenJobs
+   *   Set to true if the companies requested must have open jobs.
+   *
+   *   Defaults to false.
+   *
+   *   If true, at most {@link google.cloud.talent.v4beta1.ListCompaniesRequest.page_size|page_size} of companies are fetched, among which
+   *   only those with open jobs are returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listCompaniesAsync(
+    request?: protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.talent.v4beta1.ICompany> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listCompanies.asyncIterate(
+      this.innerApiCalls['listCompanies'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.talent.v4beta1.ICompany>;
   }
   // --------------------
   // -- Path templates --
@@ -832,11 +953,11 @@ export class CompanyServiceClient {
     profile: string,
     application: string
   ) {
-    return this._pathTemplates.applicationPathTemplate.render({
-      project,
-      tenant,
-      profile,
-      application,
+    return this.pathTemplates.applicationPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
+      application: application,
     });
   }
 
@@ -848,7 +969,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .project;
   }
 
@@ -860,7 +981,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .tenant;
   }
 
@@ -872,7 +993,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the profile.
    */
   matchProfileFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .profile;
   }
 
@@ -884,7 +1005,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
   }
 
@@ -897,10 +1018,10 @@ export class CompanyServiceClient {
    * @returns {string} Resource name string.
    */
   profilePath(project: string, tenant: string, profile: string) {
-    return this._pathTemplates.profilePathTemplate.render({
-      project,
-      tenant,
-      profile,
+    return this.pathTemplates.profilePathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
     });
   }
 
@@ -912,7 +1033,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).project;
+    return this.pathTemplates.profilePathTemplate.match(profileName).project;
   }
 
   /**
@@ -923,7 +1044,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).tenant;
+    return this.pathTemplates.profilePathTemplate.match(profileName).tenant;
   }
 
   /**
@@ -934,7 +1055,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the profile.
    */
   matchProfileFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).profile;
+    return this.pathTemplates.profilePathTemplate.match(profileName).profile;
   }
 
   /**
@@ -945,9 +1066,9 @@ export class CompanyServiceClient {
    * @returns {string} Resource name string.
    */
   projectCompanyPath(project: string, company: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.render({
-      project,
-      company,
+    return this.pathTemplates.projectCompanyPathTemplate.render({
+      project: project,
+      company: company,
     });
   }
 
@@ -959,7 +1080,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectCompanyName(projectCompanyName: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.match(
+    return this.pathTemplates.projectCompanyPathTemplate.match(
       projectCompanyName
     ).project;
   }
@@ -972,7 +1093,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the company.
    */
   matchCompanyFromProjectCompanyName(projectCompanyName: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.match(
+    return this.pathTemplates.projectCompanyPathTemplate.match(
       projectCompanyName
     ).company;
   }
@@ -985,9 +1106,9 @@ export class CompanyServiceClient {
    * @returns {string} Resource name string.
    */
   projectJobPath(project: string, job: string) {
-    return this._pathTemplates.projectJobPathTemplate.render({
-      project,
-      job,
+    return this.pathTemplates.projectJobPathTemplate.render({
+      project: project,
+      job: job,
     });
   }
 
@@ -999,7 +1120,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectJobName(projectJobName: string) {
-    return this._pathTemplates.projectJobPathTemplate.match(projectJobName)
+    return this.pathTemplates.projectJobPathTemplate.match(projectJobName)
       .project;
   }
 
@@ -1011,7 +1132,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromProjectJobName(projectJobName: string) {
-    return this._pathTemplates.projectJobPathTemplate.match(projectJobName).job;
+    return this.pathTemplates.projectJobPathTemplate.match(projectJobName).job;
   }
 
   /**
@@ -1023,10 +1144,10 @@ export class CompanyServiceClient {
    * @returns {string} Resource name string.
    */
   projectTenantCompanyPath(project: string, tenant: string, company: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.render({
-      project,
-      tenant,
-      company,
+    return this.pathTemplates.projectTenantCompanyPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      company: company,
     });
   }
 
@@ -1038,7 +1159,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).project;
   }
@@ -1051,7 +1172,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).tenant;
   }
@@ -1064,7 +1185,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the company.
    */
   matchCompanyFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).company;
   }
@@ -1078,10 +1199,10 @@ export class CompanyServiceClient {
    * @returns {string} Resource name string.
    */
   projectTenantJobPath(project: string, tenant: string, job: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.render({
-      project,
-      tenant,
-      job,
+    return this.pathTemplates.projectTenantJobPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      job: job,
     });
   }
 
@@ -1093,7 +1214,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).project;
   }
@@ -1106,7 +1227,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).tenant;
   }
@@ -1119,7 +1240,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).job;
   }
@@ -1132,9 +1253,9 @@ export class CompanyServiceClient {
    * @returns {string} Resource name string.
    */
   tenantPath(project: string, tenant: string) {
-    return this._pathTemplates.tenantPathTemplate.render({
-      project,
-      tenant,
+    return this.pathTemplates.tenantPathTemplate.render({
+      project: project,
+      tenant: tenant,
     });
   }
 
@@ -1146,7 +1267,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTenantName(tenantName: string) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
+    return this.pathTemplates.tenantPathTemplate.match(tenantName).project;
   }
 
   /**
@@ -1157,7 +1278,7 @@ export class CompanyServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromTenantName(tenantName: string) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
+    return this.pathTemplates.tenantPathTemplate.match(tenantName).tenant;
   }
 
   /**

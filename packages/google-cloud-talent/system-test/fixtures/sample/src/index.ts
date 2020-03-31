@@ -16,16 +16,24 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ApplicationServiceClient, CompanyServiceClient, CompletionClient, EventServiceClient, JobServiceClient, ProfileServiceClient, TenantServiceClient} from '@google-cloud/talent';
+import {
+  ApplicationServiceClient,
+  CompanyServiceClient,
+  CompletionClient,
+  EventServiceClient,
+  JobServiceClient,
+  ProfileServiceClient,
+  TenantServiceClient,
+} from '@google-cloud/talent';
 
 function main() {
-  const applicationServiceClient = new ApplicationServiceClient();
-  const companyServiceClient = new CompanyServiceClient();
-  const completionClient = new CompletionClient();
-  const eventServiceClient = new EventServiceClient();
-  const jobServiceClient = new JobServiceClient();
-  const profileServiceClient = new ProfileServiceClient();
-  const tenantServiceClient = new TenantServiceClient();
+  new ApplicationServiceClient();
+  new CompanyServiceClient();
+  new CompletionClient();
+  new EventServiceClient();
+  new JobServiceClient();
+  new ProfileServiceClient();
+  new TenantServiceClient();
 }
 
 main();

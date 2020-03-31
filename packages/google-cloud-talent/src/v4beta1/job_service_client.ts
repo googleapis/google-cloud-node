@@ -18,19 +18,19 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   LROperation,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './job_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +41,6 @@ const version = require('../../../package.json').version;
  * @memberof v4beta1
  */
 export class JobServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +48,14 @@ export class JobServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   jobServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -148,13 +148,16 @@ export class JobServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
       ),
@@ -181,7 +184,7 @@ export class JobServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -199,6 +202,7 @@ export class JobServiceClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -222,7 +226,7 @@ export class JobServiceClient {
       '.google.cloud.talent.v4beta1.BatchOperationMetadata'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       batchCreateJobs: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchCreateJobsResponse.decode.bind(batchCreateJobsResponse),
@@ -246,7 +250,7 @@ export class JobServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -273,7 +277,7 @@ export class JobServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.talent.v4beta1.JobService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.talent.v4beta1.JobService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -292,9 +296,8 @@ export class JobServiceClient {
       'searchJobs',
       'searchJobsForAlert',
     ];
-
     for (const methodName of jobServiceStubMethods) {
-      const innerCallPromise = this.jobServiceStub.then(
+      const callPromise = this.jobServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -308,20 +311,14 @@ export class JobServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.jobServiceStub;
@@ -381,22 +378,30 @@ export class JobServiceClient {
   // -- Service calls --
   // -------------------
   createJob(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateJobRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.ICreateJobRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.ICreateJobRequest | undefined,
       {} | undefined
     ]
   >;
   createJob(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateJobRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.ICreateJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.ICreateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createJob(
+    request: protos.google.cloud.talent.v4beta1.ICreateJobRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.ICreateJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -422,23 +427,25 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createJob(
-    request: protosTypes.google.cloud.talent.v4beta1.ICreateJobRequest,
+    request: protos.google.cloud.talent.v4beta1.ICreateJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IJob,
-          protosTypes.google.cloud.talent.v4beta1.ICreateJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.talent.v4beta1.IJob,
+          | protos.google.cloud.talent.v4beta1.ICreateJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.ICreateJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.ICreateJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.ICreateJobRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.ICreateJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -459,25 +466,33 @@ export class JobServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createJob(request, options, callback);
+    return this.innerApiCalls.createJob(request, options, callback);
   }
   getJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.IGetJobRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IGetJobRequest | undefined,
       {} | undefined
     ]
   >;
   getJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.IGetJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IGetJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getJob(
+    request: protos.google.cloud.talent.v4beta1.IGetJobRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IGetJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -502,23 +517,23 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IGetJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IGetJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IJob,
-          protosTypes.google.cloud.talent.v4beta1.IGetJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.talent.v4beta1.IJob,
+          protos.google.cloud.talent.v4beta1.IGetJobRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.IGetJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IGetJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.IGetJobRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IGetJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -539,25 +554,33 @@ export class JobServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getJob(request, options, callback);
+    return this.innerApiCalls.getJob(request, options, callback);
   }
   updateJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateJobRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IUpdateJobRequest | undefined,
       {} | undefined
     ]
   >;
   updateJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateJob(
+    request: protos.google.cloud.talent.v4beta1.IUpdateJobRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -585,23 +608,25 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IUpdateJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IUpdateJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IJob,
-          protosTypes.google.cloud.talent.v4beta1.IUpdateJobRequest | undefined,
-          {} | undefined
+          protos.google.cloud.talent.v4beta1.IJob,
+          | protos.google.cloud.talent.v4beta1.IUpdateJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateJobRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IJob,
-      protosTypes.google.cloud.talent.v4beta1.IUpdateJobRequest | undefined,
+      protos.google.cloud.talent.v4beta1.IJob,
+      protos.google.cloud.talent.v4beta1.IUpdateJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -622,25 +647,33 @@ export class JobServiceClient {
       'job.name': request.job!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateJob(request, options, callback);
+    return this.innerApiCalls.updateJob(request, options, callback);
   }
   deleteJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteJobRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteJobRequest | undefined,
       {} | undefined
     ]
   >;
   deleteJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteJobRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteJob(
+    request: protos.google.cloud.talent.v4beta1.IDeleteJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -667,23 +700,25 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteJob(
-    request: protosTypes.google.cloud.talent.v4beta1.IDeleteJobRequest,
+    request: protos.google.cloud.talent.v4beta1.IDeleteJobRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          protosTypes.google.cloud.talent.v4beta1.IDeleteJobRequest | undefined,
-          {} | undefined
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.talent.v4beta1.IDeleteJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteJobRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteJobRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.cloud.talent.v4beta1.IDeleteJobRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IDeleteJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -704,29 +739,37 @@ export class JobServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteJob(request, options, callback);
+    return this.innerApiCalls.deleteJob(request, options, callback);
   }
   batchDeleteJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest | undefined,
       {} | undefined
     ]
   >;
   batchDeleteJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteJobs(
+    request: protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -759,28 +802,27 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchDeleteJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      (
-        | protosTypes.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest
-        | undefined
-      ),
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -801,25 +843,33 @@ export class JobServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchDeleteJobs(request, options, callback);
+    return this.innerApiCalls.batchDeleteJobs(request, options, callback);
   }
   searchJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse,
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | undefined,
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse,
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest | undefined,
       {} | undefined
     ]
   >;
   searchJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse,
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse,
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchJobs(
+    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse,
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1068,24 +1118,25 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   searchJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse,
-          | protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest
+          protos.google.cloud.talent.v4beta1.ISearchJobsResponse,
+          | protos.google.cloud.talent.v4beta1.ISearchJobsRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse,
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | undefined,
-      {} | undefined
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse,
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse,
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | undefined,
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse,
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1106,32 +1157,43 @@ export class JobServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.searchJobs(request, options, callback);
+    return this.innerApiCalls.searchJobs(request, options, callback);
   }
 
   batchCreateJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-        protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   batchCreateJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-        protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateJobs(
+    request: protos.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1154,32 +1216,32 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchCreateJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-            protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+            protos.google.cloud.talent.v4beta1.IJobOperationResult,
+            protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-        protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-        protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1200,31 +1262,42 @@ export class JobServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchCreateJobs(request, options, callback);
+    return this.innerApiCalls.batchCreateJobs(request, options, callback);
   }
   batchUpdateJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-        protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   batchUpdateJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-        protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchUpdateJobs(
+    request: protos.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1262,32 +1335,32 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchUpdateJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-            protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+            protos.google.cloud.talent.v4beta1.IJobOperationResult,
+            protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-        protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.talent.v4beta1.IJobOperationResult,
-        protosTypes.google.cloud.talent.v4beta1.IBatchOperationMetadata
+        protos.google.cloud.talent.v4beta1.IJobOperationResult,
+        protos.google.cloud.talent.v4beta1.IBatchOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1308,25 +1381,33 @@ export class JobServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchUpdateJobs(request, options, callback);
+    return this.innerApiCalls.batchUpdateJobs(request, options, callback);
   }
   listJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IListJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IListJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IJob[],
-      protosTypes.google.cloud.talent.v4beta1.IListJobsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListJobsResponse
+      protos.google.cloud.talent.v4beta1.IJob[],
+      protos.google.cloud.talent.v4beta1.IListJobsRequest | null,
+      protos.google.cloud.talent.v4beta1.IListJobsResponse
     ]
   >;
   listJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IListJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IListJobsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IJob[],
-      protosTypes.google.cloud.talent.v4beta1.IListJobsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListJobsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListJobsRequest,
+      protos.google.cloud.talent.v4beta1.IListJobsResponse | null | undefined,
+      protos.google.cloud.talent.v4beta1.IJob
+    >
+  ): void;
+  listJobs(
+    request: protos.google.cloud.talent.v4beta1.IListJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListJobsRequest,
+      protos.google.cloud.talent.v4beta1.IListJobsResponse | null | undefined,
+      protos.google.cloud.talent.v4beta1.IJob
     >
   ): void;
   /**
@@ -1391,24 +1472,26 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listJobs(
-    request: protosTypes.google.cloud.talent.v4beta1.IListJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.IListJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.talent.v4beta1.IJob[],
-          protosTypes.google.cloud.talent.v4beta1.IListJobsRequest | null,
-          protosTypes.google.cloud.talent.v4beta1.IListJobsResponse
+      | PaginationCallback<
+          protos.google.cloud.talent.v4beta1.IListJobsRequest,
+          | protos.google.cloud.talent.v4beta1.IListJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.talent.v4beta1.IJob
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.IJob[],
-      protosTypes.google.cloud.talent.v4beta1.IListJobsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListJobsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListJobsRequest,
+      protos.google.cloud.talent.v4beta1.IListJobsResponse | null | undefined,
+      protos.google.cloud.talent.v4beta1.IJob
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.IJob[],
-      protosTypes.google.cloud.talent.v4beta1.IListJobsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.IListJobsResponse
+      protos.google.cloud.talent.v4beta1.IJob[],
+      protos.google.cloud.talent.v4beta1.IListJobsRequest | null,
+      protos.google.cloud.talent.v4beta1.IListJobsResponse
     ]
   > | void {
     request = request || {};
@@ -1428,7 +1511,7 @@ export class JobServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listJobs(request, options, callback);
+    return this.innerApiCalls.listJobs(request, options, callback);
   }
 
   /**
@@ -1490,7 +1573,7 @@ export class JobServiceClient {
    *   An object stream which emits an object representing [Job]{@link google.cloud.talent.v4beta1.Job} on 'data' event.
    */
   listJobsStream(
-    request?: protosTypes.google.cloud.talent.v4beta1.IListJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListJobsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1504,29 +1587,110 @@ export class JobServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listJobs.createStream(
-      this._innerApiCalls.listJobs as gax.GaxCall,
+    return this.descriptors.page.listJobs.createStream(
+      this.innerApiCalls.listJobs as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listJobs}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the tenant under which the job is created.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
+   * @param {string} request.filter
+   *   Required. The filter string specifies the jobs to be enumerated.
+   *
+   *   Supported operator: =, AND
+   *
+   *   The fields eligible for filtering are:
+   *
+   *   * `companyName` (Required)
+   *   * `requisitionId`
+   *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
+   *   OPEN if no value is specified.
+   *
+   *   Sample Query:
+   *
+   *   * companyName = "projects/foo/tenants/bar/companies/baz"
+   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
+   *   requisitionId = "req-1"
+   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
+   *   status = "EXPIRED"
+   * @param {string} request.pageToken
+   *   The starting point of a query result.
+   * @param {number} request.pageSize
+   *   The maximum number of jobs to be returned per page of results.
+   *
+   *   If {@link google.cloud.talent.v4beta1.ListJobsRequest.job_view|job_view} is set to {@link google.cloud.talent.v4beta1.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY}, the maximum allowed
+   *   page size is 1000. Otherwise, the maximum allowed page size is 100.
+   *
+   *   Default is 100 if empty or a number < 1 is specified.
+   * @param {google.cloud.talent.v4beta1.JobView} request.jobView
+   *   The desired job attributes returned for jobs in the
+   *   search response. Defaults to {@link google.cloud.talent.v4beta1.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no value is
+   *   specified.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listJobsAsync(
+    request?: protos.google.cloud.talent.v4beta1.IListJobsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.talent.v4beta1.IJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listJobs.asyncIterate(
+      this.innerApiCalls['listJobs'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.talent.v4beta1.IJob>;
+  }
   searchJobsForAlert(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[],
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse
+      protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[],
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest | null,
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse
     ]
   >;
   searchJobsForAlert(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[],
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse | null | undefined,
+      protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob
+    >
+  ): void;
+  searchJobsForAlert(
+    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse | null | undefined,
+      protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob
     >
   ): void;
   /**
@@ -1792,24 +1956,26 @@ export class JobServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   searchJobsForAlert(
-    request: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[],
-          protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | null,
-          protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse
+      | PaginationCallback<
+          protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+          | protos.google.cloud.talent.v4beta1.ISearchJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[],
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse | null | undefined,
+      protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob
     >
   ): Promise<
     [
-      protosTypes.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[],
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest | null,
-      protosTypes.google.cloud.talent.v4beta1.ISearchJobsResponse
+      protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[],
+      protos.google.cloud.talent.v4beta1.ISearchJobsRequest | null,
+      protos.google.cloud.talent.v4beta1.ISearchJobsResponse
     ]
   > | void {
     request = request || {};
@@ -1829,7 +1995,7 @@ export class JobServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.searchJobsForAlert(request, options, callback);
+    return this.innerApiCalls.searchJobsForAlert(request, options, callback);
   }
 
   /**
@@ -2083,7 +2249,7 @@ export class JobServiceClient {
    *   An object stream which emits an object representing [MatchingJob]{@link google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob} on 'data' event.
    */
   searchJobsForAlertStream(
-    request?: protosTypes.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2097,11 +2263,280 @@ export class JobServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.searchJobsForAlert.createStream(
-      this._innerApiCalls.searchJobsForAlert as gax.GaxCall,
+    return this.descriptors.page.searchJobsForAlert.createStream(
+      this.innerApiCalls.searchJobsForAlert as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link searchJobsForAlert}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the tenant to search within.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
+   * @param {google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode} request.searchMode
+   *   Mode of a search.
+   *
+   *   Defaults to {@link google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
+   * @param {google.cloud.talent.v4beta1.RequestMetadata} request.requestMetadata
+   *   Required. The meta information collected about the job searcher, used to improve the
+   *   search quality of the service. The identifiers (such as `user_id`) are
+   *   provided by users, and must be unique and consistent.
+   * @param {google.cloud.talent.v4beta1.JobQuery} request.jobQuery
+   *   Query used to search against jobs, such as keyword, location filters, etc.
+   * @param {boolean} request.enableBroadening
+   *   Controls whether to broaden the search when it produces sparse results.
+   *   Broadened queries append results to the end of the matching results
+   *   list.
+   *
+   *   Defaults to false.
+   * @param {boolean} request.requirePreciseResultSize
+   *   Controls if the search job request requires the return of a precise
+   *   count of the first 300 results. Setting this to `true` ensures
+   *   consistency in the number of results per page. Best practice is to set this
+   *   value to true if a client allows users to jump directly to a
+   *   non-sequential search results page.
+   *
+   *   Enabling this flag may adversely impact performance.
+   *
+   *   Defaults to false.
+   * @param {number[]} request.histogramQueries
+   *   An expression specifies a histogram request against matching jobs.
+   *
+   *   Expression syntax is an aggregation function call with histogram facets and
+   *   other options.
+   *
+   *   Available aggregation function calls are:
+   *   * `count(string_histogram_facet)`: Count the number of matching entities,
+   *   for each distinct attribute value.
+   *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
+   *   matching entities within each bucket.
+   *
+   *   Data types:
+   *
+   *   * Histogram facet: facet names with format {@link a-zA-Z0-9_|a-zA-Z}+.
+   *   * String: string like "any string with backslash escape for quote(\")."
+   *   * Number: whole number and floating point number like 10, -1 and -0.01.
+   *   * List: list of elements with comma(,) separator surrounded by square
+   *   brackets, for example, [1, 2, 3] and ["one", "two", "three"].
+   *
+   *   Built-in constants:
+   *
+   *   * MIN (minimum number similar to java Double.MIN_VALUE)
+   *   * MAX (maximum number similar to java Double.MAX_VALUE)
+   *
+   *   Built-in functions:
+   *
+   *   * bucket(start, end[, label]): bucket built-in function creates a bucket
+   *   with range of [start, end). Note that the end is exclusive, for example,
+   *   bucket(1, MAX, "positive number") or bucket(1, 10).
+   *
+   *   Job histogram facets:
+   *
+   *   * company_display_name: histogram by {@link google.cloud.talent.v4beta1.Job.company_display_name|Job.company_display_name}.
+   *   * employment_type: histogram by {@link google.cloud.talent.v4beta1.Job.employment_types|Job.employment_types}, for example,
+   *     "FULL_TIME", "PART_TIME".
+   *   * company_size: histogram by {@link google.cloud.talent.v4beta1.CompanySize|CompanySize}, for example, "SMALL",
+   *   "MEDIUM", "BIG".
+   *   * publish_time_in_month: histogram by the {@link google.cloud.talent.v4beta1.Job.posting_publish_time|Job.posting_publish_time}
+   *     in months.
+   *     Must specify list of numeric buckets in spec.
+   *   * publish_time_in_year: histogram by the {@link google.cloud.talent.v4beta1.Job.posting_publish_time|Job.posting_publish_time}
+   *     in years.
+   *     Must specify list of numeric buckets in spec.
+   *   * degree_types: histogram by the {@link google.cloud.talent.v4beta1.Job.degree_types|Job.degree_types}, for example,
+   *     "Bachelors", "Masters".
+   *   * job_level: histogram by the {@link google.cloud.talent.v4beta1.Job.job_level|Job.job_level}, for example, "Entry
+   *     Level".
+   *   * country: histogram by the country code of jobs, for example, "US", "FR".
+   *   * admin1: histogram by the admin1 code of jobs, which is a global
+   *     placeholder referring to the state, province, or the particular term a
+   *     country uses to define the geographic structure below the country level,
+   *     for example, "CA", "IL".
+   *   * city: histogram by a combination of the "city name, admin1 code". For
+   *     example,  "Mountain View, CA", "New York, NY".
+   *   * admin1_country: histogram by a combination of the "admin1 code, country",
+   *     for example, "CA, US", "IL, US".
+   *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
+   *     and longitude), for example, 37.4038522,-122.0987765. Since the
+   *     coordinates of a city center can change, customers may need to refresh
+   *     them periodically.
+   *   * locale: histogram by the {@link google.cloud.talent.v4beta1.Job.language_code|Job.language_code}, for example, "en-US",
+   *     "fr-FR".
+   *   * language: histogram by the language subtag of the {@link google.cloud.talent.v4beta1.Job.language_code|Job.language_code},
+   *     for example, "en", "fr".
+   *   * category: histogram by the {@link google.cloud.talent.v4beta1.JobCategory|JobCategory}, for example,
+   *     "COMPUTER_AND_IT", "HEALTHCARE".
+   *   * base_compensation_unit: histogram by the
+   *     {@link google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit} of base
+   *     salary, for example, "WEEKLY", "MONTHLY".
+   *   * base_compensation: histogram by the base salary. Must specify list of
+   *     numeric buckets to group results by.
+   *   * annualized_base_compensation: histogram by the base annualized salary.
+   *     Must specify list of numeric buckets to group results by.
+   *   * annualized_total_compensation: histogram by the total annualized salary.
+   *     Must specify list of numeric buckets to group results by.
+   *   * string_custom_attribute: histogram by string {@link google.cloud.talent.v4beta1.Job.custom_attributes|Job.custom_attributes}.
+   *     Values can be accessed via square bracket notations like
+   *     string_custom_attribute["key1"].
+   *   * numeric_custom_attribute: histogram by numeric {@link google.cloud.talent.v4beta1.Job.custom_attributes|Job.custom_attributes}.
+   *     Values can be accessed via square bracket notations like
+   *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
+   *     group results by.
+   *
+   *   Example expressions:
+   *
+   *   * `count(admin1)`
+   *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
+   *   bucket(100000, MAX)])`
+   *   * `count(string_custom_attribute["some-string-custom-attribute"])`
+   *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+   * @param {google.cloud.talent.v4beta1.JobView} request.jobView
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to {@link google.cloud.talent.v4beta1.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if no value is specified.
+   * @param {number} request.offset
+   *   An integer that specifies the current offset (that is, starting result
+   *   location, amongst the jobs deemed by the API as relevant) in search
+   *   results. This field is only considered if {@link google.cloud.talent.v4beta1.SearchJobsRequest.page_token|page_token} is unset.
+   *
+   *   The maximum allowed value is 5000. Otherwise an error is thrown.
+   *
+   *   For example, 0 means to  return results starting from the first matching
+   *   job, and 10 means to return from the 11th job. This can be used for
+   *   pagination, (for example, pageSize = 10 and offset = 10 means to return
+   *   from the second page).
+   * @param {number} request.pageSize
+   *   A limit on the number of jobs returned in the search results.
+   *   Increasing this value above the default value of 10 can increase search
+   *   response time. The value can be between 1 and 100.
+   * @param {string} request.pageToken
+   *   The token specifying the current offset within
+   *   search results. See {@link google.cloud.talent.v4beta1.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token} for
+   *   an explanation of how to obtain the next set of query results.
+   * @param {string} request.orderBy
+   *   The criteria determining how search results are sorted. Default is
+   *   `"relevance desc"`.
+   *
+   *   Supported options are:
+   *
+   *   * `"relevance desc"`: By relevance descending, as determined by the API
+   *     algorithms. Relevance thresholding of query results is only available
+   *     with this ordering.
+   *   * `"posting_publish_time desc"`: By {@link google.cloud.talent.v4beta1.Job.posting_publish_time|Job.posting_publish_time}
+   *     descending.
+   *   * `"posting_update_time desc"`: By {@link google.cloud.talent.v4beta1.Job.posting_update_time|Job.posting_update_time}
+   *     descending.
+   *   * `"title"`: By {@link google.cloud.talent.v4beta1.Job.title|Job.title} ascending.
+   *   * `"title desc"`: By {@link google.cloud.talent.v4beta1.Job.title|Job.title} descending.
+   *   * `"annualized_base_compensation"`: By job's
+   *     {@link google.cloud.talent.v4beta1.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range} ascending. Jobs
+   *     whose annualized base compensation is unspecified are put at the end of
+   *     search results.
+   *   * `"annualized_base_compensation desc"`: By job's
+   *     {@link google.cloud.talent.v4beta1.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range} descending. Jobs
+   *     whose annualized base compensation is unspecified are put at the end of
+   *     search results.
+   *   * `"annualized_total_compensation"`: By job's
+   *     {@link google.cloud.talent.v4beta1.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range} ascending. Jobs
+   *     whose annualized base compensation is unspecified are put at the end of
+   *     search results.
+   *   * `"annualized_total_compensation desc"`: By job's
+   *     {@link google.cloud.talent.v4beta1.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range} descending. Jobs
+   *     whose annualized base compensation is unspecified are put at the end of
+   *     search results.
+   *   * `"custom_ranking desc"`: By the relevance score adjusted to the
+   *     {@link google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression} with weight
+   *     factor assigned by
+   *     {@link google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level} in descending
+   *     order.
+   *   * Location sorting: Use the special syntax to order jobs by distance:<br>
+   *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+   *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+   *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+   *     multiple locations. See details below.<br>
+   *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+   *     multiple locations. See details below.<br>
+   *     The string can have a maximum of 256 characters. When multiple distance
+   *     centers are provided, a job that is close to any of the distance centers
+   *     would have a high rank. When a job has multiple locations, the job
+   *     location closest to one of the distance centers will be used. Jobs that
+   *     don't have locations will be ranked at the bottom. Distance is calculated
+   *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+   *     still applied unless explicitly disabled in
+   *     {@link google.cloud.talent.v4beta1.SearchJobsRequest.diversification_level|diversification_level}.
+   * @param {google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel} request.diversificationLevel
+   *   Controls whether highly similar jobs are returned next to each other in
+   *   the search results. Jobs are identified as highly similar based on
+   *   their titles, job categories, and locations. Highly similar results are
+   *   clustered so that only one representative job of the cluster is
+   *   displayed to the job seeker higher up in the results, with the other jobs
+   *   being displayed lower down in the results.
+   *
+   *   Defaults to {@link google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE} if no value
+   *   is specified.
+   * @param {google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
+   *   Controls over how job documents get ranked on top of existing relevance
+   *   score (determined by API algorithm).
+   * @param {boolean} request.disableKeywordMatch
+   *   Controls whether to disable exact keyword match on {@link google.cloud.talent.v4beta1.Job.title|Job.title},
+   *   {@link google.cloud.talent.v4beta1.Job.description|Job.description}, {@link google.cloud.talent.v4beta1.Job.company_display_name|Job.company_display_name}, {@link google.cloud.talent.v4beta1.Job.addresses|Job.addresses},
+   *   {@link google.cloud.talent.v4beta1.Job.qualifications|Job.qualifications}. When disable keyword match is turned off, a
+   *   keyword match returns jobs that do not match given category filters when
+   *   there are matching keywords. For example, for the query "program manager,"
+   *   a result is returned even if the job posting has the title "software
+   *   developer," which doesn't fall into "program manager" ontology, but does
+   *   have "program manager" appearing in its description.
+   *
+   *   For queries like "cloud" that don't contain title or
+   *   location specific ontology, jobs with "cloud" keyword matches are returned
+   *   regardless of this flag's value.
+   *
+   *   Use {@link google.cloud.talent.v4beta1.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes} if
+   *   company-specific globally matched custom field/attribute string values are
+   *   needed. Enabling keyword match improves recall of subsequent search
+   *   requests.
+   *
+   *   Defaults to false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  searchJobsForAlertAsync(
+    request?: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<
+    protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob
+  > {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchJobsForAlert.asyncIterate(
+      this.innerApiCalls['searchJobsForAlert'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<
+      protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob
+    >;
   }
   // --------------------
   // -- Path templates --
@@ -2122,11 +2557,11 @@ export class JobServiceClient {
     profile: string,
     application: string
   ) {
-    return this._pathTemplates.applicationPathTemplate.render({
-      project,
-      tenant,
-      profile,
-      application,
+    return this.pathTemplates.applicationPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
+      application: application,
     });
   }
 
@@ -2138,7 +2573,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .project;
   }
 
@@ -2150,7 +2585,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .tenant;
   }
 
@@ -2162,7 +2597,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the profile.
    */
   matchProfileFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .profile;
   }
 
@@ -2174,7 +2609,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
   }
 
@@ -2187,10 +2622,10 @@ export class JobServiceClient {
    * @returns {string} Resource name string.
    */
   profilePath(project: string, tenant: string, profile: string) {
-    return this._pathTemplates.profilePathTemplate.render({
-      project,
-      tenant,
-      profile,
+    return this.pathTemplates.profilePathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
     });
   }
 
@@ -2202,7 +2637,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).project;
+    return this.pathTemplates.profilePathTemplate.match(profileName).project;
   }
 
   /**
@@ -2213,7 +2648,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).tenant;
+    return this.pathTemplates.profilePathTemplate.match(profileName).tenant;
   }
 
   /**
@@ -2224,7 +2659,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the profile.
    */
   matchProfileFromProfileName(profileName: string) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).profile;
+    return this.pathTemplates.profilePathTemplate.match(profileName).profile;
   }
 
   /**
@@ -2235,9 +2670,9 @@ export class JobServiceClient {
    * @returns {string} Resource name string.
    */
   projectCompanyPath(project: string, company: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.render({
-      project,
-      company,
+    return this.pathTemplates.projectCompanyPathTemplate.render({
+      project: project,
+      company: company,
     });
   }
 
@@ -2249,7 +2684,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectCompanyName(projectCompanyName: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.match(
+    return this.pathTemplates.projectCompanyPathTemplate.match(
       projectCompanyName
     ).project;
   }
@@ -2262,7 +2697,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the company.
    */
   matchCompanyFromProjectCompanyName(projectCompanyName: string) {
-    return this._pathTemplates.projectCompanyPathTemplate.match(
+    return this.pathTemplates.projectCompanyPathTemplate.match(
       projectCompanyName
     ).company;
   }
@@ -2275,9 +2710,9 @@ export class JobServiceClient {
    * @returns {string} Resource name string.
    */
   projectJobPath(project: string, job: string) {
-    return this._pathTemplates.projectJobPathTemplate.render({
-      project,
-      job,
+    return this.pathTemplates.projectJobPathTemplate.render({
+      project: project,
+      job: job,
     });
   }
 
@@ -2289,7 +2724,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectJobName(projectJobName: string) {
-    return this._pathTemplates.projectJobPathTemplate.match(projectJobName)
+    return this.pathTemplates.projectJobPathTemplate.match(projectJobName)
       .project;
   }
 
@@ -2301,7 +2736,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromProjectJobName(projectJobName: string) {
-    return this._pathTemplates.projectJobPathTemplate.match(projectJobName).job;
+    return this.pathTemplates.projectJobPathTemplate.match(projectJobName).job;
   }
 
   /**
@@ -2313,10 +2748,10 @@ export class JobServiceClient {
    * @returns {string} Resource name string.
    */
   projectTenantCompanyPath(project: string, tenant: string, company: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.render({
-      project,
-      tenant,
-      company,
+    return this.pathTemplates.projectTenantCompanyPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      company: company,
     });
   }
 
@@ -2328,7 +2763,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).project;
   }
@@ -2341,7 +2776,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).tenant;
   }
@@ -2354,7 +2789,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the company.
    */
   matchCompanyFromProjectTenantCompanyName(projectTenantCompanyName: string) {
-    return this._pathTemplates.projectTenantCompanyPathTemplate.match(
+    return this.pathTemplates.projectTenantCompanyPathTemplate.match(
       projectTenantCompanyName
     ).company;
   }
@@ -2368,10 +2803,10 @@ export class JobServiceClient {
    * @returns {string} Resource name string.
    */
   projectTenantJobPath(project: string, tenant: string, job: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.render({
-      project,
-      tenant,
-      job,
+    return this.pathTemplates.projectTenantJobPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      job: job,
     });
   }
 
@@ -2383,7 +2818,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).project;
   }
@@ -2396,7 +2831,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).tenant;
   }
@@ -2409,7 +2844,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromProjectTenantJobName(projectTenantJobName: string) {
-    return this._pathTemplates.projectTenantJobPathTemplate.match(
+    return this.pathTemplates.projectTenantJobPathTemplate.match(
       projectTenantJobName
     ).job;
   }
@@ -2422,9 +2857,9 @@ export class JobServiceClient {
    * @returns {string} Resource name string.
    */
   tenantPath(project: string, tenant: string) {
-    return this._pathTemplates.tenantPathTemplate.render({
-      project,
-      tenant,
+    return this.pathTemplates.tenantPathTemplate.render({
+      project: project,
+      tenant: tenant,
     });
   }
 
@@ -2436,7 +2871,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTenantName(tenantName: string) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
+    return this.pathTemplates.tenantPathTemplate.match(tenantName).project;
   }
 
   /**
@@ -2447,7 +2882,7 @@ export class JobServiceClient {
    * @returns {string} A string representing the tenant.
    */
   matchTenantFromTenantName(tenantName: string) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
+    return this.pathTemplates.tenantPathTemplate.match(tenantName).tenant;
   }
 
   /**

@@ -34,8 +34,6 @@ export {
   ProfileServiceClient,
   TenantServiceClient,
 };
-// For compatibility with JavaScript libraries we need to provide this default export:
-// tslint:disable-next-line no-default-export
 export default {
   v4beta1,
   ApplicationServiceClient,
