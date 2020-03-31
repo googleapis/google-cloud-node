@@ -1,22 +1,5 @@
 {
-  "updateTime": "2020-03-06T12:32:55.468505Z",
-  "sources": [
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "f0b581b5bdf803e45201ecdb3688b60e381628a8",
-        "internalRef": "299181282"
-      }
-    },
-    {
-      "template": {
-        "name": "node_library",
-        "origin": "synthtool.gcp",
-        "version": "2020.2.4"
-      }
-    }
-  ],
+  "updateTime": "2020-03-31T19:49:37.802729Z",
   "destinations": [
     {
       "client": {

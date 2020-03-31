@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './alert_policy_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -48,9 +48,6 @@ const version = require('../../../package.json').version;
  * @memberof v3
  */
 export class AlertPolicyServiceClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -58,6 +55,14 @@ export class AlertPolicyServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   alertPolicyServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -149,13 +154,16 @@ export class AlertPolicyServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       folderAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/alertPolicies/{alert_policy}'
       ),
@@ -236,7 +244,7 @@ export class AlertPolicyServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listAlertPolicies: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -255,7 +263,7 @@ export class AlertPolicyServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -282,7 +290,7 @@ export class AlertPolicyServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.monitoring.v3.AlertPolicyService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.AlertPolicyService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -296,14 +304,14 @@ export class AlertPolicyServiceClient {
       'deleteAlertPolicy',
       'updateAlertPolicy',
     ];
-
     for (const methodName of alertPolicyServiceStubMethods) {
-      const innerCallPromise = this.alertPolicyServiceStub.then(
+      const callPromise = this.alertPolicyServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -311,20 +319,14 @@ export class AlertPolicyServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.alertPolicyServiceStub;
@@ -385,22 +387,30 @@ export class AlertPolicyServiceClient {
   // -- Service calls --
   // -------------------
   getAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IGetAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IGetAlertPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   getAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IGetAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IGetAlertPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IGetAlertPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAlertPolicy(
+    request: protos.google.monitoring.v3.IGetAlertPolicyRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IGetAlertPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -419,23 +429,23 @@ export class AlertPolicyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IGetAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IGetAlertPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IAlertPolicy,
-          protosTypes.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
-          {} | undefined
+          protos.google.monitoring.v3.IAlertPolicy,
+          protos.google.monitoring.v3.IGetAlertPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IGetAlertPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -456,25 +466,33 @@ export class AlertPolicyServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getAlertPolicy(request, options, callback);
+    return this.innerApiCalls.getAlertPolicy(request, options, callback);
   }
   createAlertPolicy(
-    request: protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest,
+    request: protos.google.monitoring.v3.ICreateAlertPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   createAlertPolicy(
-    request: protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest,
+    request: protos.google.monitoring.v3.ICreateAlertPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.ICreateAlertPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAlertPolicy(
+    request: protos.google.monitoring.v3.ICreateAlertPolicyRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.ICreateAlertPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -504,24 +522,25 @@ export class AlertPolicyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createAlertPolicy(
-    request: protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest,
+    request: protos.google.monitoring.v3.ICreateAlertPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IAlertPolicy,
-          | protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest
+          protos.google.monitoring.v3.IAlertPolicy,
+          | protos.google.monitoring.v3.ICreateAlertPolicyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.ICreateAlertPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -542,25 +561,33 @@ export class AlertPolicyServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.createAlertPolicy(request, options, callback);
+    return this.innerApiCalls.createAlertPolicy(request, options, callback);
   }
   deleteAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IDeleteAlertPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   deleteAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IDeleteAlertPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteAlertPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAlertPolicy(
+    request: protos.google.monitoring.v3.IDeleteAlertPolicyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteAlertPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -581,24 +608,25 @@ export class AlertPolicyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IDeleteAlertPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.IDeleteAlertPolicyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteAlertPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -619,25 +647,33 @@ export class AlertPolicyServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteAlertPolicy(request, options, callback);
+    return this.innerApiCalls.deleteAlertPolicy(request, options, callback);
   }
   updateAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   updateAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAlertPolicy(
+    request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -682,24 +718,25 @@ export class AlertPolicyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateAlertPolicy(
-    request: protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest,
+    request: protos.google.monitoring.v3.IUpdateAlertPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IAlertPolicy,
-          | protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest
+          protos.google.monitoring.v3.IAlertPolicy,
+          | protos.google.monitoring.v3.IUpdateAlertPolicyRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IAlertPolicy,
-      protosTypes.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
+      protos.google.monitoring.v3.IAlertPolicy,
+      protos.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -720,26 +757,34 @@ export class AlertPolicyServiceClient {
       'alert_policy.name': request.alertPolicy!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateAlertPolicy(request, options, callback);
+    return this.innerApiCalls.updateAlertPolicy(request, options, callback);
   }
 
   listAlertPolicies(
-    request: protosTypes.google.monitoring.v3.IListAlertPoliciesRequest,
+    request: protos.google.monitoring.v3.IListAlertPoliciesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IAlertPolicy[],
-      protosTypes.google.monitoring.v3.IListAlertPoliciesRequest | null,
-      protosTypes.google.monitoring.v3.IListAlertPoliciesResponse
+      protos.google.monitoring.v3.IAlertPolicy[],
+      protos.google.monitoring.v3.IListAlertPoliciesRequest | null,
+      protos.google.monitoring.v3.IListAlertPoliciesResponse
     ]
   >;
   listAlertPolicies(
-    request: protosTypes.google.monitoring.v3.IListAlertPoliciesRequest,
+    request: protos.google.monitoring.v3.IListAlertPoliciesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.monitoring.v3.IAlertPolicy[],
-      protosTypes.google.monitoring.v3.IListAlertPoliciesRequest | null,
-      protosTypes.google.monitoring.v3.IListAlertPoliciesResponse
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListAlertPoliciesRequest,
+      protos.google.monitoring.v3.IListAlertPoliciesResponse | null | undefined,
+      protos.google.monitoring.v3.IAlertPolicy
+    >
+  ): void;
+  listAlertPolicies(
+    request: protos.google.monitoring.v3.IListAlertPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListAlertPoliciesRequest,
+      protos.google.monitoring.v3.IListAlertPoliciesResponse | null | undefined,
+      protos.google.monitoring.v3.IAlertPolicy
     >
   ): void;
   /**
@@ -795,24 +840,26 @@ export class AlertPolicyServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listAlertPolicies(
-    request: protosTypes.google.monitoring.v3.IListAlertPoliciesRequest,
+    request: protos.google.monitoring.v3.IListAlertPoliciesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.monitoring.v3.IAlertPolicy[],
-          protosTypes.google.monitoring.v3.IListAlertPoliciesRequest | null,
-          protosTypes.google.monitoring.v3.IListAlertPoliciesResponse
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListAlertPoliciesRequest,
+          | protos.google.monitoring.v3.IListAlertPoliciesResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.IAlertPolicy
         >,
-    callback?: Callback<
-      protosTypes.google.monitoring.v3.IAlertPolicy[],
-      protosTypes.google.monitoring.v3.IListAlertPoliciesRequest | null,
-      protosTypes.google.monitoring.v3.IListAlertPoliciesResponse
+    callback?: PaginationCallback<
+      protos.google.monitoring.v3.IListAlertPoliciesRequest,
+      protos.google.monitoring.v3.IListAlertPoliciesResponse | null | undefined,
+      protos.google.monitoring.v3.IAlertPolicy
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IAlertPolicy[],
-      protosTypes.google.monitoring.v3.IListAlertPoliciesRequest | null,
-      protosTypes.google.monitoring.v3.IListAlertPoliciesResponse
+      protos.google.monitoring.v3.IAlertPolicy[],
+      protos.google.monitoring.v3.IListAlertPoliciesRequest | null,
+      protos.google.monitoring.v3.IListAlertPoliciesResponse
     ]
   > | void {
     request = request || {};
@@ -832,7 +879,7 @@ export class AlertPolicyServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.listAlertPolicies(request, options, callback);
+    return this.innerApiCalls.listAlertPolicies(request, options, callback);
   }
 
   /**
@@ -885,7 +932,7 @@ export class AlertPolicyServiceClient {
    *   An object stream which emits an object representing [AlertPolicy]{@link google.monitoring.v3.AlertPolicy} on 'data' event.
    */
   listAlertPoliciesStream(
-    request?: protosTypes.google.monitoring.v3.IListAlertPoliciesRequest,
+    request?: protos.google.monitoring.v3.IListAlertPoliciesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -899,11 +946,75 @@ export class AlertPolicyServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listAlertPolicies.createStream(
-      this._innerApiCalls.listAlertPolicies as gax.GaxCall,
+    return this.descriptors.page.listAlertPolicies.createStream(
+      this.innerApiCalls.listAlertPolicies as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listAlertPolicies}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The project whose alert policies are to be listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *
+   *   Note that this field names the parent container in which the alerting
+   *   policies to be listed are stored. To retrieve a single alerting policy
+   *   by name, use the
+   *   {@link google.monitoring.v3.AlertPolicyService.GetAlertPolicy|GetAlertPolicy}
+   *   operation, instead.
+   * @param {string} request.filter
+   *   If provided, this field specifies the criteria that must be met by
+   *   alert policies to be included in the response.
+   *
+   *   For more details, see [sorting and
+   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields by which to sort the result. Supports
+   *   the same set of field references as the `filter` field. Entries can be
+   *   prefixed with a minus sign to sort by the field in descending order.
+   *
+   *   For more details, see [sorting and
+   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return more results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listAlertPoliciesAsync(
+    request?: protos.google.monitoring.v3.IListAlertPoliciesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.monitoring.v3.IAlertPolicy> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listAlertPolicies.asyncIterate(
+      this.innerApiCalls['listAlertPolicies'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.monitoring.v3.IAlertPolicy>;
   }
   // --------------------
   // -- Path templates --
@@ -917,8 +1028,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   folderAlertPolicyPath(folder: string, alertPolicy: string) {
-    return this._pathTemplates.folderAlertPolicyPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderAlertPolicyPathTemplate.render({
+      folder: folder,
       alert_policy: alertPolicy,
     });
   }
@@ -931,7 +1042,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this._pathTemplates.folderAlertPolicyPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
       folderAlertPolicyName
     ).folder;
   }
@@ -944,7 +1055,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this._pathTemplates.folderAlertPolicyPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
       folderAlertPolicyName
     ).alert_policy;
   }
@@ -962,10 +1073,10 @@ export class AlertPolicyServiceClient {
     alertPolicy: string,
     condition: string
   ) {
-    return this._pathTemplates.folderAlertPolicyConditionPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.render({
+      folder: folder,
       alert_policy: alertPolicy,
-      condition,
+      condition: condition,
     });
   }
 
@@ -979,7 +1090,7 @@ export class AlertPolicyServiceClient {
   matchFolderFromFolderAlertPolicyConditionName(
     folderAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
       folderAlertPolicyConditionName
     ).folder;
   }
@@ -994,7 +1105,7 @@ export class AlertPolicyServiceClient {
   matchAlertPolicyFromFolderAlertPolicyConditionName(
     folderAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
       folderAlertPolicyConditionName
     ).alert_policy;
   }
@@ -1009,7 +1120,7 @@ export class AlertPolicyServiceClient {
   matchConditionFromFolderAlertPolicyConditionName(
     folderAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
       folderAlertPolicyConditionName
     ).condition;
   }
@@ -1022,8 +1133,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   folderChannelDescriptorPath(folder: string, channelDescriptor: string) {
-    return this._pathTemplates.folderChannelDescriptorPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.render({
+      folder: folder,
       channel_descriptor: channelDescriptor,
     });
   }
@@ -1038,7 +1149,7 @@ export class AlertPolicyServiceClient {
   matchFolderFromFolderChannelDescriptorName(
     folderChannelDescriptorName: string
   ) {
-    return this._pathTemplates.folderChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
       folderChannelDescriptorName
     ).folder;
   }
@@ -1053,7 +1164,7 @@ export class AlertPolicyServiceClient {
   matchChannelDescriptorFromFolderChannelDescriptorName(
     folderChannelDescriptorName: string
   ) {
-    return this._pathTemplates.folderChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
       folderChannelDescriptorName
     ).channel_descriptor;
   }
@@ -1066,9 +1177,9 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   folderGroupPath(folder: string, group: string) {
-    return this._pathTemplates.folderGroupPathTemplate.render({
-      folder,
-      group,
+    return this.pathTemplates.folderGroupPathTemplate.render({
+      folder: folder,
+      group: group,
     });
   }
 
@@ -1080,7 +1191,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderGroupName(folderGroupName: string) {
-    return this._pathTemplates.folderGroupPathTemplate.match(folderGroupName)
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
       .folder;
   }
 
@@ -1092,7 +1203,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromFolderGroupName(folderGroupName: string) {
-    return this._pathTemplates.folderGroupPathTemplate.match(folderGroupName)
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
       .group;
   }
 
@@ -1104,8 +1215,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   folderNotificationChannelPath(folder: string, notificationChannel: string) {
-    return this._pathTemplates.folderNotificationChannelPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderNotificationChannelPathTemplate.render({
+      folder: folder,
       notification_channel: notificationChannel,
     });
   }
@@ -1120,7 +1231,7 @@ export class AlertPolicyServiceClient {
   matchFolderFromFolderNotificationChannelName(
     folderNotificationChannelName: string
   ) {
-    return this._pathTemplates.folderNotificationChannelPathTemplate.match(
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
       folderNotificationChannelName
     ).folder;
   }
@@ -1135,7 +1246,7 @@ export class AlertPolicyServiceClient {
   matchNotificationChannelFromFolderNotificationChannelName(
     folderNotificationChannelName: string
   ) {
-    return this._pathTemplates.folderNotificationChannelPathTemplate.match(
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
       folderNotificationChannelName
     ).notification_channel;
   }
@@ -1148,9 +1259,9 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   folderServicePath(folder: string, service: string) {
-    return this._pathTemplates.folderServicePathTemplate.render({
-      folder,
-      service,
+    return this.pathTemplates.folderServicePathTemplate.render({
+      folder: folder,
+      service: service,
     });
   }
 
@@ -1162,9 +1273,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderServiceName(folderServiceName: string) {
-    return this._pathTemplates.folderServicePathTemplate.match(
-      folderServiceName
-    ).folder;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .folder;
   }
 
   /**
@@ -1175,9 +1285,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromFolderServiceName(folderServiceName: string) {
-    return this._pathTemplates.folderServicePathTemplate.match(
-      folderServiceName
-    ).service;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .service;
   }
 
   /**
@@ -1193,10 +1302,10 @@ export class AlertPolicyServiceClient {
     service: string,
     serviceLevelObjective: string
   ) {
-    return this._pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
       {
-        folder,
-        service,
+        folder: folder,
+        service: service,
         service_level_objective: serviceLevelObjective,
       }
     );
@@ -1212,7 +1321,7 @@ export class AlertPolicyServiceClient {
   matchFolderFromFolderServiceServiceLevelObjectiveName(
     folderServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
       folderServiceServiceLevelObjectiveName
     ).folder;
   }
@@ -1227,7 +1336,7 @@ export class AlertPolicyServiceClient {
   matchServiceFromFolderServiceServiceLevelObjectiveName(
     folderServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
       folderServiceServiceLevelObjectiveName
     ).service;
   }
@@ -1242,7 +1351,7 @@ export class AlertPolicyServiceClient {
   matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
     folderServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
       folderServiceServiceLevelObjectiveName
     ).service_level_objective;
   }
@@ -1255,8 +1364,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   folderUptimeCheckConfigPath(folder: string, uptimeCheckConfig: string) {
-    return this._pathTemplates.folderUptimeCheckConfigPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.render({
+      folder: folder,
       uptime_check_config: uptimeCheckConfig,
     });
   }
@@ -1271,7 +1380,7 @@ export class AlertPolicyServiceClient {
   matchFolderFromFolderUptimeCheckConfigName(
     folderUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.folderUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
       folderUptimeCheckConfigName
     ).folder;
   }
@@ -1286,7 +1395,7 @@ export class AlertPolicyServiceClient {
   matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
     folderUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.folderUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
       folderUptimeCheckConfigName
     ).uptime_check_config;
   }
@@ -1299,8 +1408,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   organizationAlertPolicyPath(organization: string, alertPolicy: string) {
-    return this._pathTemplates.organizationAlertPolicyPathTemplate.render({
-      organization,
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.render({
+      organization: organization,
       alert_policy: alertPolicy,
     });
   }
@@ -1315,7 +1424,7 @@ export class AlertPolicyServiceClient {
   matchOrganizationFromOrganizationAlertPolicyName(
     organizationAlertPolicyName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
       organizationAlertPolicyName
     ).organization;
   }
@@ -1330,7 +1439,7 @@ export class AlertPolicyServiceClient {
   matchAlertPolicyFromOrganizationAlertPolicyName(
     organizationAlertPolicyName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
       organizationAlertPolicyName
     ).alert_policy;
   }
@@ -1348,11 +1457,11 @@ export class AlertPolicyServiceClient {
     alertPolicy: string,
     condition: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
       {
-        organization,
+        organization: organization,
         alert_policy: alertPolicy,
-        condition,
+        condition: condition,
       }
     );
   }
@@ -1367,7 +1476,7 @@ export class AlertPolicyServiceClient {
   matchOrganizationFromOrganizationAlertPolicyConditionName(
     organizationAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
       organizationAlertPolicyConditionName
     ).organization;
   }
@@ -1382,7 +1491,7 @@ export class AlertPolicyServiceClient {
   matchAlertPolicyFromOrganizationAlertPolicyConditionName(
     organizationAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
       organizationAlertPolicyConditionName
     ).alert_policy;
   }
@@ -1397,7 +1506,7 @@ export class AlertPolicyServiceClient {
   matchConditionFromOrganizationAlertPolicyConditionName(
     organizationAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
       organizationAlertPolicyConditionName
     ).condition;
   }
@@ -1413,12 +1522,10 @@ export class AlertPolicyServiceClient {
     organization: string,
     channelDescriptor: string
   ) {
-    return this._pathTemplates.organizationChannelDescriptorPathTemplate.render(
-      {
-        organization,
-        channel_descriptor: channelDescriptor,
-      }
-    );
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.render({
+      organization: organization,
+      channel_descriptor: channelDescriptor,
+    });
   }
 
   /**
@@ -1431,7 +1538,7 @@ export class AlertPolicyServiceClient {
   matchOrganizationFromOrganizationChannelDescriptorName(
     organizationChannelDescriptorName: string
   ) {
-    return this._pathTemplates.organizationChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
       organizationChannelDescriptorName
     ).organization;
   }
@@ -1446,7 +1553,7 @@ export class AlertPolicyServiceClient {
   matchChannelDescriptorFromOrganizationChannelDescriptorName(
     organizationChannelDescriptorName: string
   ) {
-    return this._pathTemplates.organizationChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
       organizationChannelDescriptorName
     ).channel_descriptor;
   }
@@ -1459,9 +1566,9 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   organizationGroupPath(organization: string, group: string) {
-    return this._pathTemplates.organizationGroupPathTemplate.render({
-      organization,
-      group,
+    return this.pathTemplates.organizationGroupPathTemplate.render({
+      organization: organization,
+      group: group,
     });
   }
 
@@ -1473,7 +1580,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationGroupName(organizationGroupName: string) {
-    return this._pathTemplates.organizationGroupPathTemplate.match(
+    return this.pathTemplates.organizationGroupPathTemplate.match(
       organizationGroupName
     ).organization;
   }
@@ -1486,7 +1593,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromOrganizationGroupName(organizationGroupName: string) {
-    return this._pathTemplates.organizationGroupPathTemplate.match(
+    return this.pathTemplates.organizationGroupPathTemplate.match(
       organizationGroupName
     ).group;
   }
@@ -1502,9 +1609,9 @@ export class AlertPolicyServiceClient {
     organization: string,
     notificationChannel: string
   ) {
-    return this._pathTemplates.organizationNotificationChannelPathTemplate.render(
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.render(
       {
-        organization,
+        organization: organization,
         notification_channel: notificationChannel,
       }
     );
@@ -1520,7 +1627,7 @@ export class AlertPolicyServiceClient {
   matchOrganizationFromOrganizationNotificationChannelName(
     organizationNotificationChannelName: string
   ) {
-    return this._pathTemplates.organizationNotificationChannelPathTemplate.match(
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
       organizationNotificationChannelName
     ).organization;
   }
@@ -1535,7 +1642,7 @@ export class AlertPolicyServiceClient {
   matchNotificationChannelFromOrganizationNotificationChannelName(
     organizationNotificationChannelName: string
   ) {
-    return this._pathTemplates.organizationNotificationChannelPathTemplate.match(
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
       organizationNotificationChannelName
     ).notification_channel;
   }
@@ -1548,9 +1655,9 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   organizationServicePath(organization: string, service: string) {
-    return this._pathTemplates.organizationServicePathTemplate.render({
-      organization,
-      service,
+    return this.pathTemplates.organizationServicePathTemplate.render({
+      organization: organization,
+      service: service,
     });
   }
 
@@ -1564,7 +1671,7 @@ export class AlertPolicyServiceClient {
   matchOrganizationFromOrganizationServiceName(
     organizationServiceName: string
   ) {
-    return this._pathTemplates.organizationServicePathTemplate.match(
+    return this.pathTemplates.organizationServicePathTemplate.match(
       organizationServiceName
     ).organization;
   }
@@ -1577,7 +1684,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromOrganizationServiceName(organizationServiceName: string) {
-    return this._pathTemplates.organizationServicePathTemplate.match(
+    return this.pathTemplates.organizationServicePathTemplate.match(
       organizationServiceName
     ).service;
   }
@@ -1595,10 +1702,10 @@ export class AlertPolicyServiceClient {
     service: string,
     serviceLevelObjective: string
   ) {
-    return this._pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
       {
-        organization,
-        service,
+        organization: organization,
+        service: service,
         service_level_objective: serviceLevelObjective,
       }
     );
@@ -1614,7 +1721,7 @@ export class AlertPolicyServiceClient {
   matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
     organizationServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
       organizationServiceServiceLevelObjectiveName
     ).organization;
   }
@@ -1629,7 +1736,7 @@ export class AlertPolicyServiceClient {
   matchServiceFromOrganizationServiceServiceLevelObjectiveName(
     organizationServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
       organizationServiceServiceLevelObjectiveName
     ).service;
   }
@@ -1644,7 +1751,7 @@ export class AlertPolicyServiceClient {
   matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
     organizationServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
       organizationServiceServiceLevelObjectiveName
     ).service_level_objective;
   }
@@ -1660,12 +1767,10 @@ export class AlertPolicyServiceClient {
     organization: string,
     uptimeCheckConfig: string
   ) {
-    return this._pathTemplates.organizationUptimeCheckConfigPathTemplate.render(
-      {
-        organization,
-        uptime_check_config: uptimeCheckConfig,
-      }
-    );
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.render({
+      organization: organization,
+      uptime_check_config: uptimeCheckConfig,
+    });
   }
 
   /**
@@ -1678,7 +1783,7 @@ export class AlertPolicyServiceClient {
   matchOrganizationFromOrganizationUptimeCheckConfigName(
     organizationUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
       organizationUptimeCheckConfigName
     ).organization;
   }
@@ -1693,7 +1798,7 @@ export class AlertPolicyServiceClient {
   matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
     organizationUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
       organizationUptimeCheckConfigName
     ).uptime_check_config;
   }
@@ -1705,8 +1810,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -1718,7 +1823,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -1729,8 +1834,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   projectAlertPolicyPath(project: string, alertPolicy: string) {
-    return this._pathTemplates.projectAlertPolicyPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAlertPolicyPathTemplate.render({
+      project: project,
       alert_policy: alertPolicy,
     });
   }
@@ -1743,7 +1848,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this._pathTemplates.projectAlertPolicyPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
       projectAlertPolicyName
     ).project;
   }
@@ -1756,7 +1861,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this._pathTemplates.projectAlertPolicyPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
       projectAlertPolicyName
     ).alert_policy;
   }
@@ -1774,10 +1879,10 @@ export class AlertPolicyServiceClient {
     alertPolicy: string,
     condition: string
   ) {
-    return this._pathTemplates.projectAlertPolicyConditionPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.render({
+      project: project,
       alert_policy: alertPolicy,
-      condition,
+      condition: condition,
     });
   }
 
@@ -1791,7 +1896,7 @@ export class AlertPolicyServiceClient {
   matchProjectFromProjectAlertPolicyConditionName(
     projectAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
       projectAlertPolicyConditionName
     ).project;
   }
@@ -1806,7 +1911,7 @@ export class AlertPolicyServiceClient {
   matchAlertPolicyFromProjectAlertPolicyConditionName(
     projectAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
       projectAlertPolicyConditionName
     ).alert_policy;
   }
@@ -1821,7 +1926,7 @@ export class AlertPolicyServiceClient {
   matchConditionFromProjectAlertPolicyConditionName(
     projectAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
       projectAlertPolicyConditionName
     ).condition;
   }
@@ -1834,8 +1939,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   projectChannelDescriptorPath(project: string, channelDescriptor: string) {
-    return this._pathTemplates.projectChannelDescriptorPathTemplate.render({
-      project,
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.render({
+      project: project,
       channel_descriptor: channelDescriptor,
     });
   }
@@ -1850,7 +1955,7 @@ export class AlertPolicyServiceClient {
   matchProjectFromProjectChannelDescriptorName(
     projectChannelDescriptorName: string
   ) {
-    return this._pathTemplates.projectChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
       projectChannelDescriptorName
     ).project;
   }
@@ -1865,7 +1970,7 @@ export class AlertPolicyServiceClient {
   matchChannelDescriptorFromProjectChannelDescriptorName(
     projectChannelDescriptorName: string
   ) {
-    return this._pathTemplates.projectChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
       projectChannelDescriptorName
     ).channel_descriptor;
   }
@@ -1878,9 +1983,9 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   projectGroupPath(project: string, group: string) {
-    return this._pathTemplates.projectGroupPathTemplate.render({
-      project,
-      group,
+    return this.pathTemplates.projectGroupPathTemplate.render({
+      project: project,
+      group: group,
     });
   }
 
@@ -1892,7 +1997,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectGroupName(projectGroupName: string) {
-    return this._pathTemplates.projectGroupPathTemplate.match(projectGroupName)
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
       .project;
   }
 
@@ -1904,7 +2009,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromProjectGroupName(projectGroupName: string) {
-    return this._pathTemplates.projectGroupPathTemplate.match(projectGroupName)
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
       .group;
   }
 
@@ -1916,8 +2021,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   projectNotificationChannelPath(project: string, notificationChannel: string) {
-    return this._pathTemplates.projectNotificationChannelPathTemplate.render({
-      project,
+    return this.pathTemplates.projectNotificationChannelPathTemplate.render({
+      project: project,
       notification_channel: notificationChannel,
     });
   }
@@ -1932,7 +2037,7 @@ export class AlertPolicyServiceClient {
   matchProjectFromProjectNotificationChannelName(
     projectNotificationChannelName: string
   ) {
-    return this._pathTemplates.projectNotificationChannelPathTemplate.match(
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
       projectNotificationChannelName
     ).project;
   }
@@ -1947,7 +2052,7 @@ export class AlertPolicyServiceClient {
   matchNotificationChannelFromProjectNotificationChannelName(
     projectNotificationChannelName: string
   ) {
-    return this._pathTemplates.projectNotificationChannelPathTemplate.match(
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
       projectNotificationChannelName
     ).notification_channel;
   }
@@ -1960,9 +2065,9 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   projectServicePath(project: string, service: string) {
-    return this._pathTemplates.projectServicePathTemplate.render({
-      project,
-      service,
+    return this.pathTemplates.projectServicePathTemplate.render({
+      project: project,
+      service: service,
     });
   }
 
@@ -1974,7 +2079,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectServiceName(projectServiceName: string) {
-    return this._pathTemplates.projectServicePathTemplate.match(
+    return this.pathTemplates.projectServicePathTemplate.match(
       projectServiceName
     ).project;
   }
@@ -1987,7 +2092,7 @@ export class AlertPolicyServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromProjectServiceName(projectServiceName: string) {
-    return this._pathTemplates.projectServicePathTemplate.match(
+    return this.pathTemplates.projectServicePathTemplate.match(
       projectServiceName
     ).service;
   }
@@ -2005,10 +2110,10 @@ export class AlertPolicyServiceClient {
     service: string,
     serviceLevelObjective: string
   ) {
-    return this._pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
       {
-        project,
-        service,
+        project: project,
+        service: service,
         service_level_objective: serviceLevelObjective,
       }
     );
@@ -2024,7 +2129,7 @@ export class AlertPolicyServiceClient {
   matchProjectFromProjectServiceServiceLevelObjectiveName(
     projectServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
       projectServiceServiceLevelObjectiveName
     ).project;
   }
@@ -2039,7 +2144,7 @@ export class AlertPolicyServiceClient {
   matchServiceFromProjectServiceServiceLevelObjectiveName(
     projectServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
       projectServiceServiceLevelObjectiveName
     ).service;
   }
@@ -2054,7 +2159,7 @@ export class AlertPolicyServiceClient {
   matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
     projectServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
       projectServiceServiceLevelObjectiveName
     ).service_level_objective;
   }
@@ -2067,8 +2172,8 @@ export class AlertPolicyServiceClient {
    * @returns {string} Resource name string.
    */
   projectUptimeCheckConfigPath(project: string, uptimeCheckConfig: string) {
-    return this._pathTemplates.projectUptimeCheckConfigPathTemplate.render({
-      project,
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.render({
+      project: project,
       uptime_check_config: uptimeCheckConfig,
     });
   }
@@ -2083,7 +2188,7 @@ export class AlertPolicyServiceClient {
   matchProjectFromProjectUptimeCheckConfigName(
     projectUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.projectUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
       projectUptimeCheckConfigName
     ).project;
   }
@@ -2098,7 +2203,7 @@ export class AlertPolicyServiceClient {
   matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
     projectUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.projectUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
       projectUptimeCheckConfigName
     ).uptime_check_config;
   }

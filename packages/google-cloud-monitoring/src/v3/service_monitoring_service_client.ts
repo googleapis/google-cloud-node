@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './service_monitoring_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -43,9 +43,6 @@ const version = require('../../../package.json').version;
  * @memberof v3
  */
 export class ServiceMonitoringServiceClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -53,6 +50,14 @@ export class ServiceMonitoringServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   serviceMonitoringServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -146,13 +151,16 @@ export class ServiceMonitoringServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       folderAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/alertPolicies/{alert_policy}'
       ),
@@ -233,7 +241,7 @@ export class ServiceMonitoringServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listServices: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -257,7 +265,7 @@ export class ServiceMonitoringServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -284,7 +292,7 @@ export class ServiceMonitoringServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.monitoring.v3.ServiceMonitoringService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.ServiceMonitoringService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -303,14 +311,14 @@ export class ServiceMonitoringServiceClient {
       'updateServiceLevelObjective',
       'deleteServiceLevelObjective',
     ];
-
     for (const methodName of serviceMonitoringServiceStubMethods) {
-      const innerCallPromise = this.serviceMonitoringServiceStub.then(
+      const callPromise = this.serviceMonitoringServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -318,20 +326,14 @@ export class ServiceMonitoringServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.serviceMonitoringServiceStub;
@@ -392,22 +394,30 @@ export class ServiceMonitoringServiceClient {
   // -- Service calls --
   // -------------------
   createService(
-    request: protosTypes.google.monitoring.v3.ICreateServiceRequest,
+    request: protos.google.monitoring.v3.ICreateServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.ICreateServiceRequest | undefined,
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | undefined,
       {} | undefined
     ]
   >;
   createService(
-    request: protosTypes.google.monitoring.v3.ICreateServiceRequest,
+    request: protos.google.monitoring.v3.ICreateServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.ICreateServiceRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createService(
+    request: protos.google.monitoring.v3.ICreateServiceRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -430,23 +440,23 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createService(
-    request: protosTypes.google.monitoring.v3.ICreateServiceRequest,
+    request: protos.google.monitoring.v3.ICreateServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IService,
-          protosTypes.google.monitoring.v3.ICreateServiceRequest | undefined,
-          {} | undefined
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.ICreateServiceRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.ICreateServiceRequest | undefined,
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -467,25 +477,33 @@ export class ServiceMonitoringServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createService(request, options, callback);
+    return this.innerApiCalls.createService(request, options, callback);
   }
   getService(
-    request: protosTypes.google.monitoring.v3.IGetServiceRequest,
+    request: protos.google.monitoring.v3.IGetServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.IGetServiceRequest | undefined,
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | undefined,
       {} | undefined
     ]
   >;
   getService(
-    request: protosTypes.google.monitoring.v3.IGetServiceRequest,
+    request: protos.google.monitoring.v3.IGetServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.IGetServiceRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getService(
+    request: protos.google.monitoring.v3.IGetServiceRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -503,23 +521,23 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getService(
-    request: protosTypes.google.monitoring.v3.IGetServiceRequest,
+    request: protos.google.monitoring.v3.IGetServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IService,
-          protosTypes.google.monitoring.v3.IGetServiceRequest | undefined,
-          {} | undefined
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.IGetServiceRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.IGetServiceRequest | undefined,
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -540,25 +558,33 @@ export class ServiceMonitoringServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getService(request, options, callback);
+    return this.innerApiCalls.getService(request, options, callback);
   }
   updateService(
-    request: protosTypes.google.monitoring.v3.IUpdateServiceRequest,
+    request: protos.google.monitoring.v3.IUpdateServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.IUpdateServiceRequest | undefined,
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | undefined,
       {} | undefined
     ]
   >;
   updateService(
-    request: protosTypes.google.monitoring.v3.IUpdateServiceRequest,
+    request: protos.google.monitoring.v3.IUpdateServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.IUpdateServiceRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateService(
+    request: protos.google.monitoring.v3.IUpdateServiceRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -578,23 +604,23 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateService(
-    request: protosTypes.google.monitoring.v3.IUpdateServiceRequest,
+    request: protos.google.monitoring.v3.IUpdateServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IService,
-          protosTypes.google.monitoring.v3.IUpdateServiceRequest | undefined,
-          {} | undefined
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.IUpdateServiceRequest | undefined,
-      {} | undefined
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IService,
-      protosTypes.google.monitoring.v3.IUpdateServiceRequest | undefined,
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -615,25 +641,33 @@ export class ServiceMonitoringServiceClient {
       'service.name': request.service!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateService(request, options, callback);
+    return this.innerApiCalls.updateService(request, options, callback);
   }
   deleteService(
-    request: protosTypes.google.monitoring.v3.IDeleteServiceRequest,
+    request: protos.google.monitoring.v3.IDeleteServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.monitoring.v3.IDeleteServiceRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | undefined,
       {} | undefined
     ]
   >;
   deleteService(
-    request: protosTypes.google.monitoring.v3.IDeleteServiceRequest,
+    request: protos.google.monitoring.v3.IDeleteServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.monitoring.v3.IDeleteServiceRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteService(
+    request: protos.google.monitoring.v3.IDeleteServiceRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -651,23 +685,23 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteService(
-    request: protosTypes.google.monitoring.v3.IDeleteServiceRequest,
+    request: protos.google.monitoring.v3.IDeleteServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          protosTypes.google.monitoring.v3.IDeleteServiceRequest | undefined,
-          {} | undefined
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.monitoring.v3.IDeleteServiceRequest | undefined,
-      {} | undefined
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
-      protosTypes.google.monitoring.v3.IDeleteServiceRequest | undefined,
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -688,29 +722,40 @@ export class ServiceMonitoringServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteService(request, options, callback);
+    return this.innerApiCalls.deleteService(request, options, callback);
   }
   createServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
+      protos.google.monitoring.v3.IServiceLevelObjective,
       (
-        | protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+        | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
-      | protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createServiceLevelObjective(
+    request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -736,26 +781,28 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IServiceLevelObjective,
-          | protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
-      | protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
+      protos.google.monitoring.v3.IServiceLevelObjective,
       (
-        | protosTypes.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+        | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
         | undefined
       ),
       {} | undefined
@@ -778,33 +825,41 @@ export class ServiceMonitoringServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createServiceLevelObjective(
+    return this.innerApiCalls.createServiceLevelObjective(
       request,
       options,
       callback
     );
   }
   getServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
-      (
-        | protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest
-        | undefined
-      ),
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest | undefined,
       {} | undefined
     ]
   >;
   getServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
-      | protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getServiceLevelObjective(
+    request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -828,28 +883,27 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IServiceLevelObjective,
-          | protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
-      | protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
-      (
-        | protosTypes.google.monitoring.v3.IGetServiceLevelObjectiveRequest
-        | undefined
-      ),
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -870,33 +924,44 @@ export class ServiceMonitoringServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getServiceLevelObjective(
+    return this.innerApiCalls.getServiceLevelObjective(
       request,
       options,
       callback
     );
   }
   updateServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
+      protos.google.monitoring.v3.IServiceLevelObjective,
       (
-        | protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+        | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
-      | protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateServiceLevelObjective(
+    request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -916,26 +981,28 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.monitoring.v3.IServiceLevelObjective,
-          | protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
-      | protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IServiceLevelObjective,
+      protos.google.monitoring.v3.IServiceLevelObjective,
       (
-        | protosTypes.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+        | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
         | undefined
       ),
       {} | undefined
@@ -958,33 +1025,44 @@ export class ServiceMonitoringServiceClient {
       'service_level_objective.name': request.serviceLevelObjective!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateServiceLevelObjective(
+    return this.innerApiCalls.updateServiceLevelObjective(
       request,
       options,
       callback
     );
   }
   deleteServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+        | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteServiceLevelObjective(
+    request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1003,26 +1081,28 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteServiceLevelObjective(
-    request: protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+        | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
         | undefined
       ),
       {} | undefined
@@ -1045,7 +1125,7 @@ export class ServiceMonitoringServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteServiceLevelObjective(
+    return this.innerApiCalls.deleteServiceLevelObjective(
       request,
       options,
       callback
@@ -1053,22 +1133,30 @@ export class ServiceMonitoringServiceClient {
   }
 
   listServices(
-    request: protosTypes.google.monitoring.v3.IListServicesRequest,
+    request: protos.google.monitoring.v3.IListServicesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IService[],
-      protosTypes.google.monitoring.v3.IListServicesRequest | null,
-      protosTypes.google.monitoring.v3.IListServicesResponse
+      protos.google.monitoring.v3.IService[],
+      protos.google.monitoring.v3.IListServicesRequest | null,
+      protos.google.monitoring.v3.IListServicesResponse
     ]
   >;
   listServices(
-    request: protosTypes.google.monitoring.v3.IListServicesRequest,
+    request: protos.google.monitoring.v3.IListServicesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.monitoring.v3.IService[],
-      protosTypes.google.monitoring.v3.IListServicesRequest | null,
-      protosTypes.google.monitoring.v3.IListServicesResponse
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListServicesRequest,
+      protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+      protos.google.monitoring.v3.IService
+    >
+  ): void;
+  listServices(
+    request: protos.google.monitoring.v3.IListServicesRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListServicesRequest,
+      protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+      protos.google.monitoring.v3.IService
     >
   ): void;
   /**
@@ -1121,24 +1209,24 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listServices(
-    request: protosTypes.google.monitoring.v3.IListServicesRequest,
+    request: protos.google.monitoring.v3.IListServicesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.monitoring.v3.IService[],
-          protosTypes.google.monitoring.v3.IListServicesRequest | null,
-          protosTypes.google.monitoring.v3.IListServicesResponse
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListServicesRequest,
+          protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+          protos.google.monitoring.v3.IService
         >,
-    callback?: Callback<
-      protosTypes.google.monitoring.v3.IService[],
-      protosTypes.google.monitoring.v3.IListServicesRequest | null,
-      protosTypes.google.monitoring.v3.IListServicesResponse
+    callback?: PaginationCallback<
+      protos.google.monitoring.v3.IListServicesRequest,
+      protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+      protos.google.monitoring.v3.IService
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IService[],
-      protosTypes.google.monitoring.v3.IListServicesRequest | null,
-      protosTypes.google.monitoring.v3.IListServicesResponse
+      protos.google.monitoring.v3.IService[],
+      protos.google.monitoring.v3.IListServicesRequest | null,
+      protos.google.monitoring.v3.IListServicesResponse
     ]
   > | void {
     request = request || {};
@@ -1158,7 +1246,7 @@ export class ServiceMonitoringServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listServices(request, options, callback);
+    return this.innerApiCalls.listServices(request, options, callback);
   }
 
   /**
@@ -1208,7 +1296,7 @@ export class ServiceMonitoringServiceClient {
    *   An object stream which emits an object representing [Service]{@link google.monitoring.v3.Service} on 'data' event.
    */
   listServicesStream(
-    request?: protosTypes.google.monitoring.v3.IListServicesRequest,
+    request?: protos.google.monitoring.v3.IListServicesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1222,29 +1310,102 @@ export class ServiceMonitoringServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listServices.createStream(
-      this._innerApiCalls.listServices as gax.GaxCall,
+    return this.descriptors.page.listServices.createStream(
+      this.innerApiCalls.listServices as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listServices}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent `Workspace`.
+   *   Of the form `projects/{project_id}`.
+   * @param {string} request.filter
+   *   A filter specifying what `Service`s to return. The filter currently
+   *   supports the following fields:
+   *
+   *       - `identifier_case`
+   *       - `app_engine.module_id`
+   *       - `cloud_endpoints.service`
+   *       - `cluster_istio.location`
+   *       - `cluster_istio.cluster_name`
+   *       - `cluster_istio.service_namespace`
+   *       - `cluster_istio.service_name`
+   *
+   *   `identifier_case` refers to which option in the identifier oneof is
+   *   populated. For example, the filter `identifier_case = "CUSTOM"` would match
+   *   all services with a value for the `custom` field. Valid options are
+   *   "CUSTOM", "APP_ENGINE", "CLOUD_ENDPOINTS", and "CLUSTER_ISTIO".
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listServicesAsync(
+    request?: protos.google.monitoring.v3.IListServicesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.monitoring.v3.IService> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listServices.asyncIterate(
+      this.innerApiCalls['listServices'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.monitoring.v3.IService>;
+  }
   listServiceLevelObjectives(
-    request: protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IServiceLevelObjective[],
-      protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
-      protosTypes.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      protos.google.monitoring.v3.IServiceLevelObjective[],
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
+      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
     ]
   >;
   listServiceLevelObjectives(
-    request: protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.monitoring.v3.IServiceLevelObjective[],
-      protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
-      protosTypes.google.monitoring.v3.IListServiceLevelObjectivesResponse
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+      | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      | null
+      | undefined,
+      protos.google.monitoring.v3.IServiceLevelObjective
+    >
+  ): void;
+  listServiceLevelObjectives(
+    request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+      | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      | null
+      | undefined,
+      protos.google.monitoring.v3.IServiceLevelObjective
     >
   ): void;
   /**
@@ -1288,24 +1449,28 @@ export class ServiceMonitoringServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listServiceLevelObjectives(
-    request: protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.monitoring.v3.IServiceLevelObjective[],
-          protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
-          protosTypes.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+          | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.IServiceLevelObjective
         >,
-    callback?: Callback<
-      protosTypes.google.monitoring.v3.IServiceLevelObjective[],
-      protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
-      protosTypes.google.monitoring.v3.IListServiceLevelObjectivesResponse
+    callback?: PaginationCallback<
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+      | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      | null
+      | undefined,
+      protos.google.monitoring.v3.IServiceLevelObjective
     >
   ): Promise<
     [
-      protosTypes.google.monitoring.v3.IServiceLevelObjective[],
-      protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
-      protosTypes.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      protos.google.monitoring.v3.IServiceLevelObjective[],
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
+      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
     ]
   > | void {
     request = request || {};
@@ -1325,7 +1490,7 @@ export class ServiceMonitoringServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listServiceLevelObjectives(
+    return this.innerApiCalls.listServiceLevelObjectives(
       request,
       options,
       callback
@@ -1370,7 +1535,7 @@ export class ServiceMonitoringServiceClient {
    *   An object stream which emits an object representing [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective} on 'data' event.
    */
   listServiceLevelObjectivesStream(
-    request?: protosTypes.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1384,11 +1549,63 @@ export class ServiceMonitoringServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listServiceLevelObjectives.createStream(
-      this._innerApiCalls.listServiceLevelObjectives as gax.GaxCall,
+    return this.descriptors.page.listServiceLevelObjectives.createStream(
+      this.innerApiCalls.listServiceLevelObjectives as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listServiceLevelObjectives}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent `Service`.
+   *   Of the form `projects/{project_id}/services/{service_id}`.
+   * @param {string} request.filter
+   *   A filter specifying what `ServiceLevelObjective`s to return.
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
+   *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
+   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
+   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
+   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listServiceLevelObjectivesAsync(
+    request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.monitoring.v3.IServiceLevelObjective> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listServiceLevelObjectives.asyncIterate(
+      this.innerApiCalls['listServiceLevelObjectives'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.monitoring.v3.IServiceLevelObjective>;
   }
   // --------------------
   // -- Path templates --
@@ -1402,8 +1619,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   folderAlertPolicyPath(folder: string, alertPolicy: string) {
-    return this._pathTemplates.folderAlertPolicyPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderAlertPolicyPathTemplate.render({
+      folder: folder,
       alert_policy: alertPolicy,
     });
   }
@@ -1416,7 +1633,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this._pathTemplates.folderAlertPolicyPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
       folderAlertPolicyName
     ).folder;
   }
@@ -1429,7 +1646,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this._pathTemplates.folderAlertPolicyPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
       folderAlertPolicyName
     ).alert_policy;
   }
@@ -1447,10 +1664,10 @@ export class ServiceMonitoringServiceClient {
     alertPolicy: string,
     condition: string
   ) {
-    return this._pathTemplates.folderAlertPolicyConditionPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.render({
+      folder: folder,
       alert_policy: alertPolicy,
-      condition,
+      condition: condition,
     });
   }
 
@@ -1464,7 +1681,7 @@ export class ServiceMonitoringServiceClient {
   matchFolderFromFolderAlertPolicyConditionName(
     folderAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
       folderAlertPolicyConditionName
     ).folder;
   }
@@ -1479,7 +1696,7 @@ export class ServiceMonitoringServiceClient {
   matchAlertPolicyFromFolderAlertPolicyConditionName(
     folderAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
       folderAlertPolicyConditionName
     ).alert_policy;
   }
@@ -1494,7 +1711,7 @@ export class ServiceMonitoringServiceClient {
   matchConditionFromFolderAlertPolicyConditionName(
     folderAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
       folderAlertPolicyConditionName
     ).condition;
   }
@@ -1507,8 +1724,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   folderChannelDescriptorPath(folder: string, channelDescriptor: string) {
-    return this._pathTemplates.folderChannelDescriptorPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.render({
+      folder: folder,
       channel_descriptor: channelDescriptor,
     });
   }
@@ -1523,7 +1740,7 @@ export class ServiceMonitoringServiceClient {
   matchFolderFromFolderChannelDescriptorName(
     folderChannelDescriptorName: string
   ) {
-    return this._pathTemplates.folderChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
       folderChannelDescriptorName
     ).folder;
   }
@@ -1538,7 +1755,7 @@ export class ServiceMonitoringServiceClient {
   matchChannelDescriptorFromFolderChannelDescriptorName(
     folderChannelDescriptorName: string
   ) {
-    return this._pathTemplates.folderChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
       folderChannelDescriptorName
     ).channel_descriptor;
   }
@@ -1551,9 +1768,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   folderGroupPath(folder: string, group: string) {
-    return this._pathTemplates.folderGroupPathTemplate.render({
-      folder,
-      group,
+    return this.pathTemplates.folderGroupPathTemplate.render({
+      folder: folder,
+      group: group,
     });
   }
 
@@ -1565,7 +1782,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderGroupName(folderGroupName: string) {
-    return this._pathTemplates.folderGroupPathTemplate.match(folderGroupName)
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
       .folder;
   }
 
@@ -1577,7 +1794,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromFolderGroupName(folderGroupName: string) {
-    return this._pathTemplates.folderGroupPathTemplate.match(folderGroupName)
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
       .group;
   }
 
@@ -1589,8 +1806,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   folderNotificationChannelPath(folder: string, notificationChannel: string) {
-    return this._pathTemplates.folderNotificationChannelPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderNotificationChannelPathTemplate.render({
+      folder: folder,
       notification_channel: notificationChannel,
     });
   }
@@ -1605,7 +1822,7 @@ export class ServiceMonitoringServiceClient {
   matchFolderFromFolderNotificationChannelName(
     folderNotificationChannelName: string
   ) {
-    return this._pathTemplates.folderNotificationChannelPathTemplate.match(
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
       folderNotificationChannelName
     ).folder;
   }
@@ -1620,7 +1837,7 @@ export class ServiceMonitoringServiceClient {
   matchNotificationChannelFromFolderNotificationChannelName(
     folderNotificationChannelName: string
   ) {
-    return this._pathTemplates.folderNotificationChannelPathTemplate.match(
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
       folderNotificationChannelName
     ).notification_channel;
   }
@@ -1633,9 +1850,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   folderServicePath(folder: string, service: string) {
-    return this._pathTemplates.folderServicePathTemplate.render({
-      folder,
-      service,
+    return this.pathTemplates.folderServicePathTemplate.render({
+      folder: folder,
+      service: service,
     });
   }
 
@@ -1647,9 +1864,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderServiceName(folderServiceName: string) {
-    return this._pathTemplates.folderServicePathTemplate.match(
-      folderServiceName
-    ).folder;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .folder;
   }
 
   /**
@@ -1660,9 +1876,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromFolderServiceName(folderServiceName: string) {
-    return this._pathTemplates.folderServicePathTemplate.match(
-      folderServiceName
-    ).service;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .service;
   }
 
   /**
@@ -1678,10 +1893,10 @@ export class ServiceMonitoringServiceClient {
     service: string,
     serviceLevelObjective: string
   ) {
-    return this._pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
       {
-        folder,
-        service,
+        folder: folder,
+        service: service,
         service_level_objective: serviceLevelObjective,
       }
     );
@@ -1697,7 +1912,7 @@ export class ServiceMonitoringServiceClient {
   matchFolderFromFolderServiceServiceLevelObjectiveName(
     folderServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
       folderServiceServiceLevelObjectiveName
     ).folder;
   }
@@ -1712,7 +1927,7 @@ export class ServiceMonitoringServiceClient {
   matchServiceFromFolderServiceServiceLevelObjectiveName(
     folderServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
       folderServiceServiceLevelObjectiveName
     ).service;
   }
@@ -1727,7 +1942,7 @@ export class ServiceMonitoringServiceClient {
   matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
     folderServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
       folderServiceServiceLevelObjectiveName
     ).service_level_objective;
   }
@@ -1740,8 +1955,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   folderUptimeCheckConfigPath(folder: string, uptimeCheckConfig: string) {
-    return this._pathTemplates.folderUptimeCheckConfigPathTemplate.render({
-      folder,
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.render({
+      folder: folder,
       uptime_check_config: uptimeCheckConfig,
     });
   }
@@ -1756,7 +1971,7 @@ export class ServiceMonitoringServiceClient {
   matchFolderFromFolderUptimeCheckConfigName(
     folderUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.folderUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
       folderUptimeCheckConfigName
     ).folder;
   }
@@ -1771,7 +1986,7 @@ export class ServiceMonitoringServiceClient {
   matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
     folderUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.folderUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
       folderUptimeCheckConfigName
     ).uptime_check_config;
   }
@@ -1784,8 +1999,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   organizationAlertPolicyPath(organization: string, alertPolicy: string) {
-    return this._pathTemplates.organizationAlertPolicyPathTemplate.render({
-      organization,
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.render({
+      organization: organization,
       alert_policy: alertPolicy,
     });
   }
@@ -1800,7 +2015,7 @@ export class ServiceMonitoringServiceClient {
   matchOrganizationFromOrganizationAlertPolicyName(
     organizationAlertPolicyName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
       organizationAlertPolicyName
     ).organization;
   }
@@ -1815,7 +2030,7 @@ export class ServiceMonitoringServiceClient {
   matchAlertPolicyFromOrganizationAlertPolicyName(
     organizationAlertPolicyName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
       organizationAlertPolicyName
     ).alert_policy;
   }
@@ -1833,11 +2048,11 @@ export class ServiceMonitoringServiceClient {
     alertPolicy: string,
     condition: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
       {
-        organization,
+        organization: organization,
         alert_policy: alertPolicy,
-        condition,
+        condition: condition,
       }
     );
   }
@@ -1852,7 +2067,7 @@ export class ServiceMonitoringServiceClient {
   matchOrganizationFromOrganizationAlertPolicyConditionName(
     organizationAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
       organizationAlertPolicyConditionName
     ).organization;
   }
@@ -1867,7 +2082,7 @@ export class ServiceMonitoringServiceClient {
   matchAlertPolicyFromOrganizationAlertPolicyConditionName(
     organizationAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
       organizationAlertPolicyConditionName
     ).alert_policy;
   }
@@ -1882,7 +2097,7 @@ export class ServiceMonitoringServiceClient {
   matchConditionFromOrganizationAlertPolicyConditionName(
     organizationAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
       organizationAlertPolicyConditionName
     ).condition;
   }
@@ -1898,12 +2113,10 @@ export class ServiceMonitoringServiceClient {
     organization: string,
     channelDescriptor: string
   ) {
-    return this._pathTemplates.organizationChannelDescriptorPathTemplate.render(
-      {
-        organization,
-        channel_descriptor: channelDescriptor,
-      }
-    );
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.render({
+      organization: organization,
+      channel_descriptor: channelDescriptor,
+    });
   }
 
   /**
@@ -1916,7 +2129,7 @@ export class ServiceMonitoringServiceClient {
   matchOrganizationFromOrganizationChannelDescriptorName(
     organizationChannelDescriptorName: string
   ) {
-    return this._pathTemplates.organizationChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
       organizationChannelDescriptorName
     ).organization;
   }
@@ -1931,7 +2144,7 @@ export class ServiceMonitoringServiceClient {
   matchChannelDescriptorFromOrganizationChannelDescriptorName(
     organizationChannelDescriptorName: string
   ) {
-    return this._pathTemplates.organizationChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
       organizationChannelDescriptorName
     ).channel_descriptor;
   }
@@ -1944,9 +2157,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   organizationGroupPath(organization: string, group: string) {
-    return this._pathTemplates.organizationGroupPathTemplate.render({
-      organization,
-      group,
+    return this.pathTemplates.organizationGroupPathTemplate.render({
+      organization: organization,
+      group: group,
     });
   }
 
@@ -1958,7 +2171,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationGroupName(organizationGroupName: string) {
-    return this._pathTemplates.organizationGroupPathTemplate.match(
+    return this.pathTemplates.organizationGroupPathTemplate.match(
       organizationGroupName
     ).organization;
   }
@@ -1971,7 +2184,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromOrganizationGroupName(organizationGroupName: string) {
-    return this._pathTemplates.organizationGroupPathTemplate.match(
+    return this.pathTemplates.organizationGroupPathTemplate.match(
       organizationGroupName
     ).group;
   }
@@ -1987,9 +2200,9 @@ export class ServiceMonitoringServiceClient {
     organization: string,
     notificationChannel: string
   ) {
-    return this._pathTemplates.organizationNotificationChannelPathTemplate.render(
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.render(
       {
-        organization,
+        organization: organization,
         notification_channel: notificationChannel,
       }
     );
@@ -2005,7 +2218,7 @@ export class ServiceMonitoringServiceClient {
   matchOrganizationFromOrganizationNotificationChannelName(
     organizationNotificationChannelName: string
   ) {
-    return this._pathTemplates.organizationNotificationChannelPathTemplate.match(
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
       organizationNotificationChannelName
     ).organization;
   }
@@ -2020,7 +2233,7 @@ export class ServiceMonitoringServiceClient {
   matchNotificationChannelFromOrganizationNotificationChannelName(
     organizationNotificationChannelName: string
   ) {
-    return this._pathTemplates.organizationNotificationChannelPathTemplate.match(
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
       organizationNotificationChannelName
     ).notification_channel;
   }
@@ -2033,9 +2246,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   organizationServicePath(organization: string, service: string) {
-    return this._pathTemplates.organizationServicePathTemplate.render({
-      organization,
-      service,
+    return this.pathTemplates.organizationServicePathTemplate.render({
+      organization: organization,
+      service: service,
     });
   }
 
@@ -2049,7 +2262,7 @@ export class ServiceMonitoringServiceClient {
   matchOrganizationFromOrganizationServiceName(
     organizationServiceName: string
   ) {
-    return this._pathTemplates.organizationServicePathTemplate.match(
+    return this.pathTemplates.organizationServicePathTemplate.match(
       organizationServiceName
     ).organization;
   }
@@ -2062,7 +2275,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromOrganizationServiceName(organizationServiceName: string) {
-    return this._pathTemplates.organizationServicePathTemplate.match(
+    return this.pathTemplates.organizationServicePathTemplate.match(
       organizationServiceName
     ).service;
   }
@@ -2080,10 +2293,10 @@ export class ServiceMonitoringServiceClient {
     service: string,
     serviceLevelObjective: string
   ) {
-    return this._pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
       {
-        organization,
-        service,
+        organization: organization,
+        service: service,
         service_level_objective: serviceLevelObjective,
       }
     );
@@ -2099,7 +2312,7 @@ export class ServiceMonitoringServiceClient {
   matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
     organizationServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
       organizationServiceServiceLevelObjectiveName
     ).organization;
   }
@@ -2114,7 +2327,7 @@ export class ServiceMonitoringServiceClient {
   matchServiceFromOrganizationServiceServiceLevelObjectiveName(
     organizationServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
       organizationServiceServiceLevelObjectiveName
     ).service;
   }
@@ -2129,7 +2342,7 @@ export class ServiceMonitoringServiceClient {
   matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
     organizationServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
       organizationServiceServiceLevelObjectiveName
     ).service_level_objective;
   }
@@ -2145,12 +2358,10 @@ export class ServiceMonitoringServiceClient {
     organization: string,
     uptimeCheckConfig: string
   ) {
-    return this._pathTemplates.organizationUptimeCheckConfigPathTemplate.render(
-      {
-        organization,
-        uptime_check_config: uptimeCheckConfig,
-      }
-    );
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.render({
+      organization: organization,
+      uptime_check_config: uptimeCheckConfig,
+    });
   }
 
   /**
@@ -2163,7 +2374,7 @@ export class ServiceMonitoringServiceClient {
   matchOrganizationFromOrganizationUptimeCheckConfigName(
     organizationUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
       organizationUptimeCheckConfigName
     ).organization;
   }
@@ -2178,7 +2389,7 @@ export class ServiceMonitoringServiceClient {
   matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
     organizationUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
       organizationUptimeCheckConfigName
     ).uptime_check_config;
   }
@@ -2190,8 +2401,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -2203,7 +2414,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -2214,8 +2425,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   projectAlertPolicyPath(project: string, alertPolicy: string) {
-    return this._pathTemplates.projectAlertPolicyPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAlertPolicyPathTemplate.render({
+      project: project,
       alert_policy: alertPolicy,
     });
   }
@@ -2228,7 +2439,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this._pathTemplates.projectAlertPolicyPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
       projectAlertPolicyName
     ).project;
   }
@@ -2241,7 +2452,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this._pathTemplates.projectAlertPolicyPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
       projectAlertPolicyName
     ).alert_policy;
   }
@@ -2259,10 +2470,10 @@ export class ServiceMonitoringServiceClient {
     alertPolicy: string,
     condition: string
   ) {
-    return this._pathTemplates.projectAlertPolicyConditionPathTemplate.render({
-      project,
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.render({
+      project: project,
       alert_policy: alertPolicy,
-      condition,
+      condition: condition,
     });
   }
 
@@ -2276,7 +2487,7 @@ export class ServiceMonitoringServiceClient {
   matchProjectFromProjectAlertPolicyConditionName(
     projectAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
       projectAlertPolicyConditionName
     ).project;
   }
@@ -2291,7 +2502,7 @@ export class ServiceMonitoringServiceClient {
   matchAlertPolicyFromProjectAlertPolicyConditionName(
     projectAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
       projectAlertPolicyConditionName
     ).alert_policy;
   }
@@ -2306,7 +2517,7 @@ export class ServiceMonitoringServiceClient {
   matchConditionFromProjectAlertPolicyConditionName(
     projectAlertPolicyConditionName: string
   ) {
-    return this._pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
       projectAlertPolicyConditionName
     ).condition;
   }
@@ -2319,8 +2530,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   projectChannelDescriptorPath(project: string, channelDescriptor: string) {
-    return this._pathTemplates.projectChannelDescriptorPathTemplate.render({
-      project,
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.render({
+      project: project,
       channel_descriptor: channelDescriptor,
     });
   }
@@ -2335,7 +2546,7 @@ export class ServiceMonitoringServiceClient {
   matchProjectFromProjectChannelDescriptorName(
     projectChannelDescriptorName: string
   ) {
-    return this._pathTemplates.projectChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
       projectChannelDescriptorName
     ).project;
   }
@@ -2350,7 +2561,7 @@ export class ServiceMonitoringServiceClient {
   matchChannelDescriptorFromProjectChannelDescriptorName(
     projectChannelDescriptorName: string
   ) {
-    return this._pathTemplates.projectChannelDescriptorPathTemplate.match(
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
       projectChannelDescriptorName
     ).channel_descriptor;
   }
@@ -2363,9 +2574,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   projectGroupPath(project: string, group: string) {
-    return this._pathTemplates.projectGroupPathTemplate.render({
-      project,
-      group,
+    return this.pathTemplates.projectGroupPathTemplate.render({
+      project: project,
+      group: group,
     });
   }
 
@@ -2377,7 +2588,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectGroupName(projectGroupName: string) {
-    return this._pathTemplates.projectGroupPathTemplate.match(projectGroupName)
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
       .project;
   }
 
@@ -2389,7 +2600,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromProjectGroupName(projectGroupName: string) {
-    return this._pathTemplates.projectGroupPathTemplate.match(projectGroupName)
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
       .group;
   }
 
@@ -2401,8 +2612,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   projectNotificationChannelPath(project: string, notificationChannel: string) {
-    return this._pathTemplates.projectNotificationChannelPathTemplate.render({
-      project,
+    return this.pathTemplates.projectNotificationChannelPathTemplate.render({
+      project: project,
       notification_channel: notificationChannel,
     });
   }
@@ -2417,7 +2628,7 @@ export class ServiceMonitoringServiceClient {
   matchProjectFromProjectNotificationChannelName(
     projectNotificationChannelName: string
   ) {
-    return this._pathTemplates.projectNotificationChannelPathTemplate.match(
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
       projectNotificationChannelName
     ).project;
   }
@@ -2432,7 +2643,7 @@ export class ServiceMonitoringServiceClient {
   matchNotificationChannelFromProjectNotificationChannelName(
     projectNotificationChannelName: string
   ) {
-    return this._pathTemplates.projectNotificationChannelPathTemplate.match(
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
       projectNotificationChannelName
     ).notification_channel;
   }
@@ -2445,9 +2656,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   projectServicePath(project: string, service: string) {
-    return this._pathTemplates.projectServicePathTemplate.render({
-      project,
-      service,
+    return this.pathTemplates.projectServicePathTemplate.render({
+      project: project,
+      service: service,
     });
   }
 
@@ -2459,7 +2670,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectServiceName(projectServiceName: string) {
-    return this._pathTemplates.projectServicePathTemplate.match(
+    return this.pathTemplates.projectServicePathTemplate.match(
       projectServiceName
     ).project;
   }
@@ -2472,7 +2683,7 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromProjectServiceName(projectServiceName: string) {
-    return this._pathTemplates.projectServicePathTemplate.match(
+    return this.pathTemplates.projectServicePathTemplate.match(
       projectServiceName
     ).service;
   }
@@ -2490,10 +2701,10 @@ export class ServiceMonitoringServiceClient {
     service: string,
     serviceLevelObjective: string
   ) {
-    return this._pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
       {
-        project,
-        service,
+        project: project,
+        service: service,
         service_level_objective: serviceLevelObjective,
       }
     );
@@ -2509,7 +2720,7 @@ export class ServiceMonitoringServiceClient {
   matchProjectFromProjectServiceServiceLevelObjectiveName(
     projectServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
       projectServiceServiceLevelObjectiveName
     ).project;
   }
@@ -2524,7 +2735,7 @@ export class ServiceMonitoringServiceClient {
   matchServiceFromProjectServiceServiceLevelObjectiveName(
     projectServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
       projectServiceServiceLevelObjectiveName
     ).service;
   }
@@ -2539,7 +2750,7 @@ export class ServiceMonitoringServiceClient {
   matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
     projectServiceServiceLevelObjectiveName: string
   ) {
-    return this._pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
       projectServiceServiceLevelObjectiveName
     ).service_level_objective;
   }
@@ -2552,8 +2763,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} Resource name string.
    */
   projectUptimeCheckConfigPath(project: string, uptimeCheckConfig: string) {
-    return this._pathTemplates.projectUptimeCheckConfigPathTemplate.render({
-      project,
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.render({
+      project: project,
       uptime_check_config: uptimeCheckConfig,
     });
   }
@@ -2568,7 +2779,7 @@ export class ServiceMonitoringServiceClient {
   matchProjectFromProjectUptimeCheckConfigName(
     projectUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.projectUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
       projectUptimeCheckConfigName
     ).project;
   }
@@ -2583,7 +2794,7 @@ export class ServiceMonitoringServiceClient {
   matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
     projectUptimeCheckConfigName: string
   ) {
-    return this._pathTemplates.projectUptimeCheckConfigPathTemplate.match(
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
       projectUptimeCheckConfigName
     ).uptime_check_config;
   }

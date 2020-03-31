@@ -21,6 +21,7 @@ describe('MetricServiceSmokeTest', () => {
   const projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service using promises', done => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const monitoring = require('../src');
 
     const client = new monitoring.v3.MetricServiceClient({
@@ -43,6 +44,7 @@ describe('MetricServiceSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using callbacks', done => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const monitoring = require('../src');
 
     const client = new monitoring.v3.MetricServiceClient({
@@ -78,6 +80,7 @@ describe('MetricServiceSmokeTest', () => {
   });
 
   it('successfully makes a call to the service using streaming', done => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const monitoring = require('../src');
 
     const client = new monitoring.v3.MetricServiceClient({

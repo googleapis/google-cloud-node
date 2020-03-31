@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,15 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AlertPolicyServiceClient, GroupServiceClient, MetricServiceClient, NotificationChannelServiceClient, ServiceMonitoringServiceClient, UptimeCheckServiceClient} from '@google-cloud/monitoring';
+import {
+  AlertPolicyServiceClient,
+  GroupServiceClient,
+  MetricServiceClient,
+  NotificationChannelServiceClient,
+  ServiceMonitoringServiceClient,
+  UptimeCheckServiceClient,
+} from '@google-cloud/monitoring';
 
 function main() {
-  const alertPolicyServiceClient = new AlertPolicyServiceClient();
-  const groupServiceClient = new GroupServiceClient();
-  const metricServiceClient = new MetricServiceClient();
-  const notificationChannelServiceClient = new NotificationChannelServiceClient();
-  const serviceMonitoringServiceClient = new ServiceMonitoringServiceClient();
-  const uptimeCheckServiceClient = new UptimeCheckServiceClient();
+  new AlertPolicyServiceClient();
+  new GroupServiceClient();
+  new MetricServiceClient();
+  new NotificationChannelServiceClient();
+  new ServiceMonitoringServiceClient();
+  new UptimeCheckServiceClient();
 }
 
 main();

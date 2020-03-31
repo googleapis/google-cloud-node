@@ -63,7 +63,7 @@ async function quickstart() {
 
   // Writes time series data
   const [result] = await client.createTimeSeries(request);
-  console.log(`Done writing time series data.`, result);
+  console.log('Done writing time series data.', result);
 }
 // [END monitoring_quickstart]
 
