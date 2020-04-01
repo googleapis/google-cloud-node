@@ -100,7 +100,7 @@ const request = {
 const [response] = await dlp.inspectContent(request);
 const findings = response.result.findings;
 if (findings.length > 0) {
-  console.log(`Findings:`);
+  console.log('Findings:');
   findings.forEach(finding => {
     if (includeQuote) {
       console.log(`\tQuote: ${finding.quote}`);
@@ -109,7 +109,7 @@ if (findings.length > 0) {
     console.log(`\tLikelihood: ${finding.likelihood}`);
   });
 } else {
-  console.log(`No findings.`);
+  console.log('No findings.');
 }
 
 ```
