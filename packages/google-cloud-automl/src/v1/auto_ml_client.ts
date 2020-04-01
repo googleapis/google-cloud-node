@@ -18,19 +18,19 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   LROperation,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './auto_ml_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -54,14 +54,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class AutoMlClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -69,6 +61,14 @@ export class AutoMlClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   autoMlStub?: Promise<{[name: string]: Function}>;
 
@@ -161,13 +161,16 @@ export class AutoMlClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
@@ -188,7 +191,7 @@ export class AutoMlClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listDatasets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -211,6 +214,7 @@ export class AutoMlClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -276,7 +280,7 @@ export class AutoMlClient {
       '.google.cloud.automl.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       createDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDatasetResponse.decode.bind(createDatasetResponse),
@@ -335,7 +339,7 @@ export class AutoMlClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -362,7 +366,7 @@ export class AutoMlClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.automl.v1.AutoMl'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.automl.v1.AutoMl,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -389,9 +393,8 @@ export class AutoMlClient {
       'getModelEvaluation',
       'listModelEvaluations',
     ];
-
     for (const methodName of autoMlStubMethods) {
-      const innerCallPromise = this.autoMlStub.then(
+      const callPromise = this.autoMlStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -405,20 +408,14 @@ export class AutoMlClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.autoMlStub;
@@ -475,22 +472,30 @@ export class AutoMlClient {
   // -- Service calls --
   // -------------------
   getDataset(
-    request: protosTypes.google.cloud.automl.v1.IGetDatasetRequest,
+    request: protos.google.cloud.automl.v1.IGetDatasetRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IDataset,
-      protosTypes.google.cloud.automl.v1.IGetDatasetRequest | undefined,
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IGetDatasetRequest | undefined,
       {} | undefined
     ]
   >;
   getDataset(
-    request: protosTypes.google.cloud.automl.v1.IGetDatasetRequest,
+    request: protos.google.cloud.automl.v1.IGetDatasetRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.automl.v1.IDataset,
-      protosTypes.google.cloud.automl.v1.IGetDatasetRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IGetDatasetRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDataset(
+    request: protos.google.cloud.automl.v1.IGetDatasetRequest,
+    callback: Callback<
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IGetDatasetRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -507,23 +512,23 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getDataset(
-    request: protosTypes.google.cloud.automl.v1.IGetDatasetRequest,
+    request: protos.google.cloud.automl.v1.IGetDatasetRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.automl.v1.IDataset,
-          protosTypes.google.cloud.automl.v1.IGetDatasetRequest | undefined,
-          {} | undefined
+          protos.google.cloud.automl.v1.IDataset,
+          protos.google.cloud.automl.v1.IGetDatasetRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IDataset,
-      protosTypes.google.cloud.automl.v1.IGetDatasetRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IGetDatasetRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IDataset,
-      protosTypes.google.cloud.automl.v1.IGetDatasetRequest | undefined,
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IGetDatasetRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -544,25 +549,33 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getDataset(request, options, callback);
+    return this.innerApiCalls.getDataset(request, options, callback);
   }
   updateDataset(
-    request: protosTypes.google.cloud.automl.v1.IUpdateDatasetRequest,
+    request: protos.google.cloud.automl.v1.IUpdateDatasetRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IDataset,
-      protosTypes.google.cloud.automl.v1.IUpdateDatasetRequest | undefined,
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IUpdateDatasetRequest | undefined,
       {} | undefined
     ]
   >;
   updateDataset(
-    request: protosTypes.google.cloud.automl.v1.IUpdateDatasetRequest,
+    request: protos.google.cloud.automl.v1.IUpdateDatasetRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.automl.v1.IDataset,
-      protosTypes.google.cloud.automl.v1.IUpdateDatasetRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IUpdateDatasetRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDataset(
+    request: protos.google.cloud.automl.v1.IUpdateDatasetRequest,
+    callback: Callback<
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IUpdateDatasetRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -581,23 +594,25 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateDataset(
-    request: protosTypes.google.cloud.automl.v1.IUpdateDatasetRequest,
+    request: protos.google.cloud.automl.v1.IUpdateDatasetRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.automl.v1.IDataset,
-          protosTypes.google.cloud.automl.v1.IUpdateDatasetRequest | undefined,
-          {} | undefined
+          protos.google.cloud.automl.v1.IDataset,
+          | protos.google.cloud.automl.v1.IUpdateDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IDataset,
-      protosTypes.google.cloud.automl.v1.IUpdateDatasetRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IUpdateDatasetRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IDataset,
-      protosTypes.google.cloud.automl.v1.IUpdateDatasetRequest | undefined,
+      protos.google.cloud.automl.v1.IDataset,
+      protos.google.cloud.automl.v1.IUpdateDatasetRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -618,25 +633,37 @@ export class AutoMlClient {
       'dataset.name': request.dataset!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateDataset(request, options, callback);
+    return this.innerApiCalls.updateDataset(request, options, callback);
   }
   getAnnotationSpec(
-    request: protosTypes.google.cloud.automl.v1.IGetAnnotationSpecRequest,
+    request: protos.google.cloud.automl.v1.IGetAnnotationSpecRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IAnnotationSpec,
-      protosTypes.google.cloud.automl.v1.IGetAnnotationSpecRequest | undefined,
+      protos.google.cloud.automl.v1.IAnnotationSpec,
+      protos.google.cloud.automl.v1.IGetAnnotationSpecRequest | undefined,
       {} | undefined
     ]
   >;
   getAnnotationSpec(
-    request: protosTypes.google.cloud.automl.v1.IGetAnnotationSpecRequest,
+    request: protos.google.cloud.automl.v1.IGetAnnotationSpecRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.automl.v1.IAnnotationSpec,
-      protosTypes.google.cloud.automl.v1.IGetAnnotationSpecRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IAnnotationSpec,
+      | protos.google.cloud.automl.v1.IGetAnnotationSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAnnotationSpec(
+    request: protos.google.cloud.automl.v1.IGetAnnotationSpecRequest,
+    callback: Callback<
+      protos.google.cloud.automl.v1.IAnnotationSpec,
+      | protos.google.cloud.automl.v1.IGetAnnotationSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -653,24 +680,27 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getAnnotationSpec(
-    request: protosTypes.google.cloud.automl.v1.IGetAnnotationSpecRequest,
+    request: protos.google.cloud.automl.v1.IGetAnnotationSpecRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.automl.v1.IAnnotationSpec,
-          | protosTypes.google.cloud.automl.v1.IGetAnnotationSpecRequest
+          protos.google.cloud.automl.v1.IAnnotationSpec,
+          | protos.google.cloud.automl.v1.IGetAnnotationSpecRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IAnnotationSpec,
-      protosTypes.google.cloud.automl.v1.IGetAnnotationSpecRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IAnnotationSpec,
+      | protos.google.cloud.automl.v1.IGetAnnotationSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IAnnotationSpec,
-      protosTypes.google.cloud.automl.v1.IGetAnnotationSpecRequest | undefined,
+      protos.google.cloud.automl.v1.IAnnotationSpec,
+      protos.google.cloud.automl.v1.IGetAnnotationSpecRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -691,25 +721,33 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getAnnotationSpec(request, options, callback);
+    return this.innerApiCalls.getAnnotationSpec(request, options, callback);
   }
   getModel(
-    request: protosTypes.google.cloud.automl.v1.IGetModelRequest,
+    request: protos.google.cloud.automl.v1.IGetModelRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModel,
-      protosTypes.google.cloud.automl.v1.IGetModelRequest | undefined,
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IGetModelRequest | undefined,
       {} | undefined
     ]
   >;
   getModel(
-    request: protosTypes.google.cloud.automl.v1.IGetModelRequest,
+    request: protos.google.cloud.automl.v1.IGetModelRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.automl.v1.IModel,
-      protosTypes.google.cloud.automl.v1.IGetModelRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IGetModelRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getModel(
+    request: protos.google.cloud.automl.v1.IGetModelRequest,
+    callback: Callback<
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IGetModelRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -726,23 +764,23 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getModel(
-    request: protosTypes.google.cloud.automl.v1.IGetModelRequest,
+    request: protos.google.cloud.automl.v1.IGetModelRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.automl.v1.IModel,
-          protosTypes.google.cloud.automl.v1.IGetModelRequest | undefined,
-          {} | undefined
+          protos.google.cloud.automl.v1.IModel,
+          protos.google.cloud.automl.v1.IGetModelRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IModel,
-      protosTypes.google.cloud.automl.v1.IGetModelRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IGetModelRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModel,
-      protosTypes.google.cloud.automl.v1.IGetModelRequest | undefined,
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IGetModelRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -763,25 +801,33 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getModel(request, options, callback);
+    return this.innerApiCalls.getModel(request, options, callback);
   }
   updateModel(
-    request: protosTypes.google.cloud.automl.v1.IUpdateModelRequest,
+    request: protos.google.cloud.automl.v1.IUpdateModelRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModel,
-      protosTypes.google.cloud.automl.v1.IUpdateModelRequest | undefined,
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IUpdateModelRequest | undefined,
       {} | undefined
     ]
   >;
   updateModel(
-    request: protosTypes.google.cloud.automl.v1.IUpdateModelRequest,
+    request: protos.google.cloud.automl.v1.IUpdateModelRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.automl.v1.IModel,
-      protosTypes.google.cloud.automl.v1.IUpdateModelRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IUpdateModelRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateModel(
+    request: protos.google.cloud.automl.v1.IUpdateModelRequest,
+    callback: Callback<
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IUpdateModelRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -800,23 +846,23 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateModel(
-    request: protosTypes.google.cloud.automl.v1.IUpdateModelRequest,
+    request: protos.google.cloud.automl.v1.IUpdateModelRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.automl.v1.IModel,
-          protosTypes.google.cloud.automl.v1.IUpdateModelRequest | undefined,
-          {} | undefined
+          protos.google.cloud.automl.v1.IModel,
+          protos.google.cloud.automl.v1.IUpdateModelRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IModel,
-      protosTypes.google.cloud.automl.v1.IUpdateModelRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IUpdateModelRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModel,
-      protosTypes.google.cloud.automl.v1.IUpdateModelRequest | undefined,
+      protos.google.cloud.automl.v1.IModel,
+      protos.google.cloud.automl.v1.IUpdateModelRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -837,25 +883,37 @@ export class AutoMlClient {
       'model.name': request.model!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateModel(request, options, callback);
+    return this.innerApiCalls.updateModel(request, options, callback);
   }
   getModelEvaluation(
-    request: protosTypes.google.cloud.automl.v1.IGetModelEvaluationRequest,
+    request: protos.google.cloud.automl.v1.IGetModelEvaluationRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModelEvaluation,
-      protosTypes.google.cloud.automl.v1.IGetModelEvaluationRequest | undefined,
+      protos.google.cloud.automl.v1.IModelEvaluation,
+      protos.google.cloud.automl.v1.IGetModelEvaluationRequest | undefined,
       {} | undefined
     ]
   >;
   getModelEvaluation(
-    request: protosTypes.google.cloud.automl.v1.IGetModelEvaluationRequest,
+    request: protos.google.cloud.automl.v1.IGetModelEvaluationRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.automl.v1.IModelEvaluation,
-      protosTypes.google.cloud.automl.v1.IGetModelEvaluationRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IModelEvaluation,
+      | protos.google.cloud.automl.v1.IGetModelEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getModelEvaluation(
+    request: protos.google.cloud.automl.v1.IGetModelEvaluationRequest,
+    callback: Callback<
+      protos.google.cloud.automl.v1.IModelEvaluation,
+      | protos.google.cloud.automl.v1.IGetModelEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -872,24 +930,27 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getModelEvaluation(
-    request: protosTypes.google.cloud.automl.v1.IGetModelEvaluationRequest,
+    request: protos.google.cloud.automl.v1.IGetModelEvaluationRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.automl.v1.IModelEvaluation,
-          | protosTypes.google.cloud.automl.v1.IGetModelEvaluationRequest
+          protos.google.cloud.automl.v1.IModelEvaluation,
+          | protos.google.cloud.automl.v1.IGetModelEvaluationRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IModelEvaluation,
-      protosTypes.google.cloud.automl.v1.IGetModelEvaluationRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IModelEvaluation,
+      | protos.google.cloud.automl.v1.IGetModelEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModelEvaluation,
-      protosTypes.google.cloud.automl.v1.IGetModelEvaluationRequest | undefined,
+      protos.google.cloud.automl.v1.IModelEvaluation,
+      protos.google.cloud.automl.v1.IGetModelEvaluationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -910,32 +971,43 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getModelEvaluation(request, options, callback);
+    return this.innerApiCalls.getModelEvaluation(request, options, callback);
   }
 
   createDataset(
-    request: protosTypes.google.cloud.automl.v1.ICreateDatasetRequest,
+    request: protos.google.cloud.automl.v1.ICreateDatasetRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.automl.v1.IDataset,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IDataset,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   createDataset(
-    request: protosTypes.google.cloud.automl.v1.ICreateDatasetRequest,
+    request: protos.google.cloud.automl.v1.ICreateDatasetRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.automl.v1.IDataset,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IDataset,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDataset(
+    request: protos.google.cloud.automl.v1.ICreateDatasetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.automl.v1.IDataset,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -954,32 +1026,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createDataset(
-    request: protosTypes.google.cloud.automl.v1.ICreateDatasetRequest,
+    request: protos.google.cloud.automl.v1.ICreateDatasetRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.automl.v1.IDataset,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.cloud.automl.v1.IDataset,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.automl.v1.IDataset,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IDataset,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.automl.v1.IDataset,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IDataset,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1000,31 +1072,42 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createDataset(request, options, callback);
+    return this.innerApiCalls.createDataset(request, options, callback);
   }
   deleteDataset(
-    request: protosTypes.google.cloud.automl.v1.IDeleteDatasetRequest,
+    request: protos.google.cloud.automl.v1.IDeleteDatasetRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deleteDataset(
-    request: protosTypes.google.cloud.automl.v1.IDeleteDatasetRequest,
+    request: protos.google.cloud.automl.v1.IDeleteDatasetRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDataset(
+    request: protos.google.cloud.automl.v1.IDeleteDatasetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1045,32 +1128,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteDataset(
-    request: protosTypes.google.cloud.automl.v1.IDeleteDatasetRequest,
+    request: protos.google.cloud.automl.v1.IDeleteDatasetRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.protobuf.IEmpty,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1091,31 +1174,42 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteDataset(request, options, callback);
+    return this.innerApiCalls.deleteDataset(request, options, callback);
   }
   importData(
-    request: protosTypes.google.cloud.automl.v1.IImportDataRequest,
+    request: protos.google.cloud.automl.v1.IImportDataRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   importData(
-    request: protosTypes.google.cloud.automl.v1.IImportDataRequest,
+    request: protos.google.cloud.automl.v1.IImportDataRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importData(
+    request: protos.google.cloud.automl.v1.IImportDataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1144,32 +1238,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   importData(
-    request: protosTypes.google.cloud.automl.v1.IImportDataRequest,
+    request: protos.google.cloud.automl.v1.IImportDataRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.protobuf.IEmpty,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1190,31 +1284,42 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.importData(request, options, callback);
+    return this.innerApiCalls.importData(request, options, callback);
   }
   exportData(
-    request: protosTypes.google.cloud.automl.v1.IExportDataRequest,
+    request: protos.google.cloud.automl.v1.IExportDataRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   exportData(
-    request: protosTypes.google.cloud.automl.v1.IExportDataRequest,
+    request: protos.google.cloud.automl.v1.IExportDataRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportData(
+    request: protos.google.cloud.automl.v1.IExportDataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1235,32 +1340,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   exportData(
-    request: protosTypes.google.cloud.automl.v1.IExportDataRequest,
+    request: protos.google.cloud.automl.v1.IExportDataRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.protobuf.IEmpty,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1281,31 +1386,42 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.exportData(request, options, callback);
+    return this.innerApiCalls.exportData(request, options, callback);
   }
   createModel(
-    request: protosTypes.google.cloud.automl.v1.ICreateModelRequest,
+    request: protos.google.cloud.automl.v1.ICreateModelRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.automl.v1.IModel,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IModel,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   createModel(
-    request: protosTypes.google.cloud.automl.v1.ICreateModelRequest,
+    request: protos.google.cloud.automl.v1.ICreateModelRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.automl.v1.IModel,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IModel,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createModel(
+    request: protos.google.cloud.automl.v1.ICreateModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.automl.v1.IModel,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1328,32 +1444,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createModel(
-    request: protosTypes.google.cloud.automl.v1.ICreateModelRequest,
+    request: protos.google.cloud.automl.v1.ICreateModelRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.automl.v1.IModel,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.cloud.automl.v1.IModel,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.automl.v1.IModel,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IModel,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.automl.v1.IModel,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IModel,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1374,31 +1490,42 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createModel(request, options, callback);
+    return this.innerApiCalls.createModel(request, options, callback);
   }
   deleteModel(
-    request: protosTypes.google.cloud.automl.v1.IDeleteModelRequest,
+    request: protos.google.cloud.automl.v1.IDeleteModelRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deleteModel(
-    request: protosTypes.google.cloud.automl.v1.IDeleteModelRequest,
+    request: protos.google.cloud.automl.v1.IDeleteModelRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteModel(
+    request: protos.google.cloud.automl.v1.IDeleteModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1419,32 +1546,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteModel(
-    request: protosTypes.google.cloud.automl.v1.IDeleteModelRequest,
+    request: protos.google.cloud.automl.v1.IDeleteModelRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.protobuf.IEmpty,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1465,31 +1592,42 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteModel(request, options, callback);
+    return this.innerApiCalls.deleteModel(request, options, callback);
   }
   deployModel(
-    request: protosTypes.google.cloud.automl.v1.IDeployModelRequest,
+    request: protos.google.cloud.automl.v1.IDeployModelRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deployModel(
-    request: protosTypes.google.cloud.automl.v1.IDeployModelRequest,
+    request: protos.google.cloud.automl.v1.IDeployModelRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deployModel(
+    request: protos.google.cloud.automl.v1.IDeployModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1521,32 +1659,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deployModel(
-    request: protosTypes.google.cloud.automl.v1.IDeployModelRequest,
+    request: protos.google.cloud.automl.v1.IDeployModelRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.protobuf.IEmpty,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1567,31 +1705,42 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deployModel(request, options, callback);
+    return this.innerApiCalls.deployModel(request, options, callback);
   }
   undeployModel(
-    request: protosTypes.google.cloud.automl.v1.IUndeployModelRequest,
+    request: protos.google.cloud.automl.v1.IUndeployModelRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   undeployModel(
-    request: protosTypes.google.cloud.automl.v1.IUndeployModelRequest,
+    request: protos.google.cloud.automl.v1.IUndeployModelRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  undeployModel(
+    request: protos.google.cloud.automl.v1.IUndeployModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1614,32 +1763,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   undeployModel(
-    request: protosTypes.google.cloud.automl.v1.IUndeployModelRequest,
+    request: protos.google.cloud.automl.v1.IUndeployModelRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.protobuf.IEmpty,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1660,31 +1809,42 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.undeployModel(request, options, callback);
+    return this.innerApiCalls.undeployModel(request, options, callback);
   }
   exportModel(
-    request: protosTypes.google.cloud.automl.v1.IExportModelRequest,
+    request: protos.google.cloud.automl.v1.IExportModelRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   exportModel(
-    request: protosTypes.google.cloud.automl.v1.IExportModelRequest,
+    request: protos.google.cloud.automl.v1.IExportModelRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportModel(
+    request: protos.google.cloud.automl.v1.IExportModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1709,32 +1869,32 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   exportModel(
-    request: protosTypes.google.cloud.automl.v1.IExportModelRequest,
+    request: protos.google.cloud.automl.v1.IExportModelRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.protobuf.IEmpty,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.protobuf.IEmpty,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1755,25 +1915,33 @@ export class AutoMlClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.exportModel(request, options, callback);
+    return this.innerApiCalls.exportModel(request, options, callback);
   }
   listDatasets(
-    request: protosTypes.google.cloud.automl.v1.IListDatasetsRequest,
+    request: protos.google.cloud.automl.v1.IListDatasetsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IDataset[],
-      protosTypes.google.cloud.automl.v1.IListDatasetsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListDatasetsResponse
+      protos.google.cloud.automl.v1.IDataset[],
+      protos.google.cloud.automl.v1.IListDatasetsRequest | null,
+      protos.google.cloud.automl.v1.IListDatasetsResponse
     ]
   >;
   listDatasets(
-    request: protosTypes.google.cloud.automl.v1.IListDatasetsRequest,
+    request: protos.google.cloud.automl.v1.IListDatasetsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.automl.v1.IDataset[],
-      protosTypes.google.cloud.automl.v1.IListDatasetsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListDatasetsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1.IListDatasetsRequest,
+      protos.google.cloud.automl.v1.IListDatasetsResponse | null | undefined,
+      protos.google.cloud.automl.v1.IDataset
+    >
+  ): void;
+  listDatasets(
+    request: protos.google.cloud.automl.v1.IListDatasetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1.IListDatasetsRequest,
+      protos.google.cloud.automl.v1.IListDatasetsResponse | null | undefined,
+      protos.google.cloud.automl.v1.IDataset
     >
   ): void;
   /**
@@ -1818,24 +1986,26 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listDatasets(
-    request: protosTypes.google.cloud.automl.v1.IListDatasetsRequest,
+    request: protos.google.cloud.automl.v1.IListDatasetsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.automl.v1.IDataset[],
-          protosTypes.google.cloud.automl.v1.IListDatasetsRequest | null,
-          protosTypes.google.cloud.automl.v1.IListDatasetsResponse
+      | PaginationCallback<
+          protos.google.cloud.automl.v1.IListDatasetsRequest,
+          | protos.google.cloud.automl.v1.IListDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.automl.v1.IDataset
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IDataset[],
-      protosTypes.google.cloud.automl.v1.IListDatasetsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListDatasetsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.automl.v1.IListDatasetsRequest,
+      protos.google.cloud.automl.v1.IListDatasetsResponse | null | undefined,
+      protos.google.cloud.automl.v1.IDataset
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IDataset[],
-      protosTypes.google.cloud.automl.v1.IListDatasetsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListDatasetsResponse
+      protos.google.cloud.automl.v1.IDataset[],
+      protos.google.cloud.automl.v1.IListDatasetsRequest | null,
+      protos.google.cloud.automl.v1.IListDatasetsResponse
     ]
   > | void {
     request = request || {};
@@ -1855,7 +2025,7 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listDatasets(request, options, callback);
+    return this.innerApiCalls.listDatasets(request, options, callback);
   }
 
   /**
@@ -1897,7 +2067,7 @@ export class AutoMlClient {
    *   An object stream which emits an object representing [Dataset]{@link google.cloud.automl.v1.Dataset} on 'data' event.
    */
   listDatasetsStream(
-    request?: protosTypes.google.cloud.automl.v1.IListDatasetsRequest,
+    request?: protos.google.cloud.automl.v1.IListDatasetsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1911,29 +2081,90 @@ export class AutoMlClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listDatasets.createStream(
-      this._innerApiCalls.listDatasets as gax.GaxCall,
+    return this.descriptors.page.listDatasets.createStream(
+      this.innerApiCalls.listDatasets as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listDatasets}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project from which to list datasets.
+   * @param {string} request.filter
+   *   An expression for filtering the results of the request.
+   *
+   *     * `dataset_metadata` - for existence of the case (e.g.
+   *               image_classification_dataset_metadata:*). Some examples of using the filter are:
+   *
+   *     * `translation_dataset_metadata:*` --> The dataset has
+   *                                            translation_dataset_metadata.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer results than requested.
+   *   If unspecified, server will pick a default size.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results for the server to return
+   *   Typically obtained via
+   *   {@link google.cloud.automl.v1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1.AutoMl.ListDatasets|AutoMl.ListDatasets} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listDatasetsAsync(
+    request?: protos.google.cloud.automl.v1.IListDatasetsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.automl.v1.IDataset> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listDatasets.asyncIterate(
+      this.innerApiCalls['listDatasets'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.automl.v1.IDataset>;
+  }
   listModels(
-    request: protosTypes.google.cloud.automl.v1.IListModelsRequest,
+    request: protos.google.cloud.automl.v1.IListModelsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModel[],
-      protosTypes.google.cloud.automl.v1.IListModelsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListModelsResponse
+      protos.google.cloud.automl.v1.IModel[],
+      protos.google.cloud.automl.v1.IListModelsRequest | null,
+      protos.google.cloud.automl.v1.IListModelsResponse
     ]
   >;
   listModels(
-    request: protosTypes.google.cloud.automl.v1.IListModelsRequest,
+    request: protos.google.cloud.automl.v1.IListModelsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.automl.v1.IModel[],
-      protosTypes.google.cloud.automl.v1.IListModelsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListModelsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1.IListModelsRequest,
+      protos.google.cloud.automl.v1.IListModelsResponse | null | undefined,
+      protos.google.cloud.automl.v1.IModel
+    >
+  ): void;
+  listModels(
+    request: protos.google.cloud.automl.v1.IListModelsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1.IListModelsRequest,
+      protos.google.cloud.automl.v1.IListModelsResponse | null | undefined,
+      protos.google.cloud.automl.v1.IModel
     >
   ): void;
   /**
@@ -1979,24 +2210,24 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listModels(
-    request: protosTypes.google.cloud.automl.v1.IListModelsRequest,
+    request: protos.google.cloud.automl.v1.IListModelsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.automl.v1.IModel[],
-          protosTypes.google.cloud.automl.v1.IListModelsRequest | null,
-          protosTypes.google.cloud.automl.v1.IListModelsResponse
+      | PaginationCallback<
+          protos.google.cloud.automl.v1.IListModelsRequest,
+          protos.google.cloud.automl.v1.IListModelsResponse | null | undefined,
+          protos.google.cloud.automl.v1.IModel
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IModel[],
-      protosTypes.google.cloud.automl.v1.IListModelsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListModelsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.automl.v1.IListModelsRequest,
+      protos.google.cloud.automl.v1.IListModelsResponse | null | undefined,
+      protos.google.cloud.automl.v1.IModel
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModel[],
-      protosTypes.google.cloud.automl.v1.IListModelsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListModelsResponse
+      protos.google.cloud.automl.v1.IModel[],
+      protos.google.cloud.automl.v1.IListModelsRequest | null,
+      protos.google.cloud.automl.v1.IListModelsResponse
     ]
   > | void {
     request = request || {};
@@ -2016,7 +2247,7 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listModels(request, options, callback);
+    return this.innerApiCalls.listModels(request, options, callback);
   }
 
   /**
@@ -2059,7 +2290,7 @@ export class AutoMlClient {
    *   An object stream which emits an object representing [Model]{@link google.cloud.automl.v1.Model} on 'data' event.
    */
   listModelsStream(
-    request?: protosTypes.google.cloud.automl.v1.IListModelsRequest,
+    request?: protos.google.cloud.automl.v1.IListModelsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2073,29 +2304,95 @@ export class AutoMlClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listModels.createStream(
-      this._innerApiCalls.listModels as gax.GaxCall,
+    return this.descriptors.page.listModels.createStream(
+      this.innerApiCalls.listModels as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listModels}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the project, from which to list the models.
+   * @param {string} request.filter
+   *   An expression for filtering the results of the request.
+   *
+   *     * `model_metadata` - for existence of the case (e.g.
+   *               video_classification_model_metadata:*).
+   *     * `dataset_id` - for = or !=. Some examples of using the filter are:
+   *
+   *     * `image_classification_model_metadata:*` --> The model has
+   *                                          image_classification_model_metadata.
+   *     * `dataset_id=5` --> The model was created from a dataset with ID 5.
+   * @param {number} request.pageSize
+   *   Requested page size.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results for the server to return
+   *   Typically obtained via
+   *   {@link google.cloud.automl.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1.AutoMl.ListModels|AutoMl.ListModels} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listModelsAsync(
+    request?: protos.google.cloud.automl.v1.IListModelsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.automl.v1.IModel> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listModels.asyncIterate(
+      this.innerApiCalls['listModels'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.automl.v1.IModel>;
+  }
   listModelEvaluations(
-    request: protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest,
+    request: protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModelEvaluation[],
-      protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListModelEvaluationsResponse
+      protos.google.cloud.automl.v1.IModelEvaluation[],
+      protos.google.cloud.automl.v1.IListModelEvaluationsRequest | null,
+      protos.google.cloud.automl.v1.IListModelEvaluationsResponse
     ]
   >;
   listModelEvaluations(
-    request: protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest,
+    request: protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.automl.v1.IModelEvaluation[],
-      protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListModelEvaluationsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
+      | protos.google.cloud.automl.v1.IListModelEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1.IModelEvaluation
+    >
+  ): void;
+  listModelEvaluations(
+    request: protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
+      | protos.google.cloud.automl.v1.IListModelEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1.IModelEvaluation
     >
   ): void;
   /**
@@ -2145,24 +2442,28 @@ export class AutoMlClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listModelEvaluations(
-    request: protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest,
+    request: protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.automl.v1.IModelEvaluation[],
-          protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest | null,
-          protosTypes.google.cloud.automl.v1.IListModelEvaluationsResponse
+      | PaginationCallback<
+          protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
+          | protos.google.cloud.automl.v1.IListModelEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.automl.v1.IModelEvaluation
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IModelEvaluation[],
-      protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListModelEvaluationsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
+      | protos.google.cloud.automl.v1.IListModelEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1.IModelEvaluation
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IModelEvaluation[],
-      protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest | null,
-      protosTypes.google.cloud.automl.v1.IListModelEvaluationsResponse
+      protos.google.cloud.automl.v1.IModelEvaluation[],
+      protos.google.cloud.automl.v1.IListModelEvaluationsRequest | null,
+      protos.google.cloud.automl.v1.IListModelEvaluationsResponse
     ]
   > | void {
     request = request || {};
@@ -2182,7 +2483,7 @@ export class AutoMlClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listModelEvaluations(request, options, callback);
+    return this.innerApiCalls.listModelEvaluations(request, options, callback);
   }
 
   /**
@@ -2229,7 +2530,7 @@ export class AutoMlClient {
    *   An object stream which emits an object representing [ModelEvaluation]{@link google.cloud.automl.v1.ModelEvaluation} on 'data' event.
    */
   listModelEvaluationsStream(
-    request?: protosTypes.google.cloud.automl.v1.IListModelEvaluationsRequest,
+    request?: protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2243,11 +2544,69 @@ export class AutoMlClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listModelEvaluations.createStream(
-      this._innerApiCalls.listModelEvaluations as gax.GaxCall,
+    return this.descriptors.page.listModelEvaluations.createStream(
+      this.innerApiCalls.listModelEvaluations as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listModelEvaluations}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the model to list the model evaluations for.
+   *   If modelId is set as "-", this will list model evaluations from across all
+   *   models of the parent location.
+   * @param {string} request.filter
+   *   Required. An expression for filtering the results of the request.
+   *
+   *     * `annotation_spec_id` - for =, !=  or existence. See example below for
+   *                            the last.
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `annotation_spec_id!=4` --> The model evaluation was done for
+   *                               annotation spec with ID different than 4.
+   *     * `NOT annotation_spec_id:*` --> The model evaluation was done for
+   *                                  aggregate of all annotation specs.
+   * @param {number} request.pageSize
+   *   Requested page size.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results for the server to return.
+   *   Typically obtained via
+   *   {@link google.cloud.automl.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
+   *   {@link google.cloud.automl.v1.AutoMl.ListModelEvaluations|AutoMl.ListModelEvaluations} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listModelEvaluationsAsync(
+    request?: protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.automl.v1.IModelEvaluation> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listModelEvaluations.asyncIterate(
+      this.innerApiCalls['listModelEvaluations'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.automl.v1.IModelEvaluation>;
   }
   // --------------------
   // -- Path templates --
@@ -2268,10 +2627,10 @@ export class AutoMlClient {
     dataset: string,
     annotationSpec: string
   ) {
-    return this._pathTemplates.annotationSpecPathTemplate.render({
-      project,
-      location,
-      dataset,
+    return this.pathTemplates.annotationSpecPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
       annotation_spec: annotationSpec,
     });
   }
@@ -2284,7 +2643,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
+    return this.pathTemplates.annotationSpecPathTemplate.match(
       annotationSpecName
     ).project;
   }
@@ -2297,7 +2656,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
+    return this.pathTemplates.annotationSpecPathTemplate.match(
       annotationSpecName
     ).location;
   }
@@ -2310,7 +2669,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
+    return this.pathTemplates.annotationSpecPathTemplate.match(
       annotationSpecName
     ).dataset;
   }
@@ -2323,7 +2682,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
+    return this.pathTemplates.annotationSpecPathTemplate.match(
       annotationSpecName
     ).annotation_spec;
   }
@@ -2337,10 +2696,10 @@ export class AutoMlClient {
    * @returns {string} Resource name string.
    */
   datasetPath(project: string, location: string, dataset: string) {
-    return this._pathTemplates.datasetPathTemplate.render({
-      project,
-      location,
-      dataset,
+    return this.pathTemplates.datasetPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
     });
   }
 
@@ -2352,7 +2711,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDatasetName(datasetName: string) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).project;
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).project;
   }
 
   /**
@@ -2363,7 +2722,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDatasetName(datasetName: string) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).location;
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).location;
   }
 
   /**
@@ -2374,7 +2733,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromDatasetName(datasetName: string) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).dataset;
   }
 
   /**
@@ -2385,9 +2744,9 @@ export class AutoMlClient {
    * @returns {string} Resource name string.
    */
   locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -2399,7 +2758,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -2410,8 +2769,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -2423,10 +2781,10 @@ export class AutoMlClient {
    * @returns {string} Resource name string.
    */
   modelPath(project: string, location: string, model: string) {
-    return this._pathTemplates.modelPathTemplate.render({
-      project,
-      location,
-      model,
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      model: model,
     });
   }
 
@@ -2438,7 +2796,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelName(modelName: string) {
-    return this._pathTemplates.modelPathTemplate.match(modelName).project;
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
   }
 
   /**
@@ -2449,7 +2807,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelName(modelName: string) {
-    return this._pathTemplates.modelPathTemplate.match(modelName).location;
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
   }
 
   /**
@@ -2460,7 +2818,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelName(modelName: string) {
-    return this._pathTemplates.modelPathTemplate.match(modelName).model;
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**
@@ -2478,10 +2836,10 @@ export class AutoMlClient {
     model: string,
     modelEvaluation: string
   ) {
-    return this._pathTemplates.modelEvaluationPathTemplate.render({
-      project,
-      location,
-      model,
+    return this.pathTemplates.modelEvaluationPathTemplate.render({
+      project: project,
+      location: location,
+      model: model,
       model_evaluation: modelEvaluation,
     });
   }
@@ -2494,7 +2852,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this._pathTemplates.modelEvaluationPathTemplate.match(
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).project;
   }
@@ -2507,7 +2865,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this._pathTemplates.modelEvaluationPathTemplate.match(
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).location;
   }
@@ -2520,7 +2878,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this._pathTemplates.modelEvaluationPathTemplate.match(
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).model;
   }
@@ -2533,7 +2891,7 @@ export class AutoMlClient {
    * @returns {string} A string representing the model_evaluation.
    */
   matchModelEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this._pathTemplates.modelEvaluationPathTemplate.match(
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).model_evaluation;
   }

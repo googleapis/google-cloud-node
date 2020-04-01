@@ -60,7 +60,7 @@ async function main(
     payload: payload,
     params: params,
   });
-  console.log(`Prediction results:`);
+  console.log('Prediction results:');
   response.payload.forEach(result => {
     console.log(`Predicted class name: ${result.displayName}`);
     console.log(`Predicted class score: ${result.classification.score}`);

@@ -19,8 +19,8 @@
 import {AutoMlClient, PredictionServiceClient} from '@google-cloud/automl';
 
 function main() {
-  const autoMlClient = new AutoMlClient();
-  const predictionServiceClient = new PredictionServiceClient();
+  new AutoMlClient();
+  new PredictionServiceClient();
 }
 
 main();

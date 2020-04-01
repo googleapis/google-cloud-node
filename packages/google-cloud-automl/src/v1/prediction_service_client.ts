@@ -18,7 +18,6 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
@@ -27,7 +26,7 @@ import {
 } from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './prediction_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -41,14 +40,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class PredictionServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -56,6 +47,14 @@ export class PredictionServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   predictionServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -148,13 +147,16 @@ export class PredictionServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
@@ -174,6 +176,7 @@ export class PredictionServiceClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -191,7 +194,7 @@ export class PredictionServiceClient {
       '.google.cloud.automl.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       batchPredict: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchPredictResponse.decode.bind(batchPredictResponse),
@@ -210,7 +213,7 @@ export class PredictionServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -237,7 +240,7 @@ export class PredictionServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.automl.v1.PredictionService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.automl.v1.PredictionService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -245,9 +248,8 @@ export class PredictionServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const predictionServiceStubMethods = ['predict', 'batchPredict'];
-
     for (const methodName of predictionServiceStubMethods) {
-      const innerCallPromise = this.predictionServiceStub.then(
+      const callPromise = this.predictionServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -261,20 +263,14 @@ export class PredictionServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.predictionServiceStub;
@@ -331,22 +327,30 @@ export class PredictionServiceClient {
   // -- Service calls --
   // -------------------
   predict(
-    request: protosTypes.google.cloud.automl.v1.IPredictRequest,
+    request: protos.google.cloud.automl.v1.IPredictRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IPredictResponse,
-      protosTypes.google.cloud.automl.v1.IPredictRequest | undefined,
+      protos.google.cloud.automl.v1.IPredictResponse,
+      protos.google.cloud.automl.v1.IPredictRequest | undefined,
       {} | undefined
     ]
   >;
   predict(
-    request: protosTypes.google.cloud.automl.v1.IPredictRequest,
+    request: protos.google.cloud.automl.v1.IPredictRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.automl.v1.IPredictResponse,
-      protosTypes.google.cloud.automl.v1.IPredictRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IPredictResponse,
+      protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  predict(
+    request: protos.google.cloud.automl.v1.IPredictRequest,
+    callback: Callback<
+      protos.google.cloud.automl.v1.IPredictResponse,
+      protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -437,23 +441,23 @@ export class PredictionServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   predict(
-    request: protosTypes.google.cloud.automl.v1.IPredictRequest,
+    request: protos.google.cloud.automl.v1.IPredictRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.automl.v1.IPredictResponse,
-          protosTypes.google.cloud.automl.v1.IPredictRequest | undefined,
-          {} | undefined
+          protos.google.cloud.automl.v1.IPredictResponse,
+          protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.automl.v1.IPredictResponse,
-      protosTypes.google.cloud.automl.v1.IPredictRequest | undefined,
-      {} | undefined
+      protos.google.cloud.automl.v1.IPredictResponse,
+      protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.automl.v1.IPredictResponse,
-      protosTypes.google.cloud.automl.v1.IPredictRequest | undefined,
+      protos.google.cloud.automl.v1.IPredictResponse,
+      protos.google.cloud.automl.v1.IPredictRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -474,32 +478,43 @@ export class PredictionServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.predict(request, options, callback);
+    return this.innerApiCalls.predict(request, options, callback);
   }
 
   batchPredict(
-    request: protosTypes.google.cloud.automl.v1.IBatchPredictRequest,
+    request: protos.google.cloud.automl.v1.IBatchPredictRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.automl.v1.IBatchPredictResult,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IBatchPredictResult,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   batchPredict(
-    request: protosTypes.google.cloud.automl.v1.IBatchPredictRequest,
+    request: protos.google.cloud.automl.v1.IBatchPredictRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.automl.v1.IBatchPredictResult,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IBatchPredictResult,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchPredict(
+    request: protos.google.cloud.automl.v1.IBatchPredictRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.automl.v1.IBatchPredictResult,
+        protos.google.cloud.automl.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -620,32 +635,32 @@ export class PredictionServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchPredict(
-    request: protosTypes.google.cloud.automl.v1.IBatchPredictRequest,
+    request: protos.google.cloud.automl.v1.IBatchPredictRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.automl.v1.IBatchPredictResult,
-            protosTypes.google.cloud.automl.v1.IOperationMetadata
+            protos.google.cloud.automl.v1.IBatchPredictResult,
+            protos.google.cloud.automl.v1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.automl.v1.IBatchPredictResult,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IBatchPredictResult,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.automl.v1.IBatchPredictResult,
-        protosTypes.google.cloud.automl.v1.IOperationMetadata
+        protos.google.cloud.automl.v1.IBatchPredictResult,
+        protos.google.cloud.automl.v1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -666,7 +681,7 @@ export class PredictionServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchPredict(request, options, callback);
+    return this.innerApiCalls.batchPredict(request, options, callback);
   }
   // --------------------
   // -- Path templates --
@@ -687,10 +702,10 @@ export class PredictionServiceClient {
     dataset: string,
     annotationSpec: string
   ) {
-    return this._pathTemplates.annotationSpecPathTemplate.render({
-      project,
-      location,
-      dataset,
+    return this.pathTemplates.annotationSpecPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
       annotation_spec: annotationSpec,
     });
   }
@@ -703,7 +718,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
+    return this.pathTemplates.annotationSpecPathTemplate.match(
       annotationSpecName
     ).project;
   }
@@ -716,7 +731,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
+    return this.pathTemplates.annotationSpecPathTemplate.match(
       annotationSpecName
     ).location;
   }
@@ -729,7 +744,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
+    return this.pathTemplates.annotationSpecPathTemplate.match(
       annotationSpecName
     ).dataset;
   }
@@ -742,7 +757,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
+    return this.pathTemplates.annotationSpecPathTemplate.match(
       annotationSpecName
     ).annotation_spec;
   }
@@ -756,10 +771,10 @@ export class PredictionServiceClient {
    * @returns {string} Resource name string.
    */
   datasetPath(project: string, location: string, dataset: string) {
-    return this._pathTemplates.datasetPathTemplate.render({
-      project,
-      location,
-      dataset,
+    return this.pathTemplates.datasetPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
     });
   }
 
@@ -771,7 +786,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDatasetName(datasetName: string) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).project;
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).project;
   }
 
   /**
@@ -782,7 +797,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDatasetName(datasetName: string) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).location;
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).location;
   }
 
   /**
@@ -793,7 +808,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromDatasetName(datasetName: string) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).dataset;
   }
 
   /**
@@ -805,10 +820,10 @@ export class PredictionServiceClient {
    * @returns {string} Resource name string.
    */
   modelPath(project: string, location: string, model: string) {
-    return this._pathTemplates.modelPathTemplate.render({
-      project,
-      location,
-      model,
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      model: model,
     });
   }
 
@@ -820,7 +835,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelName(modelName: string) {
-    return this._pathTemplates.modelPathTemplate.match(modelName).project;
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
   }
 
   /**
@@ -831,7 +846,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelName(modelName: string) {
-    return this._pathTemplates.modelPathTemplate.match(modelName).location;
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
   }
 
   /**
@@ -842,7 +857,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelName(modelName: string) {
-    return this._pathTemplates.modelPathTemplate.match(modelName).model;
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**
@@ -860,10 +875,10 @@ export class PredictionServiceClient {
     model: string,
     modelEvaluation: string
   ) {
-    return this._pathTemplates.modelEvaluationPathTemplate.render({
-      project,
-      location,
-      model,
+    return this.pathTemplates.modelEvaluationPathTemplate.render({
+      project: project,
+      location: location,
+      model: model,
       model_evaluation: modelEvaluation,
     });
   }
@@ -876,7 +891,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this._pathTemplates.modelEvaluationPathTemplate.match(
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).project;
   }
@@ -889,7 +904,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this._pathTemplates.modelEvaluationPathTemplate.match(
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).location;
   }
@@ -902,7 +917,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this._pathTemplates.modelEvaluationPathTemplate.match(
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).model;
   }
@@ -915,7 +930,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the model_evaluation.
    */
   matchModelEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this._pathTemplates.modelEvaluationPathTemplate.match(
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).model_evaluation;
   }
