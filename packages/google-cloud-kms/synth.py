@@ -23,6 +23,9 @@ import os
 
 logging.basicConfig(level=logging.DEBUG)
 
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
+
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1']
 for version in versions:
