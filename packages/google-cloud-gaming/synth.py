@@ -17,6 +17,9 @@ import synthtool.gcp as gcp
 import subprocess
 import logging
 logging.basicConfig(level=logging.DEBUG)
+
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
 # run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1']
