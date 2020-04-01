@@ -44,6 +44,7 @@ objects to users via direct download.
   * [Generate Encryption Key](#generate-encryption-key)
   * [Generate Signed Url](#generate-signed-url)
   * [Generate V4 Read Signed Url](#generate-v4-read-signed-url)
+  * [Generate V4 Signed Policy](#generate-v4-signed-policy)
   * [Generate V4 Upload Signed Url](#generate-v4-upload-signed-url)
   * [Get Default Event Based Hold](#get-default-event-based-hold)
   * [Get Metadata](#get-metadata)
@@ -542,6 +543,23 @@ __Usage:__
 
 
 `node samples/generateV4ReadSignedUrl.js`
+
+
+-----
+
+
+
+
+### Generate V4 Signed Policy
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/generateV4SignedPolicy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/generateV4SignedPolicy.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/generateV4SignedPolicy.js`
 
 
 -----
