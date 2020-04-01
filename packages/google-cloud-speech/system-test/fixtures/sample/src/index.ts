@@ -19,7 +19,7 @@
 import {SpeechClient} from '@google-cloud/speech';
 
 function main() {
-  const speechClient = new SpeechClient();
+  new SpeechClient();
 }
 
 main();

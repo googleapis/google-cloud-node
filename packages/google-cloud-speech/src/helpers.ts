@@ -68,7 +68,7 @@ export class ImprovedStreamingClient {
     // Format the audio content as input request for pipeline
     const recognizeStream = streamEvents(new pumpify.obj());
 
-    // tslint:disable-next-line no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const requestStream = (this as any)
       ._streamingRecognize(options)
       .on('error', (err: Error) => {

@@ -18,7 +18,6 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
@@ -27,7 +26,7 @@ import {
 } from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './speech_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -38,13 +37,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class SpeechClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -52,6 +44,13 @@ export class SpeechClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   operationsClient: gax.OperationsClient;
   speechStub?: Promise<{[name: string]: Function}>;
 
@@ -144,12 +143,15 @@ export class SpeechClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
-    this._descriptors.stream = {
+    this.descriptors.stream = {
       streamingRecognize: new this._gaxModule.StreamDescriptor(
         gax.StreamType.BIDI_STREAMING
       ),
@@ -160,6 +162,7 @@ export class SpeechClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -177,7 +180,7 @@ export class SpeechClient {
       '.google.cloud.speech.v1.LongRunningRecognizeMetadata'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       longRunningRecognize: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         longRunningRecognizeResponse.decode.bind(longRunningRecognizeResponse),
@@ -196,7 +199,7 @@ export class SpeechClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -223,7 +226,7 @@ export class SpeechClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.speech.v1.Speech'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.speech.v1.Speech,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -235,9 +238,8 @@ export class SpeechClient {
       'longRunningRecognize',
       'streamingRecognize',
     ];
-
     for (const methodName of speechStubMethods) {
-      const innerCallPromise = this.speechStub.then(
+      const callPromise = this.speechStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -251,20 +253,14 @@ export class SpeechClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.speechStub;
@@ -321,22 +317,30 @@ export class SpeechClient {
   // -- Service calls --
   // -------------------
   recognize(
-    request: protosTypes.google.cloud.speech.v1.IRecognizeRequest,
+    request: protos.google.cloud.speech.v1.IRecognizeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.speech.v1.IRecognizeResponse,
-      protosTypes.google.cloud.speech.v1.IRecognizeRequest | undefined,
+      protos.google.cloud.speech.v1.IRecognizeResponse,
+      protos.google.cloud.speech.v1.IRecognizeRequest | undefined,
       {} | undefined
     ]
   >;
   recognize(
-    request: protosTypes.google.cloud.speech.v1.IRecognizeRequest,
+    request: protos.google.cloud.speech.v1.IRecognizeRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.speech.v1.IRecognizeResponse,
-      protosTypes.google.cloud.speech.v1.IRecognizeRequest | undefined,
-      {} | undefined
+      protos.google.cloud.speech.v1.IRecognizeResponse,
+      protos.google.cloud.speech.v1.IRecognizeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  recognize(
+    request: protos.google.cloud.speech.v1.IRecognizeRequest,
+    callback: Callback<
+      protos.google.cloud.speech.v1.IRecognizeResponse,
+      protos.google.cloud.speech.v1.IRecognizeRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -357,23 +361,23 @@ export class SpeechClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   recognize(
-    request: protosTypes.google.cloud.speech.v1.IRecognizeRequest,
+    request: protos.google.cloud.speech.v1.IRecognizeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.speech.v1.IRecognizeResponse,
-          protosTypes.google.cloud.speech.v1.IRecognizeRequest | undefined,
-          {} | undefined
+          protos.google.cloud.speech.v1.IRecognizeResponse,
+          protos.google.cloud.speech.v1.IRecognizeRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.speech.v1.IRecognizeResponse,
-      protosTypes.google.cloud.speech.v1.IRecognizeRequest | undefined,
-      {} | undefined
+      protos.google.cloud.speech.v1.IRecognizeResponse,
+      protos.google.cloud.speech.v1.IRecognizeRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.speech.v1.IRecognizeResponse,
-      protosTypes.google.cloud.speech.v1.IRecognizeRequest | undefined,
+      protos.google.cloud.speech.v1.IRecognizeResponse,
+      protos.google.cloud.speech.v1.IRecognizeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -387,7 +391,7 @@ export class SpeechClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.recognize(request, options, callback);
+    return this.innerApiCalls.recognize(request, options, callback);
   }
 
   /**
@@ -403,32 +407,43 @@ export class SpeechClient {
    */
   _streamingRecognize(options?: gax.CallOptions): gax.CancellableStream {
     this.initialize();
-    return this._innerApiCalls.streamingRecognize(options);
+    return this.innerApiCalls.streamingRecognize(options);
   }
 
   longRunningRecognize(
-    request: protosTypes.google.cloud.speech.v1.ILongRunningRecognizeRequest,
+    request: protos.google.cloud.speech.v1.ILongRunningRecognizeRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protosTypes.google.cloud.speech.v1.ILongRunningRecognizeMetadata
+        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
+        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   longRunningRecognize(
-    request: protosTypes.google.cloud.speech.v1.ILongRunningRecognizeRequest,
+    request: protos.google.cloud.speech.v1.ILongRunningRecognizeRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protosTypes.google.cloud.speech.v1.ILongRunningRecognizeMetadata
+        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
+        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  longRunningRecognize(
+    request: protos.google.cloud.speech.v1.ILongRunningRecognizeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
+        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -453,32 +468,32 @@ export class SpeechClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   longRunningRecognize(
-    request: protosTypes.google.cloud.speech.v1.ILongRunningRecognizeRequest,
+    request: protos.google.cloud.speech.v1.ILongRunningRecognizeRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-            protosTypes.google.cloud.speech.v1.ILongRunningRecognizeMetadata
+            protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
+            protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protosTypes.google.cloud.speech.v1.ILongRunningRecognizeMetadata
+        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
+        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protosTypes.google.cloud.speech.v1.ILongRunningRecognizeMetadata
+        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
+        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -492,7 +507,7 @@ export class SpeechClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.longRunningRecognize(request, options, callback);
+    return this.innerApiCalls.longRunningRecognize(request, options, callback);
   }
 
   /**
@@ -513,4 +528,5 @@ export class SpeechClient {
 }
 
 import {ImprovedStreamingClient} from '../helpers';
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SpeechClient extends ImprovedStreamingClient {}

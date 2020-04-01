@@ -17,11 +17,10 @@
 'use strict';
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {afterEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as stream from 'stream';
-
-const speech = require('../src');
+import * as speech from '../src';
 
 describe('Speech helper methods', () => {
   const sandbox = sinon.createSandbox();
@@ -31,8 +30,8 @@ describe('Speech helper methods', () => {
   });
 
   describe('streamingRecognize', () => {
-    const CONFIG = {
-      config: {encoding: 'LINEAR16', languageCode: 'en-us', sampleRate: 16000},
+    const CONFIG: speech.protos.google.cloud.speech.v1.IStreamingRecognitionConfig = {
+      config: {encoding: 'LINEAR16', languageCode: 'en-us'},
     };
     const OPTIONS = {timeout: Infinity};
 
@@ -47,7 +46,7 @@ describe('Speech helper methods', () => {
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
       const sr = sandbox
-        .stub(client._innerApiCalls, 'streamingRecognize')
+        .stub(client.innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
       // Call the new helper method and establish that the config was
@@ -81,7 +80,7 @@ describe('Speech helper methods', () => {
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
       const sr = sandbox
-        .stub(client._innerApiCalls, 'streamingRecognize')
+        .stub(client.innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
       const userStream = client.streamingRecognize(CONFIG);
@@ -103,7 +102,7 @@ describe('Speech helper methods', () => {
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
       sandbox
-        .stub(client._innerApiCalls, 'streamingRecognize')
+        .stub(client.innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
       const userStream = client.streamingRecognize(CONFIG, OPTIONS);
@@ -129,7 +128,7 @@ describe('Speech helper methods', () => {
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
       sandbox
-        .stub(client._innerApiCalls, 'streamingRecognize')
+        .stub(client.innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
       const userStream = client.streamingRecognize(CONFIG, OPTIONS);
@@ -157,7 +156,7 @@ describe('Speech helper methods', () => {
       const requestStream = new stream.PassThrough({objectMode: true});
 
       sandbox
-        .stub(client._innerApiCalls, 'streamingRecognize')
+        .stub(client.innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
       const userStream = client.streamingRecognize(CONFIG, OPTIONS);

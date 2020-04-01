@@ -50,10 +50,11 @@ for version in versions:
     # accepts streamingConfig when calling streamingRecognize.
     # Rename the generated methods to avoid confusion.
     s.replace(f'src/{version}/{name}_client.ts', r'( +)streamingRecognize\(', '\\1_streamingRecognize(')
-    s.replace(f'test/gapic-{name}-{version}.ts', r'client\.streamingRecognize\(', 'client._streamingRecognize(')
+    s.replace(f'test/gapic_{name}_{version}.ts', r'client\.streamingRecognize\(', 'client._streamingRecognize(')
     s.replace(f'src/{version}/{name}_client.ts', r'\Z', 
         '\n' + 
         "import {ImprovedStreamingClient} from '../helpers';\n" +
+        '// eslint-disable-next-line @typescript-eslint/no-empty-interface\n' +
         'export interface SpeechClient extends ImprovedStreamingClient {}\n'
     )
 
