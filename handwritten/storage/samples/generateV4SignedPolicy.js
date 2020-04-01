@@ -21,7 +21,7 @@
  */
 
 function main(bucketName = 'my-bucket', filename = 'test.txt') {
-  // [START storage_generate_post_policy_url_v4]
+  // [START storage_generate_signed_post_policy_v4]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -65,6 +65,6 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
   }
 
   generateV4SignedPolicy().catch(console.error);
-  // [END storage_generate_post_policy_url_v4]
+  // [END storage_generate_signed_post_policy_v4]
 }
 main(...process.argv.slice(2));
