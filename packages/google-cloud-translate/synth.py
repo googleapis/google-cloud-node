@@ -36,6 +36,9 @@ for version in versions:
   s.copy(library, excludes=['README.md', 'package.json', 'src/index.ts'])
 
 logging.basicConfig(level=logging.DEBUG)
+
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
