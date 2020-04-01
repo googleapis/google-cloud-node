@@ -18,7 +18,8 @@ const {describe, it} = require('mocha');
 
 describe('ImageAnnotatorSmokeTest', () => {
   it('successfully makes a call to the service', done => {
-    const vision = require('../src');
+    // eslint-disable-next-line node/no-missing-require
+    const vision = require('@google-cloud/vision');
 
     const client = new vision.v1p3beta1.ImageAnnotatorClient({
       // optional auth parameters.

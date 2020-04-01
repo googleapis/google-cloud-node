@@ -19,8 +19,8 @@
 import {ImageAnnotatorClient, ProductSearchClient} from '@google-cloud/vision';
 
 function main() {
-  const imageAnnotatorClient = new ImageAnnotatorClient();
-  const productSearchClient = new ProductSearchClient();
+  new ImageAnnotatorClient();
+  new ProductSearchClient();
 }
 
 main();

@@ -16,6 +16,7 @@ import {describe, it} from 'mocha';
 
 describe('ImageAnnotatorSmokeTest', () => {
   it('successfully makes a call to the service', done => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const vision = require('../src');
 
     const client = new vision.v1p3beta1.ImageAnnotatorClient({

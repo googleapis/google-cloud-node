@@ -20,6 +20,7 @@ import * as is from 'is';
 import * as sinon from 'sinon';
 import * as prototypes from '../protos/protos';
 import * as assert from 'assert';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const vision = require('../src');
 
 describe('Vision helper methods', () => {

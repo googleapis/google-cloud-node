@@ -18,7 +18,6 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
@@ -27,7 +26,7 @@ import {
 } from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './image_annotator_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -40,14 +39,6 @@ const version = require('../../../package.json').version;
  * @memberof v1p4beta1
  */
 export class ImageAnnotatorClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -55,6 +46,14 @@ export class ImageAnnotatorClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   imageAnnotatorStub?: Promise<{[name: string]: Function}>;
 
@@ -147,13 +146,16 @@ export class ImageAnnotatorClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/products/{product}'
       ),
@@ -170,6 +172,7 @@ export class ImageAnnotatorClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -193,7 +196,7 @@ export class ImageAnnotatorClient {
       '.google.cloud.vision.v1p4beta1.OperationMetadata'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       asyncBatchAnnotateImages: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         asyncBatchAnnotateImagesResponse.decode.bind(
@@ -225,7 +228,7 @@ export class ImageAnnotatorClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -252,7 +255,7 @@ export class ImageAnnotatorClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.vision.v1p4beta1.ImageAnnotator'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.vision.v1p4beta1.ImageAnnotator,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -265,9 +268,8 @@ export class ImageAnnotatorClient {
       'asyncBatchAnnotateImages',
       'asyncBatchAnnotateFiles',
     ];
-
     for (const methodName of imageAnnotatorStubMethods) {
-      const innerCallPromise = this.imageAnnotatorStub.then(
+      const callPromise = this.imageAnnotatorStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -281,20 +283,14 @@ export class ImageAnnotatorClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.imageAnnotatorStub;
@@ -354,26 +350,37 @@ export class ImageAnnotatorClient {
   // -- Service calls --
   // -------------------
   batchAnnotateImages(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
       (
-        | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+        | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchAnnotateImages(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
-      | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
+      | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchAnnotateImages(
+    request: protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest,
+    callback: Callback<
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
+      | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -390,26 +397,28 @@ export class ImageAnnotatorClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchAnnotateImages(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
-          | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+          protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
+          | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
-      | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
+      | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesResponse,
       (
-        | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
+        | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
         | undefined
       ),
       {} | undefined
@@ -425,29 +434,40 @@ export class ImageAnnotatorClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.batchAnnotateImages(request, options, callback);
+    return this.innerApiCalls.batchAnnotateImages(request, options, callback);
   }
   batchAnnotateFiles(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
       (
-        | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+        | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   batchAnnotateFiles(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
-      | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
+      | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  batchAnnotateFiles(
+    request: protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest,
+    callback: Callback<
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
+      | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -471,26 +491,28 @@ export class ImageAnnotatorClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchAnnotateFiles(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
-          | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+          protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
+          | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
-      | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
+      | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
+      protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesResponse,
       (
-        | protosTypes.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
+        | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
         | undefined
       ),
       {} | undefined
@@ -506,32 +528,43 @@ export class ImageAnnotatorClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.batchAnnotateFiles(request, options, callback);
+    return this.innerApiCalls.batchAnnotateFiles(request, options, callback);
   }
 
   asyncBatchAnnotateImages(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
-        protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   asyncBatchAnnotateImages(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
-        protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  asyncBatchAnnotateImages(
+    request: protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -558,32 +591,32 @@ export class ImageAnnotatorClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   asyncBatchAnnotateImages(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
-            protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+            protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
+            protos.google.cloud.vision.v1p4beta1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
-        protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
-        protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateImagesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -597,35 +630,46 @@ export class ImageAnnotatorClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.asyncBatchAnnotateImages(
+    return this.innerApiCalls.asyncBatchAnnotateImages(
       request,
       options,
       callback
     );
   }
   asyncBatchAnnotateFiles(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
-        protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   asyncBatchAnnotateFiles(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
-        protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  asyncBatchAnnotateFiles(
+    request: protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -647,32 +691,32 @@ export class ImageAnnotatorClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   asyncBatchAnnotateFiles(
-    request: protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesRequest,
+    request: protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
-            protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+            protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
+            protos.google.cloud.vision.v1p4beta1.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
-        protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
-        protosTypes.google.cloud.vision.v1p4beta1.IOperationMetadata
+        protos.google.cloud.vision.v1p4beta1.IAsyncBatchAnnotateFilesResponse,
+        protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -686,7 +730,7 @@ export class ImageAnnotatorClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.asyncBatchAnnotateFiles(
+    return this.innerApiCalls.asyncBatchAnnotateFiles(
       request,
       options,
       callback
@@ -705,10 +749,10 @@ export class ImageAnnotatorClient {
    * @returns {string} Resource name string.
    */
   productPath(project: string, location: string, product: string) {
-    return this._pathTemplates.productPathTemplate.render({
-      project,
-      location,
-      product,
+    return this.pathTemplates.productPathTemplate.render({
+      project: project,
+      location: location,
+      product: product,
     });
   }
 
@@ -720,7 +764,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProductName(productName: string) {
-    return this._pathTemplates.productPathTemplate.match(productName).project;
+    return this.pathTemplates.productPathTemplate.match(productName).project;
   }
 
   /**
@@ -731,7 +775,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProductName(productName: string) {
-    return this._pathTemplates.productPathTemplate.match(productName).location;
+    return this.pathTemplates.productPathTemplate.match(productName).location;
   }
 
   /**
@@ -742,7 +786,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the product.
    */
   matchProductFromProductName(productName: string) {
-    return this._pathTemplates.productPathTemplate.match(productName).product;
+    return this.pathTemplates.productPathTemplate.match(productName).product;
   }
 
   /**
@@ -754,9 +798,9 @@ export class ImageAnnotatorClient {
    * @returns {string} Resource name string.
    */
   productSetPath(project: string, location: string, productSet: string) {
-    return this._pathTemplates.productSetPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.productSetPathTemplate.render({
+      project: project,
+      location: location,
       product_set: productSet,
     });
   }
@@ -769,7 +813,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProductSetName(productSetName: string) {
-    return this._pathTemplates.productSetPathTemplate.match(productSetName)
+    return this.pathTemplates.productSetPathTemplate.match(productSetName)
       .project;
   }
 
@@ -781,7 +825,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProductSetName(productSetName: string) {
-    return this._pathTemplates.productSetPathTemplate.match(productSetName)
+    return this.pathTemplates.productSetPathTemplate.match(productSetName)
       .location;
   }
 
@@ -793,7 +837,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the product_set.
    */
   matchProductSetFromProductSetName(productSetName: string) {
-    return this._pathTemplates.productSetPathTemplate.match(productSetName)
+    return this.pathTemplates.productSetPathTemplate.match(productSetName)
       .product_set;
   }
 
@@ -812,10 +856,10 @@ export class ImageAnnotatorClient {
     product: string,
     referenceImage: string
   ) {
-    return this._pathTemplates.referenceImagePathTemplate.render({
-      project,
-      location,
-      product,
+    return this.pathTemplates.referenceImagePathTemplate.render({
+      project: project,
+      location: location,
+      product: product,
       reference_image: referenceImage,
     });
   }
@@ -828,7 +872,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReferenceImageName(referenceImageName: string) {
-    return this._pathTemplates.referenceImagePathTemplate.match(
+    return this.pathTemplates.referenceImagePathTemplate.match(
       referenceImageName
     ).project;
   }
@@ -841,7 +885,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReferenceImageName(referenceImageName: string) {
-    return this._pathTemplates.referenceImagePathTemplate.match(
+    return this.pathTemplates.referenceImagePathTemplate.match(
       referenceImageName
     ).location;
   }
@@ -854,7 +898,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the product.
    */
   matchProductFromReferenceImageName(referenceImageName: string) {
-    return this._pathTemplates.referenceImagePathTemplate.match(
+    return this.pathTemplates.referenceImagePathTemplate.match(
       referenceImageName
     ).product;
   }
@@ -867,7 +911,7 @@ export class ImageAnnotatorClient {
    * @returns {string} A string representing the reference_image.
    */
   matchReferenceImageFromReferenceImageName(referenceImageName: string) {
-    return this._pathTemplates.referenceImagePathTemplate.match(
+    return this.pathTemplates.referenceImagePathTemplate.match(
       referenceImageName
     ).reference_image;
   }
@@ -889,4 +933,5 @@ export class ImageAnnotatorClient {
   }
 }
 import {FeaturesMethod} from '../helpers';
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ImageAnnotatorClient extends FeaturesMethod {}

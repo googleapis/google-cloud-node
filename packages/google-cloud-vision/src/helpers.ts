@@ -43,7 +43,7 @@ export interface FeaturesMethod {
 }
 interface ImprovedRequest {
   image?: {source?: {filename: string}; content?: Uint8Array | string | null};
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   features?: any;
 }
 
@@ -82,7 +82,7 @@ interface VisionClient {
   ): void;
 }
 
-// tslint:disable-next-line no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const _requestToObject = (request: any) => {
   if (is.string(request)) {
     // Is this a URL or a local file?
@@ -353,6 +353,7 @@ export function call(apiVersion: string) {
   });
 
   const protoFilesRoot = gax.protobuf.Root.fromJSON(
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     require('../protos/protos.json')
   );
   const features = (protoFilesRoot.lookup(
