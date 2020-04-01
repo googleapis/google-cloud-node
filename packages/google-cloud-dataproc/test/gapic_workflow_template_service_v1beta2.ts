@@ -1151,5 +1151,43 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
                     .getCall(-1).calledWith(fakePath));
             });
         });
+
+        describe('region', () => {
+            const fakePath = "/rendered/path/region";
+            const expectedParameters = {
+                project: "projectValue",
+                region: "regionValue",
+            };
+            const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.regionPathTemplate.render = 
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.regionPathTemplate.match = 
+                sinon.stub().returns(expectedParameters);
+
+            it('regionPath', () => {
+                const result = client.regionPath("projectValue", "regionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.regionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRegionName', () => {
+                const result = client.matchProjectFromRegionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.regionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRegionFromRegionName', () => {
+                const result = client.matchRegionFromRegionName(fakePath);
+                assert.strictEqual(result, "regionValue");
+                assert((client.pathTemplates.regionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
 });

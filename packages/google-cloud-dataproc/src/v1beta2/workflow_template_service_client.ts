@@ -153,6 +153,9 @@ export class WorkflowTemplateServiceClient {
       projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
       ),
+      regionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -769,7 +772,8 @@ export class WorkflowTemplateServiceClient {
  * Instantiates a template and begins execution.
  *
  * This method is equivalent to executing the sequence
- * {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.CreateWorkflowTemplate|CreateWorkflowTemplate}, {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.InstantiateWorkflowTemplate|InstantiateWorkflowTemplate},
+ * {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.CreateWorkflowTemplate|CreateWorkflowTemplate},
+ * {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.InstantiateWorkflowTemplate|InstantiateWorkflowTemplate},
  * {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.DeleteWorkflowTemplate|DeleteWorkflowTemplate}.
  *
  * The returned Operation can be used to track execution of
@@ -1260,6 +1264,42 @@ export class WorkflowTemplateServiceClient {
    */
   matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
     return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).workflow_template;
+  }
+
+  /**
+   * Return a fully-qualified region resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @returns {string} Resource name string.
+   */
+  regionPath(project:string,region:string) {
+    return this.pathTemplates.regionPathTemplate.render({
+      project: project,
+      region: region,
+    });
+  }
+
+  /**
+   * Parse the project from Region resource.
+   *
+   * @param {string} regionName
+   *   A fully-qualified path representing Region resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRegionName(regionName: string) {
+    return this.pathTemplates.regionPathTemplate.match(regionName).project;
+  }
+
+  /**
+   * Parse the region from Region resource.
+   *
+   * @param {string} regionName
+   *   A fully-qualified path representing Region resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromRegionName(regionName: string) {
+    return this.pathTemplates.regionPathTemplate.match(regionName).region;
   }
 
   /**
