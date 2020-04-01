@@ -19,7 +19,7 @@
 import {DataTransferServiceClient} from '@google-cloud/bigquery-data-transfer';
 
 function main() {
-  const dataTransferServiceClient = new DataTransferServiceClient();
+  new DataTransferServiceClient();
 }
 
 main();

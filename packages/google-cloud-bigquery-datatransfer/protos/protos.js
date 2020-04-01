@@ -1639,6 +1639,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
                                 if (message.dataRefreshType != null && message.hasOwnProperty("dataRefreshType"))
@@ -1739,6 +1740,10 @@
                                 case "GOOGLE_PLUS_AUTHORIZATION_CODE":
                                 case 2:
                                     message.authorizationType = 2;
+                                    break;
+                                case "FIRST_PARTY_OAUTH":
+                                case 3:
+                                    message.authorizationType = 3;
                                     break;
                                 }
                                 switch (object.dataRefreshType) {
@@ -1865,12 +1870,14 @@
                              * @property {number} AUTHORIZATION_TYPE_UNSPECIFIED=0 AUTHORIZATION_TYPE_UNSPECIFIED value
                              * @property {number} AUTHORIZATION_CODE=1 AUTHORIZATION_CODE value
                              * @property {number} GOOGLE_PLUS_AUTHORIZATION_CODE=2 GOOGLE_PLUS_AUTHORIZATION_CODE value
+                             * @property {number} FIRST_PARTY_OAUTH=3 FIRST_PARTY_OAUTH value
                              */
                             DataSource.AuthorizationType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "AUTHORIZATION_TYPE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "AUTHORIZATION_CODE"] = 1;
                                 values[valuesById[2] = "GOOGLE_PLUS_AUTHORIZATION_CODE"] = 2;
+                                values[valuesById[3] = "FIRST_PARTY_OAUTH"] = 3;
                                 return values;
                             })();
     

@@ -18,12 +18,12 @@
 
 import * as gax from 'google-gax';
 import {
-  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 

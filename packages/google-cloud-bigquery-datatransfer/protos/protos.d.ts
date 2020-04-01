@@ -739,7 +739,8 @@ export namespace google {
                         enum AuthorizationType {
                             AUTHORIZATION_TYPE_UNSPECIFIED = 0,
                             AUTHORIZATION_CODE = 1,
-                            GOOGLE_PLUS_AUTHORIZATION_CODE = 2
+                            GOOGLE_PLUS_AUTHORIZATION_CODE = 2,
+                            FIRST_PARTY_OAUTH = 3
                         }
 
                         /** DataRefreshType enum. */
