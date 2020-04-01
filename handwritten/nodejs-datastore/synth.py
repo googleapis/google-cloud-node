@@ -5,6 +5,9 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
+
 gapic = gcp.GAPICMicrogenerator()
 version = 'v1'
 library = gapic.typescript_library(
