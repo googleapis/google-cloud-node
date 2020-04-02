@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './registration_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -54,14 +54,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class RegistrationServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -69,6 +61,14 @@ export class RegistrationServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   registrationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -160,13 +160,16 @@ export class RegistrationServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}/endpoints/{endpoint}'
       ),
@@ -184,7 +187,7 @@ export class RegistrationServiceClient {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listNamespaces: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -213,7 +216,7 @@ export class RegistrationServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -240,7 +243,7 @@ export class RegistrationServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.servicedirectory.v1beta1.RegistrationService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.servicedirectory.v1beta1
             .RegistrationService,
       this._opts
@@ -268,9 +271,8 @@ export class RegistrationServiceClient {
       'setIamPolicy',
       'testIamPermissions',
     ];
-
     for (const methodName of registrationServiceStubMethods) {
-      const innerCallPromise = this.registrationServiceStub.then(
+      const callPromise = this.registrationServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -284,20 +286,14 @@ export class RegistrationServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.registrationServiceStub;
@@ -354,26 +350,37 @@ export class RegistrationServiceClient {
   // -- Service calls --
   // -------------------
   createNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createNamespace(
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -401,26 +408,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+          protos.google.cloud.servicedirectory.v1beta1.INamespace,
+          | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
         | undefined
       ),
       {} | undefined
@@ -443,29 +452,40 @@ export class RegistrationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createNamespace(request, options, callback);
+    return this.innerApiCalls.createNamespace(request, options, callback);
   }
   getNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getNamespace(
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -482,26 +502,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+          protos.google.cloud.servicedirectory.v1beta1.INamespace,
+          | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
         | undefined
       ),
       {} | undefined
@@ -524,29 +546,40 @@ export class RegistrationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getNamespace(request, options, callback);
+    return this.innerApiCalls.getNamespace(request, options, callback);
   }
   updateNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateNamespace(
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -565,26 +598,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+          protos.google.cloud.servicedirectory.v1beta1.INamespace,
+          | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
         | undefined
       ),
       {} | undefined
@@ -607,29 +642,40 @@ export class RegistrationServiceClient {
       'namespace.name': request.namespace!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateNamespace(request, options, callback);
+    return this.innerApiCalls.updateNamespace(request, options, callback);
   }
   deleteNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteNamespace(
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -647,26 +693,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteNamespace(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
         | undefined
       ),
       {} | undefined
@@ -689,29 +737,40 @@ export class RegistrationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteNamespace(request, options, callback);
+    return this.innerApiCalls.deleteNamespace(request, options, callback);
   }
   createService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
+      protos.google.cloud.servicedirectory.v1beta1.IService,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createService(
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -738,26 +797,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+          protos.google.cloud.servicedirectory.v1beta1.IService,
+          | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
+      protos.google.cloud.servicedirectory.v1beta1.IService,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
         | undefined
       ),
       {} | undefined
@@ -780,29 +841,40 @@ export class RegistrationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createService(request, options, callback);
+    return this.innerApiCalls.createService(request, options, callback);
   }
   getService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
+      protos.google.cloud.servicedirectory.v1beta1.IService,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getService(
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -819,26 +891,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+          protos.google.cloud.servicedirectory.v1beta1.IService,
+          | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
+      protos.google.cloud.servicedirectory.v1beta1.IService,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
         | undefined
       ),
       {} | undefined
@@ -861,29 +935,40 @@ export class RegistrationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getService(request, options, callback);
+    return this.innerApiCalls.getService(request, options, callback);
   }
   updateService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
+      protos.google.cloud.servicedirectory.v1beta1.IService,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateService(
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -902,26 +987,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+          protos.google.cloud.servicedirectory.v1beta1.IService,
+          | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+      protos.google.cloud.servicedirectory.v1beta1.IService,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService,
+      protos.google.cloud.servicedirectory.v1beta1.IService,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
         | undefined
       ),
       {} | undefined
@@ -944,29 +1031,40 @@ export class RegistrationServiceClient {
       'service.name': request.service!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateService(request, options, callback);
+    return this.innerApiCalls.updateService(request, options, callback);
   }
   deleteService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteService(
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -984,26 +1082,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
         | undefined
       ),
       {} | undefined
@@ -1026,29 +1126,40 @@ export class RegistrationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteService(request, options, callback);
+    return this.innerApiCalls.deleteService(request, options, callback);
   }
   createEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+        | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createEndpoint(
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1075,26 +1186,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+          protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+          | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
+        | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
         | undefined
       ),
       {} | undefined
@@ -1117,29 +1230,40 @@ export class RegistrationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.createEndpoint(request, options, callback);
+    return this.innerApiCalls.createEndpoint(request, options, callback);
   }
   getEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getEndpoint(
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1156,26 +1280,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+          protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+          | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
         | undefined
       ),
       {} | undefined
@@ -1198,29 +1324,40 @@ export class RegistrationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getEndpoint(request, options, callback);
+    return this.innerApiCalls.getEndpoint(request, options, callback);
   }
   updateEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateEndpoint(
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1239,26 +1376,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+          protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+          | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
         | undefined
       ),
       {} | undefined
@@ -1281,29 +1420,40 @@ export class RegistrationServiceClient {
       'endpoint.name': request.endpoint!.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateEndpoint(request, options, callback);
+    return this.innerApiCalls.updateEndpoint(request, options, callback);
   }
   deleteEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  deleteEndpoint(
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1320,26 +1470,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   deleteEndpoint(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.protobuf.IEmpty,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.protobuf.IEmpty,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.protobuf.IEmpty,
+      protos.google.protobuf.IEmpty,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
         | undefined
       ),
       {} | undefined
@@ -1362,25 +1514,33 @@ export class RegistrationServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.deleteEndpoint(request, options, callback);
+    return this.innerApiCalls.deleteEndpoint(request, options, callback);
   }
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1395,23 +1555,23 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1432,25 +1592,33 @@ export class RegistrationServiceClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.getIamPolicy(request, options, callback);
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1465,23 +1633,23 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1502,25 +1670,33 @@ export class RegistrationServiceClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.setIamPolicy(request, options, callback);
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   >;
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -1535,23 +1711,23 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-          protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1572,26 +1748,38 @@ export class RegistrationServiceClient {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.testIamPermissions(request, options, callback);
+    return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
   listNamespaces(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+      protos.google.cloud.servicedirectory.v1beta1.INamespace[],
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
     ]
   >;
   listNamespaces(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace
+    >
+  ): void;
+  listNamespaces(
+    request: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace
     >
   ): void;
   /**
@@ -1659,24 +1847,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listNamespaces(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.INamespace[],
-          protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
-          protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+      | PaginationCallback<
+          protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+          | protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicedirectory.v1beta1.INamespace
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.INamespace
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.INamespace[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+      protos.google.cloud.servicedirectory.v1beta1.INamespace[],
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
     ]
   > | void {
     request = request || {};
@@ -1696,7 +1888,7 @@ export class RegistrationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listNamespaces(request, options, callback);
+    return this.innerApiCalls.listNamespaces(request, options, callback);
   }
 
   /**
@@ -1761,7 +1953,7 @@ export class RegistrationServiceClient {
    *   An object stream which emits an object representing [Namespace]{@link google.cloud.servicedirectory.v1beta1.Namespace} on 'data' event.
    */
   listNamespacesStream(
-    request?: protosTypes.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+    request?: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1775,29 +1967,117 @@ export class RegistrationServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listNamespaces.createStream(
-      this._innerApiCalls.listNamespaces as gax.GaxCall,
+    return this.descriptors.page.listNamespaces.createStream(
+      this.innerApiCalls.listNamespaces as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listNamespaces}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project and location whose namespaces we'd like to
+   *   list.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request, if any.
+   * @param {string} [request.filter]
+   *   Optional. The filter to list result by.
+   *
+   *   General filter string syntax:
+   *   <field> <operator> <value> (<logical connector>)
+   *   <field> can be "name", or "labels.<key>" for map field.
+   *   <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
+   *   is roughly the same as "=".
+   *   <value> must be the same data type as field.
+   *   <logical connector> can be "AND, OR, NOT".
+   *
+   *   Examples of valid filters:
+   *   * "labels.owner" returns Namespaces that have a label with the key "owner"
+   *     this is the same as "labels:owner".
+   *   * "labels.protocol=gRPC" returns Namespaces that have key/value
+   *     "protocol=gRPC".
+   *   * "name>projects/my-project/locations/us-east/namespaces/namespace-c"
+   *     returns Namespaces that have name that is alphabetically later than the
+   *     string, so "namespace-e" will be returned but "namespace-a" will not be.
+   *   * "labels.owner!=sd AND labels.foo=bar" returns Namespaces that have
+   *     "owner" in label key but value is not "sd" AND have key/value foo=bar.
+   *   * "doesnotexist.foo=bar" returns an empty list. Note that Namespace doesn't
+   *     have a field called "doesnotexist". Since the filter does not match any
+   *     Namespaces, it returns no results.
+   * @param {string} [request.orderBy]
+   *   Optional. The order to list result by.
+   *
+   *   General order by string syntax:
+   *   <field> (<asc|desc>) (,)
+   *   <field> allows values {"name"}
+   *   <asc/desc> ascending or descending order by <field>. If this is left
+   *   blank, "asc" is used.
+   *   Note that an empty order_by string result in default order, which is order
+   *   by name in ascending order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listNamespacesAsync(
+    request?: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.INamespace> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listNamespaces.asyncIterate(
+      this.innerApiCalls['listNamespaces'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.INamespace>;
+  }
   listServices(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+      protos.google.cloud.servicedirectory.v1beta1.IService[],
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
     ]
   >;
   listServices(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+    callback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.IService
+    >
+  ): void;
+  listServices(
+    request: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.IService
     >
   ): void;
   /**
@@ -1858,24 +2138,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listServices(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IService[],
-          protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
-          protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+      | PaginationCallback<
+          protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+          | protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicedirectory.v1beta1.IService
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.IService
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IService[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+      protos.google.cloud.servicedirectory.v1beta1.IService[],
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
     ]
   > | void {
     request = request || {};
@@ -1895,7 +2179,7 @@ export class RegistrationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listServices(request, options, callback);
+    return this.innerApiCalls.listServices(request, options, callback);
   }
 
   /**
@@ -1953,7 +2237,7 @@ export class RegistrationServiceClient {
    *   An object stream which emits an object representing [Service]{@link google.cloud.servicedirectory.v1beta1.Service} on 'data' event.
    */
   listServicesStream(
-    request?: protosTypes.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+    request?: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -1967,29 +2251,110 @@ export class RegistrationServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listServices.createStream(
-      this._innerApiCalls.listServices as gax.GaxCall,
+    return this.descriptors.page.listServices.createStream(
+      this.innerApiCalls.listServices as gax.GaxCall,
       request,
       callSettings
     );
   }
+
+  /**
+   * Equivalent to {@link listServices}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the namespace whose services we'd
+   *   like to list.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {string} [request.filter]
+   *   Optional. The filter to list result by.
+   *
+   *   General filter string syntax:
+   *   <field> <operator> <value> (<logical connector>)
+   *   <field> can be "name", or "metadata.<key>" for map field.
+   *   <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
+   *   is roughly the same as "=".
+   *   <value> must be the same data type as field.
+   *   <logical connector> can be "AND, OR, NOT".
+   *
+   *   Examples of valid filters:
+   *   * "metadata.owner" returns Services that have a label with the key "owner"
+   *     this is the same as "metadata:owner".
+   *   * "metadata.protocol=gRPC" returns Services that have key/value
+   *     "protocol=gRPC".
+   *   * "name>projects/my-project/locations/us-east/namespaces/my-namespace/services/service-c"
+   *     returns Services that have name that is alphabetically later than the
+   *     string, so "service-e" will be returned but "service-a" will not be.
+   *   * "metadata.owner!=sd AND metadata.foo=bar" returns Services that have
+   *     "owner" in label key but value is not "sd" AND have key/value foo=bar.
+   *   * "doesnotexist.foo=bar" returns an empty list. Note that Service doesn't
+   *     have a field called "doesnotexist". Since the filter does not match any
+   *     Services, it returns no results.
+   * @param {string} [request.orderBy]
+   *   Optional. The order to list result by.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listServicesAsync(
+    request?: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IService> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listServices.asyncIterate(
+      this.innerApiCalls['listServices'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IService>;
+  }
   listEndpoints(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint[],
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
     ]
   >;
   listEndpoints(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+    callback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint
+    >
+  ): void;
+  listEndpoints(
+    request: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint
     >
   ): void;
   /**
@@ -2052,24 +2417,28 @@ export class RegistrationServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listEndpoints(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint[],
-          protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
-          protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+      | PaginationCallback<
+          protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+          | protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicedirectory.v1beta1.IEndpoint
         >,
-    callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+    callback?: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+      | protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+      | null
+      | undefined,
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IEndpoint[],
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
-      protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+      protos.google.cloud.servicedirectory.v1beta1.IEndpoint[],
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
     ]
   > | void {
     request = request || {};
@@ -2089,7 +2458,7 @@ export class RegistrationServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listEndpoints(request, options, callback);
+    return this.innerApiCalls.listEndpoints(request, options, callback);
   }
 
   /**
@@ -2149,7 +2518,7 @@ export class RegistrationServiceClient {
    *   An object stream which emits an object representing [Endpoint]{@link google.cloud.servicedirectory.v1beta1.Endpoint} on 'data' event.
    */
   listEndpointsStream(
-    request?: protosTypes.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+    request?: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -2163,11 +2532,82 @@ export class RegistrationServiceClient {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listEndpoints.createStream(
-      this._innerApiCalls.listEndpoints as gax.GaxCall,
+    return this.descriptors.page.listEndpoints.createStream(
+      this.innerApiCalls.listEndpoints as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listEndpoints}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the service whose endpoints we'd like to
+   *   list.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {string} [request.filter]
+   *   Optional. The filter to list result by.
+   *
+   *   General filter string syntax:
+   *   <field> <operator> <value> (<logical connector>)
+   *   <field> can be "name", "address", "port" or "metadata.<key>" for map field.
+   *   <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
+   *   is roughly the same as "=".
+   *   <value> must be the same data type as field.
+   *   <logical connector> can be "AND, OR, NOT".
+   *
+   *   Examples of valid filters:
+   *   * "metadata.owner" returns Endpoints that have a label with the key "owner"
+   *     this is the same as "metadata:owner".
+   *   * "metadata.protocol=gRPC" returns Endpoints that have key/value
+   *     "protocol=gRPC".
+   *   * "address=192.108.1.105" returns Endpoints that have this address.
+   *   * "port>8080" returns Endpoints that have port number larger than 8080.
+   *   * "name>projects/my-project/locations/us-east/namespaces/my-namespace/services/my-service/endpoints/endpoint-c"
+   *     returns Endpoints that have name that is alphabetically later than the
+   *     string, so "endpoint-e" will be returned but "endpoint-a" will not be.
+   *   * "metadata.owner!=sd AND metadata.foo=bar" returns Endpoints that have
+   *     "owner" in label key but value is not "sd" AND have key/value foo=bar.
+   *   * "doesnotexist.foo=bar" returns an empty list. Note that Endpoint doesn't
+   *     have a field called "doesnotexist". Since the filter does not match any
+   *     Endpoints, it returns no results.
+   * @param {string} [request.orderBy]
+   *   Optional. The order to list result by.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listEndpointsAsync(
+    request?: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IEndpoint> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listEndpoints.asyncIterate(
+      this.innerApiCalls['listEndpoints'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IEndpoint>;
   }
   // --------------------
   // -- Path templates --
@@ -2190,12 +2630,12 @@ export class RegistrationServiceClient {
     service: string,
     endpoint: string
   ) {
-    return this._pathTemplates.endpointPathTemplate.render({
-      project,
-      location,
-      namespace,
-      service,
-      endpoint,
+    return this.pathTemplates.endpointPathTemplate.render({
+      project: project,
+      location: location,
+      namespace: namespace,
+      service: service,
+      endpoint: endpoint,
     });
   }
 
@@ -2207,7 +2647,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName).project;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).project;
   }
 
   /**
@@ -2218,8 +2658,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName)
-      .location;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).location;
   }
 
   /**
@@ -2230,7 +2669,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName)
+    return this.pathTemplates.endpointPathTemplate.match(endpointName)
       .namespace;
   }
 
@@ -2242,7 +2681,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName).service;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).service;
   }
 
   /**
@@ -2253,8 +2692,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the endpoint.
    */
   matchEndpointFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName)
-      .endpoint;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
   }
 
   /**
@@ -2265,9 +2703,9 @@ export class RegistrationServiceClient {
    * @returns {string} Resource name string.
    */
   locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -2279,7 +2717,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -2290,8 +2728,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -2303,10 +2740,10 @@ export class RegistrationServiceClient {
    * @returns {string} Resource name string.
    */
   namespacePath(project: string, location: string, namespace: string) {
-    return this._pathTemplates.namespacePathTemplate.render({
-      project,
-      location,
-      namespace,
+    return this.pathTemplates.namespacePathTemplate.render({
+      project: project,
+      location: location,
+      namespace: namespace,
     });
   }
 
@@ -2318,7 +2755,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNamespaceName(namespaceName: string) {
-    return this._pathTemplates.namespacePathTemplate.match(namespaceName)
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
       .project;
   }
 
@@ -2330,7 +2767,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNamespaceName(namespaceName: string) {
-    return this._pathTemplates.namespacePathTemplate.match(namespaceName)
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
       .location;
   }
 
@@ -2342,7 +2779,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromNamespaceName(namespaceName: string) {
-    return this._pathTemplates.namespacePathTemplate.match(namespaceName)
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
       .namespace;
   }
 
@@ -2361,11 +2798,11 @@ export class RegistrationServiceClient {
     namespace: string,
     service: string
   ) {
-    return this._pathTemplates.servicePathTemplate.render({
-      project,
-      location,
-      namespace,
-      service,
+    return this.pathTemplates.servicePathTemplate.render({
+      project: project,
+      location: location,
+      namespace: namespace,
+      service: service,
     });
   }
 
@@ -2377,7 +2814,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).project;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).project;
   }
 
   /**
@@ -2388,7 +2825,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).location;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).location;
   }
 
   /**
@@ -2399,7 +2836,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).namespace;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).namespace;
   }
 
   /**
@@ -2410,7 +2847,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).service;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).service;
   }
 
   /**

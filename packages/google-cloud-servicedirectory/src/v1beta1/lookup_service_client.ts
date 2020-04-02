@@ -17,16 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './lookup_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -37,14 +31,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class LookupServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -52,6 +38,14 @@ export class LookupServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   lookupServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -143,13 +137,16 @@ export class LookupServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}/endpoints/{endpoint}'
       ),
@@ -172,7 +169,7 @@ export class LookupServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -199,7 +196,7 @@ export class LookupServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.servicedirectory.v1beta1.LookupService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.servicedirectory.v1beta1
             .LookupService,
       this._opts
@@ -208,9 +205,8 @@ export class LookupServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const lookupServiceStubMethods = ['resolveService'];
-
     for (const methodName of lookupServiceStubMethods) {
-      const innerCallPromise = this.lookupServiceStub.then(
+      const callPromise = this.lookupServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -224,20 +220,14 @@ export class LookupServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.lookupServiceStub;
@@ -294,26 +284,37 @@ export class LookupServiceClient {
   // -- Service calls --
   // -------------------
   resolveService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   resolveService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+      | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  resolveService(
+    request: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+      | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -355,26 +356,28 @@ export class LookupServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   resolveService(
-    request: protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
+    request: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
-          | protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+          protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+          | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
-      | protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+      | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
       (
-        | protosTypes.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+        | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
         | undefined
       ),
       {} | undefined
@@ -397,7 +400,7 @@ export class LookupServiceClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.resolveService(request, options, callback);
+    return this.innerApiCalls.resolveService(request, options, callback);
   }
 
   // --------------------
@@ -421,12 +424,12 @@ export class LookupServiceClient {
     service: string,
     endpoint: string
   ) {
-    return this._pathTemplates.endpointPathTemplate.render({
-      project,
-      location,
-      namespace,
-      service,
-      endpoint,
+    return this.pathTemplates.endpointPathTemplate.render({
+      project: project,
+      location: location,
+      namespace: namespace,
+      service: service,
+      endpoint: endpoint,
     });
   }
 
@@ -438,7 +441,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName).project;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).project;
   }
 
   /**
@@ -449,8 +452,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName)
-      .location;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).location;
   }
 
   /**
@@ -461,7 +463,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName)
+    return this.pathTemplates.endpointPathTemplate.match(endpointName)
       .namespace;
   }
 
@@ -473,7 +475,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName).service;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).service;
   }
 
   /**
@@ -484,8 +486,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the endpoint.
    */
   matchEndpointFromEndpointName(endpointName: string) {
-    return this._pathTemplates.endpointPathTemplate.match(endpointName)
-      .endpoint;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
   }
 
   /**
@@ -497,10 +498,10 @@ export class LookupServiceClient {
    * @returns {string} Resource name string.
    */
   namespacePath(project: string, location: string, namespace: string) {
-    return this._pathTemplates.namespacePathTemplate.render({
-      project,
-      location,
-      namespace,
+    return this.pathTemplates.namespacePathTemplate.render({
+      project: project,
+      location: location,
+      namespace: namespace,
     });
   }
 
@@ -512,7 +513,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNamespaceName(namespaceName: string) {
-    return this._pathTemplates.namespacePathTemplate.match(namespaceName)
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
       .project;
   }
 
@@ -524,7 +525,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNamespaceName(namespaceName: string) {
-    return this._pathTemplates.namespacePathTemplate.match(namespaceName)
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
       .location;
   }
 
@@ -536,7 +537,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromNamespaceName(namespaceName: string) {
-    return this._pathTemplates.namespacePathTemplate.match(namespaceName)
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
       .namespace;
   }
 
@@ -555,11 +556,11 @@ export class LookupServiceClient {
     namespace: string,
     service: string
   ) {
-    return this._pathTemplates.servicePathTemplate.render({
-      project,
-      location,
-      namespace,
-      service,
+    return this.pathTemplates.servicePathTemplate.render({
+      project: project,
+      location: location,
+      namespace: namespace,
+      service: service,
     });
   }
 
@@ -571,7 +572,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).project;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).project;
   }
 
   /**
@@ -582,7 +583,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).location;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).location;
   }
 
   /**
@@ -593,7 +594,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).namespace;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).namespace;
   }
 
   /**
@@ -604,7 +605,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromServiceName(serviceName: string) {
-    return this._pathTemplates.servicePathTemplate.match(serviceName).service;
+    return this.pathTemplates.servicePathTemplate.match(serviceName).service;
   }
 
   /**

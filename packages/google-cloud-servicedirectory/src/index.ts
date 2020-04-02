@@ -20,8 +20,6 @@ import * as v1beta1 from './v1beta1';
 const LookupServiceClient = v1beta1.LookupServiceClient;
 const RegistrationServiceClient = v1beta1.RegistrationServiceClient;
 export {v1beta1, LookupServiceClient, RegistrationServiceClient};
-// For compatibility with JavaScript libraries we need to provide this default export:
-// tslint:disable-next-line no-default-export
 export default {v1beta1, LookupServiceClient, RegistrationServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
