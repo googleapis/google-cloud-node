@@ -3,3 +3,4 @@ src/**/doc/*
 build/
 docs/
 protos/
+proto/

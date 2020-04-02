@@ -24,14 +24,14 @@ library = gapic.typescript_library(
 # Copy everything except for top level index, package.json, and README.md
 s.copy(
     library,
-    excludes=['package.json', 'README.md', 'src/index.ts'])
+    excludes=['package.json', 'README.md', 'src/index.ts', '.eslintignore'])
 
 system_test_files=['system-test/fixtures/sample/src/index.ts','system-test/fixtures/sample/src/index.js']
 for file in system_test_files:
     s.replace(file, 'DatastoreClient', 'Datastore')
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location="build/src")
-s.copy(templates)
+s.copy(templates, excludes=['.eslintignore'])
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])

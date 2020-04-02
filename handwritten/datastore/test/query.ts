@@ -13,8 +13,10 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {beforeEach, describe, it} from 'mocha';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const {Query} = require('../src/query');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 import {Datastore} from '../src';
 
 describe('Query', () => {
@@ -22,7 +24,7 @@ describe('Query', () => {
   const NAMESPACE = 'Namespace';
   const KINDS = ['Kind'];
 
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let query: any;
 
   beforeEach(() => {
@@ -293,14 +295,15 @@ describe('Query', () => {
     it('should call the parent instance runQuery correctly', done => {
       const args = [{}, () => {}];
 
-      query.scope.runQuery = function() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      query.scope.runQuery = function(...thisArgs: any[]) {
         assert.strictEqual(this, query.scope);
-        assert.strictEqual(arguments[0], query);
-        assert.strictEqual(arguments[1], args[0]);
+        assert.strictEqual(thisArgs[0], query);
+        assert.strictEqual(thisArgs[1], args[0]);
         done();
       };
 
-      query.run.apply(query, args);
+      query.run(...args);
     });
   });
 
@@ -308,9 +311,10 @@ describe('Query', () => {
     it('should not require options', () => {
       const runQueryReturnValue = {};
 
-      query.scope.runQueryStream = function() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      query.scope.runQueryStream = function(...args: any[]) {
         assert.strictEqual(this, query.scope);
-        assert.strictEqual(arguments[0], query);
+        assert.strictEqual(args[0], query);
         return runQueryReturnValue;
       };
 
@@ -326,10 +330,11 @@ describe('Query', () => {
       };
       const runQueryReturnValue = {};
 
-      query.scope.runQueryStream = function() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      query.scope.runQueryStream = function(...args: any[]) {
         assert.strictEqual(this, query.scope);
-        assert.strictEqual(arguments[0], query);
-        assert.strictEqual(arguments[1], options);
+        assert.strictEqual(args[0], query);
+        assert.strictEqual(args[1], options);
         return runQueryReturnValue;
       };
 

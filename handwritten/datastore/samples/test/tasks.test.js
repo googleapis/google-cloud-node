@@ -33,7 +33,7 @@ describe('task samples', () => {
     const parts = output.match(expected);
     assert.match(parts[0], expected);
     const keyId = Number(parts[1]);
-    const [task] = await datastore.get(datastore.key([`Task`, keyId]));
+    const [task] = await datastore.get(datastore.key(['Task', keyId]));
     key = task[datastore.KEY];
     assert.strictEqual(task.description, description);
   });
