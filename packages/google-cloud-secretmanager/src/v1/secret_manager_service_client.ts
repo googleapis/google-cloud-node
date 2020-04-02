@@ -369,6 +369,10 @@ export class SecretManagerServiceClient {
    *   {@link google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/*`.
    * @param {string} request.secretId
    *   Required. This must be unique within the project.
+   *
+   *   A secret ID is a string with a maximum length of 255 characters and can
+   *   contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
+   *   underscore (`_`) characters.
    * @param {google.cloud.secretmanager.v1.Secret} request.secret
    *   Required. A {@link google.cloud.secretmanager.v1.Secret|Secret} with initial field values.
    * @param {object} [options]
