@@ -19,8 +19,8 @@
 import {CloudBillingClient, CloudCatalogClient} from '@google-cloud/billing';
 
 function main() {
-  const cloudBillingClient = new CloudBillingClient();
-  const cloudCatalogClient = new CloudCatalogClient();
+  new CloudBillingClient();
+  new CloudCatalogClient();
 }
 
 main();
