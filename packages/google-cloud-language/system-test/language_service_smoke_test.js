@@ -14,8 +14,11 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('LanguageServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
+    // eslint-disable-next-line node/no-missing-require
     const language = require('../src');
 
     const client = new language.v1.LanguageServiceClient({

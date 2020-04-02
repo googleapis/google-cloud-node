@@ -17,16 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './language_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -38,13 +32,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta2
  */
 export class LanguageServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -52,6 +39,13 @@ export class LanguageServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   languageServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -143,7 +137,10 @@ export class LanguageServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Put together the default options sent with requests.
@@ -157,7 +154,7 @@ export class LanguageServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -184,7 +181,7 @@ export class LanguageServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.language.v1beta2.LanguageService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.language.v1beta2.LanguageService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -199,9 +196,8 @@ export class LanguageServiceClient {
       'classifyText',
       'annotateText',
     ];
-
     for (const methodName of languageServiceStubMethods) {
-      const innerCallPromise = this.languageServiceStub.then(
+      const callPromise = this.languageServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -215,20 +211,14 @@ export class LanguageServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.languageServiceStub;
@@ -288,26 +278,34 @@ export class LanguageServiceClient {
   // -- Service calls --
   // -------------------
   analyzeSentiment(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
+      protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest | undefined,
       {} | undefined
     ]
   >;
   analyzeSentiment(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
+      protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  analyzeSentiment(
+    request: protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -327,28 +325,27 @@ export class LanguageServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   analyzeSentiment(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
-          | protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
+          protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
+          | protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
+      protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
+      protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -362,29 +359,37 @@ export class LanguageServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.analyzeSentiment(request, options, callback);
+    return this.innerApiCalls.analyzeSentiment(request, options, callback);
   }
   analyzeEntities(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest | undefined,
       {} | undefined
     ]
   >;
   analyzeEntities(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  analyzeEntities(
+    request: protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -405,28 +410,27 @@ export class LanguageServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   analyzeEntities(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
-          | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
+          protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
+          | protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -440,29 +444,40 @@ export class LanguageServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.analyzeEntities(request, options, callback);
+    return this.innerApiCalls.analyzeEntities(request, options, callback);
   }
   analyzeEntitySentiment(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
       (
-        | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+        | protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   analyzeEntitySentiment(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  analyzeEntitySentiment(
+    request: protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -482,26 +497,28 @@ export class LanguageServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   analyzeEntitySentiment(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
-          | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+          protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
+          | protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
+      protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
       (
-        | protosTypes.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
+        | protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
         | undefined
       ),
       {} | undefined
@@ -517,33 +534,41 @@ export class LanguageServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.analyzeEntitySentiment(
+    return this.innerApiCalls.analyzeEntitySentiment(
       request,
       options,
       callback
     );
   }
   analyzeSyntax(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
+      protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest | undefined,
       {} | undefined
     ]
   >;
   analyzeSyntax(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
+      protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  analyzeSyntax(
+    request: protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -564,28 +589,27 @@ export class LanguageServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   analyzeSyntax(
-    request: protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
+    request: protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
-          | protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
+          protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
+          | protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
+      protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
+      | protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
+      protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -599,29 +623,37 @@ export class LanguageServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.analyzeSyntax(request, options, callback);
+    return this.innerApiCalls.analyzeSyntax(request, options, callback);
   }
   classifyText(
-    request: protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest,
+    request: protos.google.cloud.language.v1beta2.IClassifyTextRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IClassifyTextResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IClassifyTextResponse,
+      protos.google.cloud.language.v1beta2.IClassifyTextRequest | undefined,
       {} | undefined
     ]
   >;
   classifyText(
-    request: protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest,
+    request: protos.google.cloud.language.v1beta2.IClassifyTextRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.language.v1beta2.IClassifyTextResponse,
-      | protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest
+      protos.google.cloud.language.v1beta2.IClassifyTextResponse,
+      | protos.google.cloud.language.v1beta2.IClassifyTextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  classifyText(
+    request: protos.google.cloud.language.v1beta2.IClassifyTextRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1beta2.IClassifyTextResponse,
+      | protos.google.cloud.language.v1beta2.IClassifyTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -638,28 +670,27 @@ export class LanguageServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   classifyText(
-    request: protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest,
+    request: protos.google.cloud.language.v1beta2.IClassifyTextRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.language.v1beta2.IClassifyTextResponse,
-          | protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest
+          protos.google.cloud.language.v1beta2.IClassifyTextResponse,
+          | protos.google.cloud.language.v1beta2.IClassifyTextRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.language.v1beta2.IClassifyTextResponse,
-      | protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest
+      protos.google.cloud.language.v1beta2.IClassifyTextResponse,
+      | protos.google.cloud.language.v1beta2.IClassifyTextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IClassifyTextResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IClassifyTextRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IClassifyTextResponse,
+      protos.google.cloud.language.v1beta2.IClassifyTextRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -673,29 +704,37 @@ export class LanguageServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.classifyText(request, options, callback);
+    return this.innerApiCalls.classifyText(request, options, callback);
   }
   annotateText(
-    request: protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest,
+    request: protos.google.cloud.language.v1beta2.IAnnotateTextRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnnotateTextResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
+      protos.google.cloud.language.v1beta2.IAnnotateTextRequest | undefined,
       {} | undefined
     ]
   >;
   annotateText(
-    request: protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest,
+    request: protos.google.cloud.language.v1beta2.IAnnotateTextRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnnotateTextResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest
+      protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
+      | protos.google.cloud.language.v1beta2.IAnnotateTextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  annotateText(
+    request: protos.google.cloud.language.v1beta2.IAnnotateTextRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
+      | protos.google.cloud.language.v1beta2.IAnnotateTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -717,28 +756,27 @@ export class LanguageServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   annotateText(
-    request: protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest,
+    request: protos.google.cloud.language.v1beta2.IAnnotateTextRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.language.v1beta2.IAnnotateTextResponse,
-          | protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest
+          protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
+          | protos.google.cloud.language.v1beta2.IAnnotateTextRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.language.v1beta2.IAnnotateTextResponse,
-      | protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest
+      protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
+      | protos.google.cloud.language.v1beta2.IAnnotateTextRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.language.v1beta2.IAnnotateTextResponse,
-      (
-        | protosTypes.google.cloud.language.v1beta2.IAnnotateTextRequest
-        | undefined
-      ),
+      protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
+      protos.google.cloud.language.v1beta2.IAnnotateTextRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -752,7 +790,7 @@ export class LanguageServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.annotateText(request, options, callback);
+    return this.innerApiCalls.annotateText(request, options, callback);
   }
 
   /**
