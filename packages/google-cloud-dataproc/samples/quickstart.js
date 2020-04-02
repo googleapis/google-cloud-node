@@ -12,14 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// sample-metadata:
+//   title: Quickstart
+//   usage: node quickstart.js <PROJECT_ID> <REGION> <CLUSTER_NAME> <JOB_FILE_PATH>
+
 // [START dataproc_quickstart]
 // This quickstart sample walks a user through creating a Cloud Dataproc
 // cluster, submitting a PySpark job from Google Cloud Storage to the
 // cluster, reading the output of the job and deleting the cluster, all
 // using the Node.js client library.
-//
-// Usage:
-//     node quickstart.js <PROJECT_ID> <REGION> <CLUSTER_NAME> <GCS_JOB_FILE_PATH>
 
 'use strict';
 
@@ -32,11 +33,13 @@ function main(projectId, region, clusterName, jobFilePath) {
   // Create a cluster client with the endpoint set to the desired cluster region
   const clusterClient = new dataproc.v1.ClusterControllerClient({
     apiEndpoint: `${region}-dataproc.googleapis.com`,
+    projectId: projectId,
   });
 
   // Create a job client with the endpoint set to the desired cluster region
   const jobClient = new dataproc.v1.JobControllerClient({
     apiEndpoint: `${region}-dataproc.googleapis.com`,
+    projectId: projectId,
   });
 
   async function quickstart() {
