@@ -64,7 +64,6 @@ const util = require('util');
 // Creates a client
 const client = new textToSpeech.TextToSpeechClient();
 async function quickStart() {
-
   // The text to synthesize
   const text = 'hello, world!';
 
