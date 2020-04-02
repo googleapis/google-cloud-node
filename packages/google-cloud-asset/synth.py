@@ -20,6 +20,9 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
+
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1', 'v1', 'v1p1beta1', 'v1p2beta1', 'v1p4beta1']
 name = 'asset'
