@@ -13,9 +13,8 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {before, after, describe, it} from 'mocha';
 import {Datastore} from '../src';
-const assertRejects = require('assert-rejects');
 
 describe('Datastore', () => {
   const testKinds: string[] = [];
@@ -25,7 +24,7 @@ describe('Datastore', () => {
   // Override the Key method so we can track what keys are created during the
   // tests. They are then deleted in the `after` hook.
   const key = datastore.key;
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   datastore.key = function(options: any) {
     const keyObject = key.call(this, options);
     testKinds.push(keyObject.kind);
@@ -266,7 +265,7 @@ describe('Datastore', () => {
       await datastore.save({key: postKey, data: {panthers, broncos}});
       const [entity] = await datastore.get(postKey, {
         wrapNumbers: {
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           integerTypeCastFunction: (value: any) => {
             integerTypeCastFunctionCalled++;
             return value.toString();
@@ -384,7 +383,7 @@ describe('Datastore', () => {
 
       // The key's path should now be complete.
       assert(postKey.id);
-      await assertRejects(
+      await assert.rejects(
         datastore.save({
           key: postKey,
           method: 'insert',
@@ -399,7 +398,7 @@ describe('Datastore', () => {
 
     it('should fail explicitly set first update on save', async () => {
       const postKey = datastore.key('Post');
-      await assertRejects(
+      await assert.rejects(
         datastore.save({
           key: postKey,
           method: 'update',
@@ -921,7 +920,7 @@ describe('Datastore', () => {
       await transaction.run();
       await transaction.get(key);
       transaction.save({key, data: {}});
-      await assertRejects(transaction.commit());
+      await assert.rejects(transaction.commit());
     });
   });
 });

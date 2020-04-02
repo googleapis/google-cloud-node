@@ -25,7 +25,7 @@ const exec = cmd =>
 describe('error', () => {
   it('should have an error', done => {
     const errorCode = 3;
-    const output = exec(`node error.js`);
+    const output = exec('node error.js');
     assert.strictEqual(parseInt(output[0]), errorCode);
     done();
   });

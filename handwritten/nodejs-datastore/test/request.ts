@@ -15,7 +15,7 @@
 import * as pjy from '@google-cloud/projectify';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as is from 'is';
 import * as proxyquire from 'proxyquire';
@@ -36,7 +36,7 @@ import {
   GetResponse,
 } from '../src/request';
 
-// tslint:disable-next-line no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Any = any;
 
 let promisified = false;
@@ -49,16 +49,18 @@ const fakePfy = Object.assign({}, pfy, {
 });
 
 const fakePjy = {
-  replaceProjectIdToken() {
-    return (pjyOverride || pjy.replaceProjectIdToken).apply(null, arguments);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  replaceProjectIdToken(...args: any[]) {
+    return (pjyOverride || pjy.replaceProjectIdToken)(...args);
   },
 };
 
 let v1FakeClientOverride: Function | null;
 const fakeV1 = {
   FakeClient: class {
-    constructor() {
-      return (v1FakeClientOverride || (() => {})).apply(null, arguments);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    constructor(...args: any[]) {
+      return (v1FakeClientOverride || (() => {}))(...args);
     }
   },
 };
@@ -68,7 +70,6 @@ class FakeQuery extends Query {}
 let pjyOverride: Function | null;
 
 describe('Request', () => {
-  // tslint:disable-next-line variable-name
   let Request: typeof ds.DatastoreRequest;
   let request: Any;
   let key: entity.Key;
@@ -128,7 +129,7 @@ describe('Request', () => {
 
     it('should format an entity', () => {
       const key = {};
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const entityObject: any = {data: true};
       entityObject[entity.KEY_SYMBOL] = key;
       const preparedEntityObject = Request.prepareEntityObject_(
@@ -1086,7 +1087,7 @@ describe('Request', () => {
           formatArrayStub.restore();
           formatArrayStub = sandbox
             .stub(entity, 'formatArray')
-            .callsFake((array, wrapNumbers) => {
+            .callsFake(array => {
               return array;
             });
         });
@@ -2158,7 +2159,6 @@ describe('Request', () => {
   });
 
   describe('merge', () => {
-    // tslint:disable-next-line: variable-name
     let Transaction: typeof ds.Transaction;
     let transaction: ds.Transaction;
     const PROJECT_ID = 'project-id';
@@ -2194,7 +2194,7 @@ describe('Request', () => {
       request.datastore = {
         transaction: () => transaction,
       };
-      // tslint:disable-next-line: no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (transaction as any).run = (callback?: Function) => {
         callback!(null);
       };
@@ -2389,7 +2389,7 @@ describe('Request', () => {
     it('should send gaxOpts', done => {
       request.datastore.clients_ = new Map();
       request.datastore.clients_.set(CONFIG.client, {
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         [CONFIG.method](_: object, gaxO: any) {
           delete gaxO.headers;
           assert.deepStrictEqual(gaxO, CONFIG.gaxOpts);
@@ -2403,7 +2403,7 @@ describe('Request', () => {
     it('should send google-cloud-resource-prefix', done => {
       request.datastore.clients_ = new Map();
       request.datastore.clients_.set(CONFIG.client, {
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         [CONFIG.method](_: object, gaxO: any) {
           assert.deepStrictEqual(gaxO.headers, {
             'google-cloud-resource-prefix': 'projects/' + PROJECT_ID,

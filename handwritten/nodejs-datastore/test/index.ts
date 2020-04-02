@@ -13,17 +13,18 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {before, beforeEach, after, afterEach, describe, it} from 'mocha';
 import * as gax from 'google-gax';
 import * as proxyquire from 'proxyquire';
 
 import * as ds from '../src';
-import {Datastore, DatastoreOptions} from '../src';
+import {DatastoreOptions} from '../src';
 import {entity} from '../src/entity';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const v1 = require('../src/v1/index.js');
 
-// tslint:disable-next-line no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const fakeEntity: any = {
   KEY_SYMBOL: Symbol('fake key symbol'),
   Int: class {
@@ -32,8 +33,9 @@ const fakeEntity: any = {
       this.value = value;
     }
   },
-  isDsInt() {
-    this.calledWith_ = arguments;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  isDsInt(...args: any[]) {
+    this.calledWith_ = args;
   },
   Double: class {
     value: {};
@@ -41,8 +43,9 @@ const fakeEntity: any = {
       this.value = value;
     }
   },
-  isDsDouble() {
-    this.calledWith_ = arguments;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  isDsDouble(...args: any[]) {
+    this.calledWith_ = args;
   },
   GeoPoint: class {
     value: {};
@@ -50,24 +53,28 @@ const fakeEntity: any = {
       this.value = value;
     }
   },
-  isDsGeoPoint() {
-    this.calledWith_ = arguments;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  isDsGeoPoint(...args: any) {
+    this.calledWith_ = args;
   },
   Key: class {
     calledWith_: IArguments;
-    constructor() {
-      this.calledWith_ = arguments;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    constructor(...args: any) {
+      this.calledWith_ = args;
     }
   },
-  isDsKey() {
-    this.calledWith_ = arguments;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  isDsKey(...args: any) {
+    this.calledWith_ = args;
   },
   URLSafeKey: entity.URLSafeKey,
 };
 
 let googleAuthOverride: Function | null;
-function fakeGoogleAuth() {
-  return (googleAuthOverride || (() => {})).apply(null, arguments);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function fakeGoogleAuth(...args: any) {
+  return (googleAuthOverride || (() => {}))(...args);
 }
 
 let createInsecureOverride: Function | null;
@@ -79,11 +86,9 @@ const fakeGoogleGax = {
       super(opts);
       this.grpc = ({
         credentials: {
-          createInsecure() {
-            return (createInsecureOverride || (() => {})).apply(
-              null,
-              arguments
-            );
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          createInsecure(...args: any[]) {
+            return (createInsecureOverride || (() => {}))(...args);
           },
         },
       } as {}) as gax.GrpcModule;
@@ -92,25 +97,29 @@ const fakeGoogleGax = {
 };
 
 class FakeQuery {
-  calledWith_: IArguments;
-  constructor() {
-    this.calledWith_ = arguments;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  calledWith_: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(...args: any[]) {
+    this.calledWith_ = args;
   }
 }
 
 class FakeTransaction {
-  calledWith_: IArguments;
-  constructor() {
-    this.calledWith_ = arguments;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  calledWith_: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(...args: any[]) {
+    this.calledWith_ = args;
   }
 }
 
 function FakeV1() {}
 
 describe('Datastore', () => {
-  // tslint:disable-next-line variable-name
   let Datastore: typeof ds.Datastore;
-  let datastore: Datastore;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let datastore: any;
 
   const PROJECT_ID = 'project-id';
   const NAMESPACE = 'namespace';
@@ -220,7 +229,7 @@ describe('Datastore', () => {
         done();
       };
 
-      const d = new Datastore(OPTIONS);
+      new Datastore(OPTIONS);
     });
 
     it('should localize the options', () => {
@@ -259,7 +268,7 @@ describe('Datastore', () => {
         this.port_ = port;
       };
       const datastore = new Datastore(OPTIONS);
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       assert.strictEqual((datastore.options as any).port, port);
     });
 
@@ -480,7 +489,7 @@ describe('Datastore', () => {
       const namespace = 'namespace';
       const kind = ['Kind'];
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const query: any = datastore.createQuery(namespace, kind);
       assert(query instanceof FakeQuery);
 
@@ -491,7 +500,7 @@ describe('Datastore', () => {
 
     it('should include the default namespace', () => {
       const kind = ['Kind'];
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const query: any = datastore.createQuery(kind);
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
@@ -499,7 +508,7 @@ describe('Datastore', () => {
     });
 
     it('should include the default namespace in a kindless query', () => {
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const query: any = datastore.createQuery();
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
@@ -510,14 +519,14 @@ describe('Datastore', () => {
   describe('key', () => {
     it('should return a Key object', () => {
       const options = {} as entity.KeyOptions;
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const key: any = datastore.key(options);
       assert.strictEqual(key.calledWith_[0], options);
     });
 
     it('should use a non-object argument as the path', () => {
       const options = 'path';
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const key: any = datastore.key(options);
       assert.strictEqual(key.calledWith_[0].namespace, datastore.namespace);
       assert.deepStrictEqual(key.calledWith_[0].path, [options]);
@@ -630,14 +639,17 @@ describe('Datastore', () => {
         path: ['Task', 'Test'],
       });
       const base64EndocdedUrlSafeKey = 'agpwcm9qZWN0LWlkcg4LEgRUYXNrIgRUZXN0DA';
-      // tslint:disable-next-line: no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (datastore.auth as any).getProjectId = (callback: Function) => {
         callback(null, 'project-id');
       };
-      datastore.keyToLegacyUrlSafe(key, (err, urlSafeKey) => {
-        assert.ifError(err);
-        assert.strictEqual(urlSafeKey, base64EndocdedUrlSafeKey);
-      });
+      datastore.keyToLegacyUrlSafe(
+        key,
+        (err: Error | null | undefined, urlSafeKey: string) => {
+          assert.ifError(err);
+          assert.strictEqual(urlSafeKey, base64EndocdedUrlSafeKey);
+        }
+      );
     });
 
     it('should convert key to URL-safe base64 string with location prefix', () => {
@@ -647,26 +659,33 @@ describe('Datastore', () => {
       const locationPrefix = 's~';
       const base64EndocdedUrlSafeKey =
         'agxzfnByb2plY3QtaWRyDgsSBFRhc2siBFRlc3QM';
-      // tslint:disable-next-line: no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (datastore.auth as any).getProjectId = (callback: Function) => {
         callback(null, 'project-id');
       };
-      datastore.keyToLegacyUrlSafe(key, locationPrefix, (err, urlSafeKey) => {
-        assert.ifError(err);
-        assert.strictEqual(urlSafeKey, base64EndocdedUrlSafeKey);
-      });
+      datastore.keyToLegacyUrlSafe(
+        key,
+        locationPrefix,
+        (err: Error | null | undefined, urlSafeKey: string) => {
+          assert.ifError(err);
+          assert.strictEqual(urlSafeKey, base64EndocdedUrlSafeKey);
+        }
+      );
     });
 
     it('should not return URL-safe key to user if auth.getProjectId errors', () => {
       const error = new Error('Error.');
-      // tslint:disable-next-line: no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (datastore.auth as any).getProjectId = (callback: Function) => {
         callback(error);
       };
-      datastore.keyToLegacyUrlSafe({} as entity.Key, (err, urlSafeKey) => {
-        assert.strictEqual(err, error);
-        assert.strictEqual(urlSafeKey, undefined);
-      });
+      datastore.keyToLegacyUrlSafe(
+        {} as entity.Key,
+        (err: Error | null | undefined, urlSafeKey: string) => {
+          assert.strictEqual(err, error);
+          assert.strictEqual(urlSafeKey, undefined);
+        }
+      );
     });
   });
 

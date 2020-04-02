@@ -372,7 +372,7 @@ class Transaction extends DatastoreRequest {
    *   });
    * });
    */
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   delete(entities?: Entities): any {
     arrify(entities).forEach((ent: Entity) => {
       this.modifiedEntities_.push({
@@ -671,7 +671,7 @@ class Transaction extends DatastoreRequest {
    *   });
    * });
    */
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   save(entities: Entities): any {
     arrify(entities).forEach((ent: Entity) => {
       this.modifiedEntities_.push({

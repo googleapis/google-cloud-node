@@ -35,7 +35,7 @@ export interface Order {
 
 export interface Filter {
   name: string;
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   val: any;
   op: Operator;
 }
@@ -457,13 +457,12 @@ class Query {
     optionsOrCallback?: RunQueryOptions | RunQueryCallback,
     cb?: RunQueryCallback
   ): void | Promise<RunQueryResponse> {
-    const query = this;
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
     const runQuery = this.scope!.runQuery.bind(this.scope);
-    return runQuery(query, options, callback);
+    return runQuery(this, options, callback);
   }
 
   /**
