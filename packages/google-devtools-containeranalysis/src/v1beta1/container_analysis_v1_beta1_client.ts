@@ -18,18 +18,18 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
-  PaginationResponse,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
-import * as protosTypes from '../../protos/protos';
+import {RequestType} from 'google-gax/build/src/apitypes';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './container_analysis_v1_beta1_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -52,14 +52,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class ContainerAnalysisV1Beta1Client {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -67,6 +59,14 @@ export class ContainerAnalysisV1Beta1Client {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   containerAnalysisV1Beta1Stub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -160,13 +160,16 @@ export class ContainerAnalysisV1Beta1Client {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       notePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/notes/{note}'
       ),
@@ -184,7 +187,7 @@ export class ContainerAnalysisV1Beta1Client {
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
-    this._descriptors.page = {
+    this.descriptors.page = {
       listScanConfigs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -203,7 +206,7 @@ export class ContainerAnalysisV1Beta1Client {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -230,7 +233,7 @@ export class ContainerAnalysisV1Beta1Client {
         ? (this._protos as protobuf.Root).lookupService(
             'google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.devtools.containeranalysis.v1beta1
             .ContainerAnalysisV1Beta1,
       this._opts
@@ -246,9 +249,8 @@ export class ContainerAnalysisV1Beta1Client {
       'listScanConfigs',
       'updateScanConfig',
     ];
-
     for (const methodName of containerAnalysisV1Beta1StubMethods) {
-      const innerCallPromise = this.containerAnalysisV1Beta1Stub.then(
+      const callPromise = this.containerAnalysisV1Beta1Stub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -262,20 +264,14 @@ export class ContainerAnalysisV1Beta1Client {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.containerAnalysisV1Beta1Stub;
@@ -332,22 +328,30 @@ export class ContainerAnalysisV1Beta1Client {
   // -- Service calls --
   // -------------------
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -369,23 +373,23 @@ export class ContainerAnalysisV1Beta1Client {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setIamPolicy(
-    request: protosTypes.google.iam.v1.ISetIamPolicyRequest,
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.ISetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -406,25 +410,33 @@ export class ContainerAnalysisV1Beta1Client {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.setIamPolicy(request, options, callback);
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -446,23 +458,23 @@ export class ContainerAnalysisV1Beta1Client {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIamPolicy(
-    request: protosTypes.google.iam.v1.IGetIamPolicyRequest,
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.IPolicy,
-          protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.IPolicy,
-      protosTypes.google.iam.v1.IGetIamPolicyRequest | undefined,
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -483,25 +495,33 @@ export class ContainerAnalysisV1Beta1Client {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.getIamPolicy(request, options, callback);
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   >;
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -522,23 +542,23 @@ export class ContainerAnalysisV1Beta1Client {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   testIamPermissions(
-    request: protosTypes.google.iam.v1.ITestIamPermissionsRequest,
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-          protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.iam.v1.ITestIamPermissionsResponse,
-      protosTypes.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -559,29 +579,40 @@ export class ContainerAnalysisV1Beta1Client {
       resource: request.resource || '',
     });
     this.initialize();
-    return this._innerApiCalls.testIamPermissions(request, options, callback);
+    return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
   getScanConfig(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
       (
-        | protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+        | protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getScanConfig(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
-      | protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      | protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  getScanConfig(
+    request: protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest,
+    callback: Callback<
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      | protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -599,26 +630,28 @@ export class ContainerAnalysisV1Beta1Client {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getScanConfig(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
-          | protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+          protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
+          | protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
-      | protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      | protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
       (
-        | protosTypes.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
+        | protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest
         | undefined
       ),
       {} | undefined
@@ -641,29 +674,40 @@ export class ContainerAnalysisV1Beta1Client {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.getScanConfig(request, options, callback);
+    return this.innerApiCalls.getScanConfig(request, options, callback);
   }
   updateScanConfig(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
       (
-        | protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+        | protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateScanConfig(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
-      | protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      | protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  updateScanConfig(
+    request: protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest,
+    callback: Callback<
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      | protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -683,26 +727,28 @@ export class ContainerAnalysisV1Beta1Client {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   updateScanConfig(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
-          | protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+          protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
+          | protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
-      | protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      | protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig,
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig,
       (
-        | protosTypes.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
+        | protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest
         | undefined
       ),
       {} | undefined
@@ -725,26 +771,38 @@ export class ContainerAnalysisV1Beta1Client {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.updateScanConfig(request, options, callback);
+    return this.innerApiCalls.updateScanConfig(request, options, callback);
   }
 
   listScanConfigs(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig[],
-      protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest | null,
-      protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig[],
+      protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest | null,
+      protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
     ]
   >;
   listScanConfigs(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
     options: gax.CallOptions,
-    callback: Callback<
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig[],
-      protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest | null,
-      protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+    callback: PaginationCallback<
+      protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+      | protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+      | null
+      | undefined,
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig
+    >
+  ): void;
+  listScanConfigs(
+    request: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+      | protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+      | null
+      | undefined,
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig
     >
   ): void;
   /**
@@ -780,24 +838,28 @@ export class ContainerAnalysisV1Beta1Client {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listScanConfigs(
-    request: protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+    request: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
     optionsOrCallback?:
       | gax.CallOptions
-      | Callback<
-          protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig[],
-          protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest | null,
-          protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+      | PaginationCallback<
+          protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+          | protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+          | null
+          | undefined,
+          protos.google.devtools.containeranalysis.v1beta1.IScanConfig
         >,
-    callback?: Callback<
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig[],
-      protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest | null,
-      protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+    callback?: PaginationCallback<
+      protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+      | protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+      | null
+      | undefined,
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig
     >
   ): Promise<
     [
-      protosTypes.google.devtools.containeranalysis.v1beta1.IScanConfig[],
-      protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest | null,
-      protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig[],
+      protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest | null,
+      protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsResponse
     ]
   > | void {
     request = request || {};
@@ -817,7 +879,7 @@ export class ContainerAnalysisV1Beta1Client {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.listScanConfigs(request, options, callback);
+    return this.innerApiCalls.listScanConfigs(request, options, callback);
   }
 
   /**
@@ -850,7 +912,7 @@ export class ContainerAnalysisV1Beta1Client {
    *   An object stream which emits an object representing [ScanConfig]{@link google.devtools.containeranalysis.v1beta1.ScanConfig} on 'data' event.
    */
   listScanConfigsStream(
-    request?: protosTypes.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+    request?: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
     options?: gax.CallOptions
   ): Transform {
     request = request || {};
@@ -864,11 +926,59 @@ export class ContainerAnalysisV1Beta1Client {
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this._descriptors.page.listScanConfigs.createStream(
-      this._innerApiCalls.listScanConfigs as gax.GaxCall,
+    return this.descriptors.page.listScanConfigs.createStream(
+      this.innerApiCalls.listScanConfigs as gax.GaxCall,
       request,
       callSettings
     );
+  }
+
+  /**
+   * Equivalent to {@link listScanConfigs}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to list scan configurations for in the form of
+   *   `projects/[PROJECT_ID]`.
+   * @param {string} request.filter
+   *   Required. The filter expression.
+   * @param {number} request.pageSize
+   *   The number of scan configs to return in the list.
+   * @param {string} request.pageToken
+   *   Token to provide to skip to a particular spot in the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listScanConfigsAsync(
+    request?: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<
+    protos.google.devtools.containeranalysis.v1beta1.IScanConfig
+  > {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listScanConfigs.asyncIterate(
+      this.innerApiCalls['listScanConfigs'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<
+      protos.google.devtools.containeranalysis.v1beta1.IScanConfig
+    >;
   }
   // --------------------
   // -- Path templates --
@@ -882,9 +992,9 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} Resource name string.
    */
   notePath(project: string, note: string) {
-    return this._pathTemplates.notePathTemplate.render({
-      project,
-      note,
+    return this.pathTemplates.notePathTemplate.render({
+      project: project,
+      note: note,
     });
   }
 
@@ -896,7 +1006,7 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNoteName(noteName: string) {
-    return this._pathTemplates.notePathTemplate.match(noteName).project;
+    return this.pathTemplates.notePathTemplate.match(noteName).project;
   }
 
   /**
@@ -907,7 +1017,7 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} A string representing the note.
    */
   matchNoteFromNoteName(noteName: string) {
-    return this._pathTemplates.notePathTemplate.match(noteName).note;
+    return this.pathTemplates.notePathTemplate.match(noteName).note;
   }
 
   /**
@@ -918,9 +1028,9 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} Resource name string.
    */
   occurrencePath(project: string, occurrence: string) {
-    return this._pathTemplates.occurrencePathTemplate.render({
-      project,
-      occurrence,
+    return this.pathTemplates.occurrencePathTemplate.render({
+      project: project,
+      occurrence: occurrence,
     });
   }
 
@@ -932,7 +1042,7 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} A string representing the project.
    */
   matchProjectFromOccurrenceName(occurrenceName: string) {
-    return this._pathTemplates.occurrencePathTemplate.match(occurrenceName)
+    return this.pathTemplates.occurrencePathTemplate.match(occurrenceName)
       .project;
   }
 
@@ -944,7 +1054,7 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} A string representing the occurrence.
    */
   matchOccurrenceFromOccurrenceName(occurrenceName: string) {
-    return this._pathTemplates.occurrencePathTemplate.match(occurrenceName)
+    return this.pathTemplates.occurrencePathTemplate.match(occurrenceName)
       .occurrence;
   }
 
@@ -955,8 +1065,8 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} Resource name string.
    */
   projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -968,7 +1078,7 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -979,8 +1089,8 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} Resource name string.
    */
   scanConfigPath(project: string, scanConfig: string) {
-    return this._pathTemplates.scanConfigPathTemplate.render({
-      project,
+    return this.pathTemplates.scanConfigPathTemplate.render({
+      project: project,
       scan_config: scanConfig,
     });
   }
@@ -993,7 +1103,7 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} A string representing the project.
    */
   matchProjectFromScanConfigName(scanConfigName: string) {
-    return this._pathTemplates.scanConfigPathTemplate.match(scanConfigName)
+    return this.pathTemplates.scanConfigPathTemplate.match(scanConfigName)
       .project;
   }
 
@@ -1005,7 +1115,7 @@ export class ContainerAnalysisV1Beta1Client {
    * @returns {string} A string representing the scan_config.
    */
   matchScanConfigFromScanConfigName(scanConfigName: string) {
-    return this._pathTemplates.scanConfigPathTemplate.match(scanConfigName)
+    return this.pathTemplates.scanConfigPathTemplate.match(scanConfigName)
       .scan_config;
   }
 
