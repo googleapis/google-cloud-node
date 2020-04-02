@@ -19,7 +19,7 @@
 import {ClusterManagerClient} from '@google-cloud/container';
 
 function main() {
-  const clusterManagerClient = new ClusterManagerClient();
+  new ClusterManagerClient();
 }
 
 main();
