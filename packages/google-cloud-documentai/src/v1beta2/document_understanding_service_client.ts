@@ -18,7 +18,6 @@
 
 import * as gax from 'google-gax';
 import {
-  APICallback,
   Callback,
   CallOptions,
   Descriptors,
@@ -27,7 +26,7 @@ import {
 } from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './document_understanding_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -40,13 +39,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta2
  */
 export class DocumentUnderstandingServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -54,6 +46,13 @@ export class DocumentUnderstandingServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   operationsClient: gax.OperationsClient;
   documentUnderstandingServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -148,7 +147,10 @@ export class DocumentUnderstandingServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "long-running operations", which return a
@@ -156,6 +158,7 @@ export class DocumentUnderstandingServiceClient {
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback
       ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           require('../../protos/protos.json')
         )
       : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
@@ -173,7 +176,7 @@ export class DocumentUnderstandingServiceClient {
       '.google.cloud.documentai.v1beta2.OperationMetadata'
     ) as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       batchProcessDocuments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchProcessDocumentsResponse.decode.bind(
@@ -194,7 +197,7 @@ export class DocumentUnderstandingServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -221,7 +224,7 @@ export class DocumentUnderstandingServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.documentai.v1beta2.DocumentUnderstandingService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.documentai.v1beta2
             .DocumentUnderstandingService,
       this._opts
@@ -233,9 +236,8 @@ export class DocumentUnderstandingServiceClient {
       'batchProcessDocuments',
       'processDocument',
     ];
-
     for (const methodName of documentUnderstandingServiceStubMethods) {
-      const innerCallPromise = this.documentUnderstandingServiceStub.then(
+      const callPromise = this.documentUnderstandingServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -249,20 +251,14 @@ export class DocumentUnderstandingServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.documentUnderstandingServiceStub;
@@ -319,26 +315,37 @@ export class DocumentUnderstandingServiceClient {
   // -- Service calls --
   // -------------------
   processDocument(
-    request: protosTypes.google.cloud.documentai.v1beta2.IProcessDocumentRequest,
+    request: protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.documentai.v1beta2.IDocument,
+      protos.google.cloud.documentai.v1beta2.IDocument,
       (
-        | protosTypes.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+        | protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   processDocument(
-    request: protosTypes.google.cloud.documentai.v1beta2.IProcessDocumentRequest,
+    request: protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.documentai.v1beta2.IDocument,
-      | protosTypes.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+      protos.google.cloud.documentai.v1beta2.IDocument,
+      | protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  processDocument(
+    request: protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest,
+    callback: Callback<
+      protos.google.cloud.documentai.v1beta2.IDocument,
+      | protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -384,26 +391,28 @@ export class DocumentUnderstandingServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   processDocument(
-    request: protosTypes.google.cloud.documentai.v1beta2.IProcessDocumentRequest,
+    request: protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.documentai.v1beta2.IDocument,
-          | protosTypes.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+          protos.google.cloud.documentai.v1beta2.IDocument,
+          | protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.documentai.v1beta2.IDocument,
-      | protosTypes.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+      protos.google.cloud.documentai.v1beta2.IDocument,
+      | protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.documentai.v1beta2.IDocument,
+      protos.google.cloud.documentai.v1beta2.IDocument,
       (
-        | protosTypes.google.cloud.documentai.v1beta2.IProcessDocumentRequest
+        | protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest
         | undefined
       ),
       {} | undefined
@@ -426,32 +435,43 @@ export class DocumentUnderstandingServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.processDocument(request, options, callback);
+    return this.innerApiCalls.processDocument(request, options, callback);
   }
 
   batchProcessDocuments(
-    request: protosTypes.google.cloud.documentai.v1beta2.IBatchProcessDocumentsRequest,
+    request: protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
-        protosTypes.google.cloud.documentai.v1beta2.IOperationMetadata
+        protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
+        protos.google.cloud.documentai.v1beta2.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   batchProcessDocuments(
-    request: protosTypes.google.cloud.documentai.v1beta2.IBatchProcessDocumentsRequest,
+    request: protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsRequest,
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protosTypes.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
-        protosTypes.google.cloud.documentai.v1beta2.IOperationMetadata
+        protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
+        protos.google.cloud.documentai.v1beta2.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchProcessDocuments(
+    request: protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
+        protos.google.cloud.documentai.v1beta2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -475,32 +495,32 @@ export class DocumentUnderstandingServiceClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   batchProcessDocuments(
-    request: protosTypes.google.cloud.documentai.v1beta2.IBatchProcessDocumentsRequest,
+    request: protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           LROperation<
-            protosTypes.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
-            protosTypes.google.cloud.documentai.v1beta2.IOperationMetadata
+            protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
+            protos.google.cloud.documentai.v1beta2.IOperationMetadata
           >,
-          protosTypes.google.longrunning.IOperation | undefined,
-          {} | undefined
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protosTypes.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
-        protosTypes.google.cloud.documentai.v1beta2.IOperationMetadata
+        protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
+        protos.google.cloud.documentai.v1beta2.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
       LROperation<
-        protosTypes.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
-        protosTypes.google.cloud.documentai.v1beta2.IOperationMetadata
+        protos.google.cloud.documentai.v1beta2.IBatchProcessDocumentsResponse,
+        protos.google.cloud.documentai.v1beta2.IOperationMetadata
       >,
-      protosTypes.google.longrunning.IOperation | undefined,
+      protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -521,11 +541,7 @@ export class DocumentUnderstandingServiceClient {
       parent: request.parent || '',
     });
     this.initialize();
-    return this._innerApiCalls.batchProcessDocuments(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.batchProcessDocuments(request, options, callback);
   }
 
   /**

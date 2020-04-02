@@ -115,8 +115,6 @@ has instructions for running the samples.
 | --------------------------- | --------------------------------- | ------ |
 | Batch_parse_form | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/batch_parse_form.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/batch_parse_form.js,samples/README.md) |
 | Batch_parse_table | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/batch_parse_table.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/batch_parse_table.js,samples/README.md) |
-| Parse Form | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parseForm.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parseForm.js,samples/README.md) |
-| Parse Table | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parseTable.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parseTable.js,samples/README.md) |
 | Parse_form | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parse_form.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse_form.js,samples/README.md) |
 | Parse_table | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parse_table.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse_table.js,samples/README.md) |
 | Parse_with_model | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parse_with_model.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse_with_model.js,samples/README.md) |
@@ -127,6 +125,27 @@ has instructions for running the samples.
 
 The [Document AI Node.js Client API Reference][client-docs] documentation
 also contains samples.
+
+## Supported Node.js Versions
+
+Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Libraries are compatible with all current _active_ and _maintenance_ versions of
+Node.js.
+
+Client libraries targetting some end-of-life versions of Node.js are available, and
+can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+The dist-tags follow the naming convention `legacy-(version)`.
+
+_Legacy Node.js versions are supported as a best effort:_
+
+* Legacy versions will not be tested in continuous integration.
+* Some security patches may not be able to be backported.
+* Dependencies will not be kept up-to-date, and features will not be backported.
+
+#### Legacy tags available
+
+* `legacy-8`: install client libraries from this dist-tag for versions
+  compatible with Node.js 8.
 
 ## Versioning
 

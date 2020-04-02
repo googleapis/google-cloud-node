@@ -14,8 +14,6 @@
 * [Samples](#samples)
   * [Batch_parse_form](#batch_parse_form)
   * [Batch_parse_table](#batch_parse_table)
-  * [Parse Form](#parse-form)
-  * [Parse Table](#parse-table)
   * [Parse_form](#parse_form)
   * [Parse_table](#parse_table)
   * [Parse_with_model](#parse_with_model)
@@ -64,40 +62,6 @@ __Usage:__
 
 
 `node samples/batch_parse_table.js`
-
-
------
-
-
-
-
-### Parse Form
-
-View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parseForm.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parseForm.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/parseForm.js`
-
-
------
-
-
-
-
-### Parse Table
-
-View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parseTable.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parseTable.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/parseTable.js`
 
 
 -----
