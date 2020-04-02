@@ -65,7 +65,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "google-auth-library": "^5.7.0",
+    "google-auth-library": "^6.0.0",
     "gts": "2.0.0-alpha.9",
     "http2spy": "^1.1.0",
     "jsdoc": "^3.6.2",
