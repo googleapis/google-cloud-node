@@ -27,6 +27,12 @@ import {Metadata} from '@google-cloud/common';
 const dns = new DNS();
 const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN || 'gitnpm.com.';
 
+const delayMs = async (ms = 1000) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+};
+
 // Only run the tests if there is a domain to test with.
 describe('dns', () => {
   const ZONE_NAME = 'test-zone-' + uuid.v4().substr(0, 18);
@@ -117,12 +123,12 @@ describe('dns', () => {
     ZONE.delete({force: true}, done);
   });
 
-  it('should return 0 or more zones', done => {
-    dns.getZones((err, zones) => {
-      assert.ifError(err);
-      assert(zones!.length >= 0);
-      done();
-    });
+  // deal with eventual consistency of ZONE.create():
+  it('should return 0 or more zones', async function() {
+    this.retries(3);
+    await delayMs(1000);
+    const zones = await dns.getZones();
+    assert(zones!.length >= 0);
   });
 
   describe('Zones', () => {
