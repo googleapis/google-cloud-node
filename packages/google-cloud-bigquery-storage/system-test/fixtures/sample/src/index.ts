@@ -19,7 +19,7 @@
 import {BigQueryStorageClient} from '@google-cloud/bigquery-storage';
 
 function main() {
-  const bigQueryStorageClient = new BigQueryStorageClient();
+  new BigQueryStorageClient();
 }
 
 main();
