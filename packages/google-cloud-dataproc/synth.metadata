@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-04-01T11:43:28.852911Z",
+  "updateTime": "2020-04-02T11:24:18.140770Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "dc65f39f33cb139b3a2244199a3e722a4d94b679",
-        "internalRef": "304035052"
+        "sha": "75047719f704d61f405cac6d7439637ab36c1232",
+        "internalRef": "304305096",
+        "log": "75047719f704d61f405cac6d7439637ab36c1232\nfix Dataproc: add missing `REQUIRED` annotation.\n\nPiperOrigin-RevId: 304305096\n\n7e1b880fd5d477176cf9b0bb9b137b9bea56e787\nAdd Ruby/PHP namespace options\n\nPiperOrigin-RevId: 304288402\n\naba342359b6743353195ca53f944fe71e6fb6cd4\nchore: add java assembly target for accesscontextmanager BUILD.bazel\n\nPiperOrigin-RevId: 304207684\n\n"
       }
     },
     {

@@ -59,9 +59,6 @@ npm install @google-cloud/dataproc
 // cluster, submitting a PySpark job from Google Cloud Storage to the
 // cluster, reading the output of the job and deleting the cluster, all
 // using the Node.js client library.
-//
-// Usage:
-//     node quickstart.js <PROJECT_ID> <REGION> <CLUSTER_NAME> <GCS_JOB_FILE_PATH>
 
 'use strict';
 
@@ -74,11 +71,13 @@ function main(projectId, region, clusterName, jobFilePath) {
   // Create a cluster client with the endpoint set to the desired cluster region
   const clusterClient = new dataproc.v1.ClusterControllerClient({
     apiEndpoint: `${region}-dataproc.googleapis.com`,
+    projectId: projectId,
   });
 
   // Create a job client with the endpoint set to the desired cluster region
   const jobClient = new dataproc.v1.JobControllerClient({
     apiEndpoint: `${region}-dataproc.googleapis.com`,
+    projectId: projectId,
   });
 
   async function quickstart() {
@@ -211,7 +210,7 @@ has instructions for running the samples.
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
 | Create Cluster | [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/createCluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/createCluster.js,samples/README.md) |
-| Instantiate Inline Workflow Template | [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/instantiateInlineWorkflowTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/instantiateInlineWorkflowTemplate.js,samples/README.md) |
+| Instantiate an inline workflow template | [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/instantiateInlineWorkflowTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/instantiateInlineWorkflowTemplate.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 

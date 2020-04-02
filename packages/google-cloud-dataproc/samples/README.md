@@ -13,7 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Create Cluster](#create-cluster)
-  * [Instantiate Inline Workflow Template](#instantiate-inline-workflow-template)
+  * [Instantiate an inline workflow template](#instantiate-an-inline-workflow-template)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -40,7 +40,7 @@ View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master
 __Usage:__
 
 
-`node samples/createCluster.js`
+`node createCluster.js <PROJECT_ID> <REGION> <CLUSTER_NAME>`
 
 
 -----
@@ -48,7 +48,7 @@ __Usage:__
 
 
 
-### Instantiate Inline Workflow Template
+### Instantiate an inline workflow template
 
 View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/instantiateInlineWorkflowTemplate.js).
 
@@ -57,7 +57,7 @@ View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master
 __Usage:__
 
 
-`node samples/instantiateInlineWorkflowTemplate.js`
+`node instantiateInlineWorkflowTemplate.js <PROJECT_ID> <REGION>`
 
 
 -----
@@ -74,7 +74,7 @@ View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node quickstart.js <PROJECT_ID> <REGION> <CLUSTER_NAME> <JOB_FILE_PATH>`
 
 
 

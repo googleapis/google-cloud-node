@@ -214,7 +214,10 @@
                         },
                         "policy": {
                           "type": "AutoscalingPolicy",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
