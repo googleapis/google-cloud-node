@@ -17,16 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './speech_translation_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -37,13 +31,6 @@ const version = require('../../../package.json').version;
  * @memberof v1beta1
  */
 export class SpeechTranslationServiceClient {
-  private _descriptors: Descriptors = {
-    page: {},
-    stream: {},
-    longrunning: {},
-    batching: {},
-  };
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -51,6 +38,13 @@ export class SpeechTranslationServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
   speechTranslationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -144,12 +138,15 @@ export class SpeechTranslationServiceClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
-    this._descriptors.stream = {
+    this.descriptors.stream = {
       streamingTranslateSpeech: new this._gaxModule.StreamDescriptor(
         gax.StreamType.BIDI_STREAMING
       ),
@@ -166,7 +163,7 @@ export class SpeechTranslationServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -193,7 +190,7 @@ export class SpeechTranslationServiceClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.mediatranslation.v1beta1.SpeechTranslationService'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.mediatranslation.v1beta1
             .SpeechTranslationService,
       this._opts
@@ -202,9 +199,8 @@ export class SpeechTranslationServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const speechTranslationServiceStubMethods = ['streamingTranslateSpeech'];
-
     for (const methodName of speechTranslationServiceStubMethods) {
-      const innerCallPromise = this.speechTranslationServiceStub.then(
+      const callPromise = this.speechTranslationServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -218,20 +214,14 @@ export class SpeechTranslationServiceClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.speechTranslationServiceStub;
@@ -301,7 +291,7 @@ export class SpeechTranslationServiceClient {
    */
   streamingTranslateSpeech(options?: gax.CallOptions): gax.CancellableStream {
     this.initialize();
-    return this._innerApiCalls.streamingTranslateSpeech(options);
+    return this.innerApiCalls.streamingTranslateSpeech(options);
   }
 
   /**

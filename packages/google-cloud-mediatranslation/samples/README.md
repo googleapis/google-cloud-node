@@ -13,6 +13,8 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Quickstart](#quickstart)
+  * [Translate_from_file](#translate_from_file)
+  * [Translate_from_mic](#translate_from_mic)
 
 ## Before you begin
 
@@ -39,6 +41,40 @@ __Usage:__
 
 
 `node samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Translate_from_file
+
+View the [source code](https://github.com/googleapis/nodejs-media-translation/blob/master/samples/translate_from_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-media-translation&page=editor&open_in_editor=samples/translate_from_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/translate_from_file.js`
+
+
+-----
+
+
+
+
+### Translate_from_mic
+
+View the [source code](https://github.com/googleapis/nodejs-media-translation/blob/master/samples/translate_from_mic.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-media-translation&page=editor&open_in_editor=samples/translate_from_mic.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/translate_from_mic.js`
 
 
 
