@@ -285,6 +285,9 @@ export namespace google {
 
                     /** Condition conditionAbsent */
                     conditionAbsent?: (google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null);
+
+                    /** Condition conditionTimeSeriesQueryLanguage */
+                    conditionTimeSeriesQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition|null);
                 }
 
                 /** Represents a Condition. */
@@ -308,8 +311,11 @@ export namespace google {
                     /** Condition conditionAbsent. */
                     public conditionAbsent?: (google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null);
 
+                    /** Condition conditionTimeSeriesQueryLanguage. */
+                    public conditionTimeSeriesQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition|null);
+
                     /** Condition condition. */
-                    public condition?: ("conditionThreshold"|"conditionAbsent");
+                    public condition?: ("conditionThreshold"|"conditionAbsent"|"conditionTimeSeriesQueryLanguage");
 
                     /**
                      * Creates a new Condition instance using the specified properties.
@@ -718,6 +724,102 @@ export namespace google {
 
                         /**
                          * Converts this MetricAbsence to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a TimeSeriesQueryLanguageCondition. */
+                    interface ITimeSeriesQueryLanguageCondition {
+
+                        /** TimeSeriesQueryLanguageCondition query */
+                        query?: (string|null);
+
+                        /** TimeSeriesQueryLanguageCondition summary */
+                        summary?: (string|null);
+                    }
+
+                    /** Represents a TimeSeriesQueryLanguageCondition. */
+                    class TimeSeriesQueryLanguageCondition implements ITimeSeriesQueryLanguageCondition {
+
+                        /**
+                         * Constructs a new TimeSeriesQueryLanguageCondition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition);
+
+                        /** TimeSeriesQueryLanguageCondition query. */
+                        public query: string;
+
+                        /** TimeSeriesQueryLanguageCondition summary. */
+                        public summary: string;
+
+                        /**
+                         * Creates a new TimeSeriesQueryLanguageCondition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TimeSeriesQueryLanguageCondition instance
+                         */
+                        public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition): google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition;
+
+                        /**
+                         * Encodes the specified TimeSeriesQueryLanguageCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.verify|verify} messages.
+                         * @param message TimeSeriesQueryLanguageCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TimeSeriesQueryLanguageCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.verify|verify} messages.
+                         * @param message TimeSeriesQueryLanguageCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TimeSeriesQueryLanguageCondition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TimeSeriesQueryLanguageCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition;
+
+                        /**
+                         * Decodes a TimeSeriesQueryLanguageCondition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TimeSeriesQueryLanguageCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition;
+
+                        /**
+                         * Verifies a TimeSeriesQueryLanguageCondition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TimeSeriesQueryLanguageCondition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TimeSeriesQueryLanguageCondition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition;
+
+                        /**
+                         * Creates a plain object from a TimeSeriesQueryLanguageCondition message. Also converts values to other types if specified.
+                         * @param message TimeSeriesQueryLanguageCondition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TimeSeriesQueryLanguageCondition to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -3312,6 +3414,816 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of a TimeSeriesDescriptor. */
+            interface ITimeSeriesDescriptor {
+
+                /** TimeSeriesDescriptor labelDescriptors */
+                labelDescriptors?: (google.api.ILabelDescriptor[]|null);
+
+                /** TimeSeriesDescriptor pointDescriptors */
+                pointDescriptors?: (google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor[]|null);
+            }
+
+            /** Represents a TimeSeriesDescriptor. */
+            class TimeSeriesDescriptor implements ITimeSeriesDescriptor {
+
+                /**
+                 * Constructs a new TimeSeriesDescriptor.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.ITimeSeriesDescriptor);
+
+                /** TimeSeriesDescriptor labelDescriptors. */
+                public labelDescriptors: google.api.ILabelDescriptor[];
+
+                /** TimeSeriesDescriptor pointDescriptors. */
+                public pointDescriptors: google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor[];
+
+                /**
+                 * Creates a new TimeSeriesDescriptor instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns TimeSeriesDescriptor instance
+                 */
+                public static create(properties?: google.monitoring.v3.ITimeSeriesDescriptor): google.monitoring.v3.TimeSeriesDescriptor;
+
+                /**
+                 * Encodes the specified TimeSeriesDescriptor message. Does not implicitly {@link google.monitoring.v3.TimeSeriesDescriptor.verify|verify} messages.
+                 * @param message TimeSeriesDescriptor message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.ITimeSeriesDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified TimeSeriesDescriptor message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesDescriptor.verify|verify} messages.
+                 * @param message TimeSeriesDescriptor message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.ITimeSeriesDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a TimeSeriesDescriptor message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns TimeSeriesDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.TimeSeriesDescriptor;
+
+                /**
+                 * Decodes a TimeSeriesDescriptor message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns TimeSeriesDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.TimeSeriesDescriptor;
+
+                /**
+                 * Verifies a TimeSeriesDescriptor message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a TimeSeriesDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns TimeSeriesDescriptor
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.TimeSeriesDescriptor;
+
+                /**
+                 * Creates a plain object from a TimeSeriesDescriptor message. Also converts values to other types if specified.
+                 * @param message TimeSeriesDescriptor
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.TimeSeriesDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this TimeSeriesDescriptor to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace TimeSeriesDescriptor {
+
+                /** Properties of a ValueDescriptor. */
+                interface IValueDescriptor {
+
+                    /** ValueDescriptor key */
+                    key?: (string|null);
+
+                    /** ValueDescriptor valueType */
+                    valueType?: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType|null);
+
+                    /** ValueDescriptor metricKind */
+                    metricKind?: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind|null);
+                }
+
+                /** Represents a ValueDescriptor. */
+                class ValueDescriptor implements IValueDescriptor {
+
+                    /**
+                     * Constructs a new ValueDescriptor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor);
+
+                    /** ValueDescriptor key. */
+                    public key: string;
+
+                    /** ValueDescriptor valueType. */
+                    public valueType: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType);
+
+                    /** ValueDescriptor metricKind. */
+                    public metricKind: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind);
+
+                    /**
+                     * Creates a new ValueDescriptor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValueDescriptor instance
+                     */
+                    public static create(properties?: google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor): google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor;
+
+                    /**
+                     * Encodes the specified ValueDescriptor message. Does not implicitly {@link google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.verify|verify} messages.
+                     * @param message ValueDescriptor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValueDescriptor message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.verify|verify} messages.
+                     * @param message ValueDescriptor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValueDescriptor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValueDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor;
+
+                    /**
+                     * Decodes a ValueDescriptor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValueDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor;
+
+                    /**
+                     * Verifies a ValueDescriptor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValueDescriptor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValueDescriptor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor;
+
+                    /**
+                     * Creates a plain object from a ValueDescriptor message. Also converts values to other types if specified.
+                     * @param message ValueDescriptor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValueDescriptor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
+            /** Properties of a TimeSeriesData. */
+            interface ITimeSeriesData {
+
+                /** TimeSeriesData labelValues */
+                labelValues?: (google.monitoring.v3.ILabelValue[]|null);
+
+                /** TimeSeriesData pointData */
+                pointData?: (google.monitoring.v3.TimeSeriesData.IPointData[]|null);
+            }
+
+            /** Represents a TimeSeriesData. */
+            class TimeSeriesData implements ITimeSeriesData {
+
+                /**
+                 * Constructs a new TimeSeriesData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.ITimeSeriesData);
+
+                /** TimeSeriesData labelValues. */
+                public labelValues: google.monitoring.v3.ILabelValue[];
+
+                /** TimeSeriesData pointData. */
+                public pointData: google.monitoring.v3.TimeSeriesData.IPointData[];
+
+                /**
+                 * Creates a new TimeSeriesData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns TimeSeriesData instance
+                 */
+                public static create(properties?: google.monitoring.v3.ITimeSeriesData): google.monitoring.v3.TimeSeriesData;
+
+                /**
+                 * Encodes the specified TimeSeriesData message. Does not implicitly {@link google.monitoring.v3.TimeSeriesData.verify|verify} messages.
+                 * @param message TimeSeriesData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.ITimeSeriesData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified TimeSeriesData message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesData.verify|verify} messages.
+                 * @param message TimeSeriesData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.ITimeSeriesData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a TimeSeriesData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns TimeSeriesData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.TimeSeriesData;
+
+                /**
+                 * Decodes a TimeSeriesData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns TimeSeriesData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.TimeSeriesData;
+
+                /**
+                 * Verifies a TimeSeriesData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a TimeSeriesData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns TimeSeriesData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.TimeSeriesData;
+
+                /**
+                 * Creates a plain object from a TimeSeriesData message. Also converts values to other types if specified.
+                 * @param message TimeSeriesData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.TimeSeriesData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this TimeSeriesData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace TimeSeriesData {
+
+                /** Properties of a PointData. */
+                interface IPointData {
+
+                    /** PointData values */
+                    values?: (google.monitoring.v3.ITypedValue[]|null);
+
+                    /** PointData timeInterval */
+                    timeInterval?: (google.monitoring.v3.ITimeInterval|null);
+                }
+
+                /** Represents a PointData. */
+                class PointData implements IPointData {
+
+                    /**
+                     * Constructs a new PointData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.TimeSeriesData.IPointData);
+
+                    /** PointData values. */
+                    public values: google.monitoring.v3.ITypedValue[];
+
+                    /** PointData timeInterval. */
+                    public timeInterval?: (google.monitoring.v3.ITimeInterval|null);
+
+                    /**
+                     * Creates a new PointData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PointData instance
+                     */
+                    public static create(properties?: google.monitoring.v3.TimeSeriesData.IPointData): google.monitoring.v3.TimeSeriesData.PointData;
+
+                    /**
+                     * Encodes the specified PointData message. Does not implicitly {@link google.monitoring.v3.TimeSeriesData.PointData.verify|verify} messages.
+                     * @param message PointData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.TimeSeriesData.IPointData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PointData message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesData.PointData.verify|verify} messages.
+                     * @param message PointData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.TimeSeriesData.IPointData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PointData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PointData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.TimeSeriesData.PointData;
+
+                    /**
+                     * Decodes a PointData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PointData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.TimeSeriesData.PointData;
+
+                    /**
+                     * Verifies a PointData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PointData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PointData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.TimeSeriesData.PointData;
+
+                    /**
+                     * Creates a plain object from a PointData message. Also converts values to other types if specified.
+                     * @param message PointData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.TimeSeriesData.PointData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PointData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
+            /** Properties of a LabelValue. */
+            interface ILabelValue {
+
+                /** LabelValue boolValue */
+                boolValue?: (boolean|null);
+
+                /** LabelValue int64Value */
+                int64Value?: (number|Long|string|null);
+
+                /** LabelValue stringValue */
+                stringValue?: (string|null);
+            }
+
+            /** Represents a LabelValue. */
+            class LabelValue implements ILabelValue {
+
+                /**
+                 * Constructs a new LabelValue.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.ILabelValue);
+
+                /** LabelValue boolValue. */
+                public boolValue: boolean;
+
+                /** LabelValue int64Value. */
+                public int64Value: (number|Long|string);
+
+                /** LabelValue stringValue. */
+                public stringValue: string;
+
+                /** LabelValue value. */
+                public value?: ("boolValue"|"int64Value"|"stringValue");
+
+                /**
+                 * Creates a new LabelValue instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LabelValue instance
+                 */
+                public static create(properties?: google.monitoring.v3.ILabelValue): google.monitoring.v3.LabelValue;
+
+                /**
+                 * Encodes the specified LabelValue message. Does not implicitly {@link google.monitoring.v3.LabelValue.verify|verify} messages.
+                 * @param message LabelValue message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.ILabelValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LabelValue message, length delimited. Does not implicitly {@link google.monitoring.v3.LabelValue.verify|verify} messages.
+                 * @param message LabelValue message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.ILabelValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LabelValue message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LabelValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.LabelValue;
+
+                /**
+                 * Decodes a LabelValue message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LabelValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.LabelValue;
+
+                /**
+                 * Verifies a LabelValue message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LabelValue message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LabelValue
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.LabelValue;
+
+                /**
+                 * Creates a plain object from a LabelValue message. Also converts values to other types if specified.
+                 * @param message LabelValue
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.LabelValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LabelValue to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryError. */
+            interface IQueryError {
+
+                /** QueryError locator */
+                locator?: (google.monitoring.v3.ITextLocator|null);
+
+                /** QueryError message */
+                message?: (string|null);
+            }
+
+            /** Represents a QueryError. */
+            class QueryError implements IQueryError {
+
+                /**
+                 * Constructs a new QueryError.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.IQueryError);
+
+                /** QueryError locator. */
+                public locator?: (google.monitoring.v3.ITextLocator|null);
+
+                /** QueryError message. */
+                public message: string;
+
+                /**
+                 * Creates a new QueryError instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QueryError instance
+                 */
+                public static create(properties?: google.monitoring.v3.IQueryError): google.monitoring.v3.QueryError;
+
+                /**
+                 * Encodes the specified QueryError message. Does not implicitly {@link google.monitoring.v3.QueryError.verify|verify} messages.
+                 * @param message QueryError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.IQueryError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryError message, length delimited. Does not implicitly {@link google.monitoring.v3.QueryError.verify|verify} messages.
+                 * @param message QueryError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.IQueryError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryError message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.QueryError;
+
+                /**
+                 * Decodes a QueryError message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.QueryError;
+
+                /**
+                 * Verifies a QueryError message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryError message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryError
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.QueryError;
+
+                /**
+                 * Creates a plain object from a QueryError message. Also converts values to other types if specified.
+                 * @param message QueryError
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.QueryError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryError to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a TextLocator. */
+            interface ITextLocator {
+
+                /** TextLocator source */
+                source?: (string|null);
+
+                /** TextLocator startPosition */
+                startPosition?: (google.monitoring.v3.TextLocator.IPosition|null);
+
+                /** TextLocator endPosition */
+                endPosition?: (google.monitoring.v3.TextLocator.IPosition|null);
+
+                /** TextLocator nestedLocator */
+                nestedLocator?: (google.monitoring.v3.ITextLocator|null);
+
+                /** TextLocator nestingReason */
+                nestingReason?: (string|null);
+            }
+
+            /** Represents a TextLocator. */
+            class TextLocator implements ITextLocator {
+
+                /**
+                 * Constructs a new TextLocator.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.ITextLocator);
+
+                /** TextLocator source. */
+                public source: string;
+
+                /** TextLocator startPosition. */
+                public startPosition?: (google.monitoring.v3.TextLocator.IPosition|null);
+
+                /** TextLocator endPosition. */
+                public endPosition?: (google.monitoring.v3.TextLocator.IPosition|null);
+
+                /** TextLocator nestedLocator. */
+                public nestedLocator?: (google.monitoring.v3.ITextLocator|null);
+
+                /** TextLocator nestingReason. */
+                public nestingReason: string;
+
+                /**
+                 * Creates a new TextLocator instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns TextLocator instance
+                 */
+                public static create(properties?: google.monitoring.v3.ITextLocator): google.monitoring.v3.TextLocator;
+
+                /**
+                 * Encodes the specified TextLocator message. Does not implicitly {@link google.monitoring.v3.TextLocator.verify|verify} messages.
+                 * @param message TextLocator message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.ITextLocator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified TextLocator message, length delimited. Does not implicitly {@link google.monitoring.v3.TextLocator.verify|verify} messages.
+                 * @param message TextLocator message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.ITextLocator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a TextLocator message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns TextLocator
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.TextLocator;
+
+                /**
+                 * Decodes a TextLocator message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns TextLocator
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.TextLocator;
+
+                /**
+                 * Verifies a TextLocator message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a TextLocator message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns TextLocator
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.TextLocator;
+
+                /**
+                 * Creates a plain object from a TextLocator message. Also converts values to other types if specified.
+                 * @param message TextLocator
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.TextLocator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this TextLocator to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace TextLocator {
+
+                /** Properties of a Position. */
+                interface IPosition {
+
+                    /** Position line */
+                    line?: (number|null);
+
+                    /** Position column */
+                    column?: (number|null);
+                }
+
+                /** Represents a Position. */
+                class Position implements IPosition {
+
+                    /**
+                     * Constructs a new Position.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.TextLocator.IPosition);
+
+                    /** Position line. */
+                    public line: number;
+
+                    /** Position column. */
+                    public column: number;
+
+                    /**
+                     * Creates a new Position instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Position instance
+                     */
+                    public static create(properties?: google.monitoring.v3.TextLocator.IPosition): google.monitoring.v3.TextLocator.Position;
+
+                    /**
+                     * Encodes the specified Position message. Does not implicitly {@link google.monitoring.v3.TextLocator.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.TextLocator.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.monitoring.v3.TextLocator.Position.verify|verify} messages.
+                     * @param message Position message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.TextLocator.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.TextLocator.Position;
+
+                    /**
+                     * Decodes a Position message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Position
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.TextLocator.Position;
+
+                    /**
+                     * Verifies a Position message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Position
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.TextLocator.Position;
+
+                    /**
+                     * Creates a plain object from a Position message. Also converts values to other types if specified.
+                     * @param message Position
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.TextLocator.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Position to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Represents a MetricService */
             class MetricService extends $protobuf.rpc.Service {
 
@@ -4912,6 +5824,318 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
+            }
+
+            /** Properties of a QueryTimeSeriesRequest. */
+            interface IQueryTimeSeriesRequest {
+
+                /** QueryTimeSeriesRequest name */
+                name?: (string|null);
+
+                /** QueryTimeSeriesRequest query */
+                query?: (string|null);
+
+                /** QueryTimeSeriesRequest pageSize */
+                pageSize?: (number|null);
+
+                /** QueryTimeSeriesRequest pageToken */
+                pageToken?: (string|null);
+            }
+
+            /** Represents a QueryTimeSeriesRequest. */
+            class QueryTimeSeriesRequest implements IQueryTimeSeriesRequest {
+
+                /**
+                 * Constructs a new QueryTimeSeriesRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.IQueryTimeSeriesRequest);
+
+                /** QueryTimeSeriesRequest name. */
+                public name: string;
+
+                /** QueryTimeSeriesRequest query. */
+                public query: string;
+
+                /** QueryTimeSeriesRequest pageSize. */
+                public pageSize: number;
+
+                /** QueryTimeSeriesRequest pageToken. */
+                public pageToken: string;
+
+                /**
+                 * Creates a new QueryTimeSeriesRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QueryTimeSeriesRequest instance
+                 */
+                public static create(properties?: google.monitoring.v3.IQueryTimeSeriesRequest): google.monitoring.v3.QueryTimeSeriesRequest;
+
+                /**
+                 * Encodes the specified QueryTimeSeriesRequest message. Does not implicitly {@link google.monitoring.v3.QueryTimeSeriesRequest.verify|verify} messages.
+                 * @param message QueryTimeSeriesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.IQueryTimeSeriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryTimeSeriesRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.QueryTimeSeriesRequest.verify|verify} messages.
+                 * @param message QueryTimeSeriesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.IQueryTimeSeriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryTimeSeriesRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryTimeSeriesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.QueryTimeSeriesRequest;
+
+                /**
+                 * Decodes a QueryTimeSeriesRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryTimeSeriesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.QueryTimeSeriesRequest;
+
+                /**
+                 * Verifies a QueryTimeSeriesRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryTimeSeriesRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryTimeSeriesRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.QueryTimeSeriesRequest;
+
+                /**
+                 * Creates a plain object from a QueryTimeSeriesRequest message. Also converts values to other types if specified.
+                 * @param message QueryTimeSeriesRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.QueryTimeSeriesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryTimeSeriesRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryTimeSeriesResponse. */
+            interface IQueryTimeSeriesResponse {
+
+                /** QueryTimeSeriesResponse timeSeriesDescriptor */
+                timeSeriesDescriptor?: (google.monitoring.v3.ITimeSeriesDescriptor|null);
+
+                /** QueryTimeSeriesResponse timeSeriesData */
+                timeSeriesData?: (google.monitoring.v3.ITimeSeriesData[]|null);
+
+                /** QueryTimeSeriesResponse nextPageToken */
+                nextPageToken?: (string|null);
+
+                /** QueryTimeSeriesResponse partialErrors */
+                partialErrors?: (google.rpc.IStatus[]|null);
+            }
+
+            /** Represents a QueryTimeSeriesResponse. */
+            class QueryTimeSeriesResponse implements IQueryTimeSeriesResponse {
+
+                /**
+                 * Constructs a new QueryTimeSeriesResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.IQueryTimeSeriesResponse);
+
+                /** QueryTimeSeriesResponse timeSeriesDescriptor. */
+                public timeSeriesDescriptor?: (google.monitoring.v3.ITimeSeriesDescriptor|null);
+
+                /** QueryTimeSeriesResponse timeSeriesData. */
+                public timeSeriesData: google.monitoring.v3.ITimeSeriesData[];
+
+                /** QueryTimeSeriesResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /** QueryTimeSeriesResponse partialErrors. */
+                public partialErrors: google.rpc.IStatus[];
+
+                /**
+                 * Creates a new QueryTimeSeriesResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QueryTimeSeriesResponse instance
+                 */
+                public static create(properties?: google.monitoring.v3.IQueryTimeSeriesResponse): google.monitoring.v3.QueryTimeSeriesResponse;
+
+                /**
+                 * Encodes the specified QueryTimeSeriesResponse message. Does not implicitly {@link google.monitoring.v3.QueryTimeSeriesResponse.verify|verify} messages.
+                 * @param message QueryTimeSeriesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.IQueryTimeSeriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryTimeSeriesResponse message, length delimited. Does not implicitly {@link google.monitoring.v3.QueryTimeSeriesResponse.verify|verify} messages.
+                 * @param message QueryTimeSeriesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.IQueryTimeSeriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryTimeSeriesResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryTimeSeriesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.QueryTimeSeriesResponse;
+
+                /**
+                 * Decodes a QueryTimeSeriesResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryTimeSeriesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.QueryTimeSeriesResponse;
+
+                /**
+                 * Verifies a QueryTimeSeriesResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryTimeSeriesResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryTimeSeriesResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.QueryTimeSeriesResponse;
+
+                /**
+                 * Creates a plain object from a QueryTimeSeriesResponse message. Also converts values to other types if specified.
+                 * @param message QueryTimeSeriesResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.QueryTimeSeriesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryTimeSeriesResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryErrorList. */
+            interface IQueryErrorList {
+
+                /** QueryErrorList errors */
+                errors?: (google.monitoring.v3.IQueryError[]|null);
+
+                /** QueryErrorList errorSummary */
+                errorSummary?: (string|null);
+            }
+
+            /** Represents a QueryErrorList. */
+            class QueryErrorList implements IQueryErrorList {
+
+                /**
+                 * Constructs a new QueryErrorList.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.IQueryErrorList);
+
+                /** QueryErrorList errors. */
+                public errors: google.monitoring.v3.IQueryError[];
+
+                /** QueryErrorList errorSummary. */
+                public errorSummary: string;
+
+                /**
+                 * Creates a new QueryErrorList instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QueryErrorList instance
+                 */
+                public static create(properties?: google.monitoring.v3.IQueryErrorList): google.monitoring.v3.QueryErrorList;
+
+                /**
+                 * Encodes the specified QueryErrorList message. Does not implicitly {@link google.monitoring.v3.QueryErrorList.verify|verify} messages.
+                 * @param message QueryErrorList message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.IQueryErrorList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryErrorList message, length delimited. Does not implicitly {@link google.monitoring.v3.QueryErrorList.verify|verify} messages.
+                 * @param message QueryErrorList message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.IQueryErrorList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryErrorList message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryErrorList
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.QueryErrorList;
+
+                /**
+                 * Decodes a QueryErrorList message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryErrorList
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.QueryErrorList;
+
+                /**
+                 * Verifies a QueryErrorList message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryErrorList message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryErrorList
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.QueryErrorList;
+
+                /**
+                 * Creates a plain object from a QueryErrorList message. Also converts values to other types if specified.
+                 * @param message QueryErrorList
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.QueryErrorList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryErrorList to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
             }
 
             /** Properties of a NotificationChannelDescriptor. */
@@ -6691,6 +7915,9 @@ export namespace google {
                 /** Service clusterIstio */
                 clusterIstio?: (google.monitoring.v3.Service.IClusterIstio|null);
 
+                /** Service meshIstio */
+                meshIstio?: (google.monitoring.v3.Service.IMeshIstio|null);
+
                 /** Service telemetry */
                 telemetry?: (google.monitoring.v3.Service.ITelemetry|null);
             }
@@ -6722,11 +7949,14 @@ export namespace google {
                 /** Service clusterIstio. */
                 public clusterIstio?: (google.monitoring.v3.Service.IClusterIstio|null);
 
+                /** Service meshIstio. */
+                public meshIstio?: (google.monitoring.v3.Service.IMeshIstio|null);
+
                 /** Service telemetry. */
                 public telemetry?: (google.monitoring.v3.Service.ITelemetry|null);
 
                 /** Service identifier. */
-                public identifier?: ("custom"|"appEngine"|"cloudEndpoints"|"clusterIstio");
+                public identifier?: ("custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio");
 
                 /**
                  * Creates a new Service instance using the specified properties.
@@ -7168,6 +8398,108 @@ export namespace google {
 
                     /**
                      * Converts this ClusterIstio to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MeshIstio. */
+                interface IMeshIstio {
+
+                    /** MeshIstio meshUid */
+                    meshUid?: (string|null);
+
+                    /** MeshIstio serviceNamespace */
+                    serviceNamespace?: (string|null);
+
+                    /** MeshIstio serviceName */
+                    serviceName?: (string|null);
+                }
+
+                /** Represents a MeshIstio. */
+                class MeshIstio implements IMeshIstio {
+
+                    /**
+                     * Constructs a new MeshIstio.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.Service.IMeshIstio);
+
+                    /** MeshIstio meshUid. */
+                    public meshUid: string;
+
+                    /** MeshIstio serviceNamespace. */
+                    public serviceNamespace: string;
+
+                    /** MeshIstio serviceName. */
+                    public serviceName: string;
+
+                    /**
+                     * Creates a new MeshIstio instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MeshIstio instance
+                     */
+                    public static create(properties?: google.monitoring.v3.Service.IMeshIstio): google.monitoring.v3.Service.MeshIstio;
+
+                    /**
+                     * Encodes the specified MeshIstio message. Does not implicitly {@link google.monitoring.v3.Service.MeshIstio.verify|verify} messages.
+                     * @param message MeshIstio message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.Service.IMeshIstio, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MeshIstio message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.MeshIstio.verify|verify} messages.
+                     * @param message MeshIstio message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.Service.IMeshIstio, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MeshIstio message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MeshIstio
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Service.MeshIstio;
+
+                    /**
+                     * Decodes a MeshIstio message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MeshIstio
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Service.MeshIstio;
+
+                    /**
+                     * Verifies a MeshIstio message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MeshIstio message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MeshIstio
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Service.MeshIstio;
+
+                    /**
+                     * Creates a plain object from a MeshIstio message. Also converts values to other types if specified.
+                     * @param message MeshIstio
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.Service.MeshIstio, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MeshIstio to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

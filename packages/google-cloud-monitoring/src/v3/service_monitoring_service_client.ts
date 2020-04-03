@@ -35,7 +35,7 @@ import * as gapicConfig from './service_monitoring_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The Stackdriver Monitoring Service-Oriented Monitoring API has endpoints for
+ *  The Cloud Monitoring Service-Oriented Monitoring API has endpoints for
  *  managing and querying aspects of a workspace's services. These include the
  *  `Service`'s monitored resources, its Service-Level Objectives, and a taxonomy
  *  of categorized Health Metrics.
@@ -426,11 +426,12 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent workspace.
-   *   Of the form `projects/{project_id}`.
+   *   Required. Resource name of the parent workspace. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {string} request.serviceId
    *   Optional. The Service id to use for this Service. If omitted, an id will be
-   *   generated instead. Must match the pattern [a-z0-9\-]+
+   *   generated instead. Must match the pattern `[a-z0-9\-]+`
    * @param {google.monitoring.v3.Service} request.service
    *   Required. The `Service` to create.
    * @param {object} [options]
@@ -512,8 +513,9 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the `Service`.
-   *   Of the form `projects/{project_id}/services/{service_id}`.
+   *   Required. Resource name of the `Service`. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -676,8 +678,9 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the `Service` to delete.
-   *   Of the form `projects/{project_id}/services/{service_id}`.
+   *   Required. Resource name of the `Service` to delete. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -764,12 +767,13 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent `Service`.
-   *   Of the form `projects/{project_id}/services/{service_id}`.
+   *   Required. Resource name of the parent `Service`. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
    * @param {string} request.serviceLevelObjectiveId
    *   Optional. The ServiceLevelObjective id to use for this
    *   ServiceLevelObjective. If omitted, an id will be generated instead. Must
-   *   match the pattern [a-z0-9\-]+
+   *   match the pattern `[a-z0-9\-]+`
    * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
    *   Required. The `ServiceLevelObjective` to create.
    *   The provided `name` will be respected if no `ServiceLevelObjective` exists
@@ -868,9 +872,9 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the `ServiceLevelObjective` to get.
-   *   Of the form
-   *   `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
+   *   Required. Resource name of the `ServiceLevelObjective` to get. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
    * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
    *   View of the `ServiceLevelObjective` to return. If `DEFAULT`, return the
    *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
@@ -1071,9 +1075,9 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the `ServiceLevelObjective` to delete.
-   *   Of the form
-   *   `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
+   *   Required. Resource name of the `ServiceLevelObjective` to delete. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1165,8 +1169,11 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent `Workspace`.
-   *   Of the form `projects/{project_id}`.
+   *   Required. Resource name of the parent containing the listed services, either a
+   *   project or a Monitoring Workspace. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
    * @param {string} request.filter
    *   A filter specifying what `Service`s to return. The filter currently
    *   supports the following fields:
@@ -1265,8 +1272,11 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent `Workspace`.
-   *   Of the form `projects/{project_id}`.
+   *   Required. Resource name of the parent containing the listed services, either a
+   *   project or a Monitoring Workspace. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
    * @param {string} request.filter
    *   A filter specifying what `Service`s to return. The filter currently
    *   supports the following fields:
@@ -1325,8 +1335,11 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent `Workspace`.
-   *   Of the form `projects/{project_id}`.
+   *   Required. Resource name of the parent containing the listed services, either a
+   *   project or a Monitoring Workspace. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
    * @param {string} request.filter
    *   A filter specifying what `Service`s to return. The filter currently
    *   supports the following fields:
@@ -1414,8 +1427,11 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent `Service`.
-   *   Of the form `projects/{project_id}/services/{service_id}`.
+   *   Required. Resource name of the parent containing the listed SLOs, either a
+   *   project or a Monitoring Workspace. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
    * @param {string} request.filter
    *   A filter specifying what `ServiceLevelObjective`s to return.
    * @param {number} request.pageSize
@@ -1513,8 +1529,11 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent `Service`.
-   *   Of the form `projects/{project_id}/services/{service_id}`.
+   *   Required. Resource name of the parent containing the listed SLOs, either a
+   *   project or a Monitoring Workspace. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
    * @param {string} request.filter
    *   A filter specifying what `ServiceLevelObjective`s to return.
    * @param {number} request.pageSize
@@ -1564,8 +1583,11 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent `Service`.
-   *   Of the form `projects/{project_id}/services/{service_id}`.
+   *   Required. Resource name of the parent containing the listed SLOs, either a
+   *   project or a Monitoring Workspace. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
    * @param {string} request.filter
    *   A filter specifying what `ServiceLevelObjective`s to return.
    * @param {number} request.pageSize

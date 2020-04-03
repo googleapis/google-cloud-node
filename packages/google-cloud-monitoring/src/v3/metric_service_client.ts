@@ -446,7 +446,7 @@ export class MetricServiceClient {
     >
   ): void;
   /**
-   * Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
+   * Gets a single monitored resource descriptor. This method does not require a Workspace.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -546,7 +546,7 @@ export class MetricServiceClient {
     >
   ): void;
   /**
-   * Gets a single metric descriptor. This method does not require a Stackdriver account.
+   * Gets a single metric descriptor. This method does not require a Workspace.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -933,7 +933,7 @@ export class MetricServiceClient {
     >
   ): void;
   /**
-   * Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
+   * Lists monitored resource descriptors that match a filter. This method does not require a Workspace.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1163,7 +1163,7 @@ export class MetricServiceClient {
     >
   ): void;
   /**
-   * Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
+   * Lists metric descriptors that match a filter. This method does not require a Workspace.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1391,7 +1391,7 @@ export class MetricServiceClient {
     >
   ): void;
   /**
-   * Lists time series that match a filter. This method does not require a Stackdriver account.
+   * Lists time series that match a filter. This method does not require a Workspace.
    *
    * @param {Object} request
    *   The request object that will be sent.

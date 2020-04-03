@@ -428,8 +428,9 @@ export class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The Uptime check configuration to retrieve. The format
-   *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+   *   Required. The Uptime check configuration to retrieve. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -517,8 +518,9 @@ export class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project in which to create the Uptime check. The format
-   *     is `projects/[PROJECT_ID]`.
+   *   Required. The project in which to create the Uptime check. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {google.monitoring.v3.UptimeCheckConfig} request.uptimeCheckConfig
    *   Required. The new Uptime check configuration.
    * @param {object} [options]
@@ -724,8 +726,9 @@ export class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The Uptime check configuration to delete. The format
-   *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+   *   Required. The Uptime check configuration to delete. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -819,8 +822,9 @@ export class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project whose Uptime check configurations are listed. The format
-   *     is `projects/[PROJECT_ID]`.
+   *   Required. The project whose Uptime check configurations are listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. The server
    *   may further constrain the maximum number of results returned in a single
@@ -913,8 +917,9 @@ export class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project whose Uptime check configurations are listed. The format
-   *     is `projects/[PROJECT_ID]`.
+   *   Required. The project whose Uptime check configurations are listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. The server
    *   may further constrain the maximum number of results returned in a single
@@ -959,8 +964,9 @@ export class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project whose Uptime check configurations are listed. The format
-   *     is `projects/[PROJECT_ID]`.
+   *   Required. The project whose Uptime check configurations are listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. The server
    *   may further constrain the maximum number of results returned in a single

@@ -791,6 +791,7 @@
                          * @property {string|null} [displayName] Condition displayName
                          * @property {google.monitoring.v3.AlertPolicy.Condition.IMetricThreshold|null} [conditionThreshold] Condition conditionThreshold
                          * @property {google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null} [conditionAbsent] Condition conditionAbsent
+                         * @property {google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition|null} [conditionTimeSeriesQueryLanguage] Condition conditionTimeSeriesQueryLanguage
                          */
     
                         /**
@@ -840,17 +841,25 @@
                          */
                         Condition.prototype.conditionAbsent = null;
     
+                        /**
+                         * Condition conditionTimeSeriesQueryLanguage.
+                         * @member {google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition|null|undefined} conditionTimeSeriesQueryLanguage
+                         * @memberof google.monitoring.v3.AlertPolicy.Condition
+                         * @instance
+                         */
+                        Condition.prototype.conditionTimeSeriesQueryLanguage = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Condition condition.
-                         * @member {"conditionThreshold"|"conditionAbsent"|undefined} condition
+                         * @member {"conditionThreshold"|"conditionAbsent"|"conditionTimeSeriesQueryLanguage"|undefined} condition
                          * @memberof google.monitoring.v3.AlertPolicy.Condition
                          * @instance
                          */
                         Object.defineProperty(Condition.prototype, "condition", {
-                            get: $util.oneOfGetter($oneOfFields = ["conditionThreshold", "conditionAbsent"]),
+                            get: $util.oneOfGetter($oneOfFields = ["conditionThreshold", "conditionAbsent", "conditionTimeSeriesQueryLanguage"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -886,6 +895,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.displayName);
                             if (message.name != null && message.hasOwnProperty("name"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.name);
+                            if (message.conditionTimeSeriesQueryLanguage != null && message.hasOwnProperty("conditionTimeSeriesQueryLanguage"))
+                                $root.google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.encode(message.conditionTimeSeriesQueryLanguage, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -931,6 +942,9 @@
                                     break;
                                 case 2:
                                     message.conditionAbsent = $root.google.monitoring.v3.AlertPolicy.Condition.MetricAbsence.decode(reader, reader.uint32());
+                                    break;
+                                case 14:
+                                    message.conditionTimeSeriesQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -992,6 +1006,16 @@
                                         return "conditionAbsent." + error;
                                 }
                             }
+                            if (message.conditionTimeSeriesQueryLanguage != null && message.hasOwnProperty("conditionTimeSeriesQueryLanguage")) {
+                                if (properties.condition === 1)
+                                    return "condition: multiple values";
+                                properties.condition = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.verify(message.conditionTimeSeriesQueryLanguage);
+                                    if (error)
+                                        return "conditionTimeSeriesQueryLanguage." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1020,6 +1044,11 @@
                                 if (typeof object.conditionAbsent !== "object")
                                     throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionAbsent: object expected");
                                 message.conditionAbsent = $root.google.monitoring.v3.AlertPolicy.Condition.MetricAbsence.fromObject(object.conditionAbsent);
+                            }
+                            if (object.conditionTimeSeriesQueryLanguage != null) {
+                                if (typeof object.conditionTimeSeriesQueryLanguage !== "object")
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionTimeSeriesQueryLanguage: object expected");
+                                message.conditionTimeSeriesQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.fromObject(object.conditionTimeSeriesQueryLanguage);
                             }
                             return message;
                         };
@@ -1055,6 +1084,11 @@
                                 object.displayName = message.displayName;
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.conditionTimeSeriesQueryLanguage != null && message.hasOwnProperty("conditionTimeSeriesQueryLanguage")) {
+                                object.conditionTimeSeriesQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.toObject(message.conditionTimeSeriesQueryLanguage, options);
+                                if (options.oneofs)
+                                    object.condition = "conditionTimeSeriesQueryLanguage";
+                            }
                             return object;
                         };
     
@@ -2020,6 +2054,216 @@
                             };
     
                             return MetricAbsence;
+                        })();
+    
+                        Condition.TimeSeriesQueryLanguageCondition = (function() {
+    
+                            /**
+                             * Properties of a TimeSeriesQueryLanguageCondition.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @interface ITimeSeriesQueryLanguageCondition
+                             * @property {string|null} [query] TimeSeriesQueryLanguageCondition query
+                             * @property {string|null} [summary] TimeSeriesQueryLanguageCondition summary
+                             */
+    
+                            /**
+                             * Constructs a new TimeSeriesQueryLanguageCondition.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @classdesc Represents a TimeSeriesQueryLanguageCondition.
+                             * @implements ITimeSeriesQueryLanguageCondition
+                             * @constructor
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition=} [properties] Properties to set
+                             */
+                            function TimeSeriesQueryLanguageCondition(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TimeSeriesQueryLanguageCondition query.
+                             * @member {string} query
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @instance
+                             */
+                            TimeSeriesQueryLanguageCondition.prototype.query = "";
+    
+                            /**
+                             * TimeSeriesQueryLanguageCondition summary.
+                             * @member {string} summary
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @instance
+                             */
+                            TimeSeriesQueryLanguageCondition.prototype.summary = "";
+    
+                            /**
+                             * Creates a new TimeSeriesQueryLanguageCondition instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition} TimeSeriesQueryLanguageCondition instance
+                             */
+                            TimeSeriesQueryLanguageCondition.create = function create(properties) {
+                                return new TimeSeriesQueryLanguageCondition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TimeSeriesQueryLanguageCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition} message TimeSeriesQueryLanguageCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TimeSeriesQueryLanguageCondition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                if (message.summary != null && message.hasOwnProperty("summary"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.summary);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TimeSeriesQueryLanguageCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition} message TimeSeriesQueryLanguageCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TimeSeriesQueryLanguageCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TimeSeriesQueryLanguageCondition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition} TimeSeriesQueryLanguageCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TimeSeriesQueryLanguageCondition.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.query = reader.string();
+                                        break;
+                                    case 2:
+                                        message.summary = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TimeSeriesQueryLanguageCondition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition} TimeSeriesQueryLanguageCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TimeSeriesQueryLanguageCondition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TimeSeriesQueryLanguageCondition message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TimeSeriesQueryLanguageCondition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                if (message.summary != null && message.hasOwnProperty("summary"))
+                                    if (!$util.isString(message.summary))
+                                        return "summary: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TimeSeriesQueryLanguageCondition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition} TimeSeriesQueryLanguageCondition
+                             */
+                            TimeSeriesQueryLanguageCondition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition();
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                if (object.summary != null)
+                                    message.summary = String(object.summary);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TimeSeriesQueryLanguageCondition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition} message TimeSeriesQueryLanguageCondition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TimeSeriesQueryLanguageCondition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.query = "";
+                                    object.summary = "";
+                                }
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                if (message.summary != null && message.hasOwnProperty("summary"))
+                                    object.summary = message.summary;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TimeSeriesQueryLanguageCondition to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TimeSeriesQueryLanguageCondition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return TimeSeriesQueryLanguageCondition;
                         })();
     
                         return Condition;
@@ -8180,6 +8424,2026 @@
                     return TimeSeries;
                 })();
     
+                v3.TimeSeriesDescriptor = (function() {
+    
+                    /**
+                     * Properties of a TimeSeriesDescriptor.
+                     * @memberof google.monitoring.v3
+                     * @interface ITimeSeriesDescriptor
+                     * @property {Array.<google.api.ILabelDescriptor>|null} [labelDescriptors] TimeSeriesDescriptor labelDescriptors
+                     * @property {Array.<google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor>|null} [pointDescriptors] TimeSeriesDescriptor pointDescriptors
+                     */
+    
+                    /**
+                     * Constructs a new TimeSeriesDescriptor.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a TimeSeriesDescriptor.
+                     * @implements ITimeSeriesDescriptor
+                     * @constructor
+                     * @param {google.monitoring.v3.ITimeSeriesDescriptor=} [properties] Properties to set
+                     */
+                    function TimeSeriesDescriptor(properties) {
+                        this.labelDescriptors = [];
+                        this.pointDescriptors = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TimeSeriesDescriptor labelDescriptors.
+                     * @member {Array.<google.api.ILabelDescriptor>} labelDescriptors
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @instance
+                     */
+                    TimeSeriesDescriptor.prototype.labelDescriptors = $util.emptyArray;
+    
+                    /**
+                     * TimeSeriesDescriptor pointDescriptors.
+                     * @member {Array.<google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor>} pointDescriptors
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @instance
+                     */
+                    TimeSeriesDescriptor.prototype.pointDescriptors = $util.emptyArray;
+    
+                    /**
+                     * Creates a new TimeSeriesDescriptor instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesDescriptor=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.TimeSeriesDescriptor} TimeSeriesDescriptor instance
+                     */
+                    TimeSeriesDescriptor.create = function create(properties) {
+                        return new TimeSeriesDescriptor(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TimeSeriesDescriptor message. Does not implicitly {@link google.monitoring.v3.TimeSeriesDescriptor.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesDescriptor} message TimeSeriesDescriptor message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TimeSeriesDescriptor.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.labelDescriptors != null && message.labelDescriptors.length)
+                            for (var i = 0; i < message.labelDescriptors.length; ++i)
+                                $root.google.api.LabelDescriptor.encode(message.labelDescriptors[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.pointDescriptors != null && message.pointDescriptors.length)
+                            for (var i = 0; i < message.pointDescriptors.length; ++i)
+                                $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.encode(message.pointDescriptors[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TimeSeriesDescriptor message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesDescriptor.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesDescriptor} message TimeSeriesDescriptor message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TimeSeriesDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TimeSeriesDescriptor message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.TimeSeriesDescriptor} TimeSeriesDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TimeSeriesDescriptor.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesDescriptor();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.labelDescriptors && message.labelDescriptors.length))
+                                    message.labelDescriptors = [];
+                                message.labelDescriptors.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            case 5:
+                                if (!(message.pointDescriptors && message.pointDescriptors.length))
+                                    message.pointDescriptors = [];
+                                message.pointDescriptors.push($root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TimeSeriesDescriptor message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.TimeSeriesDescriptor} TimeSeriesDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TimeSeriesDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TimeSeriesDescriptor message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TimeSeriesDescriptor.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.labelDescriptors != null && message.hasOwnProperty("labelDescriptors")) {
+                            if (!Array.isArray(message.labelDescriptors))
+                                return "labelDescriptors: array expected";
+                            for (var i = 0; i < message.labelDescriptors.length; ++i) {
+                                var error = $root.google.api.LabelDescriptor.verify(message.labelDescriptors[i]);
+                                if (error)
+                                    return "labelDescriptors." + error;
+                            }
+                        }
+                        if (message.pointDescriptors != null && message.hasOwnProperty("pointDescriptors")) {
+                            if (!Array.isArray(message.pointDescriptors))
+                                return "pointDescriptors: array expected";
+                            for (var i = 0; i < message.pointDescriptors.length; ++i) {
+                                var error = $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.verify(message.pointDescriptors[i]);
+                                if (error)
+                                    return "pointDescriptors." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TimeSeriesDescriptor message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.TimeSeriesDescriptor} TimeSeriesDescriptor
+                     */
+                    TimeSeriesDescriptor.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.TimeSeriesDescriptor)
+                            return object;
+                        var message = new $root.google.monitoring.v3.TimeSeriesDescriptor();
+                        if (object.labelDescriptors) {
+                            if (!Array.isArray(object.labelDescriptors))
+                                throw TypeError(".google.monitoring.v3.TimeSeriesDescriptor.labelDescriptors: array expected");
+                            message.labelDescriptors = [];
+                            for (var i = 0; i < object.labelDescriptors.length; ++i) {
+                                if (typeof object.labelDescriptors[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.TimeSeriesDescriptor.labelDescriptors: object expected");
+                                message.labelDescriptors[i] = $root.google.api.LabelDescriptor.fromObject(object.labelDescriptors[i]);
+                            }
+                        }
+                        if (object.pointDescriptors) {
+                            if (!Array.isArray(object.pointDescriptors))
+                                throw TypeError(".google.monitoring.v3.TimeSeriesDescriptor.pointDescriptors: array expected");
+                            message.pointDescriptors = [];
+                            for (var i = 0; i < object.pointDescriptors.length; ++i) {
+                                if (typeof object.pointDescriptors[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.TimeSeriesDescriptor.pointDescriptors: object expected");
+                                message.pointDescriptors[i] = $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.fromObject(object.pointDescriptors[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TimeSeriesDescriptor message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @static
+                     * @param {google.monitoring.v3.TimeSeriesDescriptor} message TimeSeriesDescriptor
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TimeSeriesDescriptor.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.labelDescriptors = [];
+                            object.pointDescriptors = [];
+                        }
+                        if (message.labelDescriptors && message.labelDescriptors.length) {
+                            object.labelDescriptors = [];
+                            for (var j = 0; j < message.labelDescriptors.length; ++j)
+                                object.labelDescriptors[j] = $root.google.api.LabelDescriptor.toObject(message.labelDescriptors[j], options);
+                        }
+                        if (message.pointDescriptors && message.pointDescriptors.length) {
+                            object.pointDescriptors = [];
+                            for (var j = 0; j < message.pointDescriptors.length; ++j)
+                                object.pointDescriptors[j] = $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.toObject(message.pointDescriptors[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TimeSeriesDescriptor to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TimeSeriesDescriptor.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    TimeSeriesDescriptor.ValueDescriptor = (function() {
+    
+                        /**
+                         * Properties of a ValueDescriptor.
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                         * @interface IValueDescriptor
+                         * @property {string|null} [key] ValueDescriptor key
+                         * @property {google.api.MetricDescriptor.ValueType|null} [valueType] ValueDescriptor valueType
+                         * @property {google.api.MetricDescriptor.MetricKind|null} [metricKind] ValueDescriptor metricKind
+                         */
+    
+                        /**
+                         * Constructs a new ValueDescriptor.
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor
+                         * @classdesc Represents a ValueDescriptor.
+                         * @implements IValueDescriptor
+                         * @constructor
+                         * @param {google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor=} [properties] Properties to set
+                         */
+                        function ValueDescriptor(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ValueDescriptor key.
+                         * @member {string} key
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @instance
+                         */
+                        ValueDescriptor.prototype.key = "";
+    
+                        /**
+                         * ValueDescriptor valueType.
+                         * @member {google.api.MetricDescriptor.ValueType} valueType
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @instance
+                         */
+                        ValueDescriptor.prototype.valueType = 0;
+    
+                        /**
+                         * ValueDescriptor metricKind.
+                         * @member {google.api.MetricDescriptor.MetricKind} metricKind
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @instance
+                         */
+                        ValueDescriptor.prototype.metricKind = 0;
+    
+                        /**
+                         * Creates a new ValueDescriptor instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @static
+                         * @param {google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor} ValueDescriptor instance
+                         */
+                        ValueDescriptor.create = function create(properties) {
+                            return new ValueDescriptor(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ValueDescriptor message. Does not implicitly {@link google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @static
+                         * @param {google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor} message ValueDescriptor message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValueDescriptor.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                            if (message.valueType != null && message.hasOwnProperty("valueType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.valueType);
+                            if (message.metricKind != null && message.hasOwnProperty("metricKind"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.metricKind);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ValueDescriptor message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @static
+                         * @param {google.monitoring.v3.TimeSeriesDescriptor.IValueDescriptor} message ValueDescriptor message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValueDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ValueDescriptor message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor} ValueDescriptor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValueDescriptor.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.key = reader.string();
+                                    break;
+                                case 2:
+                                    message.valueType = reader.int32();
+                                    break;
+                                case 3:
+                                    message.metricKind = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ValueDescriptor message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor} ValueDescriptor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValueDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ValueDescriptor message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ValueDescriptor.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            if (message.valueType != null && message.hasOwnProperty("valueType"))
+                                switch (message.valueType) {
+                                default:
+                                    return "valueType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.metricKind != null && message.hasOwnProperty("metricKind"))
+                                switch (message.metricKind) {
+                                default:
+                                    return "metricKind: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ValueDescriptor message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor} ValueDescriptor
+                         */
+                        ValueDescriptor.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor)
+                                return object;
+                            var message = new $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor();
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            switch (object.valueType) {
+                            case "VALUE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.valueType = 0;
+                                break;
+                            case "BOOL":
+                            case 1:
+                                message.valueType = 1;
+                                break;
+                            case "INT64":
+                            case 2:
+                                message.valueType = 2;
+                                break;
+                            case "DOUBLE":
+                            case 3:
+                                message.valueType = 3;
+                                break;
+                            case "STRING":
+                            case 4:
+                                message.valueType = 4;
+                                break;
+                            case "DISTRIBUTION":
+                            case 5:
+                                message.valueType = 5;
+                                break;
+                            case "MONEY":
+                            case 6:
+                                message.valueType = 6;
+                                break;
+                            }
+                            switch (object.metricKind) {
+                            case "METRIC_KIND_UNSPECIFIED":
+                            case 0:
+                                message.metricKind = 0;
+                                break;
+                            case "GAUGE":
+                            case 1:
+                                message.metricKind = 1;
+                                break;
+                            case "DELTA":
+                            case 2:
+                                message.metricKind = 2;
+                                break;
+                            case "CUMULATIVE":
+                            case 3:
+                                message.metricKind = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ValueDescriptor message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @static
+                         * @param {google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor} message ValueDescriptor
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ValueDescriptor.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.key = "";
+                                object.valueType = options.enums === String ? "VALUE_TYPE_UNSPECIFIED" : 0;
+                                object.metricKind = options.enums === String ? "METRIC_KIND_UNSPECIFIED" : 0;
+                            }
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            if (message.valueType != null && message.hasOwnProperty("valueType"))
+                                object.valueType = options.enums === String ? $root.google.api.MetricDescriptor.ValueType[message.valueType] : message.valueType;
+                            if (message.metricKind != null && message.hasOwnProperty("metricKind"))
+                                object.metricKind = options.enums === String ? $root.google.api.MetricDescriptor.MetricKind[message.metricKind] : message.metricKind;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ValueDescriptor to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ValueDescriptor.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ValueDescriptor;
+                    })();
+    
+                    return TimeSeriesDescriptor;
+                })();
+    
+                v3.TimeSeriesData = (function() {
+    
+                    /**
+                     * Properties of a TimeSeriesData.
+                     * @memberof google.monitoring.v3
+                     * @interface ITimeSeriesData
+                     * @property {Array.<google.monitoring.v3.ILabelValue>|null} [labelValues] TimeSeriesData labelValues
+                     * @property {Array.<google.monitoring.v3.TimeSeriesData.IPointData>|null} [pointData] TimeSeriesData pointData
+                     */
+    
+                    /**
+                     * Constructs a new TimeSeriesData.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a TimeSeriesData.
+                     * @implements ITimeSeriesData
+                     * @constructor
+                     * @param {google.monitoring.v3.ITimeSeriesData=} [properties] Properties to set
+                     */
+                    function TimeSeriesData(properties) {
+                        this.labelValues = [];
+                        this.pointData = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TimeSeriesData labelValues.
+                     * @member {Array.<google.monitoring.v3.ILabelValue>} labelValues
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @instance
+                     */
+                    TimeSeriesData.prototype.labelValues = $util.emptyArray;
+    
+                    /**
+                     * TimeSeriesData pointData.
+                     * @member {Array.<google.monitoring.v3.TimeSeriesData.IPointData>} pointData
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @instance
+                     */
+                    TimeSeriesData.prototype.pointData = $util.emptyArray;
+    
+                    /**
+                     * Creates a new TimeSeriesData instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesData=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.TimeSeriesData} TimeSeriesData instance
+                     */
+                    TimeSeriesData.create = function create(properties) {
+                        return new TimeSeriesData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TimeSeriesData message. Does not implicitly {@link google.monitoring.v3.TimeSeriesData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesData} message TimeSeriesData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TimeSeriesData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.labelValues != null && message.labelValues.length)
+                            for (var i = 0; i < message.labelValues.length; ++i)
+                                $root.google.monitoring.v3.LabelValue.encode(message.labelValues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.pointData != null && message.pointData.length)
+                            for (var i = 0; i < message.pointData.length; ++i)
+                                $root.google.monitoring.v3.TimeSeriesData.PointData.encode(message.pointData[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TimeSeriesData message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesData} message TimeSeriesData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TimeSeriesData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TimeSeriesData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.TimeSeriesData} TimeSeriesData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TimeSeriesData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.labelValues && message.labelValues.length))
+                                    message.labelValues = [];
+                                message.labelValues.push($root.google.monitoring.v3.LabelValue.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                if (!(message.pointData && message.pointData.length))
+                                    message.pointData = [];
+                                message.pointData.push($root.google.monitoring.v3.TimeSeriesData.PointData.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TimeSeriesData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.TimeSeriesData} TimeSeriesData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TimeSeriesData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TimeSeriesData message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TimeSeriesData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.labelValues != null && message.hasOwnProperty("labelValues")) {
+                            if (!Array.isArray(message.labelValues))
+                                return "labelValues: array expected";
+                            for (var i = 0; i < message.labelValues.length; ++i) {
+                                var error = $root.google.monitoring.v3.LabelValue.verify(message.labelValues[i]);
+                                if (error)
+                                    return "labelValues." + error;
+                            }
+                        }
+                        if (message.pointData != null && message.hasOwnProperty("pointData")) {
+                            if (!Array.isArray(message.pointData))
+                                return "pointData: array expected";
+                            for (var i = 0; i < message.pointData.length; ++i) {
+                                var error = $root.google.monitoring.v3.TimeSeriesData.PointData.verify(message.pointData[i]);
+                                if (error)
+                                    return "pointData." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TimeSeriesData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.TimeSeriesData} TimeSeriesData
+                     */
+                    TimeSeriesData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.TimeSeriesData)
+                            return object;
+                        var message = new $root.google.monitoring.v3.TimeSeriesData();
+                        if (object.labelValues) {
+                            if (!Array.isArray(object.labelValues))
+                                throw TypeError(".google.monitoring.v3.TimeSeriesData.labelValues: array expected");
+                            message.labelValues = [];
+                            for (var i = 0; i < object.labelValues.length; ++i) {
+                                if (typeof object.labelValues[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.TimeSeriesData.labelValues: object expected");
+                                message.labelValues[i] = $root.google.monitoring.v3.LabelValue.fromObject(object.labelValues[i]);
+                            }
+                        }
+                        if (object.pointData) {
+                            if (!Array.isArray(object.pointData))
+                                throw TypeError(".google.monitoring.v3.TimeSeriesData.pointData: array expected");
+                            message.pointData = [];
+                            for (var i = 0; i < object.pointData.length; ++i) {
+                                if (typeof object.pointData[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.TimeSeriesData.pointData: object expected");
+                                message.pointData[i] = $root.google.monitoring.v3.TimeSeriesData.PointData.fromObject(object.pointData[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TimeSeriesData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @static
+                     * @param {google.monitoring.v3.TimeSeriesData} message TimeSeriesData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TimeSeriesData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.labelValues = [];
+                            object.pointData = [];
+                        }
+                        if (message.labelValues && message.labelValues.length) {
+                            object.labelValues = [];
+                            for (var j = 0; j < message.labelValues.length; ++j)
+                                object.labelValues[j] = $root.google.monitoring.v3.LabelValue.toObject(message.labelValues[j], options);
+                        }
+                        if (message.pointData && message.pointData.length) {
+                            object.pointData = [];
+                            for (var j = 0; j < message.pointData.length; ++j)
+                                object.pointData[j] = $root.google.monitoring.v3.TimeSeriesData.PointData.toObject(message.pointData[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TimeSeriesData to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.TimeSeriesData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TimeSeriesData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    TimeSeriesData.PointData = (function() {
+    
+                        /**
+                         * Properties of a PointData.
+                         * @memberof google.monitoring.v3.TimeSeriesData
+                         * @interface IPointData
+                         * @property {Array.<google.monitoring.v3.ITypedValue>|null} [values] PointData values
+                         * @property {google.monitoring.v3.ITimeInterval|null} [timeInterval] PointData timeInterval
+                         */
+    
+                        /**
+                         * Constructs a new PointData.
+                         * @memberof google.monitoring.v3.TimeSeriesData
+                         * @classdesc Represents a PointData.
+                         * @implements IPointData
+                         * @constructor
+                         * @param {google.monitoring.v3.TimeSeriesData.IPointData=} [properties] Properties to set
+                         */
+                        function PointData(properties) {
+                            this.values = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PointData values.
+                         * @member {Array.<google.monitoring.v3.ITypedValue>} values
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @instance
+                         */
+                        PointData.prototype.values = $util.emptyArray;
+    
+                        /**
+                         * PointData timeInterval.
+                         * @member {google.monitoring.v3.ITimeInterval|null|undefined} timeInterval
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @instance
+                         */
+                        PointData.prototype.timeInterval = null;
+    
+                        /**
+                         * Creates a new PointData instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @static
+                         * @param {google.monitoring.v3.TimeSeriesData.IPointData=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.TimeSeriesData.PointData} PointData instance
+                         */
+                        PointData.create = function create(properties) {
+                            return new PointData(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PointData message. Does not implicitly {@link google.monitoring.v3.TimeSeriesData.PointData.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @static
+                         * @param {google.monitoring.v3.TimeSeriesData.IPointData} message PointData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PointData.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.values != null && message.values.length)
+                                for (var i = 0; i < message.values.length; ++i)
+                                    $root.google.monitoring.v3.TypedValue.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.timeInterval != null && message.hasOwnProperty("timeInterval"))
+                                $root.google.monitoring.v3.TimeInterval.encode(message.timeInterval, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PointData message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesData.PointData.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @static
+                         * @param {google.monitoring.v3.TimeSeriesData.IPointData} message PointData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PointData.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PointData message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.TimeSeriesData.PointData} PointData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PointData.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesData.PointData();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.values && message.values.length))
+                                        message.values = [];
+                                    message.values.push($root.google.monitoring.v3.TypedValue.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.timeInterval = $root.google.monitoring.v3.TimeInterval.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PointData message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.TimeSeriesData.PointData} PointData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PointData.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PointData message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PointData.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!Array.isArray(message.values))
+                                    return "values: array expected";
+                                for (var i = 0; i < message.values.length; ++i) {
+                                    var error = $root.google.monitoring.v3.TypedValue.verify(message.values[i]);
+                                    if (error)
+                                        return "values." + error;
+                                }
+                            }
+                            if (message.timeInterval != null && message.hasOwnProperty("timeInterval")) {
+                                var error = $root.google.monitoring.v3.TimeInterval.verify(message.timeInterval);
+                                if (error)
+                                    return "timeInterval." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PointData message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.TimeSeriesData.PointData} PointData
+                         */
+                        PointData.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.TimeSeriesData.PointData)
+                                return object;
+                            var message = new $root.google.monitoring.v3.TimeSeriesData.PointData();
+                            if (object.values) {
+                                if (!Array.isArray(object.values))
+                                    throw TypeError(".google.monitoring.v3.TimeSeriesData.PointData.values: array expected");
+                                message.values = [];
+                                for (var i = 0; i < object.values.length; ++i) {
+                                    if (typeof object.values[i] !== "object")
+                                        throw TypeError(".google.monitoring.v3.TimeSeriesData.PointData.values: object expected");
+                                    message.values[i] = $root.google.monitoring.v3.TypedValue.fromObject(object.values[i]);
+                                }
+                            }
+                            if (object.timeInterval != null) {
+                                if (typeof object.timeInterval !== "object")
+                                    throw TypeError(".google.monitoring.v3.TimeSeriesData.PointData.timeInterval: object expected");
+                                message.timeInterval = $root.google.monitoring.v3.TimeInterval.fromObject(object.timeInterval);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PointData message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @static
+                         * @param {google.monitoring.v3.TimeSeriesData.PointData} message PointData
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PointData.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.values = [];
+                            if (options.defaults)
+                                object.timeInterval = null;
+                            if (message.values && message.values.length) {
+                                object.values = [];
+                                for (var j = 0; j < message.values.length; ++j)
+                                    object.values[j] = $root.google.monitoring.v3.TypedValue.toObject(message.values[j], options);
+                            }
+                            if (message.timeInterval != null && message.hasOwnProperty("timeInterval"))
+                                object.timeInterval = $root.google.monitoring.v3.TimeInterval.toObject(message.timeInterval, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PointData to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.TimeSeriesData.PointData
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PointData.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PointData;
+                    })();
+    
+                    return TimeSeriesData;
+                })();
+    
+                v3.LabelValue = (function() {
+    
+                    /**
+                     * Properties of a LabelValue.
+                     * @memberof google.monitoring.v3
+                     * @interface ILabelValue
+                     * @property {boolean|null} [boolValue] LabelValue boolValue
+                     * @property {number|Long|null} [int64Value] LabelValue int64Value
+                     * @property {string|null} [stringValue] LabelValue stringValue
+                     */
+    
+                    /**
+                     * Constructs a new LabelValue.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a LabelValue.
+                     * @implements ILabelValue
+                     * @constructor
+                     * @param {google.monitoring.v3.ILabelValue=} [properties] Properties to set
+                     */
+                    function LabelValue(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * LabelValue boolValue.
+                     * @member {boolean} boolValue
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @instance
+                     */
+                    LabelValue.prototype.boolValue = false;
+    
+                    /**
+                     * LabelValue int64Value.
+                     * @member {number|Long} int64Value
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @instance
+                     */
+                    LabelValue.prototype.int64Value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * LabelValue stringValue.
+                     * @member {string} stringValue
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @instance
+                     */
+                    LabelValue.prototype.stringValue = "";
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * LabelValue value.
+                     * @member {"boolValue"|"int64Value"|"stringValue"|undefined} value
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @instance
+                     */
+                    Object.defineProperty(LabelValue.prototype, "value", {
+                        get: $util.oneOfGetter($oneOfFields = ["boolValue", "int64Value", "stringValue"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new LabelValue instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @static
+                     * @param {google.monitoring.v3.ILabelValue=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.LabelValue} LabelValue instance
+                     */
+                    LabelValue.create = function create(properties) {
+                        return new LabelValue(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified LabelValue message. Does not implicitly {@link google.monitoring.v3.LabelValue.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @static
+                     * @param {google.monitoring.v3.ILabelValue} message LabelValue message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LabelValue.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.boolValue != null && message.hasOwnProperty("boolValue"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.boolValue);
+                        if (message.int64Value != null && message.hasOwnProperty("int64Value"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int64(message.int64Value);
+                        if (message.stringValue != null && message.hasOwnProperty("stringValue"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified LabelValue message, length delimited. Does not implicitly {@link google.monitoring.v3.LabelValue.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @static
+                     * @param {google.monitoring.v3.ILabelValue} message LabelValue message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LabelValue.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a LabelValue message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.LabelValue} LabelValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LabelValue.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.LabelValue();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.boolValue = reader.bool();
+                                break;
+                            case 2:
+                                message.int64Value = reader.int64();
+                                break;
+                            case 3:
+                                message.stringValue = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a LabelValue message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.LabelValue} LabelValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LabelValue.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a LabelValue message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    LabelValue.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                            properties.value = 1;
+                            if (typeof message.boolValue !== "boolean")
+                                return "boolValue: boolean expected";
+                        }
+                        if (message.int64Value != null && message.hasOwnProperty("int64Value")) {
+                            if (properties.value === 1)
+                                return "value: multiple values";
+                            properties.value = 1;
+                            if (!$util.isInteger(message.int64Value) && !(message.int64Value && $util.isInteger(message.int64Value.low) && $util.isInteger(message.int64Value.high)))
+                                return "int64Value: integer|Long expected";
+                        }
+                        if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                            if (properties.value === 1)
+                                return "value: multiple values";
+                            properties.value = 1;
+                            if (!$util.isString(message.stringValue))
+                                return "stringValue: string expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a LabelValue message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.LabelValue} LabelValue
+                     */
+                    LabelValue.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.LabelValue)
+                            return object;
+                        var message = new $root.google.monitoring.v3.LabelValue();
+                        if (object.boolValue != null)
+                            message.boolValue = Boolean(object.boolValue);
+                        if (object.int64Value != null)
+                            if ($util.Long)
+                                (message.int64Value = $util.Long.fromValue(object.int64Value)).unsigned = false;
+                            else if (typeof object.int64Value === "string")
+                                message.int64Value = parseInt(object.int64Value, 10);
+                            else if (typeof object.int64Value === "number")
+                                message.int64Value = object.int64Value;
+                            else if (typeof object.int64Value === "object")
+                                message.int64Value = new $util.LongBits(object.int64Value.low >>> 0, object.int64Value.high >>> 0).toNumber();
+                        if (object.stringValue != null)
+                            message.stringValue = String(object.stringValue);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a LabelValue message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @static
+                     * @param {google.monitoring.v3.LabelValue} message LabelValue
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    LabelValue.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                            object.boolValue = message.boolValue;
+                            if (options.oneofs)
+                                object.value = "boolValue";
+                        }
+                        if (message.int64Value != null && message.hasOwnProperty("int64Value")) {
+                            if (typeof message.int64Value === "number")
+                                object.int64Value = options.longs === String ? String(message.int64Value) : message.int64Value;
+                            else
+                                object.int64Value = options.longs === String ? $util.Long.prototype.toString.call(message.int64Value) : options.longs === Number ? new $util.LongBits(message.int64Value.low >>> 0, message.int64Value.high >>> 0).toNumber() : message.int64Value;
+                            if (options.oneofs)
+                                object.value = "int64Value";
+                        }
+                        if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                            object.stringValue = message.stringValue;
+                            if (options.oneofs)
+                                object.value = "stringValue";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this LabelValue to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.LabelValue
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    LabelValue.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return LabelValue;
+                })();
+    
+                v3.QueryError = (function() {
+    
+                    /**
+                     * Properties of a QueryError.
+                     * @memberof google.monitoring.v3
+                     * @interface IQueryError
+                     * @property {google.monitoring.v3.ITextLocator|null} [locator] QueryError locator
+                     * @property {string|null} [message] QueryError message
+                     */
+    
+                    /**
+                     * Constructs a new QueryError.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a QueryError.
+                     * @implements IQueryError
+                     * @constructor
+                     * @param {google.monitoring.v3.IQueryError=} [properties] Properties to set
+                     */
+                    function QueryError(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryError locator.
+                     * @member {google.monitoring.v3.ITextLocator|null|undefined} locator
+                     * @memberof google.monitoring.v3.QueryError
+                     * @instance
+                     */
+                    QueryError.prototype.locator = null;
+    
+                    /**
+                     * QueryError message.
+                     * @member {string} message
+                     * @memberof google.monitoring.v3.QueryError
+                     * @instance
+                     */
+                    QueryError.prototype.message = "";
+    
+                    /**
+                     * Creates a new QueryError instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.QueryError
+                     * @static
+                     * @param {google.monitoring.v3.IQueryError=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.QueryError} QueryError instance
+                     */
+                    QueryError.create = function create(properties) {
+                        return new QueryError(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified QueryError message. Does not implicitly {@link google.monitoring.v3.QueryError.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.QueryError
+                     * @static
+                     * @param {google.monitoring.v3.IQueryError} message QueryError message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryError.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.locator != null && message.hasOwnProperty("locator"))
+                            $root.google.monitoring.v3.TextLocator.encode(message.locator, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.message != null && message.hasOwnProperty("message"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryError message, length delimited. Does not implicitly {@link google.monitoring.v3.QueryError.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.QueryError
+                     * @static
+                     * @param {google.monitoring.v3.IQueryError} message QueryError message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryError.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryError message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.QueryError
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.QueryError} QueryError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryError.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryError();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.locator = $root.google.monitoring.v3.TextLocator.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                message.message = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryError message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.QueryError
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.QueryError} QueryError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryError.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryError message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.QueryError
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryError.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.locator != null && message.hasOwnProperty("locator")) {
+                            var error = $root.google.monitoring.v3.TextLocator.verify(message.locator);
+                            if (error)
+                                return "locator." + error;
+                        }
+                        if (message.message != null && message.hasOwnProperty("message"))
+                            if (!$util.isString(message.message))
+                                return "message: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryError message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.QueryError
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.QueryError} QueryError
+                     */
+                    QueryError.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.QueryError)
+                            return object;
+                        var message = new $root.google.monitoring.v3.QueryError();
+                        if (object.locator != null) {
+                            if (typeof object.locator !== "object")
+                                throw TypeError(".google.monitoring.v3.QueryError.locator: object expected");
+                            message.locator = $root.google.monitoring.v3.TextLocator.fromObject(object.locator);
+                        }
+                        if (object.message != null)
+                            message.message = String(object.message);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryError message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.QueryError
+                     * @static
+                     * @param {google.monitoring.v3.QueryError} message QueryError
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryError.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.locator = null;
+                            object.message = "";
+                        }
+                        if (message.locator != null && message.hasOwnProperty("locator"))
+                            object.locator = $root.google.monitoring.v3.TextLocator.toObject(message.locator, options);
+                        if (message.message != null && message.hasOwnProperty("message"))
+                            object.message = message.message;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryError to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.QueryError
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryError.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryError;
+                })();
+    
+                v3.TextLocator = (function() {
+    
+                    /**
+                     * Properties of a TextLocator.
+                     * @memberof google.monitoring.v3
+                     * @interface ITextLocator
+                     * @property {string|null} [source] TextLocator source
+                     * @property {google.monitoring.v3.TextLocator.IPosition|null} [startPosition] TextLocator startPosition
+                     * @property {google.monitoring.v3.TextLocator.IPosition|null} [endPosition] TextLocator endPosition
+                     * @property {google.monitoring.v3.ITextLocator|null} [nestedLocator] TextLocator nestedLocator
+                     * @property {string|null} [nestingReason] TextLocator nestingReason
+                     */
+    
+                    /**
+                     * Constructs a new TextLocator.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a TextLocator.
+                     * @implements ITextLocator
+                     * @constructor
+                     * @param {google.monitoring.v3.ITextLocator=} [properties] Properties to set
+                     */
+                    function TextLocator(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TextLocator source.
+                     * @member {string} source
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @instance
+                     */
+                    TextLocator.prototype.source = "";
+    
+                    /**
+                     * TextLocator startPosition.
+                     * @member {google.monitoring.v3.TextLocator.IPosition|null|undefined} startPosition
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @instance
+                     */
+                    TextLocator.prototype.startPosition = null;
+    
+                    /**
+                     * TextLocator endPosition.
+                     * @member {google.monitoring.v3.TextLocator.IPosition|null|undefined} endPosition
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @instance
+                     */
+                    TextLocator.prototype.endPosition = null;
+    
+                    /**
+                     * TextLocator nestedLocator.
+                     * @member {google.monitoring.v3.ITextLocator|null|undefined} nestedLocator
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @instance
+                     */
+                    TextLocator.prototype.nestedLocator = null;
+    
+                    /**
+                     * TextLocator nestingReason.
+                     * @member {string} nestingReason
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @instance
+                     */
+                    TextLocator.prototype.nestingReason = "";
+    
+                    /**
+                     * Creates a new TextLocator instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @static
+                     * @param {google.monitoring.v3.ITextLocator=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.TextLocator} TextLocator instance
+                     */
+                    TextLocator.create = function create(properties) {
+                        return new TextLocator(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TextLocator message. Does not implicitly {@link google.monitoring.v3.TextLocator.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @static
+                     * @param {google.monitoring.v3.ITextLocator} message TextLocator message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TextLocator.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.source != null && message.hasOwnProperty("source"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.source);
+                        if (message.startPosition != null && message.hasOwnProperty("startPosition"))
+                            $root.google.monitoring.v3.TextLocator.Position.encode(message.startPosition, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.endPosition != null && message.hasOwnProperty("endPosition"))
+                            $root.google.monitoring.v3.TextLocator.Position.encode(message.endPosition, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.nestedLocator != null && message.hasOwnProperty("nestedLocator"))
+                            $root.google.monitoring.v3.TextLocator.encode(message.nestedLocator, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.nestingReason != null && message.hasOwnProperty("nestingReason"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.nestingReason);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TextLocator message, length delimited. Does not implicitly {@link google.monitoring.v3.TextLocator.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @static
+                     * @param {google.monitoring.v3.ITextLocator} message TextLocator message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TextLocator.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TextLocator message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.TextLocator} TextLocator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TextLocator.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TextLocator();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.source = reader.string();
+                                break;
+                            case 2:
+                                message.startPosition = $root.google.monitoring.v3.TextLocator.Position.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.endPosition = $root.google.monitoring.v3.TextLocator.Position.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                message.nestedLocator = $root.google.monitoring.v3.TextLocator.decode(reader, reader.uint32());
+                                break;
+                            case 5:
+                                message.nestingReason = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TextLocator message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.TextLocator} TextLocator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TextLocator.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TextLocator message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TextLocator.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.source != null && message.hasOwnProperty("source"))
+                            if (!$util.isString(message.source))
+                                return "source: string expected";
+                        if (message.startPosition != null && message.hasOwnProperty("startPosition")) {
+                            var error = $root.google.monitoring.v3.TextLocator.Position.verify(message.startPosition);
+                            if (error)
+                                return "startPosition." + error;
+                        }
+                        if (message.endPosition != null && message.hasOwnProperty("endPosition")) {
+                            var error = $root.google.monitoring.v3.TextLocator.Position.verify(message.endPosition);
+                            if (error)
+                                return "endPosition." + error;
+                        }
+                        if (message.nestedLocator != null && message.hasOwnProperty("nestedLocator")) {
+                            var error = $root.google.monitoring.v3.TextLocator.verify(message.nestedLocator);
+                            if (error)
+                                return "nestedLocator." + error;
+                        }
+                        if (message.nestingReason != null && message.hasOwnProperty("nestingReason"))
+                            if (!$util.isString(message.nestingReason))
+                                return "nestingReason: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TextLocator message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.TextLocator} TextLocator
+                     */
+                    TextLocator.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.TextLocator)
+                            return object;
+                        var message = new $root.google.monitoring.v3.TextLocator();
+                        if (object.source != null)
+                            message.source = String(object.source);
+                        if (object.startPosition != null) {
+                            if (typeof object.startPosition !== "object")
+                                throw TypeError(".google.monitoring.v3.TextLocator.startPosition: object expected");
+                            message.startPosition = $root.google.monitoring.v3.TextLocator.Position.fromObject(object.startPosition);
+                        }
+                        if (object.endPosition != null) {
+                            if (typeof object.endPosition !== "object")
+                                throw TypeError(".google.monitoring.v3.TextLocator.endPosition: object expected");
+                            message.endPosition = $root.google.monitoring.v3.TextLocator.Position.fromObject(object.endPosition);
+                        }
+                        if (object.nestedLocator != null) {
+                            if (typeof object.nestedLocator !== "object")
+                                throw TypeError(".google.monitoring.v3.TextLocator.nestedLocator: object expected");
+                            message.nestedLocator = $root.google.monitoring.v3.TextLocator.fromObject(object.nestedLocator);
+                        }
+                        if (object.nestingReason != null)
+                            message.nestingReason = String(object.nestingReason);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TextLocator message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @static
+                     * @param {google.monitoring.v3.TextLocator} message TextLocator
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TextLocator.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.source = "";
+                            object.startPosition = null;
+                            object.endPosition = null;
+                            object.nestedLocator = null;
+                            object.nestingReason = "";
+                        }
+                        if (message.source != null && message.hasOwnProperty("source"))
+                            object.source = message.source;
+                        if (message.startPosition != null && message.hasOwnProperty("startPosition"))
+                            object.startPosition = $root.google.monitoring.v3.TextLocator.Position.toObject(message.startPosition, options);
+                        if (message.endPosition != null && message.hasOwnProperty("endPosition"))
+                            object.endPosition = $root.google.monitoring.v3.TextLocator.Position.toObject(message.endPosition, options);
+                        if (message.nestedLocator != null && message.hasOwnProperty("nestedLocator"))
+                            object.nestedLocator = $root.google.monitoring.v3.TextLocator.toObject(message.nestedLocator, options);
+                        if (message.nestingReason != null && message.hasOwnProperty("nestingReason"))
+                            object.nestingReason = message.nestingReason;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TextLocator to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.TextLocator
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TextLocator.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    TextLocator.Position = (function() {
+    
+                        /**
+                         * Properties of a Position.
+                         * @memberof google.monitoring.v3.TextLocator
+                         * @interface IPosition
+                         * @property {number|null} [line] Position line
+                         * @property {number|null} [column] Position column
+                         */
+    
+                        /**
+                         * Constructs a new Position.
+                         * @memberof google.monitoring.v3.TextLocator
+                         * @classdesc Represents a Position.
+                         * @implements IPosition
+                         * @constructor
+                         * @param {google.monitoring.v3.TextLocator.IPosition=} [properties] Properties to set
+                         */
+                        function Position(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Position line.
+                         * @member {number} line
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @instance
+                         */
+                        Position.prototype.line = 0;
+    
+                        /**
+                         * Position column.
+                         * @member {number} column
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @instance
+                         */
+                        Position.prototype.column = 0;
+    
+                        /**
+                         * Creates a new Position instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @static
+                         * @param {google.monitoring.v3.TextLocator.IPosition=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.TextLocator.Position} Position instance
+                         */
+                        Position.create = function create(properties) {
+                            return new Position(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Position message. Does not implicitly {@link google.monitoring.v3.TextLocator.Position.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @static
+                         * @param {google.monitoring.v3.TextLocator.IPosition} message Position message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Position.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.line != null && message.hasOwnProperty("line"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.line);
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.column);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Position message, length delimited. Does not implicitly {@link google.monitoring.v3.TextLocator.Position.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @static
+                         * @param {google.monitoring.v3.TextLocator.IPosition} message Position message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Position.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Position message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.TextLocator.Position} Position
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Position.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TextLocator.Position();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.line = reader.int32();
+                                    break;
+                                case 2:
+                                    message.column = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Position message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.TextLocator.Position} Position
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Position.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Position message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Position.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.line != null && message.hasOwnProperty("line"))
+                                if (!$util.isInteger(message.line))
+                                    return "line: integer expected";
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                if (!$util.isInteger(message.column))
+                                    return "column: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.TextLocator.Position} Position
+                         */
+                        Position.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.TextLocator.Position)
+                                return object;
+                            var message = new $root.google.monitoring.v3.TextLocator.Position();
+                            if (object.line != null)
+                                message.line = object.line | 0;
+                            if (object.column != null)
+                                message.column = object.column | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Position message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @static
+                         * @param {google.monitoring.v3.TextLocator.Position} message Position
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Position.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.line = 0;
+                                object.column = 0;
+                            }
+                            if (message.line != null && message.hasOwnProperty("line"))
+                                object.line = message.line;
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                object.column = message.column;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Position to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.TextLocator.Position
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Position.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Position;
+                    })();
+    
+                    return TextLocator;
+                })();
+    
                 v3.MetricService = (function() {
     
                     /**
@@ -11797,6 +14061,794 @@
                     })();
     
                     return CreateTimeSeriesSummary;
+                })();
+    
+                v3.QueryTimeSeriesRequest = (function() {
+    
+                    /**
+                     * Properties of a QueryTimeSeriesRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IQueryTimeSeriesRequest
+                     * @property {string|null} [name] QueryTimeSeriesRequest name
+                     * @property {string|null} [query] QueryTimeSeriesRequest query
+                     * @property {number|null} [pageSize] QueryTimeSeriesRequest pageSize
+                     * @property {string|null} [pageToken] QueryTimeSeriesRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new QueryTimeSeriesRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a QueryTimeSeriesRequest.
+                     * @implements IQueryTimeSeriesRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IQueryTimeSeriesRequest=} [properties] Properties to set
+                     */
+                    function QueryTimeSeriesRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryTimeSeriesRequest name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @instance
+                     */
+                    QueryTimeSeriesRequest.prototype.name = "";
+    
+                    /**
+                     * QueryTimeSeriesRequest query.
+                     * @member {string} query
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @instance
+                     */
+                    QueryTimeSeriesRequest.prototype.query = "";
+    
+                    /**
+                     * QueryTimeSeriesRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @instance
+                     */
+                    QueryTimeSeriesRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * QueryTimeSeriesRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @instance
+                     */
+                    QueryTimeSeriesRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new QueryTimeSeriesRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IQueryTimeSeriesRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.QueryTimeSeriesRequest} QueryTimeSeriesRequest instance
+                     */
+                    QueryTimeSeriesRequest.create = function create(properties) {
+                        return new QueryTimeSeriesRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified QueryTimeSeriesRequest message. Does not implicitly {@link google.monitoring.v3.QueryTimeSeriesRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IQueryTimeSeriesRequest} message QueryTimeSeriesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryTimeSeriesRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.query != null && message.hasOwnProperty("query"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.query);
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            writer.uint32(/* id 9, wireType 0 =*/72).int32(message.pageSize);
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryTimeSeriesRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.QueryTimeSeriesRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IQueryTimeSeriesRequest} message QueryTimeSeriesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryTimeSeriesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryTimeSeriesRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.QueryTimeSeriesRequest} QueryTimeSeriesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryTimeSeriesRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryTimeSeriesRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            case 7:
+                                message.query = reader.string();
+                                break;
+                            case 9:
+                                message.pageSize = reader.int32();
+                                break;
+                            case 10:
+                                message.pageToken = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryTimeSeriesRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.QueryTimeSeriesRequest} QueryTimeSeriesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryTimeSeriesRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryTimeSeriesRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryTimeSeriesRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.query != null && message.hasOwnProperty("query"))
+                            if (!$util.isString(message.query))
+                                return "query: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryTimeSeriesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.QueryTimeSeriesRequest} QueryTimeSeriesRequest
+                     */
+                    QueryTimeSeriesRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.QueryTimeSeriesRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.QueryTimeSeriesRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.query != null)
+                            message.query = String(object.query);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryTimeSeriesRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @static
+                     * @param {google.monitoring.v3.QueryTimeSeriesRequest} message QueryTimeSeriesRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryTimeSeriesRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.query = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.query != null && message.hasOwnProperty("query"))
+                            object.query = message.query;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryTimeSeriesRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.QueryTimeSeriesRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryTimeSeriesRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryTimeSeriesRequest;
+                })();
+    
+                v3.QueryTimeSeriesResponse = (function() {
+    
+                    /**
+                     * Properties of a QueryTimeSeriesResponse.
+                     * @memberof google.monitoring.v3
+                     * @interface IQueryTimeSeriesResponse
+                     * @property {google.monitoring.v3.ITimeSeriesDescriptor|null} [timeSeriesDescriptor] QueryTimeSeriesResponse timeSeriesDescriptor
+                     * @property {Array.<google.monitoring.v3.ITimeSeriesData>|null} [timeSeriesData] QueryTimeSeriesResponse timeSeriesData
+                     * @property {string|null} [nextPageToken] QueryTimeSeriesResponse nextPageToken
+                     * @property {Array.<google.rpc.IStatus>|null} [partialErrors] QueryTimeSeriesResponse partialErrors
+                     */
+    
+                    /**
+                     * Constructs a new QueryTimeSeriesResponse.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a QueryTimeSeriesResponse.
+                     * @implements IQueryTimeSeriesResponse
+                     * @constructor
+                     * @param {google.monitoring.v3.IQueryTimeSeriesResponse=} [properties] Properties to set
+                     */
+                    function QueryTimeSeriesResponse(properties) {
+                        this.timeSeriesData = [];
+                        this.partialErrors = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryTimeSeriesResponse timeSeriesDescriptor.
+                     * @member {google.monitoring.v3.ITimeSeriesDescriptor|null|undefined} timeSeriesDescriptor
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @instance
+                     */
+                    QueryTimeSeriesResponse.prototype.timeSeriesDescriptor = null;
+    
+                    /**
+                     * QueryTimeSeriesResponse timeSeriesData.
+                     * @member {Array.<google.monitoring.v3.ITimeSeriesData>} timeSeriesData
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @instance
+                     */
+                    QueryTimeSeriesResponse.prototype.timeSeriesData = $util.emptyArray;
+    
+                    /**
+                     * QueryTimeSeriesResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @instance
+                     */
+                    QueryTimeSeriesResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * QueryTimeSeriesResponse partialErrors.
+                     * @member {Array.<google.rpc.IStatus>} partialErrors
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @instance
+                     */
+                    QueryTimeSeriesResponse.prototype.partialErrors = $util.emptyArray;
+    
+                    /**
+                     * Creates a new QueryTimeSeriesResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IQueryTimeSeriesResponse=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.QueryTimeSeriesResponse} QueryTimeSeriesResponse instance
+                     */
+                    QueryTimeSeriesResponse.create = function create(properties) {
+                        return new QueryTimeSeriesResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified QueryTimeSeriesResponse message. Does not implicitly {@link google.monitoring.v3.QueryTimeSeriesResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IQueryTimeSeriesResponse} message QueryTimeSeriesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryTimeSeriesResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.timeSeriesDescriptor != null && message.hasOwnProperty("timeSeriesDescriptor"))
+                            $root.google.monitoring.v3.TimeSeriesDescriptor.encode(message.timeSeriesDescriptor, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        if (message.timeSeriesData != null && message.timeSeriesData.length)
+                            for (var i = 0; i < message.timeSeriesData.length; ++i)
+                                $root.google.monitoring.v3.TimeSeriesData.encode(message.timeSeriesData[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.nextPageToken);
+                        if (message.partialErrors != null && message.partialErrors.length)
+                            for (var i = 0; i < message.partialErrors.length; ++i)
+                                $root.google.rpc.Status.encode(message.partialErrors[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryTimeSeriesResponse message, length delimited. Does not implicitly {@link google.monitoring.v3.QueryTimeSeriesResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IQueryTimeSeriesResponse} message QueryTimeSeriesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryTimeSeriesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryTimeSeriesResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.QueryTimeSeriesResponse} QueryTimeSeriesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryTimeSeriesResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryTimeSeriesResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 8:
+                                message.timeSeriesDescriptor = $root.google.monitoring.v3.TimeSeriesDescriptor.decode(reader, reader.uint32());
+                                break;
+                            case 9:
+                                if (!(message.timeSeriesData && message.timeSeriesData.length))
+                                    message.timeSeriesData = [];
+                                message.timeSeriesData.push($root.google.monitoring.v3.TimeSeriesData.decode(reader, reader.uint32()));
+                                break;
+                            case 10:
+                                message.nextPageToken = reader.string();
+                                break;
+                            case 11:
+                                if (!(message.partialErrors && message.partialErrors.length))
+                                    message.partialErrors = [];
+                                message.partialErrors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryTimeSeriesResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.QueryTimeSeriesResponse} QueryTimeSeriesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryTimeSeriesResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryTimeSeriesResponse message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryTimeSeriesResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.timeSeriesDescriptor != null && message.hasOwnProperty("timeSeriesDescriptor")) {
+                            var error = $root.google.monitoring.v3.TimeSeriesDescriptor.verify(message.timeSeriesDescriptor);
+                            if (error)
+                                return "timeSeriesDescriptor." + error;
+                        }
+                        if (message.timeSeriesData != null && message.hasOwnProperty("timeSeriesData")) {
+                            if (!Array.isArray(message.timeSeriesData))
+                                return "timeSeriesData: array expected";
+                            for (var i = 0; i < message.timeSeriesData.length; ++i) {
+                                var error = $root.google.monitoring.v3.TimeSeriesData.verify(message.timeSeriesData[i]);
+                                if (error)
+                                    return "timeSeriesData." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        if (message.partialErrors != null && message.hasOwnProperty("partialErrors")) {
+                            if (!Array.isArray(message.partialErrors))
+                                return "partialErrors: array expected";
+                            for (var i = 0; i < message.partialErrors.length; ++i) {
+                                var error = $root.google.rpc.Status.verify(message.partialErrors[i]);
+                                if (error)
+                                    return "partialErrors." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryTimeSeriesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.QueryTimeSeriesResponse} QueryTimeSeriesResponse
+                     */
+                    QueryTimeSeriesResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.QueryTimeSeriesResponse)
+                            return object;
+                        var message = new $root.google.monitoring.v3.QueryTimeSeriesResponse();
+                        if (object.timeSeriesDescriptor != null) {
+                            if (typeof object.timeSeriesDescriptor !== "object")
+                                throw TypeError(".google.monitoring.v3.QueryTimeSeriesResponse.timeSeriesDescriptor: object expected");
+                            message.timeSeriesDescriptor = $root.google.monitoring.v3.TimeSeriesDescriptor.fromObject(object.timeSeriesDescriptor);
+                        }
+                        if (object.timeSeriesData) {
+                            if (!Array.isArray(object.timeSeriesData))
+                                throw TypeError(".google.monitoring.v3.QueryTimeSeriesResponse.timeSeriesData: array expected");
+                            message.timeSeriesData = [];
+                            for (var i = 0; i < object.timeSeriesData.length; ++i) {
+                                if (typeof object.timeSeriesData[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.QueryTimeSeriesResponse.timeSeriesData: object expected");
+                                message.timeSeriesData[i] = $root.google.monitoring.v3.TimeSeriesData.fromObject(object.timeSeriesData[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        if (object.partialErrors) {
+                            if (!Array.isArray(object.partialErrors))
+                                throw TypeError(".google.monitoring.v3.QueryTimeSeriesResponse.partialErrors: array expected");
+                            message.partialErrors = [];
+                            for (var i = 0; i < object.partialErrors.length; ++i) {
+                                if (typeof object.partialErrors[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.QueryTimeSeriesResponse.partialErrors: object expected");
+                                message.partialErrors[i] = $root.google.rpc.Status.fromObject(object.partialErrors[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryTimeSeriesResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @static
+                     * @param {google.monitoring.v3.QueryTimeSeriesResponse} message QueryTimeSeriesResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryTimeSeriesResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.timeSeriesData = [];
+                            object.partialErrors = [];
+                        }
+                        if (options.defaults) {
+                            object.timeSeriesDescriptor = null;
+                            object.nextPageToken = "";
+                        }
+                        if (message.timeSeriesDescriptor != null && message.hasOwnProperty("timeSeriesDescriptor"))
+                            object.timeSeriesDescriptor = $root.google.monitoring.v3.TimeSeriesDescriptor.toObject(message.timeSeriesDescriptor, options);
+                        if (message.timeSeriesData && message.timeSeriesData.length) {
+                            object.timeSeriesData = [];
+                            for (var j = 0; j < message.timeSeriesData.length; ++j)
+                                object.timeSeriesData[j] = $root.google.monitoring.v3.TimeSeriesData.toObject(message.timeSeriesData[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        if (message.partialErrors && message.partialErrors.length) {
+                            object.partialErrors = [];
+                            for (var j = 0; j < message.partialErrors.length; ++j)
+                                object.partialErrors[j] = $root.google.rpc.Status.toObject(message.partialErrors[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryTimeSeriesResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.QueryTimeSeriesResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryTimeSeriesResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryTimeSeriesResponse;
+                })();
+    
+                v3.QueryErrorList = (function() {
+    
+                    /**
+                     * Properties of a QueryErrorList.
+                     * @memberof google.monitoring.v3
+                     * @interface IQueryErrorList
+                     * @property {Array.<google.monitoring.v3.IQueryError>|null} [errors] QueryErrorList errors
+                     * @property {string|null} [errorSummary] QueryErrorList errorSummary
+                     */
+    
+                    /**
+                     * Constructs a new QueryErrorList.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a QueryErrorList.
+                     * @implements IQueryErrorList
+                     * @constructor
+                     * @param {google.monitoring.v3.IQueryErrorList=} [properties] Properties to set
+                     */
+                    function QueryErrorList(properties) {
+                        this.errors = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryErrorList errors.
+                     * @member {Array.<google.monitoring.v3.IQueryError>} errors
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @instance
+                     */
+                    QueryErrorList.prototype.errors = $util.emptyArray;
+    
+                    /**
+                     * QueryErrorList errorSummary.
+                     * @member {string} errorSummary
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @instance
+                     */
+                    QueryErrorList.prototype.errorSummary = "";
+    
+                    /**
+                     * Creates a new QueryErrorList instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @static
+                     * @param {google.monitoring.v3.IQueryErrorList=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.QueryErrorList} QueryErrorList instance
+                     */
+                    QueryErrorList.create = function create(properties) {
+                        return new QueryErrorList(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified QueryErrorList message. Does not implicitly {@link google.monitoring.v3.QueryErrorList.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @static
+                     * @param {google.monitoring.v3.IQueryErrorList} message QueryErrorList message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryErrorList.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.errors != null && message.errors.length)
+                            for (var i = 0; i < message.errors.length; ++i)
+                                $root.google.monitoring.v3.QueryError.encode(message.errors[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.errorSummary != null && message.hasOwnProperty("errorSummary"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorSummary);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryErrorList message, length delimited. Does not implicitly {@link google.monitoring.v3.QueryErrorList.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @static
+                     * @param {google.monitoring.v3.IQueryErrorList} message QueryErrorList message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryErrorList.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryErrorList message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.QueryErrorList} QueryErrorList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryErrorList.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryErrorList();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.errors && message.errors.length))
+                                    message.errors = [];
+                                message.errors.push($root.google.monitoring.v3.QueryError.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                message.errorSummary = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryErrorList message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.QueryErrorList} QueryErrorList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryErrorList.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryErrorList message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryErrorList.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.errors != null && message.hasOwnProperty("errors")) {
+                            if (!Array.isArray(message.errors))
+                                return "errors: array expected";
+                            for (var i = 0; i < message.errors.length; ++i) {
+                                var error = $root.google.monitoring.v3.QueryError.verify(message.errors[i]);
+                                if (error)
+                                    return "errors." + error;
+                            }
+                        }
+                        if (message.errorSummary != null && message.hasOwnProperty("errorSummary"))
+                            if (!$util.isString(message.errorSummary))
+                                return "errorSummary: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryErrorList message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.QueryErrorList} QueryErrorList
+                     */
+                    QueryErrorList.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.QueryErrorList)
+                            return object;
+                        var message = new $root.google.monitoring.v3.QueryErrorList();
+                        if (object.errors) {
+                            if (!Array.isArray(object.errors))
+                                throw TypeError(".google.monitoring.v3.QueryErrorList.errors: array expected");
+                            message.errors = [];
+                            for (var i = 0; i < object.errors.length; ++i) {
+                                if (typeof object.errors[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.QueryErrorList.errors: object expected");
+                                message.errors[i] = $root.google.monitoring.v3.QueryError.fromObject(object.errors[i]);
+                            }
+                        }
+                        if (object.errorSummary != null)
+                            message.errorSummary = String(object.errorSummary);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryErrorList message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @static
+                     * @param {google.monitoring.v3.QueryErrorList} message QueryErrorList
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryErrorList.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.errors = [];
+                        if (options.defaults)
+                            object.errorSummary = "";
+                        if (message.errors && message.errors.length) {
+                            object.errors = [];
+                            for (var j = 0; j < message.errors.length; ++j)
+                                object.errors[j] = $root.google.monitoring.v3.QueryError.toObject(message.errors[j], options);
+                        }
+                        if (message.errorSummary != null && message.hasOwnProperty("errorSummary"))
+                            object.errorSummary = message.errorSummary;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryErrorList to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.QueryErrorList
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryErrorList.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryErrorList;
                 })();
     
                 v3.NotificationChannelDescriptor = (function() {
@@ -15836,6 +18888,7 @@
                      * @property {google.monitoring.v3.Service.IAppEngine|null} [appEngine] Service appEngine
                      * @property {google.monitoring.v3.Service.ICloudEndpoints|null} [cloudEndpoints] Service cloudEndpoints
                      * @property {google.monitoring.v3.Service.IClusterIstio|null} [clusterIstio] Service clusterIstio
+                     * @property {google.monitoring.v3.Service.IMeshIstio|null} [meshIstio] Service meshIstio
                      * @property {google.monitoring.v3.Service.ITelemetry|null} [telemetry] Service telemetry
                      */
     
@@ -15903,6 +18956,14 @@
                     Service.prototype.clusterIstio = null;
     
                     /**
+                     * Service meshIstio.
+                     * @member {google.monitoring.v3.Service.IMeshIstio|null|undefined} meshIstio
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.meshIstio = null;
+    
+                    /**
                      * Service telemetry.
                      * @member {google.monitoring.v3.Service.ITelemetry|null|undefined} telemetry
                      * @memberof google.monitoring.v3.Service
@@ -15915,12 +18976,12 @@
     
                     /**
                      * Service identifier.
-                     * @member {"custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|undefined} identifier
+                     * @member {"custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio"|undefined} identifier
                      * @memberof google.monitoring.v3.Service
                      * @instance
                      */
                     Object.defineProperty(Service.prototype, "identifier", {
-                        get: $util.oneOfGetter($oneOfFields = ["custom", "appEngine", "cloudEndpoints", "clusterIstio"]),
+                        get: $util.oneOfGetter($oneOfFields = ["custom", "appEngine", "cloudEndpoints", "clusterIstio", "meshIstio"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -15960,6 +19021,8 @@
                             $root.google.monitoring.v3.Service.CloudEndpoints.encode(message.cloudEndpoints, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         if (message.clusterIstio != null && message.hasOwnProperty("clusterIstio"))
                             $root.google.monitoring.v3.Service.ClusterIstio.encode(message.clusterIstio, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.meshIstio != null && message.hasOwnProperty("meshIstio"))
+                            $root.google.monitoring.v3.Service.MeshIstio.encode(message.meshIstio, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         if (message.telemetry != null && message.hasOwnProperty("telemetry"))
                             $root.google.monitoring.v3.Service.Telemetry.encode(message.telemetry, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                         return writer;
@@ -16013,6 +19076,9 @@
                                 break;
                             case 9:
                                 message.clusterIstio = $root.google.monitoring.v3.Service.ClusterIstio.decode(reader, reader.uint32());
+                                break;
+                            case 10:
+                                message.meshIstio = $root.google.monitoring.v3.Service.MeshIstio.decode(reader, reader.uint32());
                                 break;
                             case 13:
                                 message.telemetry = $root.google.monitoring.v3.Service.Telemetry.decode(reader, reader.uint32());
@@ -16097,6 +19163,16 @@
                                     return "clusterIstio." + error;
                             }
                         }
+                        if (message.meshIstio != null && message.hasOwnProperty("meshIstio")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.MeshIstio.verify(message.meshIstio);
+                                if (error)
+                                    return "meshIstio." + error;
+                            }
+                        }
                         if (message.telemetry != null && message.hasOwnProperty("telemetry")) {
                             var error = $root.google.monitoring.v3.Service.Telemetry.verify(message.telemetry);
                             if (error)
@@ -16140,6 +19216,11 @@
                             if (typeof object.clusterIstio !== "object")
                                 throw TypeError(".google.monitoring.v3.Service.clusterIstio: object expected");
                             message.clusterIstio = $root.google.monitoring.v3.Service.ClusterIstio.fromObject(object.clusterIstio);
+                        }
+                        if (object.meshIstio != null) {
+                            if (typeof object.meshIstio !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.meshIstio: object expected");
+                            message.meshIstio = $root.google.monitoring.v3.Service.MeshIstio.fromObject(object.meshIstio);
                         }
                         if (object.telemetry != null) {
                             if (typeof object.telemetry !== "object")
@@ -16190,6 +19271,11 @@
                             object.clusterIstio = $root.google.monitoring.v3.Service.ClusterIstio.toObject(message.clusterIstio, options);
                             if (options.oneofs)
                                 object.identifier = "clusterIstio";
+                        }
+                        if (message.meshIstio != null && message.hasOwnProperty("meshIstio")) {
+                            object.meshIstio = $root.google.monitoring.v3.Service.MeshIstio.toObject(message.meshIstio, options);
+                            if (options.oneofs)
+                                object.identifier = "meshIstio";
                         }
                         if (message.telemetry != null && message.hasOwnProperty("telemetry"))
                             object.telemetry = $root.google.monitoring.v3.Service.Telemetry.toObject(message.telemetry, options);
@@ -16993,6 +20079,238 @@
                         };
     
                         return ClusterIstio;
+                    })();
+    
+                    Service.MeshIstio = (function() {
+    
+                        /**
+                         * Properties of a MeshIstio.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface IMeshIstio
+                         * @property {string|null} [meshUid] MeshIstio meshUid
+                         * @property {string|null} [serviceNamespace] MeshIstio serviceNamespace
+                         * @property {string|null} [serviceName] MeshIstio serviceName
+                         */
+    
+                        /**
+                         * Constructs a new MeshIstio.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a MeshIstio.
+                         * @implements IMeshIstio
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.IMeshIstio=} [properties] Properties to set
+                         */
+                        function MeshIstio(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MeshIstio meshUid.
+                         * @member {string} meshUid
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @instance
+                         */
+                        MeshIstio.prototype.meshUid = "";
+    
+                        /**
+                         * MeshIstio serviceNamespace.
+                         * @member {string} serviceNamespace
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @instance
+                         */
+                        MeshIstio.prototype.serviceNamespace = "";
+    
+                        /**
+                         * MeshIstio serviceName.
+                         * @member {string} serviceName
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @instance
+                         */
+                        MeshIstio.prototype.serviceName = "";
+    
+                        /**
+                         * Creates a new MeshIstio instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @static
+                         * @param {google.monitoring.v3.Service.IMeshIstio=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.MeshIstio} MeshIstio instance
+                         */
+                        MeshIstio.create = function create(properties) {
+                            return new MeshIstio(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MeshIstio message. Does not implicitly {@link google.monitoring.v3.Service.MeshIstio.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @static
+                         * @param {google.monitoring.v3.Service.IMeshIstio} message MeshIstio message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MeshIstio.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.meshUid != null && message.hasOwnProperty("meshUid"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.meshUid);
+                            if (message.serviceNamespace != null && message.hasOwnProperty("serviceNamespace"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceNamespace);
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.serviceName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MeshIstio message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.MeshIstio.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @static
+                         * @param {google.monitoring.v3.Service.IMeshIstio} message MeshIstio message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MeshIstio.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MeshIstio message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.MeshIstio} MeshIstio
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MeshIstio.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.MeshIstio();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.meshUid = reader.string();
+                                    break;
+                                case 3:
+                                    message.serviceNamespace = reader.string();
+                                    break;
+                                case 4:
+                                    message.serviceName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MeshIstio message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.MeshIstio} MeshIstio
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MeshIstio.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MeshIstio message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MeshIstio.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.meshUid != null && message.hasOwnProperty("meshUid"))
+                                if (!$util.isString(message.meshUid))
+                                    return "meshUid: string expected";
+                            if (message.serviceNamespace != null && message.hasOwnProperty("serviceNamespace"))
+                                if (!$util.isString(message.serviceNamespace))
+                                    return "serviceNamespace: string expected";
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                if (!$util.isString(message.serviceName))
+                                    return "serviceName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MeshIstio message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.MeshIstio} MeshIstio
+                         */
+                        MeshIstio.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.MeshIstio)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.MeshIstio();
+                            if (object.meshUid != null)
+                                message.meshUid = String(object.meshUid);
+                            if (object.serviceNamespace != null)
+                                message.serviceNamespace = String(object.serviceNamespace);
+                            if (object.serviceName != null)
+                                message.serviceName = String(object.serviceName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MeshIstio message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @static
+                         * @param {google.monitoring.v3.Service.MeshIstio} message MeshIstio
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MeshIstio.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.meshUid = "";
+                                object.serviceNamespace = "";
+                                object.serviceName = "";
+                            }
+                            if (message.meshUid != null && message.hasOwnProperty("meshUid"))
+                                object.meshUid = message.meshUid;
+                            if (message.serviceNamespace != null && message.hasOwnProperty("serviceNamespace"))
+                                object.serviceNamespace = message.serviceNamespace;
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                object.serviceName = message.serviceName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MeshIstio to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.MeshIstio
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MeshIstio.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MeshIstio;
                     })();
     
                     Service.Telemetry = (function() {

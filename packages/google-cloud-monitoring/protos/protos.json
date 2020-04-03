@@ -93,7 +93,8 @@
                         "condition": {
                           "oneof": [
                             "conditionThreshold",
-                            "conditionAbsent"
+                            "conditionAbsent",
+                            "conditionTimeSeriesQueryLanguage"
                           ]
                         }
                       },
@@ -113,6 +114,10 @@
                         "conditionAbsent": {
                           "type": "MetricAbsence",
                           "id": 2
+                        },
+                        "conditionTimeSeriesQueryLanguage": {
+                          "type": "TimeSeriesQueryLanguageCondition",
+                          "id": 14
                         }
                       },
                       "nested": {
@@ -192,6 +197,18 @@
                             "trigger": {
                               "type": "Trigger",
                               "id": 3
+                            }
+                          }
+                        },
+                        "TimeSeriesQueryLanguageCondition": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "summary": {
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         }
@@ -810,6 +827,142 @@
                     }
                   }
                 },
+                "TimeSeriesDescriptor": {
+                  "fields": {
+                    "labelDescriptors": {
+                      "rule": "repeated",
+                      "type": "google.api.LabelDescriptor",
+                      "id": 1
+                    },
+                    "pointDescriptors": {
+                      "rule": "repeated",
+                      "type": "ValueDescriptor",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "ValueDescriptor": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "valueType": {
+                          "type": "google.api.MetricDescriptor.ValueType",
+                          "id": 2
+                        },
+                        "metricKind": {
+                          "type": "google.api.MetricDescriptor.MetricKind",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "TimeSeriesData": {
+                  "fields": {
+                    "labelValues": {
+                      "rule": "repeated",
+                      "type": "LabelValue",
+                      "id": 1
+                    },
+                    "pointData": {
+                      "rule": "repeated",
+                      "type": "PointData",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "PointData": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "TypedValue",
+                          "id": 1
+                        },
+                        "timeInterval": {
+                          "type": "TimeInterval",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                },
+                "LabelValue": {
+                  "oneofs": {
+                    "value": {
+                      "oneof": [
+                        "boolValue",
+                        "int64Value",
+                        "stringValue"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "boolValue": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "int64Value": {
+                      "type": "int64",
+                      "id": 2
+                    },
+                    "stringValue": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "QueryError": {
+                  "fields": {
+                    "locator": {
+                      "type": "TextLocator",
+                      "id": 1
+                    },
+                    "message": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "TextLocator": {
+                  "fields": {
+                    "source": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "startPosition": {
+                      "type": "Position",
+                      "id": 2
+                    },
+                    "endPosition": {
+                      "type": "Position",
+                      "id": 3
+                    },
+                    "nestedLocator": {
+                      "type": "TextLocator",
+                      "id": 4
+                    },
+                    "nestingReason": {
+                      "type": "string",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "Position": {
+                      "fields": {
+                        "line": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "column": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                },
                 "MetricService": {
                   "options": {
                     "(google.api.default_host)": "monitoring.googleapis.com",
@@ -1154,6 +1307,61 @@
                           "id": 2
                         }
                       }
+                    }
+                  }
+                },
+                "QueryTimeSeriesRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "query": {
+                      "type": "string",
+                      "id": 7
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 9
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 10
+                    }
+                  }
+                },
+                "QueryTimeSeriesResponse": {
+                  "fields": {
+                    "timeSeriesDescriptor": {
+                      "type": "TimeSeriesDescriptor",
+                      "id": 8
+                    },
+                    "timeSeriesData": {
+                      "rule": "repeated",
+                      "type": "TimeSeriesData",
+                      "id": 9
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 10
+                    },
+                    "partialErrors": {
+                      "rule": "repeated",
+                      "type": "google.rpc.Status",
+                      "id": 11
+                    }
+                  }
+                },
+                "QueryErrorList": {
+                  "fields": {
+                    "errors": {
+                      "rule": "repeated",
+                      "type": "QueryError",
+                      "id": 1
+                    },
+                    "errorSummary": {
+                      "type": "string",
+                      "id": 2
                     }
                   }
                 },
@@ -1560,7 +1768,8 @@
                         "custom",
                         "appEngine",
                         "cloudEndpoints",
-                        "clusterIstio"
+                        "clusterIstio",
+                        "meshIstio"
                       ]
                     }
                   },
@@ -1587,7 +1796,14 @@
                     },
                     "clusterIstio": {
                       "type": "ClusterIstio",
-                      "id": 9
+                      "id": 9,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "meshIstio": {
+                      "type": "MeshIstio",
+                      "id": 10
                     },
                     "telemetry": {
                       "type": "Telemetry",
@@ -1615,6 +1831,9 @@
                       }
                     },
                     "ClusterIstio": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "location": {
                           "type": "string",
@@ -1623,6 +1842,22 @@
                         "clusterName": {
                           "type": "string",
                           "id": 2
+                        },
+                        "serviceNamespace": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "serviceName": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "MeshIstio": {
+                      "fields": {
+                        "meshUid": {
+                          "type": "string",
+                          "id": 1
                         },
                         "serviceNamespace": {
                           "type": "string",
