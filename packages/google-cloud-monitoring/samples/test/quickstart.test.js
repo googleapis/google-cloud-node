@@ -17,24 +17,26 @@
 const {assert} = require('chai');
 const {describe, it} = require('mocha');
 const cp = require('child_process');
-const retry = require('p-retry');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
+// A helper for delaying integration tests with an exponential backoff.
+// See examples like: https://github.com/googleapis/nodejs-monitoring/issues/190,
+// https://github.com/googleapis/nodejs-monitoring/issues/191.
+const delay = async test => {
+  const retries = test.currentRetry();
+  if (retries === 0) return; // no retry on the first failure.
+  // see: https://cloud.google.com/storage/docs/exponential-backoff:
+  const ms = Math.pow(2, retries) * 250 + Math.random() * 1000;
+  return new Promise(done => {
+    console.info(`retrying "${test.title}" in ${ms}ms`);
+    setTimeout(done, ms);
+  });
+};
 describe('quickstart', () => {
-  it('should run the quickstart', async () => {
-    // The write in the quickstart appears to be very, very flaky.
-    // This should not be needed.  The tracking bug is here:
-    // https://github.com/googleapis/nodejs-monitoring/issues/191
-    await retry(
-      async () => {
-        const result = execSync('node quickstart');
-        assert.match(result, /Done writing time series data/);
-      },
-      {
-        retries: 10,
-        onFailedAttempt: () => console.warn('Write failed, retrying...'),
-      }
-    );
+  it('should run the quickstart', async function() {
+    this.retries(8);
+    await delay(this.test); // delay the start of the test, if this is a retry.
+    const result = execSync('node quickstart');
+    assert.match(result, /Done writing time series data/);
   });
 });
