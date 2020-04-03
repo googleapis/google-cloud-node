@@ -13,6 +13,7 @@
 # limitations under the License.
 """This script is used to synthesize generated parts of this library."""
 
+import json
 import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
@@ -34,8 +35,10 @@ for version in versions:
             'grpc-service-config': f'google/cloud/{name}/{version}/cloud{name}_grpc_service_config.json',
             'package-name': f'@google-cloud/{name}'
         },
-        extra_proto_files=['google/cloud/common_resources.proto'],
-        version=version)
+        # This API has dependencies outside of its own folder so we list them here.
+        # Switching to bazel build should help get rid of this.
+        extra_proto_files=['google/cloud/common_resources.proto', 'google/cloud/orgpolicy/v1', 'google/identity/accesscontextmanager'],
+        version=version),
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
@@ -47,7 +50,21 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
+# Extra proto dependencies make the *_proto_list.json have some common files
+# that conflict with the same common files imported from gax. This is likely
+# a generator problem that needs to be fixed when we start handling synth.py
+# custom fixes.
+proto_lists=[f'src/{version}/asset_service_proto_list.json' for version in versions]
+remove_proto_keywords=['/google/api', '/google/protobuf', '/google/rpc', '/google/type']
+for file in proto_lists:
+  with open(file, 'r') as f:
+    items=json.load(f)
+    content =[item for item in items if all([(x not in item) for x in remove_proto_keywords])]
+    new_file=json.dumps(content, indent=2) + '\n'
+  with open(file, 'w') as f:  
+    f.write(new_file)
+
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'run', 'lint'])
 subprocess.run(['npx', 'compileProtos', 'src'])

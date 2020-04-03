@@ -18,7 +18,6 @@
 
 import * as gax from 'google-gax';
 import {
-  GaxCall,
   Callback,
   CallOptions,
   Descriptors,

@@ -1553,15 +1553,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** ContentType enum. */
-                enum ContentType {
-                    CONTENT_TYPE_UNSPECIFIED = 0,
-                    RESOURCE = 1,
-                    IAM_POLICY = 2,
-                    ORG_POLICY = 4,
-                    ACCESS_POLICY = 5
-                }
-
                 /** Properties of a FeedOutputConfig. */
                 interface IFeedOutputConfig {
 
@@ -1767,6 +1758,15 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** ContentType enum. */
+                enum ContentType {
+                    CONTENT_TYPE_UNSPECIFIED = 0,
+                    RESOURCE = 1,
+                    IAM_POLICY = 2,
+                    ORG_POLICY = 4,
+                    ACCESS_POLICY = 5
                 }
 
                 /** Properties of a TemporalAsset. */
@@ -1982,6 +1982,18 @@ export namespace google {
                     /** Asset iamPolicy */
                     iamPolicy?: (google.iam.v1.IPolicy|null);
 
+                    /** Asset orgPolicy */
+                    orgPolicy?: (google.cloud.orgpolicy.v1.IPolicy[]|null);
+
+                    /** Asset accessPolicy */
+                    accessPolicy?: (google.identity.accesscontextmanager.v1.IAccessPolicy|null);
+
+                    /** Asset accessLevel */
+                    accessLevel?: (google.identity.accesscontextmanager.v1.IAccessLevel|null);
+
+                    /** Asset servicePerimeter */
+                    servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
                     /** Asset ancestors */
                     ancestors?: (string[]|null);
                 }
@@ -2007,8 +2019,23 @@ export namespace google {
                     /** Asset iamPolicy. */
                     public iamPolicy?: (google.iam.v1.IPolicy|null);
 
+                    /** Asset orgPolicy. */
+                    public orgPolicy: google.cloud.orgpolicy.v1.IPolicy[];
+
+                    /** Asset accessPolicy. */
+                    public accessPolicy?: (google.identity.accesscontextmanager.v1.IAccessPolicy|null);
+
+                    /** Asset accessLevel. */
+                    public accessLevel?: (google.identity.accesscontextmanager.v1.IAccessLevel|null);
+
+                    /** Asset servicePerimeter. */
+                    public servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
                     /** Asset ancestors. */
                     public ancestors: string[];
+
+                    /** Asset accessContextPolicy. */
+                    public accessContextPolicy?: ("accessPolicy"|"accessLevel"|"servicePerimeter");
 
                     /**
                      * Creates a new Asset instance using the specified properties.
@@ -7824,6 +7851,444 @@ export namespace google {
                 }
             }
         }
+
+        /** Namespace orgpolicy. */
+        namespace orgpolicy {
+
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of a Policy. */
+                interface IPolicy {
+
+                    /** Policy version */
+                    version?: (number|null);
+
+                    /** Policy constraint */
+                    constraint?: (string|null);
+
+                    /** Policy etag */
+                    etag?: (Uint8Array|string|null);
+
+                    /** Policy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Policy listPolicy */
+                    listPolicy?: (google.cloud.orgpolicy.v1.Policy.IListPolicy|null);
+
+                    /** Policy booleanPolicy */
+                    booleanPolicy?: (google.cloud.orgpolicy.v1.Policy.IBooleanPolicy|null);
+
+                    /** Policy restoreDefault */
+                    restoreDefault?: (google.cloud.orgpolicy.v1.Policy.IRestoreDefault|null);
+                }
+
+                /** Represents a Policy. */
+                class Policy implements IPolicy {
+
+                    /**
+                     * Constructs a new Policy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v1.IPolicy);
+
+                    /** Policy version. */
+                    public version: number;
+
+                    /** Policy constraint. */
+                    public constraint: string;
+
+                    /** Policy etag. */
+                    public etag: (Uint8Array|string);
+
+                    /** Policy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Policy listPolicy. */
+                    public listPolicy?: (google.cloud.orgpolicy.v1.Policy.IListPolicy|null);
+
+                    /** Policy booleanPolicy. */
+                    public booleanPolicy?: (google.cloud.orgpolicy.v1.Policy.IBooleanPolicy|null);
+
+                    /** Policy restoreDefault. */
+                    public restoreDefault?: (google.cloud.orgpolicy.v1.Policy.IRestoreDefault|null);
+
+                    /** Policy policyType. */
+                    public policyType?: ("listPolicy"|"booleanPolicy"|"restoreDefault");
+
+                    /**
+                     * Creates a new Policy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Policy instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v1.IPolicy): google.cloud.orgpolicy.v1.Policy;
+
+                    /**
+                     * Encodes the specified Policy message. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.verify|verify} messages.
+                     * @param message Policy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v1.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Policy message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.verify|verify} messages.
+                     * @param message Policy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v1.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Policy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Policy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v1.Policy;
+
+                    /**
+                     * Decodes a Policy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Policy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v1.Policy;
+
+                    /**
+                     * Verifies a Policy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Policy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Policy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v1.Policy;
+
+                    /**
+                     * Creates a plain object from a Policy message. Also converts values to other types if specified.
+                     * @param message Policy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v1.Policy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Policy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Policy {
+
+                    /** Properties of a ListPolicy. */
+                    interface IListPolicy {
+
+                        /** ListPolicy allowedValues */
+                        allowedValues?: (string[]|null);
+
+                        /** ListPolicy deniedValues */
+                        deniedValues?: (string[]|null);
+
+                        /** ListPolicy allValues */
+                        allValues?: (google.cloud.orgpolicy.v1.Policy.ListPolicy.AllValues|keyof typeof google.cloud.orgpolicy.v1.Policy.ListPolicy.AllValues|null);
+
+                        /** ListPolicy suggestedValue */
+                        suggestedValue?: (string|null);
+
+                        /** ListPolicy inheritFromParent */
+                        inheritFromParent?: (boolean|null);
+                    }
+
+                    /** Represents a ListPolicy. */
+                    class ListPolicy implements IListPolicy {
+
+                        /**
+                         * Constructs a new ListPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.orgpolicy.v1.Policy.IListPolicy);
+
+                        /** ListPolicy allowedValues. */
+                        public allowedValues: string[];
+
+                        /** ListPolicy deniedValues. */
+                        public deniedValues: string[];
+
+                        /** ListPolicy allValues. */
+                        public allValues: (google.cloud.orgpolicy.v1.Policy.ListPolicy.AllValues|keyof typeof google.cloud.orgpolicy.v1.Policy.ListPolicy.AllValues);
+
+                        /** ListPolicy suggestedValue. */
+                        public suggestedValue: string;
+
+                        /** ListPolicy inheritFromParent. */
+                        public inheritFromParent: boolean;
+
+                        /**
+                         * Creates a new ListPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListPolicy instance
+                         */
+                        public static create(properties?: google.cloud.orgpolicy.v1.Policy.IListPolicy): google.cloud.orgpolicy.v1.Policy.ListPolicy;
+
+                        /**
+                         * Encodes the specified ListPolicy message. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.ListPolicy.verify|verify} messages.
+                         * @param message ListPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.orgpolicy.v1.Policy.IListPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListPolicy message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.ListPolicy.verify|verify} messages.
+                         * @param message ListPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.orgpolicy.v1.Policy.IListPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v1.Policy.ListPolicy;
+
+                        /**
+                         * Decodes a ListPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v1.Policy.ListPolicy;
+
+                        /**
+                         * Verifies a ListPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v1.Policy.ListPolicy;
+
+                        /**
+                         * Creates a plain object from a ListPolicy message. Also converts values to other types if specified.
+                         * @param message ListPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.orgpolicy.v1.Policy.ListPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ListPolicy {
+
+                        /** AllValues enum. */
+                        enum AllValues {
+                            ALL_VALUES_UNSPECIFIED = 0,
+                            ALLOW = 1,
+                            DENY = 2
+                        }
+                    }
+
+                    /** Properties of a BooleanPolicy. */
+                    interface IBooleanPolicy {
+
+                        /** BooleanPolicy enforced */
+                        enforced?: (boolean|null);
+                    }
+
+                    /** Represents a BooleanPolicy. */
+                    class BooleanPolicy implements IBooleanPolicy {
+
+                        /**
+                         * Constructs a new BooleanPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.orgpolicy.v1.Policy.IBooleanPolicy);
+
+                        /** BooleanPolicy enforced. */
+                        public enforced: boolean;
+
+                        /**
+                         * Creates a new BooleanPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BooleanPolicy instance
+                         */
+                        public static create(properties?: google.cloud.orgpolicy.v1.Policy.IBooleanPolicy): google.cloud.orgpolicy.v1.Policy.BooleanPolicy;
+
+                        /**
+                         * Encodes the specified BooleanPolicy message. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.BooleanPolicy.verify|verify} messages.
+                         * @param message BooleanPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.orgpolicy.v1.Policy.IBooleanPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BooleanPolicy message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.BooleanPolicy.verify|verify} messages.
+                         * @param message BooleanPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.orgpolicy.v1.Policy.IBooleanPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BooleanPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BooleanPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v1.Policy.BooleanPolicy;
+
+                        /**
+                         * Decodes a BooleanPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BooleanPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v1.Policy.BooleanPolicy;
+
+                        /**
+                         * Verifies a BooleanPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BooleanPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BooleanPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v1.Policy.BooleanPolicy;
+
+                        /**
+                         * Creates a plain object from a BooleanPolicy message. Also converts values to other types if specified.
+                         * @param message BooleanPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.orgpolicy.v1.Policy.BooleanPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BooleanPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a RestoreDefault. */
+                    interface IRestoreDefault {
+                    }
+
+                    /** Represents a RestoreDefault. */
+                    class RestoreDefault implements IRestoreDefault {
+
+                        /**
+                         * Constructs a new RestoreDefault.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.orgpolicy.v1.Policy.IRestoreDefault);
+
+                        /**
+                         * Creates a new RestoreDefault instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RestoreDefault instance
+                         */
+                        public static create(properties?: google.cloud.orgpolicy.v1.Policy.IRestoreDefault): google.cloud.orgpolicy.v1.Policy.RestoreDefault;
+
+                        /**
+                         * Encodes the specified RestoreDefault message. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.RestoreDefault.verify|verify} messages.
+                         * @param message RestoreDefault message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.orgpolicy.v1.Policy.IRestoreDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RestoreDefault message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.RestoreDefault.verify|verify} messages.
+                         * @param message RestoreDefault message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.orgpolicy.v1.Policy.IRestoreDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RestoreDefault message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RestoreDefault
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v1.Policy.RestoreDefault;
+
+                        /**
+                         * Decodes a RestoreDefault message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RestoreDefault
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v1.Policy.RestoreDefault;
+
+                        /**
+                         * Verifies a RestoreDefault message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RestoreDefault message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RestoreDefault
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v1.Policy.RestoreDefault;
+
+                        /**
+                         * Creates a plain object from a RestoreDefault message. Also converts values to other types if specified.
+                         * @param message RestoreDefault
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.orgpolicy.v1.Policy.RestoreDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RestoreDefault to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+            }
+        }
     }
 
     /** Namespace api. */
@@ -11531,6 +11996,186 @@ export namespace google {
             }
         }
 
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of an Any. */
         interface IAny {
 
@@ -11935,102 +12580,6 @@ export namespace google {
             public toJSON(): { [k: string]: any };
         }
 
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -12122,90 +12671,6 @@ export namespace google {
 
             /**
              * Converts this Duration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an Empty. */
-        interface IEmpty {
-        }
-
-        /** Represents an Empty. */
-        class Empty implements IEmpty {
-
-            /**
-             * Constructs a new Empty.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEmpty);
-
-            /**
-             * Creates a new Empty instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Empty instance
-             */
-            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
-
-            /**
-             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
-
-            /**
-             * Verifies an Empty message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Empty
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
-
-            /**
-             * Creates a plain object from an Empty message. Also converts values to other types if specified.
-             * @param message Empty
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Empty to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -12955,6 +13420,1189 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+        }
+    }
+
+    /** Namespace identity. */
+    namespace identity {
+
+        /** Namespace accesscontextmanager. */
+        namespace accesscontextmanager {
+
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of an AccessLevel. */
+                interface IAccessLevel {
+
+                    /** AccessLevel name */
+                    name?: (string|null);
+
+                    /** AccessLevel title */
+                    title?: (string|null);
+
+                    /** AccessLevel description */
+                    description?: (string|null);
+
+                    /** AccessLevel basic */
+                    basic?: (google.identity.accesscontextmanager.v1.IBasicLevel|null);
+
+                    /** AccessLevel custom */
+                    custom?: (google.identity.accesscontextmanager.v1.ICustomLevel|null);
+
+                    /** AccessLevel createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessLevel updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an AccessLevel. */
+                class AccessLevel implements IAccessLevel {
+
+                    /**
+                     * Constructs a new AccessLevel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.IAccessLevel);
+
+                    /** AccessLevel name. */
+                    public name: string;
+
+                    /** AccessLevel title. */
+                    public title: string;
+
+                    /** AccessLevel description. */
+                    public description: string;
+
+                    /** AccessLevel basic. */
+                    public basic?: (google.identity.accesscontextmanager.v1.IBasicLevel|null);
+
+                    /** AccessLevel custom. */
+                    public custom?: (google.identity.accesscontextmanager.v1.ICustomLevel|null);
+
+                    /** AccessLevel createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessLevel updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessLevel level. */
+                    public level?: ("basic"|"custom");
+
+                    /**
+                     * Creates a new AccessLevel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessLevel instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.IAccessLevel): google.identity.accesscontextmanager.v1.AccessLevel;
+
+                    /**
+                     * Encodes the specified AccessLevel message. Does not implicitly {@link google.identity.accesscontextmanager.v1.AccessLevel.verify|verify} messages.
+                     * @param message AccessLevel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.IAccessLevel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessLevel message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.AccessLevel.verify|verify} messages.
+                     * @param message AccessLevel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.IAccessLevel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessLevel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessLevel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.AccessLevel;
+
+                    /**
+                     * Decodes an AccessLevel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessLevel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.AccessLevel;
+
+                    /**
+                     * Verifies an AccessLevel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessLevel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessLevel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.AccessLevel;
+
+                    /**
+                     * Creates a plain object from an AccessLevel message. Also converts values to other types if specified.
+                     * @param message AccessLevel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.AccessLevel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessLevel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BasicLevel. */
+                interface IBasicLevel {
+
+                    /** BasicLevel conditions */
+                    conditions?: (google.identity.accesscontextmanager.v1.ICondition[]|null);
+
+                    /** BasicLevel combiningFunction */
+                    combiningFunction?: (google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction|keyof typeof google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction|null);
+                }
+
+                /** Represents a BasicLevel. */
+                class BasicLevel implements IBasicLevel {
+
+                    /**
+                     * Constructs a new BasicLevel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.IBasicLevel);
+
+                    /** BasicLevel conditions. */
+                    public conditions: google.identity.accesscontextmanager.v1.ICondition[];
+
+                    /** BasicLevel combiningFunction. */
+                    public combiningFunction: (google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction|keyof typeof google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction);
+
+                    /**
+                     * Creates a new BasicLevel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BasicLevel instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.IBasicLevel): google.identity.accesscontextmanager.v1.BasicLevel;
+
+                    /**
+                     * Encodes the specified BasicLevel message. Does not implicitly {@link google.identity.accesscontextmanager.v1.BasicLevel.verify|verify} messages.
+                     * @param message BasicLevel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.IBasicLevel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BasicLevel message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.BasicLevel.verify|verify} messages.
+                     * @param message BasicLevel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.IBasicLevel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BasicLevel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BasicLevel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.BasicLevel;
+
+                    /**
+                     * Decodes a BasicLevel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BasicLevel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.BasicLevel;
+
+                    /**
+                     * Verifies a BasicLevel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BasicLevel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BasicLevel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.BasicLevel;
+
+                    /**
+                     * Creates a plain object from a BasicLevel message. Also converts values to other types if specified.
+                     * @param message BasicLevel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.BasicLevel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BasicLevel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace BasicLevel {
+
+                    /** ConditionCombiningFunction enum. */
+                    enum ConditionCombiningFunction {
+                        AND = 0,
+                        OR = 1
+                    }
+                }
+
+                /** Properties of a Condition. */
+                interface ICondition {
+
+                    /** Condition ipSubnetworks */
+                    ipSubnetworks?: (string[]|null);
+
+                    /** Condition devicePolicy */
+                    devicePolicy?: (google.identity.accesscontextmanager.v1.IDevicePolicy|null);
+
+                    /** Condition requiredAccessLevels */
+                    requiredAccessLevels?: (string[]|null);
+
+                    /** Condition negate */
+                    negate?: (boolean|null);
+
+                    /** Condition members */
+                    members?: (string[]|null);
+
+                    /** Condition regions */
+                    regions?: (string[]|null);
+                }
+
+                /** Represents a Condition. */
+                class Condition implements ICondition {
+
+                    /**
+                     * Constructs a new Condition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.ICondition);
+
+                    /** Condition ipSubnetworks. */
+                    public ipSubnetworks: string[];
+
+                    /** Condition devicePolicy. */
+                    public devicePolicy?: (google.identity.accesscontextmanager.v1.IDevicePolicy|null);
+
+                    /** Condition requiredAccessLevels. */
+                    public requiredAccessLevels: string[];
+
+                    /** Condition negate. */
+                    public negate: boolean;
+
+                    /** Condition members. */
+                    public members: string[];
+
+                    /** Condition regions. */
+                    public regions: string[];
+
+                    /**
+                     * Creates a new Condition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Condition instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.ICondition): google.identity.accesscontextmanager.v1.Condition;
+
+                    /**
+                     * Encodes the specified Condition message. Does not implicitly {@link google.identity.accesscontextmanager.v1.Condition.verify|verify} messages.
+                     * @param message Condition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.ICondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Condition message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.Condition.verify|verify} messages.
+                     * @param message Condition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ICondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Condition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Condition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.Condition;
+
+                    /**
+                     * Decodes a Condition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Condition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.Condition;
+
+                    /**
+                     * Verifies a Condition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Condition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Condition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.Condition;
+
+                    /**
+                     * Creates a plain object from a Condition message. Also converts values to other types if specified.
+                     * @param message Condition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.Condition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Condition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CustomLevel. */
+                interface ICustomLevel {
+
+                    /** CustomLevel expr */
+                    expr?: (google.type.IExpr|null);
+                }
+
+                /** Represents a CustomLevel. */
+                class CustomLevel implements ICustomLevel {
+
+                    /**
+                     * Constructs a new CustomLevel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.ICustomLevel);
+
+                    /** CustomLevel expr. */
+                    public expr?: (google.type.IExpr|null);
+
+                    /**
+                     * Creates a new CustomLevel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomLevel instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.ICustomLevel): google.identity.accesscontextmanager.v1.CustomLevel;
+
+                    /**
+                     * Encodes the specified CustomLevel message. Does not implicitly {@link google.identity.accesscontextmanager.v1.CustomLevel.verify|verify} messages.
+                     * @param message CustomLevel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.ICustomLevel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomLevel message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.CustomLevel.verify|verify} messages.
+                     * @param message CustomLevel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ICustomLevel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomLevel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomLevel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.CustomLevel;
+
+                    /**
+                     * Decodes a CustomLevel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomLevel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.CustomLevel;
+
+                    /**
+                     * Verifies a CustomLevel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomLevel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomLevel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.CustomLevel;
+
+                    /**
+                     * Creates a plain object from a CustomLevel message. Also converts values to other types if specified.
+                     * @param message CustomLevel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.CustomLevel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomLevel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DevicePolicy. */
+                interface IDevicePolicy {
+
+                    /** DevicePolicy requireScreenlock */
+                    requireScreenlock?: (boolean|null);
+
+                    /** DevicePolicy allowedEncryptionStatuses */
+                    allowedEncryptionStatuses?: (google.identity.accesscontextmanager.type.DeviceEncryptionStatus[]|null);
+
+                    /** DevicePolicy osConstraints */
+                    osConstraints?: (google.identity.accesscontextmanager.v1.IOsConstraint[]|null);
+
+                    /** DevicePolicy allowedDeviceManagementLevels */
+                    allowedDeviceManagementLevels?: (google.identity.accesscontextmanager.type.DeviceManagementLevel[]|null);
+
+                    /** DevicePolicy requireAdminApproval */
+                    requireAdminApproval?: (boolean|null);
+
+                    /** DevicePolicy requireCorpOwned */
+                    requireCorpOwned?: (boolean|null);
+                }
+
+                /** Represents a DevicePolicy. */
+                class DevicePolicy implements IDevicePolicy {
+
+                    /**
+                     * Constructs a new DevicePolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.IDevicePolicy);
+
+                    /** DevicePolicy requireScreenlock. */
+                    public requireScreenlock: boolean;
+
+                    /** DevicePolicy allowedEncryptionStatuses. */
+                    public allowedEncryptionStatuses: google.identity.accesscontextmanager.type.DeviceEncryptionStatus[];
+
+                    /** DevicePolicy osConstraints. */
+                    public osConstraints: google.identity.accesscontextmanager.v1.IOsConstraint[];
+
+                    /** DevicePolicy allowedDeviceManagementLevels. */
+                    public allowedDeviceManagementLevels: google.identity.accesscontextmanager.type.DeviceManagementLevel[];
+
+                    /** DevicePolicy requireAdminApproval. */
+                    public requireAdminApproval: boolean;
+
+                    /** DevicePolicy requireCorpOwned. */
+                    public requireCorpOwned: boolean;
+
+                    /**
+                     * Creates a new DevicePolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DevicePolicy instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.IDevicePolicy): google.identity.accesscontextmanager.v1.DevicePolicy;
+
+                    /**
+                     * Encodes the specified DevicePolicy message. Does not implicitly {@link google.identity.accesscontextmanager.v1.DevicePolicy.verify|verify} messages.
+                     * @param message DevicePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.IDevicePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DevicePolicy message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.DevicePolicy.verify|verify} messages.
+                     * @param message DevicePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.IDevicePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DevicePolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DevicePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.DevicePolicy;
+
+                    /**
+                     * Decodes a DevicePolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DevicePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.DevicePolicy;
+
+                    /**
+                     * Verifies a DevicePolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DevicePolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DevicePolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.DevicePolicy;
+
+                    /**
+                     * Creates a plain object from a DevicePolicy message. Also converts values to other types if specified.
+                     * @param message DevicePolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.DevicePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DevicePolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OsConstraint. */
+                interface IOsConstraint {
+
+                    /** OsConstraint osType */
+                    osType?: (google.identity.accesscontextmanager.type.OsType|keyof typeof google.identity.accesscontextmanager.type.OsType|null);
+
+                    /** OsConstraint minimumVersion */
+                    minimumVersion?: (string|null);
+
+                    /** OsConstraint requireVerifiedChromeOs */
+                    requireVerifiedChromeOs?: (boolean|null);
+                }
+
+                /** Represents an OsConstraint. */
+                class OsConstraint implements IOsConstraint {
+
+                    /**
+                     * Constructs a new OsConstraint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.IOsConstraint);
+
+                    /** OsConstraint osType. */
+                    public osType: (google.identity.accesscontextmanager.type.OsType|keyof typeof google.identity.accesscontextmanager.type.OsType);
+
+                    /** OsConstraint minimumVersion. */
+                    public minimumVersion: string;
+
+                    /** OsConstraint requireVerifiedChromeOs. */
+                    public requireVerifiedChromeOs: boolean;
+
+                    /**
+                     * Creates a new OsConstraint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OsConstraint instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.IOsConstraint): google.identity.accesscontextmanager.v1.OsConstraint;
+
+                    /**
+                     * Encodes the specified OsConstraint message. Does not implicitly {@link google.identity.accesscontextmanager.v1.OsConstraint.verify|verify} messages.
+                     * @param message OsConstraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.IOsConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OsConstraint message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.OsConstraint.verify|verify} messages.
+                     * @param message OsConstraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.IOsConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OsConstraint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OsConstraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.OsConstraint;
+
+                    /**
+                     * Decodes an OsConstraint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OsConstraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.OsConstraint;
+
+                    /**
+                     * Verifies an OsConstraint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OsConstraint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OsConstraint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.OsConstraint;
+
+                    /**
+                     * Creates a plain object from an OsConstraint message. Also converts values to other types if specified.
+                     * @param message OsConstraint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.OsConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OsConstraint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessPolicy. */
+                interface IAccessPolicy {
+
+                    /** AccessPolicy name */
+                    name?: (string|null);
+
+                    /** AccessPolicy parent */
+                    parent?: (string|null);
+
+                    /** AccessPolicy title */
+                    title?: (string|null);
+
+                    /** AccessPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessPolicy etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents an AccessPolicy. */
+                class AccessPolicy implements IAccessPolicy {
+
+                    /**
+                     * Constructs a new AccessPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.IAccessPolicy);
+
+                    /** AccessPolicy name. */
+                    public name: string;
+
+                    /** AccessPolicy parent. */
+                    public parent: string;
+
+                    /** AccessPolicy title. */
+                    public title: string;
+
+                    /** AccessPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessPolicy etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new AccessPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessPolicy instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.IAccessPolicy): google.identity.accesscontextmanager.v1.AccessPolicy;
+
+                    /**
+                     * Encodes the specified AccessPolicy message. Does not implicitly {@link google.identity.accesscontextmanager.v1.AccessPolicy.verify|verify} messages.
+                     * @param message AccessPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.IAccessPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessPolicy message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.AccessPolicy.verify|verify} messages.
+                     * @param message AccessPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.IAccessPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.AccessPolicy;
+
+                    /**
+                     * Decodes an AccessPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.AccessPolicy;
+
+                    /**
+                     * Verifies an AccessPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.AccessPolicy;
+
+                    /**
+                     * Creates a plain object from an AccessPolicy message. Also converts values to other types if specified.
+                     * @param message AccessPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.AccessPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ServicePerimeter. */
+                interface IServicePerimeter {
+
+                    /** ServicePerimeter name */
+                    name?: (string|null);
+
+                    /** ServicePerimeter title */
+                    title?: (string|null);
+
+                    /** ServicePerimeter description */
+                    description?: (string|null);
+
+                    /** ServicePerimeter createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServicePerimeter updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServicePerimeter perimeterType */
+                    perimeterType?: (google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType|keyof typeof google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType|null);
+
+                    /** ServicePerimeter status */
+                    status?: (google.identity.accesscontextmanager.v1.IServicePerimeterConfig|null);
+
+                    /** ServicePerimeter spec */
+                    spec?: (google.identity.accesscontextmanager.v1.IServicePerimeterConfig|null);
+
+                    /** ServicePerimeter useExplicitDryRunSpec */
+                    useExplicitDryRunSpec?: (boolean|null);
+                }
+
+                /** Represents a ServicePerimeter. */
+                class ServicePerimeter implements IServicePerimeter {
+
+                    /**
+                     * Constructs a new ServicePerimeter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.IServicePerimeter);
+
+                    /** ServicePerimeter name. */
+                    public name: string;
+
+                    /** ServicePerimeter title. */
+                    public title: string;
+
+                    /** ServicePerimeter description. */
+                    public description: string;
+
+                    /** ServicePerimeter createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServicePerimeter updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServicePerimeter perimeterType. */
+                    public perimeterType: (google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType|keyof typeof google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType);
+
+                    /** ServicePerimeter status. */
+                    public status?: (google.identity.accesscontextmanager.v1.IServicePerimeterConfig|null);
+
+                    /** ServicePerimeter spec. */
+                    public spec?: (google.identity.accesscontextmanager.v1.IServicePerimeterConfig|null);
+
+                    /** ServicePerimeter useExplicitDryRunSpec. */
+                    public useExplicitDryRunSpec: boolean;
+
+                    /**
+                     * Creates a new ServicePerimeter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServicePerimeter instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.IServicePerimeter): google.identity.accesscontextmanager.v1.ServicePerimeter;
+
+                    /**
+                     * Encodes the specified ServicePerimeter message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeter.verify|verify} messages.
+                     * @param message ServicePerimeter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.IServicePerimeter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServicePerimeter message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeter.verify|verify} messages.
+                     * @param message ServicePerimeter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.IServicePerimeter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServicePerimeter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServicePerimeter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeter;
+
+                    /**
+                     * Decodes a ServicePerimeter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServicePerimeter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeter;
+
+                    /**
+                     * Verifies a ServicePerimeter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServicePerimeter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServicePerimeter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeter;
+
+                    /**
+                     * Creates a plain object from a ServicePerimeter message. Also converts values to other types if specified.
+                     * @param message ServicePerimeter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServicePerimeter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ServicePerimeter {
+
+                    /** PerimeterType enum. */
+                    enum PerimeterType {
+                        PERIMETER_TYPE_REGULAR = 0,
+                        PERIMETER_TYPE_BRIDGE = 1
+                    }
+                }
+
+                /** Properties of a ServicePerimeterConfig. */
+                interface IServicePerimeterConfig {
+
+                    /** ServicePerimeterConfig resources */
+                    resources?: (string[]|null);
+
+                    /** ServicePerimeterConfig accessLevels */
+                    accessLevels?: (string[]|null);
+
+                    /** ServicePerimeterConfig restrictedServices */
+                    restrictedServices?: (string[]|null);
+
+                    /** ServicePerimeterConfig vpcAccessibleServices */
+                    vpcAccessibleServices?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices|null);
+                }
+
+                /** Represents a ServicePerimeterConfig. */
+                class ServicePerimeterConfig implements IServicePerimeterConfig {
+
+                    /**
+                     * Constructs a new ServicePerimeterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.identity.accesscontextmanager.v1.IServicePerimeterConfig);
+
+                    /** ServicePerimeterConfig resources. */
+                    public resources: string[];
+
+                    /** ServicePerimeterConfig accessLevels. */
+                    public accessLevels: string[];
+
+                    /** ServicePerimeterConfig restrictedServices. */
+                    public restrictedServices: string[];
+
+                    /** ServicePerimeterConfig vpcAccessibleServices. */
+                    public vpcAccessibleServices?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices|null);
+
+                    /**
+                     * Creates a new ServicePerimeterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServicePerimeterConfig instance
+                     */
+                    public static create(properties?: google.identity.accesscontextmanager.v1.IServicePerimeterConfig): google.identity.accesscontextmanager.v1.ServicePerimeterConfig;
+
+                    /**
+                     * Encodes the specified ServicePerimeterConfig message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.verify|verify} messages.
+                     * @param message ServicePerimeterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.identity.accesscontextmanager.v1.IServicePerimeterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServicePerimeterConfig message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.verify|verify} messages.
+                     * @param message ServicePerimeterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.identity.accesscontextmanager.v1.IServicePerimeterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServicePerimeterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServicePerimeterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig;
+
+                    /**
+                     * Decodes a ServicePerimeterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServicePerimeterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig;
+
+                    /**
+                     * Verifies a ServicePerimeterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServicePerimeterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServicePerimeterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig;
+
+                    /**
+                     * Creates a plain object from a ServicePerimeterConfig message. Also converts values to other types if specified.
+                     * @param message ServicePerimeterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServicePerimeterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ServicePerimeterConfig {
+
+                    /** Properties of a VpcAccessibleServices. */
+                    interface IVpcAccessibleServices {
+
+                        /** VpcAccessibleServices enableRestriction */
+                        enableRestriction?: (boolean|null);
+
+                        /** VpcAccessibleServices allowedServices */
+                        allowedServices?: (string[]|null);
+                    }
+
+                    /** Represents a VpcAccessibleServices. */
+                    class VpcAccessibleServices implements IVpcAccessibleServices {
+
+                        /**
+                         * Constructs a new VpcAccessibleServices.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices);
+
+                        /** VpcAccessibleServices enableRestriction. */
+                        public enableRestriction: boolean;
+
+                        /** VpcAccessibleServices allowedServices. */
+                        public allowedServices: string[];
+
+                        /**
+                         * Creates a new VpcAccessibleServices instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VpcAccessibleServices instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices;
+
+                        /**
+                         * Encodes the specified VpcAccessibleServices message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.verify|verify} messages.
+                         * @param message VpcAccessibleServices message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VpcAccessibleServices message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.verify|verify} messages.
+                         * @param message VpcAccessibleServices message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VpcAccessibleServices message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VpcAccessibleServices
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices;
+
+                        /**
+                         * Decodes a VpcAccessibleServices message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VpcAccessibleServices
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices;
+
+                        /**
+                         * Verifies a VpcAccessibleServices message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VpcAccessibleServices message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VpcAccessibleServices
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices;
+
+                        /**
+                         * Creates a plain object from a VpcAccessibleServices message. Also converts values to other types if specified.
+                         * @param message VpcAccessibleServices
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VpcAccessibleServices to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+            }
+
+            /** Namespace type. */
+            namespace type {
+
+                /** DeviceEncryptionStatus enum. */
+                enum DeviceEncryptionStatus {
+                    ENCRYPTION_UNSPECIFIED = 0,
+                    ENCRYPTION_UNSUPPORTED = 1,
+                    UNENCRYPTED = 2,
+                    ENCRYPTED = 3
+                }
+
+                /** OsType enum. */
+                enum OsType {
+                    OS_UNSPECIFIED = 0,
+                    DESKTOP_MAC = 1,
+                    DESKTOP_WINDOWS = 2,
+                    DESKTOP_LINUX = 3,
+                    DESKTOP_CHROME_OS = 6,
+                    ANDROID = 4,
+                    IOS = 5
+                }
+
+                /** DeviceManagementLevel enum. */
+                enum DeviceManagementLevel {
+                    MANAGEMENT_UNSPECIFIED = 0,
+                    NONE = 1,
+                    BASIC = 2,
+                    COMPLETE = 3
+                }
+            }
         }
     }
 

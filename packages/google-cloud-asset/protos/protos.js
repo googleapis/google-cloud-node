@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
+    var $root = $protobuf.roots._google_cloud_asset_2_2_0_protos || ($protobuf.roots._google_cloud_asset_2_2_0_protos = {});
     
     $root.google = (function() {
     
@@ -3518,26 +3518,6 @@
                         return PubsubDestination;
                     })();
     
-                    /**
-                     * ContentType enum.
-                     * @name google.cloud.asset.v1.ContentType
-                     * @enum {string}
-                     * @property {number} CONTENT_TYPE_UNSPECIFIED=0 CONTENT_TYPE_UNSPECIFIED value
-                     * @property {number} RESOURCE=1 RESOURCE value
-                     * @property {number} IAM_POLICY=2 IAM_POLICY value
-                     * @property {number} ORG_POLICY=4 ORG_POLICY value
-                     * @property {number} ACCESS_POLICY=5 ACCESS_POLICY value
-                     */
-                    v1.ContentType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "CONTENT_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "RESOURCE"] = 1;
-                        values[valuesById[2] = "IAM_POLICY"] = 2;
-                        values[valuesById[4] = "ORG_POLICY"] = 4;
-                        values[valuesById[5] = "ACCESS_POLICY"] = 5;
-                        return values;
-                    })();
-    
                     v1.FeedOutputConfig = (function() {
     
                         /**
@@ -4092,6 +4072,26 @@
                         return Feed;
                     })();
     
+                    /**
+                     * ContentType enum.
+                     * @name google.cloud.asset.v1.ContentType
+                     * @enum {string}
+                     * @property {number} CONTENT_TYPE_UNSPECIFIED=0 CONTENT_TYPE_UNSPECIFIED value
+                     * @property {number} RESOURCE=1 RESOURCE value
+                     * @property {number} IAM_POLICY=2 IAM_POLICY value
+                     * @property {number} ORG_POLICY=4 ORG_POLICY value
+                     * @property {number} ACCESS_POLICY=5 ACCESS_POLICY value
+                     */
+                    v1.ContentType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONTENT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RESOURCE"] = 1;
+                        values[valuesById[2] = "IAM_POLICY"] = 2;
+                        values[valuesById[4] = "ORG_POLICY"] = 4;
+                        values[valuesById[5] = "ACCESS_POLICY"] = 5;
+                        return values;
+                    })();
+    
                     v1.TemporalAsset = (function() {
     
                         /**
@@ -4564,6 +4564,10 @@
                          * @property {string|null} [assetType] Asset assetType
                          * @property {google.cloud.asset.v1.IResource|null} [resource] Asset resource
                          * @property {google.iam.v1.IPolicy|null} [iamPolicy] Asset iamPolicy
+                         * @property {Array.<google.cloud.orgpolicy.v1.IPolicy>|null} [orgPolicy] Asset orgPolicy
+                         * @property {google.identity.accesscontextmanager.v1.IAccessPolicy|null} [accessPolicy] Asset accessPolicy
+                         * @property {google.identity.accesscontextmanager.v1.IAccessLevel|null} [accessLevel] Asset accessLevel
+                         * @property {google.identity.accesscontextmanager.v1.IServicePerimeter|null} [servicePerimeter] Asset servicePerimeter
                          * @property {Array.<string>|null} [ancestors] Asset ancestors
                          */
     
@@ -4576,6 +4580,7 @@
                          * @param {google.cloud.asset.v1.IAsset=} [properties] Properties to set
                          */
                         function Asset(properties) {
+                            this.orgPolicy = [];
                             this.ancestors = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -4616,12 +4621,58 @@
                         Asset.prototype.iamPolicy = null;
     
                         /**
+                         * Asset orgPolicy.
+                         * @member {Array.<google.cloud.orgpolicy.v1.IPolicy>} orgPolicy
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.orgPolicy = $util.emptyArray;
+    
+                        /**
+                         * Asset accessPolicy.
+                         * @member {google.identity.accesscontextmanager.v1.IAccessPolicy|null|undefined} accessPolicy
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.accessPolicy = null;
+    
+                        /**
+                         * Asset accessLevel.
+                         * @member {google.identity.accesscontextmanager.v1.IAccessLevel|null|undefined} accessLevel
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.accessLevel = null;
+    
+                        /**
+                         * Asset servicePerimeter.
+                         * @member {google.identity.accesscontextmanager.v1.IServicePerimeter|null|undefined} servicePerimeter
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.servicePerimeter = null;
+    
+                        /**
                          * Asset ancestors.
                          * @member {Array.<string>} ancestors
                          * @memberof google.cloud.asset.v1.Asset
                          * @instance
                          */
                         Asset.prototype.ancestors = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Asset accessContextPolicy.
+                         * @member {"accessPolicy"|"accessLevel"|"servicePerimeter"|undefined} accessContextPolicy
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Object.defineProperty(Asset.prototype, "accessContextPolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["accessPolicy", "accessLevel", "servicePerimeter"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Asset instance using the specified properties.
@@ -4655,6 +4706,15 @@
                                 $root.google.cloud.asset.v1.Resource.encode(message.resource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.iamPolicy != null && message.hasOwnProperty("iamPolicy"))
                                 $root.google.iam.v1.Policy.encode(message.iamPolicy, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.orgPolicy != null && message.orgPolicy.length)
+                                for (var i = 0; i < message.orgPolicy.length; ++i)
+                                    $root.google.cloud.orgpolicy.v1.Policy.encode(message.orgPolicy[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.accessPolicy != null && message.hasOwnProperty("accessPolicy"))
+                                $root.google.identity.accesscontextmanager.v1.AccessPolicy.encode(message.accessPolicy, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.accessLevel != null && message.hasOwnProperty("accessLevel"))
+                                $root.google.identity.accesscontextmanager.v1.AccessLevel.encode(message.accessLevel, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.servicePerimeter != null && message.hasOwnProperty("servicePerimeter"))
+                                $root.google.identity.accesscontextmanager.v1.ServicePerimeter.encode(message.servicePerimeter, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.ancestors != null && message.ancestors.length)
                                 for (var i = 0; i < message.ancestors.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.ancestors[i]);
@@ -4704,6 +4764,20 @@
                                 case 4:
                                     message.iamPolicy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
                                     break;
+                                case 6:
+                                    if (!(message.orgPolicy && message.orgPolicy.length))
+                                        message.orgPolicy = [];
+                                    message.orgPolicy.push($root.google.cloud.orgpolicy.v1.Policy.decode(reader, reader.uint32()));
+                                    break;
+                                case 7:
+                                    message.accessPolicy = $root.google.identity.accesscontextmanager.v1.AccessPolicy.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.accessLevel = $root.google.identity.accesscontextmanager.v1.AccessLevel.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.servicePerimeter = $root.google.identity.accesscontextmanager.v1.ServicePerimeter.decode(reader, reader.uint32());
+                                    break;
                                 case 10:
                                     if (!(message.ancestors && message.ancestors.length))
                                         message.ancestors = [];
@@ -4744,6 +4818,7 @@
                         Asset.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -4759,6 +4834,43 @@
                                 var error = $root.google.iam.v1.Policy.verify(message.iamPolicy);
                                 if (error)
                                     return "iamPolicy." + error;
+                            }
+                            if (message.orgPolicy != null && message.hasOwnProperty("orgPolicy")) {
+                                if (!Array.isArray(message.orgPolicy))
+                                    return "orgPolicy: array expected";
+                                for (var i = 0; i < message.orgPolicy.length; ++i) {
+                                    var error = $root.google.cloud.orgpolicy.v1.Policy.verify(message.orgPolicy[i]);
+                                    if (error)
+                                        return "orgPolicy." + error;
+                                }
+                            }
+                            if (message.accessPolicy != null && message.hasOwnProperty("accessPolicy")) {
+                                properties.accessContextPolicy = 1;
+                                {
+                                    var error = $root.google.identity.accesscontextmanager.v1.AccessPolicy.verify(message.accessPolicy);
+                                    if (error)
+                                        return "accessPolicy." + error;
+                                }
+                            }
+                            if (message.accessLevel != null && message.hasOwnProperty("accessLevel")) {
+                                if (properties.accessContextPolicy === 1)
+                                    return "accessContextPolicy: multiple values";
+                                properties.accessContextPolicy = 1;
+                                {
+                                    var error = $root.google.identity.accesscontextmanager.v1.AccessLevel.verify(message.accessLevel);
+                                    if (error)
+                                        return "accessLevel." + error;
+                                }
+                            }
+                            if (message.servicePerimeter != null && message.hasOwnProperty("servicePerimeter")) {
+                                if (properties.accessContextPolicy === 1)
+                                    return "accessContextPolicy: multiple values";
+                                properties.accessContextPolicy = 1;
+                                {
+                                    var error = $root.google.identity.accesscontextmanager.v1.ServicePerimeter.verify(message.servicePerimeter);
+                                    if (error)
+                                        return "servicePerimeter." + error;
+                                }
                             }
                             if (message.ancestors != null && message.hasOwnProperty("ancestors")) {
                                 if (!Array.isArray(message.ancestors))
@@ -4796,6 +4908,31 @@
                                     throw TypeError(".google.cloud.asset.v1.Asset.iamPolicy: object expected");
                                 message.iamPolicy = $root.google.iam.v1.Policy.fromObject(object.iamPolicy);
                             }
+                            if (object.orgPolicy) {
+                                if (!Array.isArray(object.orgPolicy))
+                                    throw TypeError(".google.cloud.asset.v1.Asset.orgPolicy: array expected");
+                                message.orgPolicy = [];
+                                for (var i = 0; i < object.orgPolicy.length; ++i) {
+                                    if (typeof object.orgPolicy[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.Asset.orgPolicy: object expected");
+                                    message.orgPolicy[i] = $root.google.cloud.orgpolicy.v1.Policy.fromObject(object.orgPolicy[i]);
+                                }
+                            }
+                            if (object.accessPolicy != null) {
+                                if (typeof object.accessPolicy !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Asset.accessPolicy: object expected");
+                                message.accessPolicy = $root.google.identity.accesscontextmanager.v1.AccessPolicy.fromObject(object.accessPolicy);
+                            }
+                            if (object.accessLevel != null) {
+                                if (typeof object.accessLevel !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Asset.accessLevel: object expected");
+                                message.accessLevel = $root.google.identity.accesscontextmanager.v1.AccessLevel.fromObject(object.accessLevel);
+                            }
+                            if (object.servicePerimeter != null) {
+                                if (typeof object.servicePerimeter !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Asset.servicePerimeter: object expected");
+                                message.servicePerimeter = $root.google.identity.accesscontextmanager.v1.ServicePerimeter.fromObject(object.servicePerimeter);
+                            }
                             if (object.ancestors) {
                                 if (!Array.isArray(object.ancestors))
                                     throw TypeError(".google.cloud.asset.v1.Asset.ancestors: array expected");
@@ -4819,8 +4956,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
+                                object.orgPolicy = [];
                                 object.ancestors = [];
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.assetType = "";
@@ -4835,6 +4974,26 @@
                                 object.resource = $root.google.cloud.asset.v1.Resource.toObject(message.resource, options);
                             if (message.iamPolicy != null && message.hasOwnProperty("iamPolicy"))
                                 object.iamPolicy = $root.google.iam.v1.Policy.toObject(message.iamPolicy, options);
+                            if (message.orgPolicy && message.orgPolicy.length) {
+                                object.orgPolicy = [];
+                                for (var j = 0; j < message.orgPolicy.length; ++j)
+                                    object.orgPolicy[j] = $root.google.cloud.orgpolicy.v1.Policy.toObject(message.orgPolicy[j], options);
+                            }
+                            if (message.accessPolicy != null && message.hasOwnProperty("accessPolicy")) {
+                                object.accessPolicy = $root.google.identity.accesscontextmanager.v1.AccessPolicy.toObject(message.accessPolicy, options);
+                                if (options.oneofs)
+                                    object.accessContextPolicy = "accessPolicy";
+                            }
+                            if (message.accessLevel != null && message.hasOwnProperty("accessLevel")) {
+                                object.accessLevel = $root.google.identity.accesscontextmanager.v1.AccessLevel.toObject(message.accessLevel, options);
+                                if (options.oneofs)
+                                    object.accessContextPolicy = "accessLevel";
+                            }
+                            if (message.servicePerimeter != null && message.hasOwnProperty("servicePerimeter")) {
+                                object.servicePerimeter = $root.google.identity.accesscontextmanager.v1.ServicePerimeter.toObject(message.servicePerimeter, options);
+                                if (options.oneofs)
+                                    object.accessContextPolicy = "servicePerimeter";
+                            }
                             if (message.ancestors && message.ancestors.length) {
                                 object.ancestors = [];
                                 for (var j = 0; j < message.ancestors.length; ++j)
@@ -18448,6 +18607,1104 @@
                 return asset;
             })();
     
+            cloud.orgpolicy = (function() {
+    
+                /**
+                 * Namespace orgpolicy.
+                 * @memberof google.cloud
+                 * @namespace
+                 */
+                var orgpolicy = {};
+    
+                orgpolicy.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.orgpolicy
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.Policy = (function() {
+    
+                        /**
+                         * Properties of a Policy.
+                         * @memberof google.cloud.orgpolicy.v1
+                         * @interface IPolicy
+                         * @property {number|null} [version] Policy version
+                         * @property {string|null} [constraint] Policy constraint
+                         * @property {Uint8Array|null} [etag] Policy etag
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Policy updateTime
+                         * @property {google.cloud.orgpolicy.v1.Policy.IListPolicy|null} [listPolicy] Policy listPolicy
+                         * @property {google.cloud.orgpolicy.v1.Policy.IBooleanPolicy|null} [booleanPolicy] Policy booleanPolicy
+                         * @property {google.cloud.orgpolicy.v1.Policy.IRestoreDefault|null} [restoreDefault] Policy restoreDefault
+                         */
+    
+                        /**
+                         * Constructs a new Policy.
+                         * @memberof google.cloud.orgpolicy.v1
+                         * @classdesc Represents a Policy.
+                         * @implements IPolicy
+                         * @constructor
+                         * @param {google.cloud.orgpolicy.v1.IPolicy=} [properties] Properties to set
+                         */
+                        function Policy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Policy version.
+                         * @member {number} version
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.version = 0;
+    
+                        /**
+                         * Policy constraint.
+                         * @member {string} constraint
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.constraint = "";
+    
+                        /**
+                         * Policy etag.
+                         * @member {Uint8Array} etag
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.etag = $util.newBuffer([]);
+    
+                        /**
+                         * Policy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.updateTime = null;
+    
+                        /**
+                         * Policy listPolicy.
+                         * @member {google.cloud.orgpolicy.v1.Policy.IListPolicy|null|undefined} listPolicy
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.listPolicy = null;
+    
+                        /**
+                         * Policy booleanPolicy.
+                         * @member {google.cloud.orgpolicy.v1.Policy.IBooleanPolicy|null|undefined} booleanPolicy
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.booleanPolicy = null;
+    
+                        /**
+                         * Policy restoreDefault.
+                         * @member {google.cloud.orgpolicy.v1.Policy.IRestoreDefault|null|undefined} restoreDefault
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.restoreDefault = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Policy policyType.
+                         * @member {"listPolicy"|"booleanPolicy"|"restoreDefault"|undefined} policyType
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         */
+                        Object.defineProperty(Policy.prototype, "policyType", {
+                            get: $util.oneOfGetter($oneOfFields = ["listPolicy", "booleanPolicy", "restoreDefault"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Policy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @static
+                         * @param {google.cloud.orgpolicy.v1.IPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.orgpolicy.v1.Policy} Policy instance
+                         */
+                        Policy.create = function create(properties) {
+                            return new Policy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Policy message. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @static
+                         * @param {google.cloud.orgpolicy.v1.IPolicy} message Policy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Policy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.version);
+                            if (message.constraint != null && message.hasOwnProperty("constraint"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.constraint);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.etag);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.listPolicy != null && message.hasOwnProperty("listPolicy"))
+                                $root.google.cloud.orgpolicy.v1.Policy.ListPolicy.encode(message.listPolicy, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.booleanPolicy != null && message.hasOwnProperty("booleanPolicy"))
+                                $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy.encode(message.booleanPolicy, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.restoreDefault != null && message.hasOwnProperty("restoreDefault"))
+                                $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault.encode(message.restoreDefault, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Policy message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @static
+                         * @param {google.cloud.orgpolicy.v1.IPolicy} message Policy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Policy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Policy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.orgpolicy.v1.Policy} Policy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Policy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v1.Policy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.version = reader.int32();
+                                    break;
+                                case 2:
+                                    message.constraint = reader.string();
+                                    break;
+                                case 3:
+                                    message.etag = reader.bytes();
+                                    break;
+                                case 4:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.listPolicy = $root.google.cloud.orgpolicy.v1.Policy.ListPolicy.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.booleanPolicy = $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.restoreDefault = $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Policy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.orgpolicy.v1.Policy} Policy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Policy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Policy message.
+                         * @function verify
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Policy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isInteger(message.version))
+                                    return "version: integer expected";
+                            if (message.constraint != null && message.hasOwnProperty("constraint"))
+                                if (!$util.isString(message.constraint))
+                                    return "constraint: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!(message.etag && typeof message.etag.length === "number" || $util.isString(message.etag)))
+                                    return "etag: buffer expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.listPolicy != null && message.hasOwnProperty("listPolicy")) {
+                                properties.policyType = 1;
+                                {
+                                    var error = $root.google.cloud.orgpolicy.v1.Policy.ListPolicy.verify(message.listPolicy);
+                                    if (error)
+                                        return "listPolicy." + error;
+                                }
+                            }
+                            if (message.booleanPolicy != null && message.hasOwnProperty("booleanPolicy")) {
+                                if (properties.policyType === 1)
+                                    return "policyType: multiple values";
+                                properties.policyType = 1;
+                                {
+                                    var error = $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy.verify(message.booleanPolicy);
+                                    if (error)
+                                        return "booleanPolicy." + error;
+                                }
+                            }
+                            if (message.restoreDefault != null && message.hasOwnProperty("restoreDefault")) {
+                                if (properties.policyType === 1)
+                                    return "policyType: multiple values";
+                                properties.policyType = 1;
+                                {
+                                    var error = $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault.verify(message.restoreDefault);
+                                    if (error)
+                                        return "restoreDefault." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Policy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.orgpolicy.v1.Policy} Policy
+                         */
+                        Policy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.orgpolicy.v1.Policy)
+                                return object;
+                            var message = new $root.google.cloud.orgpolicy.v1.Policy();
+                            if (object.version != null)
+                                message.version = object.version | 0;
+                            if (object.constraint != null)
+                                message.constraint = String(object.constraint);
+                            if (object.etag != null)
+                                if (typeof object.etag === "string")
+                                    $util.base64.decode(object.etag, message.etag = $util.newBuffer($util.base64.length(object.etag)), 0);
+                                else if (object.etag.length)
+                                    message.etag = object.etag;
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.orgpolicy.v1.Policy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.listPolicy != null) {
+                                if (typeof object.listPolicy !== "object")
+                                    throw TypeError(".google.cloud.orgpolicy.v1.Policy.listPolicy: object expected");
+                                message.listPolicy = $root.google.cloud.orgpolicy.v1.Policy.ListPolicy.fromObject(object.listPolicy);
+                            }
+                            if (object.booleanPolicy != null) {
+                                if (typeof object.booleanPolicy !== "object")
+                                    throw TypeError(".google.cloud.orgpolicy.v1.Policy.booleanPolicy: object expected");
+                                message.booleanPolicy = $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy.fromObject(object.booleanPolicy);
+                            }
+                            if (object.restoreDefault != null) {
+                                if (typeof object.restoreDefault !== "object")
+                                    throw TypeError(".google.cloud.orgpolicy.v1.Policy.restoreDefault: object expected");
+                                message.restoreDefault = $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault.fromObject(object.restoreDefault);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Policy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @static
+                         * @param {google.cloud.orgpolicy.v1.Policy} message Policy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Policy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.version = 0;
+                                object.constraint = "";
+                                if (options.bytes === String)
+                                    object.etag = "";
+                                else {
+                                    object.etag = [];
+                                    if (options.bytes !== Array)
+                                        object.etag = $util.newBuffer(object.etag);
+                                }
+                                object.updateTime = null;
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.constraint != null && message.hasOwnProperty("constraint"))
+                                object.constraint = message.constraint;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = options.bytes === String ? $util.base64.encode(message.etag, 0, message.etag.length) : options.bytes === Array ? Array.prototype.slice.call(message.etag) : message.etag;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.listPolicy != null && message.hasOwnProperty("listPolicy")) {
+                                object.listPolicy = $root.google.cloud.orgpolicy.v1.Policy.ListPolicy.toObject(message.listPolicy, options);
+                                if (options.oneofs)
+                                    object.policyType = "listPolicy";
+                            }
+                            if (message.booleanPolicy != null && message.hasOwnProperty("booleanPolicy")) {
+                                object.booleanPolicy = $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy.toObject(message.booleanPolicy, options);
+                                if (options.oneofs)
+                                    object.policyType = "booleanPolicy";
+                            }
+                            if (message.restoreDefault != null && message.hasOwnProperty("restoreDefault")) {
+                                object.restoreDefault = $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault.toObject(message.restoreDefault, options);
+                                if (options.oneofs)
+                                    object.policyType = "restoreDefault";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Policy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.orgpolicy.v1.Policy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Policy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        Policy.ListPolicy = (function() {
+    
+                            /**
+                             * Properties of a ListPolicy.
+                             * @memberof google.cloud.orgpolicy.v1.Policy
+                             * @interface IListPolicy
+                             * @property {Array.<string>|null} [allowedValues] ListPolicy allowedValues
+                             * @property {Array.<string>|null} [deniedValues] ListPolicy deniedValues
+                             * @property {google.cloud.orgpolicy.v1.Policy.ListPolicy.AllValues|null} [allValues] ListPolicy allValues
+                             * @property {string|null} [suggestedValue] ListPolicy suggestedValue
+                             * @property {boolean|null} [inheritFromParent] ListPolicy inheritFromParent
+                             */
+    
+                            /**
+                             * Constructs a new ListPolicy.
+                             * @memberof google.cloud.orgpolicy.v1.Policy
+                             * @classdesc Represents a ListPolicy.
+                             * @implements IListPolicy
+                             * @constructor
+                             * @param {google.cloud.orgpolicy.v1.Policy.IListPolicy=} [properties] Properties to set
+                             */
+                            function ListPolicy(properties) {
+                                this.allowedValues = [];
+                                this.deniedValues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListPolicy allowedValues.
+                             * @member {Array.<string>} allowedValues
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @instance
+                             */
+                            ListPolicy.prototype.allowedValues = $util.emptyArray;
+    
+                            /**
+                             * ListPolicy deniedValues.
+                             * @member {Array.<string>} deniedValues
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @instance
+                             */
+                            ListPolicy.prototype.deniedValues = $util.emptyArray;
+    
+                            /**
+                             * ListPolicy allValues.
+                             * @member {google.cloud.orgpolicy.v1.Policy.ListPolicy.AllValues} allValues
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @instance
+                             */
+                            ListPolicy.prototype.allValues = 0;
+    
+                            /**
+                             * ListPolicy suggestedValue.
+                             * @member {string} suggestedValue
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @instance
+                             */
+                            ListPolicy.prototype.suggestedValue = "";
+    
+                            /**
+                             * ListPolicy inheritFromParent.
+                             * @member {boolean} inheritFromParent
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @instance
+                             */
+                            ListPolicy.prototype.inheritFromParent = false;
+    
+                            /**
+                             * Creates a new ListPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IListPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.orgpolicy.v1.Policy.ListPolicy} ListPolicy instance
+                             */
+                            ListPolicy.create = function create(properties) {
+                                return new ListPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListPolicy message. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.ListPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IListPolicy} message ListPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allowedValues != null && message.allowedValues.length)
+                                    for (var i = 0; i < message.allowedValues.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.allowedValues[i]);
+                                if (message.deniedValues != null && message.deniedValues.length)
+                                    for (var i = 0; i < message.deniedValues.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.deniedValues[i]);
+                                if (message.allValues != null && message.hasOwnProperty("allValues"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.allValues);
+                                if (message.suggestedValue != null && message.hasOwnProperty("suggestedValue"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.suggestedValue);
+                                if (message.inheritFromParent != null && message.hasOwnProperty("inheritFromParent"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.inheritFromParent);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListPolicy message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.ListPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IListPolicy} message ListPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.orgpolicy.v1.Policy.ListPolicy} ListPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v1.Policy.ListPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.allowedValues && message.allowedValues.length))
+                                            message.allowedValues = [];
+                                        message.allowedValues.push(reader.string());
+                                        break;
+                                    case 2:
+                                        if (!(message.deniedValues && message.deniedValues.length))
+                                            message.deniedValues = [];
+                                        message.deniedValues.push(reader.string());
+                                        break;
+                                    case 3:
+                                        message.allValues = reader.int32();
+                                        break;
+                                    case 4:
+                                        message.suggestedValue = reader.string();
+                                        break;
+                                    case 5:
+                                        message.inheritFromParent = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.orgpolicy.v1.Policy.ListPolicy} ListPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.allowedValues != null && message.hasOwnProperty("allowedValues")) {
+                                    if (!Array.isArray(message.allowedValues))
+                                        return "allowedValues: array expected";
+                                    for (var i = 0; i < message.allowedValues.length; ++i)
+                                        if (!$util.isString(message.allowedValues[i]))
+                                            return "allowedValues: string[] expected";
+                                }
+                                if (message.deniedValues != null && message.hasOwnProperty("deniedValues")) {
+                                    if (!Array.isArray(message.deniedValues))
+                                        return "deniedValues: array expected";
+                                    for (var i = 0; i < message.deniedValues.length; ++i)
+                                        if (!$util.isString(message.deniedValues[i]))
+                                            return "deniedValues: string[] expected";
+                                }
+                                if (message.allValues != null && message.hasOwnProperty("allValues"))
+                                    switch (message.allValues) {
+                                    default:
+                                        return "allValues: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.suggestedValue != null && message.hasOwnProperty("suggestedValue"))
+                                    if (!$util.isString(message.suggestedValue))
+                                        return "suggestedValue: string expected";
+                                if (message.inheritFromParent != null && message.hasOwnProperty("inheritFromParent"))
+                                    if (typeof message.inheritFromParent !== "boolean")
+                                        return "inheritFromParent: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.orgpolicy.v1.Policy.ListPolicy} ListPolicy
+                             */
+                            ListPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.orgpolicy.v1.Policy.ListPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.orgpolicy.v1.Policy.ListPolicy();
+                                if (object.allowedValues) {
+                                    if (!Array.isArray(object.allowedValues))
+                                        throw TypeError(".google.cloud.orgpolicy.v1.Policy.ListPolicy.allowedValues: array expected");
+                                    message.allowedValues = [];
+                                    for (var i = 0; i < object.allowedValues.length; ++i)
+                                        message.allowedValues[i] = String(object.allowedValues[i]);
+                                }
+                                if (object.deniedValues) {
+                                    if (!Array.isArray(object.deniedValues))
+                                        throw TypeError(".google.cloud.orgpolicy.v1.Policy.ListPolicy.deniedValues: array expected");
+                                    message.deniedValues = [];
+                                    for (var i = 0; i < object.deniedValues.length; ++i)
+                                        message.deniedValues[i] = String(object.deniedValues[i]);
+                                }
+                                switch (object.allValues) {
+                                case "ALL_VALUES_UNSPECIFIED":
+                                case 0:
+                                    message.allValues = 0;
+                                    break;
+                                case "ALLOW":
+                                case 1:
+                                    message.allValues = 1;
+                                    break;
+                                case "DENY":
+                                case 2:
+                                    message.allValues = 2;
+                                    break;
+                                }
+                                if (object.suggestedValue != null)
+                                    message.suggestedValue = String(object.suggestedValue);
+                                if (object.inheritFromParent != null)
+                                    message.inheritFromParent = Boolean(object.inheritFromParent);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.ListPolicy} message ListPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.allowedValues = [];
+                                    object.deniedValues = [];
+                                }
+                                if (options.defaults) {
+                                    object.allValues = options.enums === String ? "ALL_VALUES_UNSPECIFIED" : 0;
+                                    object.suggestedValue = "";
+                                    object.inheritFromParent = false;
+                                }
+                                if (message.allowedValues && message.allowedValues.length) {
+                                    object.allowedValues = [];
+                                    for (var j = 0; j < message.allowedValues.length; ++j)
+                                        object.allowedValues[j] = message.allowedValues[j];
+                                }
+                                if (message.deniedValues && message.deniedValues.length) {
+                                    object.deniedValues = [];
+                                    for (var j = 0; j < message.deniedValues.length; ++j)
+                                        object.deniedValues[j] = message.deniedValues[j];
+                                }
+                                if (message.allValues != null && message.hasOwnProperty("allValues"))
+                                    object.allValues = options.enums === String ? $root.google.cloud.orgpolicy.v1.Policy.ListPolicy.AllValues[message.allValues] : message.allValues;
+                                if (message.suggestedValue != null && message.hasOwnProperty("suggestedValue"))
+                                    object.suggestedValue = message.suggestedValue;
+                                if (message.inheritFromParent != null && message.hasOwnProperty("inheritFromParent"))
+                                    object.inheritFromParent = message.inheritFromParent;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.orgpolicy.v1.Policy.ListPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * AllValues enum.
+                             * @name google.cloud.orgpolicy.v1.Policy.ListPolicy.AllValues
+                             * @enum {string}
+                             * @property {number} ALL_VALUES_UNSPECIFIED=0 ALL_VALUES_UNSPECIFIED value
+                             * @property {number} ALLOW=1 ALLOW value
+                             * @property {number} DENY=2 DENY value
+                             */
+                            ListPolicy.AllValues = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ALL_VALUES_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ALLOW"] = 1;
+                                values[valuesById[2] = "DENY"] = 2;
+                                return values;
+                            })();
+    
+                            return ListPolicy;
+                        })();
+    
+                        Policy.BooleanPolicy = (function() {
+    
+                            /**
+                             * Properties of a BooleanPolicy.
+                             * @memberof google.cloud.orgpolicy.v1.Policy
+                             * @interface IBooleanPolicy
+                             * @property {boolean|null} [enforced] BooleanPolicy enforced
+                             */
+    
+                            /**
+                             * Constructs a new BooleanPolicy.
+                             * @memberof google.cloud.orgpolicy.v1.Policy
+                             * @classdesc Represents a BooleanPolicy.
+                             * @implements IBooleanPolicy
+                             * @constructor
+                             * @param {google.cloud.orgpolicy.v1.Policy.IBooleanPolicy=} [properties] Properties to set
+                             */
+                            function BooleanPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BooleanPolicy enforced.
+                             * @member {boolean} enforced
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @instance
+                             */
+                            BooleanPolicy.prototype.enforced = false;
+    
+                            /**
+                             * Creates a new BooleanPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IBooleanPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.orgpolicy.v1.Policy.BooleanPolicy} BooleanPolicy instance
+                             */
+                            BooleanPolicy.create = function create(properties) {
+                                return new BooleanPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BooleanPolicy message. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.BooleanPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IBooleanPolicy} message BooleanPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BooleanPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enforced != null && message.hasOwnProperty("enforced"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enforced);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BooleanPolicy message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.BooleanPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IBooleanPolicy} message BooleanPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BooleanPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BooleanPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.orgpolicy.v1.Policy.BooleanPolicy} BooleanPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BooleanPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.enforced = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BooleanPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.orgpolicy.v1.Policy.BooleanPolicy} BooleanPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BooleanPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BooleanPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BooleanPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enforced != null && message.hasOwnProperty("enforced"))
+                                    if (typeof message.enforced !== "boolean")
+                                        return "enforced: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BooleanPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.orgpolicy.v1.Policy.BooleanPolicy} BooleanPolicy
+                             */
+                            BooleanPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy();
+                                if (object.enforced != null)
+                                    message.enforced = Boolean(object.enforced);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BooleanPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.BooleanPolicy} message BooleanPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BooleanPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enforced = false;
+                                if (message.enforced != null && message.hasOwnProperty("enforced"))
+                                    object.enforced = message.enforced;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BooleanPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.orgpolicy.v1.Policy.BooleanPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BooleanPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return BooleanPolicy;
+                        })();
+    
+                        Policy.RestoreDefault = (function() {
+    
+                            /**
+                             * Properties of a RestoreDefault.
+                             * @memberof google.cloud.orgpolicy.v1.Policy
+                             * @interface IRestoreDefault
+                             */
+    
+                            /**
+                             * Constructs a new RestoreDefault.
+                             * @memberof google.cloud.orgpolicy.v1.Policy
+                             * @classdesc Represents a RestoreDefault.
+                             * @implements IRestoreDefault
+                             * @constructor
+                             * @param {google.cloud.orgpolicy.v1.Policy.IRestoreDefault=} [properties] Properties to set
+                             */
+                            function RestoreDefault(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new RestoreDefault instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IRestoreDefault=} [properties] Properties to set
+                             * @returns {google.cloud.orgpolicy.v1.Policy.RestoreDefault} RestoreDefault instance
+                             */
+                            RestoreDefault.create = function create(properties) {
+                                return new RestoreDefault(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RestoreDefault message. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.RestoreDefault.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IRestoreDefault} message RestoreDefault message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RestoreDefault.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RestoreDefault message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v1.Policy.RestoreDefault.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.IRestoreDefault} message RestoreDefault message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RestoreDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RestoreDefault message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.orgpolicy.v1.Policy.RestoreDefault} RestoreDefault
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RestoreDefault.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RestoreDefault message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.orgpolicy.v1.Policy.RestoreDefault} RestoreDefault
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RestoreDefault.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RestoreDefault message.
+                             * @function verify
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RestoreDefault.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RestoreDefault message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.orgpolicy.v1.Policy.RestoreDefault} RestoreDefault
+                             */
+                            RestoreDefault.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault)
+                                    return object;
+                                return new $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault();
+                            };
+    
+                            /**
+                             * Creates a plain object from a RestoreDefault message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @static
+                             * @param {google.cloud.orgpolicy.v1.Policy.RestoreDefault} message RestoreDefault
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RestoreDefault.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this RestoreDefault to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.orgpolicy.v1.Policy.RestoreDefault
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RestoreDefault.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return RestoreDefault;
+                        })();
+    
+                        return Policy;
+                    })();
+    
+                    return v1;
+                })();
+    
+                return orgpolicy;
+            })();
+    
             return cloud;
         })();
     
@@ -28637,6 +29894,390 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Empty = (function() {
+    
+                /**
+                 * Properties of an Empty.
+                 * @memberof google.protobuf
+                 * @interface IEmpty
+                 */
+    
+                /**
+                 * Constructs a new Empty.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Empty.
+                 * @implements IEmpty
+                 * @constructor
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 */
+                function Empty(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Creates a new Empty instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 * @returns {google.protobuf.Empty} Empty instance
+                 */
+                Empty.create = function create(properties) {
+                    return new Empty(properties);
+                };
+    
+                /**
+                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Empty message.
+                 * @function verify
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Empty.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Empty} Empty
+                 */
+                Empty.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Empty)
+                        return object;
+                    return new $root.google.protobuf.Empty();
+                };
+    
+                /**
+                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.Empty} message Empty
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Empty.toObject = function toObject() {
+                    return {};
+                };
+    
+                /**
+                 * Converts this Empty to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Empty
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Empty.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Empty;
+            })();
+    
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.seconds = reader.int64();
+                            break;
+                        case 2:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Timestamp;
+            })();
+    
             protobuf.Any = (function() {
     
                 /**
@@ -29656,230 +31297,6 @@
                 return ListValue;
             })();
     
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Timestamp;
-            })();
-    
             protobuf.Duration = (function() {
     
                 /**
@@ -30102,166 +31519,6 @@
                 };
     
                 return Duration;
-            })();
-    
-            protobuf.Empty = (function() {
-    
-                /**
-                 * Properties of an Empty.
-                 * @memberof google.protobuf
-                 * @interface IEmpty
-                 */
-    
-                /**
-                 * Constructs a new Empty.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Empty.
-                 * @implements IEmpty
-                 * @constructor
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 */
-                function Empty(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Creates a new Empty instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 * @returns {google.protobuf.Empty} Empty instance
-                 */
-                Empty.create = function create(properties) {
-                    return new Empty(properties);
-                };
-    
-                /**
-                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Empty message.
-                 * @function verify
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Empty.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Empty} Empty
-                 */
-                Empty.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Empty)
-                        return object;
-                    return new $root.google.protobuf.Empty();
-                };
-    
-                /**
-                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.Empty} message Empty
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Empty.toObject = function toObject() {
-                    return {};
-                };
-    
-                /**
-                 * Converts this Empty to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Empty
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Empty.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Empty;
             })();
     
             protobuf.FieldMask = (function() {
@@ -32108,6 +33365,3242 @@
             })();
     
             return type;
+        })();
+    
+        google.identity = (function() {
+    
+            /**
+             * Namespace identity.
+             * @memberof google
+             * @namespace
+             */
+            var identity = {};
+    
+            identity.accesscontextmanager = (function() {
+    
+                /**
+                 * Namespace accesscontextmanager.
+                 * @memberof google.identity
+                 * @namespace
+                 */
+                var accesscontextmanager = {};
+    
+                accesscontextmanager.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.identity.accesscontextmanager
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.AccessLevel = (function() {
+    
+                        /**
+                         * Properties of an AccessLevel.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface IAccessLevel
+                         * @property {string|null} [name] AccessLevel name
+                         * @property {string|null} [title] AccessLevel title
+                         * @property {string|null} [description] AccessLevel description
+                         * @property {google.identity.accesscontextmanager.v1.IBasicLevel|null} [basic] AccessLevel basic
+                         * @property {google.identity.accesscontextmanager.v1.ICustomLevel|null} [custom] AccessLevel custom
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AccessLevel createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AccessLevel updateTime
+                         */
+    
+                        /**
+                         * Constructs a new AccessLevel.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents an AccessLevel.
+                         * @implements IAccessLevel
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.IAccessLevel=} [properties] Properties to set
+                         */
+                        function AccessLevel(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessLevel name.
+                         * @member {string} name
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         */
+                        AccessLevel.prototype.name = "";
+    
+                        /**
+                         * AccessLevel title.
+                         * @member {string} title
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         */
+                        AccessLevel.prototype.title = "";
+    
+                        /**
+                         * AccessLevel description.
+                         * @member {string} description
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         */
+                        AccessLevel.prototype.description = "";
+    
+                        /**
+                         * AccessLevel basic.
+                         * @member {google.identity.accesscontextmanager.v1.IBasicLevel|null|undefined} basic
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         */
+                        AccessLevel.prototype.basic = null;
+    
+                        /**
+                         * AccessLevel custom.
+                         * @member {google.identity.accesscontextmanager.v1.ICustomLevel|null|undefined} custom
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         */
+                        AccessLevel.prototype.custom = null;
+    
+                        /**
+                         * AccessLevel createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         */
+                        AccessLevel.prototype.createTime = null;
+    
+                        /**
+                         * AccessLevel updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         */
+                        AccessLevel.prototype.updateTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AccessLevel level.
+                         * @member {"basic"|"custom"|undefined} level
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         */
+                        Object.defineProperty(AccessLevel.prototype, "level", {
+                            get: $util.oneOfGetter($oneOfFields = ["basic", "custom"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AccessLevel instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IAccessLevel=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.AccessLevel} AccessLevel instance
+                         */
+                        AccessLevel.create = function create(properties) {
+                            return new AccessLevel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessLevel message. Does not implicitly {@link google.identity.accesscontextmanager.v1.AccessLevel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IAccessLevel} message AccessLevel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessLevel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.basic != null && message.hasOwnProperty("basic"))
+                                $root.google.identity.accesscontextmanager.v1.BasicLevel.encode(message.basic, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.custom != null && message.hasOwnProperty("custom"))
+                                $root.google.identity.accesscontextmanager.v1.CustomLevel.encode(message.custom, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessLevel message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.AccessLevel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IAccessLevel} message AccessLevel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessLevel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessLevel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.AccessLevel} AccessLevel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessLevel.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.AccessLevel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.title = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    message.basic = $root.google.identity.accesscontextmanager.v1.BasicLevel.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.custom = $root.google.identity.accesscontextmanager.v1.CustomLevel.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessLevel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.AccessLevel} AccessLevel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessLevel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessLevel message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessLevel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                if (!$util.isString(message.title))
+                                    return "title: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.basic != null && message.hasOwnProperty("basic")) {
+                                properties.level = 1;
+                                {
+                                    var error = $root.google.identity.accesscontextmanager.v1.BasicLevel.verify(message.basic);
+                                    if (error)
+                                        return "basic." + error;
+                                }
+                            }
+                            if (message.custom != null && message.hasOwnProperty("custom")) {
+                                if (properties.level === 1)
+                                    return "level: multiple values";
+                                properties.level = 1;
+                                {
+                                    var error = $root.google.identity.accesscontextmanager.v1.CustomLevel.verify(message.custom);
+                                    if (error)
+                                        return "custom." + error;
+                                }
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessLevel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.AccessLevel} AccessLevel
+                         */
+                        AccessLevel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.AccessLevel)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.AccessLevel();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.title != null)
+                                message.title = String(object.title);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.basic != null) {
+                                if (typeof object.basic !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.AccessLevel.basic: object expected");
+                                message.basic = $root.google.identity.accesscontextmanager.v1.BasicLevel.fromObject(object.basic);
+                            }
+                            if (object.custom != null) {
+                                if (typeof object.custom !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.AccessLevel.custom: object expected");
+                                message.custom = $root.google.identity.accesscontextmanager.v1.CustomLevel.fromObject(object.custom);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.AccessLevel.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.AccessLevel.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessLevel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.AccessLevel} message AccessLevel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessLevel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.title = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                object.title = message.title;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.basic != null && message.hasOwnProperty("basic")) {
+                                object.basic = $root.google.identity.accesscontextmanager.v1.BasicLevel.toObject(message.basic, options);
+                                if (options.oneofs)
+                                    object.level = "basic";
+                            }
+                            if (message.custom != null && message.hasOwnProperty("custom")) {
+                                object.custom = $root.google.identity.accesscontextmanager.v1.CustomLevel.toObject(message.custom, options);
+                                if (options.oneofs)
+                                    object.level = "custom";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessLevel to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.AccessLevel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessLevel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AccessLevel;
+                    })();
+    
+                    v1.BasicLevel = (function() {
+    
+                        /**
+                         * Properties of a BasicLevel.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface IBasicLevel
+                         * @property {Array.<google.identity.accesscontextmanager.v1.ICondition>|null} [conditions] BasicLevel conditions
+                         * @property {google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction|null} [combiningFunction] BasicLevel combiningFunction
+                         */
+    
+                        /**
+                         * Constructs a new BasicLevel.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents a BasicLevel.
+                         * @implements IBasicLevel
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.IBasicLevel=} [properties] Properties to set
+                         */
+                        function BasicLevel(properties) {
+                            this.conditions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BasicLevel conditions.
+                         * @member {Array.<google.identity.accesscontextmanager.v1.ICondition>} conditions
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @instance
+                         */
+                        BasicLevel.prototype.conditions = $util.emptyArray;
+    
+                        /**
+                         * BasicLevel combiningFunction.
+                         * @member {google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction} combiningFunction
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @instance
+                         */
+                        BasicLevel.prototype.combiningFunction = 0;
+    
+                        /**
+                         * Creates a new BasicLevel instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IBasicLevel=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.BasicLevel} BasicLevel instance
+                         */
+                        BasicLevel.create = function create(properties) {
+                            return new BasicLevel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BasicLevel message. Does not implicitly {@link google.identity.accesscontextmanager.v1.BasicLevel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IBasicLevel} message BasicLevel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BasicLevel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.conditions != null && message.conditions.length)
+                                for (var i = 0; i < message.conditions.length; ++i)
+                                    $root.google.identity.accesscontextmanager.v1.Condition.encode(message.conditions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.combiningFunction != null && message.hasOwnProperty("combiningFunction"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.combiningFunction);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BasicLevel message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.BasicLevel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IBasicLevel} message BasicLevel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BasicLevel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BasicLevel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.BasicLevel} BasicLevel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BasicLevel.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.BasicLevel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.conditions && message.conditions.length))
+                                        message.conditions = [];
+                                    message.conditions.push($root.google.identity.accesscontextmanager.v1.Condition.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.combiningFunction = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BasicLevel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.BasicLevel} BasicLevel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BasicLevel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BasicLevel message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BasicLevel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.conditions != null && message.hasOwnProperty("conditions")) {
+                                if (!Array.isArray(message.conditions))
+                                    return "conditions: array expected";
+                                for (var i = 0; i < message.conditions.length; ++i) {
+                                    var error = $root.google.identity.accesscontextmanager.v1.Condition.verify(message.conditions[i]);
+                                    if (error)
+                                        return "conditions." + error;
+                                }
+                            }
+                            if (message.combiningFunction != null && message.hasOwnProperty("combiningFunction"))
+                                switch (message.combiningFunction) {
+                                default:
+                                    return "combiningFunction: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BasicLevel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.BasicLevel} BasicLevel
+                         */
+                        BasicLevel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.BasicLevel)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.BasicLevel();
+                            if (object.conditions) {
+                                if (!Array.isArray(object.conditions))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.BasicLevel.conditions: array expected");
+                                message.conditions = [];
+                                for (var i = 0; i < object.conditions.length; ++i) {
+                                    if (typeof object.conditions[i] !== "object")
+                                        throw TypeError(".google.identity.accesscontextmanager.v1.BasicLevel.conditions: object expected");
+                                    message.conditions[i] = $root.google.identity.accesscontextmanager.v1.Condition.fromObject(object.conditions[i]);
+                                }
+                            }
+                            switch (object.combiningFunction) {
+                            case "AND":
+                            case 0:
+                                message.combiningFunction = 0;
+                                break;
+                            case "OR":
+                            case 1:
+                                message.combiningFunction = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BasicLevel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.BasicLevel} message BasicLevel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BasicLevel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.conditions = [];
+                            if (options.defaults)
+                                object.combiningFunction = options.enums === String ? "AND" : 0;
+                            if (message.conditions && message.conditions.length) {
+                                object.conditions = [];
+                                for (var j = 0; j < message.conditions.length; ++j)
+                                    object.conditions[j] = $root.google.identity.accesscontextmanager.v1.Condition.toObject(message.conditions[j], options);
+                            }
+                            if (message.combiningFunction != null && message.hasOwnProperty("combiningFunction"))
+                                object.combiningFunction = options.enums === String ? $root.google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction[message.combiningFunction] : message.combiningFunction;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BasicLevel to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.BasicLevel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BasicLevel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * ConditionCombiningFunction enum.
+                         * @name google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction
+                         * @enum {string}
+                         * @property {number} AND=0 AND value
+                         * @property {number} OR=1 OR value
+                         */
+                        BasicLevel.ConditionCombiningFunction = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "AND"] = 0;
+                            values[valuesById[1] = "OR"] = 1;
+                            return values;
+                        })();
+    
+                        return BasicLevel;
+                    })();
+    
+                    v1.Condition = (function() {
+    
+                        /**
+                         * Properties of a Condition.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface ICondition
+                         * @property {Array.<string>|null} [ipSubnetworks] Condition ipSubnetworks
+                         * @property {google.identity.accesscontextmanager.v1.IDevicePolicy|null} [devicePolicy] Condition devicePolicy
+                         * @property {Array.<string>|null} [requiredAccessLevels] Condition requiredAccessLevels
+                         * @property {boolean|null} [negate] Condition negate
+                         * @property {Array.<string>|null} [members] Condition members
+                         * @property {Array.<string>|null} [regions] Condition regions
+                         */
+    
+                        /**
+                         * Constructs a new Condition.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents a Condition.
+                         * @implements ICondition
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.ICondition=} [properties] Properties to set
+                         */
+                        function Condition(properties) {
+                            this.ipSubnetworks = [];
+                            this.requiredAccessLevels = [];
+                            this.members = [];
+                            this.regions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Condition ipSubnetworks.
+                         * @member {Array.<string>} ipSubnetworks
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @instance
+                         */
+                        Condition.prototype.ipSubnetworks = $util.emptyArray;
+    
+                        /**
+                         * Condition devicePolicy.
+                         * @member {google.identity.accesscontextmanager.v1.IDevicePolicy|null|undefined} devicePolicy
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @instance
+                         */
+                        Condition.prototype.devicePolicy = null;
+    
+                        /**
+                         * Condition requiredAccessLevels.
+                         * @member {Array.<string>} requiredAccessLevels
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @instance
+                         */
+                        Condition.prototype.requiredAccessLevels = $util.emptyArray;
+    
+                        /**
+                         * Condition negate.
+                         * @member {boolean} negate
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @instance
+                         */
+                        Condition.prototype.negate = false;
+    
+                        /**
+                         * Condition members.
+                         * @member {Array.<string>} members
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @instance
+                         */
+                        Condition.prototype.members = $util.emptyArray;
+    
+                        /**
+                         * Condition regions.
+                         * @member {Array.<string>} regions
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @instance
+                         */
+                        Condition.prototype.regions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Condition instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.ICondition=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.Condition} Condition instance
+                         */
+                        Condition.create = function create(properties) {
+                            return new Condition(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Condition message. Does not implicitly {@link google.identity.accesscontextmanager.v1.Condition.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.ICondition} message Condition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Condition.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ipSubnetworks != null && message.ipSubnetworks.length)
+                                for (var i = 0; i < message.ipSubnetworks.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.ipSubnetworks[i]);
+                            if (message.devicePolicy != null && message.hasOwnProperty("devicePolicy"))
+                                $root.google.identity.accesscontextmanager.v1.DevicePolicy.encode(message.devicePolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requiredAccessLevels != null && message.requiredAccessLevels.length)
+                                for (var i = 0; i < message.requiredAccessLevels.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.requiredAccessLevels[i]);
+                            if (message.negate != null && message.hasOwnProperty("negate"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.negate);
+                            if (message.members != null && message.members.length)
+                                for (var i = 0; i < message.members.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.members[i]);
+                            if (message.regions != null && message.regions.length)
+                                for (var i = 0; i < message.regions.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.regions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Condition message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.Condition.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.ICondition} message Condition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Condition.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Condition message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.Condition} Condition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Condition.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.Condition();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.ipSubnetworks && message.ipSubnetworks.length))
+                                        message.ipSubnetworks = [];
+                                    message.ipSubnetworks.push(reader.string());
+                                    break;
+                                case 2:
+                                    message.devicePolicy = $root.google.identity.accesscontextmanager.v1.DevicePolicy.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    if (!(message.requiredAccessLevels && message.requiredAccessLevels.length))
+                                        message.requiredAccessLevels = [];
+                                    message.requiredAccessLevels.push(reader.string());
+                                    break;
+                                case 5:
+                                    message.negate = reader.bool();
+                                    break;
+                                case 6:
+                                    if (!(message.members && message.members.length))
+                                        message.members = [];
+                                    message.members.push(reader.string());
+                                    break;
+                                case 7:
+                                    if (!(message.regions && message.regions.length))
+                                        message.regions = [];
+                                    message.regions.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Condition message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.Condition} Condition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Condition.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Condition message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Condition.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ipSubnetworks != null && message.hasOwnProperty("ipSubnetworks")) {
+                                if (!Array.isArray(message.ipSubnetworks))
+                                    return "ipSubnetworks: array expected";
+                                for (var i = 0; i < message.ipSubnetworks.length; ++i)
+                                    if (!$util.isString(message.ipSubnetworks[i]))
+                                        return "ipSubnetworks: string[] expected";
+                            }
+                            if (message.devicePolicy != null && message.hasOwnProperty("devicePolicy")) {
+                                var error = $root.google.identity.accesscontextmanager.v1.DevicePolicy.verify(message.devicePolicy);
+                                if (error)
+                                    return "devicePolicy." + error;
+                            }
+                            if (message.requiredAccessLevels != null && message.hasOwnProperty("requiredAccessLevels")) {
+                                if (!Array.isArray(message.requiredAccessLevels))
+                                    return "requiredAccessLevels: array expected";
+                                for (var i = 0; i < message.requiredAccessLevels.length; ++i)
+                                    if (!$util.isString(message.requiredAccessLevels[i]))
+                                        return "requiredAccessLevels: string[] expected";
+                            }
+                            if (message.negate != null && message.hasOwnProperty("negate"))
+                                if (typeof message.negate !== "boolean")
+                                    return "negate: boolean expected";
+                            if (message.members != null && message.hasOwnProperty("members")) {
+                                if (!Array.isArray(message.members))
+                                    return "members: array expected";
+                                for (var i = 0; i < message.members.length; ++i)
+                                    if (!$util.isString(message.members[i]))
+                                        return "members: string[] expected";
+                            }
+                            if (message.regions != null && message.hasOwnProperty("regions")) {
+                                if (!Array.isArray(message.regions))
+                                    return "regions: array expected";
+                                for (var i = 0; i < message.regions.length; ++i)
+                                    if (!$util.isString(message.regions[i]))
+                                        return "regions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Condition message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.Condition} Condition
+                         */
+                        Condition.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.Condition)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.Condition();
+                            if (object.ipSubnetworks) {
+                                if (!Array.isArray(object.ipSubnetworks))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.Condition.ipSubnetworks: array expected");
+                                message.ipSubnetworks = [];
+                                for (var i = 0; i < object.ipSubnetworks.length; ++i)
+                                    message.ipSubnetworks[i] = String(object.ipSubnetworks[i]);
+                            }
+                            if (object.devicePolicy != null) {
+                                if (typeof object.devicePolicy !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.Condition.devicePolicy: object expected");
+                                message.devicePolicy = $root.google.identity.accesscontextmanager.v1.DevicePolicy.fromObject(object.devicePolicy);
+                            }
+                            if (object.requiredAccessLevels) {
+                                if (!Array.isArray(object.requiredAccessLevels))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.Condition.requiredAccessLevels: array expected");
+                                message.requiredAccessLevels = [];
+                                for (var i = 0; i < object.requiredAccessLevels.length; ++i)
+                                    message.requiredAccessLevels[i] = String(object.requiredAccessLevels[i]);
+                            }
+                            if (object.negate != null)
+                                message.negate = Boolean(object.negate);
+                            if (object.members) {
+                                if (!Array.isArray(object.members))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.Condition.members: array expected");
+                                message.members = [];
+                                for (var i = 0; i < object.members.length; ++i)
+                                    message.members[i] = String(object.members[i]);
+                            }
+                            if (object.regions) {
+                                if (!Array.isArray(object.regions))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.Condition.regions: array expected");
+                                message.regions = [];
+                                for (var i = 0; i < object.regions.length; ++i)
+                                    message.regions[i] = String(object.regions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Condition message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.Condition} message Condition
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Condition.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.ipSubnetworks = [];
+                                object.requiredAccessLevels = [];
+                                object.members = [];
+                                object.regions = [];
+                            }
+                            if (options.defaults) {
+                                object.devicePolicy = null;
+                                object.negate = false;
+                            }
+                            if (message.ipSubnetworks && message.ipSubnetworks.length) {
+                                object.ipSubnetworks = [];
+                                for (var j = 0; j < message.ipSubnetworks.length; ++j)
+                                    object.ipSubnetworks[j] = message.ipSubnetworks[j];
+                            }
+                            if (message.devicePolicy != null && message.hasOwnProperty("devicePolicy"))
+                                object.devicePolicy = $root.google.identity.accesscontextmanager.v1.DevicePolicy.toObject(message.devicePolicy, options);
+                            if (message.requiredAccessLevels && message.requiredAccessLevels.length) {
+                                object.requiredAccessLevels = [];
+                                for (var j = 0; j < message.requiredAccessLevels.length; ++j)
+                                    object.requiredAccessLevels[j] = message.requiredAccessLevels[j];
+                            }
+                            if (message.negate != null && message.hasOwnProperty("negate"))
+                                object.negate = message.negate;
+                            if (message.members && message.members.length) {
+                                object.members = [];
+                                for (var j = 0; j < message.members.length; ++j)
+                                    object.members[j] = message.members[j];
+                            }
+                            if (message.regions && message.regions.length) {
+                                object.regions = [];
+                                for (var j = 0; j < message.regions.length; ++j)
+                                    object.regions[j] = message.regions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Condition to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.Condition
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Condition.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Condition;
+                    })();
+    
+                    v1.CustomLevel = (function() {
+    
+                        /**
+                         * Properties of a CustomLevel.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface ICustomLevel
+                         * @property {google.type.IExpr|null} [expr] CustomLevel expr
+                         */
+    
+                        /**
+                         * Constructs a new CustomLevel.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents a CustomLevel.
+                         * @implements ICustomLevel
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.ICustomLevel=} [properties] Properties to set
+                         */
+                        function CustomLevel(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomLevel expr.
+                         * @member {google.type.IExpr|null|undefined} expr
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @instance
+                         */
+                        CustomLevel.prototype.expr = null;
+    
+                        /**
+                         * Creates a new CustomLevel instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.ICustomLevel=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.CustomLevel} CustomLevel instance
+                         */
+                        CustomLevel.create = function create(properties) {
+                            return new CustomLevel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomLevel message. Does not implicitly {@link google.identity.accesscontextmanager.v1.CustomLevel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.ICustomLevel} message CustomLevel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomLevel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.expr != null && message.hasOwnProperty("expr"))
+                                $root.google.type.Expr.encode(message.expr, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomLevel message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.CustomLevel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.ICustomLevel} message CustomLevel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomLevel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomLevel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.CustomLevel} CustomLevel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomLevel.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.CustomLevel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.expr = $root.google.type.Expr.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomLevel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.CustomLevel} CustomLevel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomLevel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomLevel message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomLevel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.expr != null && message.hasOwnProperty("expr")) {
+                                var error = $root.google.type.Expr.verify(message.expr);
+                                if (error)
+                                    return "expr." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomLevel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.CustomLevel} CustomLevel
+                         */
+                        CustomLevel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.CustomLevel)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.CustomLevel();
+                            if (object.expr != null) {
+                                if (typeof object.expr !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.CustomLevel.expr: object expected");
+                                message.expr = $root.google.type.Expr.fromObject(object.expr);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomLevel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.CustomLevel} message CustomLevel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomLevel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.expr = null;
+                            if (message.expr != null && message.hasOwnProperty("expr"))
+                                object.expr = $root.google.type.Expr.toObject(message.expr, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomLevel to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.CustomLevel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomLevel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CustomLevel;
+                    })();
+    
+                    v1.DevicePolicy = (function() {
+    
+                        /**
+                         * Properties of a DevicePolicy.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface IDevicePolicy
+                         * @property {boolean|null} [requireScreenlock] DevicePolicy requireScreenlock
+                         * @property {Array.<google.identity.accesscontextmanager.type.DeviceEncryptionStatus>|null} [allowedEncryptionStatuses] DevicePolicy allowedEncryptionStatuses
+                         * @property {Array.<google.identity.accesscontextmanager.v1.IOsConstraint>|null} [osConstraints] DevicePolicy osConstraints
+                         * @property {Array.<google.identity.accesscontextmanager.type.DeviceManagementLevel>|null} [allowedDeviceManagementLevels] DevicePolicy allowedDeviceManagementLevels
+                         * @property {boolean|null} [requireAdminApproval] DevicePolicy requireAdminApproval
+                         * @property {boolean|null} [requireCorpOwned] DevicePolicy requireCorpOwned
+                         */
+    
+                        /**
+                         * Constructs a new DevicePolicy.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents a DevicePolicy.
+                         * @implements IDevicePolicy
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.IDevicePolicy=} [properties] Properties to set
+                         */
+                        function DevicePolicy(properties) {
+                            this.allowedEncryptionStatuses = [];
+                            this.osConstraints = [];
+                            this.allowedDeviceManagementLevels = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DevicePolicy requireScreenlock.
+                         * @member {boolean} requireScreenlock
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @instance
+                         */
+                        DevicePolicy.prototype.requireScreenlock = false;
+    
+                        /**
+                         * DevicePolicy allowedEncryptionStatuses.
+                         * @member {Array.<google.identity.accesscontextmanager.type.DeviceEncryptionStatus>} allowedEncryptionStatuses
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @instance
+                         */
+                        DevicePolicy.prototype.allowedEncryptionStatuses = $util.emptyArray;
+    
+                        /**
+                         * DevicePolicy osConstraints.
+                         * @member {Array.<google.identity.accesscontextmanager.v1.IOsConstraint>} osConstraints
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @instance
+                         */
+                        DevicePolicy.prototype.osConstraints = $util.emptyArray;
+    
+                        /**
+                         * DevicePolicy allowedDeviceManagementLevels.
+                         * @member {Array.<google.identity.accesscontextmanager.type.DeviceManagementLevel>} allowedDeviceManagementLevels
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @instance
+                         */
+                        DevicePolicy.prototype.allowedDeviceManagementLevels = $util.emptyArray;
+    
+                        /**
+                         * DevicePolicy requireAdminApproval.
+                         * @member {boolean} requireAdminApproval
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @instance
+                         */
+                        DevicePolicy.prototype.requireAdminApproval = false;
+    
+                        /**
+                         * DevicePolicy requireCorpOwned.
+                         * @member {boolean} requireCorpOwned
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @instance
+                         */
+                        DevicePolicy.prototype.requireCorpOwned = false;
+    
+                        /**
+                         * Creates a new DevicePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IDevicePolicy=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.DevicePolicy} DevicePolicy instance
+                         */
+                        DevicePolicy.create = function create(properties) {
+                            return new DevicePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DevicePolicy message. Does not implicitly {@link google.identity.accesscontextmanager.v1.DevicePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IDevicePolicy} message DevicePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DevicePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.requireScreenlock != null && message.hasOwnProperty("requireScreenlock"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.requireScreenlock);
+                            if (message.allowedEncryptionStatuses != null && message.allowedEncryptionStatuses.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.allowedEncryptionStatuses.length; ++i)
+                                    writer.int32(message.allowedEncryptionStatuses[i]);
+                                writer.ldelim();
+                            }
+                            if (message.osConstraints != null && message.osConstraints.length)
+                                for (var i = 0; i < message.osConstraints.length; ++i)
+                                    $root.google.identity.accesscontextmanager.v1.OsConstraint.encode(message.osConstraints[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.allowedDeviceManagementLevels != null && message.allowedDeviceManagementLevels.length) {
+                                writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                                for (var i = 0; i < message.allowedDeviceManagementLevels.length; ++i)
+                                    writer.int32(message.allowedDeviceManagementLevels[i]);
+                                writer.ldelim();
+                            }
+                            if (message.requireAdminApproval != null && message.hasOwnProperty("requireAdminApproval"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.requireAdminApproval);
+                            if (message.requireCorpOwned != null && message.hasOwnProperty("requireCorpOwned"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.requireCorpOwned);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DevicePolicy message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.DevicePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IDevicePolicy} message DevicePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DevicePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DevicePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.DevicePolicy} DevicePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DevicePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.DevicePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.requireScreenlock = reader.bool();
+                                    break;
+                                case 2:
+                                    if (!(message.allowedEncryptionStatuses && message.allowedEncryptionStatuses.length))
+                                        message.allowedEncryptionStatuses = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.allowedEncryptionStatuses.push(reader.int32());
+                                    } else
+                                        message.allowedEncryptionStatuses.push(reader.int32());
+                                    break;
+                                case 3:
+                                    if (!(message.osConstraints && message.osConstraints.length))
+                                        message.osConstraints = [];
+                                    message.osConstraints.push($root.google.identity.accesscontextmanager.v1.OsConstraint.decode(reader, reader.uint32()));
+                                    break;
+                                case 6:
+                                    if (!(message.allowedDeviceManagementLevels && message.allowedDeviceManagementLevels.length))
+                                        message.allowedDeviceManagementLevels = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.allowedDeviceManagementLevels.push(reader.int32());
+                                    } else
+                                        message.allowedDeviceManagementLevels.push(reader.int32());
+                                    break;
+                                case 7:
+                                    message.requireAdminApproval = reader.bool();
+                                    break;
+                                case 8:
+                                    message.requireCorpOwned = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DevicePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.DevicePolicy} DevicePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DevicePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DevicePolicy message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DevicePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.requireScreenlock != null && message.hasOwnProperty("requireScreenlock"))
+                                if (typeof message.requireScreenlock !== "boolean")
+                                    return "requireScreenlock: boolean expected";
+                            if (message.allowedEncryptionStatuses != null && message.hasOwnProperty("allowedEncryptionStatuses")) {
+                                if (!Array.isArray(message.allowedEncryptionStatuses))
+                                    return "allowedEncryptionStatuses: array expected";
+                                for (var i = 0; i < message.allowedEncryptionStatuses.length; ++i)
+                                    switch (message.allowedEncryptionStatuses[i]) {
+                                    default:
+                                        return "allowedEncryptionStatuses: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.osConstraints != null && message.hasOwnProperty("osConstraints")) {
+                                if (!Array.isArray(message.osConstraints))
+                                    return "osConstraints: array expected";
+                                for (var i = 0; i < message.osConstraints.length; ++i) {
+                                    var error = $root.google.identity.accesscontextmanager.v1.OsConstraint.verify(message.osConstraints[i]);
+                                    if (error)
+                                        return "osConstraints." + error;
+                                }
+                            }
+                            if (message.allowedDeviceManagementLevels != null && message.hasOwnProperty("allowedDeviceManagementLevels")) {
+                                if (!Array.isArray(message.allowedDeviceManagementLevels))
+                                    return "allowedDeviceManagementLevels: array expected";
+                                for (var i = 0; i < message.allowedDeviceManagementLevels.length; ++i)
+                                    switch (message.allowedDeviceManagementLevels[i]) {
+                                    default:
+                                        return "allowedDeviceManagementLevels: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.requireAdminApproval != null && message.hasOwnProperty("requireAdminApproval"))
+                                if (typeof message.requireAdminApproval !== "boolean")
+                                    return "requireAdminApproval: boolean expected";
+                            if (message.requireCorpOwned != null && message.hasOwnProperty("requireCorpOwned"))
+                                if (typeof message.requireCorpOwned !== "boolean")
+                                    return "requireCorpOwned: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DevicePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.DevicePolicy} DevicePolicy
+                         */
+                        DevicePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.DevicePolicy)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.DevicePolicy();
+                            if (object.requireScreenlock != null)
+                                message.requireScreenlock = Boolean(object.requireScreenlock);
+                            if (object.allowedEncryptionStatuses) {
+                                if (!Array.isArray(object.allowedEncryptionStatuses))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.DevicePolicy.allowedEncryptionStatuses: array expected");
+                                message.allowedEncryptionStatuses = [];
+                                for (var i = 0; i < object.allowedEncryptionStatuses.length; ++i)
+                                    switch (object.allowedEncryptionStatuses[i]) {
+                                    default:
+                                    case "ENCRYPTION_UNSPECIFIED":
+                                    case 0:
+                                        message.allowedEncryptionStatuses[i] = 0;
+                                        break;
+                                    case "ENCRYPTION_UNSUPPORTED":
+                                    case 1:
+                                        message.allowedEncryptionStatuses[i] = 1;
+                                        break;
+                                    case "UNENCRYPTED":
+                                    case 2:
+                                        message.allowedEncryptionStatuses[i] = 2;
+                                        break;
+                                    case "ENCRYPTED":
+                                    case 3:
+                                        message.allowedEncryptionStatuses[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.osConstraints) {
+                                if (!Array.isArray(object.osConstraints))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.DevicePolicy.osConstraints: array expected");
+                                message.osConstraints = [];
+                                for (var i = 0; i < object.osConstraints.length; ++i) {
+                                    if (typeof object.osConstraints[i] !== "object")
+                                        throw TypeError(".google.identity.accesscontextmanager.v1.DevicePolicy.osConstraints: object expected");
+                                    message.osConstraints[i] = $root.google.identity.accesscontextmanager.v1.OsConstraint.fromObject(object.osConstraints[i]);
+                                }
+                            }
+                            if (object.allowedDeviceManagementLevels) {
+                                if (!Array.isArray(object.allowedDeviceManagementLevels))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.DevicePolicy.allowedDeviceManagementLevels: array expected");
+                                message.allowedDeviceManagementLevels = [];
+                                for (var i = 0; i < object.allowedDeviceManagementLevels.length; ++i)
+                                    switch (object.allowedDeviceManagementLevels[i]) {
+                                    default:
+                                    case "MANAGEMENT_UNSPECIFIED":
+                                    case 0:
+                                        message.allowedDeviceManagementLevels[i] = 0;
+                                        break;
+                                    case "NONE":
+                                    case 1:
+                                        message.allowedDeviceManagementLevels[i] = 1;
+                                        break;
+                                    case "BASIC":
+                                    case 2:
+                                        message.allowedDeviceManagementLevels[i] = 2;
+                                        break;
+                                    case "COMPLETE":
+                                    case 3:
+                                        message.allowedDeviceManagementLevels[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.requireAdminApproval != null)
+                                message.requireAdminApproval = Boolean(object.requireAdminApproval);
+                            if (object.requireCorpOwned != null)
+                                message.requireCorpOwned = Boolean(object.requireCorpOwned);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DevicePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.DevicePolicy} message DevicePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DevicePolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.allowedEncryptionStatuses = [];
+                                object.osConstraints = [];
+                                object.allowedDeviceManagementLevels = [];
+                            }
+                            if (options.defaults) {
+                                object.requireScreenlock = false;
+                                object.requireAdminApproval = false;
+                                object.requireCorpOwned = false;
+                            }
+                            if (message.requireScreenlock != null && message.hasOwnProperty("requireScreenlock"))
+                                object.requireScreenlock = message.requireScreenlock;
+                            if (message.allowedEncryptionStatuses && message.allowedEncryptionStatuses.length) {
+                                object.allowedEncryptionStatuses = [];
+                                for (var j = 0; j < message.allowedEncryptionStatuses.length; ++j)
+                                    object.allowedEncryptionStatuses[j] = options.enums === String ? $root.google.identity.accesscontextmanager.type.DeviceEncryptionStatus[message.allowedEncryptionStatuses[j]] : message.allowedEncryptionStatuses[j];
+                            }
+                            if (message.osConstraints && message.osConstraints.length) {
+                                object.osConstraints = [];
+                                for (var j = 0; j < message.osConstraints.length; ++j)
+                                    object.osConstraints[j] = $root.google.identity.accesscontextmanager.v1.OsConstraint.toObject(message.osConstraints[j], options);
+                            }
+                            if (message.allowedDeviceManagementLevels && message.allowedDeviceManagementLevels.length) {
+                                object.allowedDeviceManagementLevels = [];
+                                for (var j = 0; j < message.allowedDeviceManagementLevels.length; ++j)
+                                    object.allowedDeviceManagementLevels[j] = options.enums === String ? $root.google.identity.accesscontextmanager.type.DeviceManagementLevel[message.allowedDeviceManagementLevels[j]] : message.allowedDeviceManagementLevels[j];
+                            }
+                            if (message.requireAdminApproval != null && message.hasOwnProperty("requireAdminApproval"))
+                                object.requireAdminApproval = message.requireAdminApproval;
+                            if (message.requireCorpOwned != null && message.hasOwnProperty("requireCorpOwned"))
+                                object.requireCorpOwned = message.requireCorpOwned;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DevicePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.DevicePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DevicePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DevicePolicy;
+                    })();
+    
+                    v1.OsConstraint = (function() {
+    
+                        /**
+                         * Properties of an OsConstraint.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface IOsConstraint
+                         * @property {google.identity.accesscontextmanager.type.OsType|null} [osType] OsConstraint osType
+                         * @property {string|null} [minimumVersion] OsConstraint minimumVersion
+                         * @property {boolean|null} [requireVerifiedChromeOs] OsConstraint requireVerifiedChromeOs
+                         */
+    
+                        /**
+                         * Constructs a new OsConstraint.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents an OsConstraint.
+                         * @implements IOsConstraint
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.IOsConstraint=} [properties] Properties to set
+                         */
+                        function OsConstraint(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OsConstraint osType.
+                         * @member {google.identity.accesscontextmanager.type.OsType} osType
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @instance
+                         */
+                        OsConstraint.prototype.osType = 0;
+    
+                        /**
+                         * OsConstraint minimumVersion.
+                         * @member {string} minimumVersion
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @instance
+                         */
+                        OsConstraint.prototype.minimumVersion = "";
+    
+                        /**
+                         * OsConstraint requireVerifiedChromeOs.
+                         * @member {boolean} requireVerifiedChromeOs
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @instance
+                         */
+                        OsConstraint.prototype.requireVerifiedChromeOs = false;
+    
+                        /**
+                         * Creates a new OsConstraint instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IOsConstraint=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.OsConstraint} OsConstraint instance
+                         */
+                        OsConstraint.create = function create(properties) {
+                            return new OsConstraint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OsConstraint message. Does not implicitly {@link google.identity.accesscontextmanager.v1.OsConstraint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IOsConstraint} message OsConstraint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OsConstraint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.osType != null && message.hasOwnProperty("osType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.osType);
+                            if (message.minimumVersion != null && message.hasOwnProperty("minimumVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.minimumVersion);
+                            if (message.requireVerifiedChromeOs != null && message.hasOwnProperty("requireVerifiedChromeOs"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.requireVerifiedChromeOs);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OsConstraint message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.OsConstraint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IOsConstraint} message OsConstraint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OsConstraint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OsConstraint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.OsConstraint} OsConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OsConstraint.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.OsConstraint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.osType = reader.int32();
+                                    break;
+                                case 2:
+                                    message.minimumVersion = reader.string();
+                                    break;
+                                case 3:
+                                    message.requireVerifiedChromeOs = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OsConstraint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.OsConstraint} OsConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OsConstraint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OsConstraint message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OsConstraint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.osType != null && message.hasOwnProperty("osType"))
+                                switch (message.osType) {
+                                default:
+                                    return "osType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 6:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.minimumVersion != null && message.hasOwnProperty("minimumVersion"))
+                                if (!$util.isString(message.minimumVersion))
+                                    return "minimumVersion: string expected";
+                            if (message.requireVerifiedChromeOs != null && message.hasOwnProperty("requireVerifiedChromeOs"))
+                                if (typeof message.requireVerifiedChromeOs !== "boolean")
+                                    return "requireVerifiedChromeOs: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OsConstraint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.OsConstraint} OsConstraint
+                         */
+                        OsConstraint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.OsConstraint)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.OsConstraint();
+                            switch (object.osType) {
+                            case "OS_UNSPECIFIED":
+                            case 0:
+                                message.osType = 0;
+                                break;
+                            case "DESKTOP_MAC":
+                            case 1:
+                                message.osType = 1;
+                                break;
+                            case "DESKTOP_WINDOWS":
+                            case 2:
+                                message.osType = 2;
+                                break;
+                            case "DESKTOP_LINUX":
+                            case 3:
+                                message.osType = 3;
+                                break;
+                            case "DESKTOP_CHROME_OS":
+                            case 6:
+                                message.osType = 6;
+                                break;
+                            case "ANDROID":
+                            case 4:
+                                message.osType = 4;
+                                break;
+                            case "IOS":
+                            case 5:
+                                message.osType = 5;
+                                break;
+                            }
+                            if (object.minimumVersion != null)
+                                message.minimumVersion = String(object.minimumVersion);
+                            if (object.requireVerifiedChromeOs != null)
+                                message.requireVerifiedChromeOs = Boolean(object.requireVerifiedChromeOs);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OsConstraint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.OsConstraint} message OsConstraint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OsConstraint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.osType = options.enums === String ? "OS_UNSPECIFIED" : 0;
+                                object.minimumVersion = "";
+                                object.requireVerifiedChromeOs = false;
+                            }
+                            if (message.osType != null && message.hasOwnProperty("osType"))
+                                object.osType = options.enums === String ? $root.google.identity.accesscontextmanager.type.OsType[message.osType] : message.osType;
+                            if (message.minimumVersion != null && message.hasOwnProperty("minimumVersion"))
+                                object.minimumVersion = message.minimumVersion;
+                            if (message.requireVerifiedChromeOs != null && message.hasOwnProperty("requireVerifiedChromeOs"))
+                                object.requireVerifiedChromeOs = message.requireVerifiedChromeOs;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OsConstraint to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.OsConstraint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OsConstraint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OsConstraint;
+                    })();
+    
+                    v1.AccessPolicy = (function() {
+    
+                        /**
+                         * Properties of an AccessPolicy.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface IAccessPolicy
+                         * @property {string|null} [name] AccessPolicy name
+                         * @property {string|null} [parent] AccessPolicy parent
+                         * @property {string|null} [title] AccessPolicy title
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AccessPolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AccessPolicy updateTime
+                         * @property {string|null} [etag] AccessPolicy etag
+                         */
+    
+                        /**
+                         * Constructs a new AccessPolicy.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents an AccessPolicy.
+                         * @implements IAccessPolicy
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.IAccessPolicy=} [properties] Properties to set
+                         */
+                        function AccessPolicy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessPolicy name.
+                         * @member {string} name
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @instance
+                         */
+                        AccessPolicy.prototype.name = "";
+    
+                        /**
+                         * AccessPolicy parent.
+                         * @member {string} parent
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @instance
+                         */
+                        AccessPolicy.prototype.parent = "";
+    
+                        /**
+                         * AccessPolicy title.
+                         * @member {string} title
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @instance
+                         */
+                        AccessPolicy.prototype.title = "";
+    
+                        /**
+                         * AccessPolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @instance
+                         */
+                        AccessPolicy.prototype.createTime = null;
+    
+                        /**
+                         * AccessPolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @instance
+                         */
+                        AccessPolicy.prototype.updateTime = null;
+    
+                        /**
+                         * AccessPolicy etag.
+                         * @member {string} etag
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @instance
+                         */
+                        AccessPolicy.prototype.etag = "";
+    
+                        /**
+                         * Creates a new AccessPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IAccessPolicy=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.AccessPolicy} AccessPolicy instance
+                         */
+                        AccessPolicy.create = function create(properties) {
+                            return new AccessPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessPolicy message. Does not implicitly {@link google.identity.accesscontextmanager.v1.AccessPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IAccessPolicy} message AccessPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.parent);
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessPolicy message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.AccessPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IAccessPolicy} message AccessPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.AccessPolicy} AccessPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.AccessPolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.parent = reader.string();
+                                    break;
+                                case 3:
+                                    message.title = reader.string();
+                                    break;
+                                case 4:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.etag = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.AccessPolicy} AccessPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessPolicy message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                if (!$util.isString(message.title))
+                                    return "title: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.AccessPolicy} AccessPolicy
+                         */
+                        AccessPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.AccessPolicy)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.AccessPolicy();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.title != null)
+                                message.title = String(object.title);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.AccessPolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.AccessPolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.AccessPolicy} message AccessPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.parent = "";
+                                object.title = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                object.title = message.title;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.AccessPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AccessPolicy;
+                    })();
+    
+                    v1.ServicePerimeter = (function() {
+    
+                        /**
+                         * Properties of a ServicePerimeter.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface IServicePerimeter
+                         * @property {string|null} [name] ServicePerimeter name
+                         * @property {string|null} [title] ServicePerimeter title
+                         * @property {string|null} [description] ServicePerimeter description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ServicePerimeter createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ServicePerimeter updateTime
+                         * @property {google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType|null} [perimeterType] ServicePerimeter perimeterType
+                         * @property {google.identity.accesscontextmanager.v1.IServicePerimeterConfig|null} [status] ServicePerimeter status
+                         * @property {google.identity.accesscontextmanager.v1.IServicePerimeterConfig|null} [spec] ServicePerimeter spec
+                         * @property {boolean|null} [useExplicitDryRunSpec] ServicePerimeter useExplicitDryRunSpec
+                         */
+    
+                        /**
+                         * Constructs a new ServicePerimeter.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents a ServicePerimeter.
+                         * @implements IServicePerimeter
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.IServicePerimeter=} [properties] Properties to set
+                         */
+                        function ServicePerimeter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServicePerimeter name.
+                         * @member {string} name
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.name = "";
+    
+                        /**
+                         * ServicePerimeter title.
+                         * @member {string} title
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.title = "";
+    
+                        /**
+                         * ServicePerimeter description.
+                         * @member {string} description
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.description = "";
+    
+                        /**
+                         * ServicePerimeter createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.createTime = null;
+    
+                        /**
+                         * ServicePerimeter updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.updateTime = null;
+    
+                        /**
+                         * ServicePerimeter perimeterType.
+                         * @member {google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType} perimeterType
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.perimeterType = 0;
+    
+                        /**
+                         * ServicePerimeter status.
+                         * @member {google.identity.accesscontextmanager.v1.IServicePerimeterConfig|null|undefined} status
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.status = null;
+    
+                        /**
+                         * ServicePerimeter spec.
+                         * @member {google.identity.accesscontextmanager.v1.IServicePerimeterConfig|null|undefined} spec
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.spec = null;
+    
+                        /**
+                         * ServicePerimeter useExplicitDryRunSpec.
+                         * @member {boolean} useExplicitDryRunSpec
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         */
+                        ServicePerimeter.prototype.useExplicitDryRunSpec = false;
+    
+                        /**
+                         * Creates a new ServicePerimeter instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IServicePerimeter=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.ServicePerimeter} ServicePerimeter instance
+                         */
+                        ServicePerimeter.create = function create(properties) {
+                            return new ServicePerimeter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServicePerimeter message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IServicePerimeter} message ServicePerimeter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServicePerimeter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.perimeterType != null && message.hasOwnProperty("perimeterType"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.perimeterType);
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.encode(message.status, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.spec != null && message.hasOwnProperty("spec"))
+                                $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.encode(message.spec, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.useExplicitDryRunSpec != null && message.hasOwnProperty("useExplicitDryRunSpec"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.useExplicitDryRunSpec);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServicePerimeter message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IServicePerimeter} message ServicePerimeter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServicePerimeter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServicePerimeter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.ServicePerimeter} ServicePerimeter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServicePerimeter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.title = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.perimeterType = reader.int32();
+                                    break;
+                                case 7:
+                                    message.status = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.spec = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.useExplicitDryRunSpec = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServicePerimeter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.ServicePerimeter} ServicePerimeter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServicePerimeter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServicePerimeter message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServicePerimeter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                if (!$util.isString(message.title))
+                                    return "title: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.perimeterType != null && message.hasOwnProperty("perimeterType"))
+                                switch (message.perimeterType) {
+                                default:
+                                    return "perimeterType: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.verify(message.status);
+                                if (error)
+                                    return "status." + error;
+                            }
+                            if (message.spec != null && message.hasOwnProperty("spec")) {
+                                var error = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.verify(message.spec);
+                                if (error)
+                                    return "spec." + error;
+                            }
+                            if (message.useExplicitDryRunSpec != null && message.hasOwnProperty("useExplicitDryRunSpec"))
+                                if (typeof message.useExplicitDryRunSpec !== "boolean")
+                                    return "useExplicitDryRunSpec: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServicePerimeter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.ServicePerimeter} ServicePerimeter
+                         */
+                        ServicePerimeter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.ServicePerimeter)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeter();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.title != null)
+                                message.title = String(object.title);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeter.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeter.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            switch (object.perimeterType) {
+                            case "PERIMETER_TYPE_REGULAR":
+                            case 0:
+                                message.perimeterType = 0;
+                                break;
+                            case "PERIMETER_TYPE_BRIDGE":
+                            case 1:
+                                message.perimeterType = 1;
+                                break;
+                            }
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeter.status: object expected");
+                                message.status = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.fromObject(object.status);
+                            }
+                            if (object.spec != null) {
+                                if (typeof object.spec !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeter.spec: object expected");
+                                message.spec = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.fromObject(object.spec);
+                            }
+                            if (object.useExplicitDryRunSpec != null)
+                                message.useExplicitDryRunSpec = Boolean(object.useExplicitDryRunSpec);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServicePerimeter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.ServicePerimeter} message ServicePerimeter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServicePerimeter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.title = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.perimeterType = options.enums === String ? "PERIMETER_TYPE_REGULAR" : 0;
+                                object.status = null;
+                                object.spec = null;
+                                object.useExplicitDryRunSpec = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                object.title = message.title;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.perimeterType != null && message.hasOwnProperty("perimeterType"))
+                                object.perimeterType = options.enums === String ? $root.google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType[message.perimeterType] : message.perimeterType;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.toObject(message.status, options);
+                            if (message.spec != null && message.hasOwnProperty("spec"))
+                                object.spec = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.toObject(message.spec, options);
+                            if (message.useExplicitDryRunSpec != null && message.hasOwnProperty("useExplicitDryRunSpec"))
+                                object.useExplicitDryRunSpec = message.useExplicitDryRunSpec;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServicePerimeter to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServicePerimeter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * PerimeterType enum.
+                         * @name google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType
+                         * @enum {string}
+                         * @property {number} PERIMETER_TYPE_REGULAR=0 PERIMETER_TYPE_REGULAR value
+                         * @property {number} PERIMETER_TYPE_BRIDGE=1 PERIMETER_TYPE_BRIDGE value
+                         */
+                        ServicePerimeter.PerimeterType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PERIMETER_TYPE_REGULAR"] = 0;
+                            values[valuesById[1] = "PERIMETER_TYPE_BRIDGE"] = 1;
+                            return values;
+                        })();
+    
+                        return ServicePerimeter;
+                    })();
+    
+                    v1.ServicePerimeterConfig = (function() {
+    
+                        /**
+                         * Properties of a ServicePerimeterConfig.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @interface IServicePerimeterConfig
+                         * @property {Array.<string>|null} [resources] ServicePerimeterConfig resources
+                         * @property {Array.<string>|null} [accessLevels] ServicePerimeterConfig accessLevels
+                         * @property {Array.<string>|null} [restrictedServices] ServicePerimeterConfig restrictedServices
+                         * @property {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices|null} [vpcAccessibleServices] ServicePerimeterConfig vpcAccessibleServices
+                         */
+    
+                        /**
+                         * Constructs a new ServicePerimeterConfig.
+                         * @memberof google.identity.accesscontextmanager.v1
+                         * @classdesc Represents a ServicePerimeterConfig.
+                         * @implements IServicePerimeterConfig
+                         * @constructor
+                         * @param {google.identity.accesscontextmanager.v1.IServicePerimeterConfig=} [properties] Properties to set
+                         */
+                        function ServicePerimeterConfig(properties) {
+                            this.resources = [];
+                            this.accessLevels = [];
+                            this.restrictedServices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServicePerimeterConfig resources.
+                         * @member {Array.<string>} resources
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @instance
+                         */
+                        ServicePerimeterConfig.prototype.resources = $util.emptyArray;
+    
+                        /**
+                         * ServicePerimeterConfig accessLevels.
+                         * @member {Array.<string>} accessLevels
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @instance
+                         */
+                        ServicePerimeterConfig.prototype.accessLevels = $util.emptyArray;
+    
+                        /**
+                         * ServicePerimeterConfig restrictedServices.
+                         * @member {Array.<string>} restrictedServices
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @instance
+                         */
+                        ServicePerimeterConfig.prototype.restrictedServices = $util.emptyArray;
+    
+                        /**
+                         * ServicePerimeterConfig vpcAccessibleServices.
+                         * @member {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices|null|undefined} vpcAccessibleServices
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @instance
+                         */
+                        ServicePerimeterConfig.prototype.vpcAccessibleServices = null;
+    
+                        /**
+                         * Creates a new ServicePerimeterConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IServicePerimeterConfig=} [properties] Properties to set
+                         * @returns {google.identity.accesscontextmanager.v1.ServicePerimeterConfig} ServicePerimeterConfig instance
+                         */
+                        ServicePerimeterConfig.create = function create(properties) {
+                            return new ServicePerimeterConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServicePerimeterConfig message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IServicePerimeterConfig} message ServicePerimeterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServicePerimeterConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resources != null && message.resources.length)
+                                for (var i = 0; i < message.resources.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.resources[i]);
+                            if (message.accessLevels != null && message.accessLevels.length)
+                                for (var i = 0; i < message.accessLevels.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.accessLevels[i]);
+                            if (message.restrictedServices != null && message.restrictedServices.length)
+                                for (var i = 0; i < message.restrictedServices.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.restrictedServices[i]);
+                            if (message.vpcAccessibleServices != null && message.hasOwnProperty("vpcAccessibleServices"))
+                                $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.encode(message.vpcAccessibleServices, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServicePerimeterConfig message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.IServicePerimeterConfig} message ServicePerimeterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServicePerimeterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServicePerimeterConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.identity.accesscontextmanager.v1.ServicePerimeterConfig} ServicePerimeterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServicePerimeterConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.resources && message.resources.length))
+                                        message.resources = [];
+                                    message.resources.push(reader.string());
+                                    break;
+                                case 2:
+                                    if (!(message.accessLevels && message.accessLevels.length))
+                                        message.accessLevels = [];
+                                    message.accessLevels.push(reader.string());
+                                    break;
+                                case 4:
+                                    if (!(message.restrictedServices && message.restrictedServices.length))
+                                        message.restrictedServices = [];
+                                    message.restrictedServices.push(reader.string());
+                                    break;
+                                case 10:
+                                    message.vpcAccessibleServices = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServicePerimeterConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.identity.accesscontextmanager.v1.ServicePerimeterConfig} ServicePerimeterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServicePerimeterConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServicePerimeterConfig message.
+                         * @function verify
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServicePerimeterConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resources != null && message.hasOwnProperty("resources")) {
+                                if (!Array.isArray(message.resources))
+                                    return "resources: array expected";
+                                for (var i = 0; i < message.resources.length; ++i)
+                                    if (!$util.isString(message.resources[i]))
+                                        return "resources: string[] expected";
+                            }
+                            if (message.accessLevels != null && message.hasOwnProperty("accessLevels")) {
+                                if (!Array.isArray(message.accessLevels))
+                                    return "accessLevels: array expected";
+                                for (var i = 0; i < message.accessLevels.length; ++i)
+                                    if (!$util.isString(message.accessLevels[i]))
+                                        return "accessLevels: string[] expected";
+                            }
+                            if (message.restrictedServices != null && message.hasOwnProperty("restrictedServices")) {
+                                if (!Array.isArray(message.restrictedServices))
+                                    return "restrictedServices: array expected";
+                                for (var i = 0; i < message.restrictedServices.length; ++i)
+                                    if (!$util.isString(message.restrictedServices[i]))
+                                        return "restrictedServices: string[] expected";
+                            }
+                            if (message.vpcAccessibleServices != null && message.hasOwnProperty("vpcAccessibleServices")) {
+                                var error = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.verify(message.vpcAccessibleServices);
+                                if (error)
+                                    return "vpcAccessibleServices." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServicePerimeterConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.identity.accesscontextmanager.v1.ServicePerimeterConfig} ServicePerimeterConfig
+                         */
+                        ServicePerimeterConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig)
+                                return object;
+                            var message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig();
+                            if (object.resources) {
+                                if (!Array.isArray(object.resources))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeterConfig.resources: array expected");
+                                message.resources = [];
+                                for (var i = 0; i < object.resources.length; ++i)
+                                    message.resources[i] = String(object.resources[i]);
+                            }
+                            if (object.accessLevels) {
+                                if (!Array.isArray(object.accessLevels))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeterConfig.accessLevels: array expected");
+                                message.accessLevels = [];
+                                for (var i = 0; i < object.accessLevels.length; ++i)
+                                    message.accessLevels[i] = String(object.accessLevels[i]);
+                            }
+                            if (object.restrictedServices) {
+                                if (!Array.isArray(object.restrictedServices))
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeterConfig.restrictedServices: array expected");
+                                message.restrictedServices = [];
+                                for (var i = 0; i < object.restrictedServices.length; ++i)
+                                    message.restrictedServices[i] = String(object.restrictedServices[i]);
+                            }
+                            if (object.vpcAccessibleServices != null) {
+                                if (typeof object.vpcAccessibleServices !== "object")
+                                    throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeterConfig.vpcAccessibleServices: object expected");
+                                message.vpcAccessibleServices = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.fromObject(object.vpcAccessibleServices);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServicePerimeterConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @static
+                         * @param {google.identity.accesscontextmanager.v1.ServicePerimeterConfig} message ServicePerimeterConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServicePerimeterConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.resources = [];
+                                object.accessLevels = [];
+                                object.restrictedServices = [];
+                            }
+                            if (options.defaults)
+                                object.vpcAccessibleServices = null;
+                            if (message.resources && message.resources.length) {
+                                object.resources = [];
+                                for (var j = 0; j < message.resources.length; ++j)
+                                    object.resources[j] = message.resources[j];
+                            }
+                            if (message.accessLevels && message.accessLevels.length) {
+                                object.accessLevels = [];
+                                for (var j = 0; j < message.accessLevels.length; ++j)
+                                    object.accessLevels[j] = message.accessLevels[j];
+                            }
+                            if (message.restrictedServices && message.restrictedServices.length) {
+                                object.restrictedServices = [];
+                                for (var j = 0; j < message.restrictedServices.length; ++j)
+                                    object.restrictedServices[j] = message.restrictedServices[j];
+                            }
+                            if (message.vpcAccessibleServices != null && message.hasOwnProperty("vpcAccessibleServices"))
+                                object.vpcAccessibleServices = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.toObject(message.vpcAccessibleServices, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServicePerimeterConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServicePerimeterConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        ServicePerimeterConfig.VpcAccessibleServices = (function() {
+    
+                            /**
+                             * Properties of a VpcAccessibleServices.
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                             * @interface IVpcAccessibleServices
+                             * @property {boolean|null} [enableRestriction] VpcAccessibleServices enableRestriction
+                             * @property {Array.<string>|null} [allowedServices] VpcAccessibleServices allowedServices
+                             */
+    
+                            /**
+                             * Constructs a new VpcAccessibleServices.
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig
+                             * @classdesc Represents a VpcAccessibleServices.
+                             * @implements IVpcAccessibleServices
+                             * @constructor
+                             * @param {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices=} [properties] Properties to set
+                             */
+                            function VpcAccessibleServices(properties) {
+                                this.allowedServices = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VpcAccessibleServices enableRestriction.
+                             * @member {boolean} enableRestriction
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @instance
+                             */
+                            VpcAccessibleServices.prototype.enableRestriction = false;
+    
+                            /**
+                             * VpcAccessibleServices allowedServices.
+                             * @member {Array.<string>} allowedServices
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @instance
+                             */
+                            VpcAccessibleServices.prototype.allowedServices = $util.emptyArray;
+    
+                            /**
+                             * Creates a new VpcAccessibleServices instance using the specified properties.
+                             * @function create
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @static
+                             * @param {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices=} [properties] Properties to set
+                             * @returns {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices} VpcAccessibleServices instance
+                             */
+                            VpcAccessibleServices.create = function create(properties) {
+                                return new VpcAccessibleServices(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VpcAccessibleServices message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @static
+                             * @param {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices} message VpcAccessibleServices message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VpcAccessibleServices.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableRestriction != null && message.hasOwnProperty("enableRestriction"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableRestriction);
+                                if (message.allowedServices != null && message.allowedServices.length)
+                                    for (var i = 0; i < message.allowedServices.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.allowedServices[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VpcAccessibleServices message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @static
+                             * @param {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices} message VpcAccessibleServices message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VpcAccessibleServices.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VpcAccessibleServices message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices} VpcAccessibleServices
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VpcAccessibleServices.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.enableRestriction = reader.bool();
+                                        break;
+                                    case 2:
+                                        if (!(message.allowedServices && message.allowedServices.length))
+                                            message.allowedServices = [];
+                                        message.allowedServices.push(reader.string());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VpcAccessibleServices message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices} VpcAccessibleServices
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VpcAccessibleServices.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VpcAccessibleServices message.
+                             * @function verify
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VpcAccessibleServices.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableRestriction != null && message.hasOwnProperty("enableRestriction"))
+                                    if (typeof message.enableRestriction !== "boolean")
+                                        return "enableRestriction: boolean expected";
+                                if (message.allowedServices != null && message.hasOwnProperty("allowedServices")) {
+                                    if (!Array.isArray(message.allowedServices))
+                                        return "allowedServices: array expected";
+                                    for (var i = 0; i < message.allowedServices.length; ++i)
+                                        if (!$util.isString(message.allowedServices[i]))
+                                            return "allowedServices: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VpcAccessibleServices message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices} VpcAccessibleServices
+                             */
+                            VpcAccessibleServices.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices)
+                                    return object;
+                                var message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices();
+                                if (object.enableRestriction != null)
+                                    message.enableRestriction = Boolean(object.enableRestriction);
+                                if (object.allowedServices) {
+                                    if (!Array.isArray(object.allowedServices))
+                                        throw TypeError(".google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices.allowedServices: array expected");
+                                    message.allowedServices = [];
+                                    for (var i = 0; i < object.allowedServices.length; ++i)
+                                        message.allowedServices[i] = String(object.allowedServices[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VpcAccessibleServices message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @static
+                             * @param {google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices} message VpcAccessibleServices
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VpcAccessibleServices.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.allowedServices = [];
+                                if (options.defaults)
+                                    object.enableRestriction = false;
+                                if (message.enableRestriction != null && message.hasOwnProperty("enableRestriction"))
+                                    object.enableRestriction = message.enableRestriction;
+                                if (message.allowedServices && message.allowedServices.length) {
+                                    object.allowedServices = [];
+                                    for (var j = 0; j < message.allowedServices.length; ++j)
+                                        object.allowedServices[j] = message.allowedServices[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VpcAccessibleServices to JSON.
+                             * @function toJSON
+                             * @memberof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VpcAccessibleServices.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return VpcAccessibleServices;
+                        })();
+    
+                        return ServicePerimeterConfig;
+                    })();
+    
+                    return v1;
+                })();
+    
+                accesscontextmanager.type = (function() {
+    
+                    /**
+                     * Namespace type.
+                     * @memberof google.identity.accesscontextmanager
+                     * @namespace
+                     */
+                    var type = {};
+    
+                    /**
+                     * DeviceEncryptionStatus enum.
+                     * @name google.identity.accesscontextmanager.type.DeviceEncryptionStatus
+                     * @enum {string}
+                     * @property {number} ENCRYPTION_UNSPECIFIED=0 ENCRYPTION_UNSPECIFIED value
+                     * @property {number} ENCRYPTION_UNSUPPORTED=1 ENCRYPTION_UNSUPPORTED value
+                     * @property {number} UNENCRYPTED=2 UNENCRYPTED value
+                     * @property {number} ENCRYPTED=3 ENCRYPTED value
+                     */
+                    type.DeviceEncryptionStatus = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENCRYPTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ENCRYPTION_UNSUPPORTED"] = 1;
+                        values[valuesById[2] = "UNENCRYPTED"] = 2;
+                        values[valuesById[3] = "ENCRYPTED"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * OsType enum.
+                     * @name google.identity.accesscontextmanager.type.OsType
+                     * @enum {string}
+                     * @property {number} OS_UNSPECIFIED=0 OS_UNSPECIFIED value
+                     * @property {number} DESKTOP_MAC=1 DESKTOP_MAC value
+                     * @property {number} DESKTOP_WINDOWS=2 DESKTOP_WINDOWS value
+                     * @property {number} DESKTOP_LINUX=3 DESKTOP_LINUX value
+                     * @property {number} DESKTOP_CHROME_OS=6 DESKTOP_CHROME_OS value
+                     * @property {number} ANDROID=4 ANDROID value
+                     * @property {number} IOS=5 IOS value
+                     */
+                    type.OsType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DESKTOP_MAC"] = 1;
+                        values[valuesById[2] = "DESKTOP_WINDOWS"] = 2;
+                        values[valuesById[3] = "DESKTOP_LINUX"] = 3;
+                        values[valuesById[6] = "DESKTOP_CHROME_OS"] = 6;
+                        values[valuesById[4] = "ANDROID"] = 4;
+                        values[valuesById[5] = "IOS"] = 5;
+                        return values;
+                    })();
+    
+                    /**
+                     * DeviceManagementLevel enum.
+                     * @name google.identity.accesscontextmanager.type.DeviceManagementLevel
+                     * @enum {string}
+                     * @property {number} MANAGEMENT_UNSPECIFIED=0 MANAGEMENT_UNSPECIFIED value
+                     * @property {number} NONE=1 NONE value
+                     * @property {number} BASIC=2 BASIC value
+                     * @property {number} COMPLETE=3 COMPLETE value
+                     */
+                    type.DeviceManagementLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MANAGEMENT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NONE"] = 1;
+                        values[valuesById[2] = "BASIC"] = 2;
+                        values[valuesById[3] = "COMPLETE"] = 3;
+                        return values;
+                    })();
+    
+                    return type;
+                })();
+    
+                return accesscontextmanager;
+            })();
+    
+            return identity;
         })();
     
         google.longrunning = (function() {
