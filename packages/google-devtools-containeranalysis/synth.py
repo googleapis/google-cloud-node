@@ -81,7 +81,7 @@ for filePath in to_remove:
     os.unlink(filePath)
 # remove unneeded protos in proto_list.json
 proto_lists=['src/v1/container_analysis_proto_list.json', 'src/v1beta1/container_analysis_v1_beta1_proto_list.json', 'src/v1beta1/grafeas_v1_beta1_proto_list.json']
-remove_proto_keywords=['/google/api', '/google/protobuf', 'google/rpc']
+remove_proto_keywords=['/google/api', '/google/protobuf', '/google/rpc', '/google/type']
 for file in proto_lists:
   with open(file, 'r') as f:
     items=json.load(f)
@@ -91,5 +91,5 @@ for file in proto_lists:
     f.write(new_file)
 
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'run', 'lint'])
 subprocess.run(['npx', 'compileProtos', 'src'])
