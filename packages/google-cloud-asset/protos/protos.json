@@ -325,15 +325,6 @@
                         }
                       }
                     },
-                    "ContentType": {
-                      "values": {
-                        "CONTENT_TYPE_UNSPECIFIED": 0,
-                        "RESOURCE": 1,
-                        "IAM_POLICY": 2,
-                        "ORG_POLICY": 4,
-                        "ACCESS_POLICY": 5
-                      }
-                    },
                     "FeedOutputConfig": {
                       "oneofs": {
                         "destination": {
@@ -386,6 +377,15 @@
                         }
                       }
                     },
+                    "ContentType": {
+                      "values": {
+                        "CONTENT_TYPE_UNSPECIFIED": 0,
+                        "RESOURCE": 1,
+                        "IAM_POLICY": 2,
+                        "ORG_POLICY": 4,
+                        "ACCESS_POLICY": 5
+                      }
+                    },
                     "TemporalAsset": {
                       "fields": {
                         "window": {
@@ -419,6 +419,15 @@
                         "(google.api.resource).type": "cloudasset.googleapis.com/Asset",
                         "(google.api.resource).pattern": "*"
                       },
+                      "oneofs": {
+                        "accessContextPolicy": {
+                          "oneof": [
+                            "accessPolicy",
+                            "accessLevel",
+                            "servicePerimeter"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -435,6 +444,23 @@
                         "iamPolicy": {
                           "type": "google.iam.v1.Policy",
                           "id": 4
+                        },
+                        "orgPolicy": {
+                          "rule": "repeated",
+                          "type": "google.cloud.orgpolicy.v1.Policy",
+                          "id": 6
+                        },
+                        "accessPolicy": {
+                          "type": "google.identity.accesscontextmanager.v1.AccessPolicy",
+                          "id": 7
+                        },
+                        "accessLevel": {
+                          "type": "google.identity.accesscontextmanager.v1.AccessLevel",
+                          "id": 8
+                        },
+                        "servicePerimeter": {
+                          "type": "google.identity.accesscontextmanager.v1.ServicePerimeter",
+                          "id": 9
                         },
                         "ancestors": {
                           "rule": "repeated",
@@ -1698,6 +1724,112 @@
                   }
                 }
               }
+            },
+            "orgpolicy": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.OrgPolicy.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/orgpolicy/v1;orgpolicy",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "OrgPolicyProto",
+                    "java_package": "com.google.cloud.orgpolicy.v1",
+                    "php_namespace": "Google\\Cloud\\OrgPolicy\\V1",
+                    "ruby_package": "Google::Cloud::OrgPolicy::V1"
+                  },
+                  "nested": {
+                    "Policy": {
+                      "oneofs": {
+                        "policyType": {
+                          "oneof": [
+                            "listPolicy",
+                            "booleanPolicy",
+                            "restoreDefault"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "version": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "constraint": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "bytes",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "listPolicy": {
+                          "type": "ListPolicy",
+                          "id": 5
+                        },
+                        "booleanPolicy": {
+                          "type": "BooleanPolicy",
+                          "id": 6
+                        },
+                        "restoreDefault": {
+                          "type": "RestoreDefault",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "ListPolicy": {
+                          "fields": {
+                            "allowedValues": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "deniedValues": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "allValues": {
+                              "type": "AllValues",
+                              "id": 3
+                            },
+                            "suggestedValue": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "inheritFromParent": {
+                              "type": "bool",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "AllValues": {
+                              "values": {
+                                "ALL_VALUES_UNSPECIFIED": 0,
+                                "ALLOW": 1,
+                                "DENY": 2
+                              }
+                            }
+                          }
+                        },
+                        "BooleanPolicy": {
+                          "fields": {
+                            "enforced": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "RestoreDefault": {
+                          "fields": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -2789,6 +2921,21 @@
                 }
               }
             },
+            "Empty": {
+              "fields": {}
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -2864,18 +3011,6 @@
                 }
               }
             },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -2887,9 +3022,6 @@
                   "id": 2
                 }
               }
-            },
-            "Empty": {
-              "fields": {}
             },
             "FieldMask": {
               "fields": {
@@ -3051,6 +3183,330 @@
                 "location": {
                   "type": "string",
                   "id": 4
+                }
+              }
+            }
+          }
+        },
+        "identity": {
+          "nested": {
+            "accesscontextmanager": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Identity.AccessContextManager.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/identity/accesscontextmanager/v1;accesscontextmanager",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "ServicePerimeterProto",
+                    "java_package": "com.google.identity.accesscontextmanager.v1",
+                    "php_namespace": "Google\\Identity\\AccessContextManager\\V1",
+                    "ruby_package": "Google::Identity::AccessContextManager::V1",
+                    "objc_class_prefix": "GACM"
+                  },
+                  "nested": {
+                    "AccessLevel": {
+                      "oneofs": {
+                        "level": {
+                          "oneof": [
+                            "basic",
+                            "custom"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "title": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "basic": {
+                          "type": "BasicLevel",
+                          "id": 4
+                        },
+                        "custom": {
+                          "type": "CustomLevel",
+                          "id": 5
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "BasicLevel": {
+                      "fields": {
+                        "conditions": {
+                          "rule": "repeated",
+                          "type": "Condition",
+                          "id": 1
+                        },
+                        "combiningFunction": {
+                          "type": "ConditionCombiningFunction",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ConditionCombiningFunction": {
+                          "values": {
+                            "AND": 0,
+                            "OR": 1
+                          }
+                        }
+                      }
+                    },
+                    "Condition": {
+                      "fields": {
+                        "ipSubnetworks": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "devicePolicy": {
+                          "type": "DevicePolicy",
+                          "id": 2
+                        },
+                        "requiredAccessLevels": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "negate": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "members": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "regions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "CustomLevel": {
+                      "fields": {
+                        "expr": {
+                          "type": "google.type.Expr",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DevicePolicy": {
+                      "fields": {
+                        "requireScreenlock": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "allowedEncryptionStatuses": {
+                          "rule": "repeated",
+                          "type": "google.identity.accesscontextmanager.type.DeviceEncryptionStatus",
+                          "id": 2
+                        },
+                        "osConstraints": {
+                          "rule": "repeated",
+                          "type": "OsConstraint",
+                          "id": 3
+                        },
+                        "allowedDeviceManagementLevels": {
+                          "rule": "repeated",
+                          "type": "google.identity.accesscontextmanager.type.DeviceManagementLevel",
+                          "id": 6
+                        },
+                        "requireAdminApproval": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "requireCorpOwned": {
+                          "type": "bool",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "OsConstraint": {
+                      "fields": {
+                        "osType": {
+                          "type": "google.identity.accesscontextmanager.type.OsType",
+                          "id": 1
+                        },
+                        "minimumVersion": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "requireVerifiedChromeOs": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AccessPolicy": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "title": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ServicePerimeter": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "title": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "perimeterType": {
+                          "type": "PerimeterType",
+                          "id": 6
+                        },
+                        "status": {
+                          "type": "ServicePerimeterConfig",
+                          "id": 7
+                        },
+                        "spec": {
+                          "type": "ServicePerimeterConfig",
+                          "id": 8
+                        },
+                        "useExplicitDryRunSpec": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "PerimeterType": {
+                          "values": {
+                            "PERIMETER_TYPE_REGULAR": 0,
+                            "PERIMETER_TYPE_BRIDGE": 1
+                          }
+                        }
+                      }
+                    },
+                    "ServicePerimeterConfig": {
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "accessLevels": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "restrictedServices": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "vpcAccessibleServices": {
+                          "type": "VpcAccessibleServices",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "VpcAccessibleServices": {
+                          "fields": {
+                            "enableRestriction": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "allowedServices": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": {
+                  "options": {
+                    "csharp_namespace": "Google.Identity.AccessContextManager.Type",
+                    "go_package": "google.golang.org/genproto/googleapis/identity/accesscontextmanager/type;type",
+                    "java_package": "com.google.identity.accesscontextmanager.type",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "TypeProto",
+                    "php_namespace": "Google\\Identity\\AccessContextManager\\Type",
+                    "ruby_package": "Google::Identity::AccessContextManager::Type"
+                  },
+                  "nested": {
+                    "DeviceEncryptionStatus": {
+                      "values": {
+                        "ENCRYPTION_UNSPECIFIED": 0,
+                        "ENCRYPTION_UNSUPPORTED": 1,
+                        "UNENCRYPTED": 2,
+                        "ENCRYPTED": 3
+                      }
+                    },
+                    "OsType": {
+                      "values": {
+                        "OS_UNSPECIFIED": 0,
+                        "DESKTOP_MAC": 1,
+                        "DESKTOP_WINDOWS": 2,
+                        "DESKTOP_LINUX": 3,
+                        "DESKTOP_CHROME_OS": 6,
+                        "ANDROID": 4,
+                        "IOS": 5
+                      }
+                    },
+                    "DeviceManagementLevel": {
+                      "values": {
+                        "MANAGEMENT_UNSPECIFIED": 0,
+                        "NONE": 1,
+                        "BASIC": 2,
+                        "COMPLETE": 3
+                      }
+                    }
+                  }
                 }
               }
             }

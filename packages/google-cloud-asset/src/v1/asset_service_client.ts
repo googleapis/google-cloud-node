@@ -18,7 +18,6 @@
 
 import * as gax from 'google-gax';
 import {
-  GaxCall,
   Callback,
   CallOptions,
   Descriptors,
@@ -390,11 +389,11 @@ export class AssetServiceClient {
    *   Optional. The content type.
    * @param {google.cloud.asset.v1.TimeWindow} [request.readTimeWindow]
    *   Optional. The time window for the asset history. Both start_time and
-   *   end_time are optional and if set, it must be after 2018-10-02 UTC. If
-   *   end_time is not set, it is default to current timestamp. If start_time is
-   *   not set, the snapshot of the assets at end_time will be returned. The
-   *   returned results contain all temporal assets whose time window overlap with
-   *   read_time_window.
+   *   end_time are optional and if set, it must be after the current time minus
+   *   35 days. If end_time is not set, it is default to current timestamp.
+   *   If start_time is not set, the snapshot of the assets at end_time will be
+   *   returned. The returned results contain all temporal assets whose time
+   *   window overlap with read_time_window.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -927,10 +926,10 @@ export class AssetServiceClient {
    *   or a folder number (such as "folders/123").
    * @param {google.protobuf.Timestamp} request.readTime
    *   Timestamp to take an asset snapshot. This can only be set to a timestamp
-   *   between 2018-10-02 UTC (inclusive) and the current time. If not specified,
-   *   the current time will be used. Due to delays in resource data collection
-   *   and indexing, there is a volatile window during which running the same
-   *   query may get different results.
+   *   between the current time and the current time minus 35 days (inclusive).
+   *   If not specified, the current time will be used. Due to delays in resource
+   *   data collection and indexing, there is a volatile window during which
+   *   running the same query may get different results.
    * @param {string[]} request.assetTypes
    *   A list of asset types of which to take a snapshot for. For example:
    *   "compute.googleapis.com/Disk". If specified, only matching assets will be
