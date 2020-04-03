@@ -19,9 +19,9 @@ const {describe, it} = require('mocha');
 const cp = require('child_process');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-// A helper for delaying integration tests with an exponential backoff.
-// See examples like: https://github.com/googleapis/nodejs-monitoring/issues/190,
-// https://github.com/googleapis/nodejs-monitoring/issues/191.
+// Tests in this suite can trigger the upstream error,
+// "points were written more frequently than the maximum
+//  sampling period configured for the metric":
 const delay = async test => {
   const retries = test.currentRetry();
   if (retries === 0) return; // no retry on the first failure.
