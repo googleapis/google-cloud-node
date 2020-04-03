@@ -25,6 +25,7 @@ import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
+import {Policy} from '../src/project';
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
@@ -103,6 +104,56 @@ describe('Project', () => {
 
     it('should promisify all tlhe things', () => {
       assert(promisified);
+    });
+  });
+
+  describe('getIamPolicy', () => {
+    const error = new Error('Error.');
+    const policy = {
+      version: 1,
+      bindings: [
+        {
+          members: ['serviceAccount:fakeemail@project.iam.gserviceaccount.com'],
+          role: 'roles/appengine.appAdmin',
+        },
+      ],
+      auditConfigs: [
+        {
+          auditLogConfigs: [
+            {
+              logType: 'ADMIN_READ',
+            },
+          ],
+          service: 'spanner.googleapis.com',
+        },
+      ],
+      etag: 'BwWf8AIJOb4=',
+    };
+
+    beforeEach(() => {
+      project.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(error, policy);
+      };
+    });
+
+    it('should make the correct API request', done => {
+      project.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, ':getIamPolicy');
+        done();
+      };
+      project.getIamPolicy(assert.ifError);
+    });
+
+    it('should execute the callback with error & API response', done => {
+      project.getIamPolicy((err: Error, apiResponse_: Policy) => {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, policy);
+        done();
+      });
     });
   });
 

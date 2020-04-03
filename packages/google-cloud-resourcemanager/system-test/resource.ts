@@ -57,6 +57,15 @@ describe('Resource', () => {
       const [metadata] = await project.getMetadata();
       assert.notStrictEqual(metadata.projectId, undefined);
     });
+
+    it('should get Iam policy', done => {
+      project.getIamPolicy((err, policy) => {
+        assert.ifError(err);
+        assert.notStrictEqual(policy!.etag, undefined);
+        assert.strictEqual(typeof policy!.version, 'number');
+        done();
+      });
+    });
   });
 
   // Auth through the gcloud SDK is required to:
