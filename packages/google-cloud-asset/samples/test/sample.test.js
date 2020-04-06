@@ -26,6 +26,20 @@ const storage = new Storage();
 const bucketName = `asset-nodejs-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 
+// Some of these tests can take an extremely long time, and occasionally
+// timeout, see:
+// "Timeout of 180000ms exceeded. For async tests and hooks".
+const delay = async test => {
+  const retries = test.currentRetry();
+  if (retries === 0) return; // no retry on the first failure.
+  // see: https://cloud.google.com/storage/docs/exponential-backoff:
+  const ms = Math.pow(2, retries) * 1000 + Math.random() * 2000;
+  return new Promise(done => {
+    console.info(`retrying "${test.title}" in ${ms}ms`);
+    setTimeout(done, ms);
+  });
+};
+
 describe('quickstart sample tests', () => {
   before(async () => {
     await bucket.create();
@@ -35,7 +49,9 @@ describe('quickstart sample tests', () => {
     await bucket.delete();
   });
 
-  it('should export assets to specified path', async () => {
+  it('should export assets to specified path', async function() {
+    this.retries(2);
+    await delay(this.test);
     const dumpFilePath = `gs://${bucketName}/my-assets.txt`;
     execSync(`node exportAssets ${dumpFilePath}`);
     const file = await bucket.file('my-assets.txt');
