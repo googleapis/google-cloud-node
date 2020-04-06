@@ -317,7 +317,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getSessionEntityType(request);
       }, expectedError);
       assert(
@@ -439,7 +439,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createSessionEntityType(request);
       }, expectedError);
       assert(
@@ -564,7 +564,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateSessionEntityType(request);
       }, expectedError);
       assert(
@@ -686,7 +686,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteSessionEntityType(request);
       }, expectedError);
       assert(
@@ -826,7 +826,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listSessionEntityTypes(request);
       }, expectedError);
       assert(
@@ -934,7 +934,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1018,7 +1018,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         expectedError
       );
       const iterable = client.listSessionEntityTypesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.dialogflow.v2beta1.ISessionEntityType[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

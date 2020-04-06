@@ -294,7 +294,7 @@ describe('v2beta1.AgentsClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getAgent = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getAgent(request);
       }, expectedError);
       assert(
@@ -408,7 +408,7 @@ describe('v2beta1.AgentsClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.setAgent = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setAgent(request);
       }, expectedError);
       assert(
@@ -522,7 +522,7 @@ describe('v2beta1.AgentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteAgent(request);
       }, expectedError);
       assert(
@@ -636,7 +636,7 @@ describe('v2beta1.AgentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.trainAgent(request);
       }, expectedError);
       assert(
@@ -750,7 +750,7 @@ describe('v2beta1.AgentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.exportAgent(request);
       }, expectedError);
       assert(
@@ -864,7 +864,7 @@ describe('v2beta1.AgentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.importAgent(request);
       }, expectedError);
       assert(
@@ -978,7 +978,7 @@ describe('v2beta1.AgentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.restoreAgent(request);
       }, expectedError);
       assert(
@@ -1094,7 +1094,7 @@ describe('v2beta1.AgentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getValidationResult(request);
       }, expectedError);
       assert(
@@ -1224,7 +1224,7 @@ describe('v2beta1.AgentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchAgents(request);
       }, expectedError);
       assert(
@@ -1323,7 +1323,7 @@ describe('v2beta1.AgentsClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1402,7 +1402,7 @@ describe('v2beta1.AgentsClient', () => {
         expectedError
       );
       const iterable = client.searchAgentsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.dialogflow.v2beta1.IAgent[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

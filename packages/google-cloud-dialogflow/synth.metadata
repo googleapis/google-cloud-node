@@ -1,5 +1,23 @@
 {
-  "updateTime": "2020-03-31T19:34:12.147877Z",
+  "updateTime": "2020-04-04T23:33:10.728186Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "d6cb4997910eda04c0c66c0f2fd043eeaa0f660d",
+        "internalRef": "304724866",
+        "log": "d6cb4997910eda04c0c66c0f2fd043eeaa0f660d\nchore: enable gapic v2 and proto annotation for documentai API.\n\ncommitter @summer-ji-eng\n\nPiperOrigin-RevId: 304724866\n\n490bc556608bfa5b1548c9374b06152fa33d657e\nEnable gapicv2 for devtools/remoteworkers/v1test2\n\nCommitter: @miraleung\nPiperOrigin-RevId: 304718691\n\n9f78ce31a5bd7f4a63e3cf0ddf28221557adb7ed\nEnable gapicv2 for managedidentities/v1beta1\n\nCommitter: @miraleung\nPiperOrigin-RevId: 304718676\n\n6e17d259b8e320bc51aa240cefef05ec753e2b83\ndocs: treat a dummy example URL as a string literal instead of a link\n\nPiperOrigin-RevId: 304716376\n\n"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "99820243d348191bc9c634f2b48ddf65096285ed"
+      }
+    }
+  ],
   "destinations": [
     {
       "client": {

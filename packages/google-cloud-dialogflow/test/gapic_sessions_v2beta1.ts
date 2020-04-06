@@ -250,7 +250,7 @@ describe('v2beta1.SessionsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.detectIntent(request);
       }, expectedError);
       assert(
@@ -338,7 +338,7 @@ describe('v2beta1.SessionsClient', () => {
         stream.write(request);
         stream.end();
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(

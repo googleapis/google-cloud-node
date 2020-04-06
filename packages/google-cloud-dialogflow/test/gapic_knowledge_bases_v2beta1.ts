@@ -299,7 +299,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getKnowledgeBase(request);
       }, expectedError);
       assert(
@@ -415,7 +415,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createKnowledgeBase(request);
       }, expectedError);
       assert(
@@ -531,7 +531,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteKnowledgeBase(request);
       }, expectedError);
       assert(
@@ -650,7 +650,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateKnowledgeBase(request);
       }, expectedError);
       assert(
@@ -784,7 +784,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listKnowledgeBases(request);
       }, expectedError);
       assert(
@@ -883,7 +883,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -962,7 +962,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         expectedError
       );
       const iterable = client.listKnowledgeBasesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

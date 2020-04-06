@@ -16,7 +16,7 @@
                     "java_package": "com.google.cloud.dialogflow.v2",
                     "objc_class_prefix": "DF",
                     "(google.api.resource_definition).type": "dialogflow.googleapis.com/Session",
-                    "(google.api.resource_definition).pattern": "projects/{project}/agent/sessions/{session}"
+                    "(google.api.resource_definition).pattern": "projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}"
                   },
                   "nested": {
                     "Agents": {
@@ -235,7 +235,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Agent"
                           }
                         }
                       }
@@ -265,7 +265,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Agent"
                           }
                         }
                       }
@@ -277,7 +277,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Agent"
                           }
                         },
                         "pageSize": {
@@ -313,7 +313,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Agent"
                           }
                         }
                       }
@@ -325,7 +325,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Agent"
                           }
                         },
                         "agentUri": {
@@ -372,7 +372,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Agent"
                           }
                         },
                         "agentUri": {
@@ -400,7 +400,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Agent"
                           }
                         },
                         "agentUri": {
@@ -420,7 +420,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Agent"
                           }
                         },
                         "languageCode": {
@@ -708,7 +708,7 @@
                     "Context": {
                       "options": {
                         "(google.api.resource).type": "dialogflow.googleapis.com/Context",
-                        "(google.api.resource).pattern": "projects/{project}/agent/sessions/{session}/contexts/{context}"
+                        "(google.api.resource).pattern": "projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}"
                       },
                       "fields": {
                         "name": {
@@ -740,7 +740,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Context"
                           }
                         },
                         "pageSize": {
@@ -1039,7 +1040,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/EntityType"
                           }
                         },
                         "languageCode": {
@@ -1104,7 +1105,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/EntityType"
                           }
                         },
                         "entityType": {
@@ -1175,7 +1176,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/EntityType"
                           }
                         },
                         "entityTypeBatchUri": {
@@ -1218,7 +1219,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/EntityType"
                           }
                         },
                         "entityTypeNames": {
@@ -1382,6 +1383,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent}/intents:batchUpdate",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,intent_batch_inline",
                             "(google.longrunning.operation_info).response_type": "google.cloud.dialogflow.v2.BatchUpdateIntentsResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
                           }
@@ -1407,7 +1409,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -2395,7 +2400,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Intent"
                           }
                         },
                         "languageCode": {
@@ -2474,7 +2479,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Intent"
                           }
                         },
                         "intent": {
@@ -2559,7 +2564,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Intent"
                           }
                         },
                         "intentBatchUri": {
@@ -2609,7 +2614,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Intent"
                           }
                         },
                         "intents": {
@@ -3082,7 +3087,7 @@
                     "SessionEntityType": {
                       "options": {
                         "(google.api.resource).type": "dialogflow.googleapis.com/SessionEntityType",
-                        "(google.api.resource).pattern": "projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}"
+                        "(google.api.resource).pattern": "projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}"
                       },
                       "fields": {
                         "name": {
@@ -3124,7 +3129,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/SessionEntityType"
                           }
                         },
                         "pageSize": {
@@ -3174,7 +3180,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/SessionEntityType"
                           }
                         },
                         "sessionEntityType": {
@@ -3211,7 +3218,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Context"
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/SessionEntityType"
                           }
                         }
                       }

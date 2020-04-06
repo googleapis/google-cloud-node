@@ -297,7 +297,7 @@ describe('v2beta1.ContextsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getContext(request);
       }, expectedError);
       assert(
@@ -411,7 +411,7 @@ describe('v2beta1.ContextsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createContext(request);
       }, expectedError);
       assert(
@@ -528,7 +528,7 @@ describe('v2beta1.ContextsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateContext(request);
       }, expectedError);
       assert(
@@ -642,7 +642,7 @@ describe('v2beta1.ContextsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteContext(request);
       }, expectedError);
       assert(
@@ -756,7 +756,7 @@ describe('v2beta1.ContextsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteAllContexts(request);
       }, expectedError);
       assert(
@@ -886,7 +886,7 @@ describe('v2beta1.ContextsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listContexts(request);
       }, expectedError);
       assert(
@@ -985,7 +985,7 @@ describe('v2beta1.ContextsClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1064,7 +1064,7 @@ describe('v2beta1.ContextsClient', () => {
         expectedError
       );
       const iterable = client.listContextsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.dialogflow.v2beta1.IContext[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

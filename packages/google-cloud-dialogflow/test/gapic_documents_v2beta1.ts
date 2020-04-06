@@ -297,7 +297,7 @@ describe('v2beta1.DocumentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDocument(request);
       }, expectedError);
       assert(
@@ -411,7 +411,7 @@ describe('v2beta1.DocumentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createDocument(request);
       }, expectedError);
       assert(
@@ -525,7 +525,7 @@ describe('v2beta1.DocumentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteDocument(request);
       }, expectedError);
       assert(
@@ -642,7 +642,7 @@ describe('v2beta1.DocumentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateDocument(request);
       }, expectedError);
       assert(
@@ -756,7 +756,7 @@ describe('v2beta1.DocumentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.reloadDocument(request);
       }, expectedError);
       assert(
@@ -886,7 +886,7 @@ describe('v2beta1.DocumentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDocuments(request);
       }, expectedError);
       assert(
@@ -985,7 +985,7 @@ describe('v2beta1.DocumentsClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1064,7 +1064,7 @@ describe('v2beta1.DocumentsClient', () => {
         expectedError
       );
       const iterable = client.listDocumentsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.dialogflow.v2beta1.IDocument[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

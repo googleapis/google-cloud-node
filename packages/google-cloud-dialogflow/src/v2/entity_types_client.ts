@@ -188,16 +188,25 @@ export class EntityTypesClient {
       agentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
-      contextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/sessions/{session}/contexts/{context}'
-      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/entityTypes/{entity_type}'
       ),
       intentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      sessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectAgentEnvironmentUserSessionContextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+      ),
+      projectAgentEnvironmentUserSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
+      ),
+      projectAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/sessions/{session}/contexts/{context}'
+      ),
+      projectAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
     };
@@ -474,12 +483,11 @@ export class EntityTypesClient {
    *   Required. The name of the entity type.
    *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
    * @param {string} [request.languageCode]
-   *   Optional. The language to retrieve entity synonyms for. If not specified,
-   *   the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -572,12 +580,11 @@ export class EntityTypesClient {
    * @param {google.cloud.dialogflow.v2.EntityType} request.entityType
    *   Required. The entity type to create.
    * @param {string} [request.languageCode]
-   *   Optional. The language of entity synonyms defined in `entity_type`. If not
-   *   specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -667,12 +674,11 @@ export class EntityTypesClient {
    * @param {google.cloud.dialogflow.v2.EntityType} request.entityType
    *   Required. The entity type to update.
    * @param {string} [request.languageCode]
-   *   Optional. The language of entity synonyms defined in `entity_type`. If not
-   *   specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
    * @param {object} [options]
@@ -869,12 +875,11 @@ export class EntityTypesClient {
    * @param {google.cloud.dialogflow.v2.EntityTypeBatch} request.entityTypeBatchInline
    *   The collection of entity types to update or create.
    * @param {string} [request.languageCode]
-   *   Optional. The language of entity synonyms defined in `entity_types`. If not
-   *   specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
    * @param {object} [options]
@@ -1093,12 +1098,11 @@ export class EntityTypesClient {
    * @param {number[]} request.entities
    *   Required. The entities to create.
    * @param {string} [request.languageCode]
-   *   Optional. The language of entity synonyms defined in `entities`. If not
-   *   specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1206,12 +1210,11 @@ export class EntityTypesClient {
    * @param {number[]} request.entities
    *   Required. The entities to update or create.
    * @param {string} [request.languageCode]
-   *   Optional. The language of entity synonyms defined in `entities`. If not
-   *   specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
    * @param {object} [options]
@@ -1321,12 +1324,11 @@ export class EntityTypesClient {
    *   these are not fully-qualified names, i.e. they don't start with
    *   `projects/<Project ID>`.
    * @param {string} [request.languageCode]
-   *   Optional. The language of entity synonyms defined in `entities`. If not
-   *   specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1422,12 +1424,11 @@ export class EntityTypesClient {
    *   Required. The agent to list all entity types from.
    *   Format: `projects/<Project ID>/agent`.
    * @param {string} [request.languageCode]
-   *   Optional. The language to list entity synonyms for. If not specified,
-   *   the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1515,12 +1516,11 @@ export class EntityTypesClient {
    *   Required. The agent to list all entity types from.
    *   Format: `projects/<Project ID>/agent`.
    * @param {string} [request.languageCode]
-   *   Optional. The language to list entity synonyms for. If not specified,
-   *   the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1564,12 +1564,11 @@ export class EntityTypesClient {
    *   Required. The agent to list all entity types from.
    *   Format: `projects/<Project ID>/agent`.
    * @param {string} [request.languageCode]
-   *   Optional. The language to list entity synonyms for. If not specified,
-   *   the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-   *   are supported. Note: languages must be enabled in the agent before they can
-   *   be used.
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1627,55 +1626,6 @@ export class EntityTypesClient {
    */
   matchProjectFromAgentName(agentName: string) {
     return this.pathTemplates.agentPathTemplate.match(agentName).project;
-  }
-
-  /**
-   * Return a fully-qualified context resource name string.
-   *
-   * @param {string} project
-   * @param {string} session
-   * @param {string} context
-   * @returns {string} Resource name string.
-   */
-  contextPath(project: string, session: string, context: string) {
-    return this.pathTemplates.contextPathTemplate.render({
-      project: project,
-      session: session,
-      context: context,
-    });
-  }
-
-  /**
-   * Parse the project from Context resource.
-   *
-   * @param {string} contextName
-   *   A fully-qualified path representing Context resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromContextName(contextName: string) {
-    return this.pathTemplates.contextPathTemplate.match(contextName).project;
-  }
-
-  /**
-   * Parse the session from Context resource.
-   *
-   * @param {string} contextName
-   *   A fully-qualified path representing Context resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromContextName(contextName: string) {
-    return this.pathTemplates.contextPathTemplate.match(contextName).session;
-  }
-
-  /**
-   * Parse the context from Context resource.
-   *
-   * @param {string} contextName
-   *   A fully-qualified path representing Context resource.
-   * @returns {string} A string representing the context.
-   */
-  matchContextFromContextName(contextName: string) {
-    return this.pathTemplates.contextPathTemplate.match(contextName).context;
   }
 
   /**
@@ -1753,15 +1703,313 @@ export class EntityTypesClient {
   }
 
   /**
-   * Return a fully-qualified sessionEntityType resource name string.
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEnvironmentUserSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @param {string} user
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectAgentEnvironmentUserSessionContextPath(
+    project: string,
+    environment: string,
+    user: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render(
+      {
+        project: project,
+        environment: environment,
+        user: user,
+        session: session,
+        context: context,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the environment from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).environment;
+  }
+
+  /**
+   * Parse the user from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).user;
+  }
+
+  /**
+   * Parse the session from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEnvironmentUserSessionEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @param {string} user
+   * @param {string} session
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectAgentEnvironmentUserSessionEntityTypePath(
+    project: string,
+    environment: string,
+    user: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        environment: environment,
+        user: user,
+        session: session,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the environment from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).environment;
+  }
+
+  /**
+   * Parse the user from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).user;
+  }
+
+  /**
+   * Parse the session from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the entity_type from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectAgentSessionContextPath(
+    project: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.render({
+      project: project,
+      session: session,
+      context: context,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentSessionContext resource.
+   *
+   * @param {string} projectAgentSessionContextName
+   *   A fully-qualified path representing project_agent_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the session from ProjectAgentSessionContext resource.
+   *
+   * @param {string} projectAgentSessionContextName
+   *   A fully-qualified path representing project_agent_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectAgentSessionContext resource.
+   *
+   * @param {string} projectAgentSessionContextName
+   *   A fully-qualified path representing project_agent_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentSessionEntityType resource name string.
    *
    * @param {string} project
    * @param {string} session
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  sessionEntityTypePath(project: string, session: string, entityType: string) {
-    return this.pathTemplates.sessionEntityTypePathTemplate.render({
+  projectAgentSessionEntityTypePath(
+    project: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.render({
       project: project,
       session: session,
       entity_type: entityType,
@@ -1769,41 +2017,47 @@ export class EntityTypesClient {
   }
 
   /**
-   * Parse the project from SessionEntityType resource.
+   * Parse the project from ProjectAgentSessionEntityType resource.
    *
-   * @param {string} sessionEntityTypeName
-   *   A fully-qualified path representing SessionEntityType resource.
+   * @param {string} projectAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromSessionEntityTypeName(sessionEntityTypeName: string) {
-    return this.pathTemplates.sessionEntityTypePathTemplate.match(
-      sessionEntityTypeName
+  matchProjectFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName
     ).project;
   }
 
   /**
-   * Parse the session from SessionEntityType resource.
+   * Parse the session from ProjectAgentSessionEntityType resource.
    *
-   * @param {string} sessionEntityTypeName
-   *   A fully-qualified path representing SessionEntityType resource.
+   * @param {string} projectAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromSessionEntityTypeName(sessionEntityTypeName: string) {
-    return this.pathTemplates.sessionEntityTypePathTemplate.match(
-      sessionEntityTypeName
+  matchSessionFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName
     ).session;
   }
 
   /**
-   * Parse the entity_type from SessionEntityType resource.
+   * Parse the entity_type from ProjectAgentSessionEntityType resource.
    *
-   * @param {string} sessionEntityTypeName
-   *   A fully-qualified path representing SessionEntityType resource.
+   * @param {string} projectAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromSessionEntityTypeName(sessionEntityTypeName: string) {
-    return this.pathTemplates.sessionEntityTypePathTemplate.match(
-      sessionEntityTypeName
+  matchEntityTypeFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName
     ).entity_type;
   }
 

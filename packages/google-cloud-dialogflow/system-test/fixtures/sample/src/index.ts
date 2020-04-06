@@ -28,14 +28,14 @@ import {
 } from '@google-cloud/dialogflow';
 
 function main() {
-  const agentsClient = new AgentsClient();
-  const contextsClient = new ContextsClient();
-  const entityTypesClient = new EntityTypesClient();
-  const intentsClient = new IntentsClient();
-  const sessionEntityTypesClient = new SessionEntityTypesClient();
-  const sessionsClient = new SessionsClient();
-  const documentsClient = new DocumentsClient();
-  const knowledgeBasesClient = new KnowledgeBasesClient();
+  new AgentsClient();
+  new ContextsClient();
+  new EntityTypesClient();
+  new IntentsClient();
+  new SessionEntityTypesClient();
+  new SessionsClient();
+  new DocumentsClient();
+  new KnowledgeBasesClient();
 }
 
 main();

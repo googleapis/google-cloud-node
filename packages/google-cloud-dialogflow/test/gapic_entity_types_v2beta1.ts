@@ -297,7 +297,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getEntityType(request);
       }, expectedError);
       assert(
@@ -411,7 +411,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createEntityType(request);
       }, expectedError);
       assert(
@@ -528,7 +528,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateEntityType(request);
       }, expectedError);
       assert(
@@ -642,7 +642,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteEntityType(request);
       }, expectedError);
       assert(
@@ -758,7 +758,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchUpdateEntityTypes(request);
       }, expectedError);
       assert(
@@ -874,7 +874,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchDeleteEntityTypes(request);
       }, expectedError);
       assert(
@@ -990,7 +990,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchCreateEntities(request);
       }, expectedError);
       assert(
@@ -1106,7 +1106,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchUpdateEntities(request);
       }, expectedError);
       assert(
@@ -1222,7 +1222,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchDeleteEntities(request);
       }, expectedError);
       assert(
@@ -1352,7 +1352,7 @@ describe('v2beta1.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listEntityTypes(request);
       }, expectedError);
       assert(
@@ -1451,7 +1451,7 @@ describe('v2beta1.EntityTypesClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1530,7 +1530,7 @@ describe('v2beta1.EntityTypesClient', () => {
         expectedError
       );
       const iterable = client.listEntityTypesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.dialogflow.v2beta1.IEntityType[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

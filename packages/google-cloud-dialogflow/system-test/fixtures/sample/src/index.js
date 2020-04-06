@@ -20,14 +20,14 @@
 const dialogflow = require('@google-cloud/dialogflow');
 
 function main() {
-  const agentsClient = new dialogflow.AgentsClient();
-  const contextsClient = new dialogflow.ContextsClient();
-  const entityTypesClient = new dialogflow.EntityTypesClient();
-  const intentsClient = new dialogflow.IntentsClient();
-  const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
-  const sessionsClient = new dialogflow.SessionsClient();
-  const documentsClient = new dialogflow.DocumentsClient();
-  const knowledgeBasesClient = new dialogflow.KnowledgeBasesClient();
+  new dialogflow.AgentsClient();
+  new dialogflow.ContextsClient();
+  new dialogflow.EntityTypesClient();
+  new dialogflow.IntentsClient();
+  new dialogflow.SessionEntityTypesClient();
+  new dialogflow.SessionsClient();
+  new dialogflow.DocumentsClient();
+  new dialogflow.KnowledgeBasesClient();
 }
 
 main();

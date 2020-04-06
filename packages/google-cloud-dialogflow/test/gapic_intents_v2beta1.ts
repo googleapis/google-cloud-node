@@ -294,7 +294,7 @@ describe('v2beta1.IntentsClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getIntent = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIntent(request);
       }, expectedError);
       assert(
@@ -408,7 +408,7 @@ describe('v2beta1.IntentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createIntent(request);
       }, expectedError);
       assert(
@@ -525,7 +525,7 @@ describe('v2beta1.IntentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateIntent(request);
       }, expectedError);
       assert(
@@ -639,7 +639,7 @@ describe('v2beta1.IntentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteIntent(request);
       }, expectedError);
       assert(
@@ -755,7 +755,7 @@ describe('v2beta1.IntentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchUpdateIntents(request);
       }, expectedError);
       assert(
@@ -871,7 +871,7 @@ describe('v2beta1.IntentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchDeleteIntents(request);
       }, expectedError);
       assert(
@@ -1001,7 +1001,7 @@ describe('v2beta1.IntentsClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listIntents(request);
       }, expectedError);
       assert(
@@ -1099,7 +1099,7 @@ describe('v2beta1.IntentsClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1177,7 +1177,7 @@ describe('v2beta1.IntentsClient', () => {
         expectedError
       );
       const iterable = client.listIntentsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.dialogflow.v2beta1.IIntent[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
