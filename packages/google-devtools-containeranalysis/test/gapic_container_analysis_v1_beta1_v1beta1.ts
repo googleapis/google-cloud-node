@@ -319,7 +319,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setIamPolicy(request);
       }, expectedError);
       assert(
@@ -439,7 +439,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIamPolicy(request);
       }, expectedError);
       assert(
@@ -561,7 +561,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.testIamPermissions(request);
       }, expectedError);
       assert(
@@ -681,7 +681,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getScanConfig(request);
       }, expectedError);
       assert(
@@ -801,7 +801,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateScanConfig(request);
       }, expectedError);
       assert(
@@ -939,7 +939,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listScanConfigs(request);
       }, expectedError);
       assert(
@@ -1046,7 +1046,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1129,7 +1129,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         expectedError
       );
       const iterable = client.listScanConfigsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.devtools.containeranalysis.v1beta1.IScanConfig[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
