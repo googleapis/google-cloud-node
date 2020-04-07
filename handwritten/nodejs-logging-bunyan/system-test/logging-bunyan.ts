@@ -47,7 +47,8 @@ describe('LoggingBunyan', function() {
     streams: [loggingBunyan.stream('info')],
   });
 
-  it('should properly write log entries', async () => {
+  it('should properly write log entries', async function() {
+    this.retries(3);
     const timestamp = new Date();
     const start = Date.now();
 
@@ -171,7 +172,8 @@ describe('LoggingBunyan', function() {
     const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
-    it('reports errors when logging errors', async () => {
+    it('reports errors when logging errors', async function() {
+      this.retries(3);
       const start = Date.now();
 
       const message = `an error at ${Date.now()}`;
