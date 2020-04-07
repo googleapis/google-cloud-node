@@ -186,6 +186,9 @@ export class KeyManagementServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      publicKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -3386,6 +3389,92 @@ export class KeyManagementServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified publicKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @param {string} crypto_key_version
+   * @returns {string} Resource name string.
+   */
+  publicKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+    cryptoKeyVersion: string
+  ) {
+    return this.pathTemplates.publicKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+      crypto_key_version: cryptoKeyVersion,
+    });
+  }
+
+  /**
+   * Parse the project from PublicKey resource.
+   *
+   * @param {string} publicKeyName
+   *   A fully-qualified path representing PublicKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPublicKeyName(publicKeyName: string) {
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PublicKey resource.
+   *
+   * @param {string} publicKeyName
+   *   A fully-qualified path representing PublicKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPublicKeyName(publicKeyName: string) {
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from PublicKey resource.
+   *
+   * @param {string} publicKeyName
+   *   A fully-qualified path representing PublicKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromPublicKeyName(publicKeyName: string) {
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from PublicKey resource.
+   *
+   * @param {string} publicKeyName
+   *   A fully-qualified path representing PublicKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromPublicKeyName(publicKeyName: string) {
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
+      .crypto_key;
+  }
+
+  /**
+   * Parse the crypto_key_version from PublicKey resource.
+   *
+   * @param {string} publicKeyName
+   *   A fully-qualified path representing PublicKey resource.
+   * @returns {string} A string representing the crypto_key_version.
+   */
+  matchCryptoKeyVersionFromPublicKeyName(publicKeyName: string) {
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
+      .crypto_key_version;
   }
 
   /**

@@ -14742,6 +14742,7 @@
                                 case 17:
                                 case 12:
                                 case 13:
+                                case 18:
                                     break;
                                 }
                             return null;
@@ -14841,6 +14842,10 @@
                             case "EC_SIGN_P384_SHA384":
                             case 13:
                                 message.algorithm = 13;
+                                break;
+                            case "EXTERNAL_SYMMETRIC_ENCRYPTION":
+                            case 18:
+                                message.algorithm = 18;
                                 break;
                             }
                             return message;
@@ -15155,6 +15160,7 @@
                          * @property {string|null} [importJob] CryptoKeyVersion importJob
                          * @property {google.protobuf.ITimestamp|null} [importTime] CryptoKeyVersion importTime
                          * @property {string|null} [importFailureReason] CryptoKeyVersion importFailureReason
+                         * @property {google.cloud.kms.v1.IExternalProtectionLevelOptions|null} [externalProtectionLevelOptions] CryptoKeyVersion externalProtectionLevelOptions
                          */
     
                         /**
@@ -15269,6 +15275,14 @@
                         CryptoKeyVersion.prototype.importFailureReason = "";
     
                         /**
+                         * CryptoKeyVersion externalProtectionLevelOptions.
+                         * @member {google.cloud.kms.v1.IExternalProtectionLevelOptions|null|undefined} externalProtectionLevelOptions
+                         * @memberof google.cloud.kms.v1.CryptoKeyVersion
+                         * @instance
+                         */
+                        CryptoKeyVersion.prototype.externalProtectionLevelOptions = null;
+    
+                        /**
                          * Creates a new CryptoKeyVersion instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.CryptoKeyVersion
@@ -15316,6 +15330,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.importTime, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             if (message.importFailureReason != null && message.hasOwnProperty("importFailureReason"))
                                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.importFailureReason);
+                            if (message.externalProtectionLevelOptions != null && message.hasOwnProperty("externalProtectionLevelOptions"))
+                                $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.encode(message.externalProtectionLevelOptions, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -15385,6 +15401,9 @@
                                     break;
                                 case 16:
                                     message.importFailureReason = reader.string();
+                                    break;
+                                case 17:
+                                    message.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -15468,6 +15487,7 @@
                                 case 17:
                                 case 12:
                                 case 13:
+                                case 18:
                                     break;
                                 }
                             if (message.attestation != null && message.hasOwnProperty("attestation")) {
@@ -15506,6 +15526,11 @@
                             if (message.importFailureReason != null && message.hasOwnProperty("importFailureReason"))
                                 if (!$util.isString(message.importFailureReason))
                                     return "importFailureReason: string expected";
+                            if (message.externalProtectionLevelOptions != null && message.hasOwnProperty("externalProtectionLevelOptions")) {
+                                var error = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.verify(message.externalProtectionLevelOptions);
+                                if (error)
+                                    return "externalProtectionLevelOptions." + error;
+                            }
                             return null;
                         };
     
@@ -15640,6 +15665,10 @@
                             case 13:
                                 message.algorithm = 13;
                                 break;
+                            case "EXTERNAL_SYMMETRIC_ENCRYPTION":
+                            case 18:
+                                message.algorithm = 18;
+                                break;
                             }
                             if (object.attestation != null) {
                                 if (typeof object.attestation !== "object")
@@ -15675,6 +15704,11 @@
                             }
                             if (object.importFailureReason != null)
                                 message.importFailureReason = String(object.importFailureReason);
+                            if (object.externalProtectionLevelOptions != null) {
+                                if (typeof object.externalProtectionLevelOptions !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.CryptoKeyVersion.externalProtectionLevelOptions: object expected");
+                                message.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.fromObject(object.externalProtectionLevelOptions);
+                            }
                             return message;
                         };
     
@@ -15704,6 +15738,7 @@
                                 object.importJob = "";
                                 object.importTime = null;
                                 object.importFailureReason = "";
+                                object.externalProtectionLevelOptions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -15729,6 +15764,8 @@
                                 object.importTime = $root.google.protobuf.Timestamp.toObject(message.importTime, options);
                             if (message.importFailureReason != null && message.hasOwnProperty("importFailureReason"))
                                 object.importFailureReason = message.importFailureReason;
+                            if (message.externalProtectionLevelOptions != null && message.hasOwnProperty("externalProtectionLevelOptions"))
+                                object.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.toObject(message.externalProtectionLevelOptions, options);
                             return object;
                         };
     
@@ -15763,6 +15800,7 @@
                          * @property {number} RSA_DECRYPT_OAEP_4096_SHA512=17 RSA_DECRYPT_OAEP_4096_SHA512 value
                          * @property {number} EC_SIGN_P256_SHA256=12 EC_SIGN_P256_SHA256 value
                          * @property {number} EC_SIGN_P384_SHA384=13 EC_SIGN_P384_SHA384 value
+                         * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
                          */
                         CryptoKeyVersion.CryptoKeyVersionAlgorithm = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -15782,6 +15820,7 @@
                             values[valuesById[17] = "RSA_DECRYPT_OAEP_4096_SHA512"] = 17;
                             values[valuesById[12] = "EC_SIGN_P256_SHA256"] = 12;
                             values[valuesById[13] = "EC_SIGN_P384_SHA384"] = 13;
+                            values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
                             return values;
                         })();
     
@@ -15995,6 +16034,7 @@
                                 case 17:
                                 case 12:
                                 case 13:
+                                case 18:
                                     break;
                                 }
                             return null;
@@ -16078,6 +16118,10 @@
                             case "EC_SIGN_P384_SHA384":
                             case 13:
                                 message.algorithm = 13;
+                                break;
+                            case "EXTERNAL_SYMMETRIC_ENCRYPTION":
+                            case 18:
+                                message.algorithm = 18;
                                 break;
                             }
                             return message;
@@ -16838,6 +16882,193 @@
                         values[valuesById[2] = "HSM"] = 2;
                         values[valuesById[3] = "EXTERNAL"] = 3;
                         return values;
+                    })();
+    
+                    v1.ExternalProtectionLevelOptions = (function() {
+    
+                        /**
+                         * Properties of an ExternalProtectionLevelOptions.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IExternalProtectionLevelOptions
+                         * @property {string|null} [externalKeyUri] ExternalProtectionLevelOptions externalKeyUri
+                         */
+    
+                        /**
+                         * Constructs a new ExternalProtectionLevelOptions.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an ExternalProtectionLevelOptions.
+                         * @implements IExternalProtectionLevelOptions
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IExternalProtectionLevelOptions=} [properties] Properties to set
+                         */
+                        function ExternalProtectionLevelOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExternalProtectionLevelOptions externalKeyUri.
+                         * @member {string} externalKeyUri
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @instance
+                         */
+                        ExternalProtectionLevelOptions.prototype.externalKeyUri = "";
+    
+                        /**
+                         * Creates a new ExternalProtectionLevelOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @static
+                         * @param {google.cloud.kms.v1.IExternalProtectionLevelOptions=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ExternalProtectionLevelOptions} ExternalProtectionLevelOptions instance
+                         */
+                        ExternalProtectionLevelOptions.create = function create(properties) {
+                            return new ExternalProtectionLevelOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExternalProtectionLevelOptions message. Does not implicitly {@link google.cloud.kms.v1.ExternalProtectionLevelOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @static
+                         * @param {google.cloud.kms.v1.IExternalProtectionLevelOptions} message ExternalProtectionLevelOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExternalProtectionLevelOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.externalKeyUri != null && message.hasOwnProperty("externalKeyUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.externalKeyUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExternalProtectionLevelOptions message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExternalProtectionLevelOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @static
+                         * @param {google.cloud.kms.v1.IExternalProtectionLevelOptions} message ExternalProtectionLevelOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExternalProtectionLevelOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExternalProtectionLevelOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ExternalProtectionLevelOptions} ExternalProtectionLevelOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExternalProtectionLevelOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ExternalProtectionLevelOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.externalKeyUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExternalProtectionLevelOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ExternalProtectionLevelOptions} ExternalProtectionLevelOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExternalProtectionLevelOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExternalProtectionLevelOptions message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExternalProtectionLevelOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.externalKeyUri != null && message.hasOwnProperty("externalKeyUri"))
+                                if (!$util.isString(message.externalKeyUri))
+                                    return "externalKeyUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExternalProtectionLevelOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ExternalProtectionLevelOptions} ExternalProtectionLevelOptions
+                         */
+                        ExternalProtectionLevelOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ExternalProtectionLevelOptions)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ExternalProtectionLevelOptions();
+                            if (object.externalKeyUri != null)
+                                message.externalKeyUri = String(object.externalKeyUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExternalProtectionLevelOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @static
+                         * @param {google.cloud.kms.v1.ExternalProtectionLevelOptions} message ExternalProtectionLevelOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExternalProtectionLevelOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.externalKeyUri = "";
+                            if (message.externalKeyUri != null && message.hasOwnProperty("externalKeyUri"))
+                                object.externalKeyUri = message.externalKeyUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExternalProtectionLevelOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExternalProtectionLevelOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExternalProtectionLevelOptions;
                     })();
     
                     v1.KeyManagementService = (function() {
@@ -21680,6 +21911,7 @@
                                 case 17:
                                 case 12:
                                 case 13:
+                                case 18:
                                     break;
                                 }
                             if (message.importJob != null && message.hasOwnProperty("importJob"))
@@ -21771,6 +22003,10 @@
                             case "EC_SIGN_P384_SHA384":
                             case 13:
                                 message.algorithm = 13;
+                                break;
+                            case "EXTERNAL_SYMMETRIC_ENCRYPTION":
+                            case 18:
+                                message.algorithm = 18;
                                 break;
                             }
                             if (object.importJob != null)
@@ -25108,6 +25344,7 @@
                          * @memberof google.cloud.kms.v1
                          * @interface ILocationMetadata
                          * @property {boolean|null} [hsmAvailable] LocationMetadata hsmAvailable
+                         * @property {boolean|null} [ekmAvailable] LocationMetadata ekmAvailable
                          */
     
                         /**
@@ -25132,6 +25369,14 @@
                          * @instance
                          */
                         LocationMetadata.prototype.hsmAvailable = false;
+    
+                        /**
+                         * LocationMetadata ekmAvailable.
+                         * @member {boolean} ekmAvailable
+                         * @memberof google.cloud.kms.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.ekmAvailable = false;
     
                         /**
                          * Creates a new LocationMetadata instance using the specified properties.
@@ -25159,6 +25404,8 @@
                                 writer = $Writer.create();
                             if (message.hsmAvailable != null && message.hasOwnProperty("hsmAvailable"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.hsmAvailable);
+                            if (message.ekmAvailable != null && message.hasOwnProperty("ekmAvailable"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ekmAvailable);
                             return writer;
                         };
     
@@ -25195,6 +25442,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.hsmAvailable = reader.bool();
+                                    break;
+                                case 2:
+                                    message.ekmAvailable = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -25234,6 +25484,9 @@
                             if (message.hsmAvailable != null && message.hasOwnProperty("hsmAvailable"))
                                 if (typeof message.hsmAvailable !== "boolean")
                                     return "hsmAvailable: boolean expected";
+                            if (message.ekmAvailable != null && message.hasOwnProperty("ekmAvailable"))
+                                if (typeof message.ekmAvailable !== "boolean")
+                                    return "ekmAvailable: boolean expected";
                             return null;
                         };
     
@@ -25251,6 +25504,8 @@
                             var message = new $root.google.cloud.kms.v1.LocationMetadata();
                             if (object.hsmAvailable != null)
                                 message.hsmAvailable = Boolean(object.hsmAvailable);
+                            if (object.ekmAvailable != null)
+                                message.ekmAvailable = Boolean(object.ekmAvailable);
                             return message;
                         };
     
@@ -25267,10 +25522,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.hsmAvailable = false;
+                                object.ekmAvailable = false;
+                            }
                             if (message.hsmAvailable != null && message.hasOwnProperty("hsmAvailable"))
                                 object.hsmAvailable = message.hsmAvailable;
+                            if (message.ekmAvailable != null && message.hasOwnProperty("ekmAvailable"))
+                                object.ekmAvailable = message.ekmAvailable;
                             return object;
                         };
     

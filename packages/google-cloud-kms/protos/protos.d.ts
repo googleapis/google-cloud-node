@@ -5798,6 +5798,9 @@ export namespace google {
 
                     /** CryptoKeyVersion importFailureReason */
                     importFailureReason?: (string|null);
+
+                    /** CryptoKeyVersion externalProtectionLevelOptions */
+                    externalProtectionLevelOptions?: (google.cloud.kms.v1.IExternalProtectionLevelOptions|null);
                 }
 
                 /** Represents a CryptoKeyVersion. */
@@ -5844,6 +5847,9 @@ export namespace google {
 
                     /** CryptoKeyVersion importFailureReason. */
                     public importFailureReason: string;
+
+                    /** CryptoKeyVersion externalProtectionLevelOptions. */
+                    public externalProtectionLevelOptions?: (google.cloud.kms.v1.IExternalProtectionLevelOptions|null);
 
                     /**
                      * Creates a new CryptoKeyVersion instance using the specified properties.
@@ -5935,7 +5941,8 @@ export namespace google {
                         RSA_DECRYPT_OAEP_4096_SHA256 = 10,
                         RSA_DECRYPT_OAEP_4096_SHA512 = 17,
                         EC_SIGN_P256_SHA256 = 12,
-                        EC_SIGN_P384_SHA384 = 13
+                        EC_SIGN_P384_SHA384 = 13,
+                        EXTERNAL_SYMMETRIC_ENCRYPTION = 18
                     }
 
                     /** CryptoKeyVersionState enum. */
@@ -6311,6 +6318,96 @@ export namespace google {
                     SOFTWARE = 1,
                     HSM = 2,
                     EXTERNAL = 3
+                }
+
+                /** Properties of an ExternalProtectionLevelOptions. */
+                interface IExternalProtectionLevelOptions {
+
+                    /** ExternalProtectionLevelOptions externalKeyUri */
+                    externalKeyUri?: (string|null);
+                }
+
+                /** Represents an ExternalProtectionLevelOptions. */
+                class ExternalProtectionLevelOptions implements IExternalProtectionLevelOptions {
+
+                    /**
+                     * Constructs a new ExternalProtectionLevelOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IExternalProtectionLevelOptions);
+
+                    /** ExternalProtectionLevelOptions externalKeyUri. */
+                    public externalKeyUri: string;
+
+                    /**
+                     * Creates a new ExternalProtectionLevelOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExternalProtectionLevelOptions instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IExternalProtectionLevelOptions): google.cloud.kms.v1.ExternalProtectionLevelOptions;
+
+                    /**
+                     * Encodes the specified ExternalProtectionLevelOptions message. Does not implicitly {@link google.cloud.kms.v1.ExternalProtectionLevelOptions.verify|verify} messages.
+                     * @param message ExternalProtectionLevelOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IExternalProtectionLevelOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExternalProtectionLevelOptions message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExternalProtectionLevelOptions.verify|verify} messages.
+                     * @param message ExternalProtectionLevelOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IExternalProtectionLevelOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExternalProtectionLevelOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExternalProtectionLevelOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ExternalProtectionLevelOptions;
+
+                    /**
+                     * Decodes an ExternalProtectionLevelOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExternalProtectionLevelOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ExternalProtectionLevelOptions;
+
+                    /**
+                     * Verifies an ExternalProtectionLevelOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExternalProtectionLevelOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExternalProtectionLevelOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ExternalProtectionLevelOptions;
+
+                    /**
+                     * Creates a plain object from an ExternalProtectionLevelOptions message. Also converts values to other types if specified.
+                     * @param message ExternalProtectionLevelOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ExternalProtectionLevelOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExternalProtectionLevelOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Represents a KeyManagementService */
@@ -10005,6 +10102,9 @@ export namespace google {
 
                     /** LocationMetadata hsmAvailable */
                     hsmAvailable?: (boolean|null);
+
+                    /** LocationMetadata ekmAvailable */
+                    ekmAvailable?: (boolean|null);
                 }
 
                 /** Represents a LocationMetadata. */
@@ -10018,6 +10118,9 @@ export namespace google {
 
                     /** LocationMetadata hsmAvailable. */
                     public hsmAvailable: boolean;
+
+                    /** LocationMetadata ekmAvailable. */
+                    public ekmAvailable: boolean;
 
                     /**
                      * Creates a new LocationMetadata instance using the specified properties.

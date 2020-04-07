@@ -315,7 +315,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getKeyRing(request);
       }, expectedError);
       assert(
@@ -435,7 +435,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getCryptoKey(request);
       }, expectedError);
       assert(
@@ -557,7 +557,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getCryptoKeyVersion(request);
       }, expectedError);
       assert(
@@ -677,7 +677,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getPublicKey(request);
       }, expectedError);
       assert(
@@ -797,7 +797,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getImportJob(request);
       }, expectedError);
       assert(
@@ -917,7 +917,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createKeyRing(request);
       }, expectedError);
       assert(
@@ -1037,7 +1037,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createCryptoKey(request);
       }, expectedError);
       assert(
@@ -1159,7 +1159,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createCryptoKeyVersion(request);
       }, expectedError);
       assert(
@@ -1281,7 +1281,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.importCryptoKeyVersion(request);
       }, expectedError);
       assert(
@@ -1401,7 +1401,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createImportJob(request);
       }, expectedError);
       assert(
@@ -1524,7 +1524,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateCryptoKey(request);
       }, expectedError);
       assert(
@@ -1649,7 +1649,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateCryptoKeyVersion(request);
       }, expectedError);
       assert(
@@ -1766,7 +1766,7 @@ describe('v1.KeyManagementServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.encrypt = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.encrypt(request);
       }, expectedError);
       assert(
@@ -1883,7 +1883,7 @@ describe('v1.KeyManagementServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.decrypt = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.decrypt(request);
       }, expectedError);
       assert(
@@ -2003,7 +2003,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.asymmetricSign(request);
       }, expectedError);
       assert(
@@ -2123,7 +2123,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.asymmetricDecrypt(request);
       }, expectedError);
       assert(
@@ -2245,7 +2245,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateCryptoKeyPrimaryVersion(request);
       }, expectedError);
       assert(
@@ -2367,7 +2367,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.destroyCryptoKeyVersion(request);
       }, expectedError);
       assert(
@@ -2489,7 +2489,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.restoreCryptoKeyVersion(request);
       }, expectedError);
       assert(
@@ -2613,7 +2613,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listKeyRings(request);
       }, expectedError);
       assert(
@@ -2704,7 +2704,7 @@ describe('v1.KeyManagementServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2781,7 +2781,7 @@ describe('v1.KeyManagementServiceClient', () => {
         expectedError
       );
       const iterable = client.listKeyRingsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.kms.v1.IKeyRing[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2915,7 +2915,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listCryptoKeys(request);
       }, expectedError);
       assert(
@@ -3006,7 +3006,7 @@ describe('v1.KeyManagementServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3083,7 +3083,7 @@ describe('v1.KeyManagementServiceClient', () => {
         expectedError
       );
       const iterable = client.listCryptoKeysAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.kms.v1.ICryptoKey[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -3231,7 +3231,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listCryptoKeyVersions(request);
       }, expectedError);
       assert(
@@ -3335,7 +3335,7 @@ describe('v1.KeyManagementServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3419,7 +3419,7 @@ describe('v1.KeyManagementServiceClient', () => {
         expectedError
       );
       const iterable = client.listCryptoKeyVersionsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.kms.v1.ICryptoKeyVersion[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -3553,7 +3553,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listImportJobs(request);
       }, expectedError);
       assert(
@@ -3644,7 +3644,7 @@ describe('v1.KeyManagementServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3721,7 +3721,7 @@ describe('v1.KeyManagementServiceClient', () => {
         expectedError
       );
       const iterable = client.listImportJobsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.kms.v1.IImportJob[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -4103,6 +4103,96 @@ describe('v1.KeyManagementServiceClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('publicKey', () => {
+      const fakePath = '/rendered/path/publicKey';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+        crypto_key_version: 'cryptoKeyVersionValue',
+      };
+      const client = new keymanagementserviceModule.v1.KeyManagementServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.publicKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.publicKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('publicKeyPath', () => {
+        const result = client.publicKeyPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue',
+          'cryptoKeyVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.publicKeyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPublicKeyName', () => {
+        const result = client.matchProjectFromPublicKeyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPublicKeyName', () => {
+        const result = client.matchLocationFromPublicKeyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyRingFromPublicKeyName', () => {
+        const result = client.matchKeyRingFromPublicKeyName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyFromPublicKeyName', () => {
+        const result = client.matchCryptoKeyFromPublicKeyName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyVersionFromPublicKeyName', () => {
+        const result = client.matchCryptoKeyVersionFromPublicKeyName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyVersionValue');
+        assert(
+          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
