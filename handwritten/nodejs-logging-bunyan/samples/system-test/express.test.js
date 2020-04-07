@@ -16,7 +16,7 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {describe, it, after} = require('mocha');
+const {describe, it, before, after} = require('mocha');
 const {spawn} = require('child_process');
 const delay = require('delay');
 const got = require('got');
@@ -29,7 +29,7 @@ const {APP_LOG_SUFFIX} = lb.express;
 
 describe('express samples', () => {
   after(() => got(`http://localhost:${PORT}/shutdown`));
-  it('should write using bunyan', async () => {
+  before(async () => {
     // Start the express server.
     spawn(process.execPath, ['express.js'], {
       cwd: path.join(__dirname, '..'),
@@ -38,6 +38,10 @@ describe('express samples', () => {
 
     // Wait 10 seconds for initialization and for server to start listening.
     await delay(10 * 1000);
+  });
+
+  it('should write using bunyan', async function() {
+    this.retries(3);
 
     // Make an HTTP request to exercise a request logging path.
     await got(`http://localhost:${PORT}/`);
@@ -51,6 +55,7 @@ describe('express samples', () => {
     assert.strictEqual(entries.length, 1);
     const entry = entries[0];
     assert.strictEqual('this is an info log message', entry.data.message);
+    // Ensure that a functional logger ws configured with the sample:
     assert.ok(entry.metadata.trace, 'should have a trace property');
     assert.match(entry.metadata.trace, /projects\/.*\/traces\/.*/);
   });
