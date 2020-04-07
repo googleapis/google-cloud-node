@@ -19,6 +19,9 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
+
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1', 'v1']
 for version in versions:
