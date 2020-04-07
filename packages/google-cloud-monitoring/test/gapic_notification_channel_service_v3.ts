@@ -320,7 +320,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getNotificationChannelDescriptor(request);
       }, expectedError);
       assert(
@@ -442,7 +442,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getNotificationChannel(request);
       }, expectedError);
       assert(
@@ -564,7 +564,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createNotificationChannel(request);
       }, expectedError);
       assert(
@@ -689,7 +689,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateNotificationChannel(request);
       }, expectedError);
       assert(
@@ -811,7 +811,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteNotificationChannel(request);
       }, expectedError);
       assert(
@@ -937,7 +937,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.sendNotificationChannelVerificationCode(request);
       }, expectedError);
       assert(
@@ -1064,7 +1064,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getNotificationChannelVerificationCode(request);
       }, expectedError);
       assert(
@@ -1187,7 +1187,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.verifyNotificationChannel(request);
       }, expectedError);
       assert(
@@ -1329,7 +1329,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listNotificationChannelDescriptors(request);
       }, expectedError);
       assert(
@@ -1440,7 +1440,7 @@ describe('v3.NotificationChannelServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1527,7 +1527,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         expectedError
       );
       const iterable = client.listNotificationChannelDescriptorsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.INotificationChannelDescriptor[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1675,7 +1675,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listNotificationChannels(request);
       }, expectedError);
       assert(
@@ -1779,7 +1779,7 @@ describe('v3.NotificationChannelServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1863,7 +1863,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         expectedError
       );
       const iterable = client.listNotificationChannelsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.INotificationChannel[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

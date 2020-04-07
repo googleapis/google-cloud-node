@@ -299,7 +299,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getMonitoredResourceDescriptor(request);
       }, expectedError);
       assert(
@@ -415,7 +415,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getMetricDescriptor(request);
       }, expectedError);
       assert(
@@ -531,7 +531,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createMetricDescriptor(request);
       }, expectedError);
       assert(
@@ -647,7 +647,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteMetricDescriptor(request);
       }, expectedError);
       assert(
@@ -761,7 +761,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createTimeSeries(request);
       }, expectedError);
       assert(
@@ -893,7 +893,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listMonitoredResourceDescriptors(request);
       }, expectedError);
       assert(
@@ -996,7 +996,7 @@ describe('v3.MetricServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1079,7 +1079,7 @@ describe('v3.MetricServiceClient', () => {
         expectedError
       );
       const iterable = client.listMonitoredResourceDescriptorsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.api.IMonitoredResourceDescriptor[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1209,7 +1209,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listMetricDescriptors(request);
       }, expectedError);
       assert(
@@ -1297,7 +1297,7 @@ describe('v3.MetricServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1371,7 +1371,7 @@ describe('v3.MetricServiceClient', () => {
         expectedError
       );
       const iterable = client.listMetricDescriptorsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.api.IMetricDescriptor[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1499,7 +1499,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listTimeSeries(request);
       }, expectedError);
       assert(
@@ -1592,7 +1592,7 @@ describe('v3.MetricServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1665,7 +1665,7 @@ describe('v3.MetricServiceClient', () => {
         expectedError
       );
       const iterable = client.listTimeSeriesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.ITimeSeries[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

@@ -318,7 +318,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createService(request);
       }, expectedError);
       assert(
@@ -438,7 +438,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getService(request);
       }, expectedError);
       assert(
@@ -561,7 +561,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateService(request);
       }, expectedError);
       assert(
@@ -681,7 +681,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteService(request);
       }, expectedError);
       assert(
@@ -803,7 +803,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createServiceLevelObjective(request);
       }, expectedError);
       assert(
@@ -925,7 +925,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getServiceLevelObjective(request);
       }, expectedError);
       assert(
@@ -1050,7 +1050,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateServiceLevelObjective(request);
       }, expectedError);
       assert(
@@ -1172,7 +1172,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteServiceLevelObjective(request);
       }, expectedError);
       assert(
@@ -1296,7 +1296,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listServices(request);
       }, expectedError);
       assert(
@@ -1387,7 +1387,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1464,7 +1464,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         expectedError
       );
       const iterable = client.listServicesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.IService[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1612,7 +1612,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listServiceLevelObjectives(request);
       }, expectedError);
       assert(
@@ -1716,7 +1716,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1800,7 +1800,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         expectedError
       );
       const iterable = client.listServiceLevelObjectivesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.IServiceLevelObjective[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

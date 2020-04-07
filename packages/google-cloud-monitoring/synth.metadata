@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-04-02T11:45:04.492573Z",
+  "updateTime": "2020-04-04T11:35:38.942200Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "75047719f704d61f405cac6d7439637ab36c1232",
-        "internalRef": "304305096"
+        "sha": "1346f5c11a0376bc82c5c03259b304de52671518",
+        "internalRef": "304467075",
+        "log": "1346f5c11a0376bc82c5c03259b304de52671518\nRefresh public client library for Cloud Monitoring.\nIncrease default ListTimeSeries deadline to 90s.\n\nPiperOrigin-RevId: 304467075\n\n4a6cfccb4a32cb28db7366295d90078c6af3112f\ndocs: Fix link in monitoring summary description.\n\nPiperOrigin-RevId: 304438717\n\n6e2ea9a4b63a264090f1bd4b5b25766a3f634f3a\nfix: add interface name overrides back to logging gapic config.\n\ncommitter: @hzyi-google\nPiperOrigin-RevId: 304438432\n\n01f3ccbaa66cf3ae4e3b9fd140b1ecfbe54a3ed0\nFix: Add package/namespace options for C#, Ruby and PHP in remaining protos.\n\nPiperOrigin-RevId: 304416658\n\nb89abbf12cd3c086abddcd79adb0a653349f960a\nchore(google/maps): Rename nox.py to noxfile.py\n\nupstream wip fix here: https://github.com/googleapis/gapic-generator/pull/3156\n\nPiperOrigin-RevId: 304411146\n\nbbf26d7f11fae7789b13959bf100983c496c9807\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 304409906\n\n"
       }
     },
     {

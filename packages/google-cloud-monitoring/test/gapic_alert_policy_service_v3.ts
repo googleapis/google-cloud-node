@@ -299,7 +299,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getAlertPolicy(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createAlertPolicy(request);
       }, expectedError);
       assert(
@@ -527,7 +527,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteAlertPolicy(request);
       }, expectedError);
       assert(
@@ -644,7 +644,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateAlertPolicy(request);
       }, expectedError);
       assert(
@@ -762,7 +762,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listAlertPolicies(request);
       }, expectedError);
       assert(
@@ -855,7 +855,7 @@ describe('v3.AlertPolicyServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -928,7 +928,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         expectedError
       );
       const iterable = client.listAlertPoliciesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.IAlertPolicy[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

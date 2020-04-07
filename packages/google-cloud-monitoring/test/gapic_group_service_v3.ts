@@ -294,7 +294,7 @@ describe('v3.GroupServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getGroup = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getGroup(request);
       }, expectedError);
       assert(
@@ -408,7 +408,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createGroup(request);
       }, expectedError);
       assert(
@@ -525,7 +525,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateGroup(request);
       }, expectedError);
       assert(
@@ -639,7 +639,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteGroup(request);
       }, expectedError);
       assert(
@@ -757,7 +757,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listGroups(request);
       }, expectedError);
       assert(
@@ -843,7 +843,7 @@ describe('v3.GroupServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -915,7 +915,7 @@ describe('v3.GroupServiceClient', () => {
         expectedError
       );
       const iterable = client.listGroupsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.IGroup[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1043,7 +1043,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listGroupMembers(request);
       }, expectedError);
       assert(
@@ -1130,7 +1130,7 @@ describe('v3.GroupServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1203,7 +1203,7 @@ describe('v3.GroupServiceClient', () => {
         expectedError
       );
       const iterable = client.listGroupMembersAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.api.IMonitoredResource[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

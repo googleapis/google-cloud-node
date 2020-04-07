@@ -301,7 +301,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getUptimeCheckConfig(request);
       }, expectedError);
       assert(
@@ -417,7 +417,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createUptimeCheckConfig(request);
       }, expectedError);
       assert(
@@ -536,7 +536,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateUptimeCheckConfig(request);
       }, expectedError);
       assert(
@@ -652,7 +652,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteUptimeCheckConfig(request);
       }, expectedError);
       assert(
@@ -784,7 +784,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listUptimeCheckConfigs(request);
       }, expectedError);
       assert(
@@ -884,7 +884,7 @@ describe('v3.UptimeCheckServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -964,7 +964,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         expectedError
       );
       const iterable = client.listUptimeCheckConfigsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.IUptimeCheckConfig[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1070,7 +1070,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listUptimeCheckIps(request);
       }, expectedError);
       assert(
@@ -1152,7 +1152,7 @@ describe('v3.UptimeCheckServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1207,7 +1207,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         expectedError
       );
       const iterable = client.listUptimeCheckIpsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.IUptimeCheckIp[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
