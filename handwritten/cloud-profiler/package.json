@@ -38,7 +38,7 @@
     "gcp-metadata": "^4.0.0",
     "parse-duration": "^0.1.1",
     "pprof": "1.3.0",
-    "pretty-ms": "^5.0.0",
+    "pretty-ms": "^6.0.0",
     "protobufjs": "~6.8.6",
     "semver": "^7.0.0"
   },
