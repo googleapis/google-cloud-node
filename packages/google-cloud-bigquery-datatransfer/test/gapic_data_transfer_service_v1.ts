@@ -305,7 +305,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDataSource(request);
       }, expectedError);
       assert(
@@ -427,7 +427,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createTransferConfig(request);
       }, expectedError);
       assert(
@@ -552,7 +552,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateTransferConfig(request);
       }, expectedError);
       assert(
@@ -674,7 +674,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteTransferConfig(request);
       }, expectedError);
       assert(
@@ -794,7 +794,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getTransferConfig(request);
       }, expectedError);
       assert(
@@ -916,7 +916,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.scheduleTransferRuns(request);
       }, expectedError);
       assert(
@@ -1038,7 +1038,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.startManualTransferRuns(request);
       }, expectedError);
       assert(
@@ -1158,7 +1158,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getTransferRun(request);
       }, expectedError);
       assert(
@@ -1278,7 +1278,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteTransferRun(request);
       }, expectedError);
       assert(
@@ -1398,7 +1398,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.checkValidCreds(request);
       }, expectedError);
       assert(
@@ -1536,7 +1536,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDataSources(request);
       }, expectedError);
       assert(
@@ -1643,7 +1643,7 @@ describe('v1.DataTransferServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1726,7 +1726,7 @@ describe('v1.DataTransferServiceClient', () => {
         expectedError
       );
       const iterable = client.listDataSourcesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.bigquery.datatransfer.v1.IDataSource[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1876,7 +1876,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listTransferConfigs(request);
       }, expectedError);
       assert(
@@ -1983,7 +1983,7 @@ describe('v1.DataTransferServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2066,7 +2066,7 @@ describe('v1.DataTransferServiceClient', () => {
         expectedError
       );
       const iterable = client.listTransferConfigsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2214,7 +2214,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listTransferRuns(request);
       }, expectedError);
       assert(
@@ -2321,7 +2321,7 @@ describe('v1.DataTransferServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2404,7 +2404,7 @@ describe('v1.DataTransferServiceClient', () => {
         expectedError
       );
       const iterable = client.listTransferRunsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferRun[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2552,7 +2552,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listTransferLogs(request);
       }, expectedError);
       assert(
@@ -2659,7 +2659,7 @@ describe('v1.DataTransferServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2742,7 +2742,7 @@ describe('v1.DataTransferServiceClient', () => {
         expectedError
       );
       const iterable = client.listTransferLogsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
