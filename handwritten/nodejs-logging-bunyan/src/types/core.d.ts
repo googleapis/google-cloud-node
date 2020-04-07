@@ -168,21 +168,21 @@ export interface Metadata {
 type LogWriteResponse = {}[];
 
 export interface HttpRequest {
-  requestMethod: string,
-  requestUrl: string,
-  requestSize: string,
-  status: number,
-  responseSize: string,
-  userAgent: string,
-  remoteIp: string,
-  serverIp: string,
-  referer: string,
-  latency: string,
-  cacheLookup: boolean,
-  cacheHit: boolean,
-  cacheValidatedWithOriginServer: boolean,
-  cacheFillBytes: string,
-  protocol: string,
+  requestMethod?: string;
+  requestUrl?: string;
+  requestSize?: number;
+  status?: number;
+  responseSize?: number;
+  userAgent?: string;
+  remoteIp?: string;
+  serverIp?: string;
+  referer?: string;
+  latency?: string | {seconds: number; nanos: number};
+  cacheLookup?: boolean;
+  cacheHit?: boolean;
+  cacheValidatedWithOriginServer?: boolean;
+  cacheFillBytes?: number;
+  protocol?: string;
 }
 
 export interface BunyanLogRecord {
