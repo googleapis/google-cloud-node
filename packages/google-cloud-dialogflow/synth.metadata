@@ -1,20 +1,21 @@
 {
-  "updateTime": "2020-04-04T23:33:10.728186Z",
+  "updateTime": "2020-04-07T12:28:59.987588Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d6cb4997910eda04c0c66c0f2fd043eeaa0f660d",
-        "internalRef": "304724866",
-        "log": "d6cb4997910eda04c0c66c0f2fd043eeaa0f660d\nchore: enable gapic v2 and proto annotation for documentai API.\n\ncommitter @summer-ji-eng\n\nPiperOrigin-RevId: 304724866\n\n490bc556608bfa5b1548c9374b06152fa33d657e\nEnable gapicv2 for devtools/remoteworkers/v1test2\n\nCommitter: @miraleung\nPiperOrigin-RevId: 304718691\n\n9f78ce31a5bd7f4a63e3cf0ddf28221557adb7ed\nEnable gapicv2 for managedidentities/v1beta1\n\nCommitter: @miraleung\nPiperOrigin-RevId: 304718676\n\n6e17d259b8e320bc51aa240cefef05ec753e2b83\ndocs: treat a dummy example URL as a string literal instead of a link\n\nPiperOrigin-RevId: 304716376\n\n"
+        "sha": "823facb4ca6a4b36b817ce955a790dcb40cf808f",
+        "internalRef": "305155214",
+        "log": "823facb4ca6a4b36b817ce955a790dcb40cf808f\nchore: enable gapicv2 for videointelligence/v1p3beta1\n\nCommitter: @miraleung\nPiperOrigin-RevId: 305155214\n\n6b9c969d42bcb0f8206675bd868ed7d1ddcdaef9\nAdd API for bigqueryreservation v1.\n\nPiperOrigin-RevId: 305151484\n\n514f7d27811832a9f58b83d6f6305d894b097cf6\nchore: enable gapicv2 for phishingprotection/v1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 305126983\n\nff74d47d47280e6bbcbad1a7c82b1e0959c472ec\nfix: PHP-related fixes in BUILD.bazel and service.yamls\n\nThis PR also adds the rules for all 7 langauges in OsLogin and Kms BUILD.bazel files. Those build files were missing rules for 5 langagues, including PHP.\n\nThis PR is the prerequisite for migrating PHP synth.py scripts from artman to bazel.\n\nThe fixes in service.yaml fix regression made during proto annotation migration. This became visible only during PHP generation, because only PHP depends on the affected sections of the service.yaml config.\n\nPiperOrigin-RevId: 305108224\n\nfdbc7b1f63969307c71143a0c24fdfd02e739df6\nEnable gapicv2 for osconfig/agentendpoint/v1\n\nCommitter: @miraleung\nPiperOrigin-RevId: 305086443\n\n1490d30e1ae339570dd7826ba625a603ede91a08\nEnable gapicv2 for osconfig/v1beta\n\nCommitter: @miraleung\nPiperOrigin-RevId: 305069755\n\n7bf824e82e5c3549642b150dc4a9579602000f34\nEnable gapicv2 for iam/credentials/v1\n\nCommitter: @miraleung\nPiperOrigin-RevId: 305065283\n\n9ff6fd3b22f99167827e89aae7778408b5e82425\nUpdates Dataproc v1 API:\n- Adds Dataproc Jobs.SubmitJobAsOperation RPC\n- Adds SparkR and Presto job types to WorkflowTemplates\n- Adds new Optional Components\n- Clarifies usage of some APIs\n\nPiperOrigin-RevId: 305053617\n\ncad0f5137a70d0d14a8d9acbfcee98e4cd3e9662\nUpdates to Dataproc v1beta2 API:\n- Adds SparkR and Presto job types to WorkflowTemplates\n- Adds new Optional Components\n- Clarifies usage of some APIs\n\nPiperOrigin-RevId: 305053062\n\na005f045a301535eeb4c4b3fa7bb94eec9d22a8b\nAdd support for Cloud EKM to the Cloud KMS service and resource protos.\n\nPiperOrigin-RevId: 305026790\n\n5077b1e4674afdbbf11dac3f5f43d36285ba53ff\nchore: set Ruby namespace in proto options\n\nPiperOrigin-RevId: 304836531\n\n"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "99820243d348191bc9c634f2b48ddf65096285ed"
+        "sha": "1df68ed6735ddce6797d0f83641a731c3c3f75b4",
+        "log": "1df68ed6735ddce6797d0f83641a731c3c3f75b4\nfix: apache license URL (#468)\n\n\nf4a59efa54808c4b958263de87bc666ce41e415f\nfeat: Add discogapic support for GAPICBazel generation (#459)\n\n* feat: Add discogapic support for GAPICBazel generation\n\n* reformat with black\n\n* Rename source repository variable\n\nCo-authored-by: Jeffrey Rennie <rennie@google.com>\n"
       }
     }
   ],
