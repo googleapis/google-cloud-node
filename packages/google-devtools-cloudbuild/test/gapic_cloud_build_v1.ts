@@ -302,7 +302,7 @@ describe('v1.CloudBuildClient', () => {
       const expectedOptions = {};
       const expectedError = new Error('expected');
       client.innerApiCalls.getBuild = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getBuild(request);
       }, expectedError);
       assert(
@@ -392,7 +392,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.cancelBuild(request);
       }, expectedError);
       assert(
@@ -484,7 +484,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createBuildTrigger(request);
       }, expectedError);
       assert(
@@ -574,7 +574,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getBuildTrigger(request);
       }, expectedError);
       assert(
@@ -666,7 +666,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteBuildTrigger(request);
       }, expectedError);
       assert(
@@ -758,7 +758,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateBuildTrigger(request);
       }, expectedError);
       assert(
@@ -848,7 +848,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createWorkerPool(request);
       }, expectedError);
       assert(
@@ -938,7 +938,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getWorkerPool(request);
       }, expectedError);
       assert(
@@ -1028,7 +1028,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteWorkerPool(request);
       }, expectedError);
       assert(
@@ -1118,7 +1118,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateWorkerPool(request);
       }, expectedError);
       assert(
@@ -1208,7 +1208,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listWorkerPools(request);
       }, expectedError);
       assert(
@@ -1306,7 +1306,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createBuild(request);
       }, expectedError);
       assert(
@@ -1333,7 +1333,7 @@ describe('v1.CloudBuildClient', () => {
         expectedError
       );
       const [operation] = await client.createBuild(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1431,7 +1431,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.retryBuild(request);
       }, expectedError);
       assert(
@@ -1458,7 +1458,7 @@ describe('v1.CloudBuildClient', () => {
         expectedError
       );
       const [operation] = await client.retryBuild(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1558,7 +1558,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.runBuildTrigger(request);
       }, expectedError);
       assert(
@@ -1585,7 +1585,7 @@ describe('v1.CloudBuildClient', () => {
         expectedError
       );
       const [operation] = await client.runBuildTrigger(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1679,7 +1679,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listBuilds(request);
       }, expectedError);
       assert(
@@ -1761,7 +1761,7 @@ describe('v1.CloudBuildClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1817,7 +1817,7 @@ describe('v1.CloudBuildClient', () => {
         expectedError
       );
       const iterable = client.listBuildsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.devtools.cloudbuild.v1.IBuild[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1927,7 +1927,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listBuildTriggers(request);
       }, expectedError);
       assert(
@@ -2015,7 +2015,7 @@ describe('v1.CloudBuildClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2076,7 +2076,7 @@ describe('v1.CloudBuildClient', () => {
         expectedError
       );
       const iterable = client.listBuildTriggersAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
