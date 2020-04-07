@@ -277,7 +277,7 @@ describe('v1.CloudCatalogClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listServices(request);
       }, expectedError);
       assert(
@@ -359,7 +359,7 @@ describe('v1.CloudCatalogClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -414,7 +414,7 @@ describe('v1.CloudCatalogClient', () => {
         expectedError
       );
       const iterable = client.listServicesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.billing.v1.IService[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -532,7 +532,7 @@ describe('v1.CloudCatalogClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listSkus = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listSkus(request);
       }, expectedError);
       assert(
@@ -617,7 +617,7 @@ describe('v1.CloudCatalogClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -686,7 +686,7 @@ describe('v1.CloudCatalogClient', () => {
         expectedError
       );
       const iterable = client.listSkusAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.billing.v1.ISku[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

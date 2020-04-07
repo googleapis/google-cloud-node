@@ -297,7 +297,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getBillingAccount(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateBillingAccount(request);
       }, expectedError);
       assert(
@@ -505,7 +505,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createBillingAccount(request);
       }, expectedError);
       assert(
@@ -621,7 +621,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getProjectBillingInfo(request);
       }, expectedError);
       assert(
@@ -737,7 +737,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateProjectBillingInfo(request);
       }, expectedError);
       assert(
@@ -851,7 +851,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIamPolicy(request);
       }, expectedError);
       assert(
@@ -965,7 +965,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setIamPolicy(request);
       }, expectedError);
       assert(
@@ -1081,7 +1081,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.testIamPermissions(request);
       }, expectedError);
       assert(
@@ -1189,7 +1189,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listBillingAccounts(request);
       }, expectedError);
       assert(
@@ -1277,7 +1277,7 @@ describe('v1.CloudBillingClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1338,7 +1338,7 @@ describe('v1.CloudBillingClient', () => {
         expectedError
       );
       const iterable = client.listBillingAccountsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.billing.v1.IBillingAccount[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1473,7 +1473,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listProjectBillingInfo(request);
       }, expectedError);
       assert(
@@ -1573,7 +1573,7 @@ describe('v1.CloudBillingClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1653,7 +1653,7 @@ describe('v1.CloudBillingClient', () => {
         expectedError
       );
       const iterable = client.listProjectBillingInfoAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
