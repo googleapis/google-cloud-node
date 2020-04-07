@@ -265,7 +265,7 @@ describe('v1.PredictionServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.predict = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.predict(request);
       }, expectedError);
       assert(
@@ -387,7 +387,7 @@ describe('v1.PredictionServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchPredict(request);
       }, expectedError);
       assert(
@@ -422,7 +422,7 @@ describe('v1.PredictionServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchPredict(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(

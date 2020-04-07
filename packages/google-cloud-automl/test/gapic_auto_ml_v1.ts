@@ -329,7 +329,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDataset(request);
       }, expectedError);
       assert(
@@ -446,7 +446,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateDataset(request);
       }, expectedError);
       assert(
@@ -560,7 +560,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getAnnotationSpec(request);
       }, expectedError);
       assert(
@@ -671,7 +671,7 @@ describe('v1.AutoMlClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getModel(request);
       }, expectedError);
       assert(
@@ -788,7 +788,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateModel(request);
       }, expectedError);
       assert(
@@ -904,7 +904,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getModelEvaluation(request);
       }, expectedError);
       assert(
@@ -1028,7 +1028,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createDataset(request);
       }, expectedError);
       assert(
@@ -1063,7 +1063,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.createDataset(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1187,7 +1187,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteDataset(request);
       }, expectedError);
       assert(
@@ -1222,7 +1222,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.deleteDataset(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1344,7 +1344,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.importData(request);
       }, expectedError);
       assert(
@@ -1379,7 +1379,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.importData(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1501,7 +1501,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.exportData(request);
       }, expectedError);
       assert(
@@ -1536,7 +1536,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.exportData(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1658,7 +1658,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createModel(request);
       }, expectedError);
       assert(
@@ -1693,7 +1693,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.createModel(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1815,7 +1815,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteModel(request);
       }, expectedError);
       assert(
@@ -1850,7 +1850,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.deleteModel(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1972,7 +1972,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deployModel(request);
       }, expectedError);
       assert(
@@ -2007,7 +2007,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.deployModel(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -2131,7 +2131,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.undeployModel(request);
       }, expectedError);
       assert(
@@ -2166,7 +2166,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.undeployModel(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -2288,7 +2288,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.exportModel(request);
       }, expectedError);
       assert(
@@ -2323,7 +2323,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.exportModel(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -2441,7 +2441,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDatasets(request);
       }, expectedError);
       assert(
@@ -2528,7 +2528,7 @@ describe('v1.AutoMlClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2601,7 +2601,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const iterable = client.listDatasetsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.automl.v1.IDataset[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2729,7 +2729,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listModels(request);
       }, expectedError);
       assert(
@@ -2815,7 +2815,7 @@ describe('v1.AutoMlClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2887,7 +2887,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const iterable = client.listModelsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.automl.v1.IModel[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -3029,7 +3029,7 @@ describe('v1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listModelEvaluations(request);
       }, expectedError);
       assert(
@@ -3128,7 +3128,7 @@ describe('v1.AutoMlClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3207,7 +3207,7 @@ describe('v1.AutoMlClient', () => {
         expectedError
       );
       const iterable = client.listModelEvaluationsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.automl.v1.IModelEvaluation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
