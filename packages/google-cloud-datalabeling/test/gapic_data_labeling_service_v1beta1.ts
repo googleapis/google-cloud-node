@@ -348,7 +348,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createDataset(request);
       }, expectedError);
       assert(
@@ -468,7 +468,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDataset(request);
       }, expectedError);
       assert(
@@ -588,7 +588,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteDataset(request);
       }, expectedError);
       assert(
@@ -708,7 +708,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDataItem(request);
       }, expectedError);
       assert(
@@ -830,7 +830,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getAnnotatedDataset(request);
       }, expectedError);
       assert(
@@ -952,7 +952,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteAnnotatedDataset(request);
       }, expectedError);
       assert(
@@ -1072,7 +1072,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getExample(request);
       }, expectedError);
       assert(
@@ -1194,7 +1194,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createAnnotationSpecSet(request);
       }, expectedError);
       assert(
@@ -1316,7 +1316,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getAnnotationSpecSet(request);
       }, expectedError);
       assert(
@@ -1438,7 +1438,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteAnnotationSpecSet(request);
       }, expectedError);
       assert(
@@ -1558,7 +1558,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getInstruction(request);
       }, expectedError);
       assert(
@@ -1678,7 +1678,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteInstruction(request);
       }, expectedError);
       assert(
@@ -1798,7 +1798,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getEvaluation(request);
       }, expectedError);
       assert(
@@ -1920,7 +1920,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createEvaluationJob(request);
       }, expectedError);
       assert(
@@ -2045,7 +2045,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateEvaluationJob(request);
       }, expectedError);
       assert(
@@ -2165,7 +2165,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getEvaluationJob(request);
       }, expectedError);
       assert(
@@ -2287,7 +2287,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.pauseEvaluationJob(request);
       }, expectedError);
       assert(
@@ -2409,7 +2409,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.resumeEvaluationJob(request);
       }, expectedError);
       assert(
@@ -2531,7 +2531,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteEvaluationJob(request);
       }, expectedError);
       assert(
@@ -2659,7 +2659,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.importData(request);
       }, expectedError);
       assert(
@@ -2696,7 +2696,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.importData(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -2824,7 +2824,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.exportData(request);
       }, expectedError);
       assert(
@@ -2861,7 +2861,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.exportData(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -2989,7 +2989,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.labelImage(request);
       }, expectedError);
       assert(
@@ -3026,7 +3026,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.labelImage(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -3154,7 +3154,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.labelVideo(request);
       }, expectedError);
       assert(
@@ -3191,7 +3191,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.labelVideo(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -3319,7 +3319,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.labelText(request);
       }, expectedError);
       assert(
@@ -3356,7 +3356,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.labelText(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -3486,7 +3486,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createInstruction(request);
       }, expectedError);
       assert(
@@ -3523,7 +3523,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createInstruction(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -3659,7 +3659,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDatasets(request);
       }, expectedError);
       assert(
@@ -3762,7 +3762,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3845,7 +3845,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.listDatasetsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.IDataset[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -3991,7 +3991,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDataItems(request);
       }, expectedError);
       assert(
@@ -4094,7 +4094,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -4177,7 +4177,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.listDataItemsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.IDataItem[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -4327,7 +4327,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listAnnotatedDatasets(request);
       }, expectedError);
       assert(
@@ -4435,7 +4435,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -4519,7 +4519,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.listAnnotatedDatasetsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -4665,7 +4665,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listExamples(request);
       }, expectedError);
       assert(
@@ -4768,7 +4768,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -4851,7 +4851,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.listExamplesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.IExample[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -5001,7 +5001,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listAnnotationSpecSets(request);
       }, expectedError);
       assert(
@@ -5109,7 +5109,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -5193,7 +5193,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.listAnnotationSpecSetsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -5341,7 +5341,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listInstructions(request);
       }, expectedError);
       assert(
@@ -5444,7 +5444,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -5527,7 +5527,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.listInstructionsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.IInstruction[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -5675,7 +5675,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchEvaluations(request);
       }, expectedError);
       assert(
@@ -5778,7 +5778,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -5861,7 +5861,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.searchEvaluationsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -6011,7 +6011,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchExampleComparisons(request);
       }, expectedError);
       assert(
@@ -6119,7 +6119,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -6203,7 +6203,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.searchExampleComparisonsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -6353,7 +6353,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listEvaluationJobs(request);
       }, expectedError);
       assert(
@@ -6460,7 +6460,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -6543,7 +6543,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const iterable = client.listEvaluationJobsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
