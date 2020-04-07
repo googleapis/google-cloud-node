@@ -1,5 +1,22 @@
 {
-  "updateTime": "2020-03-31T20:07:07.412385Z",
+  "updateTime": "2020-04-03T12:12:01.061224Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "3d5d228a58bdf875e6147b228db3159010c735ee",
+        "internalRef": "304500143"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "99820243d348191bc9c634f2b48ddf65096285ed"
+      }
+    }
+  ],
   "destinations": [
     {
       "client": {

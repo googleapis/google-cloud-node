@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
+    var $root = $protobuf.roots._google_cloud_speech_3_6_0_protos || ($protobuf.roots._google_cloud_speech_3_6_0_protos = {});
     
     $root.google = (function() {
     
