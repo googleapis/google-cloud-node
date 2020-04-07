@@ -297,7 +297,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getOccurrence(request);
       }, expectedError);
       assert(
@@ -411,7 +411,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteOccurrence(request);
       }, expectedError);
       assert(
@@ -525,7 +525,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createOccurrence(request);
       }, expectedError);
       assert(
@@ -641,7 +641,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchCreateOccurrences(request);
       }, expectedError);
       assert(
@@ -755,7 +755,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateOccurrence(request);
       }, expectedError);
       assert(
@@ -866,7 +866,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getOccurrenceNote(request);
       }, expectedError);
       assert(
@@ -974,7 +974,7 @@ describe('v1.GrafeasClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getNote = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getNote(request);
       }, expectedError);
       assert(
@@ -1088,7 +1088,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteNote(request);
       }, expectedError);
       assert(
@@ -1199,7 +1199,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createNote(request);
       }, expectedError);
       assert(
@@ -1313,7 +1313,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchCreateNotes(request);
       }, expectedError);
       assert(
@@ -1424,7 +1424,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateNote(request);
       }, expectedError);
       assert(
@@ -1542,7 +1542,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listOccurrences(request);
       }, expectedError);
       assert(
@@ -1629,7 +1629,7 @@ describe('v1.GrafeasClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1702,7 +1702,7 @@ describe('v1.GrafeasClient', () => {
         expectedError
       );
       const iterable = client.listOccurrencesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.grafeas.v1.IOccurrence[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1824,7 +1824,7 @@ describe('v1.GrafeasClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listNotes = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listNotes(request);
       }, expectedError);
       assert(
@@ -1909,7 +1909,7 @@ describe('v1.GrafeasClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1978,7 +1978,7 @@ describe('v1.GrafeasClient', () => {
         expectedError
       );
       const iterable = client.listNotesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.grafeas.v1.INote[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2106,7 +2106,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listNoteOccurrences(request);
       }, expectedError);
       assert(
@@ -2193,7 +2193,7 @@ describe('v1.GrafeasClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2266,7 +2266,7 @@ describe('v1.GrafeasClient', () => {
         expectedError
       );
       const iterable = client.listNoteOccurrencesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.grafeas.v1.IOccurrence[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
