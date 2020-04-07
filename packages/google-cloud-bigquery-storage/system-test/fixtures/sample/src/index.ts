@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BigQueryStorageClient} from '@google-cloud/bigquery-storage';
+import {BigQueryReadClient} from '@google-cloud/bigquery-storage';
 
 function main() {
-  new BigQueryStorageClient();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const bigQueryReadClient = new BigQueryReadClient();
 }
 
 main();

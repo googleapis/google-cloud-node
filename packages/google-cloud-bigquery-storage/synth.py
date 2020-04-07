@@ -23,7 +23,7 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 # Run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
 name = 'bigquerystorage'
-versions = ['v1beta1']
+versions = ['v1beta1', 'v1']
 for version in versions:
     library = gapic.typescript_library(
         name,
@@ -34,7 +34,7 @@ for version in versions:
             'package-name': f'@google-cloud/bigquery-storage',
         },
     )
-    s.copy(library, excludes=['package.json', 'README.md'])
+    s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts'])
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')

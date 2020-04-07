@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,11 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const {BigQueryReadClient} = require('@google-cloud/bigquery-storage');
-
-function main() {
-  const bigQueryReadClient = new BigQueryReadClient();
-}
-
-main();
+export {BigQueryReadClient} from './big_query_read_client';

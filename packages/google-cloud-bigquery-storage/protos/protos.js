@@ -66,6 +66,3895 @@
                      */
                     var storage = {};
     
+                    storage.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.cloud.bigquery.storage
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.ArrowSchema = (function() {
+    
+                            /**
+                             * Properties of an ArrowSchema.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IArrowSchema
+                             * @property {Uint8Array|null} [serializedSchema] ArrowSchema serializedSchema
+                             */
+    
+                            /**
+                             * Constructs a new ArrowSchema.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents an ArrowSchema.
+                             * @implements IArrowSchema
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IArrowSchema=} [properties] Properties to set
+                             */
+                            function ArrowSchema(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ArrowSchema serializedSchema.
+                             * @member {Uint8Array} serializedSchema
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @instance
+                             */
+                            ArrowSchema.prototype.serializedSchema = $util.newBuffer([]);
+    
+                            /**
+                             * Creates a new ArrowSchema instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowSchema=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowSchema} ArrowSchema instance
+                             */
+                            ArrowSchema.create = function create(properties) {
+                                return new ArrowSchema(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ArrowSchema message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ArrowSchema.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowSchema} message ArrowSchema message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ArrowSchema.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.serializedSchema != null && message.hasOwnProperty("serializedSchema"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.serializedSchema);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ArrowSchema message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ArrowSchema.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowSchema} message ArrowSchema message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ArrowSchema.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ArrowSchema message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowSchema} ArrowSchema
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ArrowSchema.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ArrowSchema();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.serializedSchema = reader.bytes();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ArrowSchema message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowSchema} ArrowSchema
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ArrowSchema.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ArrowSchema message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ArrowSchema.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.serializedSchema != null && message.hasOwnProperty("serializedSchema"))
+                                    if (!(message.serializedSchema && typeof message.serializedSchema.length === "number" || $util.isString(message.serializedSchema)))
+                                        return "serializedSchema: buffer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ArrowSchema message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowSchema} ArrowSchema
+                             */
+                            ArrowSchema.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.ArrowSchema)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.ArrowSchema();
+                                if (object.serializedSchema != null)
+                                    if (typeof object.serializedSchema === "string")
+                                        $util.base64.decode(object.serializedSchema, message.serializedSchema = $util.newBuffer($util.base64.length(object.serializedSchema)), 0);
+                                    else if (object.serializedSchema.length)
+                                        message.serializedSchema = object.serializedSchema;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ArrowSchema message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ArrowSchema} message ArrowSchema
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ArrowSchema.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    if (options.bytes === String)
+                                        object.serializedSchema = "";
+                                    else {
+                                        object.serializedSchema = [];
+                                        if (options.bytes !== Array)
+                                            object.serializedSchema = $util.newBuffer(object.serializedSchema);
+                                    }
+                                if (message.serializedSchema != null && message.hasOwnProperty("serializedSchema"))
+                                    object.serializedSchema = options.bytes === String ? $util.base64.encode(message.serializedSchema, 0, message.serializedSchema.length) : options.bytes === Array ? Array.prototype.slice.call(message.serializedSchema) : message.serializedSchema;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ArrowSchema to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ArrowSchema.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ArrowSchema;
+                        })();
+    
+                        v1.ArrowRecordBatch = (function() {
+    
+                            /**
+                             * Properties of an ArrowRecordBatch.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IArrowRecordBatch
+                             * @property {Uint8Array|null} [serializedRecordBatch] ArrowRecordBatch serializedRecordBatch
+                             * @property {number|Long|null} [rowCount] ArrowRecordBatch rowCount
+                             */
+    
+                            /**
+                             * Constructs a new ArrowRecordBatch.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents an ArrowRecordBatch.
+                             * @implements IArrowRecordBatch
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IArrowRecordBatch=} [properties] Properties to set
+                             */
+                            function ArrowRecordBatch(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ArrowRecordBatch serializedRecordBatch.
+                             * @member {Uint8Array} serializedRecordBatch
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @instance
+                             */
+                            ArrowRecordBatch.prototype.serializedRecordBatch = $util.newBuffer([]);
+    
+                            /**
+                             * ArrowRecordBatch rowCount.
+                             * @member {number|Long} rowCount
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @instance
+                             */
+                            ArrowRecordBatch.prototype.rowCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new ArrowRecordBatch instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowRecordBatch=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowRecordBatch} ArrowRecordBatch instance
+                             */
+                            ArrowRecordBatch.create = function create(properties) {
+                                return new ArrowRecordBatch(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ArrowRecordBatch message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ArrowRecordBatch.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowRecordBatch} message ArrowRecordBatch message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ArrowRecordBatch.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.serializedRecordBatch != null && message.hasOwnProperty("serializedRecordBatch"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.serializedRecordBatch);
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.rowCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ArrowRecordBatch message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ArrowRecordBatch.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowRecordBatch} message ArrowRecordBatch message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ArrowRecordBatch.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ArrowRecordBatch message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowRecordBatch} ArrowRecordBatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ArrowRecordBatch.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.serializedRecordBatch = reader.bytes();
+                                        break;
+                                    case 2:
+                                        message.rowCount = reader.int64();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ArrowRecordBatch message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowRecordBatch} ArrowRecordBatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ArrowRecordBatch.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ArrowRecordBatch message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ArrowRecordBatch.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.serializedRecordBatch != null && message.hasOwnProperty("serializedRecordBatch"))
+                                    if (!(message.serializedRecordBatch && typeof message.serializedRecordBatch.length === "number" || $util.isString(message.serializedRecordBatch)))
+                                        return "serializedRecordBatch: buffer expected";
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    if (!$util.isInteger(message.rowCount) && !(message.rowCount && $util.isInteger(message.rowCount.low) && $util.isInteger(message.rowCount.high)))
+                                        return "rowCount: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ArrowRecordBatch message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowRecordBatch} ArrowRecordBatch
+                             */
+                            ArrowRecordBatch.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch();
+                                if (object.serializedRecordBatch != null)
+                                    if (typeof object.serializedRecordBatch === "string")
+                                        $util.base64.decode(object.serializedRecordBatch, message.serializedRecordBatch = $util.newBuffer($util.base64.length(object.serializedRecordBatch)), 0);
+                                    else if (object.serializedRecordBatch.length)
+                                        message.serializedRecordBatch = object.serializedRecordBatch;
+                                if (object.rowCount != null)
+                                    if ($util.Long)
+                                        (message.rowCount = $util.Long.fromValue(object.rowCount)).unsigned = false;
+                                    else if (typeof object.rowCount === "string")
+                                        message.rowCount = parseInt(object.rowCount, 10);
+                                    else if (typeof object.rowCount === "number")
+                                        message.rowCount = object.rowCount;
+                                    else if (typeof object.rowCount === "object")
+                                        message.rowCount = new $util.LongBits(object.rowCount.low >>> 0, object.rowCount.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ArrowRecordBatch message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ArrowRecordBatch} message ArrowRecordBatch
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ArrowRecordBatch.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if (options.bytes === String)
+                                        object.serializedRecordBatch = "";
+                                    else {
+                                        object.serializedRecordBatch = [];
+                                        if (options.bytes !== Array)
+                                            object.serializedRecordBatch = $util.newBuffer(object.serializedRecordBatch);
+                                    }
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.rowCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.rowCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.serializedRecordBatch != null && message.hasOwnProperty("serializedRecordBatch"))
+                                    object.serializedRecordBatch = options.bytes === String ? $util.base64.encode(message.serializedRecordBatch, 0, message.serializedRecordBatch.length) : options.bytes === Array ? Array.prototype.slice.call(message.serializedRecordBatch) : message.serializedRecordBatch;
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    if (typeof message.rowCount === "number")
+                                        object.rowCount = options.longs === String ? String(message.rowCount) : message.rowCount;
+                                    else
+                                        object.rowCount = options.longs === String ? $util.Long.prototype.toString.call(message.rowCount) : options.longs === Number ? new $util.LongBits(message.rowCount.low >>> 0, message.rowCount.high >>> 0).toNumber() : message.rowCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ArrowRecordBatch to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ArrowRecordBatch.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ArrowRecordBatch;
+                        })();
+    
+                        v1.AvroSchema = (function() {
+    
+                            /**
+                             * Properties of an AvroSchema.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IAvroSchema
+                             * @property {string|null} [schema] AvroSchema schema
+                             */
+    
+                            /**
+                             * Constructs a new AvroSchema.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents an AvroSchema.
+                             * @implements IAvroSchema
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IAvroSchema=} [properties] Properties to set
+                             */
+                            function AvroSchema(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AvroSchema schema.
+                             * @member {string} schema
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @instance
+                             */
+                            AvroSchema.prototype.schema = "";
+    
+                            /**
+                             * Creates a new AvroSchema instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroSchema=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.AvroSchema} AvroSchema instance
+                             */
+                            AvroSchema.create = function create(properties) {
+                                return new AvroSchema(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AvroSchema message. Does not implicitly {@link google.cloud.bigquery.storage.v1.AvroSchema.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroSchema} message AvroSchema message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AvroSchema.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.schema != null && message.hasOwnProperty("schema"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.schema);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AvroSchema message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.AvroSchema.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroSchema} message AvroSchema message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AvroSchema.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AvroSchema message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.AvroSchema} AvroSchema
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AvroSchema.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.AvroSchema();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.schema = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AvroSchema message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.AvroSchema} AvroSchema
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AvroSchema.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AvroSchema message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AvroSchema.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.schema != null && message.hasOwnProperty("schema"))
+                                    if (!$util.isString(message.schema))
+                                        return "schema: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AvroSchema message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.AvroSchema} AvroSchema
+                             */
+                            AvroSchema.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.AvroSchema)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.AvroSchema();
+                                if (object.schema != null)
+                                    message.schema = String(object.schema);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AvroSchema message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.AvroSchema} message AvroSchema
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AvroSchema.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.schema = "";
+                                if (message.schema != null && message.hasOwnProperty("schema"))
+                                    object.schema = message.schema;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AvroSchema to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AvroSchema.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AvroSchema;
+                        })();
+    
+                        v1.AvroRows = (function() {
+    
+                            /**
+                             * Properties of an AvroRows.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IAvroRows
+                             * @property {Uint8Array|null} [serializedBinaryRows] AvroRows serializedBinaryRows
+                             * @property {number|Long|null} [rowCount] AvroRows rowCount
+                             */
+    
+                            /**
+                             * Constructs a new AvroRows.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents an AvroRows.
+                             * @implements IAvroRows
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IAvroRows=} [properties] Properties to set
+                             */
+                            function AvroRows(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AvroRows serializedBinaryRows.
+                             * @member {Uint8Array} serializedBinaryRows
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @instance
+                             */
+                            AvroRows.prototype.serializedBinaryRows = $util.newBuffer([]);
+    
+                            /**
+                             * AvroRows rowCount.
+                             * @member {number|Long} rowCount
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @instance
+                             */
+                            AvroRows.prototype.rowCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new AvroRows instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroRows=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.AvroRows} AvroRows instance
+                             */
+                            AvroRows.create = function create(properties) {
+                                return new AvroRows(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AvroRows message. Does not implicitly {@link google.cloud.bigquery.storage.v1.AvroRows.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroRows} message AvroRows message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AvroRows.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.serializedBinaryRows != null && message.hasOwnProperty("serializedBinaryRows"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.serializedBinaryRows);
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.rowCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AvroRows message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.AvroRows.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroRows} message AvroRows message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AvroRows.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AvroRows message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.AvroRows} AvroRows
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AvroRows.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.AvroRows();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.serializedBinaryRows = reader.bytes();
+                                        break;
+                                    case 2:
+                                        message.rowCount = reader.int64();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AvroRows message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.AvroRows} AvroRows
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AvroRows.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AvroRows message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AvroRows.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.serializedBinaryRows != null && message.hasOwnProperty("serializedBinaryRows"))
+                                    if (!(message.serializedBinaryRows && typeof message.serializedBinaryRows.length === "number" || $util.isString(message.serializedBinaryRows)))
+                                        return "serializedBinaryRows: buffer expected";
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    if (!$util.isInteger(message.rowCount) && !(message.rowCount && $util.isInteger(message.rowCount.low) && $util.isInteger(message.rowCount.high)))
+                                        return "rowCount: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AvroRows message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.AvroRows} AvroRows
+                             */
+                            AvroRows.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.AvroRows)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.AvroRows();
+                                if (object.serializedBinaryRows != null)
+                                    if (typeof object.serializedBinaryRows === "string")
+                                        $util.base64.decode(object.serializedBinaryRows, message.serializedBinaryRows = $util.newBuffer($util.base64.length(object.serializedBinaryRows)), 0);
+                                    else if (object.serializedBinaryRows.length)
+                                        message.serializedBinaryRows = object.serializedBinaryRows;
+                                if (object.rowCount != null)
+                                    if ($util.Long)
+                                        (message.rowCount = $util.Long.fromValue(object.rowCount)).unsigned = false;
+                                    else if (typeof object.rowCount === "string")
+                                        message.rowCount = parseInt(object.rowCount, 10);
+                                    else if (typeof object.rowCount === "number")
+                                        message.rowCount = object.rowCount;
+                                    else if (typeof object.rowCount === "object")
+                                        message.rowCount = new $util.LongBits(object.rowCount.low >>> 0, object.rowCount.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AvroRows message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.AvroRows} message AvroRows
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AvroRows.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if (options.bytes === String)
+                                        object.serializedBinaryRows = "";
+                                    else {
+                                        object.serializedBinaryRows = [];
+                                        if (options.bytes !== Array)
+                                            object.serializedBinaryRows = $util.newBuffer(object.serializedBinaryRows);
+                                    }
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.rowCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.rowCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.serializedBinaryRows != null && message.hasOwnProperty("serializedBinaryRows"))
+                                    object.serializedBinaryRows = options.bytes === String ? $util.base64.encode(message.serializedBinaryRows, 0, message.serializedBinaryRows.length) : options.bytes === Array ? Array.prototype.slice.call(message.serializedBinaryRows) : message.serializedBinaryRows;
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    if (typeof message.rowCount === "number")
+                                        object.rowCount = options.longs === String ? String(message.rowCount) : message.rowCount;
+                                    else
+                                        object.rowCount = options.longs === String ? $util.Long.prototype.toString.call(message.rowCount) : options.longs === Number ? new $util.LongBits(message.rowCount.low >>> 0, message.rowCount.high >>> 0).toNumber() : message.rowCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AvroRows to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AvroRows.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AvroRows;
+                        })();
+    
+                        v1.BigQueryRead = (function() {
+    
+                            /**
+                             * Constructs a new BigQueryRead service.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a BigQueryRead
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function BigQueryRead(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (BigQueryRead.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = BigQueryRead;
+    
+                            /**
+                             * Creates new BigQueryRead service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {BigQueryRead} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            BigQueryRead.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead#createReadSession}.
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @typedef CreateReadSessionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.storage.v1.ReadSession} [response] ReadSession
+                             */
+    
+                            /**
+                             * Calls CreateReadSession.
+                             * @function createReadSession
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @instance
+                             * @param {google.cloud.bigquery.storage.v1.ICreateReadSessionRequest} request CreateReadSessionRequest message or plain object
+                             * @param {google.cloud.bigquery.storage.v1.BigQueryRead.CreateReadSessionCallback} callback Node-style callback called with the error, if any, and ReadSession
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(BigQueryRead.prototype.createReadSession = function createReadSession(request, callback) {
+                                return this.rpcCall(createReadSession, $root.google.cloud.bigquery.storage.v1.CreateReadSessionRequest, $root.google.cloud.bigquery.storage.v1.ReadSession, request, callback);
+                            }, "name", { value: "CreateReadSession" });
+    
+                            /**
+                             * Calls CreateReadSession.
+                             * @function createReadSession
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @instance
+                             * @param {google.cloud.bigquery.storage.v1.ICreateReadSessionRequest} request CreateReadSessionRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.storage.v1.ReadSession>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead#readRows}.
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @typedef ReadRowsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.storage.v1.ReadRowsResponse} [response] ReadRowsResponse
+                             */
+    
+                            /**
+                             * Calls ReadRows.
+                             * @function readRows
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @instance
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsRequest} request ReadRowsRequest message or plain object
+                             * @param {google.cloud.bigquery.storage.v1.BigQueryRead.ReadRowsCallback} callback Node-style callback called with the error, if any, and ReadRowsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(BigQueryRead.prototype.readRows = function readRows(request, callback) {
+                                return this.rpcCall(readRows, $root.google.cloud.bigquery.storage.v1.ReadRowsRequest, $root.google.cloud.bigquery.storage.v1.ReadRowsResponse, request, callback);
+                            }, "name", { value: "ReadRows" });
+    
+                            /**
+                             * Calls ReadRows.
+                             * @function readRows
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @instance
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsRequest} request ReadRowsRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.storage.v1.ReadRowsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead#splitReadStream}.
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @typedef SplitReadStreamCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.storage.v1.SplitReadStreamResponse} [response] SplitReadStreamResponse
+                             */
+    
+                            /**
+                             * Calls SplitReadStream.
+                             * @function splitReadStream
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @instance
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamRequest} request SplitReadStreamRequest message or plain object
+                             * @param {google.cloud.bigquery.storage.v1.BigQueryRead.SplitReadStreamCallback} callback Node-style callback called with the error, if any, and SplitReadStreamResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(BigQueryRead.prototype.splitReadStream = function splitReadStream(request, callback) {
+                                return this.rpcCall(splitReadStream, $root.google.cloud.bigquery.storage.v1.SplitReadStreamRequest, $root.google.cloud.bigquery.storage.v1.SplitReadStreamResponse, request, callback);
+                            }, "name", { value: "SplitReadStream" });
+    
+                            /**
+                             * Calls SplitReadStream.
+                             * @function splitReadStream
+                             * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
+                             * @instance
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamRequest} request SplitReadStreamRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.storage.v1.SplitReadStreamResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return BigQueryRead;
+                        })();
+    
+                        v1.CreateReadSessionRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateReadSessionRequest.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface ICreateReadSessionRequest
+                             * @property {string|null} [parent] CreateReadSessionRequest parent
+                             * @property {google.cloud.bigquery.storage.v1.IReadSession|null} [readSession] CreateReadSessionRequest readSession
+                             * @property {number|null} [maxStreamCount] CreateReadSessionRequest maxStreamCount
+                             */
+    
+                            /**
+                             * Constructs a new CreateReadSessionRequest.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a CreateReadSessionRequest.
+                             * @implements ICreateReadSessionRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.ICreateReadSessionRequest=} [properties] Properties to set
+                             */
+                            function CreateReadSessionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateReadSessionRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @instance
+                             */
+                            CreateReadSessionRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateReadSessionRequest readSession.
+                             * @member {google.cloud.bigquery.storage.v1.IReadSession|null|undefined} readSession
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @instance
+                             */
+                            CreateReadSessionRequest.prototype.readSession = null;
+    
+                            /**
+                             * CreateReadSessionRequest maxStreamCount.
+                             * @member {number} maxStreamCount
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @instance
+                             */
+                            CreateReadSessionRequest.prototype.maxStreamCount = 0;
+    
+                            /**
+                             * Creates a new CreateReadSessionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ICreateReadSessionRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.CreateReadSessionRequest} CreateReadSessionRequest instance
+                             */
+                            CreateReadSessionRequest.create = function create(properties) {
+                                return new CreateReadSessionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateReadSessionRequest message. Does not implicitly {@link google.cloud.bigquery.storage.v1.CreateReadSessionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ICreateReadSessionRequest} message CreateReadSessionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateReadSessionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.readSession != null && message.hasOwnProperty("readSession"))
+                                    $root.google.cloud.bigquery.storage.v1.ReadSession.encode(message.readSession, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.maxStreamCount != null && message.hasOwnProperty("maxStreamCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxStreamCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateReadSessionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.CreateReadSessionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ICreateReadSessionRequest} message CreateReadSessionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateReadSessionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateReadSessionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.CreateReadSessionRequest} CreateReadSessionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateReadSessionRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.CreateReadSessionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.parent = reader.string();
+                                        break;
+                                    case 2:
+                                        message.readSession = $root.google.cloud.bigquery.storage.v1.ReadSession.decode(reader, reader.uint32());
+                                        break;
+                                    case 3:
+                                        message.maxStreamCount = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateReadSessionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.CreateReadSessionRequest} CreateReadSessionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateReadSessionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateReadSessionRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateReadSessionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.readSession != null && message.hasOwnProperty("readSession")) {
+                                    var error = $root.google.cloud.bigquery.storage.v1.ReadSession.verify(message.readSession);
+                                    if (error)
+                                        return "readSession." + error;
+                                }
+                                if (message.maxStreamCount != null && message.hasOwnProperty("maxStreamCount"))
+                                    if (!$util.isInteger(message.maxStreamCount))
+                                        return "maxStreamCount: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateReadSessionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.CreateReadSessionRequest} CreateReadSessionRequest
+                             */
+                            CreateReadSessionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.CreateReadSessionRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.CreateReadSessionRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.readSession != null) {
+                                    if (typeof object.readSession !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.CreateReadSessionRequest.readSession: object expected");
+                                    message.readSession = $root.google.cloud.bigquery.storage.v1.ReadSession.fromObject(object.readSession);
+                                }
+                                if (object.maxStreamCount != null)
+                                    message.maxStreamCount = object.maxStreamCount | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateReadSessionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.CreateReadSessionRequest} message CreateReadSessionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateReadSessionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.readSession = null;
+                                    object.maxStreamCount = 0;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.readSession != null && message.hasOwnProperty("readSession"))
+                                    object.readSession = $root.google.cloud.bigquery.storage.v1.ReadSession.toObject(message.readSession, options);
+                                if (message.maxStreamCount != null && message.hasOwnProperty("maxStreamCount"))
+                                    object.maxStreamCount = message.maxStreamCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateReadSessionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateReadSessionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return CreateReadSessionRequest;
+                        })();
+    
+                        v1.ReadRowsRequest = (function() {
+    
+                            /**
+                             * Properties of a ReadRowsRequest.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IReadRowsRequest
+                             * @property {string|null} [readStream] ReadRowsRequest readStream
+                             * @property {number|Long|null} [offset] ReadRowsRequest offset
+                             */
+    
+                            /**
+                             * Constructs a new ReadRowsRequest.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a ReadRowsRequest.
+                             * @implements IReadRowsRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsRequest=} [properties] Properties to set
+                             */
+                            function ReadRowsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReadRowsRequest readStream.
+                             * @member {string} readStream
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @instance
+                             */
+                            ReadRowsRequest.prototype.readStream = "";
+    
+                            /**
+                             * ReadRowsRequest offset.
+                             * @member {number|Long} offset
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @instance
+                             */
+                            ReadRowsRequest.prototype.offset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new ReadRowsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.ReadRowsRequest} ReadRowsRequest instance
+                             */
+                            ReadRowsRequest.create = function create(properties) {
+                                return new ReadRowsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReadRowsRequest message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadRowsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsRequest} message ReadRowsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadRowsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.readStream != null && message.hasOwnProperty("readStream"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.readStream);
+                                if (message.offset != null && message.hasOwnProperty("offset"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.offset);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReadRowsRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadRowsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsRequest} message ReadRowsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReadRowsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.ReadRowsRequest} ReadRowsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadRowsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ReadRowsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.readStream = reader.string();
+                                        break;
+                                    case 2:
+                                        message.offset = reader.int64();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReadRowsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.ReadRowsRequest} ReadRowsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadRowsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReadRowsRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReadRowsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.readStream != null && message.hasOwnProperty("readStream"))
+                                    if (!$util.isString(message.readStream))
+                                        return "readStream: string expected";
+                                if (message.offset != null && message.hasOwnProperty("offset"))
+                                    if (!$util.isInteger(message.offset) && !(message.offset && $util.isInteger(message.offset.low) && $util.isInteger(message.offset.high)))
+                                        return "offset: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReadRowsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.ReadRowsRequest} ReadRowsRequest
+                             */
+                            ReadRowsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.ReadRowsRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.ReadRowsRequest();
+                                if (object.readStream != null)
+                                    message.readStream = String(object.readStream);
+                                if (object.offset != null)
+                                    if ($util.Long)
+                                        (message.offset = $util.Long.fromValue(object.offset)).unsigned = false;
+                                    else if (typeof object.offset === "string")
+                                        message.offset = parseInt(object.offset, 10);
+                                    else if (typeof object.offset === "number")
+                                        message.offset = object.offset;
+                                    else if (typeof object.offset === "object")
+                                        message.offset = new $util.LongBits(object.offset.low >>> 0, object.offset.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReadRowsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ReadRowsRequest} message ReadRowsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReadRowsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.readStream = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.offset = options.longs === String ? "0" : 0;
+                                }
+                                if (message.readStream != null && message.hasOwnProperty("readStream"))
+                                    object.readStream = message.readStream;
+                                if (message.offset != null && message.hasOwnProperty("offset"))
+                                    if (typeof message.offset === "number")
+                                        object.offset = options.longs === String ? String(message.offset) : message.offset;
+                                    else
+                                        object.offset = options.longs === String ? $util.Long.prototype.toString.call(message.offset) : options.longs === Number ? new $util.LongBits(message.offset.low >>> 0, message.offset.high >>> 0).toNumber() : message.offset;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReadRowsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReadRowsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ReadRowsRequest;
+                        })();
+    
+                        v1.ThrottleState = (function() {
+    
+                            /**
+                             * Properties of a ThrottleState.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IThrottleState
+                             * @property {number|null} [throttlePercent] ThrottleState throttlePercent
+                             */
+    
+                            /**
+                             * Constructs a new ThrottleState.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a ThrottleState.
+                             * @implements IThrottleState
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IThrottleState=} [properties] Properties to set
+                             */
+                            function ThrottleState(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ThrottleState throttlePercent.
+                             * @member {number} throttlePercent
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @instance
+                             */
+                            ThrottleState.prototype.throttlePercent = 0;
+    
+                            /**
+                             * Creates a new ThrottleState instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IThrottleState=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.ThrottleState} ThrottleState instance
+                             */
+                            ThrottleState.create = function create(properties) {
+                                return new ThrottleState(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ThrottleState message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ThrottleState.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IThrottleState} message ThrottleState message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThrottleState.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.throttlePercent != null && message.hasOwnProperty("throttlePercent"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.throttlePercent);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ThrottleState message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ThrottleState.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IThrottleState} message ThrottleState message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThrottleState.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ThrottleState message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.ThrottleState} ThrottleState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThrottleState.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ThrottleState();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.throttlePercent = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ThrottleState message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.ThrottleState} ThrottleState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThrottleState.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ThrottleState message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ThrottleState.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.throttlePercent != null && message.hasOwnProperty("throttlePercent"))
+                                    if (!$util.isInteger(message.throttlePercent))
+                                        return "throttlePercent: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ThrottleState message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.ThrottleState} ThrottleState
+                             */
+                            ThrottleState.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.ThrottleState)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.ThrottleState();
+                                if (object.throttlePercent != null)
+                                    message.throttlePercent = object.throttlePercent | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ThrottleState message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ThrottleState} message ThrottleState
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ThrottleState.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.throttlePercent = 0;
+                                if (message.throttlePercent != null && message.hasOwnProperty("throttlePercent"))
+                                    object.throttlePercent = message.throttlePercent;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ThrottleState to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ThrottleState.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ThrottleState;
+                        })();
+    
+                        v1.StreamStats = (function() {
+    
+                            /**
+                             * Properties of a StreamStats.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IStreamStats
+                             * @property {google.cloud.bigquery.storage.v1.StreamStats.IProgress|null} [progress] StreamStats progress
+                             */
+    
+                            /**
+                             * Constructs a new StreamStats.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a StreamStats.
+                             * @implements IStreamStats
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IStreamStats=} [properties] Properties to set
+                             */
+                            function StreamStats(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StreamStats progress.
+                             * @member {google.cloud.bigquery.storage.v1.StreamStats.IProgress|null|undefined} progress
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @instance
+                             */
+                            StreamStats.prototype.progress = null;
+    
+                            /**
+                             * Creates a new StreamStats instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IStreamStats=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.StreamStats} StreamStats instance
+                             */
+                            StreamStats.create = function create(properties) {
+                                return new StreamStats(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StreamStats message. Does not implicitly {@link google.cloud.bigquery.storage.v1.StreamStats.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IStreamStats} message StreamStats message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StreamStats.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.progress != null && message.hasOwnProperty("progress"))
+                                    $root.google.cloud.bigquery.storage.v1.StreamStats.Progress.encode(message.progress, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StreamStats message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.StreamStats.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IStreamStats} message StreamStats message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StreamStats.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StreamStats message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.StreamStats} StreamStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StreamStats.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.StreamStats();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2:
+                                        message.progress = $root.google.cloud.bigquery.storage.v1.StreamStats.Progress.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StreamStats message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.StreamStats} StreamStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StreamStats.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StreamStats message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StreamStats.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.progress != null && message.hasOwnProperty("progress")) {
+                                    var error = $root.google.cloud.bigquery.storage.v1.StreamStats.Progress.verify(message.progress);
+                                    if (error)
+                                        return "progress." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StreamStats message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.StreamStats} StreamStats
+                             */
+                            StreamStats.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.StreamStats)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.StreamStats();
+                                if (object.progress != null) {
+                                    if (typeof object.progress !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.StreamStats.progress: object expected");
+                                    message.progress = $root.google.cloud.bigquery.storage.v1.StreamStats.Progress.fromObject(object.progress);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StreamStats message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.StreamStats} message StreamStats
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StreamStats.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.progress = null;
+                                if (message.progress != null && message.hasOwnProperty("progress"))
+                                    object.progress = $root.google.cloud.bigquery.storage.v1.StreamStats.Progress.toObject(message.progress, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StreamStats to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StreamStats.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            StreamStats.Progress = (function() {
+    
+                                /**
+                                 * Properties of a Progress.
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                                 * @interface IProgress
+                                 * @property {number|null} [atResponseStart] Progress atResponseStart
+                                 * @property {number|null} [atResponseEnd] Progress atResponseEnd
+                                 */
+    
+                                /**
+                                 * Constructs a new Progress.
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                                 * @classdesc Represents a Progress.
+                                 * @implements IProgress
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.storage.v1.StreamStats.IProgress=} [properties] Properties to set
+                                 */
+                                function Progress(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Progress atResponseStart.
+                                 * @member {number} atResponseStart
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @instance
+                                 */
+                                Progress.prototype.atResponseStart = 0;
+    
+                                /**
+                                 * Progress atResponseEnd.
+                                 * @member {number} atResponseEnd
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @instance
+                                 */
+                                Progress.prototype.atResponseEnd = 0;
+    
+                                /**
+                                 * Creates a new Progress instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.StreamStats.IProgress=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.storage.v1.StreamStats.Progress} Progress instance
+                                 */
+                                Progress.create = function create(properties) {
+                                    return new Progress(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Progress message. Does not implicitly {@link google.cloud.bigquery.storage.v1.StreamStats.Progress.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.StreamStats.IProgress} message Progress message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Progress.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.atResponseStart != null && message.hasOwnProperty("atResponseStart"))
+                                        writer.uint32(/* id 1, wireType 1 =*/9).double(message.atResponseStart);
+                                    if (message.atResponseEnd != null && message.hasOwnProperty("atResponseEnd"))
+                                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.atResponseEnd);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Progress message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.StreamStats.Progress.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.StreamStats.IProgress} message Progress message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Progress.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Progress message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.storage.v1.StreamStats.Progress} Progress
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Progress.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.StreamStats.Progress();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.atResponseStart = reader.double();
+                                            break;
+                                        case 2:
+                                            message.atResponseEnd = reader.double();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Progress message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.storage.v1.StreamStats.Progress} Progress
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Progress.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Progress message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Progress.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.atResponseStart != null && message.hasOwnProperty("atResponseStart"))
+                                        if (typeof message.atResponseStart !== "number")
+                                            return "atResponseStart: number expected";
+                                    if (message.atResponseEnd != null && message.hasOwnProperty("atResponseEnd"))
+                                        if (typeof message.atResponseEnd !== "number")
+                                            return "atResponseEnd: number expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Progress message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.storage.v1.StreamStats.Progress} Progress
+                                 */
+                                Progress.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.storage.v1.StreamStats.Progress)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.storage.v1.StreamStats.Progress();
+                                    if (object.atResponseStart != null)
+                                        message.atResponseStart = Number(object.atResponseStart);
+                                    if (object.atResponseEnd != null)
+                                        message.atResponseEnd = Number(object.atResponseEnd);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Progress message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.StreamStats.Progress} message Progress
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Progress.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.atResponseStart = 0;
+                                        object.atResponseEnd = 0;
+                                    }
+                                    if (message.atResponseStart != null && message.hasOwnProperty("atResponseStart"))
+                                        object.atResponseStart = options.json && !isFinite(message.atResponseStart) ? String(message.atResponseStart) : message.atResponseStart;
+                                    if (message.atResponseEnd != null && message.hasOwnProperty("atResponseEnd"))
+                                        object.atResponseEnd = options.json && !isFinite(message.atResponseEnd) ? String(message.atResponseEnd) : message.atResponseEnd;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Progress to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Progress.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return Progress;
+                            })();
+    
+                            return StreamStats;
+                        })();
+    
+                        v1.ReadRowsResponse = (function() {
+    
+                            /**
+                             * Properties of a ReadRowsResponse.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IReadRowsResponse
+                             * @property {google.cloud.bigquery.storage.v1.IAvroRows|null} [avroRows] ReadRowsResponse avroRows
+                             * @property {google.cloud.bigquery.storage.v1.IArrowRecordBatch|null} [arrowRecordBatch] ReadRowsResponse arrowRecordBatch
+                             * @property {number|Long|null} [rowCount] ReadRowsResponse rowCount
+                             * @property {google.cloud.bigquery.storage.v1.IStreamStats|null} [stats] ReadRowsResponse stats
+                             * @property {google.cloud.bigquery.storage.v1.IThrottleState|null} [throttleState] ReadRowsResponse throttleState
+                             */
+    
+                            /**
+                             * Constructs a new ReadRowsResponse.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a ReadRowsResponse.
+                             * @implements IReadRowsResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsResponse=} [properties] Properties to set
+                             */
+                            function ReadRowsResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReadRowsResponse avroRows.
+                             * @member {google.cloud.bigquery.storage.v1.IAvroRows|null|undefined} avroRows
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            ReadRowsResponse.prototype.avroRows = null;
+    
+                            /**
+                             * ReadRowsResponse arrowRecordBatch.
+                             * @member {google.cloud.bigquery.storage.v1.IArrowRecordBatch|null|undefined} arrowRecordBatch
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            ReadRowsResponse.prototype.arrowRecordBatch = null;
+    
+                            /**
+                             * ReadRowsResponse rowCount.
+                             * @member {number|Long} rowCount
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            ReadRowsResponse.prototype.rowCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * ReadRowsResponse stats.
+                             * @member {google.cloud.bigquery.storage.v1.IStreamStats|null|undefined} stats
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            ReadRowsResponse.prototype.stats = null;
+    
+                            /**
+                             * ReadRowsResponse throttleState.
+                             * @member {google.cloud.bigquery.storage.v1.IThrottleState|null|undefined} throttleState
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            ReadRowsResponse.prototype.throttleState = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ReadRowsResponse rows.
+                             * @member {"avroRows"|"arrowRecordBatch"|undefined} rows
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            Object.defineProperty(ReadRowsResponse.prototype, "rows", {
+                                get: $util.oneOfGetter($oneOfFields = ["avroRows", "arrowRecordBatch"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ReadRowsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.ReadRowsResponse} ReadRowsResponse instance
+                             */
+                            ReadRowsResponse.create = function create(properties) {
+                                return new ReadRowsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReadRowsResponse message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadRowsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsResponse} message ReadRowsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadRowsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.stats != null && message.hasOwnProperty("stats"))
+                                    $root.google.cloud.bigquery.storage.v1.StreamStats.encode(message.stats, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.avroRows != null && message.hasOwnProperty("avroRows"))
+                                    $root.google.cloud.bigquery.storage.v1.AvroRows.encode(message.avroRows, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.arrowRecordBatch != null && message.hasOwnProperty("arrowRecordBatch"))
+                                    $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch.encode(message.arrowRecordBatch, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.throttleState != null && message.hasOwnProperty("throttleState"))
+                                    $root.google.cloud.bigquery.storage.v1.ThrottleState.encode(message.throttleState, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int64(message.rowCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReadRowsResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadRowsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadRowsResponse} message ReadRowsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReadRowsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.ReadRowsResponse} ReadRowsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadRowsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ReadRowsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 3:
+                                        message.avroRows = $root.google.cloud.bigquery.storage.v1.AvroRows.decode(reader, reader.uint32());
+                                        break;
+                                    case 4:
+                                        message.arrowRecordBatch = $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch.decode(reader, reader.uint32());
+                                        break;
+                                    case 6:
+                                        message.rowCount = reader.int64();
+                                        break;
+                                    case 2:
+                                        message.stats = $root.google.cloud.bigquery.storage.v1.StreamStats.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.throttleState = $root.google.cloud.bigquery.storage.v1.ThrottleState.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReadRowsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.ReadRowsResponse} ReadRowsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadRowsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReadRowsResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReadRowsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.avroRows != null && message.hasOwnProperty("avroRows")) {
+                                    properties.rows = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.storage.v1.AvroRows.verify(message.avroRows);
+                                        if (error)
+                                            return "avroRows." + error;
+                                    }
+                                }
+                                if (message.arrowRecordBatch != null && message.hasOwnProperty("arrowRecordBatch")) {
+                                    if (properties.rows === 1)
+                                        return "rows: multiple values";
+                                    properties.rows = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch.verify(message.arrowRecordBatch);
+                                        if (error)
+                                            return "arrowRecordBatch." + error;
+                                    }
+                                }
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    if (!$util.isInteger(message.rowCount) && !(message.rowCount && $util.isInteger(message.rowCount.low) && $util.isInteger(message.rowCount.high)))
+                                        return "rowCount: integer|Long expected";
+                                if (message.stats != null && message.hasOwnProperty("stats")) {
+                                    var error = $root.google.cloud.bigquery.storage.v1.StreamStats.verify(message.stats);
+                                    if (error)
+                                        return "stats." + error;
+                                }
+                                if (message.throttleState != null && message.hasOwnProperty("throttleState")) {
+                                    var error = $root.google.cloud.bigquery.storage.v1.ThrottleState.verify(message.throttleState);
+                                    if (error)
+                                        return "throttleState." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReadRowsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.ReadRowsResponse} ReadRowsResponse
+                             */
+                            ReadRowsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.ReadRowsResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.ReadRowsResponse();
+                                if (object.avroRows != null) {
+                                    if (typeof object.avroRows !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadRowsResponse.avroRows: object expected");
+                                    message.avroRows = $root.google.cloud.bigquery.storage.v1.AvroRows.fromObject(object.avroRows);
+                                }
+                                if (object.arrowRecordBatch != null) {
+                                    if (typeof object.arrowRecordBatch !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadRowsResponse.arrowRecordBatch: object expected");
+                                    message.arrowRecordBatch = $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch.fromObject(object.arrowRecordBatch);
+                                }
+                                if (object.rowCount != null)
+                                    if ($util.Long)
+                                        (message.rowCount = $util.Long.fromValue(object.rowCount)).unsigned = false;
+                                    else if (typeof object.rowCount === "string")
+                                        message.rowCount = parseInt(object.rowCount, 10);
+                                    else if (typeof object.rowCount === "number")
+                                        message.rowCount = object.rowCount;
+                                    else if (typeof object.rowCount === "object")
+                                        message.rowCount = new $util.LongBits(object.rowCount.low >>> 0, object.rowCount.high >>> 0).toNumber();
+                                if (object.stats != null) {
+                                    if (typeof object.stats !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadRowsResponse.stats: object expected");
+                                    message.stats = $root.google.cloud.bigquery.storage.v1.StreamStats.fromObject(object.stats);
+                                }
+                                if (object.throttleState != null) {
+                                    if (typeof object.throttleState !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadRowsResponse.throttleState: object expected");
+                                    message.throttleState = $root.google.cloud.bigquery.storage.v1.ThrottleState.fromObject(object.throttleState);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReadRowsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ReadRowsResponse} message ReadRowsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReadRowsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.stats = null;
+                                    object.throttleState = null;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.rowCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.rowCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.stats != null && message.hasOwnProperty("stats"))
+                                    object.stats = $root.google.cloud.bigquery.storage.v1.StreamStats.toObject(message.stats, options);
+                                if (message.avroRows != null && message.hasOwnProperty("avroRows")) {
+                                    object.avroRows = $root.google.cloud.bigquery.storage.v1.AvroRows.toObject(message.avroRows, options);
+                                    if (options.oneofs)
+                                        object.rows = "avroRows";
+                                }
+                                if (message.arrowRecordBatch != null && message.hasOwnProperty("arrowRecordBatch")) {
+                                    object.arrowRecordBatch = $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch.toObject(message.arrowRecordBatch, options);
+                                    if (options.oneofs)
+                                        object.rows = "arrowRecordBatch";
+                                }
+                                if (message.throttleState != null && message.hasOwnProperty("throttleState"))
+                                    object.throttleState = $root.google.cloud.bigquery.storage.v1.ThrottleState.toObject(message.throttleState, options);
+                                if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                    if (typeof message.rowCount === "number")
+                                        object.rowCount = options.longs === String ? String(message.rowCount) : message.rowCount;
+                                    else
+                                        object.rowCount = options.longs === String ? $util.Long.prototype.toString.call(message.rowCount) : options.longs === Number ? new $util.LongBits(message.rowCount.low >>> 0, message.rowCount.high >>> 0).toNumber() : message.rowCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReadRowsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReadRowsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ReadRowsResponse;
+                        })();
+    
+                        v1.SplitReadStreamRequest = (function() {
+    
+                            /**
+                             * Properties of a SplitReadStreamRequest.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface ISplitReadStreamRequest
+                             * @property {string|null} [name] SplitReadStreamRequest name
+                             * @property {number|null} [fraction] SplitReadStreamRequest fraction
+                             */
+    
+                            /**
+                             * Constructs a new SplitReadStreamRequest.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a SplitReadStreamRequest.
+                             * @implements ISplitReadStreamRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamRequest=} [properties] Properties to set
+                             */
+                            function SplitReadStreamRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SplitReadStreamRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @instance
+                             */
+                            SplitReadStreamRequest.prototype.name = "";
+    
+                            /**
+                             * SplitReadStreamRequest fraction.
+                             * @member {number} fraction
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @instance
+                             */
+                            SplitReadStreamRequest.prototype.fraction = 0;
+    
+                            /**
+                             * Creates a new SplitReadStreamRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.SplitReadStreamRequest} SplitReadStreamRequest instance
+                             */
+                            SplitReadStreamRequest.create = function create(properties) {
+                                return new SplitReadStreamRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SplitReadStreamRequest message. Does not implicitly {@link google.cloud.bigquery.storage.v1.SplitReadStreamRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamRequest} message SplitReadStreamRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SplitReadStreamRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.fraction != null && message.hasOwnProperty("fraction"))
+                                    writer.uint32(/* id 2, wireType 1 =*/17).double(message.fraction);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SplitReadStreamRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.SplitReadStreamRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamRequest} message SplitReadStreamRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SplitReadStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SplitReadStreamRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.SplitReadStreamRequest} SplitReadStreamRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SplitReadStreamRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.SplitReadStreamRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.name = reader.string();
+                                        break;
+                                    case 2:
+                                        message.fraction = reader.double();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SplitReadStreamRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.SplitReadStreamRequest} SplitReadStreamRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SplitReadStreamRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SplitReadStreamRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SplitReadStreamRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.fraction != null && message.hasOwnProperty("fraction"))
+                                    if (typeof message.fraction !== "number")
+                                        return "fraction: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SplitReadStreamRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.SplitReadStreamRequest} SplitReadStreamRequest
+                             */
+                            SplitReadStreamRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.SplitReadStreamRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.SplitReadStreamRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.fraction != null)
+                                    message.fraction = Number(object.fraction);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SplitReadStreamRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.SplitReadStreamRequest} message SplitReadStreamRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SplitReadStreamRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.fraction = 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.fraction != null && message.hasOwnProperty("fraction"))
+                                    object.fraction = options.json && !isFinite(message.fraction) ? String(message.fraction) : message.fraction;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SplitReadStreamRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SplitReadStreamRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return SplitReadStreamRequest;
+                        })();
+    
+                        v1.SplitReadStreamResponse = (function() {
+    
+                            /**
+                             * Properties of a SplitReadStreamResponse.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface ISplitReadStreamResponse
+                             * @property {google.cloud.bigquery.storage.v1.IReadStream|null} [primaryStream] SplitReadStreamResponse primaryStream
+                             * @property {google.cloud.bigquery.storage.v1.IReadStream|null} [remainderStream] SplitReadStreamResponse remainderStream
+                             */
+    
+                            /**
+                             * Constructs a new SplitReadStreamResponse.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a SplitReadStreamResponse.
+                             * @implements ISplitReadStreamResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamResponse=} [properties] Properties to set
+                             */
+                            function SplitReadStreamResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SplitReadStreamResponse primaryStream.
+                             * @member {google.cloud.bigquery.storage.v1.IReadStream|null|undefined} primaryStream
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @instance
+                             */
+                            SplitReadStreamResponse.prototype.primaryStream = null;
+    
+                            /**
+                             * SplitReadStreamResponse remainderStream.
+                             * @member {google.cloud.bigquery.storage.v1.IReadStream|null|undefined} remainderStream
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @instance
+                             */
+                            SplitReadStreamResponse.prototype.remainderStream = null;
+    
+                            /**
+                             * Creates a new SplitReadStreamResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.SplitReadStreamResponse} SplitReadStreamResponse instance
+                             */
+                            SplitReadStreamResponse.create = function create(properties) {
+                                return new SplitReadStreamResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SplitReadStreamResponse message. Does not implicitly {@link google.cloud.bigquery.storage.v1.SplitReadStreamResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamResponse} message SplitReadStreamResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SplitReadStreamResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.primaryStream != null && message.hasOwnProperty("primaryStream"))
+                                    $root.google.cloud.bigquery.storage.v1.ReadStream.encode(message.primaryStream, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.remainderStream != null && message.hasOwnProperty("remainderStream"))
+                                    $root.google.cloud.bigquery.storage.v1.ReadStream.encode(message.remainderStream, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SplitReadStreamResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.SplitReadStreamResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ISplitReadStreamResponse} message SplitReadStreamResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SplitReadStreamResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SplitReadStreamResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.SplitReadStreamResponse} SplitReadStreamResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SplitReadStreamResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.SplitReadStreamResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.primaryStream = $root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.remainderStream = $root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SplitReadStreamResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.SplitReadStreamResponse} SplitReadStreamResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SplitReadStreamResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SplitReadStreamResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SplitReadStreamResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.primaryStream != null && message.hasOwnProperty("primaryStream")) {
+                                    var error = $root.google.cloud.bigquery.storage.v1.ReadStream.verify(message.primaryStream);
+                                    if (error)
+                                        return "primaryStream." + error;
+                                }
+                                if (message.remainderStream != null && message.hasOwnProperty("remainderStream")) {
+                                    var error = $root.google.cloud.bigquery.storage.v1.ReadStream.verify(message.remainderStream);
+                                    if (error)
+                                        return "remainderStream." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SplitReadStreamResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.SplitReadStreamResponse} SplitReadStreamResponse
+                             */
+                            SplitReadStreamResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.SplitReadStreamResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.SplitReadStreamResponse();
+                                if (object.primaryStream != null) {
+                                    if (typeof object.primaryStream !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.SplitReadStreamResponse.primaryStream: object expected");
+                                    message.primaryStream = $root.google.cloud.bigquery.storage.v1.ReadStream.fromObject(object.primaryStream);
+                                }
+                                if (object.remainderStream != null) {
+                                    if (typeof object.remainderStream !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.SplitReadStreamResponse.remainderStream: object expected");
+                                    message.remainderStream = $root.google.cloud.bigquery.storage.v1.ReadStream.fromObject(object.remainderStream);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SplitReadStreamResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.SplitReadStreamResponse} message SplitReadStreamResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SplitReadStreamResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.primaryStream = null;
+                                    object.remainderStream = null;
+                                }
+                                if (message.primaryStream != null && message.hasOwnProperty("primaryStream"))
+                                    object.primaryStream = $root.google.cloud.bigquery.storage.v1.ReadStream.toObject(message.primaryStream, options);
+                                if (message.remainderStream != null && message.hasOwnProperty("remainderStream"))
+                                    object.remainderStream = $root.google.cloud.bigquery.storage.v1.ReadStream.toObject(message.remainderStream, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SplitReadStreamResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SplitReadStreamResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return SplitReadStreamResponse;
+                        })();
+    
+                        /**
+                         * DataFormat enum.
+                         * @name google.cloud.bigquery.storage.v1.DataFormat
+                         * @enum {string}
+                         * @property {number} DATA_FORMAT_UNSPECIFIED=0 DATA_FORMAT_UNSPECIFIED value
+                         * @property {number} AVRO=1 AVRO value
+                         * @property {number} ARROW=2 ARROW value
+                         */
+                        v1.DataFormat = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DATA_FORMAT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AVRO"] = 1;
+                            values[valuesById[2] = "ARROW"] = 2;
+                            return values;
+                        })();
+    
+                        v1.ReadSession = (function() {
+    
+                            /**
+                             * Properties of a ReadSession.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IReadSession
+                             * @property {string|null} [name] ReadSession name
+                             * @property {google.protobuf.ITimestamp|null} [expireTime] ReadSession expireTime
+                             * @property {google.cloud.bigquery.storage.v1.DataFormat|null} [dataFormat] ReadSession dataFormat
+                             * @property {google.cloud.bigquery.storage.v1.IAvroSchema|null} [avroSchema] ReadSession avroSchema
+                             * @property {google.cloud.bigquery.storage.v1.IArrowSchema|null} [arrowSchema] ReadSession arrowSchema
+                             * @property {string|null} [table] ReadSession table
+                             * @property {google.cloud.bigquery.storage.v1.ReadSession.ITableModifiers|null} [tableModifiers] ReadSession tableModifiers
+                             * @property {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions|null} [readOptions] ReadSession readOptions
+                             * @property {Array.<google.cloud.bigquery.storage.v1.IReadStream>|null} [streams] ReadSession streams
+                             */
+    
+                            /**
+                             * Constructs a new ReadSession.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a ReadSession.
+                             * @implements IReadSession
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IReadSession=} [properties] Properties to set
+                             */
+                            function ReadSession(properties) {
+                                this.streams = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReadSession name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.name = "";
+    
+                            /**
+                             * ReadSession expireTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.expireTime = null;
+    
+                            /**
+                             * ReadSession dataFormat.
+                             * @member {google.cloud.bigquery.storage.v1.DataFormat} dataFormat
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.dataFormat = 0;
+    
+                            /**
+                             * ReadSession avroSchema.
+                             * @member {google.cloud.bigquery.storage.v1.IAvroSchema|null|undefined} avroSchema
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.avroSchema = null;
+    
+                            /**
+                             * ReadSession arrowSchema.
+                             * @member {google.cloud.bigquery.storage.v1.IArrowSchema|null|undefined} arrowSchema
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.arrowSchema = null;
+    
+                            /**
+                             * ReadSession table.
+                             * @member {string} table
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.table = "";
+    
+                            /**
+                             * ReadSession tableModifiers.
+                             * @member {google.cloud.bigquery.storage.v1.ReadSession.ITableModifiers|null|undefined} tableModifiers
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.tableModifiers = null;
+    
+                            /**
+                             * ReadSession readOptions.
+                             * @member {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions|null|undefined} readOptions
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.readOptions = null;
+    
+                            /**
+                             * ReadSession streams.
+                             * @member {Array.<google.cloud.bigquery.storage.v1.IReadStream>} streams
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.streams = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ReadSession schema.
+                             * @member {"avroSchema"|"arrowSchema"|undefined} schema
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            Object.defineProperty(ReadSession.prototype, "schema", {
+                                get: $util.oneOfGetter($oneOfFields = ["avroSchema", "arrowSchema"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ReadSession instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadSession=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.ReadSession} ReadSession instance
+                             */
+                            ReadSession.create = function create(properties) {
+                                return new ReadSession(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReadSession message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadSession.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadSession} message ReadSession message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadSession.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.dataFormat != null && message.hasOwnProperty("dataFormat"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.dataFormat);
+                                if (message.avroSchema != null && message.hasOwnProperty("avroSchema"))
+                                    $root.google.cloud.bigquery.storage.v1.AvroSchema.encode(message.avroSchema, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.arrowSchema != null && message.hasOwnProperty("arrowSchema"))
+                                    $root.google.cloud.bigquery.storage.v1.ArrowSchema.encode(message.arrowSchema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.table);
+                                if (message.tableModifiers != null && message.hasOwnProperty("tableModifiers"))
+                                    $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.encode(message.tableModifiers, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.readOptions != null && message.hasOwnProperty("readOptions"))
+                                    $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.encode(message.readOptions, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.streams != null && message.streams.length)
+                                    for (var i = 0; i < message.streams.length; ++i)
+                                        $root.google.cloud.bigquery.storage.v1.ReadStream.encode(message.streams[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReadSession message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadSession.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadSession} message ReadSession message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadSession.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReadSession message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.ReadSession} ReadSession
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadSession.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ReadSession();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.name = reader.string();
+                                        break;
+                                    case 2:
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    case 3:
+                                        message.dataFormat = reader.int32();
+                                        break;
+                                    case 4:
+                                        message.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.decode(reader, reader.uint32());
+                                        break;
+                                    case 6:
+                                        message.table = reader.string();
+                                        break;
+                                    case 7:
+                                        message.tableModifiers = $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.decode(reader, reader.uint32());
+                                        break;
+                                    case 8:
+                                        message.readOptions = $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.decode(reader, reader.uint32());
+                                        break;
+                                    case 10:
+                                        if (!(message.streams && message.streams.length))
+                                            message.streams = [];
+                                        message.streams.push($root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReadSession message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.ReadSession} ReadSession
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadSession.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReadSession message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReadSession.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                    if (error)
+                                        return "expireTime." + error;
+                                }
+                                if (message.dataFormat != null && message.hasOwnProperty("dataFormat"))
+                                    switch (message.dataFormat) {
+                                    default:
+                                        return "dataFormat: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.avroSchema != null && message.hasOwnProperty("avroSchema")) {
+                                    properties.schema = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.storage.v1.AvroSchema.verify(message.avroSchema);
+                                        if (error)
+                                            return "avroSchema." + error;
+                                    }
+                                }
+                                if (message.arrowSchema != null && message.hasOwnProperty("arrowSchema")) {
+                                    if (properties.schema === 1)
+                                        return "schema: multiple values";
+                                    properties.schema = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.storage.v1.ArrowSchema.verify(message.arrowSchema);
+                                        if (error)
+                                            return "arrowSchema." + error;
+                                    }
+                                }
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    if (!$util.isString(message.table))
+                                        return "table: string expected";
+                                if (message.tableModifiers != null && message.hasOwnProperty("tableModifiers")) {
+                                    var error = $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.verify(message.tableModifiers);
+                                    if (error)
+                                        return "tableModifiers." + error;
+                                }
+                                if (message.readOptions != null && message.hasOwnProperty("readOptions")) {
+                                    var error = $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.verify(message.readOptions);
+                                    if (error)
+                                        return "readOptions." + error;
+                                }
+                                if (message.streams != null && message.hasOwnProperty("streams")) {
+                                    if (!Array.isArray(message.streams))
+                                        return "streams: array expected";
+                                    for (var i = 0; i < message.streams.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.storage.v1.ReadStream.verify(message.streams[i]);
+                                        if (error)
+                                            return "streams." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReadSession message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.ReadSession} ReadSession
+                             */
+                            ReadSession.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.ReadSession)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.ReadSession();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.expireTime != null) {
+                                    if (typeof object.expireTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.expireTime: object expected");
+                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                                }
+                                switch (object.dataFormat) {
+                                case "DATA_FORMAT_UNSPECIFIED":
+                                case 0:
+                                    message.dataFormat = 0;
+                                    break;
+                                case "AVRO":
+                                case 1:
+                                    message.dataFormat = 1;
+                                    break;
+                                case "ARROW":
+                                case 2:
+                                    message.dataFormat = 2;
+                                    break;
+                                }
+                                if (object.avroSchema != null) {
+                                    if (typeof object.avroSchema !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.avroSchema: object expected");
+                                    message.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.fromObject(object.avroSchema);
+                                }
+                                if (object.arrowSchema != null) {
+                                    if (typeof object.arrowSchema !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.arrowSchema: object expected");
+                                    message.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.fromObject(object.arrowSchema);
+                                }
+                                if (object.table != null)
+                                    message.table = String(object.table);
+                                if (object.tableModifiers != null) {
+                                    if (typeof object.tableModifiers !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.tableModifiers: object expected");
+                                    message.tableModifiers = $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.fromObject(object.tableModifiers);
+                                }
+                                if (object.readOptions != null) {
+                                    if (typeof object.readOptions !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.readOptions: object expected");
+                                    message.readOptions = $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.fromObject(object.readOptions);
+                                }
+                                if (object.streams) {
+                                    if (!Array.isArray(object.streams))
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.streams: array expected");
+                                    message.streams = [];
+                                    for (var i = 0; i < object.streams.length; ++i) {
+                                        if (typeof object.streams[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.streams: object expected");
+                                        message.streams[i] = $root.google.cloud.bigquery.storage.v1.ReadStream.fromObject(object.streams[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReadSession message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ReadSession} message ReadSession
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReadSession.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.streams = [];
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.expireTime = null;
+                                    object.dataFormat = options.enums === String ? "DATA_FORMAT_UNSPECIFIED" : 0;
+                                    object.table = "";
+                                    object.tableModifiers = null;
+                                    object.readOptions = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                                if (message.dataFormat != null && message.hasOwnProperty("dataFormat"))
+                                    object.dataFormat = options.enums === String ? $root.google.cloud.bigquery.storage.v1.DataFormat[message.dataFormat] : message.dataFormat;
+                                if (message.avroSchema != null && message.hasOwnProperty("avroSchema")) {
+                                    object.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.toObject(message.avroSchema, options);
+                                    if (options.oneofs)
+                                        object.schema = "avroSchema";
+                                }
+                                if (message.arrowSchema != null && message.hasOwnProperty("arrowSchema")) {
+                                    object.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.toObject(message.arrowSchema, options);
+                                    if (options.oneofs)
+                                        object.schema = "arrowSchema";
+                                }
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    object.table = message.table;
+                                if (message.tableModifiers != null && message.hasOwnProperty("tableModifiers"))
+                                    object.tableModifiers = $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.toObject(message.tableModifiers, options);
+                                if (message.readOptions != null && message.hasOwnProperty("readOptions"))
+                                    object.readOptions = $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.toObject(message.readOptions, options);
+                                if (message.streams && message.streams.length) {
+                                    object.streams = [];
+                                    for (var j = 0; j < message.streams.length; ++j)
+                                        object.streams[j] = $root.google.cloud.bigquery.storage.v1.ReadStream.toObject(message.streams[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReadSession to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReadSession.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            ReadSession.TableModifiers = (function() {
+    
+                                /**
+                                 * Properties of a TableModifiers.
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                                 * @interface ITableModifiers
+                                 * @property {google.protobuf.ITimestamp|null} [snapshotTime] TableModifiers snapshotTime
+                                 */
+    
+                                /**
+                                 * Constructs a new TableModifiers.
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                                 * @classdesc Represents a TableModifiers.
+                                 * @implements ITableModifiers
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.ITableModifiers=} [properties] Properties to set
+                                 */
+                                function TableModifiers(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * TableModifiers snapshotTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} snapshotTime
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @instance
+                                 */
+                                TableModifiers.prototype.snapshotTime = null;
+    
+                                /**
+                                 * Creates a new TableModifiers instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.ITableModifiers=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.storage.v1.ReadSession.TableModifiers} TableModifiers instance
+                                 */
+                                TableModifiers.create = function create(properties) {
+                                    return new TableModifiers(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified TableModifiers message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.ITableModifiers} message TableModifiers message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TableModifiers.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.snapshotTime != null && message.hasOwnProperty("snapshotTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.snapshotTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified TableModifiers message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.ITableModifiers} message TableModifiers message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TableModifiers.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a TableModifiers message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.storage.v1.ReadSession.TableModifiers} TableModifiers
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TableModifiers.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.snapshotTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a TableModifiers message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.storage.v1.ReadSession.TableModifiers} TableModifiers
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TableModifiers.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a TableModifiers message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                TableModifiers.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.snapshotTime != null && message.hasOwnProperty("snapshotTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.snapshotTime);
+                                        if (error)
+                                            return "snapshotTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a TableModifiers message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.storage.v1.ReadSession.TableModifiers} TableModifiers
+                                 */
+                                TableModifiers.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers();
+                                    if (object.snapshotTime != null) {
+                                        if (typeof object.snapshotTime !== "object")
+                                            throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.snapshotTime: object expected");
+                                        message.snapshotTime = $root.google.protobuf.Timestamp.fromObject(object.snapshotTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a TableModifiers message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.TableModifiers} message TableModifiers
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                TableModifiers.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.snapshotTime = null;
+                                    if (message.snapshotTime != null && message.hasOwnProperty("snapshotTime"))
+                                        object.snapshotTime = $root.google.protobuf.Timestamp.toObject(message.snapshotTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this TableModifiers to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                TableModifiers.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return TableModifiers;
+                            })();
+    
+                            ReadSession.TableReadOptions = (function() {
+    
+                                /**
+                                 * Properties of a TableReadOptions.
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                                 * @interface ITableReadOptions
+                                 * @property {Array.<string>|null} [selectedFields] TableReadOptions selectedFields
+                                 * @property {string|null} [rowRestriction] TableReadOptions rowRestriction
+                                 */
+    
+                                /**
+                                 * Constructs a new TableReadOptions.
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                                 * @classdesc Represents a TableReadOptions.
+                                 * @implements ITableReadOptions
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions=} [properties] Properties to set
+                                 */
+                                function TableReadOptions(properties) {
+                                    this.selectedFields = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * TableReadOptions selectedFields.
+                                 * @member {Array.<string>} selectedFields
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @instance
+                                 */
+                                TableReadOptions.prototype.selectedFields = $util.emptyArray;
+    
+                                /**
+                                 * TableReadOptions rowRestriction.
+                                 * @member {string} rowRestriction
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @instance
+                                 */
+                                TableReadOptions.prototype.rowRestriction = "";
+    
+                                /**
+                                 * Creates a new TableReadOptions instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions} TableReadOptions instance
+                                 */
+                                TableReadOptions.create = function create(properties) {
+                                    return new TableReadOptions(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified TableReadOptions message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions} message TableReadOptions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TableReadOptions.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.selectedFields != null && message.selectedFields.length)
+                                        for (var i = 0; i < message.selectedFields.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.selectedFields[i]);
+                                    if (message.rowRestriction != null && message.hasOwnProperty("rowRestriction"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.rowRestriction);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified TableReadOptions message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions} message TableReadOptions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TableReadOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a TableReadOptions message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions} TableReadOptions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TableReadOptions.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            if (!(message.selectedFields && message.selectedFields.length))
+                                                message.selectedFields = [];
+                                            message.selectedFields.push(reader.string());
+                                            break;
+                                        case 2:
+                                            message.rowRestriction = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a TableReadOptions message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions} TableReadOptions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TableReadOptions.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a TableReadOptions message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                TableReadOptions.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.selectedFields != null && message.hasOwnProperty("selectedFields")) {
+                                        if (!Array.isArray(message.selectedFields))
+                                            return "selectedFields: array expected";
+                                        for (var i = 0; i < message.selectedFields.length; ++i)
+                                            if (!$util.isString(message.selectedFields[i]))
+                                                return "selectedFields: string[] expected";
+                                    }
+                                    if (message.rowRestriction != null && message.hasOwnProperty("rowRestriction"))
+                                        if (!$util.isString(message.rowRestriction))
+                                            return "rowRestriction: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a TableReadOptions message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions} TableReadOptions
+                                 */
+                                TableReadOptions.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions();
+                                    if (object.selectedFields) {
+                                        if (!Array.isArray(object.selectedFields))
+                                            throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.selectedFields: array expected");
+                                        message.selectedFields = [];
+                                        for (var i = 0; i < object.selectedFields.length; ++i)
+                                            message.selectedFields[i] = String(object.selectedFields[i]);
+                                    }
+                                    if (object.rowRestriction != null)
+                                        message.rowRestriction = String(object.rowRestriction);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a TableReadOptions message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions} message TableReadOptions
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                TableReadOptions.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.selectedFields = [];
+                                    if (options.defaults)
+                                        object.rowRestriction = "";
+                                    if (message.selectedFields && message.selectedFields.length) {
+                                        object.selectedFields = [];
+                                        for (var j = 0; j < message.selectedFields.length; ++j)
+                                            object.selectedFields[j] = message.selectedFields[j];
+                                    }
+                                    if (message.rowRestriction != null && message.hasOwnProperty("rowRestriction"))
+                                        object.rowRestriction = message.rowRestriction;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this TableReadOptions to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                TableReadOptions.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return TableReadOptions;
+                            })();
+    
+                            return ReadSession;
+                        })();
+    
+                        v1.ReadStream = (function() {
+    
+                            /**
+                             * Properties of a ReadStream.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IReadStream
+                             * @property {string|null} [name] ReadStream name
+                             */
+    
+                            /**
+                             * Constructs a new ReadStream.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents a ReadStream.
+                             * @implements IReadStream
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IReadStream=} [properties] Properties to set
+                             */
+                            function ReadStream(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReadStream name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @instance
+                             */
+                            ReadStream.prototype.name = "";
+    
+                            /**
+                             * Creates a new ReadStream instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadStream=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.ReadStream} ReadStream instance
+                             */
+                            ReadStream.create = function create(properties) {
+                                return new ReadStream(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReadStream message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadStream.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadStream} message ReadStream message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadStream.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReadStream message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ReadStream.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IReadStream} message ReadStream message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadStream.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReadStream message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.ReadStream} ReadStream
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadStream.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ReadStream();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.name = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReadStream message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.ReadStream} ReadStream
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadStream.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReadStream message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReadStream.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReadStream message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.ReadStream} ReadStream
+                             */
+                            ReadStream.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.ReadStream)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.ReadStream();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReadStream message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ReadStream} message ReadStream
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReadStream.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReadStream to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReadStream.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ReadStream;
+                        })();
+    
+                        return v1;
+                    })();
+    
                     storage.v1beta1 = (function() {
     
                         /**

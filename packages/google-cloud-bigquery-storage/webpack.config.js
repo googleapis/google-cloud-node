@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'BigQueryStorage',
-    filename: './big-query-storage.js',
+    library: 'BigQueryRead',
+    filename: './big-query-read.js',
   },
   node: {
     child_process: 'empty',

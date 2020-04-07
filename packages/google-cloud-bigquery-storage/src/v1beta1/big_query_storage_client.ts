@@ -807,9 +807,9 @@ export class BigQueryStorageClient {
    */
   readSessionPath(project: string, location: string, session: string) {
     return this.pathTemplates.readSessionPathTemplate.render({
-      project: project,
-      location: location,
-      session: session,
+      project,
+      location,
+      session,
     });
   }
 
@@ -859,9 +859,9 @@ export class BigQueryStorageClient {
    */
   streamPath(project: string, location: string, stream: string) {
     return this.pathTemplates.streamPathTemplate.render({
-      project: project,
-      location: location,
-      stream: stream,
+      project,
+      location,
+      stream,
     });
   }
 
