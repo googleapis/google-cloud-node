@@ -3,9 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    ".*github.com/googleapis/nodejs-memcache.*",
-    "https://googleapis.dev.*"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10

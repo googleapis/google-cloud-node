@@ -331,7 +331,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getInstance(request);
       }, expectedError);
       assert(
@@ -455,7 +455,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createInstance(request);
       }, expectedError);
       assert(
@@ -490,7 +490,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         expectedError
       );
       const [operation] = await client.createInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -617,7 +617,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateInstance(request);
       }, expectedError);
       assert(
@@ -653,7 +653,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         expectedError
       );
       const [operation] = await client.updateInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -777,7 +777,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateParameters(request);
       }, expectedError);
       assert(
@@ -812,7 +812,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         expectedError
       );
       const [operation] = await client.updateParameters(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -936,7 +936,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteInstance(request);
       }, expectedError);
       assert(
@@ -971,7 +971,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         expectedError
       );
       const [operation] = await client.deleteInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1095,7 +1095,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.applyParameters(request);
       }, expectedError);
       assert(
@@ -1130,7 +1130,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         expectedError
       );
       const [operation] = await client.applyParameters(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1260,7 +1260,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listInstances(request);
       }, expectedError);
       assert(
@@ -1359,7 +1359,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1438,7 +1438,7 @@ describe('v1beta2.CloudMemcacheClient', () => {
         expectedError
       );
       const iterable = client.listInstancesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.memcache.v1beta2.IInstance[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
