@@ -1,13 +1,13 @@
 {
-  "updateTime": "2020-04-02T11:24:18.140770Z",
+  "updateTime": "2020-04-03T11:34:20.894981Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "75047719f704d61f405cac6d7439637ab36c1232",
-        "internalRef": "304305096",
-        "log": "75047719f704d61f405cac6d7439637ab36c1232\nfix Dataproc: add missing `REQUIRED` annotation.\n\nPiperOrigin-RevId: 304305096\n\n7e1b880fd5d477176cf9b0bb9b137b9bea56e787\nAdd Ruby/PHP namespace options\n\nPiperOrigin-RevId: 304288402\n\naba342359b6743353195ca53f944fe71e6fb6cd4\nchore: add java assembly target for accesscontextmanager BUILD.bazel\n\nPiperOrigin-RevId: 304207684\n\n"
+        "sha": "3d5d228a58bdf875e6147b228db3159010c735ee",
+        "internalRef": "304500143",
+        "log": "3d5d228a58bdf875e6147b228db3159010c735ee\nEnable visibility on the GetSnapshot and GetTopicSnapshots methods\n\nPiperOrigin-RevId: 304500143\n\n1346f5c11a0376bc82c5c03259b304de52671518\nRefresh public client library for Cloud Monitoring.\nIncrease default ListTimeSeries deadline to 90s.\n\nPiperOrigin-RevId: 304467075\n\n4a6cfccb4a32cb28db7366295d90078c6af3112f\ndocs: Fix link in monitoring summary description.\n\nPiperOrigin-RevId: 304438717\n\n6e2ea9a4b63a264090f1bd4b5b25766a3f634f3a\nfix: add interface name overrides back to logging gapic config.\n\ncommitter: @hzyi-google\nPiperOrigin-RevId: 304438432\n\n01f3ccbaa66cf3ae4e3b9fd140b1ecfbe54a3ed0\nFix: Add package/namespace options for C#, Ruby and PHP in remaining protos.\n\nPiperOrigin-RevId: 304416658\n\nb89abbf12cd3c086abddcd79adb0a653349f960a\nchore(google/maps): Rename nox.py to noxfile.py\n\nupstream wip fix here: https://github.com/googleapis/gapic-generator/pull/3156\n\nPiperOrigin-RevId: 304411146\n\nbbf26d7f11fae7789b13959bf100983c496c9807\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 304409906\n\n"
       }
     },
     {
