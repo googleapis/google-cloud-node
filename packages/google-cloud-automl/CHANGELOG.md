@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.11.0...v2.0.0) (2020-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on npm.
+
+### Features
+
+* drop node8 support, support for async iterators ([#364](https://www.github.com/googleapis/nodejs-automl/issues/364)) ([156ff6f](https://www.github.com/googleapis/nodejs-automl/commit/156ff6f70880244a698d7a7ef7cac831281dd1f8))
+
 ## [1.11.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.10.1...v1.11.0) (2020-03-12)
 
 
