@@ -290,7 +290,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listGameServerClusters(request);
       }, expectedError);
       assert(
@@ -412,7 +412,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getGameServerCluster(request);
       }, expectedError);
       assert(
@@ -534,7 +534,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.previewCreateGameServerCluster(request);
       }, expectedError);
       assert(
@@ -656,7 +656,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.previewDeleteGameServerCluster(request);
       }, expectedError);
       assert(
@@ -781,7 +781,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.previewUpdateGameServerCluster(request);
       }, expectedError);
       assert(
@@ -911,7 +911,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createGameServerCluster(request);
       }, expectedError);
       assert(
@@ -948,7 +948,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createGameServerCluster(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1078,7 +1078,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteGameServerCluster(request);
       }, expectedError);
       assert(
@@ -1115,7 +1115,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteGameServerCluster(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1248,7 +1248,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateGameServerCluster(request);
       }, expectedError);
       assert(
@@ -1286,7 +1286,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         expectedError
       );
       const [operation] = await client.updateGameServerCluster(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(

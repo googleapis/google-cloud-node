@@ -268,7 +268,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listRealms(request);
       }, expectedError);
       assert(
@@ -379,7 +379,7 @@ describe('v1beta.RealmsServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getRealm = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getRealm(request);
       }, expectedError);
       assert(
@@ -498,7 +498,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.previewRealmUpdate(request);
       }, expectedError);
       assert(
@@ -620,7 +620,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createRealm(request);
       }, expectedError);
       assert(
@@ -655,7 +655,7 @@ describe('v1beta.RealmsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createRealm(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -777,7 +777,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteRealm(request);
       }, expectedError);
       assert(
@@ -812,7 +812,7 @@ describe('v1beta.RealmsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteRealm(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -937,7 +937,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateRealm(request);
       }, expectedError);
       assert(
@@ -973,7 +973,7 @@ describe('v1beta.RealmsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.updateRealm(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(

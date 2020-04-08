@@ -289,7 +289,7 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listGameServerConfigs(request);
       }, expectedError);
       assert(
@@ -411,7 +411,7 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getGameServerConfig(request);
       }, expectedError);
       assert(
@@ -541,7 +541,7 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createGameServerConfig(request);
       }, expectedError);
       assert(
@@ -578,7 +578,7 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createGameServerConfig(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -708,7 +708,7 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteGameServerConfig(request);
       }, expectedError);
       assert(
@@ -745,7 +745,7 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteGameServerConfig(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(

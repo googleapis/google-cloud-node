@@ -1,19 +1,21 @@
 {
-  "updateTime": "2020-04-03T11:41:38.050756Z",
+  "updateTime": "2020-04-07T12:40:41.496571Z",
   "sources": [
     {
       "git": {
         "name": "googleapis-private",
         "remote": "https://github.com/googleapis/googleapis-private.git",
-        "sha": "e6378caa596533251006a9eb318f3f9e71984f2b",
-        "internalRef": "301441701"
+        "sha": "ddac0ff9513bd89b53aa6895c65a7c3272626583",
+        "internalRef": "304945322",
+        "log": "ddac0ff9513bd89b53aa6895c65a7c3272626583\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 304945322\n\n"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "99820243d348191bc9c634f2b48ddf65096285ed"
+        "sha": "1df68ed6735ddce6797d0f83641a731c3c3f75b4",
+        "log": "1df68ed6735ddce6797d0f83641a731c3c3f75b4\nfix: apache license URL (#468)\n\n\nf4a59efa54808c4b958263de87bc666ce41e415f\nfeat: Add discogapic support for GAPICBazel generation (#459)\n\n* feat: Add discogapic support for GAPICBazel generation\n\n* reformat with black\n\n* Rename source repository variable\n\nCo-authored-by: Jeffrey Rennie <rennie@google.com>\n"
       }
     }
   ],

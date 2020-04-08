@@ -290,7 +290,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listGameServerDeployments(request);
       }, expectedError);
       assert(
@@ -412,7 +412,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getGameServerDeployment(request);
       }, expectedError);
       assert(
@@ -534,7 +534,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getGameServerDeploymentRollout(request);
       }, expectedError);
       assert(
@@ -661,7 +661,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.previewGameServerDeploymentRollout(request);
       }, expectedError);
       assert(
@@ -783,7 +783,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.fetchDeploymentState(request);
       }, expectedError);
       assert(
@@ -913,7 +913,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createGameServerDeployment(request);
       }, expectedError);
       assert(
@@ -950,7 +950,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createGameServerDeployment(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1080,7 +1080,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteGameServerDeployment(request);
       }, expectedError);
       assert(
@@ -1117,7 +1117,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteGameServerDeployment(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1250,7 +1250,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateGameServerDeployment(request);
       }, expectedError);
       assert(
@@ -1288,7 +1288,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.updateGameServerDeployment(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1423,7 +1423,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateGameServerDeploymentRollout(request);
       }, expectedError);
       assert(
@@ -1463,7 +1463,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const [operation] = await client.updateGameServerDeploymentRollout(
         request
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
