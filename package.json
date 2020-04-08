@@ -34,5 +34,8 @@
   },
   "devDependencies": {
     "semistandard": "^13.0.1"
+  },
+  "engines": {
+    "node": ">=10"
   }
 }
