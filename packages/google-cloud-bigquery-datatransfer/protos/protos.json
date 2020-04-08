@@ -16,6 +16,7 @@
                         "java_outer_classname": "TransferProto",
                         "java_package": "com.google.cloud.bigquery.datatransfer.v1",
                         "php_namespace": "Google\\Cloud\\BigQuery\\DataTransfer\\V1",
+                        "ruby_package": "Google::Cloud::Bigquery::DataTransfer::V1",
                         "objc_class_prefix": "GCBDT"
                       },
                       "nested": {
