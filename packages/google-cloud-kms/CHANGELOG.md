@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.6.3...v2.0.0) (2020-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+New feature: methods with pagination now support async iteration.
+* move to typescript code generation (#264)
+
+### Features
+
+* add support for Cloud EKM to the Cloud KMS service and resource protos ([#306](https://www.github.com/googleapis/nodejs-kms/issues/306)) ([f6e28c7](https://www.github.com/googleapis/nodejs-kms/commit/f6e28c788600d24e89ced41d834ec091600d1238))
+* deferred client initialization ([#286](https://www.github.com/googleapis/nodejs-kms/issues/286)) ([e116119](https://www.github.com/googleapis/nodejs-kms/commit/e11611913e553ac2581c528692174c6e4c0cb627))
+* drop node8 support, support for async iterators ([#300](https://www.github.com/googleapis/nodejs-kms/issues/300)) ([c2ca42e](https://www.github.com/googleapis/nodejs-kms/commit/c2ca42e06286910a94981c5bb2e3989b1f1de2a7))
+* move to typescript code generation ([#264](https://www.github.com/googleapis/nodejs-kms/issues/264)) ([ad02c1c](https://www.github.com/googleapis/nodejs-kms/commit/ad02c1c9978c9489314130a9fcee81d1d0244a0c))
+
+
+### Bug Fixes
+
+* export explicit version in protos.js ([#303](https://www.github.com/googleapis/nodejs-kms/issues/303)) ([90e1b52](https://www.github.com/googleapis/nodejs-kms/commit/90e1b52bd25265500c9c150e9f0c765bb250c309))
+
 ### [1.6.3](https://www.github.com/googleapis/nodejs-kms/compare/v1.6.2...v1.6.3) (2020-02-10)
 
 
