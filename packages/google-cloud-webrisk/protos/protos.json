@@ -14,7 +14,8 @@
                     "java_outer_classname": "WebRiskProto",
                     "java_package": "com.google.webrisk.v1",
                     "objc_class_prefix": "GCWR",
-                    "php_namespace": "Google\\Cloud\\WebRisk\\V1"
+                    "php_namespace": "Google\\Cloud\\WebRisk\\V1",
+                    "ruby_package": "Google::Cloud::WebRisk::V1"
                   },
                   "nested": {
                     "WebRiskService": {
@@ -355,7 +356,8 @@
                     "java_outer_classname": "WebRiskProto",
                     "java_package": "com.google.webrisk.v1beta1",
                     "objc_class_prefix": "GCWR",
-                    "php_namespace": "Google\\Cloud\\WebRisk\\V1beta1"
+                    "php_namespace": "Google\\Cloud\\WebRisk\\V1beta1",
+                    "ruby_package": "Google::Cloud::WebRisk::V1beta1"
                   },
                   "nested": {
                     "WebRiskServiceV1Beta1": {

@@ -233,7 +233,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.computeThreatListDiff(request);
       }, expectedError);
       assert(
@@ -329,7 +329,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchUris(request);
       }, expectedError);
       assert(
@@ -425,7 +425,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchHashes(request);
       }, expectedError);
       assert(
