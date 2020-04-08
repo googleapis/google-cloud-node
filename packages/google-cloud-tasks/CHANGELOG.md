@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.9.0...v2.0.0) (2020-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+New feature: methods with pagination now support async iteration.
+
+### Features
+
+* drop node8 support, support for async iterators ([#388](https://www.github.com/googleapis/nodejs-tasks/issues/388)) ([2b759e1](https://www.github.com/googleapis/nodejs-tasks/commit/2b759e17adf636464fa67fbd99fe87a65cac317f))
+
+
+### Bug Fixes
+
+* export explicit version in protos.js ([#393](https://www.github.com/googleapis/nodejs-tasks/issues/393)) ([5b8c80d](https://www.github.com/googleapis/nodejs-tasks/commit/5b8c80d32f7c081887da203b833a2ee38ae69c38))
+
 ## [1.9.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.8.0...v1.9.0) (2020-03-06)
 
 
