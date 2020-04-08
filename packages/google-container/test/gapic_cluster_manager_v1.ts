@@ -299,7 +299,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listClusters(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getCluster(request);
       }, expectedError);
       assert(
@@ -527,7 +527,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createCluster(request);
       }, expectedError);
       assert(
@@ -641,7 +641,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateCluster(request);
       }, expectedError);
       assert(
@@ -755,7 +755,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateNodePool(request);
       }, expectedError);
       assert(
@@ -871,7 +871,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setNodePoolAutoscaling(request);
       }, expectedError);
       assert(
@@ -985,7 +985,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setLoggingService(request);
       }, expectedError);
       assert(
@@ -1101,7 +1101,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setMonitoringService(request);
       }, expectedError);
       assert(
@@ -1215,7 +1215,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setAddonsConfig(request);
       }, expectedError);
       assert(
@@ -1329,7 +1329,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setLocations(request);
       }, expectedError);
       assert(
@@ -1443,7 +1443,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateMaster(request);
       }, expectedError);
       assert(
@@ -1557,7 +1557,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setMasterAuth(request);
       }, expectedError);
       assert(
@@ -1671,7 +1671,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteCluster(request);
       }, expectedError);
       assert(
@@ -1785,7 +1785,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listOperations(request);
       }, expectedError);
       assert(
@@ -1899,7 +1899,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getOperation(request);
       }, expectedError);
       assert(
@@ -2013,7 +2013,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.cancelOperation(request);
       }, expectedError);
       assert(
@@ -2127,7 +2127,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getServerConfig(request);
       }, expectedError);
       assert(
@@ -2241,7 +2241,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listNodePools(request);
       }, expectedError);
       assert(
@@ -2355,7 +2355,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getNodePool(request);
       }, expectedError);
       assert(
@@ -2469,7 +2469,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createNodePool(request);
       }, expectedError);
       assert(
@@ -2583,7 +2583,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteNodePool(request);
       }, expectedError);
       assert(
@@ -2699,7 +2699,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.rollbackNodePoolUpgrade(request);
       }, expectedError);
       assert(
@@ -2815,7 +2815,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setNodePoolManagement(request);
       }, expectedError);
       assert(
@@ -2926,7 +2926,7 @@ describe('v1.ClusterManagerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setLabels(request);
       }, expectedError);
       assert(
@@ -3040,7 +3040,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setLegacyAbac(request);
       }, expectedError);
       assert(
@@ -3154,7 +3154,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.startIPRotation(request);
       }, expectedError);
       assert(
@@ -3270,7 +3270,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.completeIPRotation(request);
       }, expectedError);
       assert(
@@ -3384,7 +3384,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setNodePoolSize(request);
       }, expectedError);
       assert(
@@ -3498,7 +3498,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setNetworkPolicy(request);
       }, expectedError);
       assert(
@@ -3614,7 +3614,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setMaintenancePolicy(request);
       }, expectedError);
       assert(
@@ -3746,7 +3746,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listUsableSubnetworks(request);
       }, expectedError);
       assert(
@@ -3846,7 +3846,7 @@ describe('v1.ClusterManagerClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3926,7 +3926,7 @@ describe('v1.ClusterManagerClient', () => {
         expectedError
       );
       const iterable = client.listUsableSubnetworksAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.container.v1.IUsableSubnetwork[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
