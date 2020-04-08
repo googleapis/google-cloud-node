@@ -299,7 +299,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createTaxonomy(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteTaxonomy(request);
       }, expectedError);
       assert(
@@ -530,7 +530,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateTaxonomy(request);
       }, expectedError);
       assert(
@@ -644,7 +644,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getTaxonomy(request);
       }, expectedError);
       assert(
@@ -758,7 +758,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createPolicyTag(request);
       }, expectedError);
       assert(
@@ -872,7 +872,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deletePolicyTag(request);
       }, expectedError);
       assert(
@@ -989,7 +989,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updatePolicyTag(request);
       }, expectedError);
       assert(
@@ -1103,7 +1103,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getPolicyTag(request);
       }, expectedError);
       assert(
@@ -1217,7 +1217,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIamPolicy(request);
       }, expectedError);
       assert(
@@ -1331,7 +1331,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setIamPolicy(request);
       }, expectedError);
       assert(
@@ -1447,7 +1447,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.testIamPermissions(request);
       }, expectedError);
       assert(
@@ -1577,7 +1577,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listTaxonomies(request);
       }, expectedError);
       assert(
@@ -1676,7 +1676,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1755,7 +1755,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         expectedError
       );
       const iterable = client.listTaxonomiesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datacatalog.v1beta1.ITaxonomy[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1895,7 +1895,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listPolicyTags(request);
       }, expectedError);
       assert(
@@ -1994,7 +1994,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2073,7 +2073,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         expectedError
       );
       const iterable = client.listPolicyTagsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.datacatalog.v1beta1.IPolicyTag[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
