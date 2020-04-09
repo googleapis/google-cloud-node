@@ -255,7 +255,7 @@ describe('v1p1beta1.SpeechClient', () => {
       const expectedOptions = {};
       const expectedError = new Error('expected');
       client.innerApiCalls.recognize = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.recognize(request);
       }, expectedError);
       assert(
@@ -355,7 +355,7 @@ describe('v1p1beta1.SpeechClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.longRunningRecognize(request);
       }, expectedError);
       assert(
@@ -382,7 +382,7 @@ describe('v1p1beta1.SpeechClient', () => {
         expectedError
       );
       const [operation] = await client.longRunningRecognize(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -470,7 +470,7 @@ describe('v1p1beta1.SpeechClient', () => {
         stream.write(request);
         stream.end();
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(

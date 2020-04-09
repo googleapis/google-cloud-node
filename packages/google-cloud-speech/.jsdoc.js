@@ -40,7 +40,7 @@ module.exports = {
     includePattern: '\\.js$'
   },
   templates: {
-    copyright: 'Copyright 2019 Google, LLC.',
+    copyright: 'Copyright 2020 Google LLC',
     includeDate: false,
     sourceFiles: false,
     systemName: '@google-cloud/speech',
