@@ -42,7 +42,13 @@ export interface FeaturesMethod {
   objectLocalization?: FeatureFunction;
 }
 interface ImprovedRequest {
-  image?: {source?: {filename: string}; content?: Uint8Array | string | null};
+  image?: {
+    source?: {
+      filename?: string;
+      imageUri?: string;
+    };
+    content?: Uint8Array | string | null;
+  };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   features?: any;
 }
