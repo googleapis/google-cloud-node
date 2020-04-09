@@ -296,7 +296,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getJob(request);
       }, expectedError);
       assert(
@@ -407,7 +407,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createJob(request);
       }, expectedError);
       assert(
@@ -521,7 +521,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateJob(request);
       }, expectedError);
       assert(
@@ -632,7 +632,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteJob(request);
       }, expectedError);
       assert(
@@ -743,7 +743,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.pauseJob(request);
       }, expectedError);
       assert(
@@ -854,7 +854,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.resumeJob(request);
       }, expectedError);
       assert(
@@ -965,7 +965,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.runJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.runJob(request);
       }, expectedError);
       assert(
@@ -1080,7 +1080,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listJobs(request);
       }, expectedError);
       assert(
@@ -1165,7 +1165,7 @@ describe('v1.CloudSchedulerClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1234,7 +1234,7 @@ describe('v1.CloudSchedulerClient', () => {
         expectedError
       );
       const iterable = client.listJobsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.scheduler.v1.IJob[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
