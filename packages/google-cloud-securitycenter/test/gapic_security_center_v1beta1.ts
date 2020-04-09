@@ -331,7 +331,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createSource(request);
       }, expectedError);
       assert(
@@ -445,7 +445,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createFinding(request);
       }, expectedError);
       assert(
@@ -559,7 +559,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIamPolicy(request);
       }, expectedError);
       assert(
@@ -675,7 +675,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getOrganizationSettings(request);
       }, expectedError);
       assert(
@@ -786,7 +786,7 @@ describe('v1beta1.SecurityCenterClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getSource(request);
       }, expectedError);
       assert(
@@ -900,7 +900,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setFindingState(request);
       }, expectedError);
       assert(
@@ -1014,7 +1014,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setIamPolicy(request);
       }, expectedError);
       assert(
@@ -1130,7 +1130,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.testIamPermissions(request);
       }, expectedError);
       assert(
@@ -1247,7 +1247,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateFinding(request);
       }, expectedError);
       assert(
@@ -1366,7 +1366,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateOrganizationSettings(request);
       }, expectedError);
       assert(
@@ -1483,7 +1483,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateSource(request);
       }, expectedError);
       assert(
@@ -1602,7 +1602,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateSecurityMarks(request);
       }, expectedError);
       assert(
@@ -1726,7 +1726,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.runAssetDiscovery(request);
       }, expectedError);
       assert(
@@ -1761,7 +1761,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         expectedError
       );
       const [operation] = await client.runAssetDiscovery(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1893,7 +1893,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.groupAssets(request);
       }, expectedError);
       assert(
@@ -1995,7 +1995,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2073,7 +2073,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         expectedError
       );
       const iterable = client.groupAssetsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.securitycenter.v1beta1.IGroupResult[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2215,7 +2215,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.groupFindings(request);
       }, expectedError);
       assert(
@@ -2318,7 +2318,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2397,7 +2397,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         expectedError
       );
       const iterable = client.groupFindingsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.securitycenter.v1beta1.IGroupResult[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2539,7 +2539,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listAssets(request);
       }, expectedError);
       assert(
@@ -2641,7 +2641,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2719,7 +2719,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         expectedError
       );
       const iterable = client.listAssetsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2861,7 +2861,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listFindings(request);
       }, expectedError);
       assert(
@@ -2960,7 +2960,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3039,7 +3039,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         expectedError
       );
       const iterable = client.listFindingsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.securitycenter.v1beta1.IFinding[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -3179,7 +3179,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listSources(request);
       }, expectedError);
       assert(
@@ -3277,7 +3277,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3355,7 +3355,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         expectedError
       );
       const iterable = client.listSourcesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.securitycenter.v1beta1.ISource[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
