@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v2.1.0...v3.0.0) (2020-04-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+New feature: methods with pagination now support async iteration.
+
+### Features
+
+* drop node8 support, support for async iterators ([#85](https://www.github.com/googleapis/nodejs-secret-manager/issues/85)) ([24cd25b](https://www.github.com/googleapis/nodejs-secret-manager/commit/24cd25b04c94e2058489db6cf06ba74a14770b0f))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v2.0.1...v2.1.0) (2020-03-06)
 
 
