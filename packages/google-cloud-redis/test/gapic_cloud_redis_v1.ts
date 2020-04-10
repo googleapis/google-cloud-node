@@ -329,7 +329,7 @@ describe('v1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getInstance(request);
       }, expectedError);
       assert(
@@ -453,7 +453,7 @@ describe('v1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createInstance(request);
       }, expectedError);
       assert(
@@ -488,7 +488,7 @@ describe('v1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.createInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -615,7 +615,7 @@ describe('v1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateInstance(request);
       }, expectedError);
       assert(
@@ -651,7 +651,7 @@ describe('v1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.updateInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -775,7 +775,7 @@ describe('v1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.importInstance(request);
       }, expectedError);
       assert(
@@ -810,7 +810,7 @@ describe('v1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.importInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -934,7 +934,7 @@ describe('v1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.exportInstance(request);
       }, expectedError);
       assert(
@@ -969,7 +969,7 @@ describe('v1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.exportInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1093,7 +1093,7 @@ describe('v1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.failoverInstance(request);
       }, expectedError);
       assert(
@@ -1128,7 +1128,7 @@ describe('v1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.failoverInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1252,7 +1252,7 @@ describe('v1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteInstance(request);
       }, expectedError);
       assert(
@@ -1287,7 +1287,7 @@ describe('v1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.deleteInstance(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1405,7 +1405,7 @@ describe('v1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listInstances(request);
       }, expectedError);
       assert(
@@ -1492,7 +1492,7 @@ describe('v1.CloudRedisClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1565,7 +1565,7 @@ describe('v1.CloudRedisClient', () => {
         expectedError
       );
       const iterable = client.listInstancesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.redis.v1.IInstance[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
