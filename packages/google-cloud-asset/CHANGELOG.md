@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-asset/compare/v2.2.0...v3.0.0) (2020-04-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+* removed SearchResources and SearchIamPolicies from v1p1beta1 client
+
+### Features
+
+* add org policy and access context manager protos ([#304](https://www.github.com/googleapis/nodejs-asset/issues/304)) ([4d18cc7](https://www.github.com/googleapis/nodejs-asset/commit/4d18cc7ac2fc4d4bae9999291575e8c3a020947f))
+* adds v1p4beta1 API surface ([#285](https://www.github.com/googleapis/nodejs-asset/issues/285)) ([9dee03a](https://www.github.com/googleapis/nodejs-asset/commit/9dee03a546df19ae1fc92f25f07f994e010f4ac4))
+* deferred client initialization ([#281](https://www.github.com/googleapis/nodejs-asset/issues/281)) ([8148ab0](https://www.github.com/googleapis/nodejs-asset/commit/8148ab0e075c36e2c49d2af96791f83398529b87))
+* drop node8 support, support for async iterators ([#299](https://www.github.com/googleapis/nodejs-asset/issues/299)) ([ae14ae8](https://www.github.com/googleapis/nodejs-asset/commit/ae14ae8fc84defbd65b06fdaaef94e07a1294e1b))
+* removed SearchResources and SearchIamPolicies from v1p1beta1 client ([184fd2f](https://www.github.com/googleapis/nodejs-asset/commit/184fd2fd3ee9cc32312f671398992f3b453fb78d))
+
+
+### Bug Fixes
+
+* in rare cases test can take longer than 180,000 timeout ([#307](https://www.github.com/googleapis/nodejs-asset/issues/307)) ([8a528fa](https://www.github.com/googleapis/nodejs-asset/commit/8a528fac934ce8dd1378c06a89b52c5d76286a9b))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-asset/compare/v2.1.0...v2.2.0) (2020-02-27)
 
 
