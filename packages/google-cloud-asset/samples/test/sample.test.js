@@ -49,7 +49,7 @@ describe('quickstart sample tests', () => {
     await bucket.delete();
   });
 
-  it('should export assets to specified path', async function() {
+  it('should export assets to specified path', async function () {
     this.retries(2);
     await delay(this.test);
     const dumpFilePath = `gs://${bucketName}/my-assets.txt`;

@@ -49,7 +49,7 @@ async function main(dumpFilePath) {
     // Do things with with the response.
     console.log(result);
   }
-  exportAssets().catch((err) => {
+  exportAssets().catch(err => {
     throw err;
   });
   // [END asset_quickstart_export_assets]
