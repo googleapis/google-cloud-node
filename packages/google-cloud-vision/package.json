@@ -29,7 +29,7 @@
   "scripts": {
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
-    "lint": "gts fix && eslint --fix samples/*.js",
+    "lint": "gts fix",
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha build/system-test",
     "fix": "gts fix",
@@ -52,7 +52,6 @@
     "@types/is": "0.0.21",
     "@types/mocha": "^7.0.1",
     "@types/node": "^13.7.4",
-    "@types/is": "0.0.21",
     "@types/sinon": "^9.0.0",
     "@types/uuid": "^3.4.7",
     "c8": "^7.1.0",

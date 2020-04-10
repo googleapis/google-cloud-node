@@ -214,7 +214,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchAnnotateImages(request);
       }, expectedError);
       assert(

@@ -331,7 +331,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createProductSet(request);
       }, expectedError);
       assert(
@@ -445,7 +445,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getProductSet(request);
       }, expectedError);
       assert(
@@ -562,7 +562,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateProductSet(request);
       }, expectedError);
       assert(
@@ -676,7 +676,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteProductSet(request);
       }, expectedError);
       assert(
@@ -790,7 +790,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createProduct(request);
       }, expectedError);
       assert(
@@ -904,7 +904,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getProduct(request);
       }, expectedError);
       assert(
@@ -1021,7 +1021,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateProduct(request);
       }, expectedError);
       assert(
@@ -1135,7 +1135,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteProduct(request);
       }, expectedError);
       assert(
@@ -1251,7 +1251,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createReferenceImage(request);
       }, expectedError);
       assert(
@@ -1367,7 +1367,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteReferenceImage(request);
       }, expectedError);
       assert(
@@ -1481,7 +1481,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getReferenceImage(request);
       }, expectedError);
       assert(
@@ -1597,7 +1597,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.addProductToProductSet(request);
       }, expectedError);
       assert(
@@ -1713,7 +1713,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.removeProductFromProductSet(request);
       }, expectedError);
       assert(
@@ -1837,7 +1837,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.importProductSets(request);
       }, expectedError);
       assert(
@@ -1872,7 +1872,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         expectedError
       );
       const [operation] = await client.importProductSets(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -2002,7 +2002,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listProductSets(request);
       }, expectedError);
       assert(
@@ -2101,7 +2101,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2180,7 +2180,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         expectedError
       );
       const iterable = client.listProductSetsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.vision.v1p3beta1.IProductSet[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2320,7 +2320,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listProducts(request);
       }, expectedError);
       assert(
@@ -2419,7 +2419,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2498,7 +2498,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         expectedError
       );
       const iterable = client.listProductsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.vision.v1p3beta1.IProduct[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2642,7 +2642,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listReferenceImages(request);
       }, expectedError);
       assert(
@@ -2741,7 +2741,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2820,7 +2820,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         expectedError
       );
       const iterable = client.listReferenceImagesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.vision.v1p3beta1.IReferenceImage[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2962,7 +2962,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listProductsInProductSet(request);
       }, expectedError);
       assert(
@@ -3062,7 +3062,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3142,7 +3142,7 @@ describe('v1p3beta1.ProductSearchClient', () => {
         expectedError
       );
       const iterable = client.listProductsInProductSetAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.vision.v1p3beta1.IProduct[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

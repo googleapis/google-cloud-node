@@ -43,7 +43,9 @@ for version in versions:
 for version in versions:
     client_file = f"src/{version}/image_annotator_client.ts"
     s.replace(client_file, '\Z',
-    'import {FeaturesMethod} from \'../helpers\'; \n export interface ImageAnnotatorClient extends FeaturesMethod {}'
+    'import {FeaturesMethod} from \'../helpers\';\n' +
+    '// eslint-disable-next-line @typescript-eslint/no-empty-interface\n' +
+    'export interface ImageAnnotatorClient extends FeaturesMethod {}\n'
     )
 # Copy common templates
 common_templates = gcp.CommonTemplates()

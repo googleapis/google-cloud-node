@@ -246,7 +246,7 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchAnnotateImages(request);
       }, expectedError);
       assert(
@@ -338,7 +338,7 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchAnnotateFiles(request);
       }, expectedError);
       assert(
@@ -438,7 +438,7 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.asyncBatchAnnotateImages(request);
       }, expectedError);
       assert(
@@ -465,7 +465,7 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
         expectedError
       );
       const [operation] = await client.asyncBatchAnnotateImages(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -565,7 +565,7 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.asyncBatchAnnotateFiles(request);
       }, expectedError);
       assert(
@@ -592,7 +592,7 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
         expectedError
       );
       const [operation] = await client.asyncBatchAnnotateFiles(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(

@@ -20,7 +20,7 @@ import {Storage} from '@google-cloud/storage';
 import * as uuid from 'uuid';
 import * as prototypes from '../protos/protos';
 import * as vision from '../src';
-// const vision = require('../src');
+
 describe('Vision', () => {
   const IMAGES = Object.freeze({
     document: path.join(
