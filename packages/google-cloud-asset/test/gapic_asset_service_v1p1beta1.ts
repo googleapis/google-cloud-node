@@ -319,7 +319,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchAllResources(request);
       }, expectedError);
       assert(
@@ -422,7 +422,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -501,7 +501,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         expectedError
       );
       const iterable = client.searchAllResourcesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -645,7 +645,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchAllIamPolicies(request);
       }, expectedError);
       assert(
@@ -748,7 +748,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -827,7 +827,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         expectedError
       );
       const iterable = client.searchAllIamPoliciesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

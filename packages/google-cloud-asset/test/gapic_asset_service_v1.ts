@@ -268,7 +268,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchGetAssetsHistory(request);
       }, expectedError);
       assert(
@@ -382,7 +382,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createFeed(request);
       }, expectedError);
       assert(
@@ -493,7 +493,7 @@ describe('v1.AssetServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeed = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getFeed(request);
       }, expectedError);
       assert(
@@ -604,7 +604,7 @@ describe('v1.AssetServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeeds = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listFeeds(request);
       }, expectedError);
       assert(
@@ -721,7 +721,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateFeed(request);
       }, expectedError);
       assert(
@@ -835,7 +835,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteFeed(request);
       }, expectedError);
       assert(
@@ -957,7 +957,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.exportAssets(request);
       }, expectedError);
       assert(
@@ -992,7 +992,7 @@ describe('v1.AssetServiceClient', () => {
         expectedError
       );
       const [operation] = await client.exportAssets(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
