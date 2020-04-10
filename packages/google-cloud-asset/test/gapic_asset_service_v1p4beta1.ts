@@ -271,7 +271,7 @@ describe('v1p4beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.analyzeIamPolicy(request);
       }, expectedError);
       assert(
@@ -398,7 +398,7 @@ describe('v1p4beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.exportIamPolicyAnalysis(request);
       }, expectedError);
       assert(
@@ -434,7 +434,7 @@ describe('v1p4beta1.AssetServiceClient', () => {
         expectedError
       );
       const [operation] = await client.exportIamPolicyAnalysis(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(

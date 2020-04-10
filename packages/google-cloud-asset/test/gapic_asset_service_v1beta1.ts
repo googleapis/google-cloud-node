@@ -270,7 +270,7 @@ describe('v1beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchGetAssetsHistory(request);
       }, expectedError);
       assert(
@@ -392,7 +392,7 @@ describe('v1beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.exportAssets(request);
       }, expectedError);
       assert(
@@ -427,7 +427,7 @@ describe('v1beta1.AssetServiceClient', () => {
         expectedError
       );
       const [operation] = await client.exportAssets(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
