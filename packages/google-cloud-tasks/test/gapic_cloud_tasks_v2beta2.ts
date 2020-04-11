@@ -294,7 +294,7 @@ describe('v2beta2.CloudTasksClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getQueue = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getQueue(request);
       }, expectedError);
       assert(
@@ -408,7 +408,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createQueue(request);
       }, expectedError);
       assert(
@@ -525,7 +525,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateQueue(request);
       }, expectedError);
       assert(
@@ -639,7 +639,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteQueue(request);
       }, expectedError);
       assert(
@@ -753,7 +753,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.purgeQueue(request);
       }, expectedError);
       assert(
@@ -867,7 +867,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.pauseQueue(request);
       }, expectedError);
       assert(
@@ -981,7 +981,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.resumeQueue(request);
       }, expectedError);
       assert(
@@ -1095,7 +1095,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIamPolicy(request);
       }, expectedError);
       assert(
@@ -1209,7 +1209,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setIamPolicy(request);
       }, expectedError);
       assert(
@@ -1325,7 +1325,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.testIamPermissions(request);
       }, expectedError);
       assert(
@@ -1436,7 +1436,7 @@ describe('v2beta2.CloudTasksClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getTask(request);
       }, expectedError);
       assert(
@@ -1550,7 +1550,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createTask(request);
       }, expectedError);
       assert(
@@ -1664,7 +1664,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteTask(request);
       }, expectedError);
       assert(
@@ -1778,7 +1778,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.leaseTasks(request);
       }, expectedError);
       assert(
@@ -1892,7 +1892,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.acknowledgeTask(request);
       }, expectedError);
       assert(
@@ -2006,7 +2006,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.renewLease(request);
       }, expectedError);
       assert(
@@ -2120,7 +2120,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.cancelLease(request);
       }, expectedError);
       assert(
@@ -2231,7 +2231,7 @@ describe('v2beta2.CloudTasksClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.runTask = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.runTask(request);
       }, expectedError);
       assert(
@@ -2349,7 +2349,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listQueues(request);
       }, expectedError);
       assert(
@@ -2441,7 +2441,7 @@ describe('v2beta2.CloudTasksClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2513,7 +2513,7 @@ describe('v2beta2.CloudTasksClient', () => {
         expectedError
       );
       const iterable = client.listQueuesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.tasks.v2beta2.IQueue[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2638,7 +2638,7 @@ describe('v2beta2.CloudTasksClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listTasks(request);
       }, expectedError);
       assert(
@@ -2729,7 +2729,7 @@ describe('v2beta2.CloudTasksClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2798,7 +2798,7 @@ describe('v2beta2.CloudTasksClient', () => {
         expectedError
       );
       const iterable = client.listTasksAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.tasks.v2beta2.ITask[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
