@@ -229,7 +229,7 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
         stream.write(request);
         stream.end();
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(

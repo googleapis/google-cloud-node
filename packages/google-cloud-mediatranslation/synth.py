@@ -46,5 +46,5 @@ s.copy(templates, excludes=['linkinator.config.json'])
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
-
+subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npx', 'compileProtos', 'src'])
