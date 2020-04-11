@@ -16,7 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AutoscalingPolicyServiceClient, ClusterControllerClient, JobControllerClient, WorkflowTemplateServiceClient} from '@google-cloud/dataproc';
+import {
+  AutoscalingPolicyServiceClient,
+  ClusterControllerClient,
+  JobControllerClient,
+  WorkflowTemplateServiceClient,
+} from '@google-cloud/dataproc';
 
 function main() {
   new AutoscalingPolicyServiceClient();

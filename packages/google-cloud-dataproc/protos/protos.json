@@ -7373,26 +7373,32 @@
               "extend": "google.protobuf.MethodOptions"
             },
             "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
               "methods": {
                 "ListOperations": {
                   "requestType": "ListOperationsRequest",
                   "responseType": "ListOperationsResponse",
                   "options": {
-                    "(google.api.http).get": "/v1/{name=operations}"
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
                   }
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
                   "responseType": "Operation",
                   "options": {
-                    "(google.api.http).get": "/v1/{name=operations/**}"
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
                   }
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
                   "responseType": "google.protobuf.Empty",
                   "options": {
-                    "(google.api.http).delete": "/v1/{name=operations/**}"
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
                   }
                 },
                 "CancelOperation": {
@@ -7400,7 +7406,8 @@
                   "responseType": "google.protobuf.Empty",
                   "options": {
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
-                    "(google.api.http).body": "*"
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
                   }
                 },
                 "WaitOperation": {
@@ -7526,6 +7533,7 @@
         },
         "rpc": {
           "options": {
+            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
             "java_multiple_files": true,
             "java_outer_classname": "StatusProto",

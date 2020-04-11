@@ -17,11 +17,19 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 import * as path from 'path';
 
-import { Transform } from 'stream';
-import { RequestType } from 'google-gax/build/src/apitypes';
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './cluster_controller_client_config.json';
 
@@ -41,7 +49,12 @@ export class ClusterControllerClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}, batching: {}};
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
@@ -76,10 +89,12 @@ export class ClusterControllerClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include the service address and port.
     const staticMembers = this.constructor as typeof ClusterControllerClient;
-    const servicePath = opts && opts.servicePath ?
-        opts.servicePath :
-        ((opts && opts.apiEndpoint) ? opts.apiEndpoint :
-                                      staticMembers.servicePath);
+    const servicePath =
+      opts && opts.servicePath
+        ? opts.servicePath
+        : opts && opts.apiEndpoint
+        ? opts.apiEndpoint
+        : staticMembers.servicePath;
     const port = opts && opts.port ? opts.port : staticMembers.port;
 
     if (!opts) {
@@ -89,8 +104,8 @@ export class ClusterControllerClient {
     opts.port = opts.port || port;
     opts.clientConfig = opts.clientConfig || {};
 
-    const isBrowser = (typeof window !== 'undefined');
-    if (isBrowser){
+    const isBrowser = typeof window !== 'undefined';
+    if (isBrowser) {
       opts.fallback = true;
     }
     // If we are in browser, we are already using fallback because of the
@@ -107,13 +122,10 @@ export class ClusterControllerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -129,12 +141,18 @@ export class ClusterControllerClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ?
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require("../../protos/protos.json") :
-        nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -159,63 +177,84 @@ export class ClusterControllerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listClusters:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'clusters')
+      listClusters: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'clusters'
+      ),
     };
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    const protoFilesRoot = opts.fallback ?
-      this._gaxModule.protobuf.Root.fromJSON(
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require("../../protos/protos.json")) :
-      this._gaxModule.protobuf.loadSync(nodejsProtoPath);
+    const protoFilesRoot = opts.fallback
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = this._gaxModule.lro({
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
-    }).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
     const createClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1beta2.Cluster') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1beta2.Cluster'
+    ) as gax.protobuf.Type;
     const createClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1beta2.ClusterOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1beta2.ClusterOperationMetadata'
+    ) as gax.protobuf.Type;
     const updateClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1beta2.Cluster') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1beta2.Cluster'
+    ) as gax.protobuf.Type;
     const updateClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1beta2.ClusterOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1beta2.ClusterOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1beta2.ClusterOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1beta2.ClusterOperationMetadata'
+    ) as gax.protobuf.Type;
     const diagnoseClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const diagnoseClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1beta2.ClusterOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1beta2.ClusterOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createClusterResponse.decode.bind(createClusterResponse),
-        createClusterMetadata.decode.bind(createClusterMetadata)),
+        createClusterMetadata.decode.bind(createClusterMetadata)
+      ),
       updateCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateClusterResponse.decode.bind(updateClusterResponse),
-        updateClusterMetadata.decode.bind(updateClusterMetadata)),
+        updateClusterMetadata.decode.bind(updateClusterMetadata)
+      ),
       deleteCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteClusterResponse.decode.bind(deleteClusterResponse),
-        deleteClusterMetadata.decode.bind(deleteClusterMetadata)),
+        deleteClusterMetadata.decode.bind(deleteClusterMetadata)
+      ),
       diagnoseCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         diagnoseClusterResponse.decode.bind(diagnoseClusterResponse),
-        diagnoseClusterMetadata.decode.bind(diagnoseClusterMetadata))
+        diagnoseClusterMetadata.decode.bind(diagnoseClusterMetadata)
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dataproc.v1beta2.ClusterController', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dataproc.v1beta2.ClusterController',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -243,16 +282,25 @@ export class ClusterControllerClient {
     // Put together the "service stub" for
     // google.cloud.dataproc.v1beta2.ClusterController.
     this.clusterControllerStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1beta2.ClusterController') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dataproc.v1beta2.ClusterController'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataproc.v1beta2.ClusterController,
-        this._opts) as Promise<{[method: string]: Function}>;
+      this._opts
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const clusterControllerStubMethods =
-        ['createCluster', 'updateCluster', 'deleteCluster', 'getCluster', 'listClusters', 'diagnoseCluster'];
+    const clusterControllerStubMethods = [
+      'createCluster',
+      'updateCluster',
+      'deleteCluster',
+      'getCluster',
+      'listClusters',
+      'diagnoseCluster',
+    ];
     for (const methodName of clusterControllerStubMethods) {
       const callPromise = this.clusterControllerStub.then(
         stub => (...args: Array<{}>) => {
@@ -262,16 +310,17 @@ export class ClusterControllerClient {
           const func = stub[methodName];
           return func.apply(stub, args);
         },
-        (err: Error|null|undefined) => () => {
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         this.descriptors.page[methodName] ||
-            this.descriptors.stream[methodName] ||
-            this.descriptors.longrunning[methodName]
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -307,9 +356,7 @@ export class ClusterControllerClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -319,8 +366,9 @@ export class ClusterControllerClient {
    * @param {function(Error, string)} callback - the callback to
    *   be called with the current project Id.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -332,64 +380,85 @@ export class ClusterControllerClient {
   // -- Service calls --
   // -------------------
   getCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IGetClusterRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.dataproc.v1beta2.ICluster,
-        protos.google.cloud.dataproc.v1beta2.IGetClusterRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dataproc.v1beta2.IGetClusterRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1beta2.ICluster,
+      protos.google.cloud.dataproc.v1beta2.IGetClusterRequest | undefined,
+      {} | undefined
+    ]
+  >;
   getCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IGetClusterRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataproc.v1beta2.ICluster,
-          protos.google.cloud.dataproc.v1beta2.IGetClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1beta2.IGetClusterRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataproc.v1beta2.ICluster,
+      | protos.google.cloud.dataproc.v1beta2.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IGetClusterRequest,
-      callback: Callback<
-          protos.google.cloud.dataproc.v1beta2.ICluster,
-          protos.google.cloud.dataproc.v1beta2.IGetClusterRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Gets the resource representation for a cluster in a project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.projectId
- *   Required. The ID of the Google Cloud Platform project that the cluster
- *   belongs to.
- * @param {string} request.region
- *   Required. The Dataproc region in which to handle the request.
- * @param {string} request.clusterName
- *   Required. The cluster name.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dataproc.v1beta2.IGetClusterRequest,
+    callback: Callback<
+      protos.google.cloud.dataproc.v1beta2.ICluster,
+      | protos.google.cloud.dataproc.v1beta2.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets the resource representation for a cluster in a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project that the cluster
+   *   belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} request.clusterName
+   *   Required. The cluster name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IGetClusterRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dataproc.v1beta2.IGetClusterRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.dataproc.v1beta2.ICluster,
-          protos.google.cloud.dataproc.v1beta2.IGetClusterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataproc.v1beta2.ICluster,
-          protos.google.cloud.dataproc.v1beta2.IGetClusterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataproc.v1beta2.ICluster,
-        protos.google.cloud.dataproc.v1beta2.IGetClusterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dataproc.v1beta2.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataproc.v1beta2.ICluster,
+      | protos.google.cloud.dataproc.v1beta2.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1beta2.ICluster,
+      protos.google.cloud.dataproc.v1beta2.IGetClusterRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -398,78 +467,109 @@ export class ClusterControllerClient {
   }
 
   createCluster(
-      request: protos.google.cloud.dataproc.v1beta2.ICreateClusterRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dataproc.v1beta2.ICreateClusterRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   createCluster(
-      request: protos.google.cloud.dataproc.v1beta2.ICreateClusterRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1beta2.ICreateClusterRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createCluster(
-      request: protos.google.cloud.dataproc.v1beta2.ICreateClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates a cluster in a project. The returned
- * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
- * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.projectId
- *   Required. The ID of the Google Cloud Platform project that the cluster
- *   belongs to.
- * @param {string} request.region
- *   Required. The Dataproc region in which to handle the request.
- * @param {google.cloud.dataproc.v1beta2.Cluster} request.cluster
- *   Required. The cluster to create.
- * @param {string} [request.requestId]
- *   Optional. A unique id used to identify the request. If the server
- *   receives two {@link google.cloud.dataproc.v1beta2.CreateClusterRequest|CreateClusterRequest} requests  with the same
- *   id, then the second request will be ignored and the
- *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the backend
- *   is returned.
- *
- *   It is recommended to always set this value to a
- *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
- *
- *   The id must contain only letters (a-z, A-Z), numbers (0-9),
- *   underscores (_), and hyphens (-). The maximum length is 40 characters.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dataproc.v1beta2.ICreateClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a cluster in a project. The returned
+   * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project that the cluster
+   *   belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {google.cloud.dataproc.v1beta2.Cluster} request.cluster
+   *   Required. The cluster to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two {@link google.cloud.dataproc.v1beta2.CreateClusterRequest|CreateClusterRequest} requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the backend
+   *   is returned.
+   *
+   *   It is recommended to always set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   createCluster(
-      request: protos.google.cloud.dataproc.v1beta2.ICreateClusterRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.dataproc.v1beta2.ICreateClusterRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1beta2.ICluster,
+            protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -477,151 +577,182 @@ export class ClusterControllerClient {
     return this.innerApiCalls.createCluster(request, options, callback);
   }
   updateCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IUpdateClusterRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dataproc.v1beta2.IUpdateClusterRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   updateCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IUpdateClusterRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1beta2.IUpdateClusterRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IUpdateClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates a cluster in a project. The returned
- * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
- * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.projectId
- *   Required. The ID of the Google Cloud Platform project the
- *   cluster belongs to.
- * @param {string} request.region
- *   Required. The Dataproc region in which to handle the request.
- * @param {string} request.clusterName
- *   Required. The cluster name.
- * @param {google.cloud.dataproc.v1beta2.Cluster} request.cluster
- *   Required. The changes to the cluster.
- * @param {google.protobuf.Duration} [request.gracefulDecommissionTimeout]
- *   Optional. Timeout for graceful YARN decomissioning. Graceful
- *   decommissioning allows removing nodes from the cluster without
- *   interrupting jobs in progress. Timeout specifies how long to wait for jobs
- *   in progress to finish before forcefully removing nodes (and potentially
- *   interrupting jobs). Default timeout is 0 (for forceful decommission), and
- *   the maximum allowed timeout is 1 day (see JSON representation of
- *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
- *
- *   Only supported on Dataproc image versions 1.2 and higher.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Specifies the path, relative to `Cluster`, of
- *   the field to update. For example, to change the number of workers
- *   in a cluster to 5, the `update_mask` parameter would be
- *   specified as `config.worker_config.num_instances`,
- *   and the `PATCH` request body would specify the new value, as follows:
- *
- *       {
- *         "config":{
- *           "workerConfig":{
- *             "numInstances":"5"
- *           }
- *         }
- *       }
- *
- *   Similarly, to change the number of preemptible workers in a cluster to 5,
- *   the `update_mask` parameter would be
- *   `config.secondary_worker_config.num_instances`, and the `PATCH` request
- *   body would be set as follows:
- *
- *       {
- *         "config":{
- *           "secondaryWorkerConfig":{
- *             "numInstances":"5"
- *           }
- *         }
- *       }
- *   <strong>Note:</strong> currently only the following fields can be updated:
- *
- *   <table>
- *   <tr>
- *   <td><strong>Mask</strong></td><td><strong>Purpose</strong></td>
- *   </tr>
- *   <tr>
- *   <td>labels</td><td>Updates labels</td>
- *   </tr>
- *   <tr>
- *   <td>config.worker_config.num_instances</td><td>Resize primary worker
- *   group</td>
- *   </tr>
- *   <tr>
- *   <td>config.secondary_worker_config.num_instances</td><td>Resize secondary
- *   worker group</td>
- *   </tr>
- *   <tr>
- *   <td>config.lifecycle_config.auto_delete_ttl</td><td>Reset MAX TTL
- *   duration</td>
- *   </tr>
- *   <tr>
- *   <td>config.lifecycle_config.auto_delete_time</td><td>Update MAX TTL
- *   deletion timestamp</td>
- *   </tr>
- *   <tr>
- *   <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL
- *   duration</td>
- *   </tr>
- *   <tr>
- *   <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or change
- *   autoscaling policies</td>
- *   </tr>
- *   </table>
- * @param {string} [request.requestId]
- *   Optional. A unique id used to identify the request. If the server
- *   receives two {@link google.cloud.dataproc.v1beta2.UpdateClusterRequest|UpdateClusterRequest} requests  with the same
- *   id, then the second request will be ignored and the
- *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
- *   backend is returned.
- *
- *   It is recommended to always set this value to a
- *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
- *
- *   The id must contain only letters (a-z, A-Z), numbers (0-9),
- *   underscores (_), and hyphens (-). The maximum length is 40 characters.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dataproc.v1beta2.IUpdateClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates a cluster in a project. The returned
+   * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project the
+   *   cluster belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} request.clusterName
+   *   Required. The cluster name.
+   * @param {google.cloud.dataproc.v1beta2.Cluster} request.cluster
+   *   Required. The changes to the cluster.
+   * @param {google.protobuf.Duration} [request.gracefulDecommissionTimeout]
+   *   Optional. Timeout for graceful YARN decomissioning. Graceful
+   *   decommissioning allows removing nodes from the cluster without
+   *   interrupting jobs in progress. Timeout specifies how long to wait for jobs
+   *   in progress to finish before forcefully removing nodes (and potentially
+   *   interrupting jobs). Default timeout is 0 (for forceful decommission), and
+   *   the maximum allowed timeout is 1 day (see JSON representation of
+   *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+   *
+   *   Only supported on Dataproc image versions 1.2 and higher.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Specifies the path, relative to `Cluster`, of
+   *   the field to update. For example, to change the number of workers
+   *   in a cluster to 5, the `update_mask` parameter would be
+   *   specified as `config.worker_config.num_instances`,
+   *   and the `PATCH` request body would specify the new value, as follows:
+   *
+   *       {
+   *         "config":{
+   *           "workerConfig":{
+   *             "numInstances":"5"
+   *           }
+   *         }
+   *       }
+   *
+   *   Similarly, to change the number of preemptible workers in a cluster to 5,
+   *   the `update_mask` parameter would be
+   *   `config.secondary_worker_config.num_instances`, and the `PATCH` request
+   *   body would be set as follows:
+   *
+   *       {
+   *         "config":{
+   *           "secondaryWorkerConfig":{
+   *             "numInstances":"5"
+   *           }
+   *         }
+   *       }
+   *   <strong>Note:</strong> currently only the following fields can be updated:
+   *
+   *   <table>
+   *   <tr>
+   *   <td><strong>Mask</strong></td><td><strong>Purpose</strong></td>
+   *   </tr>
+   *   <tr>
+   *   <td>labels</td><td>Updates labels</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.worker_config.num_instances</td><td>Resize primary worker
+   *   group</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.secondary_worker_config.num_instances</td><td>Resize secondary
+   *   worker group</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.lifecycle_config.auto_delete_ttl</td><td>Reset MAX TTL
+   *   duration</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.lifecycle_config.auto_delete_time</td><td>Update MAX TTL
+   *   deletion timestamp</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL
+   *   duration</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or change
+   *   autoscaling policies</td>
+   *   </tr>
+   *   </table>
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two {@link google.cloud.dataproc.v1beta2.UpdateClusterRequest|UpdateClusterRequest} requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
+   *   backend is returned.
+   *
+   *   It is recommended to always set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   updateCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IUpdateClusterRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1beta2.ICluster, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.dataproc.v1beta2.IUpdateClusterRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1beta2.ICluster,
+            protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.ICluster,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -629,81 +760,112 @@ export class ClusterControllerClient {
     return this.innerApiCalls.updateCluster(request, options, callback);
   }
   deleteCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IDeleteClusterRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dataproc.v1beta2.IDeleteClusterRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   deleteCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IDeleteClusterRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1beta2.IDeleteClusterRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IDeleteClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes a cluster in a project. The returned
- * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
- * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.projectId
- *   Required. The ID of the Google Cloud Platform project that the cluster
- *   belongs to.
- * @param {string} request.region
- *   Required. The Dataproc region in which to handle the request.
- * @param {string} request.clusterName
- *   Required. The cluster name.
- * @param {string} [request.clusterUuid]
- *   Optional. Specifying the `cluster_uuid` means the RPC should fail
- *   (with error NOT_FOUND) if cluster with specified UUID does not exist.
- * @param {string} [request.requestId]
- *   Optional. A unique id used to identify the request. If the server
- *   receives two {@link google.cloud.dataproc.v1beta2.DeleteClusterRequest|DeleteClusterRequest} requests  with the same
- *   id, then the second request will be ignored and the
- *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
- *   backend is returned.
- *
- *   It is recommended to always set this value to a
- *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
- *
- *   The id must contain only letters (a-z, A-Z), numbers (0-9),
- *   underscores (_), and hyphens (-). The maximum length is 40 characters.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dataproc.v1beta2.IDeleteClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a cluster in a project. The returned
+   * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project that the cluster
+   *   belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} request.clusterName
+   *   Required. The cluster name.
+   * @param {string} [request.clusterUuid]
+   *   Optional. Specifying the `cluster_uuid` means the RPC should fail
+   *   (with error NOT_FOUND) if cluster with specified UUID does not exist.
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two {@link google.cloud.dataproc.v1beta2.DeleteClusterRequest|DeleteClusterRequest} requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
+   *   backend is returned.
+   *
+   *   It is recommended to always set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   deleteCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IDeleteClusterRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.dataproc.v1beta2.IDeleteClusterRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -711,70 +873,101 @@ export class ClusterControllerClient {
     return this.innerApiCalls.deleteCluster(request, options, callback);
   }
   diagnoseCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IDiagnoseClusterRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dataproc.v1beta2.IDiagnoseClusterRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   diagnoseCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IDiagnoseClusterRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1beta2.IDiagnoseClusterRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   diagnoseCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IDiagnoseClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Gets cluster diagnostic information. The returned
- * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
- * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
- * After the operation completes,
- * {@link google.longrunning.Operation.response|Operation.response}
- * contains
- * {@link google.protobuf.Empty|Empty}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.projectId
- *   Required. The ID of the Google Cloud Platform project that the cluster
- *   belongs to.
- * @param {string} request.region
- *   Required. The Dataproc region in which to handle the request.
- * @param {string} request.clusterName
- *   Required. The cluster name.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dataproc.v1beta2.IDiagnoseClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets cluster diagnostic information. The returned
+   * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   * After the operation completes,
+   * {@link google.longrunning.Operation.response|Operation.response}
+   * contains
+   * {@link google.protobuf.Empty|Empty}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project that the cluster
+   *   belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} request.clusterName
+   *   Required. The cluster name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   diagnoseCluster(
-      request: protos.google.cloud.dataproc.v1beta2.IDiagnoseClusterRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.dataproc.v1beta2.IDiagnoseClusterRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1beta2.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -782,100 +975,119 @@ export class ClusterControllerClient {
     return this.innerApiCalls.diagnoseCluster(request, options, callback);
   }
   listClusters(
-      request: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.dataproc.v1beta2.ICluster[],
-        protos.google.cloud.dataproc.v1beta2.IListClustersRequest|null,
-        protos.google.cloud.dataproc.v1beta2.IListClustersResponse
-      ]>;
+    request: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1beta2.ICluster[],
+      protos.google.cloud.dataproc.v1beta2.IListClustersRequest | null,
+      protos.google.cloud.dataproc.v1beta2.IListClustersResponse
+    ]
+  >;
   listClusters(
-      request: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-      options: gax.CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-          protos.google.cloud.dataproc.v1beta2.IListClustersResponse|null|undefined,
-          protos.google.cloud.dataproc.v1beta2.ICluster>): void;
+    request: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+    options: gax.CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+      | protos.google.cloud.dataproc.v1beta2.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataproc.v1beta2.ICluster
+    >
+  ): void;
   listClusters(
-      request: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-          protos.google.cloud.dataproc.v1beta2.IListClustersResponse|null|undefined,
-          protos.google.cloud.dataproc.v1beta2.ICluster>): void;
-/**
- * Lists all regions/{region}/clusters in a project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.projectId
- *   Required. The ID of the Google Cloud Platform project that the cluster
- *   belongs to.
- * @param {string} request.region
- *   Required. The Dataproc region in which to handle the request.
- * @param {string} [request.filter]
- *   Optional.  A filter constraining the clusters to list. Filters are
- *   case-sensitive and have the following syntax:
- *
- *   field = value [AND [field = value]] ...
- *
- *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
- *   and `[KEY]` is a label key. **value** can be `*` to match all values.
- *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
- *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
- *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
- *   contains the `DELETING` and `ERROR` states.
- *   `clusterName` is the name of the cluster provided at creation time.
- *   Only the logical `AND` operator is supported; space-separated items are
- *   treated as having an implicit `AND` operator.
- *
- *   Example filter:
- *
- *   status.state = ACTIVE AND clusterName = mycluster
- *   AND labels.env = staging AND labels.starred = *
- * @param {number} [request.pageSize]
- *   Optional. The standard List page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard List page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}.
- *   The client library support auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *
- *   When autoPaginate: false is specified through options, the array has three elements.
- *   The first element is Array of [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster} that corresponds to
- *   the one page received from the API server.
- *   If the second element is not null it contains the request object of type [ListClustersRequest]{@link google.cloud.dataproc.v1beta2.ListClustersRequest}
- *   that can be used to obtain the next page of the results.
- *   If it is null, the next page does not exist.
- *   The third element contains the raw response received from the API server. Its type is
- *   [ListClustersResponse]{@link google.cloud.dataproc.v1beta2.ListClustersResponse}.
- *
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+      | protos.google.cloud.dataproc.v1beta2.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataproc.v1beta2.ICluster
+    >
+  ): void;
+  /**
+   * Lists all regions/{region}/clusters in a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project that the cluster
+   *   belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} [request.filter]
+   *   Optional.  A filter constraining the clusters to list. Filters are
+   *   case-sensitive and have the following syntax:
+   *
+   *   field = value [AND [field = value]] ...
+   *
+   *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
+   *   and `[KEY]` is a label key. **value** can be `*` to match all values.
+   *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
+   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
+   *   contains the `DELETING` and `ERROR` states.
+   *   `clusterName` is the name of the cluster provided at creation time.
+   *   Only the logical `AND` operator is supported; space-separated items are
+   *   treated as having an implicit `AND` operator.
+   *
+   *   Example filter:
+   *
+   *   status.state = ACTIVE AND clusterName = mycluster
+   *   AND labels.env = staging AND labels.starred = *
+   * @param {number} [request.pageSize]
+   *   Optional. The standard List page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard List page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListClustersRequest]{@link google.cloud.dataproc.v1beta2.ListClustersRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListClustersResponse]{@link google.cloud.dataproc.v1beta2.ListClustersResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   listClusters(
-      request: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-      optionsOrCallback?: gax.CallOptions|PaginationCallback<
+    request: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-          protos.google.cloud.dataproc.v1beta2.IListClustersResponse|null|undefined,
-          protos.google.cloud.dataproc.v1beta2.ICluster>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-          protos.google.cloud.dataproc.v1beta2.IListClustersResponse|null|undefined,
-          protos.google.cloud.dataproc.v1beta2.ICluster>):
-      Promise<[
-        protos.google.cloud.dataproc.v1beta2.ICluster[],
-        protos.google.cloud.dataproc.v1beta2.IListClustersRequest|null,
-        protos.google.cloud.dataproc.v1beta2.IListClustersResponse
-      ]>|void {
+          | protos.google.cloud.dataproc.v1beta2.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataproc.v1beta2.ICluster
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+      | protos.google.cloud.dataproc.v1beta2.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataproc.v1beta2.ICluster
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1beta2.ICluster[],
+      protos.google.cloud.dataproc.v1beta2.IListClustersRequest | null,
+      protos.google.cloud.dataproc.v1beta2.IListClustersResponse
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -883,59 +1095,59 @@ export class ClusterControllerClient {
     return this.innerApiCalls.listClusters(request, options, callback);
   }
 
-/**
- * Equivalent to {@link listClusters}, but returns a NodeJS Stream object.
- *
- * This fetches the paged responses for {@link listClusters} continuously
- * and invokes the callback registered for 'data' event for each element in the
- * responses.
- *
- * The returned object has 'end' method when no more elements are required.
- *
- * autoPaginate option will be ignored.
- *
- * @see {@link https://nodejs.org/api/stream.html}
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.projectId
- *   Required. The ID of the Google Cloud Platform project that the cluster
- *   belongs to.
- * @param {string} request.region
- *   Required. The Dataproc region in which to handle the request.
- * @param {string} [request.filter]
- *   Optional.  A filter constraining the clusters to list. Filters are
- *   case-sensitive and have the following syntax:
- *
- *   field = value [AND [field = value]] ...
- *
- *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
- *   and `[KEY]` is a label key. **value** can be `*` to match all values.
- *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
- *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
- *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
- *   contains the `DELETING` and `ERROR` states.
- *   `clusterName` is the name of the cluster provided at creation time.
- *   Only the logical `AND` operator is supported; space-separated items are
- *   treated as having an implicit `AND` operator.
- *
- *   Example filter:
- *
- *   status.state = ACTIVE AND clusterName = mycluster
- *   AND labels.env = staging AND labels.starred = *
- * @param {number} [request.pageSize]
- *   Optional. The standard List page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard List page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster} on 'data' event.
- */
+  /**
+   * Equivalent to {@link listClusters}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listClusters} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project that the cluster
+   *   belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} [request.filter]
+   *   Optional.  A filter constraining the clusters to list. Filters are
+   *   case-sensitive and have the following syntax:
+   *
+   *   field = value [AND [field = value]] ...
+   *
+   *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
+   *   and `[KEY]` is a label key. **value** can be `*` to match all values.
+   *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
+   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
+   *   contains the `DELETING` and `ERROR` states.
+   *   `clusterName` is the name of the cluster provided at creation time.
+   *   Only the logical `AND` operator is supported; space-separated items are
+   *   treated as having an implicit `AND` operator.
+   *
+   *   Example filter:
+   *
+   *   status.state = ACTIVE AND clusterName = mycluster
+   *   AND labels.env = staging AND labels.starred = *
+   * @param {number} [request.pageSize]
+   *   Optional. The standard List page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard List page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster} on 'data' event.
+   */
   listClustersStream(
-      request?: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-      options?: gax.CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+    options?: gax.CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     const callSettings = new gax.CallSettings(options);
@@ -947,51 +1159,51 @@ export class ClusterControllerClient {
     );
   }
 
-/**
- * Equivalent to {@link listClusters}, but returns an iterable object.
- *
- * for-await-of syntax is used with the iterable to recursively get response element on-demand.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.projectId
- *   Required. The ID of the Google Cloud Platform project that the cluster
- *   belongs to.
- * @param {string} request.region
- *   Required. The Dataproc region in which to handle the request.
- * @param {string} [request.filter]
- *   Optional.  A filter constraining the clusters to list. Filters are
- *   case-sensitive and have the following syntax:
- *
- *   field = value [AND [field = value]] ...
- *
- *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
- *   and `[KEY]` is a label key. **value** can be `*` to match all values.
- *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
- *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
- *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
- *   contains the `DELETING` and `ERROR` states.
- *   `clusterName` is the name of the cluster provided at creation time.
- *   Only the logical `AND` operator is supported; space-separated items are
- *   treated as having an implicit `AND` operator.
- *
- *   Example filter:
- *
- *   status.state = ACTIVE AND clusterName = mycluster
- *   AND labels.env = staging AND labels.starred = *
- * @param {number} [request.pageSize]
- *   Optional. The standard List page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard List page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
- */
+  /**
+   * Equivalent to {@link listClusters}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project that the cluster
+   *   belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} [request.filter]
+   *   Optional.  A filter constraining the clusters to list. Filters are
+   *   case-sensitive and have the following syntax:
+   *
+   *   field = value [AND [field = value]] ...
+   *
+   *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
+   *   and `[KEY]` is a label key. **value** can be `*` to match all values.
+   *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
+   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
+   *   contains the `DELETING` and `ERROR` states.
+   *   `clusterName` is the name of the cluster provided at creation time.
+   *   Only the logical `AND` operator is supported; space-separated items are
+   *   treated as having an implicit `AND` operator.
+   *
+   *   Example filter:
+   *
+   *   status.state = ACTIVE AND clusterName = mycluster
+   *   AND labels.env = staging AND labels.starred = *
+   * @param {number} [request.pageSize]
+   *   Optional. The standard List page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard List page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
   listClustersAsync(
-      request?: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
-      options?: gax.CallOptions):
-    AsyncIterable<protos.google.cloud.dataproc.v1beta2.ICluster>{
+    request?: protos.google.cloud.dataproc.v1beta2.IListClustersRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dataproc.v1beta2.ICluster> {
     request = request || {};
     options = options || {};
     options = options || {};
@@ -999,7 +1211,7 @@ export class ClusterControllerClient {
     this.initialize();
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
-      request as unknown as RequestType,
+      (request as unknown) as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataproc.v1beta2.ICluster>;
   }
@@ -1015,12 +1227,18 @@ export class ClusterControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectLocationAutoscalingPolicyPath(project:string,location:string,autoscalingPolicy:string) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render({
-      project: project,
-      location: location,
-      autoscaling_policy: autoscalingPolicy,
-    });
+  projectLocationAutoscalingPolicyPath(
+    project: string,
+    location: string,
+    autoscalingPolicy: string
+  ) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        autoscaling_policy: autoscalingPolicy,
+      }
+    );
   }
 
   /**
@@ -1030,8 +1248,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).project;
+  matchProjectFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string
+  ) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName
+    ).project;
   }
 
   /**
@@ -1041,8 +1263,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).location;
+  matchLocationFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string
+  ) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName
+    ).location;
   }
 
   /**
@@ -1052,8 +1278,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string
+  ) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName
+    ).autoscaling_policy;
   }
 
   /**
@@ -1064,12 +1294,18 @@ export class ClusterControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectLocationWorkflowTemplatePath(project:string,location:string,workflowTemplate:string) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render({
-      project: project,
-      location: location,
-      workflow_template: workflowTemplate,
-    });
+  projectLocationWorkflowTemplatePath(
+    project: string,
+    location: string,
+    workflowTemplate: string
+  ) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        workflow_template: workflowTemplate,
+      }
+    );
   }
 
   /**
@@ -1079,8 +1315,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).project;
+  matchProjectFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName
+    ).project;
   }
 
   /**
@@ -1090,8 +1330,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).location;
+  matchLocationFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName
+    ).location;
   }
 
   /**
@@ -1101,8 +1345,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).workflow_template;
+  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName
+    ).workflow_template;
   }
 
   /**
@@ -1113,12 +1361,18 @@ export class ClusterControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectRegionAutoscalingPolicyPath(project:string,region:string,autoscalingPolicy:string) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render({
-      project: project,
-      region: region,
-      autoscaling_policy: autoscalingPolicy,
-    });
+  projectRegionAutoscalingPolicyPath(
+    project: string,
+    region: string,
+    autoscalingPolicy: string
+  ) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render(
+      {
+        project: project,
+        region: region,
+        autoscaling_policy: autoscalingPolicy,
+      }
+    );
   }
 
   /**
@@ -1128,8 +1382,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).project;
+  matchProjectFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string
+  ) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName
+    ).project;
   }
 
   /**
@@ -1139,8 +1397,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).region;
+  matchRegionFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string
+  ) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName
+    ).region;
   }
 
   /**
@@ -1150,8 +1412,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string
+  ) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName
+    ).autoscaling_policy;
   }
 
   /**
@@ -1162,7 +1428,11 @@ export class ClusterControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectRegionWorkflowTemplatePath(project:string,region:string,workflowTemplate:string) {
+  projectRegionWorkflowTemplatePath(
+    project: string,
+    region: string,
+    workflowTemplate: string
+  ) {
     return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render({
       project: project,
       region: region,
@@ -1177,8 +1447,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).project;
+  matchProjectFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string
+  ) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName
+    ).project;
   }
 
   /**
@@ -1188,8 +1462,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).region;
+  matchRegionFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string
+  ) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName
+    ).region;
   }
 
   /**
@@ -1199,8 +1477,12 @@ export class ClusterControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).workflow_template;
+  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string
+  ) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName
+    ).workflow_template;
   }
 
   /**
