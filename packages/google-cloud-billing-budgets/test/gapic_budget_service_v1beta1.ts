@@ -299,7 +299,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createBudget(request);
       }, expectedError);
       assert(
@@ -416,7 +416,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateBudget(request);
       }, expectedError);
       assert(
@@ -527,7 +527,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getBudget = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getBudget(request);
       }, expectedError);
       assert(
@@ -641,7 +641,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteBudget(request);
       }, expectedError);
       assert(
@@ -773,7 +773,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listBudgets(request);
       }, expectedError);
       assert(
@@ -871,7 +871,7 @@ describe('v1beta1.BudgetServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -949,7 +949,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         expectedError
       );
       const iterable = client.listBudgetsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.billing.budgets.v1beta1.IBudget[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

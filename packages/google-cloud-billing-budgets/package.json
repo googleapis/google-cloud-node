@@ -14,11 +14,7 @@
     "@types/sinon": "^9.0.0",
     "c8": "^7.0.0",
     "chai": "^4.2.0",
-    "eslint": "^6.0.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "gts": "2.0.0",
+    "gts": "^2.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.2",
     "jsdoc-region-tag": "^1.0.2",
@@ -32,9 +28,9 @@
   "scripts": {
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "gts check && eslint .",
+    "lint": "gts fix",
     "clean": "gts clean",
-    "fix": "gts fix && eslint . --fix",
+    "fix": "gts fix",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
@@ -44,13 +40,13 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm install"
   },
   "license": "Apache-2.0",
   "engines": {
     "node": ">=10"
   },
   "dependencies": {
-    "google-gax": "^2.0.1"
+    "google-gax": "^2.1.0"
   }
 }

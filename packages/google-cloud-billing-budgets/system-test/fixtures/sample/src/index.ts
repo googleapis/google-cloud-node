@@ -19,7 +19,7 @@
 import {BudgetServiceClient} from '@google-cloud/billing-budgets';
 
 function main() {
-  const budgetServiceClient = new BudgetServiceClient();
+  new BudgetServiceClient();
 }
 
 main();
