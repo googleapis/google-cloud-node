@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "gts fix && eslint --fix samples/*.js",
+    "lint": "gts fix",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "mocha build/system-test",
     "test": "c8 mocha build/test",
@@ -42,10 +42,10 @@
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm install"
   },
   "dependencies": {
-    "google-gax": "^2.0.1"
+    "google-gax": "^2.1.0"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.0",
@@ -53,11 +53,7 @@
     "@types/sinon": "^7.5.2",
     "c8": "^7.0.0",
     "codecov": "^3.0.2",
-    "eslint": "^6.0.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "gts": "2.0.0",
+    "gts": "^2.0.0",
     "jsdoc": "^3.5.5",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
