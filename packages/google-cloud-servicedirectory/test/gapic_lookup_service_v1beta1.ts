@@ -236,7 +236,7 @@ describe('v1beta1.LookupServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.resolveService(request);
       }, expectedError);
       assert(

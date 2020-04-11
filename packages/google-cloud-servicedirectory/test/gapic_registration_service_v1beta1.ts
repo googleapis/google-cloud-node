@@ -316,7 +316,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createNamespace(request);
       }, expectedError);
       assert(
@@ -436,7 +436,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getNamespace(request);
       }, expectedError);
       assert(
@@ -559,7 +559,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateNamespace(request);
       }, expectedError);
       assert(
@@ -679,7 +679,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteNamespace(request);
       }, expectedError);
       assert(
@@ -799,7 +799,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createService(request);
       }, expectedError);
       assert(
@@ -919,7 +919,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getService(request);
       }, expectedError);
       assert(
@@ -1042,7 +1042,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateService(request);
       }, expectedError);
       assert(
@@ -1162,7 +1162,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteService(request);
       }, expectedError);
       assert(
@@ -1282,7 +1282,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createEndpoint(request);
       }, expectedError);
       assert(
@@ -1402,7 +1402,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getEndpoint(request);
       }, expectedError);
       assert(
@@ -1525,7 +1525,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateEndpoint(request);
       }, expectedError);
       assert(
@@ -1645,7 +1645,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteEndpoint(request);
       }, expectedError);
       assert(
@@ -1765,7 +1765,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIamPolicy(request);
       }, expectedError);
       assert(
@@ -1885,7 +1885,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setIamPolicy(request);
       }, expectedError);
       assert(
@@ -2007,7 +2007,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.testIamPermissions(request);
       }, expectedError);
       assert(
@@ -2145,7 +2145,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listNamespaces(request);
       }, expectedError);
       assert(
@@ -2252,7 +2252,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2335,7 +2335,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         expectedError
       );
       const iterable = client.listNamespacesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.servicedirectory.v1beta1.INamespace[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2483,7 +2483,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listServices(request);
       }, expectedError);
       assert(
@@ -2586,7 +2586,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2669,7 +2669,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         expectedError
       );
       const iterable = client.listServicesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.servicedirectory.v1beta1.IService[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2817,7 +2817,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listEndpoints(request);
       }, expectedError);
       assert(
@@ -2920,7 +2920,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3003,7 +3003,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         expectedError
       );
       const iterable = client.listEndpointsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.servicedirectory.v1beta1.IEndpoint[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
