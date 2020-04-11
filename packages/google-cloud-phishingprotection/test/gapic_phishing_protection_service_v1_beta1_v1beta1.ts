@@ -256,7 +256,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.reportPhishing(request);
       }, expectedError);
       assert(
