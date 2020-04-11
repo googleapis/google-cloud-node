@@ -212,7 +212,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.analyzeSentiment(request);
       }, expectedError);
       assert(
@@ -302,7 +302,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.analyzeEntities(request);
       }, expectedError);
       assert(
@@ -394,7 +394,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.analyzeEntitySentiment(request);
       }, expectedError);
       assert(
@@ -484,7 +484,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.analyzeSyntax(request);
       }, expectedError);
       assert(
@@ -574,7 +574,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.classifyText(request);
       }, expectedError);
       assert(
@@ -664,7 +664,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.annotateText(request);
       }, expectedError);
       assert(
