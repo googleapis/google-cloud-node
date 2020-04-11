@@ -12,6 +12,7 @@
                 "java_outer_classname": "UptimeProto",
                 "java_package": "com.google.monitoring.v3",
                 "php_namespace": "Google\\Cloud\\Monitoring\\V3",
+                "ruby_package": "Google::Cloud::Monitoring::V3",
                 "(google.api.resource_definition).type": "monitoring.googleapis.com/MonitoredResourceDescriptor",
                 "(google.api.resource_definition).pattern": "*",
                 "(google.api.resource_definition).history": "ORIGINALLY_SINGLE_PATTERN"
@@ -4460,6 +4461,7 @@
         },
         "rpc": {
           "options": {
+            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
             "java_multiple_files": true,
             "java_outer_classname": "StatusProto",
