@@ -316,7 +316,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createSecret(request);
       }, expectedError);
       assert(
@@ -436,7 +436,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.addSecretVersion(request);
       }, expectedError);
       assert(
@@ -553,7 +553,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getSecret = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getSecret(request);
       }, expectedError);
       assert(
@@ -676,7 +676,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateSecret(request);
       }, expectedError);
       assert(
@@ -796,7 +796,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteSecret(request);
       }, expectedError);
       assert(
@@ -916,7 +916,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getSecretVersion(request);
       }, expectedError);
       assert(
@@ -1038,7 +1038,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.accessSecretVersion(request);
       }, expectedError);
       assert(
@@ -1160,7 +1160,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.disableSecretVersion(request);
       }, expectedError);
       assert(
@@ -1282,7 +1282,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.enableSecretVersion(request);
       }, expectedError);
       assert(
@@ -1404,7 +1404,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.destroySecretVersion(request);
       }, expectedError);
       assert(
@@ -1524,7 +1524,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setIamPolicy(request);
       }, expectedError);
       assert(
@@ -1644,7 +1644,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIamPolicy(request);
       }, expectedError);
       assert(
@@ -1766,7 +1766,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.testIamPermissions(request);
       }, expectedError);
       assert(
@@ -1890,7 +1890,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listSecrets(request);
       }, expectedError);
       assert(
@@ -1986,7 +1986,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2062,7 +2062,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         expectedError
       );
       const iterable = client.listSecretsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.secrets.v1beta1.ISecret[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2210,7 +2210,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listSecretVersions(request);
       }, expectedError);
       assert(
@@ -2313,7 +2313,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2396,7 +2396,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         expectedError
       );
       const iterable = client.listSecretVersionsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.secrets.v1beta1.ISecretVersion[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
