@@ -35,5 +35,5 @@ s.copy(templates)
 s.replace('src/v*/*_client.ts', '/compute/docs/', 'https://cloud.google.com/compute/docs/')
 
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'run', 'lint'])
 subprocess.run(['npx', 'compileProtos', 'src'])
