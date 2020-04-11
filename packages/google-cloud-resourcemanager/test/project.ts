@@ -23,13 +23,12 @@ import {
 } from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import {Policy} from '../src/project';
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  // tslint:disable-next-line variable-name
   promisifyAll(Class: Function) {
     if (Class.name === 'Project') {
       promisified = true;
@@ -38,17 +37,17 @@ const fakePromisify = Object.assign({}, promisify, {
 });
 
 class FakeServiceObject extends ServiceObject {
-  calledWith_: IArguments;
+  calledWith_: Array<{}>;
   constructor(config: ServiceObjectConfig) {
     super(config);
-    this.calledWith_ = arguments;
+    this.calledWith_ = [config];
   }
 }
 
 describe('Project', () => {
-  // tslint:disable-next-line variable-name no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Project: any;
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let project: any;
 
   const RESOURCE = {

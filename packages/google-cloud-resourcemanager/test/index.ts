@@ -23,30 +23,30 @@ import {
 import {MakeAuthenticatedRequestFactoryConfig} from '@google-cloud/common/build/src/util';
 import arrify = require('arrify');
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
 import * as root from '../src';
 import {Project} from '../src';
 
 class FakeOperation {
-  calledWith_: IArguments;
-  constructor() {
-    this.calledWith_ = arguments;
+  calledWith_: Array<{}>;
+  constructor(...args: Array<{}>) {
+    this.calledWith_ = args;
   }
 }
 
 class FakeProject {
-  calledWith_: IArguments;
-  constructor() {
-    this.calledWith_ = arguments;
+  calledWith_: Array<{}>;
+  constructor(...args: Array<{}>) {
+    this.calledWith_ = args;
   }
 }
 
 class FakeService {
-  calledWith_: IArguments;
-  constructor() {
-    this.calledWith_ = arguments;
+  calledWith_: Array<{}>;
+  constructor(...args: Array<{}>) {
+    this.calledWith_ = args;
   }
 }
 
@@ -94,10 +94,8 @@ const originalFakeUtil = Object.assign({}, fakeUtil);
 
 describe('Resource', () => {
   const PROJECT_ID = 'test-project-id';
-
-  // tslint:disable-next-line variable-name no-any
   let Resource: typeof root.Resource;
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let resource: any;
 
   before(() => {
@@ -148,6 +146,7 @@ describe('Resource', () => {
       assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepStrictEqual(
         calledWith.packageJson,
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         require('../../package.json')
       );
     });

@@ -54,7 +54,7 @@ describe('headers', () => {
   it('populates x-goog-api-client header', async () => {
     const resource = new Resource();
     try {
-      const [projects] = await resource.getProjects();
+      await resource.getProjects();
     } catch (err) {
       if (err !== error) throw err;
     }

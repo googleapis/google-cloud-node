@@ -15,7 +15,7 @@
  */
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, after} from 'mocha';
 import * as uuid from 'uuid';
 import {Project, Resource} from '../src';
 
@@ -97,7 +97,7 @@ describe('Resource', () => {
 
     it('should run operation as a promise', async () => {
       const project = resource.project(generateName('project'));
-      const [_, operation] = await project.create();
+      const [, operation] = await project.create();
       await operation.promise();
       testProjects.push(project);
       const [metadata] = await project.getMetadata();
