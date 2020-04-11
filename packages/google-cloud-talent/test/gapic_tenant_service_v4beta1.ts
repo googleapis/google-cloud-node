@@ -299,7 +299,7 @@ describe('v4beta1.TenantServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createTenant(request);
       }, expectedError);
       assert(
@@ -410,7 +410,7 @@ describe('v4beta1.TenantServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getTenant = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getTenant(request);
       }, expectedError);
       assert(
@@ -527,7 +527,7 @@ describe('v4beta1.TenantServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateTenant(request);
       }, expectedError);
       assert(
@@ -641,7 +641,7 @@ describe('v4beta1.TenantServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteTenant(request);
       }, expectedError);
       assert(
@@ -759,7 +759,7 @@ describe('v4beta1.TenantServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listTenants(request);
       }, expectedError);
       assert(
@@ -851,7 +851,7 @@ describe('v4beta1.TenantServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -923,7 +923,7 @@ describe('v4beta1.TenantServiceClient', () => {
         expectedError
       );
       const iterable = client.listTenantsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4beta1.ITenant[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

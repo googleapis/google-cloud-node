@@ -299,7 +299,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createCompany(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getCompany(request);
       }, expectedError);
       assert(
@@ -530,7 +530,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateCompany(request);
       }, expectedError);
       assert(
@@ -644,7 +644,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteCompany(request);
       }, expectedError);
       assert(
@@ -762,7 +762,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listCompanies(request);
       }, expectedError);
       assert(
@@ -855,7 +855,7 @@ describe('v4beta1.CompanyServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -928,7 +928,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         expectedError
       );
       const iterable = client.listCompaniesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4beta1.ICompany[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

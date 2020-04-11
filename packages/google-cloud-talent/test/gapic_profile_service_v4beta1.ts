@@ -299,7 +299,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createProfile(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getProfile(request);
       }, expectedError);
       assert(
@@ -530,7 +530,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateProfile(request);
       }, expectedError);
       assert(
@@ -644,7 +644,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteProfile(request);
       }, expectedError);
       assert(
@@ -758,7 +758,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchProfiles(request);
       }, expectedError);
       assert(
@@ -876,7 +876,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listProfiles(request);
       }, expectedError);
       assert(
@@ -969,7 +969,7 @@ describe('v4beta1.ProfileServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1042,7 +1042,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         expectedError
       );
       const iterable = client.listProfilesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4beta1.IProfile[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

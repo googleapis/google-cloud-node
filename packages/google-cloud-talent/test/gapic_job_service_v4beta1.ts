@@ -326,7 +326,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createJob(request);
       }, expectedError);
       assert(
@@ -437,7 +437,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getJob(request);
       }, expectedError);
       assert(
@@ -551,7 +551,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateJob(request);
       }, expectedError);
       assert(
@@ -662,7 +662,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteJob(request);
       }, expectedError);
       assert(
@@ -776,7 +776,7 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchDeleteJobs(request);
       }, expectedError);
       assert(
@@ -890,7 +890,7 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchJobs(request);
       }, expectedError);
       assert(
@@ -1014,7 +1014,7 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchCreateJobs(request);
       }, expectedError);
       assert(
@@ -1049,7 +1049,7 @@ describe('v4beta1.JobServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchCreateJobs(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1173,7 +1173,7 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchUpdateJobs(request);
       }, expectedError);
       assert(
@@ -1208,7 +1208,7 @@ describe('v4beta1.JobServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchUpdateJobs(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1323,7 +1323,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listJobs(request);
       }, expectedError);
       assert(
@@ -1414,7 +1414,7 @@ describe('v4beta1.JobServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1483,7 +1483,7 @@ describe('v4beta1.JobServiceClient', () => {
         expectedError
       );
       const iterable = client.listJobsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4beta1.IJob[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1625,7 +1625,7 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.searchJobsForAlert(request);
       }, expectedError);
       assert(
@@ -1728,7 +1728,7 @@ describe('v4beta1.JobServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1807,7 +1807,7 @@ describe('v4beta1.JobServiceClient', () => {
         expectedError
       );
       const iterable = client.searchJobsForAlertAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

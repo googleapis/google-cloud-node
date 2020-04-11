@@ -315,7 +315,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createApplication(request);
       }, expectedError);
       assert(
@@ -435,7 +435,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getApplication(request);
       }, expectedError);
       assert(
@@ -558,7 +558,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateApplication(request);
       }, expectedError);
       assert(
@@ -678,7 +678,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteApplication(request);
       }, expectedError);
       assert(
@@ -814,7 +814,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listApplications(request);
       }, expectedError);
       assert(
@@ -917,7 +917,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1000,7 +1000,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         expectedError
       );
       const iterable = client.listApplicationsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4beta1.IApplication[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

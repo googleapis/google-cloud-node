@@ -234,7 +234,7 @@ describe('v4beta1.CompletionClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.completeQuery(request);
       }, expectedError);
       assert(

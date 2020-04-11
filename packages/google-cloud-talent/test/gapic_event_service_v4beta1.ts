@@ -236,7 +236,7 @@ describe('v4beta1.EventServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createClientEvent(request);
       }, expectedError);
       assert(
