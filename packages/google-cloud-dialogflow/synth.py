@@ -42,5 +42,5 @@ templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=["README.md", "samples/README.md"])
 
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'run', 'lint'])
 subprocess.run(['npx', 'compileProtos', 'src'])
