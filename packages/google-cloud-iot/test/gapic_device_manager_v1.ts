@@ -299,7 +299,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createDeviceRegistry(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDeviceRegistry(request);
       }, expectedError);
       assert(
@@ -532,7 +532,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateDeviceRegistry(request);
       }, expectedError);
       assert(
@@ -648,7 +648,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteDeviceRegistry(request);
       }, expectedError);
       assert(
@@ -762,7 +762,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createDevice(request);
       }, expectedError);
       assert(
@@ -873,7 +873,7 @@ describe('v1.DeviceManagerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getDevice = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDevice(request);
       }, expectedError);
       assert(
@@ -990,7 +990,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateDevice(request);
       }, expectedError);
       assert(
@@ -1104,7 +1104,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteDevice(request);
       }, expectedError);
       assert(
@@ -1220,7 +1220,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.modifyCloudToDeviceConfig(request);
       }, expectedError);
       assert(
@@ -1336,7 +1336,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDeviceConfigVersions(request);
       }, expectedError);
       assert(
@@ -1450,7 +1450,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDeviceStates(request);
       }, expectedError);
       assert(
@@ -1564,7 +1564,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.setIamPolicy(request);
       }, expectedError);
       assert(
@@ -1678,7 +1678,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getIamPolicy(request);
       }, expectedError);
       assert(
@@ -1794,7 +1794,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.testIamPermissions(request);
       }, expectedError);
       assert(
@@ -1910,7 +1910,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.sendCommandToDevice(request);
       }, expectedError);
       assert(
@@ -2026,7 +2026,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.bindDeviceToGateway(request);
       }, expectedError);
       assert(
@@ -2142,7 +2142,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.unbindDeviceFromGateway(request);
       }, expectedError);
       assert(
@@ -2262,7 +2262,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDeviceRegistries(request);
       }, expectedError);
       assert(
@@ -2355,7 +2355,7 @@ describe('v1.DeviceManagerClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2428,7 +2428,7 @@ describe('v1.DeviceManagerClient', () => {
         expectedError
       );
       const iterable = client.listDeviceRegistriesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.iot.v1.IDeviceRegistry[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2556,7 +2556,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDevices(request);
       }, expectedError);
       assert(
@@ -2642,7 +2642,7 @@ describe('v1.DeviceManagerClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -2714,7 +2714,7 @@ describe('v1.DeviceManagerClient', () => {
         expectedError
       );
       const iterable = client.listDevicesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.iot.v1.IDevice[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

@@ -56,5 +56,5 @@ s.replace("src/v1/doc/google/cloud/iot/v1/doc_resources.js",
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'run', 'lint'])
 subprocess.run(['npx', 'compileProtos', 'src'])
