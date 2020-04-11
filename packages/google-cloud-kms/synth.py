@@ -80,5 +80,5 @@ with open('helperMethods.ts.tmpl', 'r') as helper_file:
 s.replace(client_file, '^}', content)
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'run', 'lint'])
 subprocess.run(['npx', 'compileProtos', 'src'])
