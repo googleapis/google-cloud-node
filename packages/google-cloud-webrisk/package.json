@@ -25,7 +25,7 @@
     "Web Risk API"
   ],
   "dependencies": {
-    "google-gax": "^2.0.1"
+    "google-gax": "^2.1.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.7",
@@ -34,11 +34,7 @@
     "@types/sinon": "^9.0.0",
     "c8": "^7.0.0",
     "chai": "^4.2.0",
-    "eslint": "^6.0.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "gts": "2.0.0",
+    "gts": "^2.0.0",
     "http2spy": "^1.0.0",
     "jsdoc": "^3.5.5",
     "jsdoc-fresh": "^1.0.1",
@@ -57,7 +53,7 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
-    "lint": "gts fix && eslint --fix samples/*.js",
+    "lint": "gts fix",
     "test": "c8 mocha build/test",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
@@ -68,7 +64,7 @@
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm install"
   },
   "license": "Apache-2.0",
   "engines": {
