@@ -60,7 +60,7 @@ describe('topics', () => {
   const _pullOneMessage = subscriptionObj => {
     return new Promise((resolve, reject) => {
       const timeoutHandler = setTimeout(() => {
-        reject(new Error(`_pullOneMessage timed out`));
+        reject(new Error('_pullOneMessage timed out'));
       }, 55000);
 
       subscriptionObj.once('error', reject).once('message', message => {
@@ -208,13 +208,13 @@ describe('topics', () => {
     const [policy] = results;
     assert.deepStrictEqual(policy.bindings, [
       {
-        role: `roles/pubsub.editor`,
-        members: [`group:cloud-logs@google.com`],
+        role: 'roles/pubsub.editor',
+        members: ['group:cloud-logs@google.com'],
         condition: null,
       },
       {
-        role: `roles/pubsub.viewer`,
-        members: [`allUsers`],
+        role: 'roles/pubsub.viewer',
+        members: ['allUsers'],
         condition: null,
       },
     ]);

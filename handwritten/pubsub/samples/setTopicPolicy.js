@@ -61,7 +61,7 @@ function main(topicName = 'YOUR_TOPIC_NAME') {
     const [updatedPolicy] = await pubSubClient
       .topic(topicName)
       .iam.setPolicy(newPolicy);
-    console.log(`Updated policy for topic: %j`, updatedPolicy.bindings);
+    console.log('Updated policy for topic: %j', updatedPolicy.bindings);
   }
 
   setTopicPolicy().catch(console.error);

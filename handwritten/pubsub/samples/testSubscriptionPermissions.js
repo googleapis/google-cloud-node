@@ -51,7 +51,7 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
       .subscription(subscriptionName)
       .iam.testPermissions(permissionsToTest);
 
-    console.log(`Tested permissions for subscription: %j`, permissions);
+    console.log('Tested permissions for subscription: %j', permissions);
   }
 
   testSubscriptionPermissions().catch(console.error);

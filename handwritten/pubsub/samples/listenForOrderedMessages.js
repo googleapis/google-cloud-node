@@ -64,7 +64,7 @@ async function main(
     const subscription = pubSubClient.subscription(subscriptionName);
 
     // Create an event handler to handle messages
-    const messageHandler = function(message) {
+    const messageHandler = function (message) {
       // Buffer the message in an object (for later ordering)
       outstandingMessages[message.attributes.counterId] = message;
 

@@ -52,7 +52,7 @@ function main(topicName = 'YOUR_TOPIC_NAME') {
       .topic(topicName)
       .iam.testPermissions(permissionsToTest);
 
-    console.log(`Tested permissions for topic: %j`, permissions);
+    console.log('Tested permissions for topic: %j', permissions);
   }
 
   testTopicPermissions().catch(console.error);

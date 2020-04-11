@@ -100,8 +100,8 @@ describe('subscriptions', () => {
     const expected =
       `Subscription: ${fullSubscriptionNameOne}` +
       `\nTopic: ${fullTopicNameOne}` +
-      `\nPush config: ` +
-      `\nAck deadline: 10s`;
+      '\nPush config: ' +
+      '\nAck deadline: 10s';
     assert.include(output, expected);
   });
 
@@ -124,7 +124,7 @@ describe('subscriptions', () => {
   it('should listen for messages', async () => {
     const messageIds = await pubsub
       .topic(topicNameOne)
-      .publish(Buffer.from(`Hello, world!`));
+      .publish(Buffer.from('Hello, world!'));
     const output = execSync(
       `${commandFor('listenForMessages')} ${subscriptionNameOne}`
     );
@@ -132,7 +132,7 @@ describe('subscriptions', () => {
   });
 
   it('should listen for messages synchronously', async () => {
-    await pubsub.topic(topicNameOne).publish(Buffer.from(`Hello, world!`));
+    await pubsub.topic(topicNameOne).publish(Buffer.from('Hello, world!'));
     const output = execSync(
       `${commandFor('synchronousPull')} ${projectId} ${subscriptionNameOne}`
     );
@@ -141,7 +141,7 @@ describe('subscriptions', () => {
   });
 
   it('should listen for messages synchronously with lease management', async () => {
-    await pubsub.topic(topicNameOne).publish(Buffer.from(`Hello, world!`));
+    await pubsub.topic(topicNameOne).publish(Buffer.from('Hello, world!'));
     const output = execSync(
       `${commandFor(
         'synchronousPullWithLeaseManagement'
@@ -153,7 +153,7 @@ describe('subscriptions', () => {
   it('should listen to messages with flow control', async () => {
     const topicTwo = pubsub.topic(topicNameTwo);
     await topicTwo.subscription(subscriptionNameFour).get({autoCreate: true});
-    await topicTwo.publish(Buffer.from(`Hello, world!`));
+    await topicTwo.publish(Buffer.from('Hello, world!'));
 
     const output = execSync(
       `${commandFor(
@@ -162,7 +162,7 @@ describe('subscriptions', () => {
     );
     assert.include(
       output,
-      `ready to receive messages at a controlled volume of 5 messages.`
+      'ready to receive messages at a controlled volume of 5 messages.'
     );
     const [subscriptions] = await pubsub.topic(topicNameTwo).getSubscriptions();
     assert(subscriptions.some(s => s.name === fullSubscriptionNameFour));
@@ -170,7 +170,7 @@ describe('subscriptions', () => {
 
   it('should listen for error messages', () => {
     assert.throws(
-      () => execSync(`node listenForErrors nonexistent-subscription`),
+      () => execSync('node listenForErrors nonexistent-subscription'),
       /Resource not found/
     );
   });
@@ -184,7 +184,7 @@ describe('subscriptions', () => {
       spy.calls.push(args);
       log(...args);
     };
-    const expected = `Hello, world!`;
+    const expected = 'Hello, world!';
     const expectedBuffer = Buffer.from(expected);
     const publishedMessageIds = [];
     const topicTwo = pubsub.topic(topicNameTwo);
@@ -207,7 +207,7 @@ describe('subscriptions', () => {
     );
     assert.strictEqual(spy.calls.length, 1);
     assert.deepStrictEqual(spy.calls[0], [
-      `* %d %j %j`,
+      '* %d %j %j',
       publishedMessageIds[1],
       expected,
       {counterId: '1'},
@@ -222,13 +222,13 @@ describe('subscriptions', () => {
     );
     assert.strictEqual(spy.calls.length, 3);
     assert.deepStrictEqual(spy.calls[1], [
-      `* %d %j %j`,
+      '* %d %j %j',
       publishedMessageIds[2],
       expected,
       {counterId: '2'},
     ]);
     assert.deepStrictEqual(spy.calls[2], [
-      `* %d %j %j`,
+      '* %d %j %j',
       publishedMessageIds[0],
       expected,
       {counterId: '3'},
@@ -244,13 +244,13 @@ describe('subscriptions', () => {
     const policy = results[0];
     assert.deepStrictEqual(policy.bindings, [
       {
-        role: `roles/pubsub.editor`,
-        members: [`group:cloud-logs@google.com`],
+        role: 'roles/pubsub.editor',
+        members: ['group:cloud-logs@google.com'],
         condition: null,
       },
       {
-        role: `roles/pubsub.viewer`,
-        members: [`allUsers`],
+        role: 'roles/pubsub.viewer',
+        members: ['allUsers'],
         condition: null,
       },
     ]);

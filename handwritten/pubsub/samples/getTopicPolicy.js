@@ -43,7 +43,7 @@ function main(topicName = 'YOUR_TOPIC_NAME') {
   async function getTopicPolicy() {
     // Retrieves the IAM policy for the topic
     const [policy] = await pubSubClient.topic(topicName).iam.getPolicy();
-    console.log(`Policy for topic: %j.`, policy.bindings);
+    console.log('Policy for topic: %j.', policy.bindings);
   }
 
   getTopicPolicy().catch(console.error);

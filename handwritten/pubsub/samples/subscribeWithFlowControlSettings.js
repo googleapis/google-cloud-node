@@ -78,7 +78,7 @@ function main(
       message.ack();
     };
 
-    subscription.on(`message`, messageHandler);
+    subscription.on('message', messageHandler);
 
     setTimeout(() => {
       subscription.close();

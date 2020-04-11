@@ -62,7 +62,7 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
       .subscription(subscriptionName)
       .iam.setPolicy(newPolicy);
 
-    console.log(`Updated policy for subscription: %j`, updatedPolicy.bindings);
+    console.log('Updated policy for subscription: %j', updatedPolicy.bindings);
   }
 
   setSubscriptionPolicy().catch(console.error);

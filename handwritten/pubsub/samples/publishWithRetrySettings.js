@@ -50,7 +50,10 @@ function main(
   });
 
   async function publishWithRetrySettings() {
-    const formattedTopic = publisherClient.projectTopicPath(projectId, topicName);
+    const formattedTopic = publisherClient.projectTopicPath(
+      projectId,
+      topicName
+    );
 
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
     const dataBuffer = Buffer.from(data);

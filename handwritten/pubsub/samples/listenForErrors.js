@@ -48,7 +48,7 @@ async function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 10) {
     const subscription = pubSubClient.subscription(subscriptionName);
 
     // Create an event handler to handle messages
-    const messageHandler = function(message) {
+    const messageHandler = function (message) {
       // Do something with the message
       console.log(`Message: ${message}`);
 
@@ -57,7 +57,7 @@ async function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 10) {
     };
 
     // Create an event handler to handle errors
-    const errorHandler = function(error) {
+    const errorHandler = function (error) {
       // Do something with the error
       console.error(`ERROR: ${error}`);
       throw error;

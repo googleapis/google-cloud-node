@@ -100,7 +100,7 @@ function main(
         console.log(`Acknowledged: "${message.message.data}".`);
         // Exit after the message is acknowledged.
         waiting = false;
-        console.log(`Done.`);
+        console.log('Done.');
       } else {
         // If the message is not yet processed..
         const modifyAckRequest = {
