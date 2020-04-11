@@ -43,7 +43,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "@google-cloud/common": "^2.0.0",
+    "@google-cloud/common": "^3.0.0",
     "@google-cloud/paginator": "^2.0.0",
     "@google-cloud/promisify": "^1.0.0"
   },
