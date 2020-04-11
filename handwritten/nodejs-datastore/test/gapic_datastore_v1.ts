@@ -207,7 +207,7 @@ describe('v1.DatastoreClient', () => {
       const expectedOptions = {};
       const expectedError = new Error('expected');
       client.innerApiCalls.lookup = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.lookup(request);
       }, expectedError);
       assert(
@@ -294,7 +294,7 @@ describe('v1.DatastoreClient', () => {
       const expectedOptions = {};
       const expectedError = new Error('expected');
       client.innerApiCalls.runQuery = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.runQuery(request);
       }, expectedError);
       assert(
@@ -384,7 +384,7 @@ describe('v1.DatastoreClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.beginTransaction(request);
       }, expectedError);
       assert(
@@ -471,7 +471,7 @@ describe('v1.DatastoreClient', () => {
       const expectedOptions = {};
       const expectedError = new Error('expected');
       client.innerApiCalls.commit = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.commit(request);
       }, expectedError);
       assert(
@@ -558,7 +558,7 @@ describe('v1.DatastoreClient', () => {
       const expectedOptions = {};
       const expectedError = new Error('expected');
       client.innerApiCalls.rollback = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.rollback(request);
       }, expectedError);
       assert(
@@ -648,7 +648,7 @@ describe('v1.DatastoreClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.allocateIds(request);
       }, expectedError);
       assert(
@@ -738,7 +738,7 @@ describe('v1.DatastoreClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.reserveIds(request);
       }, expectedError);
       assert(
