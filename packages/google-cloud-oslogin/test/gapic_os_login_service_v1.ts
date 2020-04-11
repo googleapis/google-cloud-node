@@ -238,7 +238,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deletePosixAccount(request);
       }, expectedError);
       assert(
@@ -354,7 +354,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteSshPublicKey(request);
       }, expectedError);
       assert(
@@ -468,7 +468,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getLoginProfile(request);
       }, expectedError);
       assert(
@@ -582,7 +582,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getSshPublicKey(request);
       }, expectedError);
       assert(
@@ -698,7 +698,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.importSshPublicKey(request);
       }, expectedError);
       assert(
@@ -814,7 +814,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateSshPublicKey(request);
       }, expectedError);
       assert(
