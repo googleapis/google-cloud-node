@@ -299,7 +299,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createDashboard(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDashboard(request);
       }, expectedError);
       assert(
@@ -527,7 +527,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteDashboard(request);
       }, expectedError);
       assert(
@@ -644,7 +644,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateDashboard(request);
       }, expectedError);
       assert(
@@ -774,7 +774,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDashboards(request);
       }, expectedError);
       assert(
@@ -873,7 +873,7 @@ describe('v1.DashboardsServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -952,7 +952,7 @@ describe('v1.DashboardsServiceClient', () => {
         expectedError
       );
       const iterable = client.listDashboardsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.monitoring.dashboard.v1.IDashboard[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
