@@ -297,7 +297,7 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getRecommendation(request);
       }, expectedError);
       assert(
@@ -413,7 +413,7 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.markRecommendationClaimed(request);
       }, expectedError);
       assert(
@@ -529,7 +529,7 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.markRecommendationSucceeded(request);
       }, expectedError);
       assert(
@@ -645,7 +645,7 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.markRecommendationFailed(request);
       }, expectedError);
       assert(
@@ -777,7 +777,7 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listRecommendations(request);
       }, expectedError);
       assert(
@@ -876,7 +876,7 @@ describe('v1.RecommenderClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -955,7 +955,7 @@ describe('v1.RecommenderClient', () => {
         expectedError
       );
       const iterable = client.listRecommendationsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.recommender.v1.IRecommendation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
