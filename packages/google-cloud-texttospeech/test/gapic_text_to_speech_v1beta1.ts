@@ -212,7 +212,7 @@ describe('v1beta1.TextToSpeechClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listVoices(request);
       }, expectedError);
       assert(
@@ -302,7 +302,7 @@ describe('v1beta1.TextToSpeechClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.synthesizeSpeech(request);
       }, expectedError);
       assert(
