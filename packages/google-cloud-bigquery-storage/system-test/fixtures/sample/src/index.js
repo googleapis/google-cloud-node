@@ -17,10 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const {BigQueryReadClient} = require('@google-cloud/bigquery-storage');
+const storage = require('@google-cloud/bigquery-storage');
 
 function main() {
-  const bigQueryReadClient = new BigQueryReadClient();
+  const bigQueryReadClient = new storage.BigQueryReadClient();
 }
 
 main();

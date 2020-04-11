@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,16 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  APICallback,
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './big_query_read_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -39,9 +33,6 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class BigQueryReadClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _innerApiCalls: {[name: string]: Function};
-  private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -49,6 +40,14 @@ export class BigQueryReadClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   bigQueryReadStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -140,13 +139,16 @@ export class BigQueryReadClient {
       'protos.json'
     );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
-    this._pathTemplates = {
+    this.pathTemplates = {
       readSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sessions/{session}'
       ),
@@ -157,7 +159,7 @@ export class BigQueryReadClient {
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
-    this._descriptors.stream = {
+    this.descriptors.stream = {
       readRows: new this._gaxModule.StreamDescriptor(
         gax.StreamType.SERVER_STREAMING
       ),
@@ -174,7 +176,7 @@ export class BigQueryReadClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -201,7 +203,7 @@ export class BigQueryReadClient {
         ? (this._protos as protobuf.Root).lookupService(
             'google.cloud.bigquery.storage.v1.BigQueryRead'
           )
-        : // tslint:disable-next-line no-any
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.bigquery.storage.v1.BigQueryRead,
       this._opts
     ) as Promise<{[method: string]: Function}>;
@@ -213,15 +215,14 @@ export class BigQueryReadClient {
       'readRows',
       'splitReadStream',
     ];
-
     for (const methodName of bigQueryReadStubMethods) {
-      const innerCallPromise = this.bigQueryReadStub.then(
+      const callPromise = this.bigQueryReadStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
           }
-          // eslint-disable-next-line prefer-spread
-          return stub[methodName].apply(stub, args);
+          const func = stub[methodName];
+          return func.apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
           throw err;
@@ -229,20 +230,14 @@ export class BigQueryReadClient {
       );
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-          this._descriptors.stream[methodName] ||
-          this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.bigQueryReadStub;
@@ -303,26 +298,37 @@ export class BigQueryReadClient {
   // -- Service calls --
   // -------------------
   createReadSession(
-    request: protosTypes.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.bigquery.storage.v1.IReadSession,
+      protos.google.cloud.bigquery.storage.v1.IReadSession,
       (
-        | protosTypes.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+        | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createReadSession(
-    request: protosTypes.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.bigquery.storage.v1.IReadSession,
-      | protosTypes.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      protos.google.cloud.bigquery.storage.v1.IReadSession,
+      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  createReadSession(
+    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IReadSession,
+      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -369,26 +375,28 @@ export class BigQueryReadClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   createReadSession(
-    request: protosTypes.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.bigquery.storage.v1.IReadSession,
-          | protosTypes.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+          protos.google.cloud.bigquery.storage.v1.IReadSession,
+          | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.bigquery.storage.v1.IReadSession,
-      | protosTypes.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      protos.google.cloud.bigquery.storage.v1.IReadSession,
+      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.bigquery.storage.v1.IReadSession,
+      protos.google.cloud.bigquery.storage.v1.IReadSession,
       (
-        | protosTypes.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+        | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
         | undefined
       ),
       {} | undefined
@@ -411,29 +419,40 @@ export class BigQueryReadClient {
       'read_session.table': request.readSession!.table || '',
     });
     this.initialize();
-    return this._innerApiCalls.createReadSession(request, options, callback);
+    return this.innerApiCalls.createReadSession(request, options, callback);
   }
   splitReadStream(
-    request: protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
+    request: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
     options?: gax.CallOptions
   ): Promise<
     [
-      protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
+      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
       (
-        | protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+        | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   splitReadStream(
-    request: protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
+    request: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
     options: gax.CallOptions,
     callback: Callback<
-      protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
-      | protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
+      | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
+    >
+  ): void;
+  splitReadStream(
+    request: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
+      | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
@@ -469,26 +488,28 @@ export class BigQueryReadClient {
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   splitReadStream(
-    request: protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
+    request: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
-          | protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+          protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
+          | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+          | null
           | undefined,
-          {} | undefined
+          {} | null | undefined
         >,
     callback?: Callback<
-      protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
-      | protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
+      | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+      | null
       | undefined,
-      {} | undefined
+      {} | null | undefined
     >
   ): Promise<
     [
-      protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
+      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
       (
-        | protosTypes.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+        | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
         | undefined
       ),
       {} | undefined
@@ -511,7 +532,7 @@ export class BigQueryReadClient {
       name: request.name || '',
     });
     this.initialize();
-    return this._innerApiCalls.splitReadStream(request, options, callback);
+    return this.innerApiCalls.splitReadStream(request, options, callback);
   }
 
   /**
@@ -537,7 +558,7 @@ export class BigQueryReadClient {
    *   An object stream which emits [ReadRowsResponse]{@link google.cloud.bigquery.storage.v1.ReadRowsResponse} on 'data' event.
    */
   readRows(
-    request?: protosTypes.google.cloud.bigquery.storage.v1.IReadRowsRequest,
+    request?: protos.google.cloud.bigquery.storage.v1.IReadRowsRequest,
     options?: gax.CallOptions
   ): gax.CancellableStream {
     request = request || {};
@@ -550,7 +571,7 @@ export class BigQueryReadClient {
       read_stream: request.readStream || '',
     });
     this.initialize();
-    return this._innerApiCalls.readRows(request, options);
+    return this.innerApiCalls.readRows(request, options);
   }
 
   // --------------------
@@ -566,10 +587,10 @@ export class BigQueryReadClient {
    * @returns {string} Resource name string.
    */
   readSessionPath(project: string, location: string, session: string) {
-    return this._pathTemplates.readSessionPathTemplate.render({
-      project,
-      location,
-      session,
+    return this.pathTemplates.readSessionPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
     });
   }
 
@@ -581,7 +602,7 @@ export class BigQueryReadClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReadSessionName(readSessionName: string) {
-    return this._pathTemplates.readSessionPathTemplate.match(readSessionName)
+    return this.pathTemplates.readSessionPathTemplate.match(readSessionName)
       .project;
   }
 
@@ -593,7 +614,7 @@ export class BigQueryReadClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReadSessionName(readSessionName: string) {
-    return this._pathTemplates.readSessionPathTemplate.match(readSessionName)
+    return this.pathTemplates.readSessionPathTemplate.match(readSessionName)
       .location;
   }
 
@@ -605,7 +626,7 @@ export class BigQueryReadClient {
    * @returns {string} A string representing the session.
    */
   matchSessionFromReadSessionName(readSessionName: string) {
-    return this._pathTemplates.readSessionPathTemplate.match(readSessionName)
+    return this.pathTemplates.readSessionPathTemplate.match(readSessionName)
       .session;
   }
 
@@ -624,11 +645,11 @@ export class BigQueryReadClient {
     session: string,
     stream: string
   ) {
-    return this._pathTemplates.readStreamPathTemplate.render({
-      project,
-      location,
-      session,
-      stream,
+    return this.pathTemplates.readStreamPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
+      stream: stream,
     });
   }
 
@@ -640,7 +661,7 @@ export class BigQueryReadClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReadStreamName(readStreamName: string) {
-    return this._pathTemplates.readStreamPathTemplate.match(readStreamName)
+    return this.pathTemplates.readStreamPathTemplate.match(readStreamName)
       .project;
   }
 
@@ -652,7 +673,7 @@ export class BigQueryReadClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReadStreamName(readStreamName: string) {
-    return this._pathTemplates.readStreamPathTemplate.match(readStreamName)
+    return this.pathTemplates.readStreamPathTemplate.match(readStreamName)
       .location;
   }
 
@@ -664,7 +685,7 @@ export class BigQueryReadClient {
    * @returns {string} A string representing the session.
    */
   matchSessionFromReadStreamName(readStreamName: string) {
-    return this._pathTemplates.readStreamPathTemplate.match(readStreamName)
+    return this.pathTemplates.readStreamPathTemplate.match(readStreamName)
       .session;
   }
 
@@ -676,7 +697,7 @@ export class BigQueryReadClient {
    * @returns {string} A string representing the stream.
    */
   matchStreamFromReadStreamName(readStreamName: string) {
-    return this._pathTemplates.readStreamPathTemplate.match(readStreamName)
+    return this.pathTemplates.readStreamPathTemplate.match(readStreamName)
       .stream;
   }
 

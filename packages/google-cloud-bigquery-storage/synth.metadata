@@ -1,20 +1,11 @@
 {
-  "updateTime": "2020-03-11T21:35:37.421495Z",
+  "updateTime": "2020-04-10T23:55:16.301945Z",
   "sources": [
     {
       "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "80d2bd2c652a5e213302041b0620aff423132589",
-        "internalRef": "300393997",
-        "log": "80d2bd2c652a5e213302041b0620aff423132589\nEnable proto annotation and gapic v2 for talent API.\n\nPiperOrigin-RevId: 300393997\n\n85e454be7a353f7fe1bf2b0affb753305785b872\ndocs(google/maps/roads): remove mention of nonexported api\n\nPiperOrigin-RevId: 300367734\n\nbf839ae632e0f263a729569e44be4b38b1c85f9c\nAdding protocol buffer annotations and updated config info for v1 and v2.\n\nPiperOrigin-RevId: 300276913\n\n309b899ca18a4c604bce63882a161d44854da549\nPublish `Backup` APIs and protos.\n\nPiperOrigin-RevId: 300246038\n\neced64c3f122421350b4aca68a28e89121d20db8\nadd PHP client libraries\n\nPiperOrigin-RevId: 300193634\n\n7727af0e39df1ae9ad715895c8576d7b65cf6c6d\nfeat: use the latest gapic-generator and protoc-java-resource-name-plugin in googleapis/WORKSPACE.\n\nPiperOrigin-RevId: 300188410\n\n2a25aa351dd5b5fe14895266aff5824d90ce757b\nBreaking change: remove the ProjectOrTenant resource and its references.\n\nPiperOrigin-RevId: 300182152\n\na499dbb28546379415f51803505cfb6123477e71\nUpdate web risk v1 gapic config and BUILD file.\n\nPiperOrigin-RevId: 300152177\n\n52701da10fec2a5f9796e8d12518c0fe574488fe\nFix: apply appropriate namespace/package options for C#, PHP and Ruby.\n\nPiperOrigin-RevId: 300123508\n\n365c029b8cdb63f7751b92ab490f1976e616105c\nAdd CC targets to the kms protos.\n\nThese are needed by go/tink.\n\nPiperOrigin-RevId: 300038469\n\n4ba9aa8a4a1413b88dca5a8fa931824ee9c284e6\nExpose logo recognition API proto for GA.\n\nPiperOrigin-RevId: 299971671\n\n1c9fc2c9e03dadf15f16b1c4f570955bdcebe00e\nAdding ruby_package option to accessapproval.proto for the Ruby client libraries generation.\n\nPiperOrigin-RevId: 299955924\n\n1cc6f0a7bfb147e6f2ede911d9b01e7a9923b719\nbuild(google/maps/routes): generate api clients\n\nPiperOrigin-RevId: 299955905\n\n29a47c965aac79e3fe8e3314482ca0b5967680f0\nIncrease timeout to 1hr for method `dropRange` in bigtable/admin/v2, which is\nsynced with the timeout setting in gapic_yaml.\n\nPiperOrigin-RevId: 299917154\n\n8f631c4c70a60a9c7da3749511ee4ad432b62898\nbuild(google/maps/roads/v1op): move go to monorepo pattern\n\nPiperOrigin-RevId: 299885195\n\nd66816518844ebbf63504c9e8dfc7133921dd2cd\nbuild(google/maps/roads/v1op): Add bazel build files to generate clients.\n\nPiperOrigin-RevId: 299851148\n\naf7dff701fabe029672168649c62356cf1bb43d0\nAdd LogPlayerReports and LogImpressions to Playable Locations service\n\nPiperOrigin-RevId: 299724050\n\nb6927fca808f38df32a642c560082f5bf6538ced\nUpdate BigQuery Connection API v1beta1 proto: added credential to CloudSqlProperties.\n\nPiperOrigin-RevId: 299503150\n\n91e1fb5ef9829c0c7a64bfa5bde330e6ed594378\nchore: update protobuf (protoc) version to 3.11.2\n\nPiperOrigin-RevId: 299404145\n\n30e36b4bee6749c4799f4fc1a51cc8f058ba167d\nUpdate cloud asset api v1p4beta1.\n\nPiperOrigin-RevId: 299399890\n\nffbb493674099f265693872ae250711b2238090c\nfeat: cloudbuild/v1 add new fields and annotate OUTPUT_OUT fields.\n\nPiperOrigin-RevId: 299397780\n\nbc973a15818e00c19e121959832676e9b7607456\nbazel: Fix broken common  dependency\n\nPiperOrigin-RevId: 299397431\n\n71094a343e3b962e744aa49eb9338219537474e4\nchore: bigtable/admin/v2 publish retry config\n\nPiperOrigin-RevId: 299391875\n\n8f488efd7bda33885cb674ddd023b3678c40bd82\nfeat: Migrate logging to GAPIC v2; release new features.\n\nIMPORTANT: This is a breaking change for client libraries\nin all languages.\n\nCommitter: @lukesneeringer, @jskeet\nPiperOrigin-RevId: 299370279\n\n007605bf9ad3a1fd775014ebefbf7f1e6b31ee71\nUpdate API for bigqueryreservation v1beta1.\n- Adds flex capacity commitment plan to CapacityCommitment.\n- Adds methods for getting and updating BiReservations.\n- Adds methods for updating/splitting/merging CapacityCommitments.\n\nPiperOrigin-RevId: 299368059\n\n"
-      }
-    },
-    {
-      "template": {
-        "name": "node_library",
-        "origin": "synthtool.gcp",
-        "version": "2020.2.4"
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "6f32150677c9784f3c3a7e1949472bd29c9d72c5"
       }
     }
   ],

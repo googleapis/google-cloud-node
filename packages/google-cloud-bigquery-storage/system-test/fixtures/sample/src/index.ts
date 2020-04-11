@@ -19,8 +19,7 @@
 import {BigQueryReadClient} from '@google-cloud/bigquery-storage';
 
 function main() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const bigQueryReadClient = new BigQueryReadClient();
+  new BigQueryReadClient();
 }
 
 main();

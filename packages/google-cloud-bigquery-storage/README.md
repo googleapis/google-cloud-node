@@ -63,10 +63,9 @@ const avro = require('avsc');
 
 // See reference documentation at
 // https://cloud.google.com/bigquery/docs/reference/storage
-const bqStorage = require('@google-cloud/bigquery-storage').v1beta1
-  .BigQueryStorageClient;
+const {BigQueryStorageClient} = require('@google-cloud/bigquery-storage');
 
-const client = new bqStorage();
+const client = new BigQueryStorageClient();
 
 async function bigqueryStorageQuickstart() {
   // Get current project ID. The read session is created in this project.
