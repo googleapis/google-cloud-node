@@ -318,7 +318,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createAssessment(request);
       }, expectedError);
       assert(
@@ -440,7 +440,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.annotateAssessment(request);
       }, expectedError);
       assert(
@@ -557,7 +557,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.createKey = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createKey(request);
       }, expectedError);
       assert(
@@ -674,7 +674,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getKey = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getKey(request);
       }, expectedError);
       assert(
@@ -794,7 +794,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKey = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateKey(request);
       }, expectedError);
       assert(
@@ -911,7 +911,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKey = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteKey(request);
       }, expectedError);
       assert(
@@ -1044,7 +1044,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listKeys = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listKeys(request);
       }, expectedError);
       assert(
@@ -1145,7 +1145,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1224,7 +1224,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         expectedError
       );
       const iterable = client.listKeysAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.recaptchaenterprise.v1.IKey[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
