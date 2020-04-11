@@ -18,7 +18,6 @@ import {TranslationServiceClient} from '../src';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const http2spy = require('http2spy');
-const API_KEY = process.env.TRANSLATE_API_KEY;
 
 describe('translate', () => {
   const translate = new TranslationServiceClient();

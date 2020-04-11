@@ -347,7 +347,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.translateText(request);
       }, expectedError);
       assert(
@@ -467,7 +467,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.detectLanguage(request);
       }, expectedError);
       assert(
@@ -589,7 +589,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getSupportedLanguages(request);
       }, expectedError);
       assert(
@@ -709,7 +709,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getGlossary(request);
       }, expectedError);
       assert(
@@ -839,7 +839,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchTranslateText(request);
       }, expectedError);
       assert(
@@ -876,7 +876,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchTranslateText(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1006,7 +1006,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createGlossary(request);
       }, expectedError);
       assert(
@@ -1043,7 +1043,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createGlossary(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1173,7 +1173,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteGlossary(request);
       }, expectedError);
       assert(
@@ -1210,7 +1210,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteGlossary(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
@@ -1346,7 +1346,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listGlossaries(request);
       }, expectedError);
       assert(
@@ -1449,7 +1449,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -1532,7 +1532,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         expectedError
       );
       const iterable = client.listGlossariesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.cloud.translation.v3beta1.IGlossary[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);

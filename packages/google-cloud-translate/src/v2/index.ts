@@ -271,7 +271,7 @@ export class Translate extends Service {
             });
 
             // Deprecated.
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             delete (result as any).isReliable;
 
             return result;
@@ -511,7 +511,7 @@ export class Translate extends Service {
       options = {to: optionsOrTo};
     }
 
-    // tslint:disable-next-line no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const body: any = {
       q: input,
       format: options.format || (isHtml(input[0]) ? 'html' : 'text'),
