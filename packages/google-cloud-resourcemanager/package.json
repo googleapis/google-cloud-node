@@ -45,7 +45,7 @@
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
     "@google-cloud/paginator": "^3.0.0",
-    "@google-cloud/promisify": "^1.0.0"
+    "@google-cloud/promisify": "^2.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.0",
