@@ -23,11 +23,10 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 const projectId = process.env.GCLOUD_PROJECT;
-const LOCATION = 'us-central1';
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js ${projectId} ${LOCATION}`, {
+    const stdout = execSync(`node ./quickstart.js ${projectId}`, {
       cwd,
     });
     assert.match(stdout, /Entity/);
