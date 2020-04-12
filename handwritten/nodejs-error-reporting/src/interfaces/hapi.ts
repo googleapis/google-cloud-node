@@ -19,6 +19,7 @@ import {ErrorMessage} from '../classes/error-message';
 import {populateErrorMessage} from '../populate-error-message';
 import {hapiRequestInformationExtractor} from '../request-extractors/hapi';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('../../../package.json');
 
 import {RequestHandler} from '../google-apis/auth-client';
