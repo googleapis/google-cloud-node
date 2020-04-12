@@ -26,10 +26,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "fix": "0.0.6",
-    "google-gax": "^2.1.0",
-    "npm": "^6.14.4",
-    "run": "^1.4.0"
+    "google-gax": "^2.1.0"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.0",
