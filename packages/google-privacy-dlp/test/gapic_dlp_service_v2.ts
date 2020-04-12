@@ -297,7 +297,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.inspectContent(request);
       }, expectedError);
       assert(
@@ -411,7 +411,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.redactImage(request);
       }, expectedError);
       assert(
@@ -525,7 +525,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deidentifyContent(request);
       }, expectedError);
       assert(
@@ -639,7 +639,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.reidentifyContent(request);
       }, expectedError);
       assert(
@@ -729,7 +729,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listInfoTypes(request);
       }, expectedError);
       assert(
@@ -845,7 +845,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createInspectTemplate(request);
       }, expectedError);
       assert(
@@ -961,7 +961,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateInspectTemplate(request);
       }, expectedError);
       assert(
@@ -1077,7 +1077,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getInspectTemplate(request);
       }, expectedError);
       assert(
@@ -1193,7 +1193,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteInspectTemplate(request);
       }, expectedError);
       assert(
@@ -1309,7 +1309,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createDeidentifyTemplate(request);
       }, expectedError);
       assert(
@@ -1425,7 +1425,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateDeidentifyTemplate(request);
       }, expectedError);
       assert(
@@ -1541,7 +1541,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDeidentifyTemplate(request);
       }, expectedError);
       assert(
@@ -1657,7 +1657,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteDeidentifyTemplate(request);
       }, expectedError);
       assert(
@@ -1771,7 +1771,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createJobTrigger(request);
       }, expectedError);
       assert(
@@ -1885,7 +1885,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateJobTrigger(request);
       }, expectedError);
       assert(
@@ -2001,7 +2001,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.hybridInspectJobTrigger(request);
       }, expectedError);
       assert(
@@ -2115,7 +2115,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getJobTrigger(request);
       }, expectedError);
       assert(
@@ -2229,7 +2229,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteJobTrigger(request);
       }, expectedError);
       assert(
@@ -2345,7 +2345,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.activateJobTrigger(request);
       }, expectedError);
       assert(
@@ -2459,7 +2459,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createDlpJob(request);
       }, expectedError);
       assert(
@@ -2570,7 +2570,7 @@ describe('v2.DlpServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getDlpJob = stubSimpleCall(undefined, expectedError);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getDlpJob(request);
       }, expectedError);
       assert(
@@ -2684,7 +2684,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteDlpJob(request);
       }, expectedError);
       assert(
@@ -2798,7 +2798,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.cancelDlpJob(request);
       }, expectedError);
       assert(
@@ -2914,7 +2914,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.createStoredInfoType(request);
       }, expectedError);
       assert(
@@ -3030,7 +3030,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.updateStoredInfoType(request);
       }, expectedError);
       assert(
@@ -3144,7 +3144,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.getStoredInfoType(request);
       }, expectedError);
       assert(
@@ -3260,7 +3260,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.deleteStoredInfoType(request);
       }, expectedError);
       assert(
@@ -3376,7 +3376,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.hybridInspectDlpJob(request);
       }, expectedError);
       assert(
@@ -3490,7 +3490,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.finishDlpJob(request);
       }, expectedError);
       assert(
@@ -3622,7 +3622,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listInspectTemplates(request);
       }, expectedError);
       assert(
@@ -3721,7 +3721,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -3800,7 +3800,7 @@ describe('v2.DlpServiceClient', () => {
         expectedError
       );
       const iterable = client.listInspectTemplatesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.privacy.dlp.v2.IInspectTemplate[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -3942,7 +3942,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDeidentifyTemplates(request);
       }, expectedError);
       assert(
@@ -4042,7 +4042,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -4122,7 +4122,7 @@ describe('v2.DlpServiceClient', () => {
         expectedError
       );
       const iterable = client.listDeidentifyTemplatesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.privacy.dlp.v2.IDeidentifyTemplate[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -4250,7 +4250,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listJobTriggers(request);
       }, expectedError);
       assert(
@@ -4343,7 +4343,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -4416,7 +4416,7 @@ describe('v2.DlpServiceClient', () => {
         expectedError
       );
       const iterable = client.listJobTriggersAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.privacy.dlp.v2.IJobTrigger[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -4544,7 +4544,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listDlpJobs(request);
       }, expectedError);
       assert(
@@ -4630,7 +4630,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -4702,7 +4702,7 @@ describe('v2.DlpServiceClient', () => {
         expectedError
       );
       const iterable = client.listDlpJobsAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.privacy.dlp.v2.IDlpJob[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -4844,7 +4844,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.listStoredInfoTypes(request);
       }, expectedError);
       assert(
@@ -4943,7 +4943,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await promise;
       }, expectedError);
       assert(
@@ -5022,7 +5022,7 @@ describe('v2.DlpServiceClient', () => {
         expectedError
       );
       const iterable = client.listStoredInfoTypesAsync(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         const responses: protos.google.privacy.dlp.v2.IStoredInfoType[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
