@@ -14,6 +14,7 @@
                     "java_outer_classname": "DlpStorage",
                     "java_package": "com.google.privacy.dlp.v2",
                     "php_namespace": "Google\\Cloud\\Dlp\\V2",
+                    "ruby_package": "Google::Cloud::Dlp::V2",
                     "(google.api.resource_definition).type": "dlp.googleapis.com/OrganizationLocation",
                     "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
                   },
