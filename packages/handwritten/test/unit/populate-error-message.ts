@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach} from 'mocha';
 
 import {ErrorMessage} from '../../src/classes/error-message';
 import {populateErrorMessage} from '../../src/populate-error-message';

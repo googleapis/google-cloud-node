@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {Request, Response} from 'koa';
+import {describe, it} from 'mocha';
 
 import {koaRequestInformationExtractor} from '../../../src/request-extractors/koa';
 import {Fuzzer} from '../../../utils/fuzzer';

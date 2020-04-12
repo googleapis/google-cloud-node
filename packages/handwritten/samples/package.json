@@ -5,7 +5,8 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-error-reporting",
   "files": [
-    "*.js"
+    "*.js",
+    "!test/"
   ],
   "engines": {
     "node": ">=10"

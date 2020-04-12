@@ -135,16 +135,15 @@ export class ErrorReporting {
     this._client = new AuthClient(this._config, this._logger);
 
     if (this._config.getReportUnhandledRejections()) {
-      const that = this;
       process.on('unhandledRejection', reason => {
-        that._logger.warn(
+        this._logger.warn(
           'UnhandledPromiseRejectionWarning: ' +
             'Unhandled promise rejection: ' +
             reason +
             '.  This rejection has been reported to the ' +
             'Google Cloud Platform error-reporting console.'
         );
-        that.report(reason);
+        this.report(reason);
       });
     }
 

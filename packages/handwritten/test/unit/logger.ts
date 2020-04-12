@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, after, beforeEach, afterEach} from 'mocha';
 import {createLogger} from '../../src/logger';
 
 describe('logger', () => {
@@ -66,17 +66,17 @@ describe('logger', () => {
       });
     });
     describe('Default log level', () => {
-      let oldLog: (text: string) => void;
+      let oldLog: (text: any, args: string[]) => void;
       let text: string | undefined;
       beforeEach(() => {
         // eslint-disable-next-line no-console
         oldLog = console.error;
         text = '';
         // eslint-disable-next-line no-console
-        console.error = function(this) {
-          oldLog.apply(this, (arguments as {}) as [string]);
-          for (let i = 0; i < arguments.length; i++) {
-            text += arguments[i];
+        console.error = function(this, ...args: string[]) {
+          oldLog(this, args);
+          for (let i = 0; i < args.length; i++) {
+            text += args[i];
           }
         };
       });
