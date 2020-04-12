@@ -14,6 +14,7 @@
 
 import * as hapi from 'hapi';
 import {URL} from 'url';
+import {describe, it} from 'mocha';
 
 import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';
 import {Fuzzer} from '../../../utils/fuzzer';

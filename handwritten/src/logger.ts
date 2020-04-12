@@ -16,6 +16,7 @@ import * as is from 'is';
 import has = require('lodash.has');
 import consoleLogLevel = require('console-log-level');
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('../../package.json');
 
 import {ConfigurationOptions, Logger} from './configuration';

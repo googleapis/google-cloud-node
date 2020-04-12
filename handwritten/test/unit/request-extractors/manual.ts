@@ -16,6 +16,7 @@ import omit = require('lodash.omit');
 import {manualRequestInformationExtractor} from '../../../src/request-extractors/manual';
 import {Fuzzer} from '../../../utils/fuzzer';
 import {deepStrictEqual} from '../../util';
+import {describe, it} from 'mocha';
 
 describe('manualRequestInformationExtractor', () => {
   describe('Behaviour given invalid input', () => {

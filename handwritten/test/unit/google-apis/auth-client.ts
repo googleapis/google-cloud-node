@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as proxyquire from 'proxyquire';
+import {describe, beforeEach, afterEach, it} from 'mocha';
 
 import {
   Configuration,
