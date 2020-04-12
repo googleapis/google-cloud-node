@@ -118,7 +118,7 @@ describe('paginator', () => {
     });
 
     it('should maintain `this` context', done => {
-      FakeClass.prototype.methodToExtend = function() {
+      FakeClass.prototype.methodToExtend = function () {
         return this.uuid;
       };
 
@@ -184,7 +184,7 @@ describe('paginator', () => {
 
     it('should apply the proper context', done => {
       const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
-      FakeClass.prototype.methodToExtend = function() {
+      FakeClass.prototype.methodToExtend = function () {
         return this;
       };
       sandbox.stub(paginator, 'parseArguments_').callsFake(() => {

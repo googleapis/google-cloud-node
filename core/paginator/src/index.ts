@@ -92,7 +92,7 @@ export class Paginator {
 
       // overwrite the original to auto-paginate
       /* eslint-disable  @typescript-eslint/no-explicit-any */
-      Class.prototype[methodName] = function(...args: any[]) {
+      Class.prototype[methodName] = function (...args: any[]) {
         const parsedArguments = paginator.parseArguments_(args);
         return paginator.run_(parsedArguments, originalMethod.bind(this));
       };
@@ -113,7 +113,7 @@ export class Paginator {
    */
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   streamify<T = any>(methodName: string) {
-    return function(
+    return function (
       // tslint:disable-next-line:no-any
       this: {[index: string]: Function},
       /* eslint-disable  @typescript-eslint/no-explicit-any */
