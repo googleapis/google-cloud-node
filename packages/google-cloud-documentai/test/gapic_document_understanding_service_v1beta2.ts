@@ -288,7 +288,7 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.processDocument(request);
       }, expectedError);
       assert(
@@ -418,7 +418,7 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
         undefined,
         expectedError
       );
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await client.batchProcessDocuments(request);
       }, expectedError);
       assert(
@@ -455,7 +455,7 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchProcessDocuments(request);
-      assert.rejects(async () => {
+      await assert.rejects(async () => {
         await operation.promise();
       }, expectedError);
       assert(
