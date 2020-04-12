@@ -33,7 +33,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "@google-cloud/common": "^2.0.1",
+    "@google-cloud/common": "^3.0.0",
     "console-log-level": "^1.4.1",
     "is": "^3.3.0",
     "lodash.has": "^4.5.2"
