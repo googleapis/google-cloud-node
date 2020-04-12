@@ -83,7 +83,7 @@ app.get('/error', (req, res, next) => {
 });
 
 app.get('/exception', () => {
-  JSON.parse('{\"malformedJson\": true');
+  JSON.parse('{"malformedJson": true');
 });
 
 app.use(errors.express);
@@ -293,7 +293,7 @@ app.get('/error', (req, res, next) => {
 });
 
 app.get('/exception', () => {
-  JSON.parse('{\"malformedJson\": true');
+  JSON.parse('{"malformedJson": true');
 });
 
 // Note that express error handling middleware should be attached after all

@@ -17,12 +17,13 @@ const EXCLAMATION_LN = '\n!!';
 import has = require('lodash.has');
 import * as express from 'express';
 const app = express();
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const errorHandler = require('../../src/index.js')({
   onUncaughtException: 'report',
   key: process.env.STUBBED_API_KEY,
   projectId: process.env.STUBBED_PROJECT_NUM,
 });
-const bodyParser = require('body-parser');
+import bodyParser = require('body-parser');
 
 // eslint-disable-next-line no-console
 const log = console.log;

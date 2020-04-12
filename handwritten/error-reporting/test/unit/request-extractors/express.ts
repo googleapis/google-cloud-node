@@ -16,6 +16,7 @@ import {Response} from 'express';
 import {expressRequestInformationExtractor} from '../../../src/request-extractors/express';
 import {Fuzzer} from '../../../utils/fuzzer';
 import {deepStrictEqual} from '../../util';
+import {describe, it, beforeEach} from 'mocha';
 
 describe('Behaviour under varying input', () => {
   let f: Fuzzer;
@@ -105,7 +106,7 @@ describe('Behaviour under varying input', () => {
     const headerFactory = (toDeriveFrom: any) => {
       const lrn = Object.assign({}, toDeriveFrom);
       lrn.header = (toRet: string) => {
-        if (lrn.hasOwnProperty(toRet)) {
+        if (Object.prototype.hasOwnProperty.call(lrn, toRet)) {
           return lrn[toRet];
         }
         return undefined;

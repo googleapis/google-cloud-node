@@ -15,7 +15,7 @@
 import * as is from 'is';
 import has = require('lodash.has');
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, before, afterEach} from 'mocha';
 import {makeHapiPlugin as hapiInterface} from '../../../src/interfaces/hapi';
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {Fuzzer} from '../../../utils/fuzzer';
@@ -27,6 +27,7 @@ import * as http from 'http';
 import * as hapi from 'hapi';
 import * as boom from 'boom';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('../../../../package.json');
 
 interface HapiPlugin {

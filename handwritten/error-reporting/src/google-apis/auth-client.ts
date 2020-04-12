@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
 import * as is from 'is';
 import {Configuration, Logger} from '../configuration';
@@ -110,12 +111,11 @@ export class RequestHandler extends Service {
     this._config = config;
     this._logger = logger;
 
-    const that = this;
     if (tryAuthenticate) {
       this.authClient.getAccessToken().then(
         () => {},
         err => {
-          that._logger.error(
+          this._logger.error(
             [
               'Unable to find credential information on instance. This library',
               'will be unable to communicate with the Stackdriver API to save',
@@ -149,7 +149,7 @@ export class RequestHandler extends Service {
           }
         }
       );
-      that._logger.info('API key provided; skipping OAuth2 token request.');
+      this._logger.info('API key provided; skipping OAuth2 token request.');
     }
   }
   /**

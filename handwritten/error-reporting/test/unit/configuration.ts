@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, after, afterEach, beforeEach} from 'mocha';
 import * as is from 'is';
 import merge = require('lodash.merge');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';

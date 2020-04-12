@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import delay from 'delay';
 import * as is from 'is';
 import * as nock from 'nock';
@@ -461,11 +461,8 @@ describe('error-reporting', () => {
     // interfering with existing listeners of the 'unhandledRejection' event.
     assert.strictEqual(process.listenerCount('unhandledRejection'), 0);
     oldLogger = console.error;
-    console.error = function(this) {
-      const text = util.format.apply(
-        null,
-        (arguments as {}) as [{}, Array<{}>]
-      );
+    console.error = function(this, ...args: any[]) {
+      const text = util.format(null, args);
       oldLogger(text);
       logOutput += text;
     };

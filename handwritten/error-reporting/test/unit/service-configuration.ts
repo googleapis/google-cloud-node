@@ -13,13 +13,14 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, beforeEach, after, it} from 'mocha';
 import * as is from 'is';
 import omitBy = require('lodash.omitby');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 import {deepStrictEqual} from '../util';
 const level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 import {createLogger} from '../../src/logger';
+
 const logger = createLogger({
   logLevel: is.number(level) ? level : 4,
 });
