@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@google-cloud/logging": "^7.0.0",
-    "google-auth-library": "^5.0.0"
+    "google-auth-library": "^6.0.0"
   },
   "devDependencies": {
     "@google-cloud/common": "^2.0.0",
