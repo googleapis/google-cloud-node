@@ -35,12 +35,9 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   const storage = new Storage();
 
   async function setTemporarydHold() {
-    await storage
-      .bucket(bucketName)
-      .file(fileName)
-      .setMetadata({
-        temporaryHold: true,
-      });
+    await storage.bucket(bucketName).file(fileName).setMetadata({
+      temporaryHold: true,
+    });
     console.log(`Temporary hold was set for ${fileName}.`);
   }
 

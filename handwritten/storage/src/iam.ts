@@ -248,7 +248,10 @@ class Iam {
       qs.userProject = options.userProject;
     }
 
-    if (options.requestedPolicyVersion != null) {
+    if (
+      options.requestedPolicyVersion !== null &&
+      options.requestedPolicyVersion !== undefined
+    ) {
       qs.optionsRequestedPolicyVersion = options.requestedPolicyVersion;
     }
 

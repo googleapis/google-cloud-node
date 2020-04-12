@@ -170,7 +170,7 @@ export class URLSigner {
         this.bucket.name,
         config.file
       );
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       signedUrl.search = qsStringify(query as any);
       return signedUrl.href;
     });
@@ -278,7 +278,7 @@ export class URLSigner {
         ...(config.queryParams || {}),
       };
 
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const canonicalQueryParams = this.getCanonicalQueryParams(queryParams);
 
       const canonicalRequest = this.getCanonicalRequest(
@@ -343,7 +343,7 @@ export class URLSigner {
       .sort((a, b) => a[0].localeCompare(b[0]));
 
     return sortedHeaders
-      .filter(([_, value]) => value !== undefined)
+      .filter(([, value]) => value !== undefined)
       .map(([headerName, value]) => {
         // - Convert Array (multi-valued header) into string, delimited by
         //      ',' (no space).

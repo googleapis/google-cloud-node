@@ -15,6 +15,7 @@ import * as assert from 'assert';
 import * as dateFormat from 'date-and-time';
 import * as crypto from 'crypto';
 import * as sinon from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 
 import {
   URLSigner,
@@ -51,7 +52,7 @@ describe('signer', () => {
 
     beforeEach(() => {
       authClient = {
-        sign: async (_blobToSign: string) => 'signature',
+        sign: async () => 'signature',
         getCredentials: async () => ({client_email: CLIENT_EMAIL}),
       };
       bucket = {name: BUCKET_NAME};
@@ -92,7 +93,7 @@ describe('signer', () => {
       describe('version', () => {
         it('should default to v2 if version is not given', async () => {
           const v2 = sandbox
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .stub<any, any>(signer, 'getSignedUrlV2')
             .resolves({});
 
@@ -111,7 +112,7 @@ describe('signer', () => {
             ...CONFIG,
           };
           const v2 = sandbox
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .stub<any, any>(signer, 'getSignedUrlV2')
             .resolves({});
 
@@ -139,7 +140,7 @@ describe('signer', () => {
             ...CONFIG,
           };
           const v4 = sandbox
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .stub<any, any>(signer, 'getSignedUrlV4')
             .resolves({});
 
@@ -157,7 +158,7 @@ describe('signer', () => {
         });
 
         it('should error for an invalid version', () => {
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           CONFIG.version = 'v42' as any;
 
           assert.throws(
@@ -170,11 +171,11 @@ describe('signer', () => {
       describe('expires', () => {
         it('should parse Date object into expiration seconds', async () => {
           const parseExpires = sandbox
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .spy<any, any>(signer, 'parseExpires');
 
           const v2 = sandbox
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .stub<any, any>(signer, 'getSignedUrlV2')
             .resolves({});
 
@@ -190,7 +191,7 @@ describe('signer', () => {
         let v2: sinon.SinonStub;
         beforeEach(() => {
           v2 = sandbox
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .stub<any, any>(signer, 'getSignedUrlV2')
             .resolves({});
         });
@@ -239,6 +240,7 @@ describe('signer', () => {
       });
 
       describe('composing signed URL', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         let v2: sinon.SinonStub;
         const query = {
           GoogleAccessId: CLIENT_EMAIL,
@@ -248,7 +250,7 @@ describe('signer', () => {
 
         beforeEach(() => {
           v2 = sandbox
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .stub<any, any>(signer, 'getSignedUrlV2')
             .resolves(query);
         });
@@ -274,7 +276,7 @@ describe('signer', () => {
         const signedUrl = await signer.getSignedUrl(CONFIG);
 
         const v2 = sandbox
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .stub<any, any>(signer, 'getSignedUrlV2')
           .resolves({});
 
@@ -317,8 +319,8 @@ describe('signer', () => {
           'X-Goog-Foo': 'value',
           'X-Goog-Bar': 'azAZ!*()*%',
         };
-        const v2 = sandbox
-          // tslint:disable-next-line no-any
+        sandbox
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .stub<any, any>(signer, 'getSignedUrlV2')
           .resolves(query);
 
@@ -843,7 +845,7 @@ describe('signer', () => {
         };
 
         const canonical = signer.getCanonicalQueryParams(query);
-        const EXPECTED = `A=foo&B=bar`;
+        const EXPECTED = 'A=foo&B=bar';
         assert.strictEqual(canonical, EXPECTED);
       });
     });

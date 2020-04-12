@@ -13,11 +13,12 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import fetch, {Request} from 'node-fetch';
+import fetch from 'node-fetch';
 import * as FormData from 'form-data';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const normalizeNewline = require('normalize-newline');
 import pLimit from 'p-limit';
 import {promisify} from 'util';
@@ -25,14 +26,7 @@ import * as path from 'path';
 import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
-import {
-  util,
-  ApiError,
-  InstanceResponseCallback,
-  BodyResponseCallback,
-  MetadataResponse,
-  Metadata,
-} from '@google-cloud/common';
+import {util, ApiError, Metadata} from '@google-cloud/common';
 import {
   Storage,
   Bucket,
@@ -51,7 +45,6 @@ import {
   MakeBucketPrivateCallback,
   SetBucketMetadataOptions,
   SetBucketMetadataCallback,
-  DeleteFileCallback,
   SaveCallback,
   DownloadOptions,
   DownloadCallback,
@@ -91,14 +84,13 @@ import {
   GetNotificationMetadataCallback,
   DeleteNotificationOptions,
   DeleteNotificationCallback,
-  Iam,
 } from '../src';
 import * as nock from 'nock';
 
 interface ErrorCallbackFunction {
   (err: Error | null): void;
 }
-const {PubSub} = require('@google-cloud/pubsub');
+import {PubSub} from '@google-cloud/pubsub';
 
 // When set to true, skips all tests that is not compatible for
 // running inside VPCSC.
@@ -106,7 +98,7 @@ const RUNNING_IN_VPCSC = !!process.env['GOOGLE_CLOUD_TESTS_IN_VPCSC'];
 
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
 nock('http://metadata.google.internal')
-  .get(url => true)
+  .get(() => true)
   .replyWithError({code: 'ENOTFOUND'})
   .persist();
 
@@ -121,9 +113,9 @@ describe('storage', () => {
   const pubsub = new PubSub({
     projectId: process.env.PROJECT_ID,
   });
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let topic: any;
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const FILES: {[index: string]: any} = {
     logo: {
       path: path.join(
@@ -175,6 +167,7 @@ describe('storage', () => {
     let storageWithoutAuth: Storage;
 
     let GOOGLE_APPLICATION_CREDENTIALS: string | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let GOOGLE_CLOUD_PROJECT: string | undefined;
 
     before(done => {
@@ -193,6 +186,7 @@ describe('storage', () => {
       delete process.env.GOOGLE_CLOUD_PROJECT;
       delete require.cache[require.resolve('../src')];
 
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const {Storage} = require('../src');
       storageWithoutAuth = new Storage();
     });
@@ -203,7 +197,7 @@ describe('storage', () => {
     });
 
     describe('public data', () => {
-      before(function() {
+      before(function () {
         if (RUNNING_IN_VPCSC) this.skip();
       });
 
@@ -452,7 +446,7 @@ describe('storage', () => {
       });
 
       it('should get access controls', done => {
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         file.acl.get(done as any, (err, accessControls) => {
           assert.ifError(err);
           assert(Array.isArray(accessControls));
@@ -461,7 +455,7 @@ describe('storage', () => {
       });
 
       it('should not expose default api', () => {
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         assert.strictEqual(typeof (file as any).default, 'undefined');
       });
 
@@ -879,7 +873,7 @@ describe('storage', () => {
   });
 
   describe('unicode validation', () => {
-    before(function() {
+    before(function () {
       if (RUNNING_IN_VPCSC) this.skip();
     });
 
@@ -1686,7 +1680,7 @@ describe('storage', () => {
             USER_PROJECT_OPTIONS
           );
 
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           function createFileAsync(fileObject: any) {
             return fileObject.file.save(
               fileObject.contents,
@@ -1726,7 +1720,7 @@ describe('storage', () => {
         it(
           'bucket#get',
           doubleTest((options: GetBucketOptions, done: GetBucketCallback) => {
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             bucketNonWhitelist.get(options, done as any);
           })
         );
@@ -1734,7 +1728,7 @@ describe('storage', () => {
         it(
           'bucket#getMetadata',
           doubleTest((options: GetBucketOptions, done: GetBucketCallback) => {
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             bucketNonWhitelist.get(options, done as any);
           })
         );
@@ -2363,14 +2357,14 @@ describe('storage', () => {
             });
           });
 
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           function upload(opts: any, callback: ErrorCallbackFunction) {
             const ws = file.createWriteStream();
             let sizeStreamed = 0;
 
             fs.createReadStream(FILES.big.path)
               .pipe(
-                through(function(chunk, enc, next) {
+                through(function (chunk, enc, next) {
                   sizeStreamed += chunk.length;
 
                   if (opts.interrupt && sizeStreamed >= fileSize / 2) {
@@ -2395,7 +2389,7 @@ describe('storage', () => {
 
       it('should write/read/remove from a buffer', done => {
         tmp.setGracefulCleanup();
-        tmp.file(function _tempFileCreated(err, tmpFilePath) {
+        tmp.file((err, tmpFilePath) => {
           assert.ifError(err);
 
           const file = bucket.file('MyBuffer');
@@ -2952,7 +2946,7 @@ describe('storage', () => {
     });
 
     describe('second service account', () => {
-      before(async function() {
+      before(async function () {
         if (!SECOND_SERVICE_ACCOUNT) {
           this.skip();
         }
@@ -2960,14 +2954,14 @@ describe('storage', () => {
       });
 
       it('should create key for a second service account', async () => {
-        const _ = await storage.createHmacKey(SECOND_SERVICE_ACCOUNT!, {
+        await storage.createHmacKey(SECOND_SERVICE_ACCOUNT!, {
           projectId: HMAC_PROJECT,
         });
       });
 
       it('get HMAC keys for both service accounts', async () => {
         // Create a key for the first service account
-        const _ = await storage.createHmacKey(SERVICE_ACCOUNT!, {
+        await storage.createHmacKey(SERVICE_ACCOUNT!, {
           projectId: HMAC_PROJECT,
         });
 
@@ -3392,7 +3386,7 @@ describe('storage', () => {
       file = bucket.file('LogoToSign.jpg');
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       if (!storage.projectId) {
         this.skip();
       }
@@ -3447,7 +3441,7 @@ describe('storage', () => {
 
   describe('notifications', () => {
     let notification: Notification;
-    // tslint:disable-next-line no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let subscription: any;
 
     before(() => {
@@ -3470,10 +3464,10 @@ describe('storage', () => {
           .then(() => {
             return bucket.getNotifications();
           })
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .then((data: any) => {
             return Promise.all(
-              // tslint:disable-next-line no-any
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               data[0].map((notification: any) => {
                 return notification.delete();
               })
@@ -3525,7 +3519,7 @@ describe('storage', () => {
     });
 
     it('should emit events to a subscription', done => {
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       subscription.on('error', done).on('message', (message: any) => {
         const attrs = message.attributes;
         assert.strictEqual(attrs.eventType, 'OBJECT_FINALIZE');
@@ -3621,16 +3615,13 @@ describe('storage', () => {
     return file.delete();
   }
 
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function deleteTopicAsync(topic: any) {
     return topic.delete();
   }
 
   function shortUUID() {
-    return uuid
-      .v1()
-      .split('-')
-      .shift();
+    return uuid.v1().split('-').shift();
   }
 
   function generateName() {
@@ -3650,7 +3641,7 @@ describe('storage', () => {
 
   async function deleteAllTopicsAsync() {
     const [topics] = await pubsub.getTopics();
-    // tslint:disable-next-line no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const filteredTopics = (topics as any[]).filter(topic => {
       return topic.name.indexOf(TESTS_PREFIX) > -1;
     });
@@ -3701,7 +3692,7 @@ describe('storage', () => {
     );
   }
 
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createFileAsync(fileObject: any) {
     return fileObject.file.save(fileObject.contents);
   }

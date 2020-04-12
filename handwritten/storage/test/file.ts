@@ -21,7 +21,7 @@ import {
 } from '@google-cloud/common';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import * as crypto from 'crypto';
 import * as dateFormat from 'date-and-time';
 import * as duplexify from 'duplexify';
@@ -39,13 +39,13 @@ import * as gaxios from 'gaxios';
 
 import {
   Bucket,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   File,
   FileOptions,
   GetFileMetadataOptions,
   PolicyDocument,
   SetFileMetadataOptions,
   GetSignedUrlConfig,
-  GetSignedPolicyOptions,
   GenerateSignedPostPolicyV2Options,
   GenerateSignedPostPolicyV2Callback,
 } from '../src';
@@ -54,19 +54,16 @@ import {
   GenerateSignedPostPolicyV4Options,
   STORAGE_POST_POLICY_BASE_URL,
 } from '../src/file';
-import {fixedEncodeURIComponent} from '../src/util';
 
 let promisified = false;
 let makeWritableStreamOverride: Function | null;
 let handleRespOverride: Function | null;
 const fakeUtil = Object.assign({}, util, {
-  handleResp() {
-    (handleRespOverride || util.handleResp).apply(null, arguments);
+  handleResp(...args: Array<{}>) {
+    (handleRespOverride || util.handleResp)(...args);
   },
-
-  makeWritableStream() {
-    const args = arguments;
-    (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
+  makeWritableStream(...args: Array<{}>) {
+    (makeWritableStreamOverride || util.makeWritableStream)(...args);
   },
 });
 
@@ -88,27 +85,23 @@ const fakeFs = extend(true, {}, fsCached);
 const zlibCached = extend(true, {}, zlib);
 let createGunzipOverride: Function | null;
 const fakeZlib = extend(true, {}, zlib, {
-  createGunzip() {
-    return (createGunzipOverride || zlibCached.createGunzip).apply(
-      null,
-      arguments
-    );
+  createGunzip(...args: Array<{}>) {
+    return (createGunzipOverride || zlibCached.createGunzip)(...args);
   },
 });
 
 let hashStreamValidationOverride: Function | null;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const hashStreamValidation = require('hash-stream-validation');
-function fakeHashStreamValidation() {
-  return (hashStreamValidationOverride || hashStreamValidation).apply(
-    null,
-    arguments
-  );
+function fakeHashStreamValidation(...args: Array<{}>) {
+  return (hashStreamValidationOverride || hashStreamValidation)(...args);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const osCached = extend(true, {}, require('os'));
 const fakeOs = extend(true, {}, osCached);
 
-// tslint:disable-next-line: no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let resumableUploadOverride: any;
 function fakeResumableUpload() {
   return () => {
@@ -125,7 +118,7 @@ Object.assign(fakeResumableUpload, {
       createURI = resumableUploadOverride.createURI;
     }
 
-    return createURI.apply(null, args);
+    return createURI(...args);
   },
 });
 Object.assign(fakeResumableUpload, {
@@ -134,7 +127,7 @@ Object.assign(fakeResumableUpload, {
     if (resumableUploadOverride && resumableUploadOverride.upload) {
       upload = resumableUploadOverride.upload;
     }
-    return upload.apply(null, args);
+    return upload(...args);
   },
 });
 
@@ -142,12 +135,14 @@ class FakeServiceObject extends ServiceObject {
   calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);
+    // eslint-disable-next-line prefer-rest-params
     this.calledWith_ = arguments;
   }
 }
 
-// tslint:disable-next-line: no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let xdgConfigOverride: any;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const xdgBasedirCached = require('xdg-basedir');
 const fakeXdgBasedir = extend(true, {}, xdgBasedirCached);
 Object.defineProperty(fakeXdgBasedir, 'config', {
@@ -163,21 +158,21 @@ const fakeSigner = {
 };
 
 describe('File', () => {
-  // tslint:disable-next-line:variable-name no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let File: any;
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let file: any;
 
   const FILE_NAME = 'file-name.png';
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let directoryFile: any;
 
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let specialCharsFile: any;
 
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let STORAGE: any;
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let BUCKET: any;
 
   before(() => {
@@ -201,13 +196,13 @@ describe('File', () => {
     extend(true, fakeFs, fsCached);
     extend(true, fakeOs, osCached);
     xdgConfigOverride = null;
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     FakeServiceObject.prototype.request = util.noop as any;
 
     STORAGE = {
       createBucket: util.noop,
       request: util.noop,
-      // tslint:disable-next-line: no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeAuthenticatedRequest(req: {}, callback: any) {
         if (callback) {
           (callback.onAuthenticated || callback)(null, req);
@@ -323,15 +318,13 @@ describe('File', () => {
 
     it('should set a custom encryption key', done => {
       const key = 'key';
-
       const setEncryptionKey = File.prototype.setEncryptionKey;
       File.prototype.setEncryptionKey = (key_: {}) => {
         File.prototype.setEncryptionKey = setEncryptionKey;
         assert.strictEqual(key_, key);
         done();
       };
-
-      const _file = new File(BUCKET, FILE_NAME, {encryptionKey: key});
+      new File(BUCKET, FILE_NAME, {encryptionKey: key});
     });
 
     describe('userProject', () => {
@@ -358,17 +351,17 @@ describe('File', () => {
 
   describe('copy', () => {
     describe('depricate `keepAcl`', () => {
-      // tslint:disable-next-line: no-any
+      // eslint-disable-next-line
       let STORAGE2: any;
-      // tslint:disable-next-line: no-any
+      // eslint-disable-next-line
       let BUCKET2: any;
-      // tslint:disable-next-line: no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let file2: any;
       beforeEach(() => {
         STORAGE2 = {
           createBucket: util.noop,
           request: util.noop,
-          // tslint:disable-next-line: no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           makeAuthenticatedRequest(req: {}, callback: any) {
             if (callback) {
               (callback.onAuthenticated || callback)(null, req);
@@ -614,7 +607,7 @@ describe('File', () => {
 
     describe('destination types', () => {
       function assertPathEquals(
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         file: any,
         expectedPath: string,
         callback: Function
@@ -646,7 +639,7 @@ describe('File', () => {
 
       it('should allow a "gs://..." string', done => {
         const newFileName = 'gs://other-bucket/new-file-name.png';
-        const expectedPath = `/rewriteTo/b/other-bucket/o/new-file-name.png`;
+        const expectedPath = '/rewriteTo/b/other-bucket/o/new-file-name.png';
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);
       });
@@ -714,7 +707,7 @@ describe('File', () => {
           reqOpts: DecorateRequestOptions,
           callback: Function
         ) => {
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           file.copy = (newFile_: {}, options: any) => {
             assert.notStrictEqual(options, fakeOptions);
             assert.strictEqual(options.userProject, fakeOptions.userProject);
@@ -737,7 +730,7 @@ describe('File', () => {
           reqOpts: DecorateRequestOptions,
           callback: Function
         ) => {
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           file.copy = (newFile_: {}, options: any) => {
             assert.strictEqual(
               options.destinationKmsKeyName,
@@ -850,12 +843,9 @@ describe('File', () => {
       class FakeSuccessfulRequest extends FakeRequest {
         constructor(req?: DecorateRequestOptions) {
           super(req);
-
-          const self = this;
-
           setImmediate(() => {
             const stream = new FakeRequest();
-            self.emit('response', stream);
+            this.emit('response', stream);
           });
         }
       }
@@ -876,11 +866,8 @@ describe('File', () => {
       class FakeFailedRequest extends FakeRequest {
         constructor(_req?: DecorateRequestOptions) {
           super(_req);
-
-          const self = this;
-
           setImmediate(() => {
-            self.emit('error', error);
+            this.emit('error', error);
           });
         }
       }
@@ -1120,7 +1107,7 @@ describe('File', () => {
         it('should emit errors from the request stream', done => {
           const error = new Error('Error.');
           const rawResponseStream = through();
-          // tslint:disable-next-line:no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (rawResponseStream as any).toJSON = () => {
             return {headers: {}};
           };
@@ -1157,7 +1144,7 @@ describe('File', () => {
         it('should not handle both error and end events', done => {
           const error = new Error('Error.');
           const rawResponseStream = through();
-          // tslint:disable-next-line:no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (rawResponseStream as any).toJSON = () => {
             return {headers: {}};
           };
@@ -1186,11 +1173,9 @@ describe('File', () => {
             callback();
           };
 
-          let errorReceived = false;
           file
             .createReadStream({validation: false})
             .on('error', (err: Error) => {
-              errorReceived = true;
               assert.strictEqual(err, error);
               rawResponseStream.emit('end');
               setImmediate(done);
@@ -1425,10 +1410,7 @@ describe('File', () => {
 
         file.requestStream = getFakeSuccessfulRequest(data);
 
-        file
-          .createReadStream(fakeOptions)
-          .on('error', done)
-          .resume();
+        file.createReadStream(fakeOptions).on('error', done).resume();
       });
 
       it('should destroy stream from failed metadata fetch', done => {
@@ -1460,7 +1442,7 @@ describe('File', () => {
 
       it('should emit an error if crc32c validation fails', done => {
         file.requestStream = getFakeSuccessfulRequest('bad-data');
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (fakeValidationStream as any).test = () => false;
         file
           .createReadStream({validation: 'crc32c'})
@@ -1473,7 +1455,7 @@ describe('File', () => {
 
       it('should validate with md5', done => {
         file.requestStream = getFakeSuccessfulRequest(data);
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (fakeValidationStream as any).test = () => true;
         file
           .createReadStream({validation: 'md5'})
@@ -1484,7 +1466,7 @@ describe('File', () => {
 
       it('should emit an error if md5 validation fails', done => {
         file.requestStream = getFakeSuccessfulRequest('bad-data');
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (fakeValidationStream as any).test = () => false;
         file
           .createReadStream({validation: 'md5'})
@@ -1514,7 +1496,7 @@ describe('File', () => {
 
       it('should ignore a data mismatch if validation: false', done => {
         file.requestStream = getFakeSuccessfulRequest(data);
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (fakeValidationStream as any).test = () => false;
         file
           .createReadStream({validation: false})
@@ -1525,7 +1507,7 @@ describe('File', () => {
 
       describe('destroying the through stream', () => {
         beforeEach(() => {
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (fakeValidationStream as any).test = () => false;
         });
 
@@ -1653,7 +1635,7 @@ describe('File', () => {
   describe('createResumableUpload', () => {
     it('should not require options', done => {
       resumableUploadOverride = {
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         createURI(opts: any, callback: Function) {
           assert.strictEqual(opts.metadata, undefined);
           callback();
@@ -1681,7 +1663,7 @@ describe('File', () => {
       file.kmsKeyName = 'kms-key-name';
 
       resumableUploadOverride = {
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         createURI(opts: any, callback: Function) {
           const bucket = file.bucket;
           const storage = bucket.storage;
@@ -1882,7 +1864,7 @@ describe('File', () => {
         metadata: METADATA,
       });
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.startResumableUpload_ = (stream: {}, options: any) => {
         assert.deepStrictEqual(options.metadata, METADATA);
         done();
@@ -1894,7 +1876,7 @@ describe('File', () => {
     it('should alias contentType to metadata object', done => {
       const contentType = 'text/html';
       const writable = file.createWriteStream({contentType});
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.startResumableUpload_ = (stream: {}, options: any) => {
         assert.strictEqual(options.metadata.contentType, contentType);
         done();
@@ -1905,7 +1887,7 @@ describe('File', () => {
 
     it('should detect contentType with contentType:auto', done => {
       const writable = file.createWriteStream({contentType: 'auto'});
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.startResumableUpload_ = (stream: {}, options: any) => {
         assert.strictEqual(options.metadata.contentType, 'image/png');
         done();
@@ -1916,7 +1898,7 @@ describe('File', () => {
 
     it('should set encoding with gzip:true', done => {
       const writable = file.createWriteStream({gzip: true});
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.startResumableUpload_ = (stream: {}, options: any) => {
         assert.strictEqual(options.metadata.contentEncoding, 'gzip');
         done();
@@ -1931,7 +1913,7 @@ describe('File', () => {
         contentType: 'text/html', // (compressible)
       });
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.startResumableUpload_ = (stream: {}, options: any) => {
         assert.strictEqual(options.metadata.contentEncoding, 'gzip');
         done();
@@ -1942,7 +1924,7 @@ describe('File', () => {
 
     it('should not set encoding with gzip:auto & non-compressible', done => {
       const writable = file.createWriteStream({gzip: 'auto'});
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.startResumableUpload_ = (stream: {}, options: any) => {
         assert.strictEqual(options.metadata.contentEncoding, undefined);
         done();
@@ -2198,7 +2180,7 @@ describe('File', () => {
       file.generation = 123;
 
       resumableUploadOverride = {
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         upload(opts: any) {
           assert.strictEqual(opts.bucket, file.bucket.name);
           assert.strictEqual(opts.file, file.name);
@@ -2310,7 +2292,7 @@ describe('File', () => {
     describe('with destination', () => {
       it('should write the file to a destination if provided', done => {
         tmp.setGracefulCleanup();
-        tmp.file(function _tempFileCreated(err, tmpFilePath) {
+        tmp.file((err, tmpFilePath) => {
           assert.ifError(err);
 
           const fileContents = 'abcdefghijklmnopqrstuvwxyz';
@@ -2337,7 +2319,7 @@ describe('File', () => {
 
       it('should execute callback with error', done => {
         tmp.setGracefulCleanup();
-        tmp.file(function _tempFileCreated(err, tmpFilePath) {
+        tmp.file((err, tmpFilePath) => {
           assert.ifError(err);
 
           const error = new Error('Error.');
@@ -2395,7 +2377,7 @@ describe('File', () => {
         (err: Error, expirationDate: {}, apiResponse_: {}) => {
           assert.strictEqual(
             err.message,
-            `An expiration time is not available.`
+            'An expiration time is not available.'
           );
           assert.strictEqual(expirationDate, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -2468,7 +2450,7 @@ describe('File', () => {
         return Promise.resolve('signature');
       };
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.generateSignedPostPolicyV2(
         CONFIG,
         (err: Error, signedPolicy: PolicyDocument) => {
@@ -2546,7 +2528,7 @@ describe('File', () => {
           const policy = JSON.parse(signedPolicy.string);
 
           assert(
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             policy.conditions.some((condition: any) => {
               return condition.success_action_redirect === redirectUrl;
             })
@@ -2571,7 +2553,7 @@ describe('File', () => {
           const policy = JSON.parse(signedPolicy.string);
 
           assert(
-            // tslint:disable-next-line no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             policy.conditions.some((condition: any) => {
               return condition.success_action_status === successStatus;
             })
@@ -2870,7 +2852,7 @@ describe('File', () => {
         'hex'
       );
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.generateSignedPostPolicyV4(
         CONFIG,
         (err: Error, res: SignedPostPolicyV4Output) => {
@@ -3154,7 +3136,7 @@ describe('File', () => {
               () => {}
             );
           },
-          {message: `Max allowed expiration is seven days (604800 seconds).`}
+          {message: 'Max allowed expiration is seven days (604800 seconds).'}
         );
       });
     });
@@ -3179,7 +3161,7 @@ describe('File', () => {
         getSignedUrl: signerGetSignedUrlStub,
       };
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       urlSignerStub = (sandbox.stub as any)(fakeSigner, 'URLSigner').returns(
         signer
       );
@@ -3230,7 +3212,7 @@ describe('File', () => {
     });
 
     it('should error if action is null', () => {
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       SIGNED_URL_CONFIG.action = null as any;
 
       assert.throws(() => {
@@ -3246,7 +3228,7 @@ describe('File', () => {
     });
 
     it('should error for an invalid action', () => {
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       SIGNED_URL_CONFIG.action = 'watch' as any;
 
       assert.throws(() => {
@@ -3260,67 +3242,55 @@ describe('File', () => {
         'another-header': 'value',
       };
 
-      file.getSignedUrl(
-        SIGNED_URL_CONFIG,
-        (err: Error | null, _signedUrl: string) => {
-          assert.ifError(err);
-          const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
-          assert.strictEqual(getSignedUrlArgs[0]['method'], 'POST');
-          assert.deepStrictEqual(getSignedUrlArgs[0]['extensionHeaders'], {
-            'another-header': 'value',
-            'x-goog-resumable': 'start',
-          });
-          done();
-        }
-      );
+      file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.strictEqual(getSignedUrlArgs[0]['method'], 'POST');
+        assert.deepStrictEqual(getSignedUrlArgs[0]['extensionHeaders'], {
+          'another-header': 'value',
+          'x-goog-resumable': 'start',
+        });
+        done();
+      });
     });
 
     it('should add response-content-type query parameter', done => {
       SIGNED_URL_CONFIG.responseType = 'application/json';
-      file.getSignedUrl(
-        SIGNED_URL_CONFIG,
-        (err: Error | null, _signedUrl: string) => {
-          assert.ifError(err);
-          const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
-          assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
-            'response-content-type': 'application/json',
-          });
-          done();
-        }
-      );
+      file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
+          'response-content-type': 'application/json',
+        });
+        done();
+      });
     });
 
     it('should respect promptSaveAs argument', done => {
       const filename = 'fname.txt';
       SIGNED_URL_CONFIG.promptSaveAs = filename;
-      file.getSignedUrl(
-        SIGNED_URL_CONFIG,
-        (err: Error | null, _signedUrl: string) => {
-          assert.ifError(err);
-          const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
-          assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
-            'response-content-disposition':
-              'attachment; filename="' + filename + '"',
-          });
-          done();
-        }
-      );
+      file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
+          'response-content-disposition':
+            'attachment; filename="' + filename + '"',
+        });
+        done();
+      });
     });
 
     it('should add response-content-disposition query parameter', done => {
       const disposition = 'attachment; filename="fname.ext"';
       SIGNED_URL_CONFIG.responseDisposition = disposition;
-      file.getSignedUrl(
-        SIGNED_URL_CONFIG,
-        (err: Error | null, _signedUrl: string) => {
-          assert.ifError(err);
-          const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
-          assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
-            'response-content-disposition': disposition,
-          });
-          done();
-        }
-      );
+      file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
+          'response-content-disposition': disposition,
+        });
+        done();
+      });
     });
 
     it('should ignore promptSaveAs if set', done => {
@@ -3329,33 +3299,27 @@ describe('File', () => {
       SIGNED_URL_CONFIG.promptSaveAs = saveAs;
       SIGNED_URL_CONFIG.responseDisposition = disposition;
 
-      file.getSignedUrl(
-        SIGNED_URL_CONFIG,
-        (err: Error | null, _signedUrl: string) => {
-          assert.ifError(err);
-          const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
-          assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
-            'response-content-disposition': disposition,
-          });
-          done();
-        }
-      );
+      file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
+          'response-content-disposition': disposition,
+        });
+        done();
+      });
     });
 
     it('should add generation to query parameter', done => {
       file.generation = '246680131';
 
-      file.getSignedUrl(
-        SIGNED_URL_CONFIG,
-        (err: Error | null, _signedUrl: string) => {
-          assert.ifError(err);
-          const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
-          assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
-            generation: file.generation,
-          });
-          done();
-        }
-      );
+      file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
+          generation: file.generation,
+        });
+        done();
+      });
     });
   });
 
@@ -3501,7 +3465,7 @@ describe('File', () => {
   describe('move', () => {
     describe('copy to destination', () => {
       function assertCopyFile(
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         file: any,
         expectedDestination: string,
         callback: Function
@@ -3565,7 +3529,7 @@ describe('File', () => {
         file.copy = (destination: {}, options: {}, callback: Function) => {
           callback(null, newFile, copyApiResponse);
         };
-        file.delete = ({}, callback: Function) => {
+        file.delete = (_: {}, callback: Function) => {
           callback();
         };
 
@@ -3674,7 +3638,7 @@ describe('File', () => {
       const callback = () => {};
       const expectedReturnValue = {};
 
-      file.parent.request = function(
+      file.parent.request = function (
         reqOpts: DecorateRequestOptions,
         callback_: Function
       ) {
@@ -3838,7 +3802,7 @@ describe('File', () => {
     });
 
     it('should convert camelCase to snake_case', done => {
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.copy = (newFile: {}, options: any) => {
         assert.strictEqual(options.storageClass, 'CAMEL_CASE');
         done();
@@ -3848,7 +3812,7 @@ describe('File', () => {
     });
 
     it('should convert hyphenate to snake_case', done => {
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.copy = (newFile: {}, options: any) => {
         assert.strictEqual(options.storageClass, 'HYPHENATED_CLASS');
         done();
@@ -3911,11 +3875,11 @@ describe('File', () => {
 
   describe('setEncryptionKey', () => {
     const KEY = crypto.randomBytes(32);
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const KEY_BASE64 = Buffer.from(KEY as any).toString('base64');
     const KEY_HASH = crypto
       .createHash('sha256')
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .update(KEY_BASE64, 'base64' as any)
       .digest('base64');
     let _file: {};
@@ -3981,7 +3945,7 @@ describe('File', () => {
         file.kmsKeyName = 'kms-key-name';
 
         resumableUploadOverride = {
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           upload(opts: any) {
             const bucket = file.bucket;
             const storage = bucket.storage;
@@ -4106,7 +4070,7 @@ describe('File', () => {
         public: true,
       };
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeWritableStreamOverride = (stream: {}, options_: any) => {
         assert.strictEqual(options_.metadata, options.metadata);
         assert.deepStrictEqual(options_.request, {
@@ -4126,7 +4090,7 @@ describe('File', () => {
     });
 
     it('should set predefinedAcl when public: true', done => {
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeWritableStreamOverride = (stream: {}, options_: any) => {
         assert.strictEqual(options_.request.qs.predefinedAcl, 'publicRead');
         done();
@@ -4136,7 +4100,7 @@ describe('File', () => {
     });
 
     it('should set predefinedAcl when private: true', done => {
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeWritableStreamOverride = (stream: {}, options_: any) => {
         assert.strictEqual(options_.request.qs.predefinedAcl, 'private');
         done();
@@ -4147,7 +4111,7 @@ describe('File', () => {
 
     it('should send query.ifGenerationMatch if File has one', done => {
       const versionedFile = new File(BUCKET, 'new-file.txt', {generation: 1});
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeWritableStreamOverride = (stream: {}, options: any) => {
         assert.strictEqual(options.request.qs.ifGenerationMatch, 1);
         done();
@@ -4158,7 +4122,7 @@ describe('File', () => {
 
     it('should send query.kmsKeyName if File has one', done => {
       file.kmsKeyName = 'kms-key-name';
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeWritableStreamOverride = (stream: {}, options: any) => {
         assert.strictEqual(options.request.qs.kmsKeyName, file.kmsKeyName);
         done();
@@ -4171,7 +4135,7 @@ describe('File', () => {
       const options = {
         userProject: 'user-project-id',
       };
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeWritableStreamOverride = (stream: {}, options_: any) => {
         assert.strictEqual(
           options_.request.qs.userProject,
@@ -4202,7 +4166,7 @@ describe('File', () => {
           file.startSimpleUpload_(stream);
 
           stream.on('error', (err: Error) => {
-            // tslint:disable-next-line: no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             assert.strictEqual((stream as any).destroyed, true);
             assert.strictEqual(err, error);
             done();
@@ -4257,7 +4221,7 @@ describe('File', () => {
     it('should call the parent setUserProject function', done => {
       const userProject = 'grape-spaceship-123';
 
-      file.parent.setUserProject = function(userProject_: string) {
+      file.parent.setUserProject = function (userProject_: string) {
         assert.strictEqual(this, file);
         assert.strictEqual(userProject_, userProject);
         done();

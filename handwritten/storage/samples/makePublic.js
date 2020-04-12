@@ -36,10 +36,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
 
   async function makePublic() {
     // Makes the file public
-    await storage
-      .bucket(bucketName)
-      .file(filename)
-      .makePublic();
+    await storage.bucket(bucketName).file(filename).makePublic();
 
     console.log(`gs://${bucketName}/${filename} is now public.`);
   }

@@ -19,7 +19,7 @@ import {
   util,
 } from '@google-cloud/common';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
 import {Bucket} from '../src';
@@ -28,14 +28,15 @@ class FakeServiceObject extends ServiceObject {
   calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);
+    // eslint-disable-next-line prefer-rest-params
     this.calledWith_ = arguments;
   }
 }
 
 describe('Notification', () => {
-  // tslint:disable-next-line:variable-name no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Notification: any;
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let notification: any;
   let promisified = false;
   const fakeUtil = Object.assign({}, util);

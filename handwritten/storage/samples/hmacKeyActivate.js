@@ -41,8 +41,8 @@ function main(
     const hmacKey = storage.hmacKey(hmacKeyAccessId, {projectId});
     const [hmacKeyMetadata] = await hmacKey.setMetadata({state: 'ACTIVE'});
 
-    console.log(`The HMAC key is now active.`);
-    console.log(`The HMAC key metadata is:`);
+    console.log('The HMAC key is now active.');
+    console.log('The HMAC key metadata is:');
     for (const [key, value] of Object.entries(hmacKeyMetadata)) {
       console.log(`${key}: ${value}`);
     }

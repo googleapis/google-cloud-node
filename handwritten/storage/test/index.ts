@@ -20,18 +20,18 @@ import {
   util,
 } from '@google-cloud/common';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
-
 import arrify = require('arrify');
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {Bucket} from '../src';
 import {GetFilesOptions} from '../src/bucket';
 import sinon = require('sinon');
 import {HmacKey} from '../src/hmacKey';
 import {HmacKeyResourceResponse} from '../src/storage';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const hmacKeyModule = require('../src/hmacKey');
 
 class FakeChannel {
@@ -84,11 +84,11 @@ const fakePromisify = {
 
 describe('Storage', () => {
   const PROJECT_ID = 'project-id';
-  // tslint:disable-next-line:variable-name no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Storage: any;
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let storage: any;
-  // tslint:disable-next-line:variable-name no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Bucket: any;
 
   before(() => {
@@ -137,6 +137,7 @@ describe('Storage', () => {
       ]);
       assert.deepStrictEqual(
         calledWith.packageJson,
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         require('../../package.json')
       );
     });
@@ -727,7 +728,7 @@ describe('Storage', () => {
   });
 
   describe('getHmacKeys', () => {
-    // tslint:disable-next-line: no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let storageRequestStub: sinon.SinonStub<any, any>;
     const SERVICE_ACCOUNT_EMAIL = 'service-account@gserviceaccount.com';
     const ACCESS_ID = 'some-access-id';
@@ -822,7 +823,7 @@ describe('Storage', () => {
 
       storage.getHmacKeys(
         query,
-        // tslint:disable-next-line: no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (err: Error, _hmacKeys: [], nextQuery: any) => {
           assert.ifError(err);
           assert.deepStrictEqual(nextQuery, expectedNextQuery);

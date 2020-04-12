@@ -35,12 +35,9 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   const storage = new Storage();
 
   async function releaseTemporaryHold() {
-    await storage
-      .bucket(bucketName)
-      .file(fileName)
-      .setMetadata({
-        temporaryHold: false,
-      });
+    await storage.bucket(bucketName).file(fileName).setMetadata({
+      temporaryHold: false,
+    });
     console.log(`Temporary hold was released for ${fileName}.`);
   }
 

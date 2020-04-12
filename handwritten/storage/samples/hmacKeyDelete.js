@@ -42,7 +42,7 @@ function main(
     await hmacKey.delete();
 
     console.log(
-      `The key is deleted, though it may still appear in getHmacKeys() results.`
+      'The key is deleted, though it may still appear in getHmacKeys() results.'
     );
   }
   // [END storage_delete_hmac_key]

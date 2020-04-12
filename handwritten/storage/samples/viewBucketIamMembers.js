@@ -38,7 +38,7 @@ function main(bucketName = 'my-bucket') {
     console.log(`Bindings for bucket ${bucketName}:`);
     for (const binding of bindings) {
       console.log(`  Role: ${binding.role}`);
-      console.log(`  Members:`);
+      console.log('  Members:');
 
       const members = binding.members;
       for (const member of members) {
@@ -47,7 +47,7 @@ function main(bucketName = 'my-bucket') {
 
       const condition = binding.condition;
       if (condition) {
-        console.log(`  Condiiton:`);
+        console.log('  Condiiton:');
         console.log(`    Title: ${condition.title}`);
         console.log(`    Description: ${condition.description}`);
         console.log(`    Expression: ${condition.expression}`);

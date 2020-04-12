@@ -14,7 +14,7 @@
 
 'use strict';
 
-const {Storage} = require(`@google-cloud/storage`);
+const {Storage} = require('@google-cloud/storage');
 const {assert} = require('chai');
 const {before, after, describe, it} = require('mocha');
 const cp = require('child_process');
@@ -72,7 +72,7 @@ describe('HMAC SA Key samples', () => {
     assert.include(output, 'The HMAC key is now active.');
   });
 
-  it(`should delete HMAC key`, async () => {
+  it('should delete HMAC key', async () => {
     // Deactivate then delete
     execSync(
       `node hmacKeyDeactivate.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`
@@ -82,7 +82,7 @@ describe('HMAC SA Key samples', () => {
     );
     assert.include(
       output,
-      `The key is deleted, though it may still appear in getHmacKeys() results.`
+      'The key is deleted, though it may still appear in getHmacKeys() results.'
     );
   });
 });

@@ -599,7 +599,7 @@ export class Storage extends Service {
       metadata = metadataOrCallback as CreateBucketRequest;
     }
 
-    const body = Object.assign({}, metadata, {name}) as {
+    const body = (Object.assign({}, metadata, {name}) as {}) as {
       [index: string]: string | {};
     };
 
@@ -1091,6 +1091,7 @@ export class Storage extends Service {
         const camelCaseResponse = {} as {[index: string]: string};
 
         for (const prop in resp) {
+          // eslint-disable-next-line no-prototype-builtins
           if (resp.hasOwnProperty(prop)) {
             const camelCaseProp = prop.replace(/_(\w)/g, (_, match) =>
               match.toUpperCase()

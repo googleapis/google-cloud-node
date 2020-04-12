@@ -28,7 +28,7 @@ function main(bucketName = 'my-bucket') {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Imports the Google Cloud client library
-  const {Storage} = require(`@google-cloud/storage`);
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();

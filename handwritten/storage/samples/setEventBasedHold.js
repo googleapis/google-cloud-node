@@ -36,12 +36,9 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
 
   async function setEventBasedHold() {
     // Set event-based hold
-    await storage
-      .bucket(bucketName)
-      .file(fileName)
-      .setMetadata({
-        eventBasedHold: true,
-      });
+    await storage.bucket(bucketName).file(fileName).setMetadata({
+      eventBasedHold: true,
+    });
     console.log(`Event-based hold was set for ${fileName}.`);
   }
 

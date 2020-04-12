@@ -15,33 +15,26 @@
 import * as sinon from 'sinon';
 import * as proxyquire from 'proxyquire';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import {util, ServiceObject} from '@google-cloud/common';
 
-// tslint:disable-next-line: no-any
-let sandbox: sinon.SinonSandbox;
-// tslint:disable-next-line: no-any
+const sandbox = sinon.createSandbox();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let STORAGE: any;
-// tslint:disable-next-line: no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let hmacKey: any;
 
 const ACCESS_ID = 'fake-access-id';
 
 describe('HmacKey', () => {
-  beforeEach(() => {
-    sandbox = sinon.createSandbox();
-  });
-
-  afterEach(() => {
-    sandbox.restore();
-  });
+  afterEach(() => sandbox.restore());
 
   describe('initialization', () => {
-    // tslint:disable-next-line: no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let serviceObjectSpy: sinon.SinonSpy;
-    // tslint:disable-next-line: no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let commonModule: any;
-    // tslint:disable-next-line: no-any variable-name
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let HmacKey: any;
 
     beforeEach(() => {

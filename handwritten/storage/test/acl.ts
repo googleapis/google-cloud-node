@@ -14,12 +14,11 @@
 
 import {DecorateRequestOptions, Metadata, util} from '@google-cloud/common';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
-// tslint:disable-next-line:variable-name no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let Acl: any;
-// tslint:disable-next-line:variable-name
 let AclRoleAccessorMethods: Function;
 describe('storage/acl', () => {
   let promisified = false;
@@ -32,9 +31,9 @@ describe('storage/acl', () => {
     },
   };
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const {Storage} = require('../src');
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let acl: any;
 
   const ERROR = new Error('Error.');
@@ -493,11 +492,11 @@ describe('storage/acl', () => {
 });
 
 describe('storage/AclRoleAccessorMethods', () => {
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let aclEntity: any;
 
   beforeEach(() => {
-    // tslint:disable-next-line: no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     aclEntity = new (AclRoleAccessorMethods as any)();
   });
 

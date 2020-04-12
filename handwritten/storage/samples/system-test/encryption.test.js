@@ -29,9 +29,9 @@ const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 
-const fileName = `test.txt`;
-const filePath = path.join(__dirname, `../resources`, fileName);
-const downloadFilePath = path.join(__dirname, `../resources/downloaded.txt`);
+const fileName = 'test.txt';
+const filePath = path.join(__dirname, '../resources', fileName);
+const downloadFilePath = path.join(__dirname, '../resources/downloaded.txt');
 
 let key;
 
@@ -48,7 +48,7 @@ after(async () => {
 });
 
 it('should generate a key', () => {
-  const output = execSync(`node generateEncryptionKey.js`);
+  const output = execSync('node generateEncryptionKey.js');
   assert.match(output, /Base 64 encoded encryption key:/);
   const test = /^Base 64 encoded encryption key: ([^\s]+)/;
   key = output.match(test)[1];
@@ -78,7 +78,7 @@ it('should download a file', () => {
 });
 
 it('should rotate keys', () => {
-  let output = execSync(`node generateEncryptionKey.js`);
+  let output = execSync('node generateEncryptionKey.js');
   assert.match(output, /Base 64 encoded encryption key:/);
   const test = /^Base 64 encoded encryption key: ([^\s]+)/;
   const newKey = output.match(test)[1];

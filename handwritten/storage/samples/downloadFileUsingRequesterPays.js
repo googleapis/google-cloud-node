@@ -40,7 +40,7 @@ function main(
   // const destFilename = 'Local destination of file, e.g. ./local/path/to/file.txt';
 
   // Imports the Google Cloud client library
-  const {Storage} = require(`@google-cloud/storage`);
+  const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
@@ -55,10 +55,7 @@ function main(
     };
 
     // Downloads the file
-    await storage
-      .bucket(bucketName)
-      .file(srcFilename)
-      .download(options);
+    await storage.bucket(bucketName).file(srcFilename).download(options);
 
     console.log(
       `gs://${bucketName}/${srcFilename} downloaded to ${destFilename} using requester-pays requests.`

@@ -92,7 +92,7 @@ const testFile = fs.readFileSync(
   'utf-8'
 );
 
-// tslint:disable-next-line no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const testCases = JSON.parse(testFile);
 const v4SignedUrlCases: V4SignedURLTestCase[] = testCases.signingV4Tests;
 const v4SignedPolicyCases: V4SignedPolicyTestCase[] =

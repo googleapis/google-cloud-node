@@ -36,10 +36,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
 
   async function deleteFile() {
     // Deletes the file from the bucket
-    await storage
-      .bucket(bucketName)
-      .file(filename)
-      .delete();
+    await storage.bucket(bucketName).file(filename).delete();
 
     console.log(`gs://${bucketName}/${filename} deleted.`);
   }

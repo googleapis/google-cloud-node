@@ -36,10 +36,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
 
   async function printFileAcl() {
     // Gets the ACL for the file
-    const [acls] = await storage
-      .bucket(bucketName)
-      .file(filename)
-      .acl.get();
+    const [acls] = await storage.bucket(bucketName).file(filename).acl.get();
 
     acls.forEach(acl => {
       console.log(`${acl.role}: ${acl.entity}`);

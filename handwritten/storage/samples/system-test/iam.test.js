@@ -69,7 +69,7 @@ it('should add conditional binding to a bucket', async () => {
     output,
     `Added the following member(s) with role ${roleName} to ${bucketName}:`
   );
-  assert.include(output, `with condition:`);
+  assert.include(output, 'with condition:');
   assert.include(output, `Title: ${title}`);
   assert.include(output, `Description: ${description}`);
   assert.include(output, `Expression: ${expression}`);
@@ -79,7 +79,7 @@ it('should list members of a role on a bucket', async () => {
   const output = execSync(`node viewBucketIamMembers.js ${bucketName}`);
   assert.match(output, new RegExp(`Bindings for bucket ${bucketName}:`));
   assert.match(output, new RegExp(`Role: ${roleName}`));
-  assert.match(output, new RegExp(`Members:`));
+  assert.match(output, new RegExp('Members:'));
   assert.match(output, new RegExp(`user:${userEmail}`));
 });
 
@@ -99,5 +99,5 @@ it('should remove conditional binding to a bucket', async () => {
   const output = execSync(
     `node removeBucketConditionalBinding.js ${bucketName} ${roleName} '${title}' '${description}' '${expression}'`
   );
-  assert.include(output, `Conditional Binding was removed.`);
+  assert.include(output, 'Conditional Binding was removed.');
 });

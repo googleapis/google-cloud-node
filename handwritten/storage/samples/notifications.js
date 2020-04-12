@@ -113,59 +113,56 @@ async function deleteNotification(bucketName, notificationId) {
   // const notificationId = 'ID of notification to delete, e.g. 1';
 
   // Deletes the notification from the bucket
-  await storage
-    .bucket(bucketName)
-    .notification(notificationId)
-    .delete();
+  await storage.bucket(bucketName).notification(notificationId).delete();
 
   console.log(`Notification ${notificationId} deleted.`);
   // [END storage_delete_notification]
 }
 
-require(`yargs`)
+require('yargs')
   .demand(1)
   .command(
-    `create <bucketName> <topic>`,
-    `Creates a new notification`,
+    'create <bucketName> <topic>',
+    'Creates a new notification',
     {},
     opts => createNotification(opts.bucketName, opts.topic)
   )
   .command(
-    `list <bucketName>`,
-    `Lists notifications for a given bucket.`,
+    'list <bucketName>',
+    'Lists notifications for a given bucket.',
     {},
     opts => listNotifications(opts.bucketName)
   )
   .command(
-    `get-metadata <bucketName> <notificationId>`,
-    `Gets metadata for a notification.`,
+    'get-metadata <bucketName> <notificationId>',
+    'Gets metadata for a notification.',
     {},
     opts => getMetadata(opts.bucketName, opts.notificationId)
   )
   .command(
-    `delete <bucketName> <notificationId>`,
-    `Deletes a notification from a bucket.`,
+    'delete <bucketName> <notificationId>',
+    'Deletes a notification from a bucket.',
     {},
     opts => deleteNotification(opts.bucketName, opts.notificationId)
   )
   .example(
-    `node $0 create my-bucket my-topic`,
-    `Creates a notification subscription.`
+    'node $0 create my-bucket my-topic',
+    'Creates a notification subscription.'
   )
   .example(
-    `node $0 list my-bucket`,
-    `Lists notifications associated with "my-bucket".`
+    'node $0 list my-bucket',
+    'Lists notifications associated with "my-bucket".'
   )
   .example(
-    `node $0 get-metadata my-bucket 1`,
-    `Gets the metadata for notification "1" attached to "my-bucket".`
+    'node $0 get-metadata my-bucket 1',
+    'Gets the metadata for notification "1" attached to "my-bucket".'
   )
   .example(
-    `node $0 delete my-bucket 1`,
-    `Deletes the notification "1" from "my-bucket".`
+    'node $0 delete my-bucket 1',
+    'Deletes the notification "1" from "my-bucket".'
   )
   .wrap(120)
   .recommendCommands()
-  .epilogue(`For more information, see https://cloud.google.com/storage/docs`)
+  .epilogue('For more information, see https://cloud.google.com/storage/docs')
   .strict()
   .help().argv;

@@ -333,7 +333,7 @@ class Notification extends ServiceObject {
 
           args.push(onCreate);
 
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line
           this.create.apply(this, args as any);
           return;
         }

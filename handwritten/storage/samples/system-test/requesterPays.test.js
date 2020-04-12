@@ -49,7 +49,7 @@ after(async () => {
   await bucket.delete().catch(console.error);
 });
 
-it.skip(`should error on requester-pays requests if they are disabled`, () => {
+it.skip('should error on requester-pays requests if they are disabled', () => {
   const result = execSync(
     `node downloadFileUsingRequesterPays.js ${projectId} ${bucketName} ${fileName} ${downloadFilePath}`
   );
@@ -60,7 +60,7 @@ it.skip(`should error on requester-pays requests if they are disabled`, () => {
   );
 });
 
-it(`should fetch requester-pays status on a default bucket`, () => {
+it('should fetch requester-pays status on a default bucket', () => {
   const out = execSync(`node getRequesterPaysStatus.js ${bucketName}`);
   assert.include(
     out,
@@ -68,7 +68,7 @@ it(`should fetch requester-pays status on a default bucket`, () => {
   );
 });
 
-it(`should enable requester-pays requests`, () => {
+it('should enable requester-pays requests', () => {
   const out = execSync(`node enableRequesterPays.js ${bucketName}`);
   assert.include(
     out,
@@ -76,7 +76,7 @@ it(`should enable requester-pays requests`, () => {
   );
 });
 
-it(`should fetch requester-pays status on a modified bucket`, () => {
+it('should fetch requester-pays status on a modified bucket', () => {
   const out = execSync(`node getRequesterPaysStatus.js ${bucketName}`);
   assert.include(
     out,
@@ -84,7 +84,7 @@ it(`should fetch requester-pays status on a modified bucket`, () => {
   );
 });
 
-it(`should download a file using requester-pays requests`, () => {
+it('should download a file using requester-pays requests', () => {
   const out = execSync(
     `node downloadFileUsingRequesterPays.js ${projectId} ${bucketName} ${fileName} ${downloadFilePath}`
   );
@@ -95,7 +95,7 @@ it(`should download a file using requester-pays requests`, () => {
   fs.statSync(downloadFilePath);
 });
 
-it(`should disable requester-pays requests`, () => {
+it('should disable requester-pays requests', () => {
   const out = execSync(`node disableRequesterPays.js ${bucketName}`);
   assert.include(
     out,

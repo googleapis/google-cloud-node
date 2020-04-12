@@ -52,7 +52,7 @@ function main(
         encryptionKey: Buffer.from(newKey, 'base64'),
       });
 
-    console.log(`Encryption key rotated successfully.`);
+    console.log('Encryption key rotated successfully.');
   }
 
   rotateEncryptionKey().catch(console.error);

@@ -293,7 +293,7 @@ class AclRoleAccessorMethods {
     const entities = AclRoleAccessorMethods.entities;
     const roleGroup = role.toLowerCase() + 's';
 
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this as any)[roleGroup] = entities.reduce((acc, entity) => {
       const isPrefix = entity.charAt(entity.length - 1) === '-';
 
@@ -306,7 +306,7 @@ class AclRoleAccessorMethods {
 
         // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the
         // more complex API of specifying an `entity` and `role`.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (acc as any)[method] = (
           entityId: string,
           options: {},
@@ -343,7 +343,7 @@ class AclRoleAccessorMethods {
             args.push(callback);
           }
 
-          // tslint:disable-next-line:no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           return (this as any)[accessMethod].apply(this, args);
         };
       });

@@ -43,8 +43,8 @@ function main(
     });
 
     console.log(`The base64 encoded secret is: ${secret}`);
-    console.log(`Do not miss that secret, there is no API to recover it.`);
-    console.log(`The HMAC key metadata is:`);
+    console.log('Do not miss that secret, there is no API to recover it.');
+    console.log('The HMAC key metadata is:');
     for (const [key, value] of Object.entries(hmacKey.metadata)) {
       console.log(`${key}: ${value}`);
     }

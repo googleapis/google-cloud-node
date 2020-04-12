@@ -41,10 +41,7 @@ function main(
 
   async function moveFile() {
     // Moves the file within the bucket
-    await storage
-      .bucket(bucketName)
-      .file(srcFilename)
-      .move(destFilename);
+    await storage.bucket(bucketName).file(srcFilename).move(destFilename);
 
     console.log(
       `gs://${bucketName}/${srcFilename} moved to gs://${bucketName}/${destFilename}.`

@@ -21,12 +21,13 @@ import {
 } from '@google-cloud/common';
 import arrify = require('arrify');
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as mime from 'mime-types';
 import pLimit from 'p-limit';
 import * as path from 'path';
 import * as proxyquire from 'proxyquire';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const snakeize = require('snakeize');
 import * as stream from 'stream';
 import * as through from 'through2';
@@ -59,6 +60,7 @@ class FakeFile {
   createWriteStream: Function;
   isSameFile = () => false;
   constructor(bucket: Bucket, name: string, options?: FileOptions) {
+    // eslint-disable-next-line prefer-rest-params
     this.calledWith_ = arguments;
     this.bucket = bucket;
     this.name = name;
@@ -138,9 +140,9 @@ class FakeAcl {
 }
 
 class FakeIam {
-  calledWith_: IArguments;
-  constructor() {
-    this.calledWith_ = arguments;
+  calledWith_: Array<{}>;
+  constructor(...args: Array<{}>) {
+    this.calledWith_ = args;
   }
 }
 
@@ -148,6 +150,7 @@ class FakeServiceObject extends ServiceObject {
   calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);
+    // eslint-disable-next-line prefer-rest-params
     this.calledWith_ = arguments;
   }
 }
@@ -157,9 +160,9 @@ const fakeSigner = {
 };
 
 describe('Bucket', () => {
-  // tslint:disable-next-line:variable-name no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Bucket: any;
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let bucket: any;
 
   const STORAGE = {
@@ -999,7 +1002,7 @@ describe('Bucket', () => {
         return () => {};
       };
 
-      bucket.getFiles = (query: {}) => Promise.resolve([[]]);
+      bucket.getFiles = () => Promise.resolve([[]]);
       bucket.deleteFiles({}, assert.ifError);
     });
 
@@ -1031,7 +1034,7 @@ describe('Bucket', () => {
     it('should execute callback with error from getting files', done => {
       const error = new Error('Error.');
 
-      bucket.getFiles = (query: {}) => {
+      bucket.getFiles = () => {
         return Promise.reject(error);
       };
 
@@ -1045,11 +1048,11 @@ describe('Bucket', () => {
       const error = new Error('Error.');
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = (query: {}) => Promise.reject(error);
+        file.delete = () => Promise.reject(error);
         return file;
       });
 
-      bucket.getFiles = (query: {}) => {
+      bucket.getFiles = () => {
         return Promise.resolve([files]);
       };
 
@@ -1063,11 +1066,11 @@ describe('Bucket', () => {
       const error = new Error('Error.');
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = (query: {}) => Promise.reject(error);
+        file.delete = () => Promise.reject(error);
         return file;
       });
 
-      bucket.getFiles = (query: {}) => {
+      bucket.getFiles = () => {
         return Promise.resolve([files]);
       };
 
@@ -1430,7 +1433,7 @@ describe('Bucket', () => {
     it('should strip excess slashes from a directory', done => {
       const directory = 'directory-name///';
       bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.prefix, `directory-name/`);
+        assert.strictEqual(reqOpts.qs.prefix, 'directory-name/');
         done();
       };
       bucket.getFiles({directory}, assert.ifError);
@@ -1748,7 +1751,7 @@ describe('Bucket', () => {
         getSignedUrl: signerGetSignedUrlStub,
       };
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       urlSignerStub = (sandbox.stub as any)(fakeSigner, 'URLSigner').returns(
         signer
       );
@@ -1792,7 +1795,7 @@ describe('Bucket', () => {
     });
 
     it('should error if action is null', () => {
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       SIGNED_URL_CONFIG.action = null as any;
 
       assert.throws(() => {
@@ -1808,7 +1811,7 @@ describe('Bucket', () => {
     });
 
     it('should error for an invalid action', () => {
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       SIGNED_URL_CONFIG.action = 'watch' as any;
 
       assert.throws(() => {
@@ -1977,28 +1980,17 @@ describe('Bucket', () => {
     });
 
     it('should not make files public by default', done => {
-      bucket.acl.add = (opts: {}) => {
-        return Promise.resolve();
-      };
-
-      bucket.acl.default.add = (opts: {}) => {
-        return Promise.resolve();
-      };
-
+      bucket.acl.add = () => Promise.resolve();
+      bucket.acl.default.add = () => Promise.resolve();
       bucket.makeAllFilesPublicPrivate_ = () => {
         throw new Error('Please, no. I do not want to be called.');
       };
-
       bucket.makePublic(done);
     });
 
     it('should execute callback with error', done => {
       const error = new Error('Error.');
-
-      bucket.acl.add = (opts: {}) => {
-        return Promise.reject(error);
-      };
-
+      bucket.acl.add = () => Promise.reject(error);
       bucket.makePublic((err: Error) => {
         assert.strictEqual(err, error);
         done();
@@ -2050,7 +2042,7 @@ describe('Bucket', () => {
       ) => {
         assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
         done();
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       }) as any;
 
       bucket.request({}, assert.ifError);
@@ -2069,7 +2061,7 @@ describe('Bucket', () => {
         assert.strictEqual(reqOpts.qs, options.qs);
         assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
         done();
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       }) as any;
 
       bucket.request(options, assert.ifError);
@@ -2088,7 +2080,7 @@ describe('Bucket', () => {
       ) => {
         assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
         done();
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       }) as any;
 
       bucket.request(options, assert.ifError);
@@ -2261,10 +2253,10 @@ describe('Bucket', () => {
     });
 
     it('should return early in snippet sandbox', () => {
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (global as any)['GCLOUD_SANDBOX_ENV'] = true;
       const returnValue = bucket.upload(filepath, assert.ifError);
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (global as any)['GCLOUD_SANDBOX_ENV'];
       assert.strictEqual(returnValue, undefined);
     });
@@ -2504,7 +2496,7 @@ describe('Bucket', () => {
         return () => {};
       };
 
-      bucket.getFiles = (options: {}) => Promise.resolve([[]]);
+      bucket.getFiles = () => Promise.resolve([[]]);
       bucket.makeAllFilesPublicPrivate_({}, assert.ifError);
     });
 
@@ -2517,11 +2509,7 @@ describe('Bucket', () => {
         };
         return file;
       });
-
-      bucket.getFiles = (options: {}) => {
-        return Promise.resolve([files]);
-      };
-
+      bucket.getFiles = () => Promise.resolve([files]);
       bucket.makeAllFilesPublicPrivate_({public: true}, (err: Error) => {
         assert.ifError(err);
         assert.strictEqual(timesCalled, files.length);
@@ -2536,17 +2524,14 @@ describe('Bucket', () => {
       let timesCalled = 0;
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.makePrivate = (options_: {}) => {
+        file.makePrivate = () => {
           timesCalled++;
           return Promise.resolve();
         };
         return file;
       });
 
-      bucket.getFiles = (options_: {}) => {
-        return Promise.resolve([files]);
-      };
-
+      bucket.getFiles = () => Promise.resolve([files]);
       bucket.makeAllFilesPublicPrivate_(options, (err: Error) => {
         assert.ifError(err);
         assert.strictEqual(timesCalled, files.length);
@@ -2556,11 +2541,7 @@ describe('Bucket', () => {
 
     it('should execute callback with error from getting files', done => {
       const error = new Error('Error.');
-
-      bucket.getFiles = (options: {}) => {
-        return Promise.reject(error);
-      };
-
+      bucket.getFiles = () => Promise.reject(error);
       bucket.makeAllFilesPublicPrivate_({}, (err: Error) => {
         assert.strictEqual(err, error);
         done();
@@ -2569,16 +2550,11 @@ describe('Bucket', () => {
 
     it('should execute callback with error from changing file', done => {
       const error = new Error('Error.');
-
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
         file.makePublic = () => Promise.reject(error);
         return file;
       });
-
-      bucket.getFiles = (options: {}) => {
-        return Promise.resolve([files]);
-      };
-
+      bucket.getFiles = () => Promise.resolve([files]);
       bucket.makeAllFilesPublicPrivate_({public: true}, (err: Error) => {
         assert.strictEqual(err, error);
         done();
@@ -2587,16 +2563,11 @@ describe('Bucket', () => {
 
     it('should execute callback with queued errors', done => {
       const error = new Error('Error.');
-
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
         file.makePublic = () => Promise.reject(error);
         return file;
       });
-
-      bucket.getFiles = (options: {}) => {
-        return Promise.resolve([files]);
-      };
-
+      bucket.getFiles = () => Promise.resolve([files]);
       bucket.makeAllFilesPublicPrivate_(
         {
           public: true,
@@ -2620,7 +2591,7 @@ describe('Bucket', () => {
         return file;
       });
 
-      bucket.getFiles = (options: {}) => {
+      bucket.getFiles = () => {
         const files = successFiles.concat(errorFiles);
         return Promise.resolve([files]);
       };

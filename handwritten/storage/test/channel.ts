@@ -22,12 +22,11 @@ import {
   ServiceObjectConfig,
 } from '@google-cloud/common';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
 let promisified = false;
 const fakePromisify = {
-  // tslint:disable-next-line:variable-name
   promisifyAll(Class: Function) {
     if (Class.name === 'Channel') {
       promisified = true;
@@ -39,6 +38,7 @@ class FakeServiceObject extends ServiceObject {
   calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);
+    // eslint-disable-next-line prefer-rest-params
     this.calledWith_ = arguments;
   }
 }
@@ -48,9 +48,9 @@ describe('Channel', () => {
   const ID = 'channel-id';
   const RESOURCE_ID = 'resource-id';
 
-  // tslint:disable-next-line:variable-name no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Channel: any;
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let channel: any;
 
   before(() => {

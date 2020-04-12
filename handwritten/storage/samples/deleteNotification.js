@@ -36,10 +36,7 @@ function main(bucketName = 'my-bucket', notificationId = '1') {
 
   async function deleteNotification() {
     // Deletes the notification from the bucket
-    await storage
-      .bucket(bucketName)
-      .notification(notificationId)
-      .delete();
+    await storage.bucket(bucketName).notification(notificationId).delete();
 
     console.log(`Notification ${notificationId} deleted.`);
   }

@@ -14,7 +14,7 @@
 
 'use strict';
 
-const {Storage} = require(`@google-cloud/storage`);
+const {Storage} = require('@google-cloud/storage');
 const {assert} = require('chai');
 const {after, it} = require('mocha');
 const cp = require('child_process');
@@ -39,7 +39,7 @@ it('should create a bucket', async () => {
 });
 
 it('should list buckets', () => {
-  const output = execSync(`node listBuckets.js`);
+  const output = execSync('node listBuckets.js');
   assert.match(output, /Buckets:/);
   assert.match(output, new RegExp(bucketName));
 });
@@ -64,7 +64,7 @@ it('should set a buckets default KMS key', async () => {
   );
 });
 
-it(`should enable a bucket's uniform bucket-level access`, async () => {
+it("should enable a bucket's uniform bucket-level access", async () => {
   const output = execSync(
     `node enableUniformBucketLevelAccess.js ${bucketName}`
   );
@@ -80,7 +80,7 @@ it(`should enable a bucket's uniform bucket-level access`, async () => {
   );
 });
 
-it(`should get a bucket's uniform bucket-level access metadata`, async () => {
+it("should get a bucket's uniform bucket-level access metadata", async () => {
   const output = execSync(`node getUniformBucketLevelAccess.js ${bucketName}`);
 
   assert.match(
@@ -96,7 +96,7 @@ it(`should get a bucket's uniform bucket-level access metadata`, async () => {
   );
 });
 
-it(`should disable a bucket's uniform bucket-level access`, async () => {
+it("should disable a bucket's uniform bucket-level access", async () => {
   const output = execSync(
     `node disableUniformBucketLevelAccess.js ${bucketName}`
   );
@@ -112,7 +112,7 @@ it(`should disable a bucket's uniform bucket-level access`, async () => {
   );
 });
 
-it(`should delete a bucket`, async () => {
+it('should delete a bucket', async () => {
   const output = execSync(`node deleteBucket.js ${bucketName}`);
   assert.match(output, new RegExp(`Bucket ${bucketName} deleted.`));
   const [exists] = await bucket.exists();

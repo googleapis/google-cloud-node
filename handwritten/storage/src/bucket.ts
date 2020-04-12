@@ -20,7 +20,6 @@ import {
   ExistsCallback,
   GetConfig,
   Metadata,
-  MetadataResponse,
   ResponseBody,
   ServiceObject,
   util,
@@ -36,9 +35,10 @@ import * as path from 'path';
 import pLimit from 'p-limit';
 import {promisify} from 'util';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const snakeize = require('snakeize');
 
-import {Acl, AddAclCallback} from './acl';
+import {Acl} from './acl';
 import {Channel} from './channel';
 import {
   File,
@@ -185,7 +185,7 @@ export interface DeleteFilesCallback {
 
 export type DeleteLabelsResponse = [Metadata];
 
-export interface DeleteLabelsCallback extends SetLabelsCallback {}
+export type DeleteLabelsCallback = SetLabelsCallback;
 
 export type DisableRequesterPaysResponse = [Metadata];
 
@@ -205,7 +205,7 @@ export interface BucketExistsOptions extends GetConfig {
 
 export type BucketExistsResponse = [boolean];
 
-export interface BucketExistsCallback extends ExistsCallback {}
+export type BucketExistsCallback = ExistsCallback;
 
 export interface GetBucketOptions extends GetConfig {
   userProject?: string;
@@ -1249,7 +1249,7 @@ class Bucket extends ServiceObject {
       return this.file(file);
     };
 
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sources = (sources as any).map(convertToFile);
     const destinationFile = convertToFile(destination);
     callback = callback || util.noop;
@@ -1536,7 +1536,7 @@ class Bucket extends ServiceObject {
 
     const topicIsObject = topic !== null && typeof topic === 'object';
     if (topicIsObject && util.isCustomType(topic, 'pubsub/topic')) {
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       topic = (topic as any).name;
     }
 
@@ -2180,7 +2180,7 @@ class Bucket extends ServiceObject {
       },
       (err, resp) => {
         if (err) {
-          // tslint:disable-next-line:no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (callback as any)(err, null, null, resp);
           return;
         }
@@ -2208,7 +2208,7 @@ class Bucket extends ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (callback as any)(null, files, nextQuery, resp);
       }
     );
@@ -3400,7 +3400,7 @@ class Bucket extends ServiceObject {
     optionsOrCallback?: UploadOptions | UploadCallback,
     callback?: UploadCallback
   ): Promise<UploadResponse> | void {
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((global as any)['GCLOUD_SANDBOX_ENV']) {
       return;
     }
@@ -3421,7 +3421,7 @@ class Bucket extends ServiceObject {
     if (options.destination instanceof File) {
       newFile = options.destination;
     } else if (
-      options.destination != null &&
+      options.destination !== null &&
       typeof options.destination === 'string'
     ) {
       // Use the string as the name of the file.
@@ -3444,7 +3444,7 @@ class Bucket extends ServiceObject {
       options.metadata.contentType = contentType;
     }
 
-    if (options.resumable != null && typeof options.resumable === 'boolean') {
+    if (options.resumable !== null && typeof options.resumable === 'boolean') {
       upload();
     } else {
       // Determine if the upload should be resumable if it's over the threshold.

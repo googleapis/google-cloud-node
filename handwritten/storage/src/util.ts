@@ -48,12 +48,7 @@ export function objectEntries<T>(obj: {[key: string]: T}): Array<[string, T]> {
 export function fixedEncodeURIComponent(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g,
-    c =>
-      '%' +
-      c
-        .charCodeAt(0)
-        .toString(16)
-        .toUpperCase()
+    c => '%' + c.charCodeAt(0).toString(16).toUpperCase()
   );
 }
 

@@ -42,7 +42,7 @@ function main(
     // Populate the hmacKey object with metadata from server.
     await hmacKey.getMetadata();
 
-    console.log(`The HMAC key metadata is:`);
+    console.log('The HMAC key metadata is:');
     for (const [key, value] of Object.entries(hmacKey.metadata)) {
       console.log(`${key}: ${value}`);
     }
