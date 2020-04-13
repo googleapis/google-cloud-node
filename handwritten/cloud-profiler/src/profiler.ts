@@ -24,8 +24,7 @@ import {promisify} from 'util';
 import * as zlib from 'zlib';
 import * as r from 'teeny-request';
 
-import {perftools} from '../../proto/profile';
-
+import {perftools} from '../proto/profile';
 import {ProfilerConfig} from './config';
 import {createLogger} from './logger';
 

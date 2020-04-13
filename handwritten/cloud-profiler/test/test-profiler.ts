@@ -26,7 +26,7 @@ import * as sinon from 'sinon';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import {perftools} from '../../proto/profile';
+import {perftools} from '../proto/profile';
 import {ProfilerConfig} from '../src/config';
 import {parseBackoffDuration, Profiler, Retryer} from '../src/profiler';
 
@@ -39,7 +39,7 @@ import {
 
 const parseDuration: (str: string) => number = require('parse-duration');
 
-const fakeCredentials = require('../../ts/test/fixtures/gcloud-credentials.json');
+const fakeCredentials = require('../../test/fixtures/gcloud-credentials.json');
 
 const API = 'cloudprofiler.googleapis.com';
 const TEST_API = 'test-cloudprofiler.sandbox.googleapis.com';

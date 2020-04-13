@@ -3,15 +3,15 @@
   "version": "3.0.1",
   "description": "Adds support for Stackdriver Profiler to Node.js applications",
   "repository": "googleapis/cloud-profiler-nodejs",
-  "main": "out/src/index.js",
-  "types": "out/src/index.d.ts",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
   "scripts": {
-    "test": "c8 mocha out/test/test-*.js",
-    "system-test": "c8 --no-clean mocha out/system-test/test-*.js --timeout=60000",
+    "test": "c8 mocha build/test/test-*.js",
+    "system-test": "c8 --no-clean mocha build/system-test/test-*.js --timeout=60000",
     "samples-test": "echo 'no sample tests'",
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "tsc -p .",
+    "compile": "tsc -p . && cp -R proto build",
     "fix": "gts fix",
     "lint": "gts check",
     "docs": "jsdoc -c .jsdoc.js",
@@ -64,22 +64,19 @@
     "sinon": "^9.0.0",
     "source-map": "^0.7.0",
     "tmp": "0.1.0",
-    "typescript": "3.6.4"
+    "typescript": "^3.8.3"
   },
   "files": [
-    "out/src",
-    "out/third_party/cloud-debug-nodejs",
+    "build/src",
+    "build/third_party/cloud-debug-nodejs",
     "bindings",
-    "proto",
-    "package-lock.json",
-    "package.json",
-    "README.md"
+    "build/proto"
   ],
   "nyc": {
     "exclude": [
       "proto",
-      "out/test",
-      "out/system-test"
+      "build/test",
+      "build/system-test"
     ]
   },
   "engines": {

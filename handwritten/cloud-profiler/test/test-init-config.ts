@@ -397,7 +397,7 @@ describe('createProfiler', () => {
     process.env.GCLOUD_PROFILER_LOGLEVEL = '4';
     process.env.GAE_SERVICE = 'process-service';
     process.env.GAE_VERSION = 'process-version';
-    process.env.GCLOUD_PROFILER_CONFIG = './ts/test/fixtures/test-config.json';
+    process.env.GCLOUD_PROFILER_CONFIG = './test/fixtures/test-config.json';
     instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
     instanceMetadataStub
       .withArgs('name')
@@ -479,7 +479,7 @@ describe('createProfiler', () => {
     process.env.GCLOUD_PROFILER_LOGLEVEL = '4';
     process.env.GAE_SERVICE = 'process-service';
     process.env.GAE_VERSION = 'process-version';
-    process.env.GCLOUD_PROFILER_CONFIG = './ts/test/fixtures/test-config.json';
+    process.env.GCLOUD_PROFILER_CONFIG = './test/fixtures/test-config.json';
     instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
     instanceMetadataStub
       .withArgs('name')
@@ -515,7 +515,7 @@ describe('createProfiler', () => {
     projectMetadataStub = sinon.stub(gcpMetadata, 'project');
     projectMetadataStub.throwsException('cannot access metadata');
 
-    process.env.GCLOUD_PROFILER_CONFIG = './ts/test/fixtures/test-config.json';
+    process.env.GCLOUD_PROFILER_CONFIG = './test/fixtures/test-config.json';
 
     const expConfigParams = {
       logLevel: 3,
