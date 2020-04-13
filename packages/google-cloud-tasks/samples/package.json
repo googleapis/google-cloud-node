@@ -5,12 +5,14 @@
   "author": "Google Inc.",
   "private": true,
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
+  "files": [
+    "*.js"
+  ],
   "scripts": {
     "test": "mocha",
-    "start": "node server.js",
-    "lint": "eslint '**/*.js'"
+    "start": "node server.js"
   },
   "dependencies": {
     "@google-cloud/tasks": "^2.0.0",
