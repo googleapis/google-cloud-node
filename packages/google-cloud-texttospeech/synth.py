@@ -31,7 +31,7 @@ versions = ['v1', 'v1beta1']
 
 for version in versions:
     library = gapic.typescript_library(
-        'texttospeech', 
+        'texttospeech',
         generator_args={
             "grpc-service-config": f"google/cloud/texttospeech/{version}/texttospeech_grpc_service_config.json",
             "package-name":f"@google-cloud/text-to-speech"
@@ -50,5 +50,5 @@ s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
