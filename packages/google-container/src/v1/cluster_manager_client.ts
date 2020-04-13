@@ -357,12 +357,12 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides, or "-" for all zones.
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.parent
    *   The parent (project and location) where the clusters will be listed.
-   *   Specified in the format 'projects/* /locations/*'.
+   *   Specified in the format `projects/* /locations/*`.
    *   Location "-" matches all zones and all regions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -448,7 +448,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -456,7 +456,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to retrieve.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -535,7 +535,7 @@ export class ClusterManagerClient {
    * Compute Engine instances.
    *
    * By default, the cluster is created in the project's
-   * [default network](https://cloud.google.com/vpc/docs/firewalls#networks).
+   * [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
    *
    * One firewall is added for the cluster. After cluster creation,
    * the Kubelet creates routes for each node to allow the containers
@@ -553,15 +553,15 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the parent field.
    * @param {google.container.v1.Cluster} request.cluster
    *   Required. A [cluster
-   *   resource](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters)
+   *   resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters)
    * @param {string} request.parent
    *   The parent (project and location) where the cluster will be created.
-   *   Specified in the format 'projects/* /locations/*'.
+   *   Specified in the format `projects/* /locations/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -646,7 +646,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -656,7 +656,7 @@ export class ClusterManagerClient {
    *   Required. A description of the update.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to update.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -741,7 +741,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -767,7 +767,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster, node pool) of the node pool to
    *   update. Specified in the format
-   *   'projects/* /locations/* /clusters/* /nodePools/*'.
+   *   `projects/* /locations/* /clusters/* /nodePools/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -856,7 +856,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -870,7 +870,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster, node pool) of the node pool to set
    *   autoscaler settings. Specified in the format
-   *   'projects/* /locations/* /clusters/* /nodePools/*'.
+   *   `projects/* /locations/* /clusters/* /nodePools/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -963,7 +963,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -977,7 +977,7 @@ export class ClusterManagerClient {
    *   * "none" - no metrics will be exported from the cluster
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to set logging.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1068,7 +1068,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -1084,7 +1084,7 @@ export class ClusterManagerClient {
    *   * "none" - no metrics will be exported from the cluster
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to set monitoring.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1173,7 +1173,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -1184,7 +1184,7 @@ export class ClusterManagerClient {
    *   cluster.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to set addons.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1269,7 +1269,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -1277,7 +1277,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string[]} request.locations
    *   Required. The desired list of Google Compute Engine
-   *   [zones](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster's nodes
+   *   [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
    *   should be located. Changing the locations a cluster is in will result
    *   in nodes being either created or removed from the cluster, depending on
    *   whether locations are being added or removed.
@@ -1285,7 +1285,7 @@ export class ClusterManagerClient {
    *   This list must always include the cluster's primary zone.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to set locations.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1370,7 +1370,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -1389,7 +1389,7 @@ export class ClusterManagerClient {
    *   - "-": picks the default Kubernetes version
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to update.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1476,7 +1476,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -1488,7 +1488,7 @@ export class ClusterManagerClient {
    *   Required. A description of the update.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to set auth.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1581,7 +1581,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -1589,7 +1589,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to delete.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1674,11 +1674,11 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) to return operations for, or `-` for
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
    *   all zones. This field has been deprecated and replaced by the parent field.
    * @param {string} request.parent
    *   The parent (project and location) where the operations will be listed.
-   *   Specified in the format 'projects/* /locations/*'.
+   *   Specified in the format `projects/* /locations/*`.
    *   Location "-" matches all zones and all regions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1764,7 +1764,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.operationId
@@ -1772,7 +1772,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.name
    *   The name (project, location, operation id) of the operation to get.
-   *   Specified in the format 'projects/* /locations/* /operations/*'.
+   *   Specified in the format `projects/* /locations/* /operations/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1857,14 +1857,14 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the operation resides.
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.operationId
    *   Deprecated. The server-assigned `name` of the operation.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.name
    *   The name (project, location, operation id) of the operation to cancel.
-   *   Specified in the format 'projects/* /locations/* /operations/*'.
+   *   Specified in the format `projects/* /locations/* /operations/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1949,11 +1949,11 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) to return operations for.
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.name
    *   The name (project and location) of the server config to get,
-   *   specified in the format 'projects/* /locations/*'.
+   *   specified in the format `projects/* /locations/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2038,7 +2038,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.clusterId
@@ -2046,7 +2046,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.parent
    *   The parent (project, location, cluster id) where the node pools will be
-   *   listed. Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   listed. Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2131,7 +2131,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -2143,7 +2143,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster, node pool id) of the node pool to
    *   get. Specified in the format
-   *   'projects/* /locations/* /clusters/* /nodePools/*'.
+   *   `projects/* /locations/* /clusters/* /nodePools/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2228,7 +2228,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.clusterId
@@ -2239,7 +2239,7 @@ export class ClusterManagerClient {
    * @param {string} request.parent
    *   The parent (project, location, cluster id) where the node pool will be
    *   created. Specified in the format
-   *   'projects/* /locations/* /clusters/*'.
+   *   `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2324,7 +2324,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -2336,7 +2336,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster, node pool id) of the node pool to
    *   delete. Specified in the format
-   *   'projects/* /locations/* /clusters/* /nodePools/*'.
+   *   `projects/* /locations/* /clusters/* /nodePools/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2426,7 +2426,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -2438,7 +2438,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster, node pool id) of the node poll to
    *   rollback upgrade.
-   *   Specified in the format 'projects/* /locations/* /clusters/* /nodePools/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2535,7 +2535,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -2549,7 +2549,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster, node pool id) of the node pool to set
    *   management properties. Specified in the format
-   *   'projects/* /locations/* /clusters/* /nodePools/*'.
+   *   `projects/* /locations/* /clusters/* /nodePools/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2638,7 +2638,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -2655,7 +2655,7 @@ export class ClusterManagerClient {
    *   resource to get the latest fingerprint.
    * @param {string} request.name
    *   The name (project, location, cluster id) of the cluster to set labels.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2740,7 +2740,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -2750,7 +2750,7 @@ export class ClusterManagerClient {
    *   Required. Whether ABAC authorization will be enabled in the cluster.
    * @param {string} request.name
    *   The name (project, location, cluster id) of the cluster to set legacy abac.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2835,7 +2835,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -2843,7 +2843,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.name
    *   The name (project, location, cluster id) of the cluster to start IP
-   *   rotation. Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   rotation. Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {boolean} request.rotateCredentials
    *   Whether to rotate credentials during IP rotation.
    * @param {object} [options]
@@ -2930,7 +2930,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -2938,7 +2938,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.name
    *   The name (project, location, cluster id) of the cluster to complete IP
-   *   rotation. Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   rotation. Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3025,7 +3025,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -3039,7 +3039,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster, node pool id) of the node pool to set
    *   size.
-   *   Specified in the format 'projects/* /locations/* /clusters/* /nodePools/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3124,7 +3124,7 @@ export class ClusterManagerClient {
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
    *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
@@ -3134,7 +3134,7 @@ export class ClusterManagerClient {
    *   Required. Configuration options for the NetworkPolicy feature.
    * @param {string} request.name
    *   The name (project, location, cluster id) of the cluster to set networking
-   *   policy. Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   policy. Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3224,7 +3224,7 @@ export class ClusterManagerClient {
    *   number](https://support.google.com/cloud/answer/6158840).
    * @param {string} request.zone
    *   Required. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/regions-zones/#available) in which the cluster
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    * @param {string} request.clusterId
    *   Required. The name of the cluster to update.
@@ -3234,7 +3234,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster id) of the cluster to set maintenance
    *   policy.
-   *   Specified in the format 'projects/* /locations/* /clusters/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3324,7 +3324,7 @@ export class ClusterManagerClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent project where subnetworks are usable.
-   *   Specified in the format 'projects/*'.
+   *   Specified in the format `projects/*`.
    * @param {string} request.filter
    *   Filtering currently only supports equality on the networkProjectId and must
    *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
@@ -3418,7 +3418,7 @@ export class ClusterManagerClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent project where subnetworks are usable.
-   *   Specified in the format 'projects/*'.
+   *   Specified in the format `projects/*`.
    * @param {string} request.filter
    *   Filtering currently only supports equality on the networkProjectId and must
    *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
@@ -3468,7 +3468,7 @@ export class ClusterManagerClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent project where subnetworks are usable.
-   *   Specified in the format 'projects/*'.
+   *   Specified in the format `projects/*`.
    * @param {string} request.filter
    *   Filtering currently only supports equality on the networkProjectId and must
    *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`

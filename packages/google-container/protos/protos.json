@@ -11,7 +11,8 @@
                 "java_multiple_files": true,
                 "java_outer_classname": "ClusterServiceProto",
                 "java_package": "com.google.container.v1",
-                "php_namespace": "Google\\Cloud\\Container\\V1"
+                "php_namespace": "Google\\Cloud\\Container\\V1",
+                "ruby_package": "Google::Cloud::Container::V1"
               },
               "nested": {
                 "ClusterManager": {
