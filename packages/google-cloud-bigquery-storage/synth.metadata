@@ -1,6 +1,20 @@
 {
-  "updateTime": "2020-04-10T23:55:16.301945Z",
   "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/nodejs-bigquery-storage.git",
+        "sha": "b5b9492a0c4b86b868a2b33c5c350301db29cc65"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
+        "internalRef": "305974465"
+      }
+    },
     {
       "git": {
         "name": "synthtool",
