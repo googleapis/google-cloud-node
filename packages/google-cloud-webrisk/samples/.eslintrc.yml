@@ -2,4 +2,3 @@
 rules:
   no-console: off
   no-process-exit: off
-  node/no-missing-require: off
