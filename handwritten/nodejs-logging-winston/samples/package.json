@@ -8,10 +8,10 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-logging-winston",
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
-    "test": "mocha system-test/*.js --timeout 600000"
+    "test": "mocha --timeout 600000"
   },
   "dependencies": {
     "@google-cloud/logging-winston": "^3.0.6",

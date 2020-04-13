@@ -13,13 +13,13 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach} from 'mocha';
 import {GCPEnv} from 'google-auth-library';
 import {LogEntry} from 'winston';
 import * as TransportStream from 'winston-transport';
 import * as winston from 'winston';
 import {Options} from '../../src/types/core';
-const proxyquire = require('proxyquire');
+import * as proxyquire from 'proxyquire';
 
 // types-only import. Actual require is done through proxyquire below.
 
@@ -30,10 +30,9 @@ const FAKE_ENVIRONMENT = 'FAKE_ENVIRONMENT';
 let authEnvironment: string;
 let passedOptions: Array<Options | undefined>;
 let transport: TransportStream | undefined;
-let loggedEntry: LogEntry;
 
 class FakeLoggingWinston extends TransportStream {
-  // tslint:disable-next-line:no-any Doing "just enough" faking.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   common: any;
 
   constructor(options: Options) {
@@ -57,7 +56,6 @@ class FakeLoggingWinston extends TransportStream {
   }
 
   log(info: LogEntry, cb: Function) {
-    loggedEntry = info;
     cb();
   }
 }
@@ -120,7 +118,7 @@ describe('middleware/express', () => {
     assert.ok(passedOptions);
     assert.strictEqual(passedOptions.length, 1);
     const [options] = passedOptions;
-    assert.strictEqual(options!.logName, `winston_log`);
+    assert.strictEqual(options!.logName, 'winston_log');
   });
 
   it('should acquire the projectId and pass to makeMiddleware', async () => {

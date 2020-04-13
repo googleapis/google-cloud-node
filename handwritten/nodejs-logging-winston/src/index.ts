@@ -104,8 +104,9 @@ export class LoggingWinston extends TransportStream {
     this.common = new LoggingCommon(options);
   }
 
-  // tslint:disable-next-line:no-any Matching the Winston API.
+  // eslint-disable-next-line
   log(info: any, callback: Callback) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {message, level, splat, stack, ...metadata} = info;
 
     // If the whole message is an error we have to manually copy the stack into
