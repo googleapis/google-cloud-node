@@ -26,8 +26,7 @@
 
 import arrify = require('arrify');
 import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
-import {GrpcClient, ClientStub} from 'google-gax';
-import {ChannelCredentials} from '@grpc/grpc-js';
+import {GrpcClient, ClientStub, ChannelCredentials} from 'google-gax';
 import * as is from 'is';
 
 import {entity} from './entity';

@@ -20,8 +20,7 @@ import {Query, QueryProto, IntegerTypeCastOptions} from './query';
 import {PathType} from '.';
 import {protobuf as Protobuf} from 'google-gax';
 import * as path from 'path';
-import * as appengine from '../proto/app_engine_key';
-import {google} from '../proto/datastore';
+import {google} from '../protos/protos';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace entity {
@@ -1285,7 +1284,7 @@ export namespace entity {
       key: entity.Key,
       locationPrefix?: string
     ): string {
-      const elements: appengine.Path.IElement[] = [];
+      const elements: {}[] = [];
       let currentKey = key;
 
       do {
@@ -1310,7 +1309,7 @@ export namespace entity {
         projectId = `${locationPrefix}${projectId}`;
       }
 
-      const reference: appengine.IReference = {
+      const reference = {
         app: projectId,
         namespace: key.namespace,
         path: {element: elements},
@@ -1343,7 +1342,8 @@ export namespace entity {
       });
       const pathElements: PathType[] = [];
 
-      reference.path.element.forEach((element: appengine.Path.Element) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      reference.path.element.forEach((element: any) => {
         pathElements.push(element.type);
 
         if (is.defined(element.name)) {

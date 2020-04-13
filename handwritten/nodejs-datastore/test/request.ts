@@ -22,7 +22,7 @@ import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Transform} from 'stream';
 
-import {google} from '../proto/datastore';
+import {google} from '../protos/protos';
 import * as ds from '../src';
 import {entity, Entity, KeyProto, EntityProto} from '../src/entity.js';
 import {IntegerTypeCastOptions, Query, QueryProto} from '../src/query.js';
@@ -312,10 +312,7 @@ describe('Request', () => {
         done();
       };
 
-      request
-        .createReadStream(key, options)
-        .on('error', done)
-        .emit('reading');
+      request.createReadStream(key, options).on('error', done).emit('reading');
     });
 
     it('should allow setting strong read consistency', done => {
@@ -487,10 +484,7 @@ describe('Request', () => {
           return arr;
         });
 
-        request
-          .createReadStream(key)
-          .on('error', done)
-          .emit('reading');
+        request.createReadStream(key).on('error', done).emit('reading');
       });
 
       describe('should pass `wrapNumbers` to formatArray', () => {
@@ -511,10 +505,7 @@ describe('Request', () => {
         });
 
         it('should pass `wrapNumbers` to formatArray as undefined by default', done => {
-          request
-            .createReadStream(key)
-            .on('error', done)
-            .resume();
+          request.createReadStream(key).on('error', done).resume();
 
           setImmediate(() => {
             wrapNumbersOpts = formtArrayStub.getCall(0).args[1];
@@ -575,10 +566,7 @@ describe('Request', () => {
           done();
         };
 
-        request
-          .createReadStream(key)
-          .on('error', done)
-          .emit('reading');
+        request.createReadStream(key).on('error', done).emit('reading');
       });
 
       it('should push results to the stream', done => {
@@ -883,10 +871,7 @@ describe('Request', () => {
         return {} as QueryProto;
       });
 
-      request
-        .runQueryStream(query)
-        .on('error', done)
-        .emit('reading');
+      request.runQueryStream(query).on('error', done).emit('reading');
     });
 
     it('should make correct request when the stream is ready', done => {
@@ -909,10 +894,7 @@ describe('Request', () => {
         done();
       };
 
-      request
-        .runQueryStream(query)
-        .on('error', done)
-        .emit('reading');
+      request.runQueryStream(query).on('error', done).emit('reading');
     });
 
     it('should allow customization of GAX options', done => {
@@ -926,10 +908,7 @@ describe('Request', () => {
         done();
       };
 
-      request
-        .runQueryStream({}, options)
-        .on('error', done)
-        .emit('reading');
+      request.runQueryStream({}, options).on('error', done).emit('reading');
     });
 
     it('should allow setting strong read consistency', done => {
@@ -1093,10 +1072,7 @@ describe('Request', () => {
         });
 
         it('should pass `wrapNumbers` to formatArray as undefined by default', done => {
-          request
-            .runQueryStream({})
-            .on('error', assert.ifError)
-            .resume();
+          request.runQueryStream({}).on('error', assert.ifError).resume();
 
           setImmediate(() => {
             wrapNumbersOpts = formatArrayStub.getCall(0).args[1];
@@ -1183,7 +1159,7 @@ describe('Request', () => {
           }
         };
 
-        FakeQuery.prototype.start = function(endCursor) {
+        FakeQuery.prototype.start = function (endCursor) {
           assert.strictEqual(
             endCursor,
             apiResponse.batch.endCursor.toString('base64')

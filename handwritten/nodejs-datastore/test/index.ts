@@ -263,7 +263,7 @@ describe('Datastore', () => {
     it('should set port if detected', () => {
       const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
       const port = 99;
-      Datastore.prototype.determineBaseUrl_ = function() {
+      Datastore.prototype.determineBaseUrl_ = function () {
         Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
         this.port_ = port;
       };
@@ -275,7 +275,7 @@ describe('Datastore', () => {
     it('should set grpc ssl credentials if custom endpoint', () => {
       const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
 
-      Datastore.prototype.determineBaseUrl_ = function() {
+      Datastore.prototype.determineBaseUrl_ = function () {
         Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
         this.customEndpoint_ = true;
       };

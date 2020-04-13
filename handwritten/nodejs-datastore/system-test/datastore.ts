@@ -25,7 +25,7 @@ describe('Datastore', () => {
   // tests. They are then deleted in the `after` hook.
   const key = datastore.key;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  datastore.key = function(options: any) {
+  datastore.key = function (options: any) {
     const keyObject = key.call(this, options);
     testKinds.push(keyObject.kind);
     return keyObject;

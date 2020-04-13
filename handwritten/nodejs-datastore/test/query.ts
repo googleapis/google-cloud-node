@@ -296,7 +296,7 @@ describe('Query', () => {
       const args = [{}, () => {}];
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      query.scope.runQuery = function(...thisArgs: any[]) {
+      query.scope.runQuery = function (...thisArgs: any[]) {
         assert.strictEqual(this, query.scope);
         assert.strictEqual(thisArgs[0], query);
         assert.strictEqual(thisArgs[1], args[0]);
@@ -312,7 +312,7 @@ describe('Query', () => {
       const runQueryReturnValue = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      query.scope.runQueryStream = function(...args: any[]) {
+      query.scope.runQueryStream = function (...args: any[]) {
         assert.strictEqual(this, query.scope);
         assert.strictEqual(args[0], query);
         return runQueryReturnValue;
@@ -331,7 +331,7 @@ describe('Query', () => {
       const runQueryReturnValue = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      query.scope.runQueryStream = function(...args: any[]) {
+      query.scope.runQueryStream = function (...args: any[]) {
         assert.strictEqual(this, query.scope);
         assert.strictEqual(args[0], query);
         assert.strictEqual(args[1], options);

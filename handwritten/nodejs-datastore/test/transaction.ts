@@ -353,7 +353,7 @@ describe('Transaction', () => {
       const args = ['0', '1']; // Query only accepts to accept string||null values
       const createQueryReturnValue = {};
 
-      transaction.datastore.createQuery = function(...ags: Any) {
+      transaction.datastore.createQuery = function (...ags: Any) {
         assert.strictEqual(this, transaction);
         assert.strictEqual(ags[0], args[0]);
         assert.strictEqual(ags[1], args[1]);
