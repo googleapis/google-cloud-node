@@ -1,6 +1,20 @@
 {
-  "updateTime": "2020-04-11T00:15:21.700620Z",
   "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/nodejs-document-ai.git",
+        "sha": "9e6cf011c010bdae157d022fa95edd0ad819862c"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
+        "internalRef": "305974465"
+      }
+    },
     {
       "git": {
         "name": "synthtool",
