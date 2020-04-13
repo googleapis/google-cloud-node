@@ -14,8 +14,7 @@
 
 import * as util from 'util';
 import * as types from './types/core';
-
-const {Logging} = require('@google-cloud/logging');
+import {Logging} from '@google-cloud/logging';
 import mapValues = require('lodash.mapvalues');
 
 type Callback = (err: Error, apiResponse: {}) => void;
@@ -95,13 +94,15 @@ export class LoggingCommon {
     this.logName = options.logName || 'winston_log';
     this.inspectMetadata = options.inspectMetadata === true;
     this.levels = options.levels || NPM_LEVEL_NAME_TO_CODE;
-    this.stackdriverLog = new Logging(options).log(this.logName, {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.stackdriverLog = new Logging(options as any).log(this.logName, {
       removeCircular: true,
       // See: https://cloud.google.com/logging/quotas, a log size of
       // 250,000 has been chosen to keep us comfortably within the
       // 256,000 limit.
       maxEntrySize: options.maxEntrySize || 250000,
-    });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }) as any;
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
     this.prefix = options.prefix;
