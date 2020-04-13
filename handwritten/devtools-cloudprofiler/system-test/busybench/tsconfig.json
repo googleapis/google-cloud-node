@@ -7,9 +7,6 @@
     "target": "es2015"
   },
   "include": [
-    "src/*.ts",
-    "src/**/*.ts",
-    "test/*.ts",
-    "test/**/*.ts"
+    "src/*.ts"
   ]
 }
