@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.7.0...v3.0.0) (2020-04-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#130](https://www.github.com/googleapis/nodejs-grafeas/issues/130)) ([74d809b](https://www.github.com/googleapis/nodejs-grafeas/commit/74d809b9ede6edd844cef6db0315383df32671f5))
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#135](https://www.github.com/googleapis/nodejs-grafeas/issues/135)) ([289f055](https://www.github.com/googleapis/nodejs-grafeas/commit/289f055a2375db09e9199c0e7534771facaef146))
+* remove eslint, update gax, fix generated protos, run the generator ([#139](https://www.github.com/googleapis/nodejs-grafeas/issues/139)) ([86c96aa](https://www.github.com/googleapis/nodejs-grafeas/commit/86c96aaa3507e6d76b75042aac945838db335eec))
+
 ## [2.7.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.6.0...v2.7.0) (2020-03-06)
 
 
