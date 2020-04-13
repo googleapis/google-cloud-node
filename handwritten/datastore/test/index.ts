@@ -72,14 +72,14 @@ const fakeEntity: any = {
 };
 
 let googleAuthOverride: Function | null;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function fakeGoogleAuth(...args: any) {
+function fakeGoogleAuth(...args: Array<{}>) {
   return (googleAuthOverride || (() => {}))(...args);
 }
 
 let createInsecureOverride: Function | null;
 
 const fakeGoogleGax = {
+  GoogleAuth: fakeGoogleAuth,
   GrpcClient: class extends gax.GrpcClient {
     constructor(opts: gax.GrpcClientOptions) {
       // super constructor must be called first!
