@@ -46,7 +46,7 @@
   "dependencies": {
     "@google-cloud/projectify": "^2.0.0",
     "@google-cloud/promisify": "^2.0.0",
-    "@grpc/grpc-js": "0.7.8",
+    "@grpc/grpc-js": "0.7.9",
     "@types/duplexify": "^3.6.0",
     "@types/long": "^4.0.1",
     "arrify": "^2.0.1",
