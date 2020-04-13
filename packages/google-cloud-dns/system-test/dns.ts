@@ -13,12 +13,13 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, after} from 'mocha';
 import * as fs from 'fs';
 import * as tmp from 'tmp';
 import * as util from 'util';
 import * as uuid from 'uuid';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const format = require('string-format-obj');
 
 import {DNS, Record} from '../src';

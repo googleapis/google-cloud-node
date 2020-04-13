@@ -21,7 +21,7 @@ import {
 import * as promisify from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import {CoreOptions, OptionsWithUri, Response} from 'request';
 
@@ -49,6 +49,7 @@ class FakeService extends Service {
   calledWith_: IArguments;
   constructor(config: ServiceConfig, options?: ServiceOptions) {
     super(config, options);
+    // eslint-disable-next-line prefer-rest-params
     this.calledWith_ = arguments;
   }
 }
@@ -73,6 +74,7 @@ const fakePromisify = Object.assign({}, promisify, {
 class FakeZone {
   calledWith_: IArguments;
   constructor() {
+    // eslint-disable-next-line prefer-rest-params
     this.calledWith_ = arguments;
   }
 }
@@ -131,6 +133,7 @@ describe('DNS', () => {
       ]);
       assert.deepStrictEqual(
         calledWith.packageJson,
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         require('../../package.json')
       );
     });

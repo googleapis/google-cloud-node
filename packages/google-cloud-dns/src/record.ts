@@ -20,6 +20,7 @@ import {Change, CreateChangeCallback} from './change';
 import {Zone} from './zone';
 import {Metadata} from '@google-cloud/common';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const format = require('string-format-obj');
 
 export interface RecordObject {

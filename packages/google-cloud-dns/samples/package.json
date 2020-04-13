@@ -8,7 +8,8 @@
     "node": ">=8"
   },
   "files": [
-    "*.js"
+    "*.js",
+    "!test/"
   ],
   "scripts": {
     "test": "mocha --timeout 600000"
