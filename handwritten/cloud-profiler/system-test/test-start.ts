@@ -19,7 +19,7 @@ import * as nock from 'nock';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import {perftools} from '../../proto/profile';
+import {perftools} from '../proto/profile';
 import {RequestProfile} from '../src/profiler';
 
 const API = 'https://cloudprofiler.googleapis.com/v2';
@@ -28,7 +28,7 @@ let uploadedProfiles: RequestProfile[] = new Array<RequestProfile>();
 let createProfileCount = 0;
 nock.disableNetConnect();
 
-const fakeCredentials = require('../../ts/test/fixtures/gcloud-credentials.json');
+const fakeCredentials = require('../../test/fixtures/gcloud-credentials.json');
 
 // Start profiler and collect profiles before testing.
 before(async () => {
