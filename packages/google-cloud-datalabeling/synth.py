@@ -23,7 +23,6 @@ logging.basicConfig(level=logging.DEBUG)
 
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
-
 # Run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1']
@@ -33,7 +32,7 @@ for version in versions:
         generator_args={
             "grpc-service-config": f"google/cloud/datalabeling/{version}/datalabeling_grpc_service_config.json",
             "package-name": f"@google-cloud/datalabeling",
-            "main-service": f"datalabeling"            
+            "main-service": f"datalabeling"
         },
         proto_path=f'/google/cloud/datalabeling/{version}',
         extra_proto_files=['google/cloud/common_resources.proto'],
@@ -47,5 +46,5 @@ s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
