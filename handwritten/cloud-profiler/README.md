@@ -6,7 +6,7 @@
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 
 > **Beta**. *This is a Beta release of the Stackdriver Profiler agent for
-Node.js. These libraries might be changed in backward-incompatible ways and are 
+Node.js. These libraries might be changed in backward-incompatible ways and are
 not subject to any SLA or deprecation policy.*
 
 
@@ -81,7 +81,7 @@ application default credentials:
 
 ## Configuration
 
-See [the default configuration](https://github.com/googleapis/cloud-profiler-nodejs/blob/master/ts/src/config.ts) for a list of possible
+See [the default configuration](https://github.com/googleapis/cloud-profiler-nodejs/blob/master/src/config.ts) for a list of possible
 configuration options. These options can be passed to the agent through the
 object argument to the start command shown below:
 

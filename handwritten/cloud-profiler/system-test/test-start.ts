@@ -13,13 +13,13 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, after} from 'mocha';
 import delay from 'delay';
 import * as nock from 'nock';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import {perftools} from '../proto/profile';
+import {perftools} from '../protos/profile';
 import {RequestProfile} from '../src/profiler';
 
 const API = 'https://cloudprofiler.googleapis.com/v2';
@@ -28,6 +28,7 @@ let uploadedProfiles: RequestProfile[] = new Array<RequestProfile>();
 let createProfileCount = 0;
 nock.disableNetConnect();
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fakeCredentials = require('../../test/fixtures/gcloud-credentials.json');
 
 // Start profiler and collect profiles before testing.
@@ -85,6 +86,7 @@ before(async () => {
     });
 
   // start profiling and wait to collect profiles.
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const profiler = require('../src/index');
   profiler.start({credentials: fakeCredentials});
   await delay(30 * 1000);

@@ -24,11 +24,12 @@ import {promisify} from 'util';
 import * as zlib from 'zlib';
 import * as r from 'teeny-request';
 
-import {perftools} from '../proto/profile';
+import {perftools} from '../protos/profile';
 import {ProfilerConfig} from './config';
 import {createLogger} from './logger';
 
-const parseDuration: (str: string) => number = require('parse-duration');
+import parseDuration = require('parse-duration');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pjson = require('../../package.json');
 const SCOPE = 'https://www.googleapis.com/auth/monitoring.write';
 const gzip = promisify(zlib.gzip);
@@ -80,14 +81,14 @@ export interface RequestProfile {
  * message.
  */
 function getResponseErrorMessage(
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   response: r.Response<any>,
   err: Error | null
 ): string | undefined {
   if (err && err.message) {
     return err.message;
   }
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const body = (response as any).body;
   if (body && body.message && typeof body.message === 'string') {
     return body.message;
@@ -100,7 +101,7 @@ function getResponseErrorMessage(
  * that backoff is greater than 0. Otherwise returns undefined.
  */
 function getServerResponseBackoff(body: object): number | undefined {
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const b = body as any;
   if (b.error && b.error.details && Array.isArray(b.error.details)) {
     for (const item of b.error.details) {
@@ -145,7 +146,7 @@ export function parseBackoffDuration(
 /**
  * @return true if an deployment is a Deployment and false otherwise.
  */
-// tslint:disable-next-line: no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isDeployment(deployment: any): deployment is Deployment {
   return (
     (deployment.projectId === undefined ||
@@ -161,7 +162,7 @@ function isDeployment(deployment: any): deployment is Deployment {
 /**
  * @return true if an prof is a RequestProfile and false otherwise.
  */
-// tslint:disable-next-line: no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isRequestProfile(prof: any): prof is RequestProfile {
   return (
     prof &&
@@ -247,7 +248,7 @@ export class Retryer {
 function responseToProfileOrError(
   err: Error | null,
   body?: object,
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   response?: r.Response<any>
 ): RequestProfile {
   // response.statusCode is guaranteed to exist on client requests.
@@ -446,14 +447,14 @@ export class Profiler extends ServiceObject {
       timeout: parseDuration('1h'),
     };
 
-    this.logger.debug(`Attempting to create profile.`);
+    this.logger.debug('Attempting to create profile.');
     return new Promise<RequestProfile>((resolve, reject) => {
       this.request(
         options,
         (
           err: Error | ApiError | null,
           body?: object,
-          // tslint:disable-next-line: no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           response?: r.Response<any>
         ) => {
           try {
@@ -546,7 +547,7 @@ export class Profiler extends ServiceObject {
     if (!durationMillis) {
       throw Error(
         `Cannot collect time profile, duration "${prof.duration}" cannot` +
-          ` be parsed.`
+          ' be parsed.'
       );
     }
     const options = {

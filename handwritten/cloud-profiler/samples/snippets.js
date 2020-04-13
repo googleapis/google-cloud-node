@@ -17,8 +17,8 @@
 // [START profiler_setup_nodejs_compute_engine]
 require('@google-cloud/profiler').start({
   serviceContext: {
-      service: 'your-service',
-      version: '1.0.0'
-  }
+    service: 'your-service',
+    version: '1.0.0',
+  },
 });
 // [END profiler_setup_nodejs_compute_engine]
