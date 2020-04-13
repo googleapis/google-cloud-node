@@ -25,8 +25,13 @@
  */
 
 import arrify = require('arrify');
-import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
-import {GrpcClient, ClientStub, ChannelCredentials} from 'google-gax';
+import {
+  GrpcClient,
+  ClientStub,
+  ChannelCredentials,
+  GoogleAuth,
+  GoogleAuthOptions,
+} from 'google-gax';
 import * as is from 'is';
 
 import {entity} from './entity';
@@ -414,7 +419,7 @@ class Datastore extends DatastoreRequest {
         libVersion: require('../../package.json').version,
         scopes: gapic.v1.DatastoreClient.scopes,
         servicePath: this.baseUrl_,
-        port: is.number(this.port_) ? this.port_ : 443,
+        port: typeof this.port_ === 'number' ? this.port_ : 443,
         projectId: userProvidedProjectId,
       },
       options
