@@ -15,6 +15,7 @@
 import * as common from '@google-cloud/common';
 import delay from 'delay';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('../../package.json');
 
 export interface ServiceContext {

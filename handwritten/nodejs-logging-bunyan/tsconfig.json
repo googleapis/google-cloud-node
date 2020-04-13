@@ -11,8 +11,5 @@
     "test/**/*.ts",
     "system-test/*.ts",
     "system-test/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
   ]
 }

@@ -40,7 +40,7 @@ describe('express samples', () => {
     await delay(10 * 1000);
   });
 
-  it('should write using bunyan', async function() {
+  it('should write using bunyan', async function () {
     this.retries(3);
 
     // Make an HTTP request to exercise a request logging path.

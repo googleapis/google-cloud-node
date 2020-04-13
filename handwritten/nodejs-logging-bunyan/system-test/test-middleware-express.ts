@@ -17,13 +17,12 @@
 /* AN EXAMPLE RATHER THAN A TEST AT THIS POINT */
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before} from 'mocha';
 import delay from 'delay';
 import * as uuid from 'uuid';
-
 import {express as elb} from '../src/index';
+import {Logging} from '@google-cloud/logging';
 
-const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 
 const WRITE_CONSISTENCY_DELAY_MS = 20 * 1000;
@@ -59,7 +58,7 @@ describe('express middleware', () => {
       const fakeResponse = {};
       const next = async () => {
         // At this point fakeRequest.log should have been installed.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (fakeRequest as any).log.info(LOG_MESSAGE);
 
         await delay(WRITE_CONSISTENCY_DELAY_MS);
@@ -70,12 +69,12 @@ describe('express middleware', () => {
         const entry = entries[0];
         assert.strictEqual(LOG_MESSAGE, entry.data.message);
         assert(entry.metadata.trace, 'should have a trace property');
-        assert(entry.metadata.trace.match(/projects\/.*\/traces\/.*/));
+        assert(entry.metadata.trace!.match(/projects\/.*\/traces\/.*/));
         done();
       };
 
       // Call middleware with mocks.
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       mw(fakeRequest as any, fakeResponse as any, next);
     }).timeout(TEST_TIMEOUT);
   });

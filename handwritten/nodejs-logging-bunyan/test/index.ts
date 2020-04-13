@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import {inspect} from 'util';
 
@@ -58,14 +58,14 @@ describe('logging-bunyan', () => {
   }
 
   // Writable.write used 'any' in function signature.
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   FakeWritable.prototype.write = (
     chunk: {},
     encoding: string,
     callback: Function
   ) => {
     // Function cannot pass as type in setImmediate.
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setImmediate(callback as any);
   };
 
@@ -95,7 +95,7 @@ describe('logging-bunyan', () => {
   });
 
   // loggingBunyan is loggingBunyan namespace which cannot be determined type.
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let loggingBunyan: any;
 
   const OPTIONS = {
@@ -144,11 +144,7 @@ describe('logging-bunyan', () => {
     it('should localize Log instance using default name, options', () => {
       const optionsWithoutLogName = Object.assign({}, OPTIONS);
       delete optionsWithoutLogName.logName;
-
-      const loggingBunyan = new loggingBunyanLib.LoggingBunyan(
-        optionsWithoutLogName
-      );
-
+      new loggingBunyanLib.LoggingBunyan(optionsWithoutLogName);
       assert.strictEqual(fakeLoggingOptions_, optionsWithoutLogName);
       assert.strictEqual(fakeLogName_, 'bunyan_log');
       assert.deepStrictEqual(fakeLogOptions_, {
@@ -169,8 +165,8 @@ describe('logging-bunyan', () => {
       } catch (err) {
         assert.strictEqual(
           err.message,
-          `If 'serviceContext' is specified then ` +
-            `'serviceContext.service' is required.`
+          "If 'serviceContext' is specified then " +
+            "'serviceContext.service' is required."
         );
         done();
       }
@@ -414,7 +410,7 @@ describe('logging-bunyan', () => {
     it('should promote prefixed trace property to metadata', done => {
       const recordWithTrace = Object.assign({}, RECORD);
       // recordWithTrace does not have index signature.
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (recordWithTrace as any)[loggingBunyanLib.LOGGING_TRACE_KEY] = 'trace1';
 
       loggingBunyan.stackdriverLog.entry = (
@@ -447,9 +443,9 @@ describe('logging-bunyan', () => {
     it('should not set trace property if trace unavailable', done => {
       global._google_trace_agent = undefined;
 
-      FakeWritable.prototype.write = function(
+      FakeWritable.prototype.write = function (
         // Writable.write used 'any' in function signature.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         record: any,
         encoding: string,
         callback: Function
@@ -476,13 +472,13 @@ describe('logging-bunyan', () => {
       const recordWithoutTrace = Object.assign({}, RECORD);
       const recordWithTrace = Object.assign({}, RECORD);
       // recordWithTrace does not have index signature.
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (recordWithTrace as any)[loggingBunyanLib.LOGGING_TRACE_KEY] =
         'projects/project1/traces/trace1';
 
-      FakeWritable.prototype.write = function(
+      FakeWritable.prototype.write = function (
         // Writable.write used 'any' in function signature.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         record: any,
         encoding: string,
         callback: Function
@@ -514,13 +510,13 @@ describe('logging-bunyan', () => {
       };
       const recordWithTraceAlreadySet = Object.assign({}, RECORD);
       // recordWithTraceAlreadySet does not have index signature.
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (recordWithTraceAlreadySet as any)[loggingBunyanLib.LOGGING_TRACE_KEY] =
         'trace1';
 
-      FakeWritable.prototype.write = function(
+      FakeWritable.prototype.write = function (
         // Writable.write used 'any' in function signature.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         record: any,
         encoding: string,
         callback: Function
@@ -539,9 +535,9 @@ describe('logging-bunyan', () => {
   });
 
   it('should not set prefixed trace property if trace unavailable', () => {
-    FakeWritable.prototype.write = function(
+    FakeWritable.prototype.write = function (
       // Writable.write used 'any' in function signature.
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       record: any,
       encoding: string,
       callback: Function
@@ -612,7 +608,7 @@ describe('logging-bunyan', () => {
 
       loggingBunyan.stackdriverLog.write =
         // Writable.write used 'any' in function signature.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (entries: any, callback: Function) => {
           assert.strictEqual(entries, entry);
           callback(); // done()
@@ -650,7 +646,7 @@ describe('logging-bunyan', () => {
 
       loggingBunyan.stackdriverLog.write =
         // Writable.write used 'any' in function signature.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (entries: any, callback: Function) => {
           assert.deepStrictEqual(entries, [entry, entry]);
           callback(); // done()

@@ -20,7 +20,7 @@ import * as express from './middleware/express';
 // Export the express middleware as 'express'.
 export {express};
 
-const {Logging, detectServiceContext} = require('@google-cloud/logging');
+import {Logging, detectServiceContext} from '@google-cloud/logging';
 
 import * as types from './types/core';
 
@@ -146,13 +146,15 @@ export class LoggingBunyan extends Writable {
     this.logName = options.logName || 'bunyan_log';
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
-    this.stackdriverLog = new Logging(options).log(this.logName, {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.stackdriverLog = new Logging(options as any).log(this.logName, {
       removeCircular: true,
       // See: https://cloud.google.com/logging/quotas, a log size of
       // 250,000 has been chosen to keep us comfortably within the
       // 256,000 limit.
       maxEntrySize: options.maxEntrySize || 250000,
-    });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }) as any;
 
     // serviceContext.service is required by the Error Reporting
     // API.  Without it, errors that are logged with level 'error'
@@ -163,16 +165,16 @@ export class LoggingBunyan extends Writable {
     // that serviceContext.service is specified.
     if (this.serviceContext && !this.serviceContext.service) {
       throw new Error(
-        `If 'serviceContext' is specified then ` +
-          `'serviceContext.service' is required.`
+        "If 'serviceContext' is specified then " +
+          "'serviceContext.service' is required."
       );
     }
 
     /* Asynchrnously attempt to discover the service context. */
     if (!this.serviceContext) {
       detectServiceContext(this.stackdriverLog.logging.auth).then(
-        (serviceContext: types.ServiceContext) => {
-          this.serviceContext = serviceContext;
+        serviceContext => {
+          this.serviceContext = serviceContext!;
         },
         () => {
           /* swallow any errors. */
@@ -252,7 +254,7 @@ export class LoggingBunyan extends Writable {
     return this.stackdriverLog.entry(entryMetadata, record);
   }
 
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static properLabels(labels: any) {
     if (typeof labels !== 'object') return false;
     for (const prop in labels) {
@@ -279,7 +281,7 @@ export class LoggingBunyan extends Writable {
     callback?: Function
   ): boolean;
   // Writable.write used 'any' in function signature.
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   write(...args: any[]): boolean {
     let record = args[0];
     let encoding: string | null = null;
@@ -321,7 +323,7 @@ export class LoggingBunyan extends Writable {
   // Writable._write used 'any' in function signature.
   _writev(
     chunks: Array<{
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       chunk: any;
       encoding: string;
     }>,
@@ -329,7 +331,7 @@ export class LoggingBunyan extends Writable {
   ) {
     const entries = chunks.map(
       (request: {
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         chunk: any;
         encoding: string;
       }) => {
