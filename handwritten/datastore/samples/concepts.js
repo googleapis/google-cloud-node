@@ -765,10 +765,7 @@ class Query extends TestHelper {
     const datastore = this.datastore;
 
     // [START datastore_keys_only_query]
-    const query = datastore
-      .createQuery()
-      .select('__key__')
-      .limit(1);
+    const query = datastore.createQuery().select('__key__').limit(1);
     // [END datastore_keys_only_query]
 
     return this.datastore.runQuery(query);

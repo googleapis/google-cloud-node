@@ -751,7 +751,7 @@ describe('entity', () => {
         integerValue: value,
       };
 
-      entity.Int = function(value_: {}) {
+      entity.Int = function (value_: {}) {
         assert.strictEqual(value_, value);
         this.value = value_;
       };
@@ -793,7 +793,7 @@ describe('entity', () => {
         doubleValue: value,
       };
 
-      entity.Double = function(value_: {}) {
+      entity.Double = function (value_: {}) {
         assert.strictEqual(value_, value);
         this.value = value_;
       };
@@ -1888,10 +1888,7 @@ describe('entity', () => {
       const startVal = Buffer.from('start');
       const endVal = Buffer.from('end');
 
-      const query = ds
-        .createQuery('Kind1')
-        .start(startVal)
-        .end(endVal);
+      const query = ds.createQuery('Kind1').start(startVal).end(endVal);
 
       const queryProto = entity.queryToQueryProto(query);
       assert.strictEqual(queryProto.endCursor, endVal);

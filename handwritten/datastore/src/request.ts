@@ -23,7 +23,7 @@ const concat = require('concat-stream');
 import * as extend from 'extend';
 import {split} from 'split-array-stream';
 import * as streamEvents from 'stream-events';
-import {google} from '../proto/datastore';
+import {google} from '../protos/protos';
 import {CallOptions} from 'google-gax';
 import {Transform} from 'stream';
 
@@ -399,7 +399,8 @@ class DatastoreRequest {
           delete: entity.keyToKeyProto(key),
         };
       }),
-    };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
 
     if (this.id) {
       this.requests_.push(reqOpts);
