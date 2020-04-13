@@ -14,7 +14,8 @@
                     "java_outer_classname": "PhishingProtectionProto",
                     "java_package": "com.google.phishingprotection.v1beta1",
                     "objc_class_prefix": "GCPP",
-                    "php_namespace": "Google\\Cloud\\PhishingProtection\\V1beta1"
+                    "php_namespace": "Google\\Cloud\\PhishingProtection\\V1beta1",
+                    "ruby_package": "Google::Cloud::PhishingProtection::V1beta1"
                   },
                   "nested": {
                     "PhishingProtectionServiceV1Beta1": {
