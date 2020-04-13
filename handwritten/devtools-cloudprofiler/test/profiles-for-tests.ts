@@ -17,7 +17,7 @@ import * as path from 'path';
 import {SourceMapGenerator} from 'source-map';
 import * as tmp from 'tmp';
 
-import {perftools} from '../proto/profile';
+import {perftools} from '../protos/profile';
 import {TimeProfile} from '../src/v8-types';
 
 const timeLeaf1 = {

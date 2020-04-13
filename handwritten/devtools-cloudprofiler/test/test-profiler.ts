@@ -18,7 +18,7 @@ import {
   DecorateRequestOptions,
 } from '@google-cloud/common';
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach, before, after} from 'mocha';
 import * as extend from 'extend';
 import * as nock from 'nock';
 import {heap as heapProfiler, time as timeProfiler} from 'pprof';
@@ -26,7 +26,7 @@ import * as sinon from 'sinon';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import {perftools} from '../proto/profile';
+import {perftools} from '../protos/profile';
 import {ProfilerConfig} from '../src/config';
 import {parseBackoffDuration, Profiler, Retryer} from '../src/profiler';
 
@@ -37,8 +37,8 @@ import {
   timeProfile,
 } from './profiles-for-tests';
 
-const parseDuration: (str: string) => number = require('parse-duration');
-
+import parseDuration = require('parse-duration');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fakeCredentials = require('../../test/fixtures/gcloud-credentials.json');
 
 const API = 'cloudprofiler.googleapis.com';
@@ -101,8 +101,8 @@ describe('Retryer', () => {
 });
 
 describe('Profiler', () => {
-  // tslint:disable-next-line: no-any
-  const sinonStubs: Array<sinon.SinonStub<any, any>> = new Array();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sinonStubs: Array<sinon.SinonStub<any, any>> = [];
   beforeEach(() => {
     sinonStubs.push(sinon.stub(timeProfiler, 'start'));
     sinonStubs.push(
@@ -565,7 +565,9 @@ describe('Profiler', () => {
       try {
         await profiler.createProfile();
         assert.fail('expected error, no error thrown');
-      } catch (_) {}
+      } catch (_) {
+        // 👻
+      }
     });
     it(
       'should not have instance and zone in request body when instance and' +

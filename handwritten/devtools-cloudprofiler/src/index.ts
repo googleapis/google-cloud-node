@@ -23,6 +23,7 @@ import {Config, defaultConfig, LocalConfig, ProfilerConfig} from './config';
 import {createLogger} from './logger';
 import {Profiler} from './profiler';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pjson = require('../../package.json');
 const serviceRegex = /^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$/;
 

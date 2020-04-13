@@ -9,17 +9,15 @@
     "test": "c8 mocha build/test/test-*.js",
     "system-test": "c8 --no-clean mocha build/system-test/test-*.js --timeout=60000",
     "samples-test": "echo 'no sample tests'",
-    "check": "gts check",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -R proto build",
+    "compile": "tsc -p . && cp -R protos build",
     "fix": "gts fix",
     "lint": "gts check",
     "docs": "jsdoc -c .jsdoc.js",
+    "prelint": "cd samples; npm link ../; npm install",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check && npm run license-check",
-    "proto": "npm run proto:profile && npm run proto:profiler",
-    "proto:profiler": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profiler.js third_party/googleapis/google/devtools/cloudprofiler/v2/profiler.proto && pbts -o proto/profiler.d.ts proto/profiler.js",
+    "proto": "mkdir -p protos && pbjs -t static-module -w commonjs -o protos/profiler.js third_party/googleapis/google/devtools/cloudprofiler/v2/profiler.proto && pbts -o protos/profiler.d.ts protos/profiler.js",
     "license-check": "jsgl --local .",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
@@ -40,7 +38,8 @@
     "pprof": "1.3.0",
     "pretty-ms": "^6.0.0",
     "protobufjs": "~6.8.6",
-    "semver": "^7.0.0"
+    "semver": "^7.0.0",
+    "teeny-request": "^6.0.3"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
@@ -48,12 +47,13 @@
     "@types/mocha": "^7.0.0",
     "@types/nock": "^10.0.0",
     "@types/node": "^10.0.3",
+    "@types/parse-duration": "^0.1.0",
     "@types/pretty-ms": "^4.0.0",
     "@types/sinon": "^9.0.0",
     "@types/tmp": "0.1.0",
     "c8": "^7.0.0",
     "codecov": "^3.0.0",
-    "gts": "^1.0.0",
+    "gts": "^2.0.0",
     "js-green-licenses": "^1.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
@@ -70,16 +70,16 @@
     "build/src",
     "build/third_party/cloud-debug-nodejs",
     "bindings",
-    "build/proto"
+    "build/protos"
   ],
   "nyc": {
     "exclude": [
-      "proto",
+      "protos",
       "build/test",
       "build/system-test"
     ]
   },
   "engines": {
-    "node": ">=6.12.3 <8.0.0 || >=8.9.4 <10.0.0 || >=10.4.1"
+    "node": ">=10.4.1"
   }
 }
