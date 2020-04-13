@@ -20,8 +20,8 @@ import * as bunyan from 'bunyan';
 import * as uuid from 'uuid';
 import * as types from '../src/types/core';
 import {ErrorsApiTransport} from './errors-transport';
+import {Logging} from '@google-cloud/logging';
 
-const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 import {LoggingBunyan} from '../src/index';
 import delay from 'delay';
@@ -33,7 +33,7 @@ function logName(name: string) {
   return `${UUID}_${name}`;
 }
 
-describe('LoggingBunyan', function() {
+describe('LoggingBunyan', function () {
   this.timeout(WRITE_CONSISTENCY_DELAY_MS);
 
   const SERVICE = `logging-bunyan-system-test-${UUID}`;
@@ -47,13 +47,13 @@ describe('LoggingBunyan', function() {
     streams: [loggingBunyan.stream('info')],
   });
 
-  it('should properly write log entries', async function() {
+  it('should properly write log entries', async function () {
     this.retries(3);
     const timestamp = new Date();
     const start = Date.now();
 
     // Type of circular.circular cannot be determined..
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const circular: {circular?: any} = {};
     circular.circular = circular;
 
@@ -143,16 +143,16 @@ describe('LoggingBunyan', function() {
 
     testData.forEach(test => {
       // logger does not have index signature.
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (logger as any)[test.level].apply(logger, test.args);
     });
     // `earliest` is sent last, but it should show up as the earliest entry.
     // logger does not have index signature.
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (logger as any)[earliest.level].apply(logger, earliest.args);
     // insert into list as the earliest entry.
     // TODO: identify the correct type for testData and earliest
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     testData.unshift(earliest as any);
 
     const entries = await pollLogs(
@@ -172,7 +172,7 @@ describe('LoggingBunyan', function() {
     const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
-    it('reports errors when logging errors', async function() {
+    it('reports errors when logging errors', async function () {
       this.retries(3);
       const start = Date.now();
 
@@ -215,7 +215,7 @@ function pollLogs(
           {
             pageSize: size,
           },
-          (err: Error, entries: types.StackdriverEntry[]) => {
+          (err, entries) => {
             if (!entries || entries.length < size) return loop();
 
             const {receiveTimestamp} = (entries[entries.length - 1].metadata ||
@@ -224,7 +224,8 @@ function pollLogs(
               receiveTimestamp.seconds * 1000 + receiveTimestamp.nanos * 1e-6;
 
             if (timeMilliseconds >= logTime) {
-              return resolve(entries);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              return resolve(entries as any);
             }
 
             if (Date.now() > end) {

@@ -15,7 +15,7 @@
  */
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach} from 'mocha';
 import {GCPEnv} from 'google-auth-library';
 import * as proxyquire from 'proxyquire';
 
@@ -31,7 +31,7 @@ let authEnvironment: string;
 let passedOptions: Array<MiddlewareOptions | undefined>;
 
 class FakeLoggingBunyan {
-  // tslint:disable-next-line:no-any Doing "just enough" faking.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   stackdriverLog: any;
   constructor(options: MiddlewareOptions) {
     passedOptions.push(options);
@@ -49,7 +49,7 @@ class FakeLoggingBunyan {
     };
   }
 
-  // tslint:disable-next-line:no-any Doing "just enough" faking.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   stream(level: any) {
     return {level, type: 'raw', stream: this};
   }
@@ -100,7 +100,7 @@ describe('middleware/express', () => {
         option => option!.logName === `bunyan_log_${APP_LOG_SUFFIX}`
       )
     );
-    assert.ok(passedOptions.some(option => option!.logName === `bunyan_log`));
+    assert.ok(passedOptions.some(option => option!.logName === 'bunyan_log'));
     assert.ok(passedOptions.every(option => option!.level === 'info'));
   });
 

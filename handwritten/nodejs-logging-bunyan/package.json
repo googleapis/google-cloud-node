@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10"
   },
   "repository": "googleapis/nodejs-logging-bunyan",
   "main": "./build/src/index.js",
@@ -33,7 +33,7 @@
   "scripts": {
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "gts check && eslint '**/*.js'",
+    "lint": "gts check",
     "presamples-test": "npm run compile",
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
@@ -42,7 +42,7 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "postcompile": "cpy ./src/types/* ./build/src/types",
-    "fix": "gts fix && eslint --fix '**/*.js'",
+    "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "docs-test": "linkinator docs",
@@ -66,21 +66,16 @@
     "codecov": "^3.0.2",
     "cpy-cli": "^3.0.0",
     "delay": "^4.1.0",
-    "eslint": "^6.0.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
     "express": "^4.16.3",
-    "gts": "^1.0.0",
+    "gts": "^2.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^2.0.0",
     "mocha": "^7.0.0",
     "post-install-check": "0.0.1",
-    "prettier": "^1.13.6",
     "proxyquire": "^2.0.1",
-    "typescript": "3.6.4",
+    "typescript": "^3.8.3",
     "uuid": "^7.0.0"
   },
   "peerDependencies": {
