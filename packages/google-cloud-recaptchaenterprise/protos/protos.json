@@ -14,7 +14,8 @@
                     "java_outer_classname": "RecaptchaEnterpriseProto",
                     "java_package": "com.google.recaptchaenterprise.v1",
                     "objc_class_prefix": "GCRE",
-                    "php_namespace": "Google\\Cloud\\RecaptchaEnterprise\\V1"
+                    "php_namespace": "Google\\Cloud\\RecaptchaEnterprise\\V1",
+                    "ruby_package": "Google::Cloud::RecaptchaEnterprise::V1"
                   },
                   "nested": {
                     "RecaptchaEnterpriseService": {
@@ -491,7 +492,8 @@
                     "java_outer_classname": "RecaptchaEnterpriseProto",
                     "java_package": "com.google.recaptchaenterprise.v1beta1",
                     "objc_class_prefix": "GCRE",
-                    "php_namespace": "Google\\Cloud\\RecaptchaEnterprise\\V1beta1"
+                    "php_namespace": "Google\\Cloud\\RecaptchaEnterprise\\V1beta1",
+                    "ruby_package": "Google::Cloud::RecaptchaEnterprise::V1beta1"
                   },
                   "nested": {
                     "RecaptchaEnterpriseServiceV1Beta1": {
