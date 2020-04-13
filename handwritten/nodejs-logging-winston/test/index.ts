@@ -13,16 +13,14 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach} from 'mocha';
 import * as TransportStream from 'winston-transport';
-
+import * as proxyquire from 'proxyquire';
 import * as types from '../src/types/core';
-
-const proxyquire = require('proxyquire');
 
 describe('logging-winston', () => {
   let fakeLoggingOptions_: types.Options | null;
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let lastFakeLoggingArgs: IArguments | any[] = [];
 
   class FakeLogging {
@@ -35,6 +33,7 @@ describe('logging-winston', () => {
       metadata: {} | undefined,
       callback: () => void
     ): void {
+      // eslint-disable-next-line prefer-rest-params
       lastFakeLoggingArgs = arguments;
       if (callback) setImmediate(callback);
     }
@@ -42,9 +41,10 @@ describe('logging-winston', () => {
 
   class FakeTransport {
     // transportCalledWith_ takes arguments which cannot be determined type.
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     transportCalledWith_: any;
     constructor() {
+      // eslint-disable-next-line prefer-rest-params
       this.transportCalledWith_ = arguments;
     }
   }
@@ -59,7 +59,7 @@ describe('logging-winston', () => {
     winston: fakeWinston,
   });
   // loggingWinston is LoggingWinston namespace which cannot be determined type.
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line
   let loggingWinston: any;
 
   const OPTIONS: types.Options = {
@@ -98,7 +98,7 @@ describe('logging-winston', () => {
 
     it('should initialize Log instance using provided apiEndpoint', () => {
       const options = Object.assign({}, OPTIONS);
-      const logger = new loggingWinstonLib.LoggingWinston(options);
+      new loggingWinstonLib.LoggingWinston(options);
       assert.deepStrictEqual(fakeLoggingOptions_, options);
     });
 

@@ -17,7 +17,6 @@
 import * as TransportStream from 'winston-transport';
 import {GoogleAuth} from 'google-auth-library';
 
-
 export interface Options {
   /**
    * The default log level. Winston will filter messages with a severity lower
@@ -96,7 +95,7 @@ export interface Options {
   // TODO: address the correct type of promise.
   promise?: {};
 
-  scopes?: string[]|string;
+  scopes?: string[] | string;
 
   logname?: string;
 
@@ -155,7 +154,7 @@ export enum STACKDRIVER_LOGGING_LEVELS {
   warning,
   notice,
   info,
-  debug
+  debug,
 }
 
 export type StackdriverLoggingLevelNames = keyof typeof STACKDRIVER_LOGGING_LEVELS;
@@ -163,30 +162,34 @@ export type StackdriverLoggingLevelNames = keyof typeof STACKDRIVER_LOGGING_LEVE
 // Mapped types are only supported in type aliases and not in interfaces and
 // classes.
 type StackdriverLogFunctions = {
-  [P in StackdriverLoggingLevelNames]:
-      (entry: StackdriverEntry|StackdriverEntry[], options?: {},
-       callback?: (err: Error, apiResponse: {}) => void) =>
-          Promise<LogWriteResponse>;
+  [P in StackdriverLoggingLevelNames]: (
+    entry: StackdriverEntry | StackdriverEntry[],
+    options?: {},
+    callback?: (err: Error, apiResponse: {}) => void
+  ) => Promise<LogWriteResponse>;
 };
 
 interface StackdriverOtherFunctions {
-  write:
-      (entry: StackdriverEntry|StackdriverEntry[], options?: {},
-       callback?:
-           (err: Error, apiResponse: {}) => void) => Promise<LogWriteResponse>;
-  entry: (metadata: {}, data: {}|string) => StackdriverEntry;
-  logging: { auth: GoogleAuth };
+  write: (
+    entry: StackdriverEntry | StackdriverEntry[],
+    options?: {},
+    callback?: (err: Error, apiResponse: {}) => void
+  ) => Promise<LogWriteResponse>;
+  entry: (metadata: {}, data: {} | string) => StackdriverEntry;
+  logging: {auth: GoogleAuth};
 }
 
-export type StackdriverLog = StackdriverLogFunctions&StackdriverOtherFunctions;
+export type StackdriverLog = StackdriverLogFunctions &
+  StackdriverOtherFunctions;
 
 export interface StackdriverLogging {
   Entry?: StackdriverEntry;
   Log?: StackdriverLog;
   Logging?: StackdriverLogging;
-  entry?:
-      (resource?: MonitoredResource,
-       data?: {message: string}|string) => StackdriverEntry;
+  entry?: (
+    resource?: MonitoredResource,
+    data?: {message: string} | string
+  ) => StackdriverEntry;
   // define additional properties and methods.
 }
 
@@ -200,12 +203,13 @@ export interface Metadata {
 }
 
 export interface StackdriverEntry {
-  constructor:
-      (metadata?: StackdriverEntryMetadata,
-       data?: {message: string}|string) => StackdriverEntry;
-  data?: {message: string}|string;
+  constructor: (
+    metadata?: StackdriverEntryMetadata,
+    data?: {message: string} | string
+  ) => StackdriverEntry;
+  data?: {message: string} | string;
   metadata?: StackdriverEntryMetadata;
-  jsonPayload?:{[key: string]: any};
+  jsonPayload?: {[key: string]: any};
 }
 type LogWriteResponse = Array<{}>;
 
@@ -231,27 +235,27 @@ export type Winston3LogArg = {
   /**
    * the logging message
    */
-  message: string,
+  message: string;
   /**
    * the log level defined in NPM_LEVEL_NAME_TO_CODE
    */
-  level: string,
+  level: string;
   /**
    * the stack for an error
    */
-  stack?: string,
+  stack?: string;
   /**
    * not used but should not be passed through to common
    */
-  splat?: {},
+  splat?: {};
   /**
    * set httpRequest to a http.clientRequest object to log it
    */
-  httpRequest?: HttpRequest, labels: {}
-}&{[key: string]: string | {}};
-
+  httpRequest?: HttpRequest;
+  labels: {};
+} & {[key: string]: string | {}};
 
 export interface Logger extends TransportStream {
-  new(options?: Options):any;
-  LOGGING_TRACE_KEY:string;
+  new (options?: Options): any;
+  LOGGING_TRACE_KEY: string;
 }

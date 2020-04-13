@@ -22,7 +22,7 @@ import {express as elb} from '../src/index';
 import * as winston from 'winston';
 import {REQUEST_LOG_SUFFIX} from '../src/middleware/express';
 
-const {Logging} = require('@google-cloud/logging');
+import {Logging} from '@google-cloud/logging';
 const logging = new Logging();
 
 const WRITE_CONSISTENCY_DELAY_MS = 20 * 1000;
@@ -52,6 +52,7 @@ describe(__filename, () => {
 
   describe('request logging middleware', () => {
     it('should write request correlated log entries', () => {
+      // eslint-disable-next-line no-async-promise-executor
       return new Promise(async resolve => {
         const logger = winston.createLogger();
         const mw = await elb.makeMiddleware(logger, {
@@ -78,7 +79,7 @@ describe(__filename, () => {
 
         const next = async () => {
           // At this point fakeRequest.log should have been installed.
-          // tslint:disable-next-line:no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (fakeRequest as any).log.info(LOG_MESSAGE);
 
           await delay(WRITE_CONSISTENCY_DELAY_MS);
@@ -89,7 +90,7 @@ describe(__filename, () => {
           const [appLogEntry] = appLogEntries;
           assert.strictEqual(LOG_MESSAGE, appLogEntry.data.message);
           assert(appLogEntry.metadata.trace, 'should have a trace property');
-          assert(appLogEntry.metadata.trace.match(/projects\/.*\/traces\/.*/));
+          assert(appLogEntry.metadata.trace!.match(/projects\/.*\/traces\/.*/));
           assert.strictEqual(appLogEntry.metadata.severity, 'INFO');
 
           const requestLog = logging.log(`${LOG_NAME}${REQUEST_LOG_SUFFIX}`);
@@ -109,7 +110,7 @@ describe(__filename, () => {
         };
 
         // Call middleware with mocks.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mw(fakeRequest as any, fakeResponse as any, next);
       });
     }).timeout(TEST_TIMEOUT);

@@ -17,16 +17,12 @@
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as uuid from 'uuid';
-
 import * as types from '../src/types/core';
-
 import {ErrorsApiTransport} from './errors-transport';
+import * as proxyquire from 'proxyquire';
+import * as winston from 'winston';
+import {Logging, Entry} from '@google-cloud/logging';
 
-const proxyquire = require('proxyquire');
-
-const winston = require('winston');
-
-const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 
 const WRITE_CONSISTENCY_DELAY_MS = 90000;
@@ -36,7 +32,7 @@ function logName(name: string) {
   return `${UUID}_${name}`;
 }
 
-describe('LoggingWinston', function() {
+describe('LoggingWinston', function () {
   this.timeout(WRITE_CONSISTENCY_DELAY_MS);
   const testTimestamp = new Date();
 
@@ -79,7 +75,7 @@ describe('LoggingWinston', function() {
   ];
 
   interface TestData {
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     args: any[];
     level: string;
     verify: (entry: types.StackdriverEntry) => void;
@@ -120,7 +116,7 @@ describe('LoggingWinston', function() {
         },
       ] as TestData[]);
 
-      const LOG_NAME = logName(`logging_winston_system_tests_1`);
+      const LOG_NAME = logName('logging_winston_system_tests_1');
 
       const logger = winston.createLogger({
         transports: [new LoggingWinston({logName: LOG_NAME})],
@@ -129,7 +125,7 @@ describe('LoggingWinston', function() {
       const start = Date.now();
       testData.forEach(test => {
         // logger does not have index signature.
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (logger as any)[test.level].apply(logger, test.args);
       });
 
@@ -142,14 +138,14 @@ describe('LoggingWinston', function() {
       assert.strictEqual(entries.length, testData.length);
       entries.reverse().forEach((entry, index) => {
         const test = testData[index];
-        test.verify(entry);
+        test.verify((entry as {}) as types.StackdriverEntry);
       });
     });
 
     it('should work correctly with winston formats', async () => {
       const MESSAGE = 'A message that should be padded';
       const start = Date.now();
-      const LOG_NAME = logName(`logging_winston_system_tests_2`);
+      const LOG_NAME = logName('logging_winston_system_tests_2');
       const logger = winston.createLogger({
         transports: [new LoggingWinston({logName: LOG_NAME})],
         format: winston.format.combine(
@@ -218,7 +214,7 @@ function pollLogs(
   size: number,
   timeout: number
 ) {
-  const p = new Promise<types.StackdriverEntry[]>((resolve, reject) => {
+  const p = new Promise<Entry[]>((resolve, reject) => {
     const end = Date.now() + timeout;
     loop();
 
@@ -228,7 +224,7 @@ function pollLogs(
           {
             pageSize: size,
           },
-          (err: Error, entries: types.StackdriverEntry[]) => {
+          (err, entries) => {
             if (!entries || entries.length < size) return loop();
 
             const {receiveTimestamp} = (entries[entries.length - 1].metadata ||

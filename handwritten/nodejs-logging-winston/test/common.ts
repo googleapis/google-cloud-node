@@ -13,11 +13,10 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach} from 'mocha';
 import * as nodeutil from 'util';
+import * as proxyquire from 'proxyquire';
 import * as types from '../src/types/core';
-
-const proxyquire = require('proxyquire');
 
 describe('logging-common', () => {
   let fakeLogInstance: types.StackdriverLogging;
@@ -38,10 +37,9 @@ describe('logging-common', () => {
 
   class FakeTransport {
     // transportCalledWith_ takes arguments which cannot be determined type.
-    // tslint:disable-next-line:no-any
-    transportCalledWith_: any;
-    constructor() {
-      this.transportCalledWith_ = arguments;
+    transportCalledWith_: Array<{}>;
+    constructor(...args: Array<{}>) {
+      this.transportCalledWith_ = args;
     }
   }
 
@@ -58,7 +56,7 @@ describe('logging-common', () => {
   });
 
   // loggingCommon is loggingCommon namespace which cannot be determined type.
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let loggingCommon: any;
 
   const OPTIONS: types.Options = {
@@ -92,9 +90,7 @@ describe('logging-common', () => {
       const optionsWithScopes: types.Options = Object.assign({}, OPTIONS);
       optionsWithScopes.scopes = fakeScope;
 
-      const loggingCommon = new loggingCommonLib.LoggingCommon(
-        optionsWithScopes
-      );
+      new loggingCommonLib.LoggingCommon(optionsWithScopes);
 
       assert.deepStrictEqual(fakeLoggingOptions_, optionsWithScopes);
     });
@@ -154,7 +150,7 @@ describe('logging-common', () => {
     });
 
     it('should set removeCircular to true', () => {
-      const loggingCommon = new loggingCommonLib.LoggingCommon(OPTIONS);
+      new loggingCommonLib.LoggingCommon(OPTIONS);
 
       assert.deepStrictEqual(fakeLogOptions_, {
         removeCircular: true,
@@ -180,7 +176,7 @@ describe('logging-common', () => {
     };
 
     beforeEach(() => {
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       fakeLogInstance.entry = (() => {}) as any;
       loggingCommon.stackdriverLog.emergency = () => {};
       loggingCommon.stackdriverLog[STACKDRIVER_LEVEL] = () => {};
@@ -278,9 +274,9 @@ describe('logging-common', () => {
 
         for (const prop of Object.keys(METADATA)) {
           // metadata does not have index signature.
-          // tslint:disable-next-line:no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (expectedWinstonMetadata as any)[prop] =
-            // tslint:disable-next-line:no-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             nodeutil.inspect((METADATA as any)[prop]);
         }
         assert.deepStrictEqual(data.metadata, expectedWinstonMetadata);
@@ -370,7 +366,7 @@ describe('logging-common', () => {
       const metadataWithTrace = Object.assign({}, METADATA);
       const loggingTraceKey = loggingCommonLib.LOGGING_TRACE_KEY;
       // metadataWithTrace does not have index signature.
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (metadataWithTrace as any)[loggingTraceKey] = 'trace1';
 
       loggingCommon.stackdriverLog.entry = (
@@ -493,7 +489,6 @@ describe('logging-common', () => {
 
   describe('label and labels', () => {
     const LEVEL = Object.keys(OPTIONS.levels as {[name: string]: number})[0];
-    const STACKDRIVER_LEVEL = 'alert'; // (code 1)
     const MESSAGE = 'message';
     const PREFIX = 'prefix';
     const LABELS = {label1: 'value1'};

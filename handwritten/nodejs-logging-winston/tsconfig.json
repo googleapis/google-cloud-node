@@ -2,11 +2,7 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "build",
-    "lib": [
-      "es2016",
-      "es2017.sharedmemory"
-    ]
+    "outDir": "build"
   },
   "include": [
     "src/*.ts",
