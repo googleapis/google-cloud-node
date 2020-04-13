@@ -51,7 +51,7 @@
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
     "@google-cloud/paginator": "^3.0.0",
-    "@google-cloud/promisify": "^1.0.0",
+    "@google-cloud/promisify": "^2.0.0",
     "arrify": "^2.0.0",
     "compressible": "^2.0.12",
     "concat-stream": "^2.0.0",
