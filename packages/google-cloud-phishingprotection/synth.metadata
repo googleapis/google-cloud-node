@@ -3,23 +3,25 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-phishing-protection.git",
-        "sha": "f530cee08819d7e5faea57f1df2a514e23552067"
+        "remote": "git@github.com:googleapis/nodejs-phishing-protection.git",
+        "sha": "2a29c86fdfda267937fdb0ea559344a376c4cde9"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
-        "internalRef": "305974465"
+        "sha": "26523a96798ce1a6caa1b3c912119059cfcc98a7",
+        "internalRef": "306320014",
+        "log": "26523a96798ce1a6caa1b3c912119059cfcc98a7\nchore: delete gapic config for resourcemanager/v2\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306320014\n\n35672e7936b923eff048d0ee1529faa163cc81b8\nchore: enable gapicv2 for datacatalog/v1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306318928\n\ndea1f52034d188ca371c3a70c716ca2a6b3f2aa1\nchore: delete gapic config for language/v1beta1\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306298030\n\ndf955af5d9508cf9215de6f1fbdad033d5b8fef6\nchore: enable gapicv2 for language/v1beta2 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306297639\n\ne2a59ff2f861b1b92b2f15b242780dccddd77ab9\nchore: enable gapicv2 for bigquery/reservation/v1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306297615\n\nc9942c00e8f35b5b37cd589ef7a0323aeda264e2\nchore: enable gapicv2 for datacatalog/v1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306297587\n\nf561f57eea013327be27d8f6799b3cc2d18ee804\nbazel: upgrade gapic-generator-go to v0.13.2\n\nChanges include:\n* update Bazel rules_go to v0.22.3\n* update Bazel Go repositories with latest\n* fix Bazel go_gapic_assembly_pkg archive contents path\n\nPiperOrigin-RevId: 306294636\n\na34f4eb96a94bfd5b3e7f8de253db28d0a3e9237\nchore: enable gapicv2 for asset/v1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306283252\n\n4efd71279f0781579ced60c374336ce1b8b8cea8\nchore: enable gapicv2 for asset/v1p4beta1  API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306282838\n\n789fd7e0680b04a589447139811d55c5d1f34afe\nchore: enable gapicv2 for asset/v1p1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306282062\n\n0feb08065d91d6deebffef3019751f0619a72140\nchore: enable gapicv2 for asset/v1p2beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306281797\n\n9ea892ebe8a7cd66da9bd62eb7086b8dc2ddd559\nchore: enable gapicv2 for vision/v1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306281271\n\n4d61e1cb40184a7ad63ef37b1813f6608718674a\nAdd speech adaptation, phrase sets and custom classes.\n\nPiperOrigin-RevId: 306280989\n\n3824f547aa44df459580615c73cabb30a2a78ee0\nfeat: Adding Retry policy for OS Config V1Beta AgentEndpointService\n\nPiperOrigin-RevId: 306254195\n\n"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6f32150677c9784f3c3a7e1949472bd29c9d72c5"
+        "sha": "3df869dd6eb546ef13beeb7a9efa6ee0226afafd",
+        "log": "3df869dd6eb546ef13beeb7a9efa6ee0226afafd\nci: add dependency list completeness check (#490)\n\n\n682c0c37d1054966ca662a44259e96cc7aea4413\nbuild(nodejs): update lint ignore rules (#488)\n\n\n97c7ccfdceb927db1cbe6f3bb09616aa02bafd89\ndoc: document context-aware commit flags (#481)\n\nAlso, delete obsolete blurb about cleaning up old, dead files.\n\nCo-authored-by: Jeff Ching <chingor@google.com>\n8eff3790f88b50706a0c4b6a20b385f24e9ac4e7\nfeat: common postprocessing for node libraries (#485)\n\nCo-authored-by: Justin Beckwith <justin.beckwith@gmail.com>\n21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19\nbuild(nodejs): remove unused codecov config (#486)\n\n\n"
       }
     }
   ],

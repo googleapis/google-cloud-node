@@ -22,7 +22,6 @@ logging.basicConfig(level=logging.DEBUG)
 
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
-
 # run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1']
@@ -45,5 +44,5 @@ s.copy(templates, excludes=['.nycrc'])
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
