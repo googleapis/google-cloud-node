@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.8.0...v2.0.0) (2020-04-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#297](https://www.github.com/googleapis/nodejs-iot/issues/297)) ([1cf607e](https://www.github.com/googleapis/nodejs-iot/commit/1cf607edcecfe2053596096efaa1cabe0d11de1e))
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#302](https://www.github.com/googleapis/nodejs-iot/issues/302)) ([8c8acba](https://www.github.com/googleapis/nodejs-iot/commit/8c8acba58f2670139863849cb86e3d8fe9fc7af7))
+* remove eslint, update gax, fix generated protos, run the generator ([#306](https://www.github.com/googleapis/nodejs-iot/issues/306)) ([8edd1b5](https://www.github.com/googleapis/nodejs-iot/commit/8edd1b51347efc7a78390702ba8bd0a714599695))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.7.0...v1.8.0) (2020-03-06)
 
 
