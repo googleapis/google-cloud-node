@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach, afterEach, after} from 'mocha';
 import * as gcpMetadata from 'gcp-metadata';
 import {heap as heapProfiler} from 'pprof';
 import * as sinon from 'sinon';
@@ -26,7 +26,7 @@ describe('nodeVersionOkay', () => {
     assert.strictEqual(true, nodeVersionOkay('v11.0.0-alpha.1'));
   });
   it('should accept beta versions', () => {
-    assert.strictEqual(true, nodeVersionOkay('v8.9.10-beta.2'));
+    assert.strictEqual(true, nodeVersionOkay('v12.9.10-beta.2'));
   });
   it('should accept nightly versions', () => {
     assert.strictEqual(true, nodeVersionOkay('v11.0.0-nightly2018000000'));
@@ -34,37 +34,19 @@ describe('nodeVersionOkay', () => {
   it('should accept pre-release versions', () => {
     assert.strictEqual(true, nodeVersionOkay('v11.0.0-pre'));
   });
-  it('should accept v6.12.3', () => {
-    assert.strictEqual(true, nodeVersionOkay('v6.12.3'));
-  });
-  it('should not accept v6.12.2', () => {
-    assert.strictEqual(false, nodeVersionOkay('v6.12.2'));
-  });
-  it('should accept v8.9.4', () => {
-    assert.strictEqual(true, nodeVersionOkay('v8.9.4'));
-  });
-  it('should not accept v8.9.3', () => {
-    assert.strictEqual(false, nodeVersionOkay('v8.9.3'));
-  });
   it('should accept v10.4.1', () => {
     assert.strictEqual(true, nodeVersionOkay('v10.4.1'));
   });
   it('should not accept v10.4.0', () => {
     assert.strictEqual(false, nodeVersionOkay('v10.4.0'));
   });
-  it('should accept node 7', () => {
-    assert.strictEqual(true, nodeVersionOkay('v7.7.7'));
-  });
-  it('should accept node 9', () => {
-    assert.strictEqual(true, nodeVersionOkay('v9.9.9'));
-  });
 });
 
 describe('createProfiler', () => {
   let savedEnv: NodeJS.ProcessEnv;
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let instanceMetadataStub: sinon.SinonStub<any>;
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let projectMetadataStub: sinon.SinonStub<any>;
   let startStub: sinon.SinonStub<[number, number], void>;
 
