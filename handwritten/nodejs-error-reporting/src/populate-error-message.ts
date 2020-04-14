@@ -39,7 +39,7 @@ export interface PopulatedObject {
  * @returns {Undefined} - does not return a value
  */
 // the `ob` argument can be anything, including `null` and `undefined`
-// tslint:disable-next-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function populateErrorMessage(ob: any, em: ErrorMessage) {
   if (ob === null || ob === undefined) {
     em.setMessage(buildStackTrace('' + ob));

@@ -66,6 +66,7 @@ describe('logger', () => {
       });
     });
     describe('Default log level', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let oldLog: (text: any, args: string[]) => void;
       let text: string | undefined;
       beforeEach(() => {
@@ -73,7 +74,7 @@ describe('logger', () => {
         oldLog = console.error;
         text = '';
         // eslint-disable-next-line no-console
-        console.error = function(this, ...args: string[]) {
+        console.error = function (this, ...args: string[]) {
           oldLog(this, args);
           for (let i = 0; i < args.length; i++) {
             text += args[i];

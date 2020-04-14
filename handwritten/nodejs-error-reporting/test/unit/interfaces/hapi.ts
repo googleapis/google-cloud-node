@@ -199,6 +199,7 @@ describe('Hapi interface', () => {
     const fakeClient = ({
       sendError: (
         errorMessage: ErrorMessage,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         userCb?: (
           err: Error | null,
           response: http.ServerResponse | null,
@@ -221,7 +222,7 @@ describe('Hapi interface', () => {
       assert.strictEqual(plugin.version, packageJson.version);
     });
 
-    it(`Should record 'log' events correctly`, () => {
+    it("Should record 'log' events correctly", () => {
       const fakeServer = {events: new EventEmitter()};
 
       // emulate how the hapi server would register itself
@@ -243,7 +244,7 @@ describe('Hapi interface', () => {
       assert.strictEqual(errorMessage.message, testError.stack);
     });
 
-    it(`Should record 'request' events correctly`, () => {
+    it("Should record 'request' events correctly", () => {
       const fakeServer = {events: new EventEmitter()};
 
       // emulate how the hapi server would register itself

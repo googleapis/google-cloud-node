@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Middleware, Request, Response} from 'koa';
+import {Request, Response} from 'koa';
 
 import {ErrorMessage} from '../classes/error-message';
 import {Configuration} from '../configuration';
@@ -40,7 +40,7 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
    * @param {Function} next - the result of the request handlers to yield
    * @returns {Undefined} does not return anything
    */
-  return function*(
+  return function* (
     this: {request: Request; response: Response},
     next: Function
   ) {

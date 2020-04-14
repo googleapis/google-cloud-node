@@ -153,10 +153,7 @@ describe('Request/Response lifecycle mocking', () => {
   });
 
   beforeEach(() => {
-    env
-      .setProjectId()
-      .setKeyFilename()
-      .setProduction();
+    env.setProjectId().setKeyFilename().setProduction();
     fakeService = nock(
       'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
         process.env.GCLOUD_PROJECT
@@ -179,7 +176,7 @@ describe('Request/Response lifecycle mocking', () => {
     env.restoreProcessToOriginalState();
   });
 
-  it('Should fail when receiving non-retryable errors', function(this, done) {
+  it('Should fail when receiving non-retryable errors', function (this, done) {
     this.timeout(5000);
     client.sendError({} as ErrorMessage, (err, response) => {
       assert(err instanceof Error);
@@ -193,7 +190,7 @@ describe('Request/Response lifecycle mocking', () => {
     });
   });
 
-  it('Should retry when receiving retryable errors', function(this, done) {
+  it('Should retry when receiving retryable errors', function (this, done) {
     this.timeout(25000);
     let tries = 0;
     const intendedTries = 4;
@@ -212,10 +209,7 @@ describe('Request/Response lifecycle mocking', () => {
     'Should provide the key as a query string on outgoing requests when ' +
       'using an API key',
     done => {
-      env
-        .sterilizeProcess()
-        .setProjectId()
-        .setProduction();
+      env.sterilizeProcess().setProjectId().setProduction();
       const key = env.apiKey;
       const logger = createLogger({logLevel: 5});
       const client = new RequestHandler(
@@ -256,7 +250,7 @@ describe('Client creation', () => {
   it(
     'Should not throw on initialization when using only project id as a ' +
       'runtime argument',
-    function(this, done) {
+    function (this, done) {
       env.sterilizeProcess().setKeyFilename();
       const logger = createLogger({logLevel: 5});
       const cfg = new Configuration(
@@ -284,11 +278,8 @@ describe('Client creation', () => {
   it(
     'Should not throw on initialization when using only project id as an ' +
       'env variable',
-    function(this, done) {
-      env
-        .sterilizeProcess()
-        .setProjectId()
-        .setKeyFilename();
+    function (this, done) {
+      env.sterilizeProcess().setProjectId().setKeyFilename();
       const logger = createLogger({logLevel: 5});
       const cfg = new Configuration({reportMode: 'always'}, logger);
       this.timeout(10000);
@@ -309,7 +300,7 @@ describe('Client creation', () => {
   it(
     'Should not throw on initialization when using only project number as ' +
       'a runtime argument',
-    function(this, done) {
+    function (this, done) {
       env.sterilizeProcess().setKeyFilename();
       const logger = createLogger({logLevel: 5});
       const cfg = new Configuration(
@@ -337,11 +328,8 @@ describe('Client creation', () => {
   it(
     'Should not throw on initialization when using only project number as ' +
       'an env variable',
-    function(this, done) {
-      env
-        .sterilizeProcess()
-        .setKeyFilename()
-        .setProjectNumber();
+    function (this, done) {
+      env.sterilizeProcess().setKeyFilename().setProjectNumber();
       const logger = createLogger({logLevel: 5});
       const cfg = new Configuration({reportMode: 'always'}, logger);
       this.timeout(10000);
@@ -376,10 +364,7 @@ describe('Expected Behavior', () => {
   });
 
   it('Should callback with an error with a configuration that cannot report errors', done => {
-    env
-      .sterilizeProcess()
-      .setKeyFilename()
-      .setProjectId();
+    env.sterilizeProcess().setKeyFilename().setProjectId();
     process.env.NODE_ENV = 'null';
     const logger = createLogger({logLevel: 5, reportMode: 'production'});
     const client = new RequestHandler(
@@ -461,7 +446,8 @@ describe('error-reporting', () => {
     // interfering with existing listeners of the 'unhandledRejection' event.
     assert.strictEqual(process.listenerCount('unhandledRejection'), 0);
     oldLogger = console.error;
-    console.error = function(this, ...args: any[]) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    console.error = function (this, ...args: any[]) {
       const text = util.format(null, args);
       oldLogger(text);
       logOutput += text;
@@ -579,7 +565,7 @@ describe('error-reporting', () => {
     const context = rep.serviceContext;
     assert.ok(
       context,
-      `Expected the error item's representative to have a context`
+      "Expected the error item's representative to have a context"
     );
     assert.strictEqual(context.service, SERVICE);
     assert.strictEqual(context.version, VERSION);
@@ -587,7 +573,8 @@ describe('error-reporting', () => {
 
   // the `errOb` argument can be anything, including `null` and `undefined`
   async function verifyReporting(
-    errOb: any, // tslint:disable-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    errOb: any,
     messageTest: (message: string) => void,
     maxCount: number,
     timeout: number
@@ -638,7 +625,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is a string', async function(this) {
+  it('Should correctly publish an error that is a string', async function (this) {
     this.timeout(TIMEOUT);
     const errorId = buildName('with-string');
     await verifyReporting(
@@ -651,7 +638,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is undefined', async function(this) {
+  it('Should correctly publish an error that is undefined', async function (this) {
     this.timeout(TIMEOUT);
     await verifyReporting(
       undefined,
@@ -663,7 +650,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is null', async function(this) {
+  it('Should correctly publish an error that is null', async function (this) {
     this.timeout(TIMEOUT);
     await verifyReporting(
       null,
@@ -675,7 +662,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is a plain object', async function(this) {
+  it('Should correctly publish an error that is a plain object', async function (this) {
     this.timeout(TIMEOUT);
     await verifyReporting(
       {someKey: 'someValue'},
@@ -687,7 +674,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is a number', async function(this) {
+  it('Should correctly publish an error that is a number', async function (this) {
     this.timeout(TIMEOUT);
     const num = new Date().getTime();
     await verifyReporting(
@@ -700,7 +687,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is of an unknown type', async function(this) {
+  it('Should correctly publish an error that is of an unknown type', async function (this) {
     this.timeout(TIMEOUT);
     const bool = true;
     await verifyReporting(
@@ -713,7 +700,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish errors using an error builder', async function(this) {
+  it('Should correctly publish errors using an error builder', async function (this) {
     this.timeout(TIMEOUT);
     const errorId = buildName('with-error-builder');
     // Use an IIFE with the name `definitionSiteFunction` to use later to
@@ -749,7 +736,7 @@ describe('error-reporting', () => {
     await callingSiteFunction();
   });
 
-  it('Should report unhandledRejections if enabled', async function(this) {
+  it('Should report unhandledRejections if enabled', async function (this) {
     this.timeout(TIMEOUT);
     reinitialize({reportUnhandledRejections: true});
     const rejectValue = buildName('report-promise-rejection');
@@ -772,7 +759,7 @@ describe('error-reporting', () => {
     assert.notStrictEqual(logOutput.indexOf(expected), -1);
   });
 
-  it('Should not report unhandledRejections if disabled', async function(this) {
+  it('Should not report unhandledRejections if disabled', async function (this) {
     this.timeout(TIMEOUT);
     reinitialize({reportUnhandledRejections: false});
     const rejectValue = buildName('do-not-report-promise-rejection');
