@@ -22,7 +22,7 @@ import {CoreOptions, OptionsWithUri, Response} from 'request';
 import * as uuid from 'uuid';
 
 import {Change, CreateChangeRequest} from '../src/change';
-import {Record, RecordObject} from '../src/record';
+import {Record, RecordObject, RecordMetadata} from '../src/record';
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
@@ -57,18 +57,18 @@ const fakeFs = {
 };
 
 class FakeChange {
-  calledWith_: any[];
-  constructor(...args: any[]) {
+  calledWith_: Array<{}>;
+  constructor(...args: Array<{}>) {
     this.calledWith_ = args;
   }
 }
 
 class FakeRecord {
-  calledWith_: any[];
-  constructor(...args: any[]) {
+  calledWith_: Array<{}>;
+  constructor(...args: Array<{}>) {
     this.calledWith_ = args;
   }
-  static fromZoneRecord_(...args: any[]) {
+  static fromZoneRecord_(...args: Array<{}>) {
     const record = new FakeRecord();
     record.calledWith_ = args;
     return record;
@@ -76,8 +76,8 @@ class FakeRecord {
 }
 
 class FakeServiceObject extends ServiceObject {
-  calledWith_: any[];
-  constructor(config: ServiceObjectConfig, ...args: any[]) {
+  calledWith_: Array<{}>;
+  constructor(config: ServiceObjectConfig, ...args: Array<{}>) {
     super(config);
     this.calledWith_ = args;
   }
@@ -102,9 +102,9 @@ const fakePaginator = {
 };
 
 describe('Zone', () => {
-  // tslint:disable-next-line
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Zone: any;
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let zone: any;
 
   const DNS = {
@@ -358,7 +358,7 @@ describe('Zone', () => {
       });
 
       it('should try to delete again after emptying', done => {
-        // tslint:disable-next-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (FakeServiceObject.prototype as any).delete = () => {
           done();
         };
@@ -881,7 +881,7 @@ describe('Zone', () => {
 
     describe('success', () => {
       const recordType = 'ns';
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let parsedZonefile: any = {};
 
       beforeEach(() => {
@@ -926,9 +926,9 @@ describe('Zone', () => {
         parsedZonefile.mx = {ttl: '180'};
         zone.addRecords = (recordsToCreate: FakeRecord[]) => {
           const record1 = recordsToCreate[0].calledWith_[2];
-          assert.strictEqual(record1.ttl, defaultTTL);
+          assert.strictEqual((record1 as RecordMetadata).ttl, defaultTTL);
           const record2 = recordsToCreate[1].calledWith_[2];
-          assert.strictEqual(record2.ttl, '180');
+          assert.strictEqual((record2 as RecordMetadata).ttl, '180');
           done();
         };
         zone.import(path, done);

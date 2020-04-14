@@ -17,6 +17,7 @@ import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {Record} from '../src';
 
 let promisified = false;
@@ -31,9 +32,9 @@ const fakePromisify = Object.assign({}, promisify, {
 });
 
 describe('Record', () => {
-  // tslint:disable-next-line
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Record: any;
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let record: any;
 
   const ZONE = {

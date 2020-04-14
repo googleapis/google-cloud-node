@@ -337,7 +337,7 @@ class DNS extends Service {
           callback!(err, null, null, resp);
           return;
         }
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const zones = arrify(resp.managedZones).map((zone: any) => {
           const zoneInstance = this.zone(zone.name);
           zoneInstance.metadata = zone;

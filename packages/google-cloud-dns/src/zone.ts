@@ -392,7 +392,7 @@ class Zone extends ZoneServiceObject {
     config: CreateZoneRequest,
     callback?: CreateZoneCallback
   ): void | Promise<CreateZoneResponse> {
-    // tslint:disable-next-line no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const args = [config, callback!] as any;
     ServiceObject.prototype.create.apply(this, args);
   }
@@ -1088,7 +1088,7 @@ class Zone extends ZoneServiceObject {
       const recordsToCreate: Record[] = [];
       recordTypes.forEach(recordType => {
         const recordTypeSet = arrify(parsedZonefile[recordType]);
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         recordTypeSet.forEach((record: any) => {
           record.ttl = record.ttl || defaultTTL;
           recordsToCreate.push(

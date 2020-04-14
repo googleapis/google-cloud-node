@@ -22,6 +22,7 @@ import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {Change} from '../src/change';
 
 let promisified = false;
@@ -43,9 +44,9 @@ class FakeServiceObject extends ServiceObject {
 }
 
 describe('Change', () => {
-  // tslint:disable-next-line:variable-name no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let Change: any;
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let change: any;
 
   const ZONE = {

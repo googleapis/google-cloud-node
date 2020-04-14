@@ -80,9 +80,9 @@ class FakeZone {
 }
 
 describe('DNS', () => {
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let DNS: any;
-  // tslint:disable-next-line: no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let dns: any;
 
   const PROJECT_ID = 'project-id';

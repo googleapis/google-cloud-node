@@ -125,7 +125,7 @@ describe('dns', () => {
   });
 
   // deal with eventual consistency of ZONE.create():
-  it('should return 0 or more zones', async function() {
+  it('should return 0 or more zones', async function () {
     this.retries(3);
     await delayMs(1000);
     const zones = await dns.getZones();
@@ -285,8 +285,7 @@ describe('dns', () => {
         const onRecordsReceived = (
           err?: Error | null,
           records?: Record[] | null,
-          nextQuery?: {} | null,
-          apiResponse?: Metadata
+          nextQuery?: {} | null
         ) => {
           if (nextQuery) {
             ZONE.getRecords(nextQuery, onRecordsReceived);
