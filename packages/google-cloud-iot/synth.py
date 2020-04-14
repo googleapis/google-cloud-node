@@ -29,7 +29,7 @@ versions = ['v1']
 
 for version in versions:
     library = gapic.typescript_library(
-        'iot', 
+        'iot',
         generator_args={
             "grpc-service-config": f"google/cloud/iot/{version}/cloudiot_grpc_service_config.json",
             "package-name": f"@google-cloud/iot",
@@ -50,11 +50,7 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-s.replace("src/v1/doc/google/cloud/iot/v1/doc_resources.js",
-        "\[RFC(.*)\]\(https:\/\/cloud\.google\.com",
-        r"[RFC\1](")
-
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
