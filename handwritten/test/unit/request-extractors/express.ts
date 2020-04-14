@@ -102,7 +102,7 @@ describe('Behaviour under varying input', () => {
       remoteAddress: '',
       statusCode: 201,
     };
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const headerFactory = (toDeriveFrom: any) => {
       const lrn = Object.assign({}, toDeriveFrom);
       lrn.header = (toRet: string) => {

@@ -71,7 +71,7 @@ describe('Manual handler', () => {
       const r = report(new Error('hokeypokey'));
       assert(r.message.match(/hokeypokey/));
     });
-    it('Should allow a function as a malformed error input', function(this, done) {
+    it('Should allow a function as a malformed error input', function (this, done) {
       this.timeout(2000);
       const r = report(() => {
         assert(false, 'callback should not be called');
