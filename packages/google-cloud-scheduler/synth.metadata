@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-scheduler.git",
-        "sha": "ecda16434c53cda59f87e2919eab64efb1ad8375"
+        "remote": "git@github.com:googleapis/nodejs-scheduler.git",
+        "sha": "001e17ab1c044a5e29d1d5b49fce773c6abee06c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
-        "internalRef": "305974465"
+        "sha": "26523a96798ce1a6caa1b3c912119059cfcc98a7",
+        "internalRef": "306320014"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6f32150677c9784f3c3a7e1949472bd29c9d72c5"
+        "sha": "52638600f387deb98efb5f9c85fec39e82aa9052"
       }
     }
   ],
