@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.7.0...v2.0.0) (2020-04-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support ([#123](https://www.github.com/googleapis/nodejs-phishing-protection/issues/123)) ([fe53a97](https://www.github.com/googleapis/nodejs-phishing-protection/commit/fe53a97b06dcc5123482f3459312ad2c9ff3534d))
+
+
+### Bug Fixes
+
+* drop unused files from package ([#137](https://www.github.com/googleapis/nodejs-phishing-protection/issues/137)) ([9738564](https://www.github.com/googleapis/nodejs-phishing-protection/commit/9738564b5fe1e74e20a9e1fd6cb8ab4af954a817))
+* export explicit version from protos.js ([#128](https://www.github.com/googleapis/nodejs-phishing-protection/issues/128)) ([e71e492](https://www.github.com/googleapis/nodejs-phishing-protection/commit/e71e49252a8e67a03c55af2919a12a34ee121726))
+* remove eslint, update gax, fix generated protos, run the generator ([#133](https://www.github.com/googleapis/nodejs-phishing-protection/issues/133)) ([f530cee](https://www.github.com/googleapis/nodejs-phishing-protection/commit/f530cee08819d7e5faea57f1df2a514e23552067))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.6.0...v1.7.0) (2020-03-06)
 
 
