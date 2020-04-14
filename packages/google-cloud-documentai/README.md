@@ -59,6 +59,7 @@ npm install @google-cloud/documentai
  * TODO(developer): Uncomment these variables before running the sample.
  */
 // const projectId = 'YOUR_PROJECT_ID';
+// const location = 'YOUR_PROJECT_LOCATION'; // Format is 'us' or 'eu'
 // const gcsInputUri = 'YOUR_SOURCE_PDF';
 
 const {
@@ -68,7 +69,7 @@ const client = new DocumentUnderstandingServiceClient();
 
 async function quickstart() {
   // Configure the request for processing the PDF
-  const parent = `projects/${projectId}`;
+  const parent = `projects/${projectId}/locations/${location}`;
   const request = {
     parent,
     inputConfig: {
