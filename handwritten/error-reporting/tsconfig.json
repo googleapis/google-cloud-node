@@ -13,8 +13,5 @@
     "system-test/*.ts",
     "system-test/**/*.ts",
     "utils/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
   ]
 }

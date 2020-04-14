@@ -32,7 +32,7 @@ import * as restifyInterface from './interfaces/restify';
 import {createLogger} from './logger';
 import * as manualRequestExtractor from './request-extractors/manual';
 
-// tslint:disable-next-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type RestifyRequestHandler = (req: any, res: any, next: Function) => any;
 
 /**
@@ -106,7 +106,8 @@ export class ErrorReporting {
   private _client!: AuthClient;
   // the `err` argument can be anything, including `null` and `undefined`
   report!: (
-    err: any, // tslint:disable-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    err: any,
     request?: manualRequestExtractor.Request,
     additionalMessage?: string | {},
     callback?: manualInterface.Callback | {} | string
@@ -118,11 +119,11 @@ export class ErrorReporting {
     version?: string;
   };
   express!: (err: {}, req: {}, res: {}, next: Function) => void;
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   restify!: (server: any) => RestifyRequestHandler | RestifyRequestHandler[];
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   koa!: (context: any, next: {}) => IterableIterator<{}>;
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   koa2!: (context: any, next: Function) => Promise<void>;
 
   constructor(initConfiguration?: ConfigurationOptions) {

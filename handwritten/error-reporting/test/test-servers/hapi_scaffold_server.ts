@@ -18,10 +18,8 @@ const errorHandler = new ErrorReporting();
 
 const server = new Hapi.Server({port: 3000});
 
-// eslint-disable-next-line no-console
 const log = console.log;
-
-// eslint-disable-next-line no-console
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const error = console.error;
 
 server.route({
