@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
 import * as stringify from 'json-stable-stringify';
 
 export type Anything = {} | undefined | null;

@@ -77,29 +77,23 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
    * @returns {Undefined} - returns the execution of the next callback
    */
   function hapiRegisterFunction(
-    server: any, // tslint:disable-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    server: any,
     options: {},
     next?: Function
   ) {
     if (server) {
       if (server.events && server.events.on) {
         // Hapi 17 is being used
-        server.events.on(
-          'log',
-          (event: {error?: {}; channel: string}, tags: {}) => {
-            if (event.error && event.channel === 'app') {
-              client.sendError(hapiErrorHandler(event.error));
-            }
+        server.events.on('log', (event: {error?: {}; channel: string}) => {
+          if (event.error && event.channel === 'app') {
+            client.sendError(hapiErrorHandler(event.error));
           }
-        );
+        });
 
         server.events.on(
           'request',
-          (
-            request: hapi.Request,
-            event: {error?: {}; channel: string},
-            tags: {}
-          ) => {
+          (request: hapi.Request, event: {error?: {}; channel: string}) => {
             if (event.error && event.channel === 'error') {
               client.sendError(hapiErrorHandler(event.error, request));
             }
@@ -113,7 +107,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
         }
 
         if (is.function(server.ext)) {
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           server.ext('onPreResponse', (request: hapi.Request, reply: any) => {
             if (
               is.object(request) &&

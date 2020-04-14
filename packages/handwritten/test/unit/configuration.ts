@@ -49,10 +49,7 @@ function restoreConfigEnv() {
   process.env.GAE_MODULE_VERSION = configEnv.GAE_MODULE_VERSION;
 }
 function createDeadMetadataService() {
-  return nock(METADATA_URL)
-    .get('/project-id')
-    .times(1)
-    .reply(500);
+  return nock(METADATA_URL).get('/project-id').times(1).reply(500);
 }
 
 describe('Configuration class', () => {
