@@ -5,7 +5,7 @@
     "outDir": "build",
     "resolveJsonModule": true,
     "lib": [
-      "es2018",
+      "es2016",
       "dom"
     ]
   },

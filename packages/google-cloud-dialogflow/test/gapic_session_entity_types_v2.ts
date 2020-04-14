@@ -20,7 +20,7 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { describe, it } from 'mocha';
 import * as sessionentitytypesModule from '../src';
 
 import {PassThrough} from 'stream';
@@ -28,1563 +28,1094 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2.SessionEntityTypesClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      sessionentitytypesModule.v2.SessionEntityTypesClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      sessionentitytypesModule.v2.SessionEntityTypesClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = sessionentitytypesModule.v2.SessionEntityTypesClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new sessionentitytypesModule.v2.SessionEntityTypesClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-      fallback: true,
-    });
-    assert(client);
-  });
-
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    assert.strictEqual(client.sessionEntityTypesStub, undefined);
-    await client.initialize();
-    assert(client.sessionEntityTypesStub);
-  });
-
-  it('has close method', () => {
-    const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.close();
-  });
-
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
-
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
-      });
-    });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
-  });
-
-  describe('getSessionEntityType', () => {
-    it('invokes getSessionEntityType without error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.GetSessionEntityTypeRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.SessionEntityType()
-      );
-      client.innerApiCalls.getSessionEntityType = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.getSessionEntityType(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    it('has servicePath', () => {
+        const servicePath = sessionentitytypesModule.v2.SessionEntityTypesClient.servicePath;
+        assert(servicePath);
     });
 
-    it('invokes getSessionEntityType without error using callback', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.GetSessionEntityTypeRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.SessionEntityType()
-      );
-      client.innerApiCalls.getSessionEntityType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.getSessionEntityType(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.v2.ISessionEntityType | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+    it('has apiEndpoint', () => {
+        const apiEndpoint = sessionentitytypesModule.v2.SessionEntityTypesClient.apiEndpoint;
+        assert(apiEndpoint);
     });
 
-    it('invokes getSessionEntityType with error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.GetSessionEntityTypeRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSessionEntityType = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getSessionEntityType(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.getSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('createSessionEntityType', () => {
-    it('invokes createSessionEntityType without error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.CreateSessionEntityTypeRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.SessionEntityType()
-      );
-      client.innerApiCalls.createSessionEntityType = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.createSessionEntityType(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    it('has port', () => {
+        const port = sessionentitytypesModule.v2.SessionEntityTypesClient.port;
+        assert(port);
+        assert(typeof port === 'number');
     });
 
-    it('invokes createSessionEntityType without error using callback', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.CreateSessionEntityTypeRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.SessionEntityType()
-      );
-      client.innerApiCalls.createSessionEntityType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.createSessionEntityType(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.v2.ISessionEntityType | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+    it('should create a client with no option', () => {
+        const client = new sessionentitytypesModule.v2.SessionEntityTypesClient();
+        assert(client);
     });
 
-    it('invokes createSessionEntityType with error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.CreateSessionEntityTypeRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSessionEntityType = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.createSessionEntityType(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.createSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('updateSessionEntityType', () => {
-    it('invokes updateSessionEntityType without error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.UpdateSessionEntityTypeRequest()
-      );
-      request.sessionEntityType = {};
-      request.sessionEntityType.name = '';
-      const expectedHeaderRequestParams = 'session_entity_type.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.SessionEntityType()
-      );
-      client.innerApiCalls.updateSessionEntityType = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.updateSessionEntityType(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes updateSessionEntityType without error using callback', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.UpdateSessionEntityTypeRequest()
-      );
-      request.sessionEntityType = {};
-      request.sessionEntityType.name = '';
-      const expectedHeaderRequestParams = 'session_entity_type.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.SessionEntityType()
-      );
-      client.innerApiCalls.updateSessionEntityType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.updateSessionEntityType(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.v2.ISessionEntityType | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes updateSessionEntityType with error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.UpdateSessionEntityTypeRequest()
-      );
-      request.sessionEntityType = {};
-      request.sessionEntityType.name = '';
-      const expectedHeaderRequestParams = 'session_entity_type.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSessionEntityType = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.updateSessionEntityType(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.updateSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('deleteSessionEntityType', () => {
-    it('invokes deleteSessionEntityType without error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.DeleteSessionEntityTypeRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSessionEntityType = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.deleteSessionEntityType(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes deleteSessionEntityType without error using callback', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.DeleteSessionEntityTypeRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSessionEntityType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSessionEntityType(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes deleteSessionEntityType with error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.DeleteSessionEntityTypeRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSessionEntityType = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteSessionEntityType(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.deleteSessionEntityType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('listSessionEntityTypes', () => {
-    it('invokes listSessionEntityTypes without error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-      ];
-      client.innerApiCalls.listSessionEntityTypes = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.listSessionEntityTypes(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSessionEntityTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listSessionEntityTypes without error using callback', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-      ];
-      client.innerApiCalls.listSessionEntityTypes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.listSessionEntityTypes(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.dialogflow.v2.ISessionEntityType[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSessionEntityTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes listSessionEntityTypes with error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSessionEntityTypes = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.listSessionEntityTypes(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.listSessionEntityTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listSessionEntityTypesStream without error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-      ];
-      client.descriptors.page.listSessionEntityTypes.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
-      const stream = client.listSessionEntityTypesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.v2.SessionEntityType[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dialogflow.v2.SessionEntityType) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    it('should create a client with gRPC fallback', () => {
+        const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+            fallback: true,
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+        assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSessionEntityTypes
-          .createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSessionEntityTypes, request)
-      );
-      assert.strictEqual(
-        (client.descriptors.page.listSessionEntityTypes
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
-        expectedHeaderRequestParams
-      );
+        assert.strictEqual(client.sessionEntityTypesStub, undefined);
+        await client.initialize();
+        assert(client.sessionEntityTypesStub);
     });
 
-    it('invokes listSessionEntityTypesStream with error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSessionEntityTypes.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSessionEntityTypesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.v2.SessionEntityType[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dialogflow.v2.SessionEntityType) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    it('has close method', () => {
+        const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+        client.close();
+    });
+
+    it('has getProjectId method', async () => {
+        const fakeProjectId = 'fake-project-id';
+        const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
         });
-      });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
-      assert(
-        (client.descriptors.page.listSessionEntityTypes
-          .createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSessionEntityTypes, request)
-      );
-      assert.strictEqual(
-        (client.descriptors.page.listSessionEntityTypes
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
-        expectedHeaderRequestParams
-      );
+        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+        const result = await client.getProjectId();
+        assert.strictEqual(result, fakeProjectId);
+        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
     });
 
-    it('uses async iteration with listSessionEntityTypes without error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.v2.SessionEntityType()
-        ),
-      ];
-      client.descriptors.page.listSessionEntityTypes.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.dialogflow.v2.ISessionEntityType[] = [];
-      const iterable = client.listSessionEntityTypesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSessionEntityTypes
-          .asyncIterate as SinonStub).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (client.descriptors.page.listSessionEntityTypes
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
-        expectedHeaderRequestParams
-      );
+    it('has getProjectId method with callback', async () => {
+        const fakeProjectId = 'fake-project-id';
+        const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+        const promise = new Promise((resolve, reject) => {
+            client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(projectId);
+                }
+            });
+        });
+        const result = await promise;
+        assert.strictEqual(result, fakeProjectId);
     });
 
-    it('uses async iteration with listSessionEntityTypes with error', async () => {
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSessionEntityTypes.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSessionEntityTypesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dialogflow.v2.ISessionEntityType[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSessionEntityTypes
-          .asyncIterate as SinonStub).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (client.descriptors.page.listSessionEntityTypes
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
-        expectedHeaderRequestParams
-      );
-    });
-  });
+    describe('getSessionEntityType', () => {
+        it('invokes getSessionEntityType without error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.GetSessionEntityTypeRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType());
+            client.innerApiCalls.getSessionEntityType = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSessionEntityType(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.getSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-  describe('Path templates', () => {
-    describe('agent', () => {
-      const fakePath = '/rendered/path/agent';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.agentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.agentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('invokes getSessionEntityType without error using callback', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.GetSessionEntityTypeRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType());
+            client.innerApiCalls.getSessionEntityType = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSessionEntityType(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2.ISessionEntityType|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.getSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('agentPath', () => {
-        const result = client.agentPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.agentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAgentName', () => {
-        const result = client.matchProjectFromAgentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.agentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('entityType', () => {
-      const fakePath = '/rendered/path/entityType';
-      const expectedParameters = {
-        project: 'projectValue',
-        entity_type: 'entityTypeValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.entityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.entityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('entityTypePath', () => {
-        const result = client.entityTypePath('projectValue', 'entityTypeValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEntityTypeName', () => {
-        const result = client.matchProjectFromEntityTypeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntityTypeFromEntityTypeName', () => {
-        const result = client.matchEntityTypeFromEntityTypeName(fakePath);
-        assert.strictEqual(result, 'entityTypeValue');
-        assert(
-          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getSessionEntityType with error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.GetSessionEntityTypeRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSessionEntityType = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.getSessionEntityType(request); }, expectedError);
+            assert((client.innerApiCalls.getSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
 
-    describe('intent', () => {
-      const fakePath = '/rendered/path/intent';
-      const expectedParameters = {
-        project: 'projectValue',
-        intent: 'intentValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.intentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.intentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createSessionEntityType', () => {
+        it('invokes createSessionEntityType without error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.CreateSessionEntityTypeRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType());
+            client.innerApiCalls.createSessionEntityType = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSessionEntityType(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.createSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-      it('intentPath', () => {
-        const result = client.intentPath('projectValue', 'intentValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.intentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createSessionEntityType without error using callback', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.CreateSessionEntityTypeRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType());
+            client.innerApiCalls.createSessionEntityType = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSessionEntityType(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2.ISessionEntityType|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.createSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('matchProjectFromIntentName', () => {
-        const result = client.matchProjectFromIntentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.intentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchIntentFromIntentName', () => {
-        const result = client.matchIntentFromIntentName(fakePath);
-        assert.strictEqual(result, 'intentValue');
-        assert(
-          (client.pathTemplates.intentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createSessionEntityType with error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.CreateSessionEntityTypeRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSessionEntityType = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.createSessionEntityType(request); }, expectedError);
+            assert((client.innerApiCalls.createSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
 
-    describe('project', () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('updateSessionEntityType', () => {
+        it('invokes updateSessionEntityType without error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.UpdateSessionEntityTypeRequest());
+            request.sessionEntityType = {};
+            request.sessionEntityType.name = '';
+            const expectedHeaderRequestParams = "session_entity_type.name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType());
+            client.innerApiCalls.updateSessionEntityType = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSessionEntityType(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.updateSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes updateSessionEntityType without error using callback', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.UpdateSessionEntityTypeRequest());
+            request.sessionEntityType = {};
+            request.sessionEntityType.name = '';
+            const expectedHeaderRequestParams = "session_entity_type.name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType());
+            client.innerApiCalls.updateSessionEntityType = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSessionEntityType(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2.ISessionEntityType|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.updateSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateSessionEntityType with error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.UpdateSessionEntityTypeRequest());
+            request.sessionEntityType = {};
+            request.sessionEntityType.name = '';
+            const expectedHeaderRequestParams = "session_entity_type.name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSessionEntityType = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.updateSessionEntityType(request); }, expectedError);
+            assert((client.innerApiCalls.updateSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
 
-    describe('projectAgentEnvironmentUserSessionContext', () => {
-      const fakePath =
-        '/rendered/path/projectAgentEnvironmentUserSessionContext';
-      const expectedParameters = {
-        project: 'projectValue',
-        environment: 'environmentValue',
-        user: 'userValue',
-        session: 'sessionValue',
-        context: 'contextValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('deleteSessionEntityType', () => {
+        it('invokes deleteSessionEntityType without error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.DeleteSessionEntityTypeRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
+            client.innerApiCalls.deleteSessionEntityType = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteSessionEntityType(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.deleteSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-      it('projectAgentEnvironmentUserSessionContextPath', () => {
-        const result = client.projectAgentEnvironmentUserSessionContextPath(
-          'projectValue',
-          'environmentValue',
-          'userValue',
-          'sessionValue',
-          'contextValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionContextPathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes deleteSessionEntityType without error using callback', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.DeleteSessionEntityTypeRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
+            client.innerApiCalls.deleteSessionEntityType = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSessionEntityType(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.deleteSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('matchProjectFromProjectAgentEnvironmentUserSessionContextName', () => {
-        const result = client.matchProjectFromProjectAgentEnvironmentUserSessionContextName(
-          fakePath
-        );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionContextPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName', () => {
-        const result = client.matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(
-          fakePath
-        );
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionContextPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchUserFromProjectAgentEnvironmentUserSessionContextName', () => {
-        const result = client.matchUserFromProjectAgentEnvironmentUserSessionContextName(
-          fakePath
-        );
-        assert.strictEqual(result, 'userValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionContextPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectAgentEnvironmentUserSessionContextName', () => {
-        const result = client.matchSessionFromProjectAgentEnvironmentUserSessionContextName(
-          fakePath
-        );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionContextPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContextFromProjectAgentEnvironmentUserSessionContextName', () => {
-        const result = client.matchContextFromProjectAgentEnvironmentUserSessionContextName(
-          fakePath
-        );
-        assert.strictEqual(result, 'contextValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionContextPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes deleteSessionEntityType with error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.DeleteSessionEntityTypeRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSessionEntityType = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.deleteSessionEntityType(request); }, expectedError);
+            assert((client.innerApiCalls.deleteSessionEntityType as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
 
-    describe('projectAgentEnvironmentUserSessionEntityType', () => {
-      const fakePath =
-        '/rendered/path/projectAgentEnvironmentUserSessionEntityType';
-      const expectedParameters = {
-        project: 'projectValue',
-        environment: 'environmentValue',
-        user: 'userValue',
-        session: 'sessionValue',
-        entity_type: 'entityTypeValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listSessionEntityTypes', () => {
+        it('invokes listSessionEntityTypes without error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+            ];
+            client.innerApiCalls.listSessionEntityTypes = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSessionEntityTypes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.listSessionEntityTypes as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-      it('projectAgentEnvironmentUserSessionEntityTypePath', () => {
-        const result = client.projectAgentEnvironmentUserSessionEntityTypePath(
-          'projectValue',
-          'environmentValue',
-          'userValue',
-          'sessionValue',
-          'entityTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listSessionEntityTypes without error using callback', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+            ];
+            client.innerApiCalls.listSessionEntityTypes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSessionEntityTypes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2.ISessionEntityType[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.listSessionEntityTypes as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-        const result = client.matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(
-          fakePath
-        );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listSessionEntityTypes with error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSessionEntityTypes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.listSessionEntityTypes(request); }, expectedError);
+            assert((client.innerApiCalls.listSessionEntityTypes as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-      it('matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-        const result = client.matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(
-          fakePath
-        );
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listSessionEntityTypesStream without error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+            ];
+            client.descriptors.page.listSessionEntityTypes.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSessionEntityTypesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dialogflow.v2.SessionEntityType[] = [];
+                stream.on('data', (response: protos.google.cloud.dialogflow.v2.SessionEntityType) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSessionEntityTypes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSessionEntityTypes, request));
+            assert.strictEqual(
+                (client.descriptors.page.listSessionEntityTypes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+                expectedHeaderRequestParams
+            );
+        });
 
-      it('matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-        const result = client.matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(
-          fakePath
-        );
-        assert.strictEqual(result, 'userValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listSessionEntityTypesStream with error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSessionEntityTypes.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSessionEntityTypesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dialogflow.v2.SessionEntityType[] = [];
+                stream.on('data', (response: protos.google.cloud.dialogflow.v2.SessionEntityType) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(async () => { await promise; }, expectedError);
+            assert((client.descriptors.page.listSessionEntityTypes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSessionEntityTypes, request));
+            assert.strictEqual(
+                (client.descriptors.page.listSessionEntityTypes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+                expectedHeaderRequestParams
+            );
+        });
 
-      it('matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-        const result = client.matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(
-          fakePath
-        );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('uses async iteration with listSessionEntityTypes without error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.v2.SessionEntityType()),
+            ];
+            client.descriptors.page.listSessionEntityTypes.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dialogflow.v2.ISessionEntityType[] = [];
+            const iterable = client.listSessionEntityTypesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSessionEntityTypes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert.strictEqual(
+                (client.descriptors.page.listSessionEntityTypes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+                expectedHeaderRequestParams
+            );
+        });
 
-      it('matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-        const result = client.matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(
-          fakePath
-        );
-        assert.strictEqual(result, 'entityTypeValue');
-        assert(
-          (client.pathTemplates
-            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('uses async iteration with listSessionEntityTypes with error', async () => {
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListSessionEntityTypesRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";const expectedError = new Error('expected');
+            client.descriptors.page.listSessionEntityTypes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSessionEntityTypesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dialogflow.v2.ISessionEntityType[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSessionEntityTypes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert.strictEqual(
+                (client.descriptors.page.listSessionEntityTypes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+                expectedHeaderRequestParams
+            );
+        });
     });
 
-    describe('projectAgentSession', () => {
-      const fakePath = '/rendered/path/projectAgentSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        session: 'sessionValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectAgentSessionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAgentSessionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('projectAgentSessionPath', () => {
-        const result = client.projectAgentSessionPath(
-          'projectValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectAgentSessionPathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('agent', () => {
+            const fakePath = "/rendered/path/agent";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.agentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.agentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromProjectAgentSessionName', () => {
-        const result = client.matchProjectFromProjectAgentSessionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('agentPath', () => {
+                const result = client.agentPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.agentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchSessionFromProjectAgentSessionName', () => {
-        const result = client.matchSessionFromProjectAgentSessionName(fakePath);
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromAgentName', () => {
+                const result = client.matchProjectFromAgentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.agentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('entityType', () => {
+            const fakePath = "/rendered/path/entityType";
+            const expectedParameters = {
+                project: "projectValue",
+                entity_type: "entityTypeValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.entityTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entityTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entityTypePath', () => {
+                const result = client.entityTypePath("projectValue", "entityTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entityTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntityTypeName', () => {
+                const result = client.matchProjectFromEntityTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntityTypeFromEntityTypeName', () => {
+                const result = client.matchEntityTypeFromEntityTypeName(fakePath);
+                assert.strictEqual(result, "entityTypeValue");
+                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('intent', () => {
+            const fakePath = "/rendered/path/intent";
+            const expectedParameters = {
+                project: "projectValue",
+                intent: "intentValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.intentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.intentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('intentPath', () => {
+                const result = client.intentPath("projectValue", "intentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.intentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromIntentName', () => {
+                const result = client.matchProjectFromIntentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.intentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchIntentFromIntentName', () => {
+                const result = client.matchIntentFromIntentName(fakePath);
+                assert.strictEqual(result, "intentValue");
+                assert((client.pathTemplates.intentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAgentEnvironmentUserSessionContext', () => {
+            const fakePath = "/rendered/path/projectAgentEnvironmentUserSessionContext";
+            const expectedParameters = {
+                project: "projectValue",
+                environment: "environmentValue",
+                user: "userValue",
+                session: "sessionValue",
+                context: "contextValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAgentEnvironmentUserSessionContextPath', () => {
+                const result = client.projectAgentEnvironmentUserSessionContextPath("projectValue", "environmentValue", "userValue", "sessionValue", "contextValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAgentEnvironmentUserSessionContextName', () => {
+                const result = client.matchProjectFromProjectAgentEnvironmentUserSessionContextName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName', () => {
+                const result = client.matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserFromProjectAgentEnvironmentUserSessionContextName', () => {
+                const result = client.matchUserFromProjectAgentEnvironmentUserSessionContextName(fakePath);
+                assert.strictEqual(result, "userValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectAgentEnvironmentUserSessionContextName', () => {
+                const result = client.matchSessionFromProjectAgentEnvironmentUserSessionContextName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContextFromProjectAgentEnvironmentUserSessionContextName', () => {
+                const result = client.matchContextFromProjectAgentEnvironmentUserSessionContextName(fakePath);
+                assert.strictEqual(result, "contextValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAgentEnvironmentUserSessionEntityType', () => {
+            const fakePath = "/rendered/path/projectAgentEnvironmentUserSessionEntityType";
+            const expectedParameters = {
+                project: "projectValue",
+                environment: "environmentValue",
+                user: "userValue",
+                session: "sessionValue",
+                entity_type: "entityTypeValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAgentEnvironmentUserSessionEntityTypePath', () => {
+                const result = client.projectAgentEnvironmentUserSessionEntityTypePath("projectValue", "environmentValue", "userValue", "sessionValue", "entityTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+                const result = client.matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+                const result = client.matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+                const result = client.matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "userValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+                const result = client.matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+                const result = client.matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "entityTypeValue");
+                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAgentSession', () => {
+            const fakePath = "/rendered/path/projectAgentSession";
+            const expectedParameters = {
+                project: "projectValue",
+                session: "sessionValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectAgentSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAgentSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAgentSessionPath', () => {
+                const result = client.projectAgentSessionPath("projectValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAgentSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAgentSessionName', () => {
+                const result = client.matchProjectFromProjectAgentSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAgentSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectAgentSessionName', () => {
+                const result = client.matchSessionFromProjectAgentSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectAgentSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAgentSessionContext', () => {
+            const fakePath = "/rendered/path/projectAgentSessionContext";
+            const expectedParameters = {
+                project: "projectValue",
+                session: "sessionValue",
+                context: "contextValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectAgentSessionContextPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAgentSessionContextPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAgentSessionContextPath', () => {
+                const result = client.projectAgentSessionContextPath("projectValue", "sessionValue", "contextValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAgentSessionContextPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAgentSessionContextName', () => {
+                const result = client.matchProjectFromProjectAgentSessionContextName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAgentSessionContextPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectAgentSessionContextName', () => {
+                const result = client.matchSessionFromProjectAgentSessionContextName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectAgentSessionContextPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContextFromProjectAgentSessionContextName', () => {
+                const result = client.matchContextFromProjectAgentSessionContextName(fakePath);
+                assert.strictEqual(result, "contextValue");
+                assert((client.pathTemplates.projectAgentSessionContextPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAgentSessionEntityType', () => {
+            const fakePath = "/rendered/path/projectAgentSessionEntityType";
+            const expectedParameters = {
+                project: "projectValue",
+                session: "sessionValue",
+                entity_type: "entityTypeValue",
+            };
+            const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectAgentSessionEntityTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAgentSessionEntityTypePath', () => {
+                const result = client.projectAgentSessionEntityTypePath("projectValue", "sessionValue", "entityTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAgentSessionEntityTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAgentSessionEntityTypeName', () => {
+                const result = client.matchProjectFromProjectAgentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectAgentSessionEntityTypeName', () => {
+                const result = client.matchSessionFromProjectAgentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntityTypeFromProjectAgentSessionEntityTypeName', () => {
+                const result = client.matchEntityTypeFromProjectAgentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "entityTypeValue");
+                assert((client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('projectAgentSessionContext', () => {
-      const fakePath = '/rendered/path/projectAgentSessionContext';
-      const expectedParameters = {
-        project: 'projectValue',
-        session: 'sessionValue',
-        context: 'contextValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectAgentSessionContextPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAgentSessionContextPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectAgentSessionContextPath', () => {
-        const result = client.projectAgentSessionContextPath(
-          'projectValue',
-          'sessionValue',
-          'contextValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectAgentSessionContextPathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectAgentSessionContextName', () => {
-        const result = client.matchProjectFromProjectAgentSessionContextName(
-          fakePath
-        );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionContextPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectAgentSessionContextName', () => {
-        const result = client.matchSessionFromProjectAgentSessionContextName(
-          fakePath
-        );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionContextPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContextFromProjectAgentSessionContextName', () => {
-        const result = client.matchContextFromProjectAgentSessionContextName(
-          fakePath
-        );
-        assert.strictEqual(result, 'contextValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionContextPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectAgentSessionEntityType', () => {
-      const fakePath = '/rendered/path/projectAgentSessionEntityType';
-      const expectedParameters = {
-        project: 'projectValue',
-        session: 'sessionValue',
-        entity_type: 'entityTypeValue',
-      };
-      const client = new sessionentitytypesModule.v2.SessionEntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectAgentSessionEntityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectAgentSessionEntityTypePath', () => {
-        const result = client.projectAgentSessionEntityTypePath(
-          'projectValue',
-          'sessionValue',
-          'entityTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectAgentSessionEntityTypePathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectAgentSessionEntityTypeName', () => {
-        const result = client.matchProjectFromProjectAgentSessionEntityTypeName(
-          fakePath
-        );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectAgentSessionEntityTypeName', () => {
-        const result = client.matchSessionFromProjectAgentSessionEntityTypeName(
-          fakePath
-        );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntityTypeFromProjectAgentSessionEntityTypeName', () => {
-        const result = client.matchEntityTypeFromProjectAgentSessionEntityTypeName(
-          fakePath
-        );
-        assert.strictEqual(result, 'entityTypeValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

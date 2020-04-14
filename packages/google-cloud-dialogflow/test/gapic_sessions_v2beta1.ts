@@ -20,7 +20,7 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { describe, it } from 'mocha';
 import * as sessionsModule from '../src';
 
 import {PassThrough} from 'stream';
@@ -28,687 +28,483 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubBidiStreamingCall<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  return sinon.stub().returns(mockStream);
+function stubBidiStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    return sinon.stub().returns(mockStream);
 }
 
 describe('v2beta1.SessionsClient', () => {
-  it('has servicePath', () => {
-    const servicePath = sessionsModule.v2beta1.SessionsClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint = sessionsModule.v2beta1.SessionsClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = sessionsModule.v2beta1.SessionsClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new sessionsModule.v2beta1.SessionsClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new sessionsModule.v2beta1.SessionsClient({
-      fallback: true,
-    });
-    assert(client);
-  });
-
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new sessionsModule.v2beta1.SessionsClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    assert.strictEqual(client.sessionsStub, undefined);
-    await client.initialize();
-    assert(client.sessionsStub);
-  });
-
-  it('has close method', () => {
-    const client = new sessionsModule.v2beta1.SessionsClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.close();
-  });
-
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new sessionsModule.v2beta1.SessionsClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
-
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new sessionsModule.v2beta1.SessionsClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
-      });
-    });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
-  });
-
-  describe('detectIntent', () => {
-    it('invokes detectIntent without error', async () => {
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest()
-      );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2beta1.DetectIntentResponse()
-      );
-      client.innerApiCalls.detectIntent = stubSimpleCall(expectedResponse);
-      const [response] = await client.detectIntent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.detectIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    it('has servicePath', () => {
+        const servicePath = sessionsModule.v2beta1.SessionsClient.servicePath;
+        assert(servicePath);
     });
 
-    it('invokes detectIntent without error using callback', async () => {
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest()
-      );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2beta1.DetectIntentResponse()
-      );
-      client.innerApiCalls.detectIntent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.detectIntent(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.v2beta1.IDetectIntentResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.detectIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+    it('has apiEndpoint', () => {
+        const apiEndpoint = sessionsModule.v2beta1.SessionsClient.apiEndpoint;
+        assert(apiEndpoint);
     });
 
-    it('invokes detectIntent with error', async () => {
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest()
-      );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.detectIntent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.detectIntent(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.detectIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    it('has port', () => {
+        const port = sessionsModule.v2beta1.SessionsClient.port;
+        assert(port);
+        assert(typeof port === 'number');
     });
-  });
 
-  describe('streamingDetectIntent', () => {
-    it('invokes streamingDetectIntent without error', async () => {
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse()
-      );
-      client.innerApiCalls.streamingDetectIntent = stubBidiStreamingCall(
-        expectedResponse
-      );
-      const stream = client.streamingDetectIntent();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
+    it('should create a client with no option', () => {
+        const client = new sessionsModule.v2beta1.SessionsClient();
+        assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+        const client = new sessionsModule.v2beta1.SessionsClient({
+            fallback: true,
         });
-        stream.write(request);
-        stream.end();
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.streamingDetectIntent as SinonStub)
-          .getCall(0)
-          .calledWithExactly(undefined)
-      );
-      assert.deepStrictEqual(
-        (((stream as unknown) as PassThrough)._transform as SinonStub).getCall(
-          0
-        ).args[0],
-        request
-      );
+        assert(client);
     });
 
-    it('invokes streamingDetectIntent with error', async () => {
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.streamingDetectIntent = stubBidiStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.streamingDetectIntent();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new sessionsModule.v2beta1.SessionsClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
         });
-        stream.write(request);
-        stream.end();
-      });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.streamingDetectIntent as SinonStub)
-          .getCall(0)
-          .calledWithExactly(undefined)
-      );
-      assert.deepStrictEqual(
-        (((stream as unknown) as PassThrough)._transform as SinonStub).getCall(
-          0
-        ).args[0],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('projectAgent', () => {
-      const fakePath = '/rendered/path/projectAgent';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectAgentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAgentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectAgentPath', () => {
-        const result = client.projectAgentPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectAgentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectAgentName', () => {
-        const result = client.matchProjectFromProjectAgentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectAgentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        assert.strictEqual(client.sessionsStub, undefined);
+        await client.initialize();
+        assert(client.sessionsStub);
     });
 
-    describe('projectAgentIntent', () => {
-      const fakePath = '/rendered/path/projectAgentIntent';
-      const expectedParameters = {
-        project: 'projectValue',
-        intent: 'intentValue',
-      };
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectAgentIntentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAgentIntentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectAgentIntentPath', () => {
-        const result = client.projectAgentIntentPath(
-          'projectValue',
-          'intentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectAgentIntentPathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectAgentIntentName', () => {
-        const result = client.matchProjectFromProjectAgentIntentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectAgentIntentPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchIntentFromProjectAgentIntentName', () => {
-        const result = client.matchIntentFromProjectAgentIntentName(fakePath);
-        assert.strictEqual(result, 'intentValue');
-        assert(
-          (client.pathTemplates.projectAgentIntentPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+    it('has close method', () => {
+        const client = new sessionsModule.v2beta1.SessionsClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.close();
     });
 
-    describe('projectAgentSession', () => {
-      const fakePath = '/rendered/path/projectAgentSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        session: 'sessionValue',
-      };
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectAgentSessionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAgentSessionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectAgentSessionPath', () => {
-        const result = client.projectAgentSessionPath(
-          'projectValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectAgentSessionPathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectAgentSessionName', () => {
-        const result = client.matchProjectFromProjectAgentSessionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectAgentSessionName', () => {
-        const result = client.matchSessionFromProjectAgentSessionName(fakePath);
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (client.pathTemplates.projectAgentSessionPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+    it('has getProjectId method', async () => {
+        const fakeProjectId = 'fake-project-id';
+        const client = new sessionsModule.v2beta1.SessionsClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+        const result = await client.getProjectId();
+        assert.strictEqual(result, fakeProjectId);
+        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
     });
 
-    describe('projectLocationAgent', () => {
-      const fakePath = '/rendered/path/projectLocationAgent';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectLocationAgentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationAgentPath', () => {
-        const result = client.projectLocationAgentPath(
-          'projectValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectLocationAgentPathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationAgentName', () => {
-        const result = client.matchProjectFromProjectLocationAgentName(
-          fakePath
-        );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectLocationAgentPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationAgentName', () => {
-        const result = client.matchLocationFromProjectLocationAgentName(
-          fakePath
-        );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.projectLocationAgentPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+    it('has getProjectId method with callback', async () => {
+        const fakeProjectId = 'fake-project-id';
+        const client = new sessionsModule.v2beta1.SessionsClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+        const promise = new Promise((resolve, reject) => {
+            client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(projectId);
+                }
+            });
+        });
+        const result = await promise;
+        assert.strictEqual(result, fakeProjectId);
     });
 
-    describe('projectLocationAgentIntent', () => {
-      const fakePath = '/rendered/path/projectLocationAgentIntent';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        intent: 'intentValue',
-      };
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectLocationAgentIntentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentIntentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('detectIntent', () => {
+        it('invokes detectIntent without error', async () => {
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest());
+            request.session = '';
+            const expectedHeaderRequestParams = "session=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DetectIntentResponse());
+            client.innerApiCalls.detectIntent = stubSimpleCall(expectedResponse);
+            const [response] = await client.detectIntent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.detectIntent as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-      it('projectLocationAgentIntentPath', () => {
-        const result = client.projectLocationAgentIntentPath(
-          'projectValue',
-          'locationValue',
-          'intentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectLocationAgentIntentPathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes detectIntent without error using callback', async () => {
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest());
+            request.session = '';
+            const expectedHeaderRequestParams = "session=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DetectIntentResponse());
+            client.innerApiCalls.detectIntent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.detectIntent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2beta1.IDetectIntentResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.detectIntent as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('matchProjectFromProjectLocationAgentIntentName', () => {
-        const result = client.matchProjectFromProjectLocationAgentIntentName(
-          fakePath
-        );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectLocationAgentIntentPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationAgentIntentName', () => {
-        const result = client.matchLocationFromProjectLocationAgentIntentName(
-          fakePath
-        );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.projectLocationAgentIntentPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchIntentFromProjectLocationAgentIntentName', () => {
-        const result = client.matchIntentFromProjectLocationAgentIntentName(
-          fakePath
-        );
-        assert.strictEqual(result, 'intentValue');
-        assert(
-          (client.pathTemplates.projectLocationAgentIntentPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes detectIntent with error', async () => {
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest());
+            request.session = '';
+            const expectedHeaderRequestParams = "session=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.detectIntent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.detectIntent(request); }, expectedError);
+            assert((client.innerApiCalls.detectIntent as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
 
-    describe('projectLocationAgentSession', () => {
-      const fakePath = '/rendered/path/projectLocationAgentSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        session: 'sessionValue',
-      };
-      const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectLocationAgentSessionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentSessionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('streamingDetectIntent', () => {
+        it('invokes streamingDetectIntent without error', async () => {
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest());
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse());
+            client.innerApiCalls.streamingDetectIntent = stubBidiStreamingCall(expectedResponse);
+            const stream = client.streamingDetectIntent();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.streamingDetectIntent as SinonStub)
+                .getCall(0).calledWithExactly(undefined));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
+        });
 
-      it('projectLocationAgentSessionPath', () => {
-        const result = client.projectLocationAgentSessionPath(
-          'projectValue',
-          'locationValue',
-          'sessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectLocationAgentSessionPathTemplate
-            .render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationAgentSessionName', () => {
-        const result = client.matchProjectFromProjectLocationAgentSessionName(
-          fakePath
-        );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectLocationAgentSessionPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationAgentSessionName', () => {
-        const result = client.matchLocationFromProjectLocationAgentSessionName(
-          fakePath
-        );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.projectLocationAgentSessionPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationAgentSessionName', () => {
-        const result = client.matchSessionFromProjectLocationAgentSessionName(
-          fakePath
-        );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (client.pathTemplates.projectLocationAgentSessionPathTemplate
-            .match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes streamingDetectIntent with error', async () => {
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest());const expectedError = new Error('expected');
+            client.innerApiCalls.streamingDetectIntent = stubBidiStreamingCall(undefined, expectedError);
+            const stream = client.streamingDetectIntent();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            await assert.rejects(async () => { await promise; }, expectedError);
+            assert((client.innerApiCalls.streamingDetectIntent as SinonStub)
+                .getCall(0).calledWithExactly(undefined));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
+        });
     });
-  });
+
+    describe('Path templates', () => {
+
+        describe('projectAgent', () => {
+            const fakePath = "/rendered/path/projectAgent";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectAgentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAgentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAgentPath', () => {
+                const result = client.projectAgentPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAgentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAgentName', () => {
+                const result = client.matchProjectFromProjectAgentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAgentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAgentIntent', () => {
+            const fakePath = "/rendered/path/projectAgentIntent";
+            const expectedParameters = {
+                project: "projectValue",
+                intent: "intentValue",
+            };
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectAgentIntentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAgentIntentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAgentIntentPath', () => {
+                const result = client.projectAgentIntentPath("projectValue", "intentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAgentIntentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAgentIntentName', () => {
+                const result = client.matchProjectFromProjectAgentIntentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAgentIntentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchIntentFromProjectAgentIntentName', () => {
+                const result = client.matchIntentFromProjectAgentIntentName(fakePath);
+                assert.strictEqual(result, "intentValue");
+                assert((client.pathTemplates.projectAgentIntentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAgentSession', () => {
+            const fakePath = "/rendered/path/projectAgentSession";
+            const expectedParameters = {
+                project: "projectValue",
+                session: "sessionValue",
+            };
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectAgentSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAgentSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAgentSessionPath', () => {
+                const result = client.projectAgentSessionPath("projectValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAgentSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAgentSessionName', () => {
+                const result = client.matchProjectFromProjectAgentSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAgentSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectAgentSessionName', () => {
+                const result = client.matchSessionFromProjectAgentSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectAgentSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationAgent', () => {
+            const fakePath = "/rendered/path/projectLocationAgent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectLocationAgentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationAgentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationAgentPath', () => {
+                const result = client.projectLocationAgentPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationAgentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationAgentName', () => {
+                const result = client.matchProjectFromProjectLocationAgentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationAgentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationAgentName', () => {
+                const result = client.matchLocationFromProjectLocationAgentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationAgentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationAgentIntent', () => {
+            const fakePath = "/rendered/path/projectLocationAgentIntent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intent: "intentValue",
+            };
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectLocationAgentIntentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationAgentIntentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationAgentIntentPath', () => {
+                const result = client.projectLocationAgentIntentPath("projectValue", "locationValue", "intentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationAgentIntentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationAgentIntentName', () => {
+                const result = client.matchProjectFromProjectLocationAgentIntentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationAgentIntentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationAgentIntentName', () => {
+                const result = client.matchLocationFromProjectLocationAgentIntentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationAgentIntentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchIntentFromProjectLocationAgentIntentName', () => {
+                const result = client.matchIntentFromProjectLocationAgentIntentName(fakePath);
+                assert.strictEqual(result, "intentValue");
+                assert((client.pathTemplates.projectLocationAgentIntentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationAgentSession', () => {
+            const fakePath = "/rendered/path/projectLocationAgentSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                session: "sessionValue",
+            };
+            const client = new sessionsModule.v2beta1.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectLocationAgentSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationAgentSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationAgentSessionPath', () => {
+                const result = client.projectLocationAgentSessionPath("projectValue", "locationValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationAgentSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationAgentSessionName', () => {
+                const result = client.matchProjectFromProjectLocationAgentSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationAgentSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationAgentSessionName', () => {
+                const result = client.matchLocationFromProjectLocationAgentSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationAgentSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationAgentSessionName', () => {
+                const result = client.matchSessionFromProjectLocationAgentSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationAgentSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });
