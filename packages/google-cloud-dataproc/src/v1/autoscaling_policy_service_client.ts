@@ -366,7 +366,7 @@ export class AutoscalingPolicyServiceClient {
    *     of the location has the following format:
    *     `projects/{project_id}/locations/{location}`
    * @param {google.cloud.dataproc.v1.AutoscalingPolicy} request.policy
-   *   The autoscaling policy to create.
+   *   Required. The autoscaling policy to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

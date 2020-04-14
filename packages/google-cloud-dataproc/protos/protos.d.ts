@@ -4098,7 +4098,9 @@ export namespace google {
                     ANACONDA = 5,
                     HIVE_WEBHCAT = 3,
                     JUPYTER = 1,
-                    ZEPPELIN = 4
+                    PRESTO = 6,
+                    ZEPPELIN = 4,
+                    ZOOKEEPER = 8
                 }
 
                 /** Represents a JobController */
@@ -4134,6 +4136,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public submitJob(request: google.cloud.dataproc.v1.ISubmitJobRequest): Promise<google.cloud.dataproc.v1.Job>;
+
+                    /**
+                     * Calls SubmitJobAsOperation.
+                     * @param request SubmitJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public submitJobAsOperation(request: google.cloud.dataproc.v1.ISubmitJobRequest, callback: google.cloud.dataproc.v1.JobController.SubmitJobAsOperationCallback): void;
+
+                    /**
+                     * Calls SubmitJobAsOperation.
+                     * @param request SubmitJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public submitJobAsOperation(request: google.cloud.dataproc.v1.ISubmitJobRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls GetJob.
@@ -4214,6 +4230,13 @@ export namespace google {
                      * @param [response] Job
                      */
                     type SubmitJobCallback = (error: (Error|null), response?: google.cloud.dataproc.v1.Job) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.JobController#submitJobAsOperation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SubmitJobAsOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dataproc.v1.JobController#getJob}.
@@ -5978,6 +6001,9 @@ export namespace google {
 
                     /** Job jobUuid */
                     jobUuid?: (string|null);
+
+                    /** Job done */
+                    done?: (boolean|null);
                 }
 
                 /** Represents a Job. */
@@ -6042,6 +6068,9 @@ export namespace google {
 
                     /** Job jobUuid. */
                     public jobUuid: string;
+
+                    /** Job done. */
+                    public done: boolean;
 
                     /** Job typeJob. */
                     public typeJob?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob");
@@ -6310,6 +6339,114 @@ export namespace google {
 
                     /**
                      * Converts this SubmitJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a JobMetadata. */
+                interface IJobMetadata {
+
+                    /** JobMetadata jobId */
+                    jobId?: (string|null);
+
+                    /** JobMetadata status */
+                    status?: (google.cloud.dataproc.v1.IJobStatus|null);
+
+                    /** JobMetadata operationType */
+                    operationType?: (string|null);
+
+                    /** JobMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a JobMetadata. */
+                class JobMetadata implements IJobMetadata {
+
+                    /**
+                     * Constructs a new JobMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IJobMetadata);
+
+                    /** JobMetadata jobId. */
+                    public jobId: string;
+
+                    /** JobMetadata status. */
+                    public status?: (google.cloud.dataproc.v1.IJobStatus|null);
+
+                    /** JobMetadata operationType. */
+                    public operationType: string;
+
+                    /** JobMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new JobMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns JobMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IJobMetadata): google.cloud.dataproc.v1.JobMetadata;
+
+                    /**
+                     * Encodes the specified JobMetadata message. Does not implicitly {@link google.cloud.dataproc.v1.JobMetadata.verify|verify} messages.
+                     * @param message JobMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IJobMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified JobMetadata message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.JobMetadata.verify|verify} messages.
+                     * @param message JobMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IJobMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a JobMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns JobMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.JobMetadata;
+
+                    /**
+                     * Decodes a JobMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns JobMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.JobMetadata;
+
+                    /**
+                     * Verifies a JobMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a JobMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns JobMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.JobMetadata;
+
+                    /**
+                     * Creates a plain object from a JobMetadata message. Also converts values to other types if specified.
+                     * @param message JobMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.JobMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this JobMetadata to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -7845,8 +7982,14 @@ export namespace google {
                     /** OrderedJob pigJob */
                     pigJob?: (google.cloud.dataproc.v1.IPigJob|null);
 
+                    /** OrderedJob sparkRJob */
+                    sparkRJob?: (google.cloud.dataproc.v1.ISparkRJob|null);
+
                     /** OrderedJob sparkSqlJob */
                     sparkSqlJob?: (google.cloud.dataproc.v1.ISparkSqlJob|null);
+
+                    /** OrderedJob prestoJob */
+                    prestoJob?: (google.cloud.dataproc.v1.IPrestoJob|null);
 
                     /** OrderedJob labels */
                     labels?: ({ [k: string]: string }|null);
@@ -7885,8 +8028,14 @@ export namespace google {
                     /** OrderedJob pigJob. */
                     public pigJob?: (google.cloud.dataproc.v1.IPigJob|null);
 
+                    /** OrderedJob sparkRJob. */
+                    public sparkRJob?: (google.cloud.dataproc.v1.ISparkRJob|null);
+
                     /** OrderedJob sparkSqlJob. */
                     public sparkSqlJob?: (google.cloud.dataproc.v1.ISparkSqlJob|null);
+
+                    /** OrderedJob prestoJob. */
+                    public prestoJob?: (google.cloud.dataproc.v1.IPrestoJob|null);
 
                     /** OrderedJob labels. */
                     public labels: { [k: string]: string };
@@ -7898,7 +8047,7 @@ export namespace google {
                     public prerequisiteStepIds: string[];
 
                     /** OrderedJob jobType. */
-                    public jobType?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkSqlJob");
+                    public jobType?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob");
 
                     /**
                      * Creates a new OrderedJob instance using the specified properties.
@@ -11070,6 +11219,9 @@ export namespace google {
 
                     /** ClusterConfig securityConfig */
                     securityConfig?: (google.cloud.dataproc.v1beta2.ISecurityConfig|null);
+
+                    /** ClusterConfig gkeClusterConfig */
+                    gkeClusterConfig?: (google.cloud.dataproc.v1beta2.IGkeClusterConfig|null);
                 }
 
                 /** Represents a ClusterConfig. */
@@ -11116,6 +11268,9 @@ export namespace google {
 
                     /** ClusterConfig securityConfig. */
                     public securityConfig?: (google.cloud.dataproc.v1beta2.ISecurityConfig|null);
+
+                    /** ClusterConfig gkeClusterConfig. */
+                    public gkeClusterConfig?: (google.cloud.dataproc.v1beta2.IGkeClusterConfig|null);
 
                     /**
                      * Creates a new ClusterConfig instance using the specified properties.
@@ -11186,6 +11341,195 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GkeClusterConfig. */
+                interface IGkeClusterConfig {
+
+                    /** GkeClusterConfig namespacedGkeDeploymentTarget */
+                    namespacedGkeDeploymentTarget?: (google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget|null);
+                }
+
+                /** Represents a GkeClusterConfig. */
+                class GkeClusterConfig implements IGkeClusterConfig {
+
+                    /**
+                     * Constructs a new GkeClusterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1beta2.IGkeClusterConfig);
+
+                    /** GkeClusterConfig namespacedGkeDeploymentTarget. */
+                    public namespacedGkeDeploymentTarget?: (google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget|null);
+
+                    /**
+                     * Creates a new GkeClusterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeClusterConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1beta2.IGkeClusterConfig): google.cloud.dataproc.v1beta2.GkeClusterConfig;
+
+                    /**
+                     * Encodes the specified GkeClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1beta2.GkeClusterConfig.verify|verify} messages.
+                     * @param message GkeClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1beta2.IGkeClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1beta2.GkeClusterConfig.verify|verify} messages.
+                     * @param message GkeClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1beta2.IGkeClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeClusterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1beta2.GkeClusterConfig;
+
+                    /**
+                     * Decodes a GkeClusterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1beta2.GkeClusterConfig;
+
+                    /**
+                     * Verifies a GkeClusterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeClusterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeClusterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1beta2.GkeClusterConfig;
+
+                    /**
+                     * Creates a plain object from a GkeClusterConfig message. Also converts values to other types if specified.
+                     * @param message GkeClusterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1beta2.GkeClusterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeClusterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace GkeClusterConfig {
+
+                    /** Properties of a NamespacedGkeDeploymentTarget. */
+                    interface INamespacedGkeDeploymentTarget {
+
+                        /** NamespacedGkeDeploymentTarget targetGkeCluster */
+                        targetGkeCluster?: (string|null);
+
+                        /** NamespacedGkeDeploymentTarget clusterNamespace */
+                        clusterNamespace?: (string|null);
+                    }
+
+                    /** Represents a NamespacedGkeDeploymentTarget. */
+                    class NamespacedGkeDeploymentTarget implements INamespacedGkeDeploymentTarget {
+
+                        /**
+                         * Constructs a new NamespacedGkeDeploymentTarget.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget);
+
+                        /** NamespacedGkeDeploymentTarget targetGkeCluster. */
+                        public targetGkeCluster: string;
+
+                        /** NamespacedGkeDeploymentTarget clusterNamespace. */
+                        public clusterNamespace: string;
+
+                        /**
+                         * Creates a new NamespacedGkeDeploymentTarget instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NamespacedGkeDeploymentTarget instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget): google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+
+                        /**
+                         * Encodes the specified NamespacedGkeDeploymentTarget message. Does not implicitly {@link google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
+                         * @param message NamespacedGkeDeploymentTarget message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NamespacedGkeDeploymentTarget message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
+                         * @param message NamespacedGkeDeploymentTarget message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NamespacedGkeDeploymentTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+
+                        /**
+                         * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NamespacedGkeDeploymentTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+
+                        /**
+                         * Verifies a NamespacedGkeDeploymentTarget message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NamespacedGkeDeploymentTarget message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NamespacedGkeDeploymentTarget
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+
+                        /**
+                         * Creates a plain object from a NamespacedGkeDeploymentTarget message. Also converts values to other types if specified.
+                         * @param message NamespacedGkeDeploymentTarget
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NamespacedGkeDeploymentTarget to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Properties of an EndpointConfig. */
@@ -12622,7 +12966,10 @@ export namespace google {
                         RUNNING = 2,
                         ERROR = 3,
                         DELETING = 4,
-                        UPDATING = 5
+                        UPDATING = 5,
+                        STOPPING = 6,
+                        STOPPED = 7,
+                        STARTING = 8
                     }
 
                     /** Substate enum. */
@@ -13800,11 +14147,15 @@ export namespace google {
                 enum Component {
                     COMPONENT_UNSPECIFIED = 0,
                     ANACONDA = 5,
+                    DOCKER = 13,
                     DRUID = 9,
+                    FLINK = 14,
                     HIVE_WEBHCAT = 3,
                     JUPYTER = 1,
                     KERBEROS = 7,
                     PRESTO = 6,
+                    RANGER = 12,
+                    SOLR = 10,
                     ZEPPELIN = 4,
                     ZOOKEEPER = 8
                 }
@@ -13842,6 +14193,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public submitJob(request: google.cloud.dataproc.v1beta2.ISubmitJobRequest): Promise<google.cloud.dataproc.v1beta2.Job>;
+
+                    /**
+                     * Calls SubmitJobAsOperation.
+                     * @param request SubmitJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public submitJobAsOperation(request: google.cloud.dataproc.v1beta2.ISubmitJobRequest, callback: google.cloud.dataproc.v1beta2.JobController.SubmitJobAsOperationCallback): void;
+
+                    /**
+                     * Calls SubmitJobAsOperation.
+                     * @param request SubmitJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public submitJobAsOperation(request: google.cloud.dataproc.v1beta2.ISubmitJobRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls GetJob.
@@ -13922,6 +14287,13 @@ export namespace google {
                      * @param [response] Job
                      */
                     type SubmitJobCallback = (error: (Error|null), response?: google.cloud.dataproc.v1beta2.Job) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1beta2.JobController#submitJobAsOperation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SubmitJobAsOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dataproc.v1beta2.JobController#getJob}.
@@ -15052,6 +15424,135 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a PrestoJob. */
+                interface IPrestoJob {
+
+                    /** PrestoJob queryFileUri */
+                    queryFileUri?: (string|null);
+
+                    /** PrestoJob queryList */
+                    queryList?: (google.cloud.dataproc.v1beta2.IQueryList|null);
+
+                    /** PrestoJob continueOnFailure */
+                    continueOnFailure?: (boolean|null);
+
+                    /** PrestoJob outputFormat */
+                    outputFormat?: (string|null);
+
+                    /** PrestoJob clientTags */
+                    clientTags?: (string[]|null);
+
+                    /** PrestoJob properties */
+                    properties?: ({ [k: string]: string }|null);
+
+                    /** PrestoJob loggingConfig */
+                    loggingConfig?: (google.cloud.dataproc.v1beta2.ILoggingConfig|null);
+                }
+
+                /** Represents a PrestoJob. */
+                class PrestoJob implements IPrestoJob {
+
+                    /**
+                     * Constructs a new PrestoJob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1beta2.IPrestoJob);
+
+                    /** PrestoJob queryFileUri. */
+                    public queryFileUri: string;
+
+                    /** PrestoJob queryList. */
+                    public queryList?: (google.cloud.dataproc.v1beta2.IQueryList|null);
+
+                    /** PrestoJob continueOnFailure. */
+                    public continueOnFailure: boolean;
+
+                    /** PrestoJob outputFormat. */
+                    public outputFormat: string;
+
+                    /** PrestoJob clientTags. */
+                    public clientTags: string[];
+
+                    /** PrestoJob properties. */
+                    public properties: { [k: string]: string };
+
+                    /** PrestoJob loggingConfig. */
+                    public loggingConfig?: (google.cloud.dataproc.v1beta2.ILoggingConfig|null);
+
+                    /** PrestoJob queries. */
+                    public queries?: ("queryFileUri"|"queryList");
+
+                    /**
+                     * Creates a new PrestoJob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrestoJob instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1beta2.IPrestoJob): google.cloud.dataproc.v1beta2.PrestoJob;
+
+                    /**
+                     * Encodes the specified PrestoJob message. Does not implicitly {@link google.cloud.dataproc.v1beta2.PrestoJob.verify|verify} messages.
+                     * @param message PrestoJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1beta2.IPrestoJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrestoJob message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1beta2.PrestoJob.verify|verify} messages.
+                     * @param message PrestoJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1beta2.IPrestoJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrestoJob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrestoJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1beta2.PrestoJob;
+
+                    /**
+                     * Decodes a PrestoJob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrestoJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1beta2.PrestoJob;
+
+                    /**
+                     * Verifies a PrestoJob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrestoJob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrestoJob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1beta2.PrestoJob;
+
+                    /**
+                     * Creates a plain object from a PrestoJob message. Also converts values to other types if specified.
+                     * @param message PrestoJob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1beta2.PrestoJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrestoJob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a JobPlacement. */
                 interface IJobPlacement {
 
@@ -15531,6 +16032,9 @@ export namespace google {
                     /** Job sparkSqlJob */
                     sparkSqlJob?: (google.cloud.dataproc.v1beta2.ISparkSqlJob|null);
 
+                    /** Job prestoJob */
+                    prestoJob?: (google.cloud.dataproc.v1beta2.IPrestoJob|null);
+
                     /** Job status */
                     status?: (google.cloud.dataproc.v1beta2.IJobStatus|null);
 
@@ -15557,6 +16061,9 @@ export namespace google {
 
                     /** Job jobUuid */
                     jobUuid?: (string|null);
+
+                    /** Job done */
+                    done?: (boolean|null);
                 }
 
                 /** Represents a Job. */
@@ -15595,6 +16102,9 @@ export namespace google {
                     /** Job sparkSqlJob. */
                     public sparkSqlJob?: (google.cloud.dataproc.v1beta2.ISparkSqlJob|null);
 
+                    /** Job prestoJob. */
+                    public prestoJob?: (google.cloud.dataproc.v1beta2.IPrestoJob|null);
+
                     /** Job status. */
                     public status?: (google.cloud.dataproc.v1beta2.IJobStatus|null);
 
@@ -15622,8 +16132,11 @@ export namespace google {
                     /** Job jobUuid. */
                     public jobUuid: string;
 
+                    /** Job done. */
+                    public done: boolean;
+
                     /** Job typeJob. */
-                    public typeJob?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob");
+                    public typeJob?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob");
 
                     /**
                      * Creates a new Job instance using the specified properties.
@@ -15781,6 +16294,114 @@ export namespace google {
 
                     /**
                      * Converts this JobScheduling to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a JobMetadata. */
+                interface IJobMetadata {
+
+                    /** JobMetadata jobId */
+                    jobId?: (string|null);
+
+                    /** JobMetadata status */
+                    status?: (google.cloud.dataproc.v1beta2.IJobStatus|null);
+
+                    /** JobMetadata operationType */
+                    operationType?: (string|null);
+
+                    /** JobMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a JobMetadata. */
+                class JobMetadata implements IJobMetadata {
+
+                    /**
+                     * Constructs a new JobMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1beta2.IJobMetadata);
+
+                    /** JobMetadata jobId. */
+                    public jobId: string;
+
+                    /** JobMetadata status. */
+                    public status?: (google.cloud.dataproc.v1beta2.IJobStatus|null);
+
+                    /** JobMetadata operationType. */
+                    public operationType: string;
+
+                    /** JobMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new JobMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns JobMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1beta2.IJobMetadata): google.cloud.dataproc.v1beta2.JobMetadata;
+
+                    /**
+                     * Encodes the specified JobMetadata message. Does not implicitly {@link google.cloud.dataproc.v1beta2.JobMetadata.verify|verify} messages.
+                     * @param message JobMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1beta2.IJobMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified JobMetadata message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1beta2.JobMetadata.verify|verify} messages.
+                     * @param message JobMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1beta2.IJobMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a JobMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns JobMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1beta2.JobMetadata;
+
+                    /**
+                     * Decodes a JobMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns JobMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1beta2.JobMetadata;
+
+                    /**
+                     * Verifies a JobMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a JobMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns JobMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1beta2.JobMetadata;
+
+                    /**
+                     * Creates a plain object from a JobMetadata message. Also converts values to other types if specified.
+                     * @param message JobMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1beta2.JobMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this JobMetadata to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -17424,8 +18045,14 @@ export namespace google {
                     /** OrderedJob pigJob */
                     pigJob?: (google.cloud.dataproc.v1beta2.IPigJob|null);
 
+                    /** OrderedJob sparkRJob */
+                    sparkRJob?: (google.cloud.dataproc.v1beta2.ISparkRJob|null);
+
                     /** OrderedJob sparkSqlJob */
                     sparkSqlJob?: (google.cloud.dataproc.v1beta2.ISparkSqlJob|null);
+
+                    /** OrderedJob prestoJob */
+                    prestoJob?: (google.cloud.dataproc.v1beta2.IPrestoJob|null);
 
                     /** OrderedJob labels */
                     labels?: ({ [k: string]: string }|null);
@@ -17464,8 +18091,14 @@ export namespace google {
                     /** OrderedJob pigJob. */
                     public pigJob?: (google.cloud.dataproc.v1beta2.IPigJob|null);
 
+                    /** OrderedJob sparkRJob. */
+                    public sparkRJob?: (google.cloud.dataproc.v1beta2.ISparkRJob|null);
+
                     /** OrderedJob sparkSqlJob. */
                     public sparkSqlJob?: (google.cloud.dataproc.v1beta2.ISparkSqlJob|null);
+
+                    /** OrderedJob prestoJob. */
+                    public prestoJob?: (google.cloud.dataproc.v1beta2.IPrestoJob|null);
 
                     /** OrderedJob labels. */
                     public labels: { [k: string]: string };
@@ -17477,7 +18110,7 @@ export namespace google {
                     public prerequisiteStepIds: string[];
 
                     /** OrderedJob jobType. */
-                    public jobType?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkSqlJob");
+                    public jobType?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob");
 
                     /**
                      * Creates a new OrderedJob instance using the specified properties.

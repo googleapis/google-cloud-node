@@ -22,6 +22,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -55,6 +56,7 @@ export class JobControllerClient {
   };
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   jobControllerStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -181,6 +183,37 @@ export class JobControllerClient {
       ),
     };
 
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const protoFilesRoot = opts.fallback
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
+
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
+    const submitJobAsOperationResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataproc.v1beta2.Job'
+    ) as gax.protobuf.Type;
+    const submitJobAsOperationMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataproc.v1beta2.JobMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      submitJobAsOperation: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        submitJobAsOperationResponse.decode.bind(submitJobAsOperationResponse),
+        submitJobAsOperationMetadata.decode.bind(submitJobAsOperationMetadata)
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.dataproc.v1beta2.JobController',
@@ -228,6 +261,7 @@ export class JobControllerClient {
     // and create an API call method for each.
     const jobControllerStubMethods = [
       'submitJob',
+      'submitJobAsOperation',
       'getJob',
       'listJobs',
       'updateJob',
@@ -739,6 +773,114 @@ export class JobControllerClient {
     return this.innerApiCalls.deleteJob(request, options, callback);
   }
 
+  submitJobAsOperation(
+    request: protos.google.cloud.dataproc.v1beta2.ISubmitJobRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.IJob,
+        protos.google.cloud.dataproc.v1beta2.IJobMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  submitJobAsOperation(
+    request: protos.google.cloud.dataproc.v1beta2.ISubmitJobRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.IJob,
+        protos.google.cloud.dataproc.v1beta2.IJobMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitJobAsOperation(
+    request: protos.google.cloud.dataproc.v1beta2.ISubmitJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.IJob,
+        protos.google.cloud.dataproc.v1beta2.IJobMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Submits job to a cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project that the job
+   *   belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {google.cloud.dataproc.v1beta2.Job} request.job
+   *   Required. The job resource.
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two {@link google.cloud.dataproc.v1beta2.SubmitJobRequest|SubmitJobRequest} requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first {@link google.cloud.dataproc.v1beta2.Job|Job} created and stored in the backend
+   *   is returned.
+   *
+   *   It is recommended to always set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  submitJobAsOperation(
+    request: protos.google.cloud.dataproc.v1beta2.ISubmitJobRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1beta2.IJob,
+            protos.google.cloud.dataproc.v1beta2.IJobMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.IJob,
+        protos.google.cloud.dataproc.v1beta2.IJobMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1beta2.IJob,
+        protos.google.cloud.dataproc.v1beta2.IJobMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    this.initialize();
+    return this.innerApiCalls.submitJobAsOperation(request, options, callback);
+  }
   listJobs(
     request: protos.google.cloud.dataproc.v1beta2.IListJobsRequest,
     options?: gax.CallOptions

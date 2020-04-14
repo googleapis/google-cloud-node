@@ -1006,7 +1006,7 @@ export class ClusterControllerClient {
     >
   ): void;
   /**
-   * Lists all regions/{region}/clusters in a project.
+   * Lists all regions/{region}/clusters in a project alphabetically.
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -33,6 +33,11 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
+        "SubmitJobAsOperation": {
+          "timeout_millis": 900000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
         "GetJob": {
           "timeout_millis": 900000,
           "retry_codes_name": "deadline_exceeded_internal_unavailable",

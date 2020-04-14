@@ -6977,7 +6977,9 @@
                                     case 5:
                                     case 3:
                                     case 1:
+                                    case 6:
                                     case 4:
+                                    case 8:
                                         break;
                                     }
                             }
@@ -7028,9 +7030,17 @@
                                     case 1:
                                         message.optionalComponents[i] = 1;
                                         break;
+                                    case "PRESTO":
+                                    case 6:
+                                        message.optionalComponents[i] = 6;
+                                        break;
                                     case "ZEPPELIN":
                                     case 4:
                                         message.optionalComponents[i] = 4;
+                                        break;
+                                    case "ZOOKEEPER":
+                                    case 8:
+                                        message.optionalComponents[i] = 8;
                                         break;
                                     }
                             }
@@ -9984,7 +9994,9 @@
                      * @property {number} ANACONDA=5 ANACONDA value
                      * @property {number} HIVE_WEBHCAT=3 HIVE_WEBHCAT value
                      * @property {number} JUPYTER=1 JUPYTER value
+                     * @property {number} PRESTO=6 PRESTO value
                      * @property {number} ZEPPELIN=4 ZEPPELIN value
+                     * @property {number} ZOOKEEPER=8 ZOOKEEPER value
                      */
                     v1.Component = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -9992,7 +10004,9 @@
                         values[valuesById[5] = "ANACONDA"] = 5;
                         values[valuesById[3] = "HIVE_WEBHCAT"] = 3;
                         values[valuesById[1] = "JUPYTER"] = 1;
+                        values[valuesById[6] = "PRESTO"] = 6;
                         values[valuesById[4] = "ZEPPELIN"] = 4;
+                        values[valuesById[8] = "ZOOKEEPER"] = 8;
                         return values;
                     })();
     
@@ -10058,6 +10072,39 @@
                          * @instance
                          * @param {google.cloud.dataproc.v1.ISubmitJobRequest} request SubmitJobRequest message or plain object
                          * @returns {Promise<google.cloud.dataproc.v1.Job>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataproc.v1.JobController#submitJobAsOperation}.
+                         * @memberof google.cloud.dataproc.v1.JobController
+                         * @typedef SubmitJobAsOperationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls SubmitJobAsOperation.
+                         * @function submitJobAsOperation
+                         * @memberof google.cloud.dataproc.v1.JobController
+                         * @instance
+                         * @param {google.cloud.dataproc.v1.ISubmitJobRequest} request SubmitJobRequest message or plain object
+                         * @param {google.cloud.dataproc.v1.JobController.SubmitJobAsOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(JobController.prototype.submitJobAsOperation = function submitJobAsOperation(request, callback) {
+                            return this.rpcCall(submitJobAsOperation, $root.google.cloud.dataproc.v1.SubmitJobRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "SubmitJobAsOperation" });
+    
+                        /**
+                         * Calls SubmitJobAsOperation.
+                         * @function submitJobAsOperation
+                         * @memberof google.cloud.dataproc.v1.JobController
+                         * @instance
+                         * @param {google.cloud.dataproc.v1.ISubmitJobRequest} request SubmitJobRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -15210,6 +15257,7 @@
                          * @property {Object.<string,string>|null} [labels] Job labels
                          * @property {google.cloud.dataproc.v1.IJobScheduling|null} [scheduling] Job scheduling
                          * @property {string|null} [jobUuid] Job jobUuid
+                         * @property {boolean|null} [done] Job done
                          */
     
                         /**
@@ -15374,6 +15422,14 @@
                          */
                         Job.prototype.jobUuid = "";
     
+                        /**
+                         * Job done.
+                         * @member {boolean} done
+                         * @memberof google.cloud.dataproc.v1.Job
+                         * @instance
+                         */
+                        Job.prototype.done = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -15451,6 +15507,8 @@
                                 writer.uint32(/* id 22, wireType 2 =*/178).string(message.jobUuid);
                             if (message.prestoJob != null && message.hasOwnProperty("prestoJob"))
                                 $root.google.cloud.dataproc.v1.PrestoJob.encode(message.prestoJob, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.done != null && message.hasOwnProperty("done"))
+                                writer.uint32(/* id 24, wireType 0 =*/192).bool(message.done);
                             return writer;
                         };
     
@@ -15547,6 +15605,9 @@
                                     break;
                                 case 22:
                                     message.jobUuid = reader.string();
+                                    break;
+                                case 24:
+                                    message.done = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -15717,6 +15778,9 @@
                             if (message.jobUuid != null && message.hasOwnProperty("jobUuid"))
                                 if (!$util.isString(message.jobUuid))
                                     return "jobUuid: string expected";
+                            if (message.done != null && message.hasOwnProperty("done"))
+                                if (typeof message.done !== "boolean")
+                                    return "done: boolean expected";
                             return null;
                         };
     
@@ -15825,6 +15889,8 @@
                             }
                             if (object.jobUuid != null)
                                 message.jobUuid = String(object.jobUuid);
+                            if (object.done != null)
+                                message.done = Boolean(object.done);
                             return message;
                         };
     
@@ -15855,6 +15921,7 @@
                                 object.driverOutputResourceUri = "";
                                 object.scheduling = null;
                                 object.jobUuid = "";
+                                object.done = false;
                             }
                             if (message.reference != null && message.hasOwnProperty("reference"))
                                 object.reference = $root.google.cloud.dataproc.v1.JobReference.toObject(message.reference, options);
@@ -15926,6 +15993,8 @@
                                 if (options.oneofs)
                                     object.typeJob = "prestoJob";
                             }
+                            if (message.done != null && message.hasOwnProperty("done"))
+                                object.done = message.done;
                             return object;
                         };
     
@@ -16387,6 +16456,270 @@
                         };
     
                         return SubmitJobRequest;
+                    })();
+    
+                    v1.JobMetadata = (function() {
+    
+                        /**
+                         * Properties of a JobMetadata.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IJobMetadata
+                         * @property {string|null} [jobId] JobMetadata jobId
+                         * @property {google.cloud.dataproc.v1.IJobStatus|null} [status] JobMetadata status
+                         * @property {string|null} [operationType] JobMetadata operationType
+                         * @property {google.protobuf.ITimestamp|null} [startTime] JobMetadata startTime
+                         */
+    
+                        /**
+                         * Constructs a new JobMetadata.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a JobMetadata.
+                         * @implements IJobMetadata
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IJobMetadata=} [properties] Properties to set
+                         */
+                        function JobMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * JobMetadata jobId.
+                         * @member {string} jobId
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @instance
+                         */
+                        JobMetadata.prototype.jobId = "";
+    
+                        /**
+                         * JobMetadata status.
+                         * @member {google.cloud.dataproc.v1.IJobStatus|null|undefined} status
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @instance
+                         */
+                        JobMetadata.prototype.status = null;
+    
+                        /**
+                         * JobMetadata operationType.
+                         * @member {string} operationType
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @instance
+                         */
+                        JobMetadata.prototype.operationType = "";
+    
+                        /**
+                         * JobMetadata startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @instance
+                         */
+                        JobMetadata.prototype.startTime = null;
+    
+                        /**
+                         * Creates a new JobMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IJobMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.JobMetadata} JobMetadata instance
+                         */
+                        JobMetadata.create = function create(properties) {
+                            return new JobMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified JobMetadata message. Does not implicitly {@link google.cloud.dataproc.v1.JobMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IJobMetadata} message JobMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        JobMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.jobId);
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                $root.google.cloud.dataproc.v1.JobStatus.encode(message.status, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.operationType);
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified JobMetadata message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.JobMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IJobMetadata} message JobMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        JobMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a JobMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.JobMetadata} JobMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        JobMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.JobMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.jobId = reader.string();
+                                    break;
+                                case 2:
+                                    message.status = $root.google.cloud.dataproc.v1.JobStatus.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.operationType = reader.string();
+                                    break;
+                                case 4:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a JobMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.JobMetadata} JobMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        JobMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a JobMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        JobMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                if (!$util.isString(message.jobId))
+                                    return "jobId: string expected";
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.cloud.dataproc.v1.JobStatus.verify(message.status);
+                                if (error)
+                                    return "status." + error;
+                            }
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                if (!$util.isString(message.operationType))
+                                    return "operationType: string expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a JobMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.JobMetadata} JobMetadata
+                         */
+                        JobMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.JobMetadata)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.JobMetadata();
+                            if (object.jobId != null)
+                                message.jobId = String(object.jobId);
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.JobMetadata.status: object expected");
+                                message.status = $root.google.cloud.dataproc.v1.JobStatus.fromObject(object.status);
+                            }
+                            if (object.operationType != null)
+                                message.operationType = String(object.operationType);
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.JobMetadata.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a JobMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1.JobMetadata} message JobMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        JobMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.jobId = "";
+                                object.status = null;
+                                object.operationType = "";
+                                object.startTime = null;
+                            }
+                            if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                object.jobId = message.jobId;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.cloud.dataproc.v1.JobStatus.toObject(message.status, options);
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                object.operationType = message.operationType;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this JobMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.JobMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        JobMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return JobMetadata;
                     })();
     
                     v1.GetJobRequest = (function() {
@@ -20122,7 +20455,9 @@
                          * @property {google.cloud.dataproc.v1.IPySparkJob|null} [pysparkJob] OrderedJob pysparkJob
                          * @property {google.cloud.dataproc.v1.IHiveJob|null} [hiveJob] OrderedJob hiveJob
                          * @property {google.cloud.dataproc.v1.IPigJob|null} [pigJob] OrderedJob pigJob
+                         * @property {google.cloud.dataproc.v1.ISparkRJob|null} [sparkRJob] OrderedJob sparkRJob
                          * @property {google.cloud.dataproc.v1.ISparkSqlJob|null} [sparkSqlJob] OrderedJob sparkSqlJob
+                         * @property {google.cloud.dataproc.v1.IPrestoJob|null} [prestoJob] OrderedJob prestoJob
                          * @property {Object.<string,string>|null} [labels] OrderedJob labels
                          * @property {google.cloud.dataproc.v1.IJobScheduling|null} [scheduling] OrderedJob scheduling
                          * @property {Array.<string>|null} [prerequisiteStepIds] OrderedJob prerequisiteStepIds
@@ -20194,12 +20529,28 @@
                         OrderedJob.prototype.pigJob = null;
     
                         /**
+                         * OrderedJob sparkRJob.
+                         * @member {google.cloud.dataproc.v1.ISparkRJob|null|undefined} sparkRJob
+                         * @memberof google.cloud.dataproc.v1.OrderedJob
+                         * @instance
+                         */
+                        OrderedJob.prototype.sparkRJob = null;
+    
+                        /**
                          * OrderedJob sparkSqlJob.
                          * @member {google.cloud.dataproc.v1.ISparkSqlJob|null|undefined} sparkSqlJob
                          * @memberof google.cloud.dataproc.v1.OrderedJob
                          * @instance
                          */
                         OrderedJob.prototype.sparkSqlJob = null;
+    
+                        /**
+                         * OrderedJob prestoJob.
+                         * @member {google.cloud.dataproc.v1.IPrestoJob|null|undefined} prestoJob
+                         * @memberof google.cloud.dataproc.v1.OrderedJob
+                         * @instance
+                         */
+                        OrderedJob.prototype.prestoJob = null;
     
                         /**
                          * OrderedJob labels.
@@ -20230,12 +20581,12 @@
     
                         /**
                          * OrderedJob jobType.
-                         * @member {"hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkSqlJob"|undefined} jobType
+                         * @member {"hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|undefined} jobType
                          * @memberof google.cloud.dataproc.v1.OrderedJob
                          * @instance
                          */
                         Object.defineProperty(OrderedJob.prototype, "jobType", {
-                            get: $util.oneOfGetter($oneOfFields = ["hadoopJob", "sparkJob", "pysparkJob", "hiveJob", "pigJob", "sparkSqlJob"]),
+                            get: $util.oneOfGetter($oneOfFields = ["hadoopJob", "sparkJob", "pysparkJob", "hiveJob", "pigJob", "sparkRJob", "sparkSqlJob", "prestoJob"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -20285,6 +20636,10 @@
                             if (message.prerequisiteStepIds != null && message.prerequisiteStepIds.length)
                                 for (var i = 0; i < message.prerequisiteStepIds.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.prerequisiteStepIds[i]);
+                            if (message.sparkRJob != null && message.hasOwnProperty("sparkRJob"))
+                                $root.google.cloud.dataproc.v1.SparkRJob.encode(message.sparkRJob, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob"))
+                                $root.google.cloud.dataproc.v1.PrestoJob.encode(message.prestoJob, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -20337,8 +20692,14 @@
                                 case 6:
                                     message.pigJob = $root.google.cloud.dataproc.v1.PigJob.decode(reader, reader.uint32());
                                     break;
+                                case 11:
+                                    message.sparkRJob = $root.google.cloud.dataproc.v1.SparkRJob.decode(reader, reader.uint32());
+                                    break;
                                 case 7:
                                     message.sparkSqlJob = $root.google.cloud.dataproc.v1.SparkSqlJob.decode(reader, reader.uint32());
+                                    break;
+                                case 12:
+                                    message.prestoJob = $root.google.cloud.dataproc.v1.PrestoJob.decode(reader, reader.uint32());
                                     break;
                                 case 8:
                                     reader.skip().pos++;
@@ -20443,6 +20804,16 @@
                                         return "pigJob." + error;
                                 }
                             }
+                            if (message.sparkRJob != null && message.hasOwnProperty("sparkRJob")) {
+                                if (properties.jobType === 1)
+                                    return "jobType: multiple values";
+                                properties.jobType = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1.SparkRJob.verify(message.sparkRJob);
+                                    if (error)
+                                        return "sparkRJob." + error;
+                                }
+                            }
                             if (message.sparkSqlJob != null && message.hasOwnProperty("sparkSqlJob")) {
                                 if (properties.jobType === 1)
                                     return "jobType: multiple values";
@@ -20451,6 +20822,16 @@
                                     var error = $root.google.cloud.dataproc.v1.SparkSqlJob.verify(message.sparkSqlJob);
                                     if (error)
                                         return "sparkSqlJob." + error;
+                                }
+                            }
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob")) {
+                                if (properties.jobType === 1)
+                                    return "jobType: multiple values";
+                                properties.jobType = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1.PrestoJob.verify(message.prestoJob);
+                                    if (error)
+                                        return "prestoJob." + error;
                                 }
                             }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
@@ -20515,10 +20896,20 @@
                                     throw TypeError(".google.cloud.dataproc.v1.OrderedJob.pigJob: object expected");
                                 message.pigJob = $root.google.cloud.dataproc.v1.PigJob.fromObject(object.pigJob);
                             }
+                            if (object.sparkRJob != null) {
+                                if (typeof object.sparkRJob !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.OrderedJob.sparkRJob: object expected");
+                                message.sparkRJob = $root.google.cloud.dataproc.v1.SparkRJob.fromObject(object.sparkRJob);
+                            }
                             if (object.sparkSqlJob != null) {
                                 if (typeof object.sparkSqlJob !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.OrderedJob.sparkSqlJob: object expected");
                                 message.sparkSqlJob = $root.google.cloud.dataproc.v1.SparkSqlJob.fromObject(object.sparkSqlJob);
+                            }
+                            if (object.prestoJob != null) {
+                                if (typeof object.prestoJob !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.OrderedJob.prestoJob: object expected");
+                                message.prestoJob = $root.google.cloud.dataproc.v1.PrestoJob.fromObject(object.prestoJob);
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -20607,6 +20998,16 @@
                                 object.prerequisiteStepIds = [];
                                 for (var j = 0; j < message.prerequisiteStepIds.length; ++j)
                                     object.prerequisiteStepIds[j] = message.prerequisiteStepIds[j];
+                            }
+                            if (message.sparkRJob != null && message.hasOwnProperty("sparkRJob")) {
+                                object.sparkRJob = $root.google.cloud.dataproc.v1.SparkRJob.toObject(message.sparkRJob, options);
+                                if (options.oneofs)
+                                    object.jobType = "sparkRJob";
+                            }
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob")) {
+                                object.prestoJob = $root.google.cloud.dataproc.v1.PrestoJob.toObject(message.prestoJob, options);
+                                if (options.oneofs)
+                                    object.jobType = "prestoJob";
                             }
                             return object;
                         };
@@ -27791,6 +28192,7 @@
                          * @property {google.cloud.dataproc.v1beta2.IAutoscalingConfig|null} [autoscalingConfig] ClusterConfig autoscalingConfig
                          * @property {google.cloud.dataproc.v1beta2.IEndpointConfig|null} [endpointConfig] ClusterConfig endpointConfig
                          * @property {google.cloud.dataproc.v1beta2.ISecurityConfig|null} [securityConfig] ClusterConfig securityConfig
+                         * @property {google.cloud.dataproc.v1beta2.IGkeClusterConfig|null} [gkeClusterConfig] ClusterConfig gkeClusterConfig
                          */
     
                         /**
@@ -27906,6 +28308,14 @@
                         ClusterConfig.prototype.securityConfig = null;
     
                         /**
+                         * ClusterConfig gkeClusterConfig.
+                         * @member {google.cloud.dataproc.v1beta2.IGkeClusterConfig|null|undefined} gkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1beta2.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.gkeClusterConfig = null;
+    
+                        /**
                          * Creates a new ClusterConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1beta2.ClusterConfig
@@ -27954,6 +28364,8 @@
                                 $root.google.cloud.dataproc.v1beta2.EndpointConfig.encode(message.endpointConfig, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.securityConfig != null && message.hasOwnProperty("securityConfig"))
                                 $root.google.cloud.dataproc.v1beta2.SecurityConfig.encode(message.securityConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig"))
+                                $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.encode(message.gkeClusterConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -28025,6 +28437,9 @@
                                     break;
                                 case 18:
                                     message.securityConfig = $root.google.cloud.dataproc.v1beta2.SecurityConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 19:
+                                    message.gkeClusterConfig = $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -28123,6 +28538,11 @@
                                 if (error)
                                     return "securityConfig." + error;
                             }
+                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig")) {
+                                var error = $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.verify(message.gkeClusterConfig);
+                                if (error)
+                                    return "gkeClusterConfig." + error;
+                            }
                             return null;
                         };
     
@@ -28200,6 +28620,11 @@
                                     throw TypeError(".google.cloud.dataproc.v1beta2.ClusterConfig.securityConfig: object expected");
                                 message.securityConfig = $root.google.cloud.dataproc.v1beta2.SecurityConfig.fromObject(object.securityConfig);
                             }
+                            if (object.gkeClusterConfig != null) {
+                                if (typeof object.gkeClusterConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.ClusterConfig.gkeClusterConfig: object expected");
+                                message.gkeClusterConfig = $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.fromObject(object.gkeClusterConfig);
+                            }
                             return message;
                         };
     
@@ -28230,6 +28655,7 @@
                                 object.autoscalingConfig = null;
                                 object.endpointConfig = null;
                                 object.securityConfig = null;
+                                object.gkeClusterConfig = null;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
@@ -28258,6 +28684,8 @@
                                 object.endpointConfig = $root.google.cloud.dataproc.v1beta2.EndpointConfig.toObject(message.endpointConfig, options);
                             if (message.securityConfig != null && message.hasOwnProperty("securityConfig"))
                                 object.securityConfig = $root.google.cloud.dataproc.v1beta2.SecurityConfig.toObject(message.securityConfig, options);
+                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig"))
+                                object.gkeClusterConfig = $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.toObject(message.gkeClusterConfig, options);
                             return object;
                         };
     
@@ -28273,6 +28701,408 @@
                         };
     
                         return ClusterConfig;
+                    })();
+    
+                    v1beta2.GkeClusterConfig = (function() {
+    
+                        /**
+                         * Properties of a GkeClusterConfig.
+                         * @memberof google.cloud.dataproc.v1beta2
+                         * @interface IGkeClusterConfig
+                         * @property {google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget|null} [namespacedGkeDeploymentTarget] GkeClusterConfig namespacedGkeDeploymentTarget
+                         */
+    
+                        /**
+                         * Constructs a new GkeClusterConfig.
+                         * @memberof google.cloud.dataproc.v1beta2
+                         * @classdesc Represents a GkeClusterConfig.
+                         * @implements IGkeClusterConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1beta2.IGkeClusterConfig=} [properties] Properties to set
+                         */
+                        function GkeClusterConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeClusterConfig namespacedGkeDeploymentTarget.
+                         * @member {google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget|null|undefined} namespacedGkeDeploymentTarget
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @instance
+                         */
+                        GkeClusterConfig.prototype.namespacedGkeDeploymentTarget = null;
+    
+                        /**
+                         * Creates a new GkeClusterConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IGkeClusterConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1beta2.GkeClusterConfig} GkeClusterConfig instance
+                         */
+                        GkeClusterConfig.create = function create(properties) {
+                            return new GkeClusterConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1beta2.GkeClusterConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IGkeClusterConfig} message GkeClusterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeClusterConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namespacedGkeDeploymentTarget != null && message.hasOwnProperty("namespacedGkeDeploymentTarget"))
+                                $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.encode(message.namespacedGkeDeploymentTarget, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1beta2.GkeClusterConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IGkeClusterConfig} message GkeClusterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeClusterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeClusterConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1beta2.GkeClusterConfig} GkeClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeClusterConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.GkeClusterConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeClusterConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1beta2.GkeClusterConfig} GkeClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeClusterConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeClusterConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeClusterConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.namespacedGkeDeploymentTarget != null && message.hasOwnProperty("namespacedGkeDeploymentTarget")) {
+                                var error = $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify(message.namespacedGkeDeploymentTarget);
+                                if (error)
+                                    return "namespacedGkeDeploymentTarget." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeClusterConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1beta2.GkeClusterConfig} GkeClusterConfig
+                         */
+                        GkeClusterConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1beta2.GkeClusterConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1beta2.GkeClusterConfig();
+                            if (object.namespacedGkeDeploymentTarget != null) {
+                                if (typeof object.namespacedGkeDeploymentTarget !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.GkeClusterConfig.namespacedGkeDeploymentTarget: object expected");
+                                message.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.fromObject(object.namespacedGkeDeploymentTarget);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeClusterConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.GkeClusterConfig} message GkeClusterConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeClusterConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.namespacedGkeDeploymentTarget = null;
+                            if (message.namespacedGkeDeploymentTarget != null && message.hasOwnProperty("namespacedGkeDeploymentTarget"))
+                                object.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.toObject(message.namespacedGkeDeploymentTarget, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeClusterConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeClusterConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        GkeClusterConfig.NamespacedGkeDeploymentTarget = (function() {
+    
+                            /**
+                             * Properties of a NamespacedGkeDeploymentTarget.
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                             * @interface INamespacedGkeDeploymentTarget
+                             * @property {string|null} [targetGkeCluster] NamespacedGkeDeploymentTarget targetGkeCluster
+                             * @property {string|null} [clusterNamespace] NamespacedGkeDeploymentTarget clusterNamespace
+                             */
+    
+                            /**
+                             * Constructs a new NamespacedGkeDeploymentTarget.
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig
+                             * @classdesc Represents a NamespacedGkeDeploymentTarget.
+                             * @implements INamespacedGkeDeploymentTarget
+                             * @constructor
+                             * @param {google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget=} [properties] Properties to set
+                             */
+                            function NamespacedGkeDeploymentTarget(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NamespacedGkeDeploymentTarget targetGkeCluster.
+                             * @member {string} targetGkeCluster
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @instance
+                             */
+                            NamespacedGkeDeploymentTarget.prototype.targetGkeCluster = "";
+    
+                            /**
+                             * NamespacedGkeDeploymentTarget clusterNamespace.
+                             * @member {string} clusterNamespace
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @instance
+                             */
+                            NamespacedGkeDeploymentTarget.prototype.clusterNamespace = "";
+    
+                            /**
+                             * Creates a new NamespacedGkeDeploymentTarget instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget=} [properties] Properties to set
+                             * @returns {google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget instance
+                             */
+                            NamespacedGkeDeploymentTarget.create = function create(properties) {
+                                return new NamespacedGkeDeploymentTarget(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NamespacedGkeDeploymentTarget message. Does not implicitly {@link google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NamespacedGkeDeploymentTarget.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.targetGkeCluster != null && message.hasOwnProperty("targetGkeCluster"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetGkeCluster);
+                                if (message.clusterNamespace != null && message.hasOwnProperty("clusterNamespace"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.clusterNamespace);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NamespacedGkeDeploymentTarget message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {google.cloud.dataproc.v1beta2.GkeClusterConfig.INamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NamespacedGkeDeploymentTarget.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NamespacedGkeDeploymentTarget.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.targetGkeCluster = reader.string();
+                                        break;
+                                    case 2:
+                                        message.clusterNamespace = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NamespacedGkeDeploymentTarget.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NamespacedGkeDeploymentTarget message.
+                             * @function verify
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NamespacedGkeDeploymentTarget.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.targetGkeCluster != null && message.hasOwnProperty("targetGkeCluster"))
+                                    if (!$util.isString(message.targetGkeCluster))
+                                        return "targetGkeCluster: string expected";
+                                if (message.clusterNamespace != null && message.hasOwnProperty("clusterNamespace"))
+                                    if (!$util.isString(message.clusterNamespace))
+                                        return "clusterNamespace: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NamespacedGkeDeploymentTarget message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
+                             */
+                            NamespacedGkeDeploymentTarget.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget)
+                                    return object;
+                                var message = new $root.google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget();
+                                if (object.targetGkeCluster != null)
+                                    message.targetGkeCluster = String(object.targetGkeCluster);
+                                if (object.clusterNamespace != null)
+                                    message.clusterNamespace = String(object.clusterNamespace);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NamespacedGkeDeploymentTarget message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NamespacedGkeDeploymentTarget.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.targetGkeCluster = "";
+                                    object.clusterNamespace = "";
+                                }
+                                if (message.targetGkeCluster != null && message.hasOwnProperty("targetGkeCluster"))
+                                    object.targetGkeCluster = message.targetGkeCluster;
+                                if (message.clusterNamespace != null && message.hasOwnProperty("clusterNamespace"))
+                                    object.clusterNamespace = message.clusterNamespace;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NamespacedGkeDeploymentTarget to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NamespacedGkeDeploymentTarget.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return NamespacedGkeDeploymentTarget;
+                        })();
+    
+                        return GkeClusterConfig;
                     })();
     
                     v1beta2.EndpointConfig = (function() {
@@ -31756,6 +32586,9 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.detail != null && message.hasOwnProperty("detail"))
@@ -31814,6 +32647,18 @@
                             case "UPDATING":
                             case 5:
                                 message.state = 5;
+                                break;
+                            case "STOPPING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "STOPPED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "STARTING":
+                            case 8:
+                                message.state = 8;
                                 break;
                             }
                             if (object.detail != null)
@@ -31891,6 +32736,9 @@
                          * @property {number} ERROR=3 ERROR value
                          * @property {number} DELETING=4 DELETING value
                          * @property {number} UPDATING=5 UPDATING value
+                         * @property {number} STOPPING=6 STOPPING value
+                         * @property {number} STOPPED=7 STOPPED value
+                         * @property {number} STARTING=8 STARTING value
                          */
                         ClusterStatus.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -31900,6 +32748,9 @@
                             values[valuesById[3] = "ERROR"] = 3;
                             values[valuesById[4] = "DELETING"] = 4;
                             values[valuesById[5] = "UPDATING"] = 5;
+                            values[valuesById[6] = "STOPPING"] = 6;
+                            values[valuesById[7] = "STOPPED"] = 7;
+                            values[valuesById[8] = "STARTING"] = 8;
                             return values;
                         })();
     
@@ -32119,11 +32970,15 @@
                                         return "optionalComponents: enum value[] expected";
                                     case 0:
                                     case 5:
+                                    case 13:
                                     case 9:
+                                    case 14:
                                     case 3:
                                     case 1:
                                     case 7:
                                     case 6:
+                                    case 12:
+                                    case 10:
                                     case 4:
                                     case 8:
                                         break;
@@ -32168,9 +33023,17 @@
                                     case 5:
                                         message.optionalComponents[i] = 5;
                                         break;
+                                    case "DOCKER":
+                                    case 13:
+                                        message.optionalComponents[i] = 13;
+                                        break;
                                     case "DRUID":
                                     case 9:
                                         message.optionalComponents[i] = 9;
+                                        break;
+                                    case "FLINK":
+                                    case 14:
+                                        message.optionalComponents[i] = 14;
                                         break;
                                     case "HIVE_WEBHCAT":
                                     case 3:
@@ -32187,6 +33050,14 @@
                                     case "PRESTO":
                                     case 6:
                                         message.optionalComponents[i] = 6;
+                                        break;
+                                    case "RANGER":
+                                    case 12:
+                                        message.optionalComponents[i] = 12;
+                                        break;
+                                    case "SOLR":
+                                    case 10:
+                                        message.optionalComponents[i] = 10;
                                         break;
                                     case "ZEPPELIN":
                                     case 4:
@@ -34845,11 +35716,15 @@
                      * @enum {string}
                      * @property {number} COMPONENT_UNSPECIFIED=0 COMPONENT_UNSPECIFIED value
                      * @property {number} ANACONDA=5 ANACONDA value
+                     * @property {number} DOCKER=13 DOCKER value
                      * @property {number} DRUID=9 DRUID value
+                     * @property {number} FLINK=14 FLINK value
                      * @property {number} HIVE_WEBHCAT=3 HIVE_WEBHCAT value
                      * @property {number} JUPYTER=1 JUPYTER value
                      * @property {number} KERBEROS=7 KERBEROS value
                      * @property {number} PRESTO=6 PRESTO value
+                     * @property {number} RANGER=12 RANGER value
+                     * @property {number} SOLR=10 SOLR value
                      * @property {number} ZEPPELIN=4 ZEPPELIN value
                      * @property {number} ZOOKEEPER=8 ZOOKEEPER value
                      */
@@ -34857,11 +35732,15 @@
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "COMPONENT_UNSPECIFIED"] = 0;
                         values[valuesById[5] = "ANACONDA"] = 5;
+                        values[valuesById[13] = "DOCKER"] = 13;
                         values[valuesById[9] = "DRUID"] = 9;
+                        values[valuesById[14] = "FLINK"] = 14;
                         values[valuesById[3] = "HIVE_WEBHCAT"] = 3;
                         values[valuesById[1] = "JUPYTER"] = 1;
                         values[valuesById[7] = "KERBEROS"] = 7;
                         values[valuesById[6] = "PRESTO"] = 6;
+                        values[valuesById[12] = "RANGER"] = 12;
+                        values[valuesById[10] = "SOLR"] = 10;
                         values[valuesById[4] = "ZEPPELIN"] = 4;
                         values[valuesById[8] = "ZOOKEEPER"] = 8;
                         return values;
@@ -34929,6 +35808,39 @@
                          * @instance
                          * @param {google.cloud.dataproc.v1beta2.ISubmitJobRequest} request SubmitJobRequest message or plain object
                          * @returns {Promise<google.cloud.dataproc.v1beta2.Job>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataproc.v1beta2.JobController#submitJobAsOperation}.
+                         * @memberof google.cloud.dataproc.v1beta2.JobController
+                         * @typedef SubmitJobAsOperationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls SubmitJobAsOperation.
+                         * @function submitJobAsOperation
+                         * @memberof google.cloud.dataproc.v1beta2.JobController
+                         * @instance
+                         * @param {google.cloud.dataproc.v1beta2.ISubmitJobRequest} request SubmitJobRequest message or plain object
+                         * @param {google.cloud.dataproc.v1beta2.JobController.SubmitJobAsOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(JobController.prototype.submitJobAsOperation = function submitJobAsOperation(request, callback) {
+                            return this.rpcCall(submitJobAsOperation, $root.google.cloud.dataproc.v1beta2.SubmitJobRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "SubmitJobAsOperation" });
+    
+                        /**
+                         * Calls SubmitJobAsOperation.
+                         * @function submitJobAsOperation
+                         * @memberof google.cloud.dataproc.v1beta2.JobController
+                         * @instance
+                         * @param {google.cloud.dataproc.v1beta2.ISubmitJobRequest} request SubmitJobRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -38529,6 +39441,401 @@
                         return SparkRJob;
                     })();
     
+                    v1beta2.PrestoJob = (function() {
+    
+                        /**
+                         * Properties of a PrestoJob.
+                         * @memberof google.cloud.dataproc.v1beta2
+                         * @interface IPrestoJob
+                         * @property {string|null} [queryFileUri] PrestoJob queryFileUri
+                         * @property {google.cloud.dataproc.v1beta2.IQueryList|null} [queryList] PrestoJob queryList
+                         * @property {boolean|null} [continueOnFailure] PrestoJob continueOnFailure
+                         * @property {string|null} [outputFormat] PrestoJob outputFormat
+                         * @property {Array.<string>|null} [clientTags] PrestoJob clientTags
+                         * @property {Object.<string,string>|null} [properties] PrestoJob properties
+                         * @property {google.cloud.dataproc.v1beta2.ILoggingConfig|null} [loggingConfig] PrestoJob loggingConfig
+                         */
+    
+                        /**
+                         * Constructs a new PrestoJob.
+                         * @memberof google.cloud.dataproc.v1beta2
+                         * @classdesc Represents a PrestoJob.
+                         * @implements IPrestoJob
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1beta2.IPrestoJob=} [properties] Properties to set
+                         */
+                        function PrestoJob(properties) {
+                            this.clientTags = [];
+                            this.properties = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PrestoJob queryFileUri.
+                         * @member {string} queryFileUri
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         */
+                        PrestoJob.prototype.queryFileUri = "";
+    
+                        /**
+                         * PrestoJob queryList.
+                         * @member {google.cloud.dataproc.v1beta2.IQueryList|null|undefined} queryList
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         */
+                        PrestoJob.prototype.queryList = null;
+    
+                        /**
+                         * PrestoJob continueOnFailure.
+                         * @member {boolean} continueOnFailure
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         */
+                        PrestoJob.prototype.continueOnFailure = false;
+    
+                        /**
+                         * PrestoJob outputFormat.
+                         * @member {string} outputFormat
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         */
+                        PrestoJob.prototype.outputFormat = "";
+    
+                        /**
+                         * PrestoJob clientTags.
+                         * @member {Array.<string>} clientTags
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         */
+                        PrestoJob.prototype.clientTags = $util.emptyArray;
+    
+                        /**
+                         * PrestoJob properties.
+                         * @member {Object.<string,string>} properties
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         */
+                        PrestoJob.prototype.properties = $util.emptyObject;
+    
+                        /**
+                         * PrestoJob loggingConfig.
+                         * @member {google.cloud.dataproc.v1beta2.ILoggingConfig|null|undefined} loggingConfig
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         */
+                        PrestoJob.prototype.loggingConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * PrestoJob queries.
+                         * @member {"queryFileUri"|"queryList"|undefined} queries
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         */
+                        Object.defineProperty(PrestoJob.prototype, "queries", {
+                            get: $util.oneOfGetter($oneOfFields = ["queryFileUri", "queryList"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new PrestoJob instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IPrestoJob=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1beta2.PrestoJob} PrestoJob instance
+                         */
+                        PrestoJob.create = function create(properties) {
+                            return new PrestoJob(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PrestoJob message. Does not implicitly {@link google.cloud.dataproc.v1beta2.PrestoJob.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IPrestoJob} message PrestoJob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrestoJob.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.queryFileUri != null && message.hasOwnProperty("queryFileUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryFileUri);
+                            if (message.queryList != null && message.hasOwnProperty("queryList"))
+                                $root.google.cloud.dataproc.v1beta2.QueryList.encode(message.queryList, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.continueOnFailure != null && message.hasOwnProperty("continueOnFailure"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.continueOnFailure);
+                            if (message.outputFormat != null && message.hasOwnProperty("outputFormat"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.outputFormat);
+                            if (message.clientTags != null && message.clientTags.length)
+                                for (var i = 0; i < message.clientTags.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.clientTags[i]);
+                            if (message.properties != null && message.hasOwnProperty("properties"))
+                                for (var keys = Object.keys(message.properties), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.properties[keys[i]]).ldelim();
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                                $root.google.cloud.dataproc.v1beta2.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PrestoJob message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1beta2.PrestoJob.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IPrestoJob} message PrestoJob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrestoJob.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PrestoJob message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1beta2.PrestoJob} PrestoJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrestoJob.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.PrestoJob(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.queryFileUri = reader.string();
+                                    break;
+                                case 2:
+                                    message.queryList = $root.google.cloud.dataproc.v1beta2.QueryList.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.continueOnFailure = reader.bool();
+                                    break;
+                                case 4:
+                                    message.outputFormat = reader.string();
+                                    break;
+                                case 5:
+                                    if (!(message.clientTags && message.clientTags.length))
+                                        message.clientTags = [];
+                                    message.clientTags.push(reader.string());
+                                    break;
+                                case 6:
+                                    reader.skip().pos++;
+                                    if (message.properties === $util.emptyObject)
+                                        message.properties = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.properties[key] = reader.string();
+                                    break;
+                                case 7:
+                                    message.loggingConfig = $root.google.cloud.dataproc.v1beta2.LoggingConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PrestoJob message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1beta2.PrestoJob} PrestoJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrestoJob.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PrestoJob message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PrestoJob.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.queryFileUri != null && message.hasOwnProperty("queryFileUri")) {
+                                properties.queries = 1;
+                                if (!$util.isString(message.queryFileUri))
+                                    return "queryFileUri: string expected";
+                            }
+                            if (message.queryList != null && message.hasOwnProperty("queryList")) {
+                                if (properties.queries === 1)
+                                    return "queries: multiple values";
+                                properties.queries = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1beta2.QueryList.verify(message.queryList);
+                                    if (error)
+                                        return "queryList." + error;
+                                }
+                            }
+                            if (message.continueOnFailure != null && message.hasOwnProperty("continueOnFailure"))
+                                if (typeof message.continueOnFailure !== "boolean")
+                                    return "continueOnFailure: boolean expected";
+                            if (message.outputFormat != null && message.hasOwnProperty("outputFormat"))
+                                if (!$util.isString(message.outputFormat))
+                                    return "outputFormat: string expected";
+                            if (message.clientTags != null && message.hasOwnProperty("clientTags")) {
+                                if (!Array.isArray(message.clientTags))
+                                    return "clientTags: array expected";
+                                for (var i = 0; i < message.clientTags.length; ++i)
+                                    if (!$util.isString(message.clientTags[i]))
+                                        return "clientTags: string[] expected";
+                            }
+                            if (message.properties != null && message.hasOwnProperty("properties")) {
+                                if (!$util.isObject(message.properties))
+                                    return "properties: object expected";
+                                var key = Object.keys(message.properties);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.properties[key[i]]))
+                                        return "properties: string{k:string} expected";
+                            }
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                                var error = $root.google.cloud.dataproc.v1beta2.LoggingConfig.verify(message.loggingConfig);
+                                if (error)
+                                    return "loggingConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PrestoJob message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1beta2.PrestoJob} PrestoJob
+                         */
+                        PrestoJob.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1beta2.PrestoJob)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1beta2.PrestoJob();
+                            if (object.queryFileUri != null)
+                                message.queryFileUri = String(object.queryFileUri);
+                            if (object.queryList != null) {
+                                if (typeof object.queryList !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.PrestoJob.queryList: object expected");
+                                message.queryList = $root.google.cloud.dataproc.v1beta2.QueryList.fromObject(object.queryList);
+                            }
+                            if (object.continueOnFailure != null)
+                                message.continueOnFailure = Boolean(object.continueOnFailure);
+                            if (object.outputFormat != null)
+                                message.outputFormat = String(object.outputFormat);
+                            if (object.clientTags) {
+                                if (!Array.isArray(object.clientTags))
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.PrestoJob.clientTags: array expected");
+                                message.clientTags = [];
+                                for (var i = 0; i < object.clientTags.length; ++i)
+                                    message.clientTags[i] = String(object.clientTags[i]);
+                            }
+                            if (object.properties) {
+                                if (typeof object.properties !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.PrestoJob.properties: object expected");
+                                message.properties = {};
+                                for (var keys = Object.keys(object.properties), i = 0; i < keys.length; ++i)
+                                    message.properties[keys[i]] = String(object.properties[keys[i]]);
+                            }
+                            if (object.loggingConfig != null) {
+                                if (typeof object.loggingConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.PrestoJob.loggingConfig: object expected");
+                                message.loggingConfig = $root.google.cloud.dataproc.v1beta2.LoggingConfig.fromObject(object.loggingConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PrestoJob message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.PrestoJob} message PrestoJob
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PrestoJob.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.clientTags = [];
+                            if (options.objects || options.defaults)
+                                object.properties = {};
+                            if (options.defaults) {
+                                object.continueOnFailure = false;
+                                object.outputFormat = "";
+                                object.loggingConfig = null;
+                            }
+                            if (message.queryFileUri != null && message.hasOwnProperty("queryFileUri")) {
+                                object.queryFileUri = message.queryFileUri;
+                                if (options.oneofs)
+                                    object.queries = "queryFileUri";
+                            }
+                            if (message.queryList != null && message.hasOwnProperty("queryList")) {
+                                object.queryList = $root.google.cloud.dataproc.v1beta2.QueryList.toObject(message.queryList, options);
+                                if (options.oneofs)
+                                    object.queries = "queryList";
+                            }
+                            if (message.continueOnFailure != null && message.hasOwnProperty("continueOnFailure"))
+                                object.continueOnFailure = message.continueOnFailure;
+                            if (message.outputFormat != null && message.hasOwnProperty("outputFormat"))
+                                object.outputFormat = message.outputFormat;
+                            if (message.clientTags && message.clientTags.length) {
+                                object.clientTags = [];
+                                for (var j = 0; j < message.clientTags.length; ++j)
+                                    object.clientTags[j] = message.clientTags[j];
+                            }
+                            var keys2;
+                            if (message.properties && (keys2 = Object.keys(message.properties)).length) {
+                                object.properties = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.properties[keys2[j]] = message.properties[keys2[j]];
+                            }
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                                object.loggingConfig = $root.google.cloud.dataproc.v1beta2.LoggingConfig.toObject(message.loggingConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PrestoJob to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1beta2.PrestoJob
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PrestoJob.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PrestoJob;
+                    })();
+    
                     v1beta2.JobPlacement = (function() {
     
                         /**
@@ -39677,6 +40984,7 @@
                          * @property {google.cloud.dataproc.v1beta2.IPigJob|null} [pigJob] Job pigJob
                          * @property {google.cloud.dataproc.v1beta2.ISparkRJob|null} [sparkRJob] Job sparkRJob
                          * @property {google.cloud.dataproc.v1beta2.ISparkSqlJob|null} [sparkSqlJob] Job sparkSqlJob
+                         * @property {google.cloud.dataproc.v1beta2.IPrestoJob|null} [prestoJob] Job prestoJob
                          * @property {google.cloud.dataproc.v1beta2.IJobStatus|null} [status] Job status
                          * @property {Array.<google.cloud.dataproc.v1beta2.IJobStatus>|null} [statusHistory] Job statusHistory
                          * @property {Array.<google.cloud.dataproc.v1beta2.IYarnApplication>|null} [yarnApplications] Job yarnApplications
@@ -39686,6 +40994,7 @@
                          * @property {Object.<string,string>|null} [labels] Job labels
                          * @property {google.cloud.dataproc.v1beta2.IJobScheduling|null} [scheduling] Job scheduling
                          * @property {string|null} [jobUuid] Job jobUuid
+                         * @property {boolean|null} [done] Job done
                          */
     
                         /**
@@ -39779,6 +41088,14 @@
                         Job.prototype.sparkSqlJob = null;
     
                         /**
+                         * Job prestoJob.
+                         * @member {google.cloud.dataproc.v1beta2.IPrestoJob|null|undefined} prestoJob
+                         * @memberof google.cloud.dataproc.v1beta2.Job
+                         * @instance
+                         */
+                        Job.prototype.prestoJob = null;
+    
+                        /**
                          * Job status.
                          * @member {google.cloud.dataproc.v1beta2.IJobStatus|null|undefined} status
                          * @memberof google.cloud.dataproc.v1beta2.Job
@@ -39850,17 +41167,25 @@
                          */
                         Job.prototype.jobUuid = "";
     
+                        /**
+                         * Job done.
+                         * @member {boolean} done
+                         * @memberof google.cloud.dataproc.v1beta2.Job
+                         * @instance
+                         */
+                        Job.prototype.done = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Job typeJob.
-                         * @member {"hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|undefined} typeJob
+                         * @member {"hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|undefined} typeJob
                          * @memberof google.cloud.dataproc.v1beta2.Job
                          * @instance
                          */
                         Object.defineProperty(Job.prototype, "typeJob", {
-                            get: $util.oneOfGetter($oneOfFields = ["hadoopJob", "sparkJob", "pysparkJob", "hiveJob", "pigJob", "sparkRJob", "sparkSqlJob"]),
+                            get: $util.oneOfGetter($oneOfFields = ["hadoopJob", "sparkJob", "pysparkJob", "hiveJob", "pigJob", "sparkRJob", "sparkSqlJob", "prestoJob"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -39927,6 +41252,10 @@
                                 $root.google.cloud.dataproc.v1beta2.SparkRJob.encode(message.sparkRJob, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             if (message.jobUuid != null && message.hasOwnProperty("jobUuid"))
                                 writer.uint32(/* id 22, wireType 2 =*/178).string(message.jobUuid);
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob"))
+                                $root.google.cloud.dataproc.v1beta2.PrestoJob.encode(message.prestoJob, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.done != null && message.hasOwnProperty("done"))
+                                writer.uint32(/* id 24, wireType 0 =*/192).bool(message.done);
                             return writer;
                         };
     
@@ -39988,6 +41317,9 @@
                                 case 12:
                                     message.sparkSqlJob = $root.google.cloud.dataproc.v1beta2.SparkSqlJob.decode(reader, reader.uint32());
                                     break;
+                                case 23:
+                                    message.prestoJob = $root.google.cloud.dataproc.v1beta2.PrestoJob.decode(reader, reader.uint32());
+                                    break;
                                 case 8:
                                     message.status = $root.google.cloud.dataproc.v1beta2.JobStatus.decode(reader, reader.uint32());
                                     break;
@@ -40023,6 +41355,9 @@
                                     break;
                                 case 22:
                                     message.jobUuid = reader.string();
+                                    break;
+                                case 24:
+                                    message.done = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -40138,6 +41473,16 @@
                                         return "sparkSqlJob." + error;
                                 }
                             }
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob")) {
+                                if (properties.typeJob === 1)
+                                    return "typeJob: multiple values";
+                                properties.typeJob = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1beta2.PrestoJob.verify(message.prestoJob);
+                                    if (error)
+                                        return "prestoJob." + error;
+                                }
+                            }
                             if (message.status != null && message.hasOwnProperty("status")) {
                                 var error = $root.google.cloud.dataproc.v1beta2.JobStatus.verify(message.status);
                                 if (error)
@@ -40186,6 +41531,9 @@
                             if (message.jobUuid != null && message.hasOwnProperty("jobUuid"))
                                 if (!$util.isString(message.jobUuid))
                                     return "jobUuid: string expected";
+                            if (message.done != null && message.hasOwnProperty("done"))
+                                if (typeof message.done !== "boolean")
+                                    return "done: boolean expected";
                             return null;
                         };
     
@@ -40246,6 +41594,11 @@
                                     throw TypeError(".google.cloud.dataproc.v1beta2.Job.sparkSqlJob: object expected");
                                 message.sparkSqlJob = $root.google.cloud.dataproc.v1beta2.SparkSqlJob.fromObject(object.sparkSqlJob);
                             }
+                            if (object.prestoJob != null) {
+                                if (typeof object.prestoJob !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.Job.prestoJob: object expected");
+                                message.prestoJob = $root.google.cloud.dataproc.v1beta2.PrestoJob.fromObject(object.prestoJob);
+                            }
                             if (object.status != null) {
                                 if (typeof object.status !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1beta2.Job.status: object expected");
@@ -40291,6 +41644,8 @@
                             }
                             if (object.jobUuid != null)
                                 message.jobUuid = String(object.jobUuid);
+                            if (object.done != null)
+                                message.done = Boolean(object.done);
                             return message;
                         };
     
@@ -40322,6 +41677,7 @@
                                 object.driverOutputResourceUri = "";
                                 object.scheduling = null;
                                 object.jobUuid = "";
+                                object.done = false;
                             }
                             if (message.reference != null && message.hasOwnProperty("reference"))
                                 object.reference = $root.google.cloud.dataproc.v1beta2.JobReference.toObject(message.reference, options);
@@ -40390,6 +41746,13 @@
                             }
                             if (message.jobUuid != null && message.hasOwnProperty("jobUuid"))
                                 object.jobUuid = message.jobUuid;
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob")) {
+                                object.prestoJob = $root.google.cloud.dataproc.v1beta2.PrestoJob.toObject(message.prestoJob, options);
+                                if (options.oneofs)
+                                    object.typeJob = "prestoJob";
+                            }
+                            if (message.done != null && message.hasOwnProperty("done"))
+                                object.done = message.done;
                             return object;
                         };
     
@@ -40592,6 +41955,270 @@
                         };
     
                         return JobScheduling;
+                    })();
+    
+                    v1beta2.JobMetadata = (function() {
+    
+                        /**
+                         * Properties of a JobMetadata.
+                         * @memberof google.cloud.dataproc.v1beta2
+                         * @interface IJobMetadata
+                         * @property {string|null} [jobId] JobMetadata jobId
+                         * @property {google.cloud.dataproc.v1beta2.IJobStatus|null} [status] JobMetadata status
+                         * @property {string|null} [operationType] JobMetadata operationType
+                         * @property {google.protobuf.ITimestamp|null} [startTime] JobMetadata startTime
+                         */
+    
+                        /**
+                         * Constructs a new JobMetadata.
+                         * @memberof google.cloud.dataproc.v1beta2
+                         * @classdesc Represents a JobMetadata.
+                         * @implements IJobMetadata
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1beta2.IJobMetadata=} [properties] Properties to set
+                         */
+                        function JobMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * JobMetadata jobId.
+                         * @member {string} jobId
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @instance
+                         */
+                        JobMetadata.prototype.jobId = "";
+    
+                        /**
+                         * JobMetadata status.
+                         * @member {google.cloud.dataproc.v1beta2.IJobStatus|null|undefined} status
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @instance
+                         */
+                        JobMetadata.prototype.status = null;
+    
+                        /**
+                         * JobMetadata operationType.
+                         * @member {string} operationType
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @instance
+                         */
+                        JobMetadata.prototype.operationType = "";
+    
+                        /**
+                         * JobMetadata startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @instance
+                         */
+                        JobMetadata.prototype.startTime = null;
+    
+                        /**
+                         * Creates a new JobMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IJobMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1beta2.JobMetadata} JobMetadata instance
+                         */
+                        JobMetadata.create = function create(properties) {
+                            return new JobMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified JobMetadata message. Does not implicitly {@link google.cloud.dataproc.v1beta2.JobMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IJobMetadata} message JobMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        JobMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.jobId);
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                $root.google.cloud.dataproc.v1beta2.JobStatus.encode(message.status, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.operationType);
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified JobMetadata message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1beta2.JobMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.IJobMetadata} message JobMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        JobMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a JobMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1beta2.JobMetadata} JobMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        JobMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.JobMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.jobId = reader.string();
+                                    break;
+                                case 2:
+                                    message.status = $root.google.cloud.dataproc.v1beta2.JobStatus.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.operationType = reader.string();
+                                    break;
+                                case 4:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a JobMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1beta2.JobMetadata} JobMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        JobMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a JobMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        JobMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                if (!$util.isString(message.jobId))
+                                    return "jobId: string expected";
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.cloud.dataproc.v1beta2.JobStatus.verify(message.status);
+                                if (error)
+                                    return "status." + error;
+                            }
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                if (!$util.isString(message.operationType))
+                                    return "operationType: string expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a JobMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1beta2.JobMetadata} JobMetadata
+                         */
+                        JobMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1beta2.JobMetadata)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1beta2.JobMetadata();
+                            if (object.jobId != null)
+                                message.jobId = String(object.jobId);
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.JobMetadata.status: object expected");
+                                message.status = $root.google.cloud.dataproc.v1beta2.JobStatus.fromObject(object.status);
+                            }
+                            if (object.operationType != null)
+                                message.operationType = String(object.operationType);
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.JobMetadata.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a JobMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1beta2.JobMetadata} message JobMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        JobMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.jobId = "";
+                                object.status = null;
+                                object.operationType = "";
+                                object.startTime = null;
+                            }
+                            if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                object.jobId = message.jobId;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.cloud.dataproc.v1beta2.JobStatus.toObject(message.status, options);
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                object.operationType = message.operationType;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this JobMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1beta2.JobMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        JobMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return JobMetadata;
                     })();
     
                     v1beta2.SubmitJobRequest = (function() {
@@ -44586,7 +46213,9 @@
                          * @property {google.cloud.dataproc.v1beta2.IPySparkJob|null} [pysparkJob] OrderedJob pysparkJob
                          * @property {google.cloud.dataproc.v1beta2.IHiveJob|null} [hiveJob] OrderedJob hiveJob
                          * @property {google.cloud.dataproc.v1beta2.IPigJob|null} [pigJob] OrderedJob pigJob
+                         * @property {google.cloud.dataproc.v1beta2.ISparkRJob|null} [sparkRJob] OrderedJob sparkRJob
                          * @property {google.cloud.dataproc.v1beta2.ISparkSqlJob|null} [sparkSqlJob] OrderedJob sparkSqlJob
+                         * @property {google.cloud.dataproc.v1beta2.IPrestoJob|null} [prestoJob] OrderedJob prestoJob
                          * @property {Object.<string,string>|null} [labels] OrderedJob labels
                          * @property {google.cloud.dataproc.v1beta2.IJobScheduling|null} [scheduling] OrderedJob scheduling
                          * @property {Array.<string>|null} [prerequisiteStepIds] OrderedJob prerequisiteStepIds
@@ -44658,12 +46287,28 @@
                         OrderedJob.prototype.pigJob = null;
     
                         /**
+                         * OrderedJob sparkRJob.
+                         * @member {google.cloud.dataproc.v1beta2.ISparkRJob|null|undefined} sparkRJob
+                         * @memberof google.cloud.dataproc.v1beta2.OrderedJob
+                         * @instance
+                         */
+                        OrderedJob.prototype.sparkRJob = null;
+    
+                        /**
                          * OrderedJob sparkSqlJob.
                          * @member {google.cloud.dataproc.v1beta2.ISparkSqlJob|null|undefined} sparkSqlJob
                          * @memberof google.cloud.dataproc.v1beta2.OrderedJob
                          * @instance
                          */
                         OrderedJob.prototype.sparkSqlJob = null;
+    
+                        /**
+                         * OrderedJob prestoJob.
+                         * @member {google.cloud.dataproc.v1beta2.IPrestoJob|null|undefined} prestoJob
+                         * @memberof google.cloud.dataproc.v1beta2.OrderedJob
+                         * @instance
+                         */
+                        OrderedJob.prototype.prestoJob = null;
     
                         /**
                          * OrderedJob labels.
@@ -44694,12 +46339,12 @@
     
                         /**
                          * OrderedJob jobType.
-                         * @member {"hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkSqlJob"|undefined} jobType
+                         * @member {"hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|undefined} jobType
                          * @memberof google.cloud.dataproc.v1beta2.OrderedJob
                          * @instance
                          */
                         Object.defineProperty(OrderedJob.prototype, "jobType", {
-                            get: $util.oneOfGetter($oneOfFields = ["hadoopJob", "sparkJob", "pysparkJob", "hiveJob", "pigJob", "sparkSqlJob"]),
+                            get: $util.oneOfGetter($oneOfFields = ["hadoopJob", "sparkJob", "pysparkJob", "hiveJob", "pigJob", "sparkRJob", "sparkSqlJob", "prestoJob"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -44749,6 +46394,10 @@
                             if (message.prerequisiteStepIds != null && message.prerequisiteStepIds.length)
                                 for (var i = 0; i < message.prerequisiteStepIds.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.prerequisiteStepIds[i]);
+                            if (message.sparkRJob != null && message.hasOwnProperty("sparkRJob"))
+                                $root.google.cloud.dataproc.v1beta2.SparkRJob.encode(message.sparkRJob, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob"))
+                                $root.google.cloud.dataproc.v1beta2.PrestoJob.encode(message.prestoJob, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -44801,8 +46450,14 @@
                                 case 6:
                                     message.pigJob = $root.google.cloud.dataproc.v1beta2.PigJob.decode(reader, reader.uint32());
                                     break;
+                                case 11:
+                                    message.sparkRJob = $root.google.cloud.dataproc.v1beta2.SparkRJob.decode(reader, reader.uint32());
+                                    break;
                                 case 7:
                                     message.sparkSqlJob = $root.google.cloud.dataproc.v1beta2.SparkSqlJob.decode(reader, reader.uint32());
+                                    break;
+                                case 12:
+                                    message.prestoJob = $root.google.cloud.dataproc.v1beta2.PrestoJob.decode(reader, reader.uint32());
                                     break;
                                 case 8:
                                     reader.skip().pos++;
@@ -44907,6 +46562,16 @@
                                         return "pigJob." + error;
                                 }
                             }
+                            if (message.sparkRJob != null && message.hasOwnProperty("sparkRJob")) {
+                                if (properties.jobType === 1)
+                                    return "jobType: multiple values";
+                                properties.jobType = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1beta2.SparkRJob.verify(message.sparkRJob);
+                                    if (error)
+                                        return "sparkRJob." + error;
+                                }
+                            }
                             if (message.sparkSqlJob != null && message.hasOwnProperty("sparkSqlJob")) {
                                 if (properties.jobType === 1)
                                     return "jobType: multiple values";
@@ -44915,6 +46580,16 @@
                                     var error = $root.google.cloud.dataproc.v1beta2.SparkSqlJob.verify(message.sparkSqlJob);
                                     if (error)
                                         return "sparkSqlJob." + error;
+                                }
+                            }
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob")) {
+                                if (properties.jobType === 1)
+                                    return "jobType: multiple values";
+                                properties.jobType = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1beta2.PrestoJob.verify(message.prestoJob);
+                                    if (error)
+                                        return "prestoJob." + error;
                                 }
                             }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
@@ -44979,10 +46654,20 @@
                                     throw TypeError(".google.cloud.dataproc.v1beta2.OrderedJob.pigJob: object expected");
                                 message.pigJob = $root.google.cloud.dataproc.v1beta2.PigJob.fromObject(object.pigJob);
                             }
+                            if (object.sparkRJob != null) {
+                                if (typeof object.sparkRJob !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.OrderedJob.sparkRJob: object expected");
+                                message.sparkRJob = $root.google.cloud.dataproc.v1beta2.SparkRJob.fromObject(object.sparkRJob);
+                            }
                             if (object.sparkSqlJob != null) {
                                 if (typeof object.sparkSqlJob !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1beta2.OrderedJob.sparkSqlJob: object expected");
                                 message.sparkSqlJob = $root.google.cloud.dataproc.v1beta2.SparkSqlJob.fromObject(object.sparkSqlJob);
+                            }
+                            if (object.prestoJob != null) {
+                                if (typeof object.prestoJob !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.OrderedJob.prestoJob: object expected");
+                                message.prestoJob = $root.google.cloud.dataproc.v1beta2.PrestoJob.fromObject(object.prestoJob);
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -45071,6 +46756,16 @@
                                 object.prerequisiteStepIds = [];
                                 for (var j = 0; j < message.prerequisiteStepIds.length; ++j)
                                     object.prerequisiteStepIds[j] = message.prerequisiteStepIds[j];
+                            }
+                            if (message.sparkRJob != null && message.hasOwnProperty("sparkRJob")) {
+                                object.sparkRJob = $root.google.cloud.dataproc.v1beta2.SparkRJob.toObject(message.sparkRJob, options);
+                                if (options.oneofs)
+                                    object.jobType = "sparkRJob";
+                            }
+                            if (message.prestoJob != null && message.hasOwnProperty("prestoJob")) {
+                                object.prestoJob = $root.google.cloud.dataproc.v1beta2.PrestoJob.toObject(message.prestoJob, options);
+                                if (options.oneofs)
+                                    object.jobType = "prestoJob";
                             }
                             return object;
                         };
