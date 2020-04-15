@@ -31,8 +31,8 @@ for version in versions:
         'datalabeling', version,
         generator_args={
             "grpc-service-config": f"google/cloud/datalabeling/{version}/datalabeling_grpc_service_config.json",
-            "package-name": f"@google-cloud/datalabeling",
-            "main-service": f"datalabeling"
+            "package-name": "@google-cloud/datalabeling",
+            "main-service": "datalabeling"
         },
         proto_path=f'/google/cloud/datalabeling/{version}',
         extra_proto_files=['google/cloud/common_resources.proto'],
