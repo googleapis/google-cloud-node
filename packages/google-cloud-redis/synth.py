@@ -15,7 +15,7 @@ versions = ['v1beta1', 'v1']
 name = 'redis'
 for version in versions:
     library = gapic.typescript_library(
-            name, 
+            name,
             generator_args={
                 "package-name": f"@google-cloud/{name}"
             },
@@ -35,5 +35,5 @@ s.copy(templates)
 s.replace('src/v*/*_client.ts', '/compute/docs/', 'https://cloud.google.com/compute/docs/')
 
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
