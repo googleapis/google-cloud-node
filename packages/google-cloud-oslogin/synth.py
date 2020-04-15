@@ -28,7 +28,7 @@ gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta', 'v1']
 for version in versions:
     library = gapic.typescript_library(
-        'os-login', 
+        'os-login',
         generator_args={
             "grpc-service-config": f"google/cloud/oslogin/{version}/oslogin_grpc_service_config.json",
             "package-name": f"@google-cloud/os-login"
@@ -50,5 +50,5 @@ s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
