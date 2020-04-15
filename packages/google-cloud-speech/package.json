@@ -62,7 +62,7 @@
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^2.0.0",
     "mocha": "^7.0.0",
-    "null-loader": "^3.0.0",
+    "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
     "sinon": "^9.0.1",
     "ts-loader": "^7.0.0",
