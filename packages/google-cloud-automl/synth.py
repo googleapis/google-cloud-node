@@ -29,8 +29,8 @@ for version in versions:
         'automl', version,
         generator_args={
             "grpc-service-config": f"google/cloud/automl/{version}/automl_grpc_service_config.json",
-            "package-name": f"@google-cloud/automl",
-            "main-service": f"automl"
+            "package-name": "@google-cloud/automl",
+            "main-service": "automl"
             },
         proto_path=f'/google/cloud/automl/{version}',
         extra_proto_files=['google/cloud/common_resources.proto'],
@@ -41,8 +41,6 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-linkinator_json="linkinator.config.json"
-s.replace(linkinator_json, '"recurse": true,', '"recurse": true,\n\t"concurrency": 10,')
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
