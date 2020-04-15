@@ -12,7 +12,7 @@ gapic = gcp.GAPICMicrogenerator()
 # tasks has two product names, and a poorly named artman yaml
 for version in ['v1', 'v1beta2']:
     library = gapic.typescript_library(
-        'language', 
+        'language',
         generator_args={
             "grpc-service-config": f"google/cloud/language/{version}/language_grpc_service_config.json",
             "package-name":f"@google-cloud/language"
@@ -32,5 +32,5 @@ s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
