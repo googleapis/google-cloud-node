@@ -30,8 +30,8 @@ library = gapic.typescript_library(
     version,
     generator_args={
         "grpc-service-config": f"google/monitoring/{version}/monitoring_grpc_service_config.json",
-        "package-name": f"@google-cloud/monitoring",
-        "main-service": f"monitoring"
+        "package-name": "@google-cloud/monitoring",
+        "main-service": "monitoring"
     },
     proto_path=f'/google/monitoring/{version}',
     extra_proto_files=['google/cloud/common_resources.proto']
