@@ -4,24 +4,24 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-phishing-protection.git",
-        "sha": "2a29c86fdfda267937fdb0ea559344a376c4cde9"
+        "sha": "632b8c6af316a959742b23f0c71c86110621d0c9"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "26523a96798ce1a6caa1b3c912119059cfcc98a7",
-        "internalRef": "306320014",
-        "log": "26523a96798ce1a6caa1b3c912119059cfcc98a7\nchore: delete gapic config for resourcemanager/v2\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306320014\n\n35672e7936b923eff048d0ee1529faa163cc81b8\nchore: enable gapicv2 for datacatalog/v1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306318928\n\ndea1f52034d188ca371c3a70c716ca2a6b3f2aa1\nchore: delete gapic config for language/v1beta1\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306298030\n\ndf955af5d9508cf9215de6f1fbdad033d5b8fef6\nchore: enable gapicv2 for language/v1beta2 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306297639\n\ne2a59ff2f861b1b92b2f15b242780dccddd77ab9\nchore: enable gapicv2 for bigquery/reservation/v1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306297615\n\nc9942c00e8f35b5b37cd589ef7a0323aeda264e2\nchore: enable gapicv2 for datacatalog/v1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306297587\n\nf561f57eea013327be27d8f6799b3cc2d18ee804\nbazel: upgrade gapic-generator-go to v0.13.2\n\nChanges include:\n* update Bazel rules_go to v0.22.3\n* update Bazel Go repositories with latest\n* fix Bazel go_gapic_assembly_pkg archive contents path\n\nPiperOrigin-RevId: 306294636\n\na34f4eb96a94bfd5b3e7f8de253db28d0a3e9237\nchore: enable gapicv2 for asset/v1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306283252\n\n4efd71279f0781579ced60c374336ce1b8b8cea8\nchore: enable gapicv2 for asset/v1p4beta1  API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306282838\n\n789fd7e0680b04a589447139811d55c5d1f34afe\nchore: enable gapicv2 for asset/v1p1beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306282062\n\n0feb08065d91d6deebffef3019751f0619a72140\nchore: enable gapicv2 for asset/v1p2beta1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306281797\n\n9ea892ebe8a7cd66da9bd62eb7086b8dc2ddd559\nchore: enable gapicv2 for vision/v1 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306281271\n\n4d61e1cb40184a7ad63ef37b1813f6608718674a\nAdd speech adaptation, phrase sets and custom classes.\n\nPiperOrigin-RevId: 306280989\n\n3824f547aa44df459580615c73cabb30a2a78ee0\nfeat: Adding Retry policy for OS Config V1Beta AgentEndpointService\n\nPiperOrigin-RevId: 306254195\n\n"
+        "sha": "629e6bea8418ad4a5d081ab9eb48bb327ad368e1",
+        "internalRef": "306660765",
+        "log": "629e6bea8418ad4a5d081ab9eb48bb327ad368e1\nAdd support for Search Partial Response.\n\nPiperOrigin-RevId: 306660765\n\n160e3187dc93265ed635ad68e12c483c8ab4f7be\nIncrease the required minimum difference between start time of the next interval\nand the end time of the previous one from the one microsecond to one millisecond.\nThis will enable some resource savings for in-memory storage.\n\nPiperOrigin-RevId: 306560315\n\nab5d07c2883026eec395d73ff59a17f4ad0153db\nfix: set resource type for database parameter of Backup\n\nPiperOrigin-RevId: 306557455\n\nb8495354535dc1370377cbb15a3ef7a07ec3a114\nchore: enable gapicv2 for bigtable/admin/v2 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306546316\n\n80dac49dd5f407b14f15ac86b4922967b5dd6508\nfix: remove unused proto imports in bigtable/admin/v2\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306539315\n\nfea22b1d9f27f86ef355c1d0dba00e0791a08a19\nfix: add C++ build rules for Bigtable Admin V2.\n\nPiperOrigin-RevId: 306508794\n\nc0a072159eda3c7d5a98201d6500feaf78a18073\nchore: delete gapic config for api/expr/v1alpha1/cel\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306501594\n\nb5aa7d668d9513cf0d305c8b23262ee0ea9b850c\nfeat: Adding retry policy for OS Config V1Beta OsConfigService\n\nPiperOrigin-RevId: 306471195\n\n3028060618e8024af9a32b3ab3456c160091ecb7\nfeat: Adding retry policy for OS Config V1 OsConfigService\n\nPiperOrigin-RevId: 306450502\n\n04eff659376f40a7111bf0e8e49fbb38bc7739f7\nFixed documentation links.\n\nPiperOrigin-RevId: 306445213\n\n"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "3df869dd6eb546ef13beeb7a9efa6ee0226afafd",
-        "log": "3df869dd6eb546ef13beeb7a9efa6ee0226afafd\nci: add dependency list completeness check (#490)\n\n\n682c0c37d1054966ca662a44259e96cc7aea4413\nbuild(nodejs): update lint ignore rules (#488)\n\n\n97c7ccfdceb927db1cbe6f3bb09616aa02bafd89\ndoc: document context-aware commit flags (#481)\n\nAlso, delete obsolete blurb about cleaning up old, dead files.\n\nCo-authored-by: Jeff Ching <chingor@google.com>\n8eff3790f88b50706a0c4b6a20b385f24e9ac4e7\nfeat: common postprocessing for node libraries (#485)\n\nCo-authored-by: Justin Beckwith <justin.beckwith@gmail.com>\n21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19\nbuild(nodejs): remove unused codecov config (#486)\n\n\n"
+        "sha": "6980131905b652563280e4d2482384d4acc9eafc",
+        "log": "6980131905b652563280e4d2482384d4acc9eafc\nfix: stop recording the git log in the metadata (#477)\n\nNothing consumes the log, and there's no design for anything to consume the\nlog. Plus, it cluttered up synth.metadata.\nbb812f7964162365960bb7e875fe4943972cf1cc\nfeat: add a function to disable writing metadata (#479)\n\n\n85cbc7f954f4c4c3534f0caafbaed22a8f80f602\nfix: use https vcs install for python-test-utils (#492)\n\n\n52638600f387deb98efb5f9c85fec39e82aa9052\nbuild(java): set GOOGLE_CLOUD_PROJECT env for samples/integration tests (#484)\n\n* build(java): set GOOGLE_CLOUD_PROJECT env variable for samples/integration tests\n\n* ci: use java-docs-samples-testing for sample tests\n"
       }
     }
   ],
