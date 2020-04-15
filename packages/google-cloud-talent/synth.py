@@ -32,17 +32,17 @@ for version in versions:
         "talent", version, 
         generator_args={
             "grpc-service-config": f"google/cloud/talent/{version}/talent_grpc_service_config.json",
-            "package-name": f"@google-cloud/talent",
-            "main-service": f"talent"
+            "package-name": "@google-cloud/talent",
+            "main-service": "talent"
             },
             proto_path=f'/google/cloud/talent/{version}',
     )
-    s.copy(library, excludes=['README.md', 'package.json', '.eslintrc.yml'])
+    s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, excludes=['.eslintrc.yml'])
+s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(["npm", "install"])
