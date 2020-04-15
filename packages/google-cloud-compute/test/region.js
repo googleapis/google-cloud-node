@@ -88,7 +88,7 @@ const fakePaginator = {
   },
 };
 
-describe('Region', function() {
+describe('Region', () => {
   let Region;
   let region;
 
@@ -97,7 +97,7 @@ describe('Region', function() {
   };
   const REGION_NAME = 'us-central1';
 
-  before(function() {
+  before(() => {
     Region = proxyquire('../src/region.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -112,31 +112,31 @@ describe('Region', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     region = new Region(COMPUTE, REGION_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should extend the correct methods', function() {
+    it('should extend the correct methods', () => {
       assert(extended); // See `fakePaginator.extend`
     });
 
-    it('should streamify the correct methods', function() {
+    it('should streamify the correct methods', () => {
       assert.strictEqual(region.getAddressesStream, 'getAddresses');
       assert.strictEqual(region.getOperationsStream, 'getOperations');
       assert.strictEqual(region.getRulesStream, 'getRules');
       assert.strictEqual(region.getSubnetworksStream, 'getSubnetworks');
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(region.name, REGION_NAME);
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       assert(region instanceof ServiceObject);
 
       const calledWith = region.calledWith_[0];
@@ -151,13 +151,13 @@ describe('Region', function() {
       });
     });
 
-    describe('request interceptor', function() {
-      it('should assign a request interceptor', function() {
+    describe('request interceptor', () => {
+      it('should assign a request interceptor', () => {
         const requestInterceptor = region.interceptors.pop().request;
         assert(is.fn(requestInterceptor));
       });
 
-      it('should strip `/global` from forwardingRules requests', function() {
+      it('should strip `/global` from forwardingRules requests', () => {
         const reqOpts = {
           uri: '/compute/v1/projects/projectId/global/forwardingRules',
         };
@@ -169,7 +169,7 @@ describe('Region', function() {
         assert.deepStrictEqual(requestInterceptor(reqOpts), expectedReqOpts);
       });
 
-      it('should not affect non-cancel requests', function() {
+      it('should not affect non-cancel requests', () => {
         const reqOpts = {
           uri: '/compute/v1/projects/projectId/other/request',
         };
@@ -183,10 +183,10 @@ describe('Region', function() {
     });
   });
 
-  describe('address', function() {
+  describe('address', () => {
     const NAME = 'address-name';
 
-    it('should return an Address object', function() {
+    it('should return an Address object', () => {
       const address = region.address(NAME);
       assert(address instanceof FakeAddress);
       assert.strictEqual(address.calledWith_[0], region);
@@ -194,12 +194,12 @@ describe('Region', function() {
     });
   });
 
-  describe('createAddress', function() {
+  describe('createAddress', () => {
     const NAME = 'address-name';
     const OPTIONS = {a: 'b', c: 'd'};
     const EXPECTED_BODY = Object.assign({}, OPTIONS, {name: NAME});
 
-    it('should not require any options', function(done) {
+    it('should not require any options', done => {
       const expectedBody = {name: NAME};
 
       region.request = function(reqOpts) {
@@ -210,7 +210,7 @@ describe('Region', function() {
       region.createAddress(NAME, assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/addresses');
@@ -222,18 +222,18 @@ describe('Region', function() {
       region.createAddress(NAME, OPTIONS, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        region.createAddress(NAME, OPTIONS, function(err, address_, op, resp) {
+      it('should execute callback with error & API response', done => {
+        region.createAddress(NAME, OPTIONS, (err, address_, op, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(address_, null);
           assert.strictEqual(op, null);
@@ -243,16 +243,16 @@ describe('Region', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {name: 'operation-name'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec callback with Address, Op & apiResponse', function(done) {
+      it('should exec callback with Address, Op & apiResponse', done => {
         const address = {};
         const operation = {};
 
@@ -266,7 +266,7 @@ describe('Region', function() {
           return operation;
         };
 
-        region.createAddress(NAME, OPTIONS, function(err, address_, op, resp) {
+        region.createAddress(NAME, OPTIONS, (err, address_, op, resp) => {
           assert.ifError(err);
 
           assert.strictEqual(address_, address);
@@ -281,11 +281,11 @@ describe('Region', function() {
     });
   });
 
-  describe('createRule', function() {
+  describe('createRule', () => {
     const NAME = 'rule-name';
     const CONFIG = {};
 
-    it('should call compute#createRule', function(done) {
+    it('should call compute#createRule', done => {
       region.parent.createRule = function(name, config, callback) {
         assert.strictEqual(this, region);
         assert.strictEqual(name, NAME);
@@ -297,7 +297,7 @@ describe('Region', function() {
     });
   });
 
-  describe('createSubnetwork', function() {
+  describe('createSubnetwork', () => {
     const NAME = 'subnetwork-name';
     const CONFIG = {
       a: 'b',
@@ -306,7 +306,7 @@ describe('Region', function() {
     };
     const EXPECTED_BODY = Object.assign({}, CONFIG, {name: NAME});
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/subnetworks');
@@ -318,8 +318,8 @@ describe('Region', function() {
       region.createSubnetwork(NAME, CONFIG, assert.ifError);
     });
 
-    describe('config.network', function() {
-      it('should accept a Network object', function(done) {
+    describe('config.network', () => {
+      it('should accept a Network object', done => {
         const network = new FakeNetwork();
         network.formattedName = 'formatted-name';
 
@@ -336,8 +336,8 @@ describe('Region', function() {
       });
     });
 
-    describe('config.range', function() {
-      it('should accept and delete a range property', function(done) {
+    describe('config.range', () => {
+      it('should accept and delete a range property', done => {
         const config = Object.assign({}, CONFIG, {
           range: '...',
         });
@@ -352,18 +352,18 @@ describe('Region', function() {
       });
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        region.createSubnetwork(NAME, CONFIG, function(err, sub, op, resp) {
+      it('should execute callback with error & API response', done => {
+        region.createSubnetwork(NAME, CONFIG, (err, sub, op, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(sub, null);
           assert.strictEqual(op, null);
@@ -373,16 +373,16 @@ describe('Region', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {name: 'operation-name'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec cb with Subnetwork, Op & apiResponse', function(done) {
+      it('should exec cb with Subnetwork, Op & apiResponse', done => {
         const subnetwork = {};
         const operation = {};
 
@@ -396,7 +396,7 @@ describe('Region', function() {
           return operation;
         };
 
-        region.createSubnetwork(NAME, CONFIG, function(err, sub, op, resp) {
+        region.createSubnetwork(NAME, CONFIG, (err, sub, op, resp) => {
           assert.ifError(err);
 
           assert.strictEqual(sub, subnetwork);
@@ -411,8 +411,8 @@ describe('Region', function() {
     });
   });
 
-  describe('getAddresses', function() {
-    it('should accept only a callback', function(done) {
+  describe('getAddresses', () => {
+    it('should accept only a callback', done => {
       region.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -421,7 +421,7 @@ describe('Region', function() {
       region.getAddresses(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
       region.request = function(reqOpts) {
@@ -434,18 +434,18 @@ describe('Region', function() {
       region.getAddresses(query, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        region.getAddresses({}, function(err, addresses, nextQuery, apiResp) {
+      it('should execute callback with error & API response', done => {
+        region.getAddresses({}, (err, addresses, nextQuery, apiResp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(addresses, null);
           assert.strictEqual(nextQuery, null);
@@ -455,18 +455,18 @@ describe('Region', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         items: [{name: 'operation-name'}],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const nextPageToken = 'next-page-token';
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
@@ -479,7 +479,7 @@ describe('Region', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        region.getAddresses({}, function(err, addresses, nextQuery) {
+        region.getAddresses({}, (err, addresses, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(nextQuery, expectedNextQuery);
@@ -488,7 +488,7 @@ describe('Region', function() {
         });
       });
 
-      it('should execute callback with Operations & API resp', function(done) {
+      it('should execute callback with Operations & API resp', done => {
         const address = {};
 
         region.address = function(name) {
@@ -496,7 +496,7 @@ describe('Region', function() {
           return address;
         };
 
-        region.getAddresses({}, function(err, addresses, nextQuery, apiResp) {
+        region.getAddresses({}, (err, addresses, nextQuery, apiResp) => {
           assert.ifError(err);
 
           assert.strictEqual(addresses[0], address);
@@ -510,8 +510,8 @@ describe('Region', function() {
     });
   });
 
-  describe('getOperations', function() {
-    it('should accept only a callback', function(done) {
+  describe('getOperations', () => {
+    it('should accept only a callback', done => {
       region.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -520,7 +520,7 @@ describe('Region', function() {
       region.getOperations(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
       region.request = function(reqOpts) {
@@ -533,18 +533,18 @@ describe('Region', function() {
       region.getOperations(query, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        region.getOperations({}, function(err, operations, nextQuery, apiResp) {
+      it('should execute callback with error & API response', done => {
+        region.getOperations({}, (err, operations, nextQuery, apiResp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operations, null);
           assert.strictEqual(nextQuery, null);
@@ -554,18 +554,18 @@ describe('Region', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         items: [{name: 'operation-name'}],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const nextPageToken = 'next-page-token';
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
@@ -578,7 +578,7 @@ describe('Region', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        region.getOperations({}, function(err, operations, nextQuery) {
+        region.getOperations({}, (err, operations, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(nextQuery, expectedNextQuery);
@@ -587,7 +587,7 @@ describe('Region', function() {
         });
       });
 
-      it('should execute callback with Operations & API resp', function(done) {
+      it('should execute callback with Operations & API resp', done => {
         const operation = {};
 
         region.operation = function(name) {
@@ -595,7 +595,7 @@ describe('Region', function() {
           return operation;
         };
 
-        region.getOperations({}, function(err, operations, nextQuery, apiResp) {
+        region.getOperations({}, (err, operations, nextQuery, apiResp) => {
           assert.ifError(err);
 
           assert.strictEqual(operations[0], operation);
@@ -609,8 +609,8 @@ describe('Region', function() {
     });
   });
 
-  describe('getRules', function() {
-    it('should accept only a callback', function(done) {
+  describe('getRules', () => {
+    it('should accept only a callback', done => {
       region.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -619,7 +619,7 @@ describe('Region', function() {
       region.getRules(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
       region.request = function(reqOpts) {
@@ -632,18 +632,18 @@ describe('Region', function() {
       region.getRules(query, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        region.getRules({}, function(err, rules, nextQuery, apiResp) {
+      it('should execute callback with error & API response', done => {
+        region.getRules({}, (err, rules, nextQuery, apiResp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(rules, null);
           assert.strictEqual(nextQuery, null);
@@ -653,18 +653,18 @@ describe('Region', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         items: [{name: 'operation-name'}],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const nextPageToken = 'next-page-token';
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
@@ -677,7 +677,7 @@ describe('Region', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        region.getRules({}, function(err, rules, nextQuery) {
+        region.getRules({}, (err, rules, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(nextQuery, expectedNextQuery);
@@ -686,7 +686,7 @@ describe('Region', function() {
         });
       });
 
-      it('should execute callback with Operations & API resp', function(done) {
+      it('should execute callback with Operations & API resp', done => {
         const rule = {};
 
         region.rule = function(name) {
@@ -694,7 +694,7 @@ describe('Region', function() {
           return rule;
         };
 
-        region.getRules({}, function(err, rules, nextQuery, apiResp) {
+        region.getRules({}, (err, rules, nextQuery, apiResp) => {
           assert.ifError(err);
 
           assert.strictEqual(rules[0], rule);
@@ -708,8 +708,8 @@ describe('Region', function() {
     });
   });
 
-  describe('getSubnetworks', function() {
-    it('should accept only a callback', function(done) {
+  describe('getSubnetworks', () => {
+    it('should accept only a callback', done => {
       region.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -718,7 +718,7 @@ describe('Region', function() {
       region.getSubnetworks(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
       region.request = function(reqOpts) {
@@ -731,18 +731,18 @@ describe('Region', function() {
       region.getSubnetworks(query, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        region.getSubnetworks({}, function(err, subnetworks, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        region.getSubnetworks({}, (err, subnetworks, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(subnetworks, null);
           assert.strictEqual(nextQuery, null);
@@ -752,18 +752,18 @@ describe('Region', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         items: [{name: 'subnetwork-name'}],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const nextPageToken = 'next-page-token';
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
@@ -776,7 +776,7 @@ describe('Region', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        region.getSubnetworks({}, function(err, subnetworks, nextQuery) {
+        region.getSubnetworks({}, (err, subnetworks, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(nextQuery, expectedNextQuery);
@@ -785,7 +785,7 @@ describe('Region', function() {
         });
       });
 
-      it('should execute callback with Operations & API resp', function(done) {
+      it('should execute callback with Operations & API resp', done => {
         const subnetwork = {};
 
         region.subnetwork = function(name) {
@@ -793,7 +793,7 @@ describe('Region', function() {
           return subnetwork;
         };
 
-        region.getSubnetworks({}, function(err, subnetworks, nextQuery, resp) {
+        region.getSubnetworks({}, (err, subnetworks, nextQuery, resp) => {
           assert.ifError(err);
 
           assert.strictEqual(subnetworks[0], subnetwork);
@@ -807,10 +807,10 @@ describe('Region', function() {
     });
   });
 
-  describe('operation', function() {
+  describe('operation', () => {
     const NAME = 'operation-name';
 
-    it('should return a Operation object', function() {
+    it('should return a Operation object', () => {
       const operation = region.operation(NAME);
       assert(operation instanceof FakeOperation);
       assert.strictEqual(operation.calledWith_[0], region);
@@ -818,10 +818,10 @@ describe('Region', function() {
     });
   });
 
-  describe('rule', function() {
+  describe('rule', () => {
     const NAME = 'rule-name';
 
-    it('should return a Operation object', function() {
+    it('should return a Operation object', () => {
       const rule = region.rule(NAME);
       assert(rule instanceof FakeRule);
       assert.strictEqual(rule.calledWith_[0], region);
@@ -829,10 +829,10 @@ describe('Region', function() {
     });
   });
 
-  describe('subnetwork', function() {
+  describe('subnetwork', () => {
     const NAME = 'subnetwork-name';
 
-    it('should return a Subnetwork object', function() {
+    it('should return a Subnetwork object', () => {
       const subnetwork = region.subnetwork(NAME);
       assert(subnetwork instanceof FakeSubnetwork);
       assert.strictEqual(subnetwork.calledWith_[0], region);

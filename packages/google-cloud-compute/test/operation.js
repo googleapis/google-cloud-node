@@ -50,7 +50,7 @@ const fakePromisify = Object.assign({}, promisify, {
   },
 });
 
-describe('Operation', function() {
+describe('Operation', () => {
   let Operation;
   let operation;
 
@@ -60,7 +60,7 @@ describe('Operation', function() {
   };
   const OPERATION_NAME = 'operation-name';
 
-  before(function() {
+  before(() => {
     Operation = proxyquire('../src/operation.js', {
       '@google-cloud/common': {
         Operation: FakeOperation,
@@ -71,17 +71,17 @@ describe('Operation', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     parseHttpRespBodyOverride = null;
     operation = new Operation(SCOPE, OPERATION_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should localize the name', function() {
+  describe('instantiation', () => {
+    it('should localize the name', () => {
       assert.strictEqual(operation.name, OPERATION_NAME);
     });
 
-    it('should inherit from Operation', function() {
+    it('should inherit from Operation', () => {
       assert(operation instanceof FakeOperation);
 
       const calledWith = operation.calledWith_[0];
@@ -96,11 +96,11 @@ describe('Operation', function() {
       });
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should give the right baseUrl for a global Operation', function() {
+    it('should give the right baseUrl for a global Operation', () => {
       const operation = new Operation(
         {
           constructor: {
@@ -115,18 +115,18 @@ describe('Operation', function() {
     });
   });
 
-  describe('getMetadata', function() {
-    describe('error', function() {
+  describe('getMetadata', () => {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.getMetadata = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it.skip('should ignore false errors', function(done) {
+      it.skip('should ignore false errors', done => {
         const apiResponse = {
           name: operation.name,
           error: {
@@ -138,7 +138,7 @@ describe('Operation', function() {
           callback(apiResponse.error, apiResponse);
         };
 
-        operation.getMetadata(function(err, metadata, apiResponse_) {
+        operation.getMetadata((err, metadata, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(metadata, apiResponse);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -146,8 +146,8 @@ describe('Operation', function() {
         });
       });
 
-      it.skip('should execute callback with error and API response', function(done) {
-        operation.getMetadata(function(err, metadata, apiResponse_) {
+      it.skip('should execute callback with error and API response', done => {
+        operation.getMetadata((err, metadata, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(metadata, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -155,32 +155,32 @@ describe('Operation', function() {
         });
       });
 
-      it.skip('should not require a callback', function() {
+      it.skip('should not require a callback', () => {
         assert.doesNotThrow(() => {
           operation.getMetadata();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.getMetadata = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it.skip('should update the metadata to the API response', function(done) {
-        operation.getMetadata(function(err) {
+      it.skip('should update the metadata to the API response', done => {
+        operation.getMetadata(err => {
           assert.ifError(err);
           assert.strictEqual(operation.metadata, apiResponse);
           done();
         });
       });
 
-      it.skip('should exec callback with metadata and API response', function(done) {
-        operation.getMetadata(function(err, metadata, apiResponse_) {
+      it.skip('should exec callback with metadata and API response', done => {
+        operation.getMetadata((err, metadata, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(metadata, apiResponse);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -188,20 +188,20 @@ describe('Operation', function() {
         });
       });
 
-      it.skip('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it.skip('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           operation.getMetadata();
         });
       });
     });
   });
 
-  describe('poll_', function() {
-    beforeEach(function() {
+  describe('poll_', () => {
+    beforeEach(() => {
       operation.emit = util.noop;
     });
 
-    it('should call getMetadata', function(done) {
+    it('should call getMetadata', done => {
       operation.getMetadata = function() {
         done();
       };
@@ -209,34 +209,34 @@ describe('Operation', function() {
       operation.poll_(assert.ifError);
     });
 
-    describe('API error', function() {
+    describe('API error', () => {
       const error = new Error('Error.');
 
-      beforeEach(function() {
+      beforeEach(() => {
         operation.getMetadata = function(callback) {
           callback(error);
         };
       });
 
-      it('should emit the error', function(done) {
-        operation.poll_(function(err) {
+      it('should emit the error', done => {
+        operation.poll_(err => {
           assert.strictEqual(err, error);
           done();
         });
       });
     });
 
-    describe('operation failure', function() {
+    describe('operation failure', () => {
       const error = new Error('Error.');
       const apiResponse = {error: error};
 
-      beforeEach(function() {
+      beforeEach(() => {
         operation.getMetadata = function(callback) {
           callback(null, apiResponse, apiResponse);
         };
       });
 
-      it('should parse and return the response body', function(done) {
+      it('should parse and return the response body', done => {
         const parsedHttpRespBody = {err: {}};
 
         parseHttpRespBodyOverride = function(body) {
@@ -244,33 +244,33 @@ describe('Operation', function() {
           return parsedHttpRespBody;
         };
 
-        operation.poll_(function(err) {
+        operation.poll_(err => {
           assert.strictEqual(err, parsedHttpRespBody.err);
           done();
         });
       });
     });
 
-    describe('operation running', function() {
+    describe('operation running', () => {
       const apiResponse = {status: 'RUNNING'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         operation.getMetadata = function(callback) {
           callback(null, apiResponse, apiResponse);
         };
       });
 
-      it('should update status', function(done) {
+      it('should update status', done => {
         delete operation.status;
 
-        operation.poll_(function(err) {
+        operation.poll_(err => {
           assert.ifError(err);
           assert.strictEqual(operation.status, apiResponse.status);
           done();
         });
       });
 
-      it('should emit the running event', function(done) {
+      it('should emit the running event', done => {
         operation.emit = function(eventName, metadata) {
           assert.strictEqual(eventName, 'running');
           assert.strictEqual(metadata, apiResponse);
@@ -280,7 +280,7 @@ describe('Operation', function() {
         operation.poll_(assert.ifError);
       });
 
-      it('should not emit running if already running', function(done) {
+      it('should not emit running if already running', done => {
         operation.emit = function(eventName) {
           assert.strictEqual(eventName, 'running');
 
@@ -292,27 +292,27 @@ describe('Operation', function() {
       });
     });
 
-    describe('operation complete', function() {
+    describe('operation complete', () => {
       const apiResponse = {status: 'DONE'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         operation.getMetadata = function(callback) {
           callback(null, apiResponse, apiResponse);
         };
       });
 
-      it('should update status', function(done) {
+      it('should update status', done => {
         operation.status = 'PENDING';
 
-        operation.poll_(function(err) {
+        operation.poll_(err => {
           assert.ifError(err);
           assert.strictEqual(operation.status, apiResponse.status);
           done();
         });
       });
 
-      it('should execute callback with metadata', function(done) {
-        operation.poll_(function(err, metadata) {
+      it('should execute callback with metadata', done => {
+        operation.poll_((err, metadata) => {
           assert.ifError(err);
           assert.strictEqual(metadata, apiResponse);
           done();

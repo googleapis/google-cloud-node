@@ -38,7 +38,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Network', function() {
+describe('Network', () => {
   let Network;
   let network;
 
@@ -57,7 +57,7 @@ describe('Network', function() {
   });
   const REGION_NAME = 'region-name';
 
-  before(function() {
+  before(() => {
     Network = proxyquire('../src/network.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -68,25 +68,25 @@ describe('Network', function() {
     Region = require('../src/region.js');
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     network = new Network(COMPUTE, NETWORK_NAME);
     REGION = new Region(COMPUTE, REGION_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should localize the compute instance', function() {
+    it('should localize the compute instance', () => {
       assert.strictEqual(network.compute, COMPUTE);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(network.name, NETWORK_NAME);
     });
 
-    it('should format the network name', function() {
+    it('should format the network name', () => {
       const formatName_ = Network.formatName_;
       const formattedName = 'projects/a/global/networks/b';
 
@@ -103,7 +103,7 @@ describe('Network', function() {
       assert(network.formattedName, formattedName);
     });
 
-    it('should inherit from ServiceObject', function(done) {
+    it('should inherit from ServiceObject', done => {
       const computeInstance = Object.assign({}, COMPUTE, {
         createNetwork: {
           bind: function(context) {
@@ -130,15 +130,15 @@ describe('Network', function() {
     });
   });
 
-  describe('formatName_', function() {
-    it('should format the name', function() {
+  describe('formatName_', () => {
+    it('should format the name', () => {
       const formattedName_ = Network.formatName_(COMPUTE, NETWORK_NAME);
       assert.strictEqual(formattedName_, NETWORK_FULL_NAME);
     });
   });
 
-  describe('createFirewall', function() {
-    it('should make the correct call to Compute', function(done) {
+  describe('createFirewall', () => {
+    it('should make the correct call to Compute', done => {
       const name = 'firewall-name';
       const config = {a: 'b', c: 'd'};
       const expectedConfig = Object.assign({}, config, {
@@ -155,8 +155,8 @@ describe('Network', function() {
     });
   });
 
-  describe('createSubnetwork', function() {
-    it('should call region.createSubnetwork correctly', function(done) {
+  describe('createSubnetwork', () => {
+    it('should call region.createSubnetwork correctly', done => {
       const name = 'subnetwork-name';
       const region = {};
       const config = {
@@ -186,8 +186,8 @@ describe('Network', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, network);
         done();
@@ -196,18 +196,18 @@ describe('Network', function() {
       network.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        network.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        network.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -215,25 +215,25 @@ describe('Network', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           network.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         network.compute.operation = function(name) {
@@ -241,7 +241,7 @@ describe('Network', function() {
           return operation;
         };
 
-        network.delete(function(err, operation_, apiResponse_) {
+        network.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -250,16 +250,16 @@ describe('Network', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           network.delete();
         });
       });
     });
   });
 
-  describe('firewall', function() {
-    it('should return a Firewall with the correct metadata', function() {
+  describe('firewall', () => {
+    it('should return a Firewall with the correct metadata', () => {
       const name = 'firewall-name';
       const firewall = {};
 
@@ -275,8 +275,8 @@ describe('Network', function() {
     });
   });
 
-  describe('getFirewalls', function() {
-    it('should make the correct call to Compute', function(done) {
+  describe('getFirewalls', () => {
+    it('should make the correct call to Compute', done => {
       const options = {a: 'b', c: 'd'};
       const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
@@ -290,7 +290,7 @@ describe('Network', function() {
       network.getFirewalls(options, done);
     });
 
-    it('should not require options', function(done) {
+    it('should not require options', done => {
       network.compute.getFirewalls = function(options, callback) {
         callback();
       };
@@ -299,8 +299,8 @@ describe('Network', function() {
     });
   });
 
-  describe('getFirewallsStream', function() {
-    it('should call to getFirewallsStream correctly', function(done) {
+  describe('getFirewallsStream', () => {
+    it('should call to getFirewallsStream correctly', done => {
       const options = {a: 'b', c: 'd'};
       const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
@@ -314,7 +314,7 @@ describe('Network', function() {
       network.getFirewallsStream(options);
     });
 
-    it('should not require options', function(done) {
+    it('should not require options', done => {
       network.compute.getFirewallsStream = function() {
         done();
       };
@@ -322,7 +322,7 @@ describe('Network', function() {
       network.getFirewallsStream();
     });
 
-    it('should return a stream', function(done) {
+    it('should return a stream', done => {
       const fakeStream = {};
 
       network.compute.getFirewallsStream = function() {
@@ -335,8 +335,8 @@ describe('Network', function() {
     });
   });
 
-  describe('getSubnetworks', function() {
-    it('should call to compute.getSubnetworks correctly', function(done) {
+  describe('getSubnetworks', () => {
+    it('should call to compute.getSubnetworks correctly', done => {
       const options = {a: 'b', c: 'd'};
       const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
@@ -350,7 +350,7 @@ describe('Network', function() {
       network.getSubnetworks(options, done);
     });
 
-    it('should not require options', function(done) {
+    it('should not require options', done => {
       network.compute.getSubnetworks = function(options, callback) {
         callback();
       };
@@ -359,8 +359,8 @@ describe('Network', function() {
     });
   });
 
-  describe('getSubnetworksStream', function() {
-    it('should call to getSubnetworksStream correctly', function(done) {
+  describe('getSubnetworksStream', () => {
+    it('should call to getSubnetworksStream correctly', done => {
       const options = {a: 'b', c: 'd'};
       const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
@@ -374,7 +374,7 @@ describe('Network', function() {
       network.getSubnetworksStream(options);
     });
 
-    it('should not require options', function(done) {
+    it('should not require options', done => {
       network.compute.getSubnetworksStream = function() {
         done();
       };
@@ -382,7 +382,7 @@ describe('Network', function() {
       network.getSubnetworksStream();
     });
 
-    it('should return a stream', function(done) {
+    it('should return a stream', done => {
       const fakeStream = {};
 
       network.compute.getSubnetworksStream = function() {

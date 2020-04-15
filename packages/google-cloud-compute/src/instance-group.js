@@ -230,14 +230,14 @@ class InstanceGroup extends common.ServiceObject {
         method: 'POST',
         uri: '/addInstances',
         json: {
-          instances: arrify(vms).map(function(vm) {
+          instances: arrify(vms).map(vm => {
             return {
               instance: vm.url,
             };
           }),
         },
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
@@ -281,7 +281,7 @@ class InstanceGroup extends common.ServiceObject {
   delete(callback) {
     const self = this;
     callback = callback || common.util.noop;
-    super.delete(function(err, resp) {
+    super.delete((err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;
@@ -369,7 +369,7 @@ class InstanceGroup extends common.ServiceObject {
         qs: options,
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -380,7 +380,7 @@ class InstanceGroup extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const vms = arrify(resp.items).map(function(vm) {
+        const vms = arrify(resp.items).map(vm => {
           const vmInstance = self.zone.vm(vm.instance);
           vmInstance.metadata = vm;
           return vmInstance;
@@ -433,14 +433,14 @@ class InstanceGroup extends common.ServiceObject {
         method: 'POST',
         uri: '/removeInstances',
         json: {
-          instances: arrify(vms).map(function(vm) {
+          instances: arrify(vms).map(vm => {
             return {
               instance: vm.url,
             };
           }),
         },
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
@@ -499,7 +499,7 @@ class InstanceGroup extends common.ServiceObject {
           namedPorts: InstanceGroup.formatPorts_(ports),
         },
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
@@ -520,7 +520,7 @@ class InstanceGroup extends common.ServiceObject {
    * @returns {object[]} - The formatted array of named ports.
    */
   static formatPorts_(ports) {
-    return Object.keys(ports).map(function(port) {
+    return Object.keys(ports).map(port => {
       return {
         name: port,
         port: ports[port],

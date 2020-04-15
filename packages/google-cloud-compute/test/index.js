@@ -162,7 +162,7 @@ class FakeService extends Service {
   }
 }
 
-describe('Compute', function() {
+describe('Compute', () => {
   let Compute;
   let compute;
 
@@ -193,20 +193,20 @@ describe('Compute', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     Object.assign(fakeUtil, originalFakeUtil);
     compute = new Compute({
       projectId: PROJECT_ID,
     });
   });
 
-  describe('instantiation', function() {
-    it('should return a new instance of Compute', function() {
+  describe('instantiation', () => {
+    it('should return a new instance of Compute', () => {
       const compute = new Compute({projectId: PROJECT_ID});
       assert(compute instanceof Compute);
     });
 
-    it('should inherit from Service', function() {
+    it('should inherit from Service', () => {
       assert(compute instanceof Service);
 
       const calledWith = compute.calledWith_[0];
@@ -222,7 +222,7 @@ describe('Compute', function() {
       );
     });
 
-    it('should streamify the correct methods', function() {
+    it('should streamify the correct methods', () => {
       assert.strictEqual(compute.getAddressesStream, 'getAddresses');
       assert.strictEqual(compute.getAutoscalersStream, 'getAutoscalers');
       assert.strictEqual(compute.getDisksStream, 'getDisks');
@@ -242,26 +242,26 @@ describe('Compute', function() {
       assert.strictEqual(compute.getZonesStream, 'getZones');
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
   });
 
-  describe('createFirewall', function() {
-    it('should throw if a name is not provided', function() {
-      assert.throws(function() {
+  describe('createFirewall', () => {
+    it('should throw if a name is not provided', () => {
+      assert.throws(() => {
         compute.createFirewall({}, assert.ifError);
       }, /A firewall name must be provided./);
     });
 
-    it('should throw if config is not provided', function() {
-      assert.throws(function() {
+    it('should throw if config is not provided', () => {
+      assert.throws(() => {
         compute.createFirewall('name', assert.ifError);
       }, /A firewall configuration object must be provided./);
     });
 
-    describe('config.protocols', function() {
-      it('should format protocols', function(done) {
+    describe('config.protocols', () => {
+      it('should format protocols', done => {
         const options = {
           allowed: {
             IPProtocol: 'http',
@@ -291,8 +291,8 @@ describe('Compute', function() {
       });
     });
 
-    describe('config.ranges', function() {
-      it('should format ranges to sourceRanges', function(done) {
+    describe('config.ranges', () => {
+      it('should format ranges to sourceRanges', done => {
         const options = {
           ranges: '0.0.0.0/0', // non-array to test that it's arrified.
         };
@@ -307,8 +307,8 @@ describe('Compute', function() {
       });
     });
 
-    describe('config.tags', function() {
-      it('should format tags to sourceTags', function(done) {
+    describe('config.tags', () => {
+      it('should format tags to sourceTags', done => {
         const options = {
           tags: 'tag', // non-array to test that it's arrified.
         };
@@ -323,7 +323,7 @@ describe('Compute', function() {
       });
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const name = 'new-firewall-name';
 
       compute.request = function(reqOpts) {
@@ -336,18 +336,18 @@ describe('Compute', function() {
       compute.createFirewall(name, {}, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec the callback with error & API response', function(done) {
-        compute.createFirewall('name', {}, function(err, firewall, op, resp) {
+      it('should exec the callback with error & API response', done => {
+        compute.createFirewall('name', {}, (err, firewall, op, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(firewall, null);
           assert.strictEqual(op, null);
@@ -357,18 +357,18 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec cb with Firewall, Operation & apiResp', function(done) {
+      it('should exec cb with Firewall, Operation & apiResp', done => {
         const name = 'name';
         const firewall = {};
         const operation = {};
@@ -383,7 +383,7 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createFirewall('name', {}, function(err, fw, op, resp) {
+        compute.createFirewall('name', {}, (err, fw, op, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(fw, firewall);
           assert.strictEqual(op, operation);
@@ -395,15 +395,15 @@ describe('Compute', function() {
     });
   });
 
-  describe('createHealthCheck', function() {
-    it('should throw if a name is not provided', function() {
-      assert.throws(function() {
+  describe('createHealthCheck', () => {
+    it('should throw if a name is not provided', () => {
+      assert.throws(() => {
         compute.createHealthCheck({}, assert.ifError);
       }, /A health check name must be provided./);
     });
 
-    describe('options.interval', function() {
-      it('should set checkIntervalSec', function(done) {
+    describe('options.interval', () => {
+      it('should set checkIntervalSec', done => {
         const options = {interval: 50};
 
         compute.request = function(reqOpts) {
@@ -416,8 +416,8 @@ describe('Compute', function() {
       });
     });
 
-    describe('config.timeout', function() {
-      it('should set timeoutSec', function(done) {
+    describe('config.timeout', () => {
+      it('should set timeoutSec', done => {
         const options = {timeout: 50};
 
         compute.request = function(reqOpts) {
@@ -430,8 +430,8 @@ describe('Compute', function() {
       });
     });
 
-    describe('options.https', function() {
-      it('should make the correct API request', function(done) {
+    describe('options.https', () => {
+      it('should make the correct API request', done => {
         const name = 'https-health-check-name';
 
         compute.request = function(reqOpts) {
@@ -445,7 +445,7 @@ describe('Compute', function() {
       });
     });
 
-    it('should make the correct default API request', function(done) {
+    it('should make the correct default API request', done => {
       const name = 'new-health-check-name';
       const options = {a: 'b'};
       const originalOptions = Object.assign({}, options);
@@ -461,18 +461,18 @@ describe('Compute', function() {
       compute.createHealthCheck(name, options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec the callback with error & API response', function(done) {
-        compute.createHealthCheck('name', {}, function(err, hc, op, resp) {
+      it('should exec the callback with error & API response', done => {
+        compute.createHealthCheck('name', {}, (err, hc, op, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(hc, null);
           assert.strictEqual(op, null);
@@ -482,18 +482,18 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec cb with HealthCheck, Op, & apiResp', function(done) {
+      it('should exec cb with HealthCheck, Op, & apiResp', done => {
         const name = 'name';
         const healthCheck = {};
         const operation = {};
@@ -509,7 +509,7 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createHealthCheck('name', {}, function(err, hc, op, resp) {
+        compute.createHealthCheck('name', {}, (err, hc, op, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(hc, healthCheck);
           assert.strictEqual(op, operation);
@@ -519,7 +519,7 @@ describe('Compute', function() {
         });
       });
 
-      it('should create an HTTPS HealthCheck object', function(done) {
+      it('should create an HTTPS HealthCheck object', done => {
         const name = 'name';
 
         compute.healthCheck = function(name_, options) {
@@ -533,7 +533,7 @@ describe('Compute', function() {
     });
   });
 
-  describe('createImage', function() {
+  describe('createImage', () => {
     const NAME = 'image-name';
 
     const DISK = {
@@ -543,25 +543,25 @@ describe('Compute', function() {
       },
     };
 
-    beforeEach(function() {
+    beforeEach(() => {
       fakeUtil.isCustomType = function() {
         return true;
       };
     });
 
-    it('should throw if Disk is not provided', function() {
+    it('should throw if Disk is not provided', () => {
       fakeUtil.isCustomType = function(unknown, type) {
         assert.strictEqual(unknown, DISK);
         assert.strictEqual(type, 'Disk');
         return false;
       };
 
-      assert.throws(function() {
+      assert.throws(() => {
         compute.createImage(NAME, DISK);
       }, /A Disk object is required\./);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {
         a: 'b',
         c: 'd',
@@ -586,18 +586,18 @@ describe('Compute', function() {
       compute.createImage(NAME, DISK, options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec the callback with error & API response', function(done) {
-        compute.createImage(NAME, DISK, function(err, op, resp) {
+      it('should exec the callback with error & API response', done => {
+        compute.createImage(NAME, DISK, (err, op, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(resp, apiResponse);
@@ -606,18 +606,18 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec cb with Operation & apiResp', function(done) {
+      it('should exec cb with Operation & apiResp', done => {
         const network = {};
         const operation = {};
 
@@ -631,7 +631,7 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createImage(NAME, DISK, function(err, image, op, resp) {
+        compute.createImage(NAME, DISK, (err, image, op, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
@@ -642,9 +642,9 @@ describe('Compute', function() {
     });
   });
 
-  describe('createNetwork', function() {
-    describe('config.range', function() {
-      it('should set the IPv4Range', function(done) {
+  describe('createNetwork', () => {
+    describe('config.range', () => {
+      it('should set the IPv4Range', done => {
         const options = {
           range: '10.240.0.0/16',
         };
@@ -659,8 +659,8 @@ describe('Compute', function() {
       });
     });
 
-    describe('config.gateway', function() {
-      it('should set the gatewayIPv4', function(done) {
+    describe('config.gateway', () => {
+      it('should set the gatewayIPv4', done => {
         const options = {
           gateway: '10.1.1.1',
         };
@@ -675,7 +675,7 @@ describe('Compute', function() {
       });
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const name = 'new-network';
 
       compute.request = function(reqOpts) {
@@ -688,18 +688,18 @@ describe('Compute', function() {
       compute.createNetwork(name, {}, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec the callback with error & API response', function(done) {
-        compute.createNetwork('name', {}, function(err, network, op, resp) {
+      it('should exec the callback with error & API response', done => {
+        compute.createNetwork('name', {}, (err, network, op, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(network, null);
           assert.strictEqual(op, null);
@@ -709,19 +709,19 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const NAME = 'network-name';
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec cb with Network, Operation & apiResp', function(done) {
+      it('should exec cb with Network, Operation & apiResp', done => {
         const network = {};
         const operation = {};
 
@@ -735,7 +735,7 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createNetwork(NAME, {}, function(err, network_, op, resp) {
+        compute.createNetwork(NAME, {}, (err, network_, op, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(network_, network);
           assert.strictEqual(op, operation);
@@ -747,10 +747,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('createRule', function() {
+  describe('createRule', () => {
     const NAME = 'new-rule';
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const config = {a: 'b'};
       const originalConfig = Object.assign({}, config);
       const expectedConfig = Object.assign({}, config, {name: NAME});
@@ -766,12 +766,12 @@ describe('Compute', function() {
       compute.createRule(NAME, config, assert.ifError);
     });
 
-    describe('config.ip', function() {
+    describe('config.ip', () => {
       const CONFIG = {
         ip: '0.0.0.0',
       };
 
-      it('should accept an array of tags', function(done) {
+      it('should accept an array of tags', done => {
         compute.request = function(reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
@@ -784,12 +784,12 @@ describe('Compute', function() {
       });
     });
 
-    describe('config.protocol', function() {
+    describe('config.protocol', () => {
       const CONFIG = {
         protocol: 'TCP',
       };
 
-      it('should accept an array of tags', function(done) {
+      it('should accept an array of tags', done => {
         compute.request = function(reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
@@ -802,12 +802,12 @@ describe('Compute', function() {
       });
     });
 
-    describe('config.range', function() {
+    describe('config.range', () => {
       const CONFIG = {
         range: '200-300',
       };
 
-      it('should accept an array of tags', function(done) {
+      it('should accept an array of tags', done => {
         compute.request = function(reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
@@ -820,18 +820,18 @@ describe('Compute', function() {
       });
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec the callback with error & API response', function(done) {
-        compute.createRule(NAME, {}, function(err, rule, op, resp) {
+      it('should exec the callback with error & API response', done => {
+        compute.createRule(NAME, {}, (err, rule, op, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(rule, null);
           assert.strictEqual(op, null);
@@ -841,18 +841,18 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec cb with Rule, Operation & apiResp', function(done) {
+      it('should exec cb with Rule, Operation & apiResp', done => {
         const rule = {};
         const operation = {};
 
@@ -866,7 +866,7 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createRule(NAME, {}, function(err, rule_, op, resp) {
+        compute.createRule(NAME, {}, (err, rule_, op, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(rule_, rule);
           assert.strictEqual(op, operation);
@@ -878,10 +878,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('createService', function() {
+  describe('createService', () => {
     const NAME = 'new-service';
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/backendServices');
@@ -892,18 +892,18 @@ describe('Compute', function() {
       compute.createService(NAME, {}, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec the callback with error & API response', function(done) {
-        compute.createService(NAME, {}, function(err, service, op, resp) {
+      it('should exec the callback with error & API response', done => {
+        compute.createService(NAME, {}, (err, service, op, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(service, null);
           assert.strictEqual(op, null);
@@ -913,18 +913,18 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec cb with Service, Operation & apiResp', function(done) {
+      it('should exec cb with Service, Operation & apiResp', done => {
         const service = {};
         const operation = {};
 
@@ -938,7 +938,7 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createService(NAME, {}, function(err, service_, op, resp) {
+        compute.createService(NAME, {}, (err, service_, op, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(service_, service);
           assert.strictEqual(op, operation);
@@ -950,10 +950,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('firewall', function() {
+  describe('firewall', () => {
     const NAME = 'firewall-name';
 
-    it('should return a Firewall object', function() {
+    it('should return a Firewall object', () => {
       const firewall = compute.firewall(NAME);
       assert(firewall instanceof FakeFirewall);
       assert.strictEqual(firewall.calledWith_[0], compute);
@@ -961,8 +961,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getAddresses', function() {
-    it('should accept only a callback', function(done) {
+  describe('getAddresses', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -971,7 +971,7 @@ describe('Compute', function() {
       compute.getAddresses(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -983,18 +983,18 @@ describe('Compute', function() {
       compute.getAddresses(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getAddresses({}, function(err, addresses, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getAddresses({}, (err, addresses, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(addresses, null);
           assert.strictEqual(nextQuery, null);
@@ -1005,7 +1005,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const REGION_NAME = 'region-1';
       const FULL_REGION_NAME = 'regions/' + REGION_NAME;
 
@@ -1018,13 +1018,13 @@ describe('Compute', function() {
         addresses: [address],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Address objects from the response', function(done) {
+      it('should create Address objects from the response', done => {
         const region = {};
 
         compute.region = function(name) {
@@ -1041,7 +1041,7 @@ describe('Compute', function() {
         compute.getAddresses({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1053,7 +1053,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getAddresses(query, function(err, addresses, nextQuery) {
+        compute.getAddresses(query, (err, addresses, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1071,8 +1071,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getAutoscalers', function() {
-    it('should accept only a callback', function(done) {
+  describe('getAutoscalers', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1081,7 +1081,7 @@ describe('Compute', function() {
       compute.getAutoscalers(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1093,18 +1093,18 @@ describe('Compute', function() {
       compute.getAutoscalers(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getAutoscalers({}, function(err, autoscalers, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getAutoscalers({}, (err, autoscalers, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(autoscalers, null);
           assert.strictEqual(nextQuery, null);
@@ -1115,7 +1115,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const ZONE_NAME = 'us-central1-a';
       const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
@@ -1132,13 +1132,13 @@ describe('Compute', function() {
         autoscalers: [autoscaler],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Autoscaler objects from the response', function(done) {
+      it('should create Autoscaler objects from the response', done => {
         const zone = {};
 
         compute.zone = function(name) {
@@ -1155,7 +1155,7 @@ describe('Compute', function() {
         compute.getAutoscalers({}, assert.ifError);
       });
 
-      it('should not create zone-less Autoscalers', function(done) {
+      it('should not create zone-less Autoscalers', done => {
         const zone = {};
 
         compute.zone = function() {
@@ -1166,7 +1166,7 @@ describe('Compute', function() {
           return autoscaler;
         };
 
-        compute.getAutoscalers({}, function(err, autoscalers) {
+        compute.getAutoscalers({}, (err, autoscalers) => {
           assert.ifError(err);
           assert(Object.keys(apiResponse.items).length > 1);
           assert.strictEqual(autoscalers.length, 1);
@@ -1174,7 +1174,7 @@ describe('Compute', function() {
         });
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1188,7 +1188,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getAutoscalers(query, function(err, autoscalers, nextQuery) {
+        compute.getAutoscalers(query, (err, autoscalers, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1206,8 +1206,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getDisks', function() {
-    it('should accept only a callback', function(done) {
+  describe('getDisks', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1216,7 +1216,7 @@ describe('Compute', function() {
       compute.getDisks(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1228,18 +1228,18 @@ describe('Compute', function() {
       compute.getDisks(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getDisks({}, function(err, disks, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getDisks({}, (err, disks, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(disks, null);
           assert.strictEqual(nextQuery, null);
@@ -1250,7 +1250,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const ZONE_NAME = 'zone-1';
       const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
@@ -1263,13 +1263,13 @@ describe('Compute', function() {
         disks: [disk],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Disk objects from the response', function(done) {
+      it('should create Disk objects from the response', done => {
         const zone = {};
 
         compute.zone = function(name) {
@@ -1286,7 +1286,7 @@ describe('Compute', function() {
         compute.getDisks({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1298,7 +1298,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getDisks(query, function(err, disks, nextQuery) {
+        compute.getDisks(query, (err, disks, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1316,8 +1316,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getFirewalls', function() {
-    it('should accept only a callback', function(done) {
+  describe('getFirewalls', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1326,7 +1326,7 @@ describe('Compute', function() {
       compute.getFirewalls(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1338,18 +1338,18 @@ describe('Compute', function() {
       compute.getFirewalls(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getFirewalls({}, function(err, firewalls, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getFirewalls({}, (err, firewalls, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(firewalls, null);
           assert.strictEqual(nextQuery, null);
@@ -1360,19 +1360,19 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const firewall = {name: 'firewall-1'};
       const apiResponse = {
         items: [firewall],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Firewall objects from the response', function(done) {
+      it('should create Firewall objects from the response', done => {
         compute.firewall = function(name) {
           assert.strictEqual(name, firewall.name);
           setImmediate(done);
@@ -1382,7 +1382,7 @@ describe('Compute', function() {
         compute.getFirewalls({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1394,7 +1394,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getFirewalls(query, function(err, firewalls, nextQuery) {
+        compute.getFirewalls(query, (err, firewalls, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1412,8 +1412,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getHealthChecks', function() {
-    it('should accept only a callback', function(done) {
+  describe('getHealthChecks', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1422,7 +1422,7 @@ describe('Compute', function() {
       compute.getHealthChecks(assert.ifError);
     });
 
-    it('should make the correct default API request', function(done) {
+    it('should make the correct default API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1434,8 +1434,8 @@ describe('Compute', function() {
       compute.getHealthChecks(options, assert.ifError);
     });
 
-    describe('options.https', function() {
-      it('should make the correct API request', function(done) {
+    describe('options.https', () => {
+      it('should make the correct API request', done => {
         const options = {https: true};
         const originalOptions = Object.assign({}, options);
 
@@ -1450,18 +1450,18 @@ describe('Compute', function() {
       });
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getHealthChecks({}, function(err, hcs, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getHealthChecks({}, (err, hcs, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(hcs, null);
           assert.strictEqual(nextQuery, null);
@@ -1472,17 +1472,17 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const healthCheck = {name: 'health-check-1'};
       const apiResponse = {items: [healthCheck]};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create HealthCheck objects from the response', function(done) {
+      it('should create HealthCheck objects from the response', done => {
         compute.healthCheck = function(name, options) {
           assert.strictEqual(name, healthCheck.name);
           assert.strictEqual(options.https, undefined);
@@ -1493,7 +1493,7 @@ describe('Compute', function() {
         compute.getHealthChecks({}, assert.ifError);
       });
 
-      it('should create HTTPS Health Check objects', function(done) {
+      it('should create HTTPS Health Check objects', done => {
         compute.healthCheck = function(name, options) {
           assert.strictEqual(name, healthCheck.name);
           assert.strictEqual(options.https, true);
@@ -1504,7 +1504,7 @@ describe('Compute', function() {
         compute.getHealthChecks({https: true}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1516,7 +1516,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getHealthChecks(query, function(err, firewalls, nextQuery) {
+        compute.getHealthChecks(query, (err, firewalls, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1534,8 +1534,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getImages', function() {
-    it('should accept only a callback', function(done) {
+  describe('getImages', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1544,7 +1544,7 @@ describe('Compute', function() {
       compute.getImages(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1556,18 +1556,18 @@ describe('Compute', function() {
       compute.getImages(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getImages({}, function(err, images, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getImages({}, (err, images, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(images, null);
           assert.strictEqual(nextQuery, null);
@@ -1578,19 +1578,19 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const image = {name: 'image-1'};
       const apiResponse = {
         items: [image],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Image objects from the response', function(done) {
+      it('should create Image objects from the response', done => {
         compute.image = function(name) {
           assert.strictEqual(name, image.name);
           setImmediate(done);
@@ -1600,7 +1600,7 @@ describe('Compute', function() {
         compute.getImages({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1612,7 +1612,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getImages(query, function(err, images, nextQuery) {
+        compute.getImages(query, (err, images, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1630,8 +1630,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getInstanceGroups', function() {
-    it('should accept only a callback', function(done) {
+  describe('getInstanceGroups', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1640,7 +1640,7 @@ describe('Compute', function() {
       compute.getInstanceGroups(assert.ifError);
     });
 
-    it('should make the correct default API request', function(done) {
+    it('should make the correct default API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1652,18 +1652,18 @@ describe('Compute', function() {
       compute.getInstanceGroups(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getInstanceGroups({}, function(err, groups, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getInstanceGroups({}, (err, groups, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(groups, null);
           assert.strictEqual(nextQuery, null);
@@ -1674,7 +1674,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const ZONE_NAME = 'zone-1';
       const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
@@ -1687,13 +1687,13 @@ describe('Compute', function() {
         instanceGroups: [instanceGroup],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create InstanceGroup objects from the resp', function(done) {
+      it('should create InstanceGroup objects from the resp', done => {
         const zone = {};
 
         compute.zone = function(name) {
@@ -1710,7 +1710,7 @@ describe('Compute', function() {
         compute.getInstanceGroups({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1724,7 +1724,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getInstanceGroups(query, function(err, groups, nextQuery) {
+        compute.getInstanceGroups(query, (err, groups, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1742,8 +1742,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getMachineTypes', function() {
-    it('should accept only a callback', function(done) {
+  describe('getMachineTypes', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1752,7 +1752,7 @@ describe('Compute', function() {
       compute.getMachineTypes(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1764,18 +1764,18 @@ describe('Compute', function() {
       compute.getMachineTypes(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getMachineTypes({}, function(err, machTypes, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getMachineTypes({}, (err, machTypes, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(machTypes, null);
           assert.strictEqual(nextQuery, null);
@@ -1785,7 +1785,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const ZONE_NAME = 'zone-1';
       const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
@@ -1798,13 +1798,13 @@ describe('Compute', function() {
         machineTypes: [machineType],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create MachineType objects from the response', function(done) {
+      it('should create MachineType objects from the response', done => {
         const zone = {};
         const machineTypeInstance = {};
 
@@ -1818,7 +1818,7 @@ describe('Compute', function() {
           return machineTypeInstance;
         };
 
-        compute.getMachineTypes({}, function(err, machTypes, nextQuery, resp) {
+        compute.getMachineTypes({}, (err, machTypes, nextQuery, resp) => {
           assert.ifError(err);
           assert.strictEqual(machTypes[0], machineTypeInstance);
           assert.strictEqual(machTypes[0].metadata, machineType);
@@ -1828,7 +1828,7 @@ describe('Compute', function() {
         });
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1840,7 +1840,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getMachineTypes(query, function(err, machineTypes, nextQuery) {
+        compute.getMachineTypes(query, (err, machineTypes, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1858,8 +1858,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getNetworks', function() {
-    it('should work with only a callback', function(done) {
+  describe('getNetworks', () => {
+    it('should work with only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1868,7 +1868,7 @@ describe('Compute', function() {
       compute.getNetworks(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1880,18 +1880,18 @@ describe('Compute', function() {
       compute.getNetworks(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getNetworks({}, function(err, networks, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getNetworks({}, (err, networks, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(networks, null);
           assert.strictEqual(nextQuery, null);
@@ -1902,19 +1902,19 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const network = {name: 'network-1'};
       const apiResponse = {
         items: [network],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Network objects from the response', function(done) {
+      it('should create Network objects from the response', done => {
         compute.network = function(name) {
           assert.strictEqual(name, network.name);
           setImmediate(done);
@@ -1924,7 +1924,7 @@ describe('Compute', function() {
         compute.getNetworks({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -1936,7 +1936,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getNetworks(query, function(err, networks, nextQuery) {
+        compute.getNetworks(query, (err, networks, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -1954,8 +1954,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getOperations', function() {
-    it('should work with only a callback', function(done) {
+  describe('getOperations', () => {
+    it('should work with only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1964,7 +1964,7 @@ describe('Compute', function() {
       compute.getOperations(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -1976,18 +1976,18 @@ describe('Compute', function() {
       compute.getOperations(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getOperations({}, function(err, ops, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getOperations({}, (err, ops, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(ops, null);
           assert.strictEqual(nextQuery, null);
@@ -1998,19 +1998,19 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const operation = {name: 'op-1'};
       const apiResponse = {
         items: [operation],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Operation objects from the response', function(done) {
+      it('should create Operation objects from the response', done => {
         compute.operation = function(name) {
           assert.strictEqual(name, operation.name);
           setImmediate(done);
@@ -2020,7 +2020,7 @@ describe('Compute', function() {
         compute.getOperations({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -2032,7 +2032,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getOperations(query, function(err, operations, nextQuery) {
+        compute.getOperations(query, (err, operations, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -2050,8 +2050,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getRegions', function() {
-    it('should work with only a callback', function(done) {
+  describe('getRegions', () => {
+    it('should work with only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -2060,7 +2060,7 @@ describe('Compute', function() {
       compute.getRegions(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -2072,18 +2072,18 @@ describe('Compute', function() {
       compute.getRegions(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getRegions({}, function(err, regions, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getRegions({}, (err, regions, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(regions, null);
           assert.strictEqual(nextQuery, null);
@@ -2094,19 +2094,19 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const region = {name: 'region-1'};
       const apiResponse = {
         items: [region],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Region objects from the response', function(done) {
+      it('should create Region objects from the response', done => {
         compute.region = function(name) {
           assert.strictEqual(name, region.name);
           setImmediate(done);
@@ -2116,7 +2116,7 @@ describe('Compute', function() {
         compute.getRegions({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -2128,7 +2128,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getRegions(query, function(err, regions, nextQuery) {
+        compute.getRegions(query, (err, regions, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -2146,8 +2146,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getRules', function() {
-    it('should work with only a callback', function(done) {
+  describe('getRules', () => {
+    it('should work with only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -2156,7 +2156,7 @@ describe('Compute', function() {
       compute.getRules(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -2168,18 +2168,18 @@ describe('Compute', function() {
       compute.getRules(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getRules({}, function(err, rules, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getRules({}, (err, rules, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(rules, null);
           assert.strictEqual(nextQuery, null);
@@ -2190,7 +2190,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const rule = {
         name: 'rule-1',
       };
@@ -2198,26 +2198,26 @@ describe('Compute', function() {
         items: [rule],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Rule objects from the response', function(done) {
+      it('should create Rule objects from the response', done => {
         compute.rule = function(name) {
           assert.strictEqual(name, rule.name);
           return rule;
         };
 
-        compute.getRules({}, function(err, rules) {
+        compute.getRules({}, (err, rules) => {
           assert.ifError(err);
           assert.deepStrictEqual(rules, [rule]);
           done();
         });
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -2232,7 +2232,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getRules(query, function(err, rules, nextQuery) {
+        compute.getRules(query, (err, rules, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -2250,8 +2250,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getServices', function() {
-    it('should work with only a callback', function(done) {
+  describe('getServices', () => {
+    it('should work with only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -2260,7 +2260,7 @@ describe('Compute', function() {
       compute.getServices(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -2272,18 +2272,18 @@ describe('Compute', function() {
       compute.getServices(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getServices({}, function(err, services, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getServices({}, (err, services, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(services, null);
           assert.strictEqual(nextQuery, null);
@@ -2294,7 +2294,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const service = {
         name: 'service-1',
       };
@@ -2302,13 +2302,13 @@ describe('Compute', function() {
         items: [service],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Service objects from the response', function(done) {
+      it('should create Service objects from the response', done => {
         compute.service = function(name) {
           assert.strictEqual(name, service.name);
           setImmediate(done);
@@ -2318,7 +2318,7 @@ describe('Compute', function() {
         compute.getServices({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -2333,7 +2333,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getServices(query, function(err, services, nextQuery) {
+        compute.getServices(query, (err, services, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -2351,8 +2351,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getSnapshots', function() {
-    it('should work with only a callback', function(done) {
+  describe('getSnapshots', () => {
+    it('should work with only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -2361,7 +2361,7 @@ describe('Compute', function() {
       compute.getSnapshots(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -2373,18 +2373,18 @@ describe('Compute', function() {
       compute.getSnapshots(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getSnapshots({}, function(err, snapshots, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getSnapshots({}, (err, snapshots, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(snapshots, null);
           assert.strictEqual(nextQuery, null);
@@ -2395,19 +2395,19 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const snapshot = {name: 'snapshot-1'};
       const apiResponse = {
         items: [snapshot],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Snapshot objects from the response', function(done) {
+      it('should create Snapshot objects from the response', done => {
         compute.snapshot = function(name) {
           assert.strictEqual(name, snapshot.name);
           setImmediate(done);
@@ -2417,7 +2417,7 @@ describe('Compute', function() {
         compute.getSnapshots({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -2429,7 +2429,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getSnapshots(query, function(err, snapshots, nextQuery) {
+        compute.getSnapshots(query, (err, snapshots, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -2447,8 +2447,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getSubnetworks', function() {
-    it('should accept only a callback', function(done) {
+  describe('getSubnetworks', () => {
+    it('should accept only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -2457,7 +2457,7 @@ describe('Compute', function() {
       compute.getSubnetworks(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -2469,18 +2469,18 @@ describe('Compute', function() {
       compute.getSubnetworks(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getSubnetworks({}, function(err, subnetworks, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getSubnetworks({}, (err, subnetworks, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(subnetworks, null);
           assert.strictEqual(nextQuery, null);
@@ -2491,7 +2491,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const REGION_NAME = 'region-1';
       const FULL_REGION_NAME = 'regions/' + REGION_NAME;
 
@@ -2504,13 +2504,13 @@ describe('Compute', function() {
         subnetworks: [subnetwork],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Subnetwork objects from the response', function(done) {
+      it('should create Subnetwork objects from the response', done => {
         const region = {};
         const fakeSubnetwork = {};
 
@@ -2524,7 +2524,7 @@ describe('Compute', function() {
           return fakeSubnetwork;
         };
 
-        compute.getSubnetworks({}, function(err, subnetworks, nextQuery, resp) {
+        compute.getSubnetworks({}, (err, subnetworks, nextQuery, resp) => {
           assert.ifError(err);
 
           assert.strictEqual(subnetworks[0], fakeSubnetwork);
@@ -2537,7 +2537,7 @@ describe('Compute', function() {
         });
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -2549,7 +2549,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getSubnetworks(query, function(err, subnetworks, nextQuery) {
+        compute.getSubnetworks(query, (err, subnetworks, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -2567,8 +2567,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getVMs', function() {
-    it('should work with only a callback', function(done) {
+  describe('getVMs', () => {
+    it('should work with only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -2577,7 +2577,7 @@ describe('Compute', function() {
       compute.getVMs(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -2589,18 +2589,18 @@ describe('Compute', function() {
       compute.getVMs(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getVMs({}, function(err, vms, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getVMs({}, (err, vms, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(vms, null);
           assert.strictEqual(nextQuery, null);
@@ -2611,7 +2611,7 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const ZONE_NAME = 'zone-1';
       const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
@@ -2624,13 +2624,13 @@ describe('Compute', function() {
         instances: [vm],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create VM objects from the response', function(done) {
+      it('should create VM objects from the response', done => {
         const zone = {};
 
         compute.zone = function(name) {
@@ -2647,7 +2647,7 @@ describe('Compute', function() {
         compute.getVMs({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -2659,7 +2659,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getVMs(query, function(err, vms, nextQuery) {
+        compute.getVMs(query, (err, vms, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -2677,8 +2677,8 @@ describe('Compute', function() {
     });
   });
 
-  describe('getZones', function() {
-    it('should work with only a callback', function(done) {
+  describe('getZones', () => {
+    it('should work with only a callback', done => {
       compute.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -2687,7 +2687,7 @@ describe('Compute', function() {
       compute.getZones(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const options = {};
 
       compute.request = function(reqOpts) {
@@ -2699,18 +2699,18 @@ describe('Compute', function() {
       compute.getZones(options, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        compute.getZones({}, function(err, zones, nextQuery, resp) {
+      it('should execute callback with error & API response', done => {
+        compute.getZones({}, (err, zones, nextQuery, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(zones, null);
           assert.strictEqual(nextQuery, null);
@@ -2721,19 +2721,19 @@ describe('Compute', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const zone = {name: 'zone-1'};
       const apiResponse = {
         items: [zone],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should create Zone objects from the response', function(done) {
+      it('should create Zone objects from the response', done => {
         compute.zone = function(name) {
           assert.strictEqual(name, zone.name);
           setImmediate(done);
@@ -2743,7 +2743,7 @@ describe('Compute', function() {
         compute.getZones({}, assert.ifError);
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
@@ -2755,7 +2755,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getZones(query, function(err, snapshots, nextQuery) {
+        compute.getZones(query, (err, snapshots, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(query, originalQuery);
@@ -2773,11 +2773,11 @@ describe('Compute', function() {
     });
   });
 
-  describe('healthCheck', function() {
+  describe('healthCheck', () => {
     const NAME = 'health-check-name';
     const OPTIONS = {};
 
-    it('should return a HealthCheck object', function() {
+    it('should return a HealthCheck object', () => {
       const healthCheck = compute.healthCheck(NAME, OPTIONS);
       assert(healthCheck instanceof FakeHealthCheck);
       assert.strictEqual(healthCheck.calledWith_[0], compute);
@@ -2786,10 +2786,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('image', function() {
+  describe('image', () => {
     const NAME = 'image-name';
 
-    it('should return an Image object', function() {
+    it('should return an Image object', () => {
       const image = compute.image(NAME);
       assert(image instanceof FakeImage);
       assert.strictEqual(image.calledWith_[0], compute);
@@ -2797,10 +2797,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('network', function() {
+  describe('network', () => {
     const NAME = 'network-name';
 
-    it('should return a Network object', function() {
+    it('should return a Network object', () => {
       const network = compute.network(NAME);
       assert(network instanceof FakeNetwork);
       assert.strictEqual(network.calledWith_[0], compute);
@@ -2808,10 +2808,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('operation', function() {
+  describe('operation', () => {
     const NAME = 'op-name';
 
-    it('should return an Operation object', function() {
+    it('should return an Operation object', () => {
       const op = compute.operation(NAME);
       assert(op instanceof FakeOperation);
       assert.strictEqual(op.calledWith_[0], compute);
@@ -2819,18 +2819,18 @@ describe('Compute', function() {
     });
   });
 
-  describe('project', function() {
-    it('should return a Project object', function() {
+  describe('project', () => {
+    it('should return a Project object', () => {
       const project = compute.project();
       assert(project instanceof FakeProject);
       assert.strictEqual(project.calledWith_[0], compute);
     });
   });
 
-  describe('region', function() {
+  describe('region', () => {
     const NAME = 'region-name';
 
-    it('should return a Region object', function() {
+    it('should return a Region object', () => {
       const region = compute.region(NAME);
       assert(region instanceof FakeRegion);
       assert.strictEqual(region.calledWith_[0], compute);
@@ -2838,10 +2838,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('rule', function() {
+  describe('rule', () => {
     const NAME = 'rule-name';
 
-    it('should return a Rule object', function() {
+    it('should return a Rule object', () => {
       const rule = compute.rule(NAME);
       assert(rule instanceof FakeRule);
       assert.strictEqual(rule.calledWith_[0], compute);
@@ -2849,10 +2849,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('service', function() {
+  describe('service', () => {
     const NAME = 'service-name';
 
-    it('should return a Service object', function() {
+    it('should return a Service object', () => {
       const service = compute.service(NAME);
       assert(service instanceof FakeServiceClass);
       assert.strictEqual(service.calledWith_[0], compute);
@@ -2860,10 +2860,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('snapshot', function() {
+  describe('snapshot', () => {
     const NAME = 'snapshot-name';
 
-    it('should return a Snapshot object', function() {
+    it('should return a Snapshot object', () => {
       const snapshot = compute.snapshot(NAME);
       assert(snapshot instanceof FakeSnapshot);
       assert.strictEqual(snapshot.calledWith_[0], compute);
@@ -2871,10 +2871,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('zone', function() {
+  describe('zone', () => {
     const NAME = 'zone-name';
 
-    it('should return a Zone object', function() {
+    it('should return a Zone object', () => {
       const zone = compute.zone(NAME);
       assert(zone instanceof FakeZone);
       assert.strictEqual(zone.calledWith_[0], compute);
@@ -2882,10 +2882,10 @@ describe('Compute', function() {
     });
   });
 
-  describe('execAfterOperation_', function() {
+  describe('execAfterOperation_', () => {
     const OPERATION = new events.EventEmitter();
 
-    it('should execute callback with error & API response', function(done) {
+    it('should execute callback with error & API response', done => {
       const error = new Error('Error.');
       const apiResponse = {};
 
@@ -2900,7 +2900,7 @@ describe('Compute', function() {
       execWithOperation(error, OPERATION, apiResponse);
     });
 
-    it('should support variable arity', function(done) {
+    it('should support variable arity', done => {
       const error = new Error('Error.');
       const apiResponse = {};
 
@@ -2915,12 +2915,12 @@ describe('Compute', function() {
       execWithOperation(error, null, null, OPERATION, apiResponse);
     });
 
-    it('should register callback on operation error', function(done) {
+    it('should register callback on operation error', done => {
       const apiResponse = {};
 
       function onComplete() {}
 
-      OPERATION.once('newListener', function(event, callback) {
+      OPERATION.once('newListener', (event, callback) => {
         assert.strictEqual(event, 'error');
         assert.strictEqual(callback, onComplete);
         done();
@@ -2930,7 +2930,7 @@ describe('Compute', function() {
       execWithOperation(null, OPERATION, apiResponse);
     });
 
-    it('should execute callback on operation complete', function(done) {
+    it('should execute callback on operation complete', done => {
       const apiResponse = {};
 
       function onComplete(err, apiResponse_) {

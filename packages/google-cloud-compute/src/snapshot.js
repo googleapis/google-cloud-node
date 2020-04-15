@@ -214,7 +214,7 @@ class Snapshot extends common.ServiceObject {
   delete(callback) {
     callback = callback || common.util.noop;
     const compute = this.compute;
-    common.ServiceObject.prototype.delete.call(this, function(err, resp) {
+    common.ServiceObject.prototype.delete.call(this, (err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;

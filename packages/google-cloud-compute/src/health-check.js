@@ -223,7 +223,7 @@ class HealthCheck extends common.ServiceObject {
   delete(callback) {
     const compute = this.compute;
     callback = callback || common.util.noop;
-    super.delete(function(err, resp) {
+    super.delete((err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;
@@ -273,7 +273,7 @@ class HealthCheck extends common.ServiceObject {
   setMetadata(metadata, callback) {
     const compute = this.compute;
     callback = callback || common.util.noop;
-    super.setMetadata(metadata, function(err, resp) {
+    super.setMetadata(metadata, (err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;

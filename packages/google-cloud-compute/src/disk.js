@@ -248,7 +248,7 @@ class Disk extends common.ServiceObject {
           name: name,
         }),
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -293,7 +293,7 @@ class Disk extends common.ServiceObject {
   delete(callback) {
     const zone = this.zone;
     callback = callback || common.util.noop;
-    super.delete(function(err, resp) {
+    super.delete((err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;

@@ -45,7 +45,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('VM', function() {
+describe('VM', () => {
   let VM;
   let vm;
 
@@ -74,7 +74,7 @@ describe('VM', function() {
     VM_NAME,
   ].join('');
 
-  before(function() {
+  before(() => {
     Disk = require('../src/disk.js');
     VM = proxyquire('../src/vm.js', {
       '@google-cloud/common': {
@@ -87,39 +87,39 @@ describe('VM', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     replaceProjectIdTokenOverride = null;
     vm = new VM(ZONE, VM_NAME);
     DISK = new Disk(ZONE, 'disk-name');
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should localize the zone', function() {
+    it('should localize the zone', () => {
       assert.strictEqual(vm.zone, ZONE);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(vm.name, VM_NAME);
     });
 
-    it('should strip a qualified name to just the instance name', function() {
+    it('should strip a qualified name to just the instance name', () => {
       const vm = new VM(ZONE, FULLY_QUALIFIED_NAME);
       assert.strictEqual(vm.name, VM_NAME);
     });
 
-    it('should initialize hasActiveWaiters to false', function() {
+    it('should initialize hasActiveWaiters to false', () => {
       assert.strictEqual(vm.hasActiveWaiters, false);
     });
 
-    it('should initialize an empty waiter array', function() {
+    it('should initialize an empty waiter array', () => {
       assert.deepStrictEqual(vm.waiters, []);
     });
 
-    it('should localize the URL of the VM', function() {
+    it('should localize the URL of the VM', () => {
       assert.strictEqual(
         vm.url,
         [
@@ -133,7 +133,7 @@ describe('VM', function() {
       );
     });
 
-    it('should inherit from ServiceObject', function(done) {
+    it('should inherit from ServiceObject', done => {
       const zoneInstance = Object.assign({}, ZONE, {
         createVM: {
           bind: function(context) {
@@ -160,28 +160,28 @@ describe('VM', function() {
     });
   });
 
-  describe('attachDisk', function() {
+  describe('attachDisk', () => {
     let EXPECTED_BODY;
 
-    beforeEach(function() {
+    beforeEach(() => {
       EXPECTED_BODY = {
         deviceName: DISK.name,
         source: DISK.formattedName,
       };
     });
 
-    it('should throw if a Disk object is not provided', function() {
-      assert.throws(function() {
+    it('should throw if a Disk object is not provided', () => {
+      assert.throws(() => {
         vm.attachDisk('disk-3', {}, assert.ifError);
       }, /A Disk object must be provided/);
 
-      assert.doesNotThrow(function() {
+      assert.doesNotThrow(() => {
         vm.request = util.noop;
         vm.attachDisk(DISK, {}, assert.ifError);
       });
     });
 
-    it('should not require an options object', function(done) {
+    it('should not require an options object', done => {
       vm.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
         done();
@@ -190,10 +190,10 @@ describe('VM', function() {
       vm.attachDisk(DISK, assert.ifError);
     });
 
-    describe('options.readOnly', function() {
+    describe('options.readOnly', () => {
       const CONFIG = {readOnly: true};
 
-      it('should set the correct mode', function(done) {
+      it('should set the correct mode', done => {
         const expectedBody = Object.assign({}, EXPECTED_BODY, {
           mode: 'READ_ONLY',
         });
@@ -206,7 +206,7 @@ describe('VM', function() {
         vm.attachDisk(DISK, CONFIG, assert.ifError);
       });
 
-      it('should delete the readOnly property', function(done) {
+      it('should delete the readOnly property', done => {
         vm.request = function(reqOpts) {
           assert.strictEqual(typeof reqOpts.json.readOnly, 'undefined');
           done();
@@ -216,7 +216,7 @@ describe('VM', function() {
       });
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/attachDisk');
@@ -229,8 +229,8 @@ describe('VM', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should make the correct API request', function(done) {
+  describe('delete', () => {
+    it('should make the correct API request', done => {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '');
@@ -241,9 +241,9 @@ describe('VM', function() {
       vm.delete(done);
     });
 
-    it('should not require a callback', function(done) {
+    it('should not require a callback', done => {
       vm.request = function(reqOpts, callback) {
-        assert.doesNotThrow(function() {
+        assert.doesNotThrow(() => {
           callback();
           done();
         });
@@ -253,11 +253,11 @@ describe('VM', function() {
     });
   });
 
-  describe('detachDisk', function() {
+  describe('detachDisk', () => {
     let DEVICE_NAME;
     let METADATA;
 
-    beforeEach(function() {
+    beforeEach(() => {
       DEVICE_NAME = DISK.formattedName;
 
       METADATA = {
@@ -274,18 +274,18 @@ describe('VM', function() {
       };
     });
 
-    it('should throw if a Disk is not provided', function() {
-      assert.throws(function() {
+    it('should throw if a Disk is not provided', () => {
+      assert.throws(() => {
         vm.detachDisk('disk-name');
       }, /A Disk object must be provided/);
 
-      assert.doesNotThrow(function() {
+      assert.doesNotThrow(() => {
         vm.getMetadata = util.noop;
         vm.detachDisk(DISK);
       });
     });
 
-    it('should replace projectId token in disk name', function(done) {
+    it('should replace projectId token in disk name', done => {
       const REPLACED_DEVICE_NAME = 'replaced-device-name';
 
       replaceProjectIdTokenOverride = function(value, projectId) {
@@ -315,7 +315,7 @@ describe('VM', function() {
       vm.detachDisk(DISK, assert.ifError);
     });
 
-    it('should return an error if device name not found', function(done) {
+    it('should return an error if device name not found', done => {
       const metadata = {
         disks: [
           {
@@ -329,7 +329,7 @@ describe('VM', function() {
         callback(null, metadata, metadata);
       };
 
-      vm.detachDisk(DISK, function(err) {
+      vm.detachDisk(DISK, err => {
         assert.strictEqual(err.name, 'DetachDiskError');
 
         const errorMessage = 'Device name for this disk was not found.';
@@ -339,7 +339,7 @@ describe('VM', function() {
       });
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/detachDisk');
@@ -351,9 +351,9 @@ describe('VM', function() {
       vm.detachDisk(DISK, done);
     });
 
-    it('should not require a callback', function(done) {
+    it('should not require a callback', done => {
       vm.request = function(reqOpts, callback) {
-        assert.doesNotThrow(function() {
+        assert.doesNotThrow(() => {
           callback();
           done();
         });
@@ -362,18 +362,18 @@ describe('VM', function() {
       vm.detachDisk(DISK);
     });
 
-    describe('refreshing metadata', function() {
-      describe('error', function() {
+    describe('refreshing metadata', () => {
+      describe('error', () => {
         const ERROR = new Error('Error.');
 
-        beforeEach(function() {
+        beforeEach(() => {
           vm.getMetadata = function(callback) {
             callback(ERROR);
           };
         });
 
-        it('should return DetachDisk error', function(done) {
-          vm.detachDisk(DISK, function(err) {
+        it('should return DetachDisk error', done => {
+          vm.detachDisk(DISK, err => {
             assert.strictEqual(err.name, 'DetachDiskError');
             assert.strictEqual(err.message, ERROR.message);
             done();
@@ -383,10 +383,10 @@ describe('VM', function() {
     });
   });
 
-  describe('getSerialPortOutput', function() {
+  describe('getSerialPortOutput', () => {
     const EXPECTED_QUERY = {port: 1};
 
-    it('should default to port 1', function(done) {
+    it('should default to port 1', done => {
       FakeServiceObject.prototype.request = function(reqOpts) {
         assert.strictEqual(reqOpts.qs.port, 1);
         done();
@@ -395,7 +395,7 @@ describe('VM', function() {
       vm.getSerialPortOutput(assert.ifError);
     });
 
-    it('should override the default port', function(done) {
+    it('should override the default port', done => {
       const port = 8001;
 
       FakeServiceObject.prototype.request = function(reqOpts) {
@@ -406,7 +406,7 @@ describe('VM', function() {
       vm.getSerialPortOutput(port, assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       FakeServiceObject.prototype.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/serialPort');
         assert.deepStrictEqual(reqOpts.qs, EXPECTED_QUERY);
@@ -417,18 +417,18 @@ describe('VM', function() {
       vm.getSerialPortOutput(assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        vm.getSerialPortOutput(function(err, output, apiResponse_) {
+      it('should execute callback with error & API response', done => {
+        vm.getSerialPortOutput((err, output, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(output, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -438,17 +438,17 @@ describe('VM', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {contents: 'contents'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec callback with contents & API response', function(done) {
-        vm.getSerialPortOutput(function(err, output, apiResponse_) {
+      it('should exec callback with contents & API response', done => {
+        vm.getSerialPortOutput((err, output, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(output, apiResponse.contents);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -459,8 +459,8 @@ describe('VM', function() {
     });
   });
 
-  describe('getTags', function() {
-    it('should get metadata', function(done) {
+  describe('getTags', () => {
+    it('should get metadata', done => {
       vm.getMetadata = function() {
         done();
       };
@@ -468,18 +468,18 @@ describe('VM', function() {
       vm.getTags(assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         vm.getMetadata = function(callback) {
           callback(error, null, apiResponse);
         };
       });
 
-      it('should execute callback with error', function(done) {
-        vm.getTags(function(err, tags, fingerprint, apiResponse_) {
+      it('should execute callback with error', done => {
+        vm.getTags((err, tags, fingerprint, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(tags, null);
           assert.strictEqual(fingerprint, null);
@@ -490,7 +490,7 @@ describe('VM', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const metadata = {
         tags: {
           items: [],
@@ -500,14 +500,14 @@ describe('VM', function() {
 
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         vm.getMetadata = function(callback) {
           callback(null, metadata, apiResponse);
         };
       });
 
-      it('should execute callback with tags and fingerprint', function(done) {
-        vm.getTags(function(err, tags, fingerprint, apiResponse_) {
+      it('should execute callback with tags and fingerprint', done => {
+        vm.getTags((err, tags, fingerprint, apiResponse_) => {
           assert.ifError(err);
 
           assert.strictEqual(tags, metadata.tags.items);
@@ -520,8 +520,8 @@ describe('VM', function() {
     });
   });
 
-  describe('reset', function() {
-    it('should make the correct API request', function(done) {
+  describe('reset', () => {
+    it('should make the correct API request', done => {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/reset');
@@ -532,9 +532,9 @@ describe('VM', function() {
       vm.reset(done);
     });
 
-    it('should not require a callback', function(done) {
+    it('should not require a callback', done => {
       vm.request = function(reqOpts, callback) {
-        assert.doesNotThrow(function() {
+        assert.doesNotThrow(() => {
           callback();
           done();
         });
@@ -544,10 +544,10 @@ describe('VM', function() {
     });
   });
 
-  describe('resize', function() {
+  describe('resize', () => {
     const MACHINE_TYPE = 'zones/' + ZONE.name + '/machineTypes/machineType';
 
-    beforeEach(function() {
+    beforeEach(() => {
       vm.request = util.noop;
 
       vm.zone.parent = {
@@ -555,7 +555,7 @@ describe('VM', function() {
       };
     });
 
-    it('should try to set the machine type', function(done) {
+    it('should try to set the machine type', done => {
       vm.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setMachineType');
@@ -568,7 +568,7 @@ describe('VM', function() {
       vm.resize(MACHINE_TYPE, assert.ifError);
     });
 
-    it('should allow a partial machine type', function(done) {
+    it('should allow a partial machine type', done => {
       const partialMachineType = MACHINE_TYPE.split('/').pop();
 
       vm.request = function(reqOpts) {
@@ -583,18 +583,18 @@ describe('VM', function() {
       vm.resize(partialMachineType, assert.ifError);
     });
 
-    describe('error', function() {
-      describe('instance is running', function() {
+    describe('error', () => {
+      describe('instance is running', () => {
         const error = new Error('Instance is starting or running.');
 
-        beforeEach(function() {
+        beforeEach(() => {
           vm.zone.parent.execAfterOperation_ = function(callback) {
             vm.zone.parent.execAfterOperation_ = util.noop;
             callback(error);
           };
         });
 
-        it('should stop the VM', function(done) {
+        it('should stop the VM', done => {
           vm.stop = function() {
             done();
           };
@@ -602,11 +602,11 @@ describe('VM', function() {
           vm.resize(MACHINE_TYPE, assert.ifError);
         });
 
-        describe('stopping failed', function() {
+        describe('stopping failed', () => {
           const vmStopError = new Error('Error.');
           const apiResponse = {};
 
-          beforeEach(function() {
+          beforeEach(() => {
             // First: vm.request()
             vm.zone.parent.execAfterOperation_ = function(callback) {
               // Second: vm.stop()
@@ -624,8 +624,8 @@ describe('VM', function() {
             };
           });
 
-          it('should return the error and API response', function(done) {
-            vm.resize(MACHINE_TYPE, function(err, apiResponse_) {
+          it('should return the error and API response', done => {
+            vm.resize(MACHINE_TYPE, (err, apiResponse_) => {
               assert.strictEqual(err, vmStopError);
               assert.strictEqual(apiResponse_, apiResponse);
               done();
@@ -633,8 +633,8 @@ describe('VM', function() {
           });
         });
 
-        describe('stopping succeeded', function() {
-          beforeEach(function() {
+        describe('stopping succeeded', () => {
+          beforeEach(() => {
             // First: vm.request()
             vm.zone.parent.execAfterOperation_ = function(callback) {
               // Second: vm.stop()
@@ -653,7 +653,7 @@ describe('VM', function() {
             };
           });
 
-          it('should try to resize the VM again', function(done) {
+          it('should try to resize the VM again', done => {
             vm.resize(MACHINE_TYPE, assert.ifError);
 
             vm.resize = function() {
@@ -663,11 +663,11 @@ describe('VM', function() {
         });
       });
 
-      describe('instance is stopped', function() {
+      describe('instance is stopped', () => {
         const error = new Error('Error');
         const apiResponse = {};
 
-        beforeEach(function() {
+        beforeEach(() => {
           vm.zone.parent.execAfterOperation_ = function(callback) {
             vm.zone.parent.execAfterOperation_ = util.noop;
 
@@ -675,8 +675,8 @@ describe('VM', function() {
           };
         });
 
-        it('should return the error & API response', function(done) {
-          vm.resize(MACHINE_TYPE, function(err, apiResponse_) {
+        it('should return the error & API response', done => {
+          vm.resize(MACHINE_TYPE, (err, apiResponse_) => {
             assert.strictEqual(err, error);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
@@ -685,8 +685,8 @@ describe('VM', function() {
       });
     });
 
-    describe('success', function() {
-      it('should start the VM by default', function(done) {
+    describe('success', () => {
+      it('should start the VM by default', done => {
         function userCallback() {}
         function onVmStart() {}
 
@@ -708,7 +708,7 @@ describe('VM', function() {
       });
     });
 
-    it('should not start the VM by request', function(done) {
+    it('should not start the VM by request', done => {
       const apiResponse = {};
 
       vm.zone.parent.execAfterOperation_ = function(callback) {
@@ -719,7 +719,7 @@ describe('VM', function() {
         done(); // Test will fail if called.
       };
 
-      vm.resize(MACHINE_TYPE, {start: false}, function(err, apiResponse_) {
+      vm.resize(MACHINE_TYPE, {start: false}, (err, apiResponse_) => {
         assert.ifError(err);
         assert.strictEqual(apiResponse_, apiResponse);
         done();
@@ -727,24 +727,24 @@ describe('VM', function() {
     });
   });
 
-  describe('setMetadata', function() {
+  describe('setMetadata', () => {
     const METADATA = {
       newKey: 'newValue',
     };
 
-    describe('getting the current fingerprint', function() {
-      describe('error', function() {
+    describe('getting the current fingerprint', () => {
+      describe('error', () => {
         const error = new Error('Error.');
         const apiResponse = {};
 
-        beforeEach(function() {
+        beforeEach(() => {
           vm.getMetadata = function(callback) {
             callback(error, null, apiResponse);
           };
         });
 
-        it('should exec the callback with error & API resp', function(done) {
-          vm.setMetadata(METADATA, function(err, operation, apiResponse_) {
+        it('should exec the callback with error & API resp', done => {
+          vm.setMetadata(METADATA, (err, operation, apiResponse_) => {
             assert.strictEqual(err, error);
             assert.strictEqual(operation, null);
             assert.strictEqual(apiResponse_, apiResponse);
@@ -753,7 +753,7 @@ describe('VM', function() {
           });
         });
 
-        describe('success', function() {
+        describe('success', () => {
           const metadata = {
             metadata: {
               fingerprint: '===',
@@ -762,13 +762,13 @@ describe('VM', function() {
 
           const apiResponse = {};
 
-          beforeEach(function() {
+          beforeEach(() => {
             vm.getMetadata = function(callback) {
               callback(null, metadata, apiResponse);
             };
           });
 
-          it('should make the correct request', function(done) {
+          it('should make the correct request', done => {
             const expectedNewMetadata = extend(true, {}, metadata.metadata, {
               items: [
                 {
@@ -793,11 +793,11 @@ describe('VM', function() {
     });
   });
 
-  describe('setTags', function() {
+  describe('setTags', () => {
     const TAGS = [];
     const FINGERPRINT = '';
 
-    it('should make the correct request', function(done) {
+    it('should make the correct request', done => {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setTags');
@@ -810,7 +810,7 @@ describe('VM', function() {
       vm.setTags(TAGS, FINGERPRINT, done);
     });
 
-    it('should not require a callback', function(done) {
+    it('should not require a callback', done => {
       vm.request = function(reqOpts, callback) {
         assert.doesNotThrow(callback);
         done();
@@ -820,8 +820,8 @@ describe('VM', function() {
     });
   });
 
-  describe('start', function() {
-    it('should make the correct API request', function(done) {
+  describe('start', () => {
+    it('should make the correct API request', done => {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/start');
@@ -832,9 +832,9 @@ describe('VM', function() {
       vm.start(done);
     });
 
-    it('should not require a callback', function(done) {
+    it('should not require a callback', done => {
       vm.request = function(reqOpts, callback) {
-        assert.doesNotThrow(function() {
+        assert.doesNotThrow(() => {
           callback();
           done();
         });
@@ -844,8 +844,8 @@ describe('VM', function() {
     });
   });
 
-  describe('stop', function() {
-    it('should make the correct API request', function(done) {
+  describe('stop', () => {
+    it('should make the correct API request', done => {
       vm.request = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/stop');
@@ -856,9 +856,9 @@ describe('VM', function() {
       vm.stop(done);
     });
 
-    it('should not require a callback', function(done) {
+    it('should not require a callback', done => {
       vm.request = function(reqOpts, callback) {
-        assert.doesNotThrow(function() {
+        assert.doesNotThrow(() => {
           callback();
           done();
         });
@@ -868,7 +868,7 @@ describe('VM', function() {
     });
   });
 
-  describe('waitFor', function() {
+  describe('waitFor', () => {
     const VALID_STATUSES = [
       'PROVISIONING',
       'STAGING',
@@ -879,32 +879,32 @@ describe('VM', function() {
       'TERMINATED',
     ];
 
-    beforeEach(function() {
+    beforeEach(() => {
       vm.startPolling_ = util.noop;
     });
 
-    it('should throw if an invalid status is passed', function() {
-      assert.throws(function() {
+    it('should throw if an invalid status is passed', () => {
+      assert.throws(() => {
         vm.waitFor('It', assert.ifError);
       }, new RegExp('Status passed to waitFor is invalid.'));
     });
 
-    it('should accept valid statuses', function() {
-      assert.doesNotThrow(function() {
-        VALID_STATUSES.forEach(function(status) {
+    it('should accept valid statuses', () => {
+      assert.doesNotThrow(() => {
+        VALID_STATUSES.forEach(status => {
           vm.waitFor(status, assert.ifError);
         });
       });
     });
 
-    it('should accept lowercase status', function() {
-      assert.doesNotThrow(function() {
+    it('should accept lowercase status', () => {
+      assert.doesNotThrow(() => {
         vm.waitFor('ProVisioning', assert.ifError);
         assert.strictEqual(vm.waiters.pop().status, 'PROVISIONING');
       });
     });
 
-    it('should not allow an out of bounds timeout', function() {
+    it('should not allow an out of bounds timeout', () => {
       vm.waitFor(VALID_STATUSES[0], {timeout: -1}, assert.ifError);
       assert.strictEqual(vm.waiters.pop().timeout, 0);
 
@@ -912,7 +912,7 @@ describe('VM', function() {
       assert.strictEqual(vm.waiters.pop().timeout, 600);
     });
 
-    it('should create a waiter', function(done) {
+    it('should create a waiter', done => {
       const now = new Date() / 1000;
       vm.waitFor(VALID_STATUSES[0], done);
 
@@ -927,19 +927,19 @@ describe('VM', function() {
       createdWaiter.callback(); // done()
     });
 
-    it('should flip hasActiveWaiters to true', function() {
+    it('should flip hasActiveWaiters to true', () => {
       assert.strictEqual(vm.hasActiveWaiters, false);
       vm.waitFor(VALID_STATUSES[0], assert.ifError);
       assert.strictEqual(vm.hasActiveWaiters, true);
     });
 
-    it('should start polling', function(done) {
+    it('should start polling', done => {
       vm.startPolling_ = done;
 
       vm.waitFor(VALID_STATUSES[0], assert.ifError);
     });
 
-    it('should not start polling if already polling', function(done) {
+    it('should not start polling if already polling', done => {
       vm.hasActiveWaiters = true;
 
       vm.startPolling_ = function() {
@@ -951,10 +951,10 @@ describe('VM', function() {
     });
   });
 
-  describe('startPolling_', function() {
+  describe('startPolling_', () => {
     const METADATA = {};
 
-    beforeEach(function() {
+    beforeEach(() => {
       vm.hasActiveWaiters = true;
 
       vm.getMetadata = function(callback) {
@@ -962,7 +962,7 @@ describe('VM', function() {
       };
     });
 
-    it('should only poll if there are active waiters', function(done) {
+    it('should only poll if there are active waiters', done => {
       vm.hasActiveWaiters = false;
 
       vm.getMetadata = function() {
@@ -973,7 +973,7 @@ describe('VM', function() {
       done();
     });
 
-    it('should refresh metadata', function(done) {
+    it('should refresh metadata', done => {
       vm.getMetadata = function() {
         done();
       };
@@ -981,10 +981,10 @@ describe('VM', function() {
       vm.startPolling_();
     });
 
-    describe('metadata refresh error', function() {
+    describe('metadata refresh error', () => {
       const ERROR = new Error('Error.');
 
-      beforeEach(function() {
+      beforeEach(() => {
         vm.getMetadata = function(callback) {
           callback(ERROR);
         };
@@ -994,7 +994,7 @@ describe('VM', function() {
         });
       });
 
-      it('should execute waiter with error', function(done) {
+      it('should execute waiter with error', done => {
         vm.waiters[0].callback = function(err) {
           assert.strictEqual(err, ERROR);
           done();
@@ -1003,26 +1003,26 @@ describe('VM', function() {
         vm.startPolling_();
       });
 
-      it('should remove waiter', function() {
+      it('should remove waiter', () => {
         assert.strictEqual(vm.waiters.length, 1);
         vm.startPolling_();
         assert.strictEqual(vm.waiters.length, 0);
       });
 
-      it('should flip hasActiveWaiters to false', function() {
+      it('should flip hasActiveWaiters to false', () => {
         assert.strictEqual(vm.hasActiveWaiters, true);
         vm.startPolling_();
         assert.strictEqual(vm.hasActiveWaiters, false);
       });
     });
 
-    describe('desired status reached', function() {
+    describe('desired status reached', () => {
       const STATUS = 'status';
       const METADATA = {
         status: STATUS,
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         vm.getMetadata = function(callback) {
           callback(null, METADATA);
         };
@@ -1033,7 +1033,7 @@ describe('VM', function() {
         });
       });
 
-      it('should execute callback with metadata', function(done) {
+      it('should execute callback with metadata', done => {
         vm.waiters[0].callback = function(err, metadata) {
           assert.ifError(err);
           assert.strictEqual(metadata, METADATA);
@@ -1043,23 +1043,23 @@ describe('VM', function() {
         vm.startPolling_();
       });
 
-      it('should remove waiter', function() {
+      it('should remove waiter', () => {
         assert.strictEqual(vm.waiters.length, 1);
         vm.startPolling_();
         assert.strictEqual(vm.waiters.length, 0);
       });
 
-      it('should flip hasActiveWaiters to false', function() {
+      it('should flip hasActiveWaiters to false', () => {
         assert.strictEqual(vm.hasActiveWaiters, true);
         vm.startPolling_();
         assert.strictEqual(vm.hasActiveWaiters, false);
       });
     });
 
-    describe('timeout exceeded', function() {
+    describe('timeout exceeded', () => {
       const STATUS = 'status';
 
-      beforeEach(function() {
+      beforeEach(() => {
         vm.waiters.push({
           status: STATUS,
           startTime: Date.now() / 1000 - 20,
@@ -1068,7 +1068,7 @@ describe('VM', function() {
         });
       });
 
-      it('should execute callback with WaitForTimeoutError', function(done) {
+      it('should execute callback with WaitForTimeoutError', done => {
         vm.waiters[0].callback = function(err) {
           assert.strictEqual(err.name, 'WaitForTimeoutError');
           assert.strictEqual(
@@ -1085,24 +1085,24 @@ describe('VM', function() {
         vm.startPolling_();
       });
 
-      it('should remove waiter', function() {
+      it('should remove waiter', () => {
         assert.strictEqual(vm.waiters.length, 1);
         vm.startPolling_();
         assert.strictEqual(vm.waiters.length, 0);
       });
 
-      it('should flip hasActiveWaiters to false', function() {
+      it('should flip hasActiveWaiters to false', () => {
         assert.strictEqual(vm.hasActiveWaiters, true);
         vm.startPolling_();
         assert.strictEqual(vm.hasActiveWaiters, false);
       });
     });
 
-    describe('desired status not reached yet', function() {
+    describe('desired status not reached yet', () => {
       const STATUS = 'status';
       const setTimeout = global.setTimeout;
 
-      beforeEach(function() {
+      beforeEach(() => {
         vm.waiters.push({
           status: STATUS,
           startTime: Date.now() / 1000,
@@ -1110,11 +1110,11 @@ describe('VM', function() {
         });
       });
 
-      after(function() {
+      after(() => {
         global.setTimeout = setTimeout;
       });
 
-      it('should check for the status again after interval', function(done) {
+      it('should check for the status again after interval', done => {
         global.setTimeout = function(fn, interval) {
           assert.strictEqual(interval, 2000);
 
@@ -1133,8 +1133,8 @@ describe('VM', function() {
     });
   });
 
-  describe('request', function() {
-    it('should make the correct request to Compute', function(done) {
+  describe('request', () => {
+    it('should make the correct request to Compute', done => {
       const reqOpts = {};
 
       FakeServiceObject.prototype.request = function(reqOpts_) {
@@ -1147,18 +1147,18 @@ describe('VM', function() {
       vm.request(reqOpts, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        vm.request({}, function(err, operation, resp) {
+      it('should execute callback with error & API response', done => {
+        vm.request({}, (err, operation, resp) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(resp, apiResponse);
@@ -1167,16 +1167,16 @@ describe('VM', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {name: 'operation-name'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Zone object & API resp', function(done) {
+      it('should execute callback with Zone object & API resp', done => {
         const operation = {};
 
         vm.zone.operation = function(name) {
@@ -1184,7 +1184,7 @@ describe('VM', function() {
           return operation;
         };
 
-        vm.request({}, function(err, operation_, resp) {
+        vm.request({}, (err, operation_, resp) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(resp, apiResponse);

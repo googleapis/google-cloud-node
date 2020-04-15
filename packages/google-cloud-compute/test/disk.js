@@ -43,7 +43,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Disk', function() {
+describe('Disk', () => {
   let Disk;
   let disk;
 
@@ -64,7 +64,7 @@ describe('Disk', function() {
     dName: DISK_NAME,
   });
 
-  before(function() {
+  before(() => {
     Disk = proxyquire('../src/disk.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -74,24 +74,24 @@ describe('Disk', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     disk = new Disk(ZONE, DISK_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should localize the zone', function() {
+  describe('instantiation', () => {
+    it('should localize the zone', () => {
       assert.strictEqual(disk.zone, ZONE);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(disk.name, DISK_NAME);
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should format the disk name', function() {
+    it('should format the disk name', () => {
       const formatName_ = Disk.formatName_;
       const formattedName = 'projects/a/zones/b/disks/c';
 
@@ -108,7 +108,7 @@ describe('Disk', function() {
       assert(disk.formattedName, formattedName);
     });
 
-    it('should inherit from ServiceObject', function(done) {
+    it('should inherit from ServiceObject', done => {
       const zoneInstance = Object.assign({}, ZONE, {
         createDisk: {
           bind: function(context) {
@@ -135,15 +135,15 @@ describe('Disk', function() {
     });
   });
 
-  describe('formatName_', function() {
-    it('should format the name', function() {
+  describe('formatName_', () => {
+    it('should format the name', () => {
       const formattedName_ = Disk.formatName_(ZONE, DISK_NAME);
       assert.strictEqual(formattedName_, DISK_FULL_NAME);
     });
   });
 
-  describe('createSnapshot', function() {
-    it('should make the correct API request', function(done) {
+  describe('createSnapshot', () => {
+    it('should make the correct API request', done => {
       disk.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/createSnapshot');
@@ -154,18 +154,18 @@ describe('Disk', function() {
       disk.createSnapshot('test', {a: 'b'}, util.noop);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         disk.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        disk.createSnapshot('test', {}, function(err, snap, op, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        disk.createSnapshot('test', {}, (err, snap, op, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(snap, null);
           assert.strictEqual(op, null);
@@ -174,25 +174,25 @@ describe('Disk', function() {
         });
       });
 
-      it('should not require options', function() {
-        assert.doesNotThrow(function() {
+      it('should not require options', () => {
+        assert.doesNotThrow(() => {
           disk.createSnapshot('test', util.noop);
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         disk.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Snapshot & Operation', function(done) {
+      it('should execute callback with Snapshot & Operation', done => {
         const snapshot = {};
         const operation = {};
 
@@ -206,7 +206,7 @@ describe('Disk', function() {
           return operation;
         };
 
-        disk.createSnapshot('test', {}, function(err, snap, op, apiResponse_) {
+        disk.createSnapshot('test', {}, (err, snap, op, apiResponse_) => {
           assert.ifError(err);
 
           assert.strictEqual(snap, snapshot);
@@ -217,8 +217,8 @@ describe('Disk', function() {
           done();
         });
 
-        it('should not require options', function() {
-          assert.doesNotThrow(function() {
+        it('should not require options', () => {
+          assert.doesNotThrow(() => {
             disk.createSnapshot('test', util.noop);
           });
         });
@@ -226,8 +226,8 @@ describe('Disk', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, disk);
         done();
@@ -236,18 +236,18 @@ describe('Disk', function() {
       disk.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        disk.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        disk.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -255,25 +255,25 @@ describe('Disk', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           disk.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         disk.zone.operation = function(name) {
@@ -281,7 +281,7 @@ describe('Disk', function() {
           return operation;
         };
 
-        disk.delete(function(err, operation_, apiResponse_) {
+        disk.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -290,18 +290,18 @@ describe('Disk', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           disk.delete();
         });
       });
     });
   });
 
-  describe('snapshot', function() {
+  describe('snapshot', () => {
     const NAME = 'snapshot-name';
 
-    it('should return a Snapshot object', function() {
+    it('should return a Snapshot object', () => {
       const snapshot = disk.snapshot(NAME);
       assert(snapshot instanceof FakeSnapshot);
       assert.strictEqual(snapshot.calledWith_[0], disk);

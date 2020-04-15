@@ -229,7 +229,7 @@ class Rule extends common.ServiceObject {
   delete(callback) {
     callback = callback || common.util.noop;
     const scope = this.scope;
-    super.delete(function(err, resp) {
+    super.delete((err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;
@@ -283,7 +283,7 @@ class Rule extends common.ServiceObject {
           target: target,
         },
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;

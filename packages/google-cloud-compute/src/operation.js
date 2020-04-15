@@ -245,7 +245,7 @@ class Operation extends common.Operation {
    */
   poll_(callback) {
     const self = this;
-    this.getMetadata(function(err, metadata, apiResponse) {
+    this.getMetadata((err, metadata, apiResponse) => {
       // Parsing the response body will automatically create an ApiError object if
       // the operation failed.
       const parsedHttpRespBody = common.util.parseHttpRespBody(apiResponse);

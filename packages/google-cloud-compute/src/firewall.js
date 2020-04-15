@@ -216,7 +216,7 @@ class Firewall extends common.ServiceObject {
   delete(callback) {
     const compute = this.compute;
     callback = callback || common.util.noop;
-    super.delete(function(err, resp) {
+    super.delete((err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;
@@ -273,7 +273,7 @@ class Firewall extends common.ServiceObject {
         uri: '',
         json: metadata,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;

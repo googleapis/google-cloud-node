@@ -191,7 +191,7 @@ class Image extends common.ServiceObject {
   delete(callback) {
     const compute = this.parent;
     callback = callback || common.util.noop;
-    super.delete(function(err, resp) {
+    super.delete((err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;

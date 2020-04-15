@@ -289,7 +289,7 @@ class Zone extends common.ServiceObject {
         uri: '/autoscalers',
         json: json,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -370,7 +370,7 @@ class Zone extends common.ServiceObject {
       delete body.image;
     }
     if (body.os) {
-      this.gceImages.getLatest(body.os, function(err, image) {
+      this.gceImages.getLatest(body.os, (err, image) => {
         if (err) {
           callback(err);
           return;
@@ -388,7 +388,7 @@ class Zone extends common.ServiceObject {
         qs: query,
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -461,7 +461,7 @@ class Zone extends common.ServiceObject {
         uri: '/instanceGroups',
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -632,7 +632,7 @@ class Zone extends common.ServiceObject {
         }
       }
       // We have to make sure the firewall rules exist to allow HTTP/S traffic.
-      async.parallel(createFirewallMethods, function(err) {
+      async.parallel(createFirewallMethods, err => {
         if (err) {
           callback(err);
           return;
@@ -642,7 +642,7 @@ class Zone extends common.ServiceObject {
       return;
     }
     if (body.os) {
-      this.gceImages.getLatest(body.os, function(err, image) {
+      this.gceImages.getLatest(body.os, (err, image) => {
         if (err) {
           callback(err);
           return;
@@ -666,7 +666,7 @@ class Zone extends common.ServiceObject {
         uri: '/instances',
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -766,7 +766,7 @@ class Zone extends common.ServiceObject {
         uri: '/autoscalers',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -777,7 +777,7 @@ class Zone extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const autoscalers = arrify(resp.items).map(function(autoscaler) {
+        const autoscalers = arrify(resp.items).map(autoscaler => {
           const autoscalerInstance = self.autoscaler(autoscaler.name);
           autoscalerInstance.metadata = autoscaler;
           return autoscalerInstance;
@@ -854,7 +854,7 @@ class Zone extends common.ServiceObject {
         uri: '/disks',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -865,7 +865,7 @@ class Zone extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const disks = (resp.items || []).map(function(disk) {
+        const disks = (resp.items || []).map(disk => {
           const diskInstance = self.disk(disk.name);
           diskInstance.metadata = disk;
           return diskInstance;
@@ -944,7 +944,7 @@ class Zone extends common.ServiceObject {
         uri: '/instanceGroups',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -955,7 +955,7 @@ class Zone extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const instanceGroups = (resp.items || []).map(function(instanceGroup) {
+        const instanceGroups = (resp.items || []).map(instanceGroup => {
           const instanceGroupInstance = self.instanceGroup(instanceGroup.name);
           instanceGroupInstance.metadata = instanceGroup;
           return instanceGroupInstance;
@@ -1034,7 +1034,7 @@ class Zone extends common.ServiceObject {
         uri: '/instanceGroupManagers',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1045,15 +1045,15 @@ class Zone extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const instanceGroupManagers = (resp.items || []).map(function(
-          instanceGroupManager
-        ) {
-          const instanceGroupManagerInstance = self.instanceGroupManager(
-            instanceGroupManager.name
-          );
-          instanceGroupManagerInstance.metadata = instanceGroupManager;
-          return instanceGroupManagerInstance;
-        });
+        const instanceGroupManagers = (resp.items || []).map(
+          instanceGroupManager => {
+            const instanceGroupManagerInstance = self.instanceGroupManager(
+              instanceGroupManager.name
+            );
+            instanceGroupManagerInstance.metadata = instanceGroupManager;
+            return instanceGroupManagerInstance;
+          }
+        );
         callback(null, instanceGroupManagers, nextQuery, resp);
       }
     );
@@ -1189,7 +1189,7 @@ class Zone extends common.ServiceObject {
         uri: '/operations',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1200,7 +1200,7 @@ class Zone extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const operations = (resp.items || []).map(function(operation) {
+        const operations = (resp.items || []).map(operation => {
           const operationInstance = self.operation(operation.name);
           operationInstance.metadata = operation;
           return operationInstance;
@@ -1275,7 +1275,7 @@ class Zone extends common.ServiceObject {
         uri: '/instances',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1286,7 +1286,7 @@ class Zone extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const vms = (resp.items || []).map(function(instance) {
+        const vms = (resp.items || []).map(instance => {
           const vmInstance = self.vm(instance.name);
           vmInstance.metadata = instance;
           return vmInstance;
@@ -1405,7 +1405,7 @@ class Zone extends common.ServiceObject {
         ranges: ['0.0.0.0/0'],
         tags: ['http-server'],
       },
-      function(err) {
+      err => {
         // If it already exists, we're all good.
         callback(err && err.code !== 409 ? err : null);
       }
@@ -1430,7 +1430,7 @@ class Zone extends common.ServiceObject {
         ranges: ['0.0.0.0/0'],
         tags: ['https-server'],
       },
-      function(err) {
+      err => {
         // If it already exists, we're all good.
         callback(err && err.code !== 409 ? err : null);
       }

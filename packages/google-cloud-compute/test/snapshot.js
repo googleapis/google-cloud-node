@@ -35,7 +35,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Snapshot', function() {
+describe('Snapshot', () => {
   let Snapshot;
   let snapshot;
 
@@ -44,7 +44,7 @@ describe('Snapshot', function() {
   };
   const SNAPSHOT_NAME = 'snapshot-name';
 
-  before(function() {
+  before(() => {
     Snapshot = proxyquire('../src/snapshot.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -53,20 +53,20 @@ describe('Snapshot', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     snapshot = new Snapshot(COMPUTE, SNAPSHOT_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should localize the compute instance', function() {
+  describe('instantiation', () => {
+    it('should localize the compute instance', () => {
       assert.strictEqual(snapshot.compute, COMPUTE);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(snapshot.name, SNAPSHOT_NAME);
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       const calledWith = snapshot.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);
@@ -82,11 +82,11 @@ describe('Snapshot', function() {
       });
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should allow creating for a Disk object snapshot', function(done) {
+    it('should allow creating for a Disk object snapshot', done => {
       const scope = {
         constructor: {
           name: 'Disk',
@@ -112,8 +112,8 @@ describe('Snapshot', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, snapshot);
         done();
@@ -122,18 +122,18 @@ describe('Snapshot', function() {
       snapshot.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should exec the callback with error & API response', function(done) {
-        snapshot.delete(function(err, operation, apiResponse_) {
+      it('should exec the callback with error & API response', done => {
+        snapshot.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -141,23 +141,23 @@ describe('Snapshot', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           snapshot.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {name: 'operation-name'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should exec callback with Operation & API response', function(done) {
+      it('should exec callback with Operation & API response', done => {
         const operation = {};
 
         snapshot.compute.operation = function(name) {
@@ -165,7 +165,7 @@ describe('Snapshot', function() {
           return operation;
         };
 
-        snapshot.delete(function(err, operation_, apiResponse_) {
+        snapshot.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
 
           assert.strictEqual(operation_, operation);
@@ -176,8 +176,8 @@ describe('Snapshot', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           snapshot.delete();
         });
       });

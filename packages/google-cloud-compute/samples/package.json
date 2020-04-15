@@ -5,7 +5,8 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-compute",
   "files": [
-    "*.js"
+    "*.js",
+    "!test/"
   ],
   "engines": {
     "node": ">=8"

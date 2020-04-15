@@ -35,7 +35,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('HealthCheck', function() {
+describe('HealthCheck', () => {
   let HealthCheck;
   let healthCheck;
 
@@ -45,7 +45,7 @@ describe('HealthCheck', function() {
   const HEALTH_CHECK_NAME = 'health-check-name';
   const OPTIONS = {};
 
-  before(function() {
+  before(() => {
     HealthCheck = proxyquire('../src/health-check.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -54,16 +54,16 @@ describe('HealthCheck', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     healthCheck = new HealthCheck(COMPUTE, HEALTH_CHECK_NAME, OPTIONS);
   });
 
-  afterEach(function() {
+  afterEach(() => {
     COMPUTE.createHealthCheck = util.noop;
   });
 
-  describe('instantiation', function() {
-    it('should inherit from ServiceObject', function() {
+  describe('instantiation', () => {
+    it('should inherit from ServiceObject', () => {
       assert(healthCheck instanceof FakeServiceObject);
 
       const calledWith = healthCheck.calledWith_[0];
@@ -78,17 +78,17 @@ describe('HealthCheck', function() {
       });
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    describe('http', function() {
-      it('should set the correct baseUrl', function() {
+    describe('http', () => {
+      it('should set the correct baseUrl', () => {
         const calledWith = healthCheck.calledWith_[0];
         assert.strictEqual(calledWith.baseUrl, '/global/httpHealthChecks');
       });
 
-      it('should not set options.https when created', function(done) {
+      it('should not set options.https when created', done => {
         const createMethod = healthCheck.calledWith_[0].createMethod;
         const NAME = 'name';
         const OPTIONS = {a: 'b'};
@@ -102,7 +102,7 @@ describe('HealthCheck', function() {
         createMethod(NAME, OPTIONS, done);
       });
 
-      it('should not require a callback when creating', function(done) {
+      it('should not require a callback when creating', done => {
         const createMethod = healthCheck.calledWith_[0].createMethod;
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
@@ -114,22 +114,22 @@ describe('HealthCheck', function() {
       });
     });
 
-    describe('https', function() {
+    describe('https', () => {
       let healthCheck;
 
-      beforeEach(function() {
+      beforeEach(() => {
         healthCheck = new HealthCheck(COMPUTE, HEALTH_CHECK_NAME, {
           https: true,
         });
       });
 
-      it('should set the correct baseUrl', function() {
+      it('should set the correct baseUrl', () => {
         const calledWith = healthCheck.calledWith_[0];
 
         assert.strictEqual(calledWith.baseUrl, '/global/httpsHealthChecks');
       });
 
-      it('should set options.https = true when created', function(done) {
+      it('should set options.https = true when created', done => {
         const createMethod = healthCheck.calledWith_[0].createMethod;
 
         const NAME = 'name';
@@ -146,7 +146,7 @@ describe('HealthCheck', function() {
         createMethod(NAME, OPTIONS, done);
       });
 
-      it('should not require a callback when creating', function(done) {
+      it('should not require a callback when creating', done => {
         const createMethod = healthCheck.calledWith_[0].createMethod;
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
@@ -159,8 +159,8 @@ describe('HealthCheck', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, healthCheck);
         done();
@@ -169,18 +169,18 @@ describe('HealthCheck', function() {
       healthCheck.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        healthCheck.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        healthCheck.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -188,25 +188,25 @@ describe('HealthCheck', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           healthCheck.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         healthCheck.compute.operation = function(name) {
@@ -214,7 +214,7 @@ describe('HealthCheck', function() {
           return operation;
         };
 
-        healthCheck.delete(function(err, operation_, apiResponse_) {
+        healthCheck.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -223,18 +223,18 @@ describe('HealthCheck', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           healthCheck.delete();
         });
       });
     });
   });
 
-  describe('setMetadata', function() {
+  describe('setMetadata', () => {
     const METADATA = {};
 
-    it('should call ServiceObject.setMetadata', function(done) {
+    it('should call ServiceObject.setMetadata', done => {
       FakeServiceObject.prototype.setMetadata = function(metadata) {
         assert.strictEqual(this, healthCheck);
         assert.strictEqual(metadata, METADATA);
@@ -244,18 +244,18 @@ describe('HealthCheck', function() {
       healthCheck.setMetadata(METADATA, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.setMetadata = function(metadata, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        healthCheck.setMetadata(METADATA, function(err, op, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        healthCheck.setMetadata(METADATA, (err, op, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -264,18 +264,18 @@ describe('HealthCheck', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.setMetadata = function(metadata, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with operation & response', function(done) {
+      it('should execute callback with operation & response', done => {
         const operation = {};
         const metadata = {a: 'b'};
 
@@ -284,7 +284,7 @@ describe('HealthCheck', function() {
           return operation;
         };
 
-        healthCheck.setMetadata(metadata, function(err, op, apiResponse_) {
+        healthCheck.setMetadata(metadata, (err, op, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
@@ -293,8 +293,8 @@ describe('HealthCheck', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           healthCheck.setMetadata({a: 'b'});
         });
       });

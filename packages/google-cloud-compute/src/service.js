@@ -227,7 +227,7 @@ class Service extends common.ServiceObject {
   delete(callback) {
     const compute = this.compute;
     callback = callback || common.util.noop;
-    common.ServiceObject.prototype.delete.call(this, function(err, resp) {
+    common.ServiceObject.prototype.delete.call(this, (err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;
@@ -289,7 +289,7 @@ class Service extends common.ServiceObject {
       group = format(
         '{resourceBaseUrl}/projects/{p}/zones/{z}/instanceGroups/{n}',
         {
-          resourceBaseUrl: `https://www.googleapis.com/compute/v1`,
+          resourceBaseUrl: 'https://www.googleapis.com/compute/v1',
           p: this.parent.projectId,
           z: group.zone.name || group.zone,
           n: group.name,
@@ -304,7 +304,7 @@ class Service extends common.ServiceObject {
           group: group,
         },
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
@@ -357,7 +357,7 @@ class Service extends common.ServiceObject {
         uri: '',
         json: metadata,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;

@@ -191,7 +191,7 @@ class Compute extends common.Service {
         uri: '/global/firewalls',
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -278,7 +278,7 @@ class Compute extends common.Service {
         uri: '/global/' + (https ? 'httpsHealthChecks' : 'httpHealthChecks'),
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -351,7 +351,7 @@ class Compute extends common.Service {
         uri: '/global/images',
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
@@ -428,7 +428,7 @@ class Compute extends common.Service {
         uri: '/global/networks',
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -521,7 +521,7 @@ class Compute extends common.Service {
         uri: '/global/forwardingRules',
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -591,7 +591,7 @@ class Compute extends common.Service {
         uri: '/global/backendServices',
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -686,7 +686,7 @@ class Compute extends common.Service {
         uri: '/aggregated/addresses',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -698,20 +698,16 @@ class Compute extends common.Service {
           });
         }
         const regions = resp.items || {};
-        const addresses = Object.keys(regions).reduce(function(
-          acc,
-          regionName
-        ) {
+        const addresses = Object.keys(regions).reduce((acc, regionName) => {
           const region = self.region(regionName.replace('regions/', ''));
           const regionAddresses = regions[regionName].addresses || [];
-          regionAddresses.forEach(function(address) {
+          regionAddresses.forEach(address => {
             const addressInstance = region.address(address.name);
             addressInstance.metadata = address;
             acc.push(addressInstance);
           });
           return acc;
-        },
-        []);
+        }, []);
         callback(null, addresses, nextQuery, resp);
       }
     );
@@ -783,7 +779,7 @@ class Compute extends common.Service {
         uri: '/aggregated/autoscalers',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -795,13 +791,13 @@ class Compute extends common.Service {
           });
         }
         const zones = resp.items || {};
-        const autoscalers = Object.keys(zones).reduce(function(acc, zoneName) {
+        const autoscalers = Object.keys(zones).reduce((acc, zoneName) => {
           if (zoneName.indexOf('zones/') !== 0) {
             return acc;
           }
           const zone = self.zone(zoneName.replace('zones/', ''));
           const zoneAutoscalers = zones[zoneName].autoscalers || [];
-          zoneAutoscalers.forEach(function(autoscaler) {
+          zoneAutoscalers.forEach(autoscaler => {
             const autoscalerInstance = zone.autoscaler(autoscaler.name);
             autoscalerInstance.metadata = autoscaler;
             acc.push(autoscalerInstance);
@@ -877,7 +873,7 @@ class Compute extends common.Service {
         uri: '/aggregated/disks',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -889,10 +885,10 @@ class Compute extends common.Service {
           });
         }
         const zones = resp.items || {};
-        const disks = Object.keys(zones).reduce(function(acc, zoneName) {
+        const disks = Object.keys(zones).reduce((acc, zoneName) => {
           const zone = self.zone(zoneName.replace('zones/', ''));
           const disks = zones[zoneName].disks || [];
-          disks.forEach(function(disk) {
+          disks.forEach(disk => {
             const diskInstance = zone.disk(disk.name);
             diskInstance.metadata = disk;
             acc.push(diskInstance);
@@ -969,7 +965,7 @@ class Compute extends common.Service {
         uri: '/aggregated/instanceGroups',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -981,20 +977,16 @@ class Compute extends common.Service {
           });
         }
         const zones = resp.items || {};
-        const instanceGroups = Object.keys(zones).reduce(function(
-          acc,
-          zoneName
-        ) {
+        const instanceGroups = Object.keys(zones).reduce((acc, zoneName) => {
           const zone = self.zone(zoneName.replace('zones/', ''));
           const instanceGroups = zones[zoneName].instanceGroups || [];
-          instanceGroups.forEach(function(group) {
+          instanceGroups.forEach(group => {
             const instanceGroupInstance = zone.instanceGroup(group.name);
             instanceGroupInstance.metadata = group;
             acc.push(instanceGroupInstance);
           });
           return acc;
-        },
-        []);
+        }, []);
         callback(null, instanceGroups, nextQuery, resp);
       }
     );
@@ -1061,7 +1053,7 @@ class Compute extends common.Service {
         uri: '/global/firewalls',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1072,7 +1064,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const firewalls = (resp.items || []).map(function(firewall) {
+        const firewalls = (resp.items || []).map(firewall => {
           const firewallInstance = self.firewall(firewall.name);
           firewallInstance.metadata = firewall;
           return firewallInstance;
@@ -1148,7 +1140,7 @@ class Compute extends common.Service {
         uri: '/global/' + (https ? 'httpsHealthChecks' : 'httpHealthChecks'),
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1159,7 +1151,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const healthChecks = (resp.items || []).map(function(healthCheck) {
+        const healthChecks = (resp.items || []).map(healthCheck => {
           const healthCheckInstance = self.healthCheck(healthCheck.name, {
             https: https,
           });
@@ -1231,7 +1223,7 @@ class Compute extends common.Service {
         uri: '/global/images',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1242,7 +1234,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const images = (resp.items || []).map(function(image) {
+        const images = (resp.items || []).map(image => {
           const imageInstance = self.image(image.name);
           imageInstance.metadata = image;
           return imageInstance;
@@ -1318,7 +1310,7 @@ class Compute extends common.Service {
         uri: '/aggregated/machineTypes',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1330,10 +1322,10 @@ class Compute extends common.Service {
           });
         }
         const zones = resp.items || {};
-        const machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
+        const machineTypes = Object.keys(zones).reduce((acc, zoneName) => {
           const zone = self.zone(zoneName.replace('zones/', ''));
           const machineTypesByZone = zones[zoneName].machineTypes || [];
-          machineTypesByZone.forEach(function(machineType) {
+          machineTypesByZone.forEach(machineType => {
             const machineTypeInstance = zone.machineType(machineType.name);
             machineTypeInstance.metadata = machineType;
             acc.push(machineTypeInstance);
@@ -1409,7 +1401,7 @@ class Compute extends common.Service {
         uri: '/global/networks',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1420,7 +1412,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const networks = (resp.items || []).map(function(network) {
+        const networks = (resp.items || []).map(network => {
           const networkInstance = self.network(network.name);
           networkInstance.metadata = network;
           return networkInstance;
@@ -1494,7 +1486,7 @@ class Compute extends common.Service {
         uri: '/global/operations',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1505,7 +1497,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const operations = (resp.items || []).map(function(operation) {
+        const operations = (resp.items || []).map(operation => {
           const operationInstance = self.operation(operation.name);
           operationInstance.metadata = operation;
           return operationInstance;
@@ -1578,7 +1570,7 @@ class Compute extends common.Service {
         uri: '/regions',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1589,7 +1581,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const regions = resp.items.map(function(region) {
+        const regions = resp.items.map(region => {
           const regionInstance = self.region(region.name);
           regionInstance.metadata = region;
           return regionInstance;
@@ -1662,7 +1654,7 @@ class Compute extends common.Service {
         uri: '/global/forwardingRules',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1673,7 +1665,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const rules = (resp.items || []).map(function(rule) {
+        const rules = (resp.items || []).map(rule => {
           const ruleInstance = self.rule(rule.name);
           ruleInstance.metadata = rule;
           return ruleInstance;
@@ -1747,7 +1739,7 @@ class Compute extends common.Service {
         uri: '/global/backendServices',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1758,7 +1750,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const services = (resp.items || []).map(function(service) {
+        const services = (resp.items || []).map(service => {
           const serviceInstance = self.service(service.name);
           serviceInstance.metadata = service;
           return serviceInstance;
@@ -1832,7 +1824,7 @@ class Compute extends common.Service {
         uri: '/global/snapshots',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1843,7 +1835,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const snapshots = (resp.items || []).map(function(snapshot) {
+        const snapshots = (resp.items || []).map(snapshot => {
           const snapshotInstance = self.snapshot(snapshot.name);
           snapshotInstance.metadata = snapshot;
           return snapshotInstance;
@@ -1917,7 +1909,7 @@ class Compute extends common.Service {
         uri: '/aggregated/subnetworks',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -1929,20 +1921,16 @@ class Compute extends common.Service {
           });
         }
         const regions = resp.items || {};
-        const subnetworks = Object.keys(regions).reduce(function(
-          acc,
-          regionName
-        ) {
+        const subnetworks = Object.keys(regions).reduce((acc, regionName) => {
           const region = self.region(regionName.replace('regions/', ''));
           const subnetworks = regions[regionName].subnetworks || [];
-          subnetworks.forEach(function(subnetwork) {
+          subnetworks.forEach(subnetwork => {
             const subnetworkInstance = region.subnetwork(subnetwork.name);
             subnetworkInstance.metadata = subnetwork;
             acc.push(subnetworkInstance);
           });
           return acc;
-        },
-        []);
+        }, []);
         callback(null, subnetworks, nextQuery, resp);
       }
     );
@@ -2011,7 +1999,7 @@ class Compute extends common.Service {
         uri: '/aggregated/instances',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -2023,10 +2011,10 @@ class Compute extends common.Service {
           });
         }
         const zones = resp.items || {};
-        const vms = Object.keys(zones).reduce(function(acc, zoneName) {
+        const vms = Object.keys(zones).reduce((acc, zoneName) => {
           const zone = self.zone(zoneName.replace('zones/', ''));
           const instances = zones[zoneName].instances || [];
-          instances.forEach(function(instance) {
+          instances.forEach(instance => {
             const vmInstance = zone.vm(instance.name);
             vmInstance.metadata = instance;
             acc.push(vmInstance);
@@ -2101,7 +2089,7 @@ class Compute extends common.Service {
         uri: '/zones',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -2112,7 +2100,7 @@ class Compute extends common.Service {
             pageToken: resp.nextPageToken,
           });
         }
-        const zones = resp.items.map(function(zone) {
+        const zones = resp.items.map(zone => {
           const zoneInstance = self.zone(zone.name);
           zoneInstance.metadata = zone;
           return zoneInstance;
@@ -2285,7 +2273,7 @@ class Compute extends common.Service {
         callback(err, apiResponse);
         return;
       }
-      operation.on('error', callback).on('complete', function(metadata) {
+      operation.on('error', callback).on('complete', metadata => {
         callback(null, metadata);
       });
     };

@@ -55,7 +55,7 @@ const fakePaginator = {
   },
 };
 
-describe('InstanceGroup', function() {
+describe('InstanceGroup', () => {
   let InstanceGroup;
   let instanceGroup;
 
@@ -68,7 +68,7 @@ describe('InstanceGroup', function() {
   };
   const NAME = 'instance-group-name';
 
-  before(function() {
+  before(() => {
     InstanceGroup = proxyquire('../src/instance-group.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -79,39 +79,39 @@ describe('InstanceGroup', function() {
     staticMethods.formatPorts_ = InstanceGroup.formatPorts_;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     Object.assign(InstanceGroup, staticMethods);
     instanceGroup = new InstanceGroup(ZONE, NAME);
   });
 
-  describe('instantiation', function() {
-    it('should extend the correct methods', function() {
+  describe('instantiation', () => {
+    it('should extend the correct methods', () => {
       assert(extended); // See `fakePaginator.extend`
     });
 
-    it('should streamify the correct methods', function() {
+    it('should streamify the correct methods', () => {
       assert.strictEqual(instanceGroup.getVMsStream, 'getVMs');
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should localize the zone instance', function() {
+    it('should localize the zone instance', () => {
       assert.strictEqual(instanceGroup.zone, ZONE);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(instanceGroup.name, NAME);
     });
 
-    it('should inherit from ServiceObject', function(done) {
+    it('should inherit from ServiceObject', done => {
       const zoneInstance = Object.assign({}, ZONE, {
         createInstanceGroup: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
 
-            setImmediate(function() {
+            setImmediate(() => {
               assert(instanceGroup instanceof ServiceObject);
 
               const calledWith = instanceGroup.calledWith_[0];
@@ -136,13 +136,13 @@ describe('InstanceGroup', function() {
     });
   });
 
-  describe('formatPorts_', function() {
+  describe('formatPorts_', () => {
     const PORTS = {
       http: 80,
       https: 443,
     };
 
-    it('should format an object of named ports', function() {
+    it('should format an object of named ports', () => {
       assert.deepStrictEqual(InstanceGroup.formatPorts_(PORTS), [
         {name: 'http', port: 80},
         {name: 'https', port: 443},
@@ -150,15 +150,15 @@ describe('InstanceGroup', function() {
     });
   });
 
-  describe('add', function() {
+  describe('add', () => {
     const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       instanceGroup.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/addInstances');
         assert.deepStrictEqual(reqOpts.json, {
-          instances: VMS.map(function(vm) {
+          instances: VMS.map(vm => {
             return {
               instance: vm.url,
             };
@@ -171,18 +171,18 @@ describe('InstanceGroup', function() {
       instanceGroup.add(VMS, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const apiResponse = {};
       const error = new Error('Error.');
 
-      beforeEach(function() {
+      beforeEach(() => {
         instanceGroup.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error and API response', function(done) {
-        instanceGroup.add(VMS, function(err, operation, apiResponse_) {
+      it('should return an error and API response', done => {
+        instanceGroup.add(VMS, (err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -191,16 +191,16 @@ describe('InstanceGroup', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {name: 'op-name'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         instanceGroup.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should return an Operation and API response', function(done) {
+      it('should return an Operation and API response', done => {
         const operation = {};
 
         instanceGroup.zone.operation = function(name) {
@@ -208,7 +208,7 @@ describe('InstanceGroup', function() {
           return operation;
         };
 
-        instanceGroup.add(VMS, function(err, operation_, apiResponse_) {
+        instanceGroup.add(VMS, (err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation.metadata, apiResponse);
@@ -219,8 +219,8 @@ describe('InstanceGroup', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, instanceGroup);
         done();
@@ -229,18 +229,18 @@ describe('InstanceGroup', function() {
       instanceGroup.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        instanceGroup.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        instanceGroup.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -248,25 +248,25 @@ describe('InstanceGroup', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           instanceGroup.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         instanceGroup.zone.operation = function(name) {
@@ -274,7 +274,7 @@ describe('InstanceGroup', function() {
           return operation;
         };
 
-        instanceGroup.delete(function(err, operation_, apiResponse_) {
+        instanceGroup.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -283,22 +283,22 @@ describe('InstanceGroup', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           instanceGroup.delete();
         });
       });
     });
   });
 
-  describe('getVMs', function() {
-    beforeEach(function() {
+  describe('getVMs', () => {
+    beforeEach(() => {
       instanceGroup.zone.vm = function() {
         return {};
       };
     });
 
-    it('should accept only a callback', function(done) {
+    it('should accept only a callback', done => {
       instanceGroup.request = function(reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -307,7 +307,7 @@ describe('InstanceGroup', function() {
       instanceGroup.getVMs(assert.ifError);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
       instanceGroup.request = function(reqOpts) {
@@ -322,12 +322,12 @@ describe('InstanceGroup', function() {
       instanceGroup.getVMs(query, assert.ifError);
     });
 
-    describe('options.running', function() {
+    describe('options.running', () => {
       const OPTIONS = {
         running: true,
       };
 
-      it('should set the instanceState filter', function(done) {
+      it('should set the instanceState filter', done => {
         instanceGroup.request = function(reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             instanceState: 'RUNNING',
@@ -339,18 +339,18 @@ describe('InstanceGroup', function() {
       });
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         instanceGroup.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        instanceGroup.getVMs({}, function(err, vms, nextQuery, apiResponse_) {
+      it('should execute callback with error & API response', done => {
+        instanceGroup.getVMs({}, (err, vms, nextQuery, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(vms, null);
           assert.strictEqual(nextQuery, null);
@@ -360,18 +360,18 @@ describe('InstanceGroup', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         items: [{instance: 'vm-name'}],
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         instanceGroup.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should build a nextQuery if necessary', function(done) {
+      it('should build a nextQuery if necessary', done => {
         const nextPageToken = 'next-page-token';
         const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
@@ -384,7 +384,7 @@ describe('InstanceGroup', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        instanceGroup.getVMs({}, function(err, vms, nextQuery) {
+        instanceGroup.getVMs({}, (err, vms, nextQuery) => {
           assert.ifError(err);
 
           assert.deepStrictEqual(nextQuery, expectedNextQuery);
@@ -393,7 +393,7 @@ describe('InstanceGroup', function() {
         });
       });
 
-      it('should execute callback with VMs & API response', function(done) {
+      it('should execute callback with VMs & API response', done => {
         const vm = {};
 
         instanceGroup.zone.vm = function(name) {
@@ -401,7 +401,7 @@ describe('InstanceGroup', function() {
           return vm;
         };
 
-        instanceGroup.getVMs({}, function(err, vms, nextQuery, apiResponse_) {
+        instanceGroup.getVMs({}, (err, vms, nextQuery, apiResponse_) => {
           assert.ifError(err);
 
           assert.strictEqual(vms[0], vm);
@@ -415,15 +415,15 @@ describe('InstanceGroup', function() {
     });
   });
 
-  describe('remove', function() {
+  describe('remove', () => {
     const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       instanceGroup.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/removeInstances');
         assert.deepStrictEqual(reqOpts.json, {
-          instances: VMS.map(function(vm) {
+          instances: VMS.map(vm => {
             return {
               instance: vm.url,
             };
@@ -436,18 +436,18 @@ describe('InstanceGroup', function() {
       instanceGroup.remove(VMS, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const apiResponse = {};
       const error = new Error('Error.');
 
-      beforeEach(function() {
+      beforeEach(() => {
         instanceGroup.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error and API response', function(done) {
-        instanceGroup.remove(VMS, function(err, operation, apiResponse_) {
+      it('should return an error and API response', done => {
+        instanceGroup.remove(VMS, (err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -456,16 +456,16 @@ describe('InstanceGroup', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {name: 'op-name'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         instanceGroup.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should return an Operation and API response', function(done) {
+      it('should return an Operation and API response', done => {
         const operation = {};
 
         instanceGroup.zone.operation = function(name) {
@@ -473,7 +473,7 @@ describe('InstanceGroup', function() {
           return operation;
         };
 
-        instanceGroup.remove(VMS, function(err, operation_, apiResponse_) {
+        instanceGroup.remove(VMS, (err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation.metadata, apiResponse);
@@ -484,13 +484,13 @@ describe('InstanceGroup', function() {
     });
   });
 
-  describe('setPorts', function() {
+  describe('setPorts', () => {
     const PORTS = {
       http: 80,
       https: 443,
     };
 
-    it('should format the named ports', function(done) {
+    it('should format the named ports', done => {
       const expectedNamedPorts = [];
 
       InstanceGroup.formatPorts_ = function(ports) {
@@ -508,18 +508,18 @@ describe('InstanceGroup', function() {
       instanceGroup.setPorts(PORTS, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         instanceGroup.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        instanceGroup.setPorts(PORTS, function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        instanceGroup.setPorts(PORTS, (err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -527,25 +527,25 @@ describe('InstanceGroup', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           instanceGroup.setPorts(PORTS);
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         instanceGroup.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         instanceGroup.zone.operation = function(name) {
@@ -553,7 +553,7 @@ describe('InstanceGroup', function() {
           return operation;
         };
 
-        instanceGroup.setPorts(PORTS, function(err, operation_, apiResponse_) {
+        instanceGroup.setPorts(PORTS, (err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -562,8 +562,8 @@ describe('InstanceGroup', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           instanceGroup.setPorts(PORTS);
         });
       });

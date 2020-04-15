@@ -214,7 +214,7 @@ class Address extends common.ServiceObject {
         method: 'DELETE',
         uri: '',
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;

@@ -33,7 +33,7 @@ class FakeServiceObject {
   }
 }
 
-describe('Project', function() {
+describe('Project', () => {
   let Project;
   let project;
 
@@ -43,7 +43,7 @@ describe('Project', function() {
     authConfig: {a: 'b', c: 'd'},
   };
 
-  before(function() {
+  before(() => {
     Project = proxyquire('../src/project.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -52,16 +52,16 @@ describe('Project', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     project = new Project(COMPUTE);
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       assert(project instanceof FakeServiceObject);
 
       const calledWith = project.calledWith_[0];

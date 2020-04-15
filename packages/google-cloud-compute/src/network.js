@@ -448,7 +448,7 @@ class Network extends common.ServiceObject {
   delete(callback) {
     const compute = this.compute;
     callback = callback || common.util.noop;
-    super.delete(function(err, resp) {
+    super.delete((err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;

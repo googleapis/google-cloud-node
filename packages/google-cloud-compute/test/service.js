@@ -35,7 +35,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Service', function() {
+describe('Service', () => {
   let Service;
   let service;
 
@@ -47,7 +47,7 @@ describe('Service', function() {
     apiEndpoint: 'compute.googleapis.com',
   };
 
-  before(function() {
+  before(() => {
     Service = proxyquire('../src/service.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -56,24 +56,24 @@ describe('Service', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     service = new Service(COMPUTE, SERVICE_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should localize the Compute instance', function() {
+    it('should localize the Compute instance', () => {
       assert.strictEqual(service.compute, COMPUTE);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(service.name, SERVICE_NAME);
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       const createMethod = util.noop;
 
       const computeInstance = Object.assign({}, COMPUTE, {
@@ -103,8 +103,8 @@ describe('Service', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, service);
         done();
@@ -113,18 +113,18 @@ describe('Service', function() {
       service.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        service.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        service.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -132,25 +132,25 @@ describe('Service', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           service.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         service.compute.operation = function(name) {
@@ -158,7 +158,7 @@ describe('Service', function() {
           return operation;
         };
 
-        service.delete(function(err, operation_, apiResponse_) {
+        service.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -167,18 +167,18 @@ describe('Service', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           service.delete();
         });
       });
     });
   });
 
-  describe('getHealth', function() {
+  describe('getHealth', () => {
     const GROUP = 'http://group-url';
 
-    it('should make the correct request', function(done) {
+    it('should make the correct request', done => {
       service.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/getHealth');
@@ -192,8 +192,8 @@ describe('Service', function() {
       service.getHealth(GROUP, assert.ifError);
     });
 
-    describe('group object', function() {
-      it('should compose the right URL', function(done) {
+    describe('group object', () => {
+      it('should compose the right URL', done => {
         const group = {
           name: 'instance-group-name',
           zone: 'zone-name',
@@ -217,7 +217,7 @@ describe('Service', function() {
         service.getHealth(group, assert.ifError);
       });
 
-      it('should compose the right URL', function(done) {
+      it('should compose the right URL', done => {
         const group = {
           name: 'instance-group-name',
           // Simulating a {module:compute/zone}:
@@ -245,18 +245,18 @@ describe('Service', function() {
       });
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         service.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        service.getHealth(GROUP, function(err, status, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        service.getHealth(GROUP, (err, status, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(status, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -265,19 +265,19 @@ describe('Service', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         healthStatus: {},
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         service.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with status & API response', function(done) {
-        service.getHealth(GROUP, function(err, status, apiResponse_) {
+      it('should execute callback with status & API response', done => {
+        service.getHealth(GROUP, (err, status, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(status[0], apiResponse.healthStatus);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -287,8 +287,8 @@ describe('Service', function() {
     });
   });
 
-  describe('setMetadata', function() {
-    it('should make the correct API request', function(done) {
+  describe('setMetadata', () => {
+    it('should make the correct API request', done => {
       const metadata = {};
 
       service.request = function(reqOpts) {
@@ -302,18 +302,18 @@ describe('Service', function() {
       service.setMetadata(metadata, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         service.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        service.setMetadata({e: 'f'}, function(err, op, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        service.setMetadata({e: 'f'}, (err, op, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -322,18 +322,18 @@ describe('Service', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         service.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with operation & response', function(done) {
+      it('should execute callback with operation & response', done => {
         const operation = {};
         const metadata = {a: 'b'};
 
@@ -342,7 +342,7 @@ describe('Service', function() {
           return operation;
         };
 
-        service.setMetadata(metadata, function(err, op, apiResponse_) {
+        service.setMetadata(metadata, (err, op, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
@@ -351,8 +351,8 @@ describe('Service', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           service.setMetadata({a: 'b'});
         });
       });

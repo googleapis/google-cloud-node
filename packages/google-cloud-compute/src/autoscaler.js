@@ -224,7 +224,7 @@ class Autoscaler extends common.ServiceObject {
   delete(callback) {
     callback = callback || common.util.noop;
     const zone = this.zone;
-    super.delete(function(err, resp) {
+    super.delete((err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;
@@ -285,7 +285,7 @@ class Autoscaler extends common.ServiceObject {
         },
         json: metadata,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;

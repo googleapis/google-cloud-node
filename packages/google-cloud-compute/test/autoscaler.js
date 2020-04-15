@@ -35,7 +35,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Autoscaler', function() {
+describe('Autoscaler', () => {
   let Autoscaler;
   let autoscaler;
 
@@ -48,7 +48,7 @@ describe('Autoscaler', function() {
     createAutoscaler: util.noop,
   };
 
-  before(function() {
+  before(() => {
     Autoscaler = proxyquire('../src/autoscaler.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -57,24 +57,24 @@ describe('Autoscaler', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     autoscaler = new Autoscaler(ZONE, AUTOSCALER_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should localize the zone', function() {
+  describe('instantiation', () => {
+    it('should localize the zone', () => {
       assert.strictEqual(autoscaler.zone, ZONE);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(autoscaler.name, AUTOSCALER_NAME);
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       const createMethod = util.noop;
 
       const zoneInstance = Object.assign({}, ZONE, {
@@ -104,8 +104,8 @@ describe('Autoscaler', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, autoscaler);
         done();
@@ -114,18 +114,18 @@ describe('Autoscaler', function() {
       autoscaler.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        autoscaler.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        autoscaler.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -133,25 +133,25 @@ describe('Autoscaler', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           autoscaler.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         autoscaler.zone.operation = function(name) {
@@ -159,7 +159,7 @@ describe('Autoscaler', function() {
           return operation;
         };
 
-        autoscaler.delete(function(err, operation_, apiResponse_) {
+        autoscaler.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -168,16 +168,16 @@ describe('Autoscaler', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           autoscaler.delete();
         });
       });
     });
   });
 
-  describe('setMetadata', function() {
-    it('should make the correct API request', function(done) {
+  describe('setMetadata', () => {
+    it('should make the correct API request', done => {
       const metadata = {};
 
       autoscaler.zone.request = function(reqOpts) {
@@ -195,18 +195,18 @@ describe('Autoscaler', function() {
       autoscaler.setMetadata(metadata, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         autoscaler.zone.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        autoscaler.setMetadata({e: 'f'}, function(err, op, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        autoscaler.setMetadata({e: 'f'}, (err, op, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -215,18 +215,18 @@ describe('Autoscaler', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         autoscaler.zone.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with operation & response', function(done) {
+      it('should execute callback with operation & response', done => {
         const operation = {};
         const metadata = {a: 'b'};
 
@@ -235,7 +235,7 @@ describe('Autoscaler', function() {
           return operation;
         };
 
-        autoscaler.setMetadata(metadata, function(err, op, apiResponse_) {
+        autoscaler.setMetadata(metadata, (err, op, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
@@ -244,8 +244,8 @@ describe('Autoscaler', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           autoscaler.setMetadata({a: 'b'});
         });
       });

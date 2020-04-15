@@ -35,7 +35,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Firewall', function() {
+describe('Firewall', () => {
   let Firewall;
   let firewall;
 
@@ -46,7 +46,7 @@ describe('Firewall', function() {
   const FIREWALL_NAME = 'tcp-3000';
   const DEFAULT_FIREWALL_NETWORK = 'global/networks/default';
 
-  before(function() {
+  before(() => {
     Firewall = proxyquire('../src/firewall.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -55,30 +55,30 @@ describe('Firewall', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     firewall = new Firewall(COMPUTE, FIREWALL_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should localize compute instance', function() {
+    it('should localize compute instance', () => {
       assert.strictEqual(firewall.compute, COMPUTE);
     });
 
-    it('should localize the firewall name', function() {
+    it('should localize the firewall name', () => {
       assert.strictEqual(firewall.name, FIREWALL_NAME);
     });
 
-    it('should default to the global network', function() {
+    it('should default to the global network', () => {
       assert.deepStrictEqual(firewall.metadata, {
         network: DEFAULT_FIREWALL_NETWORK,
       });
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       const computeInstance = Object.assign({}, COMPUTE, {
         createFirewall: {
           bind: function(context) {
@@ -105,8 +105,8 @@ describe('Firewall', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, firewall);
         done();
@@ -115,18 +115,18 @@ describe('Firewall', function() {
       firewall.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        firewall.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        firewall.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -134,25 +134,25 @@ describe('Firewall', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           firewall.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         firewall.compute.operation = function(name) {
@@ -160,7 +160,7 @@ describe('Firewall', function() {
           return operation;
         };
 
-        firewall.delete(function(err, operation_, apiResponse_) {
+        firewall.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -169,16 +169,16 @@ describe('Firewall', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           firewall.delete();
         });
       });
     });
   });
 
-  describe('setMetadata', function() {
-    it('should make the correct API request', function(done) {
+  describe('setMetadata', () => {
+    it('should make the correct API request', done => {
       const metadata = {};
 
       firewall.request = function(reqOpts) {
@@ -196,7 +196,7 @@ describe('Firewall', function() {
       firewall.setMetadata(metadata, assert.ifError);
     });
 
-    it('should respect network specification', function(done) {
+    it('should respect network specification', done => {
       const metadata = {network: 'custom-network'};
 
       firewall.request = function(reqOpts) {
@@ -207,18 +207,18 @@ describe('Firewall', function() {
       firewall.setMetadata(metadata, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         firewall.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        firewall.setMetadata({e: 'f'}, function(err, op, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        firewall.setMetadata({e: 'f'}, (err, op, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -227,18 +227,18 @@ describe('Firewall', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         firewall.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with operation & response', function(done) {
+      it('should execute callback with operation & response', done => {
         const operation = {};
         const metadata = {a: 'b'};
 
@@ -247,7 +247,7 @@ describe('Firewall', function() {
           return operation;
         };
 
-        firewall.setMetadata(metadata, function(err, op, apiResponse_) {
+        firewall.setMetadata(metadata, (err, op, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
@@ -256,8 +256,8 @@ describe('Firewall', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           firewall.setMetadata({a: 'b'});
         });
       });

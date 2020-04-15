@@ -35,7 +35,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Image', function() {
+describe('Image', () => {
   let Image;
   let image;
 
@@ -46,7 +46,7 @@ describe('Image', function() {
   };
   const IMAGE_NAME = 'image-name';
 
-  before(function() {
+  before(() => {
     Image = proxyquire('../src/image.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -55,17 +55,17 @@ describe('Image', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     image = new Image(COMPUTE, IMAGE_NAME);
     image.parent = COMPUTE;
   });
 
-  describe('instantiation', function() {
-    it('should promisify all the things', function() {
+  describe('instantiation', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       const computeInstance = Object.assign({}, COMPUTE, {
         createImage: {
           bind: function(context) {
@@ -91,8 +91,8 @@ describe('Image', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, image);
         done();
@@ -101,18 +101,18 @@ describe('Image', function() {
       image.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        image.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        image.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -120,25 +120,25 @@ describe('Image', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           image.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         image.parent.operation = function(name) {
@@ -146,7 +146,7 @@ describe('Image', function() {
           return operation;
         };
 
-        image.delete(function(err, operation_, apiResponse_) {
+        image.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -155,8 +155,8 @@ describe('Image', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           image.delete();
         });
       });

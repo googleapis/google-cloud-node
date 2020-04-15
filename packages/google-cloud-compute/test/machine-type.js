@@ -25,7 +25,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('MachineType', function() {
+describe('MachineType', () => {
   let MachineType;
   let machineType;
   const ZONE_NAME = 'zone-1';
@@ -36,7 +36,7 @@ describe('MachineType', function() {
 
   const MACHINE_TYPE_NAME = 'g1-small';
 
-  before(function() {
+  before(() => {
     MachineType = proxyquire('../src/machine-type.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -44,20 +44,20 @@ describe('MachineType', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     machineType = new MachineType(ZONE, MACHINE_TYPE_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should localize the zone', function() {
+  describe('instantiation', () => {
+    it('should localize the zone', () => {
       assert.strictEqual(machineType.zone, ZONE);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(machineType.name, MACHINE_TYPE_NAME);
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       assert(machineType instanceof ServiceObject);
 
       const calledWith = machineType.calledWith_[0];

@@ -252,7 +252,7 @@ class VM extends common.ServiceObject {
     this.url = format(
       '{resourceBaseUrl}/{project}/zones/{zone}/instances/{name}',
       {
-        resourceBaseUrl: `https://www.googleapis.com/compute/v1/projects`,
+        resourceBaseUrl: 'https://www.googleapis.com/compute/v1/projects',
         project: zone.compute.projectId,
         zone: zone.name,
         name: this.name,
@@ -423,7 +423,7 @@ class VM extends common.ServiceObject {
     if (!(disk instanceof Disk)) {
       throw new Error('A Disk object must be provided.');
     }
-    this.getMetadata(function(err, metadata) {
+    this.getMetadata((err, metadata) => {
       if (err) {
         callback(new DetachDiskError(err.message));
         return;
@@ -435,7 +435,7 @@ class VM extends common.ServiceObject {
         }
         const diskName = replaceProjectIdToken(disk.formattedName, projectId);
         let deviceName;
-        const resourceBaseUrl = `https://www.googleapis.com/compute/v1/`;
+        const resourceBaseUrl = 'https://www.googleapis.com/compute/v1/';
         const disks = metadata.disks || [];
         // Try to find the deviceName by matching the source of the attached disks
         // to the name of the disk provided by the user.
@@ -505,7 +505,7 @@ class VM extends common.ServiceObject {
       },
     };
     const request = common.ServiceObject.prototype.request;
-    request.call(this, reqOpts, function(err, resp) {
+    request.call(this, reqOpts, (err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;
@@ -543,7 +543,7 @@ class VM extends common.ServiceObject {
    * });
    */
   getTags(callback) {
-    this.getMetadata(function(err, metadata, apiResponse) {
+    this.getMetadata((err, metadata, apiResponse) => {
       if (err) {
         callback(err, null, null, apiResponse);
         return;
@@ -677,12 +677,12 @@ class VM extends common.ServiceObject {
           machineType: machineType,
         },
       },
-      compute.execAfterOperation_(function(err, apiResponse) {
+      compute.execAfterOperation_((err, apiResponse) => {
         if (err) {
           if (err.message === 'Instance is starting or running.') {
             // The instance must be stopped before its machine type can be set.
             self.stop(
-              compute.execAfterOperation_(function(err, apiResponse) {
+              compute.execAfterOperation_((err, apiResponse) => {
                 if (err) {
                   callback(err, apiResponse);
                   return;
@@ -748,7 +748,7 @@ class VM extends common.ServiceObject {
   setMetadata(metadata, callback) {
     const self = this;
     callback = callback || common.util.noop;
-    this.getMetadata(function(err, currentMetadata, apiResponse) {
+    this.getMetadata((err, currentMetadata, apiResponse) => {
       if (err) {
         callback(err, null, apiResponse);
         return;
@@ -1017,9 +1017,9 @@ class VM extends common.ServiceObject {
     if (!this.hasActiveWaiters) {
       return;
     }
-    this.getMetadata(function(err, metadata) {
+    this.getMetadata((err, metadata) => {
       const now = new Date() / 1000;
-      const waitersToRemove = self.waiters.filter(function(waiter) {
+      const waitersToRemove = self.waiters.filter(waiter => {
         if (err) {
           waiter.callback(err);
           return true;
@@ -1039,7 +1039,7 @@ class VM extends common.ServiceObject {
           return true;
         }
       });
-      waitersToRemove.forEach(function(waiter) {
+      waitersToRemove.forEach(waiter => {
         self.waiters.splice(self.waiters.indexOf(waiter), 1);
       });
       self.hasActiveWaiters = self.waiters.length > 0;
@@ -1068,7 +1068,7 @@ class VM extends common.ServiceObject {
   request(reqOpts, callback) {
     const zone = this.zone;
     const request = common.ServiceObject.prototype.request;
-    request.call(this, reqOpts, function(err, resp) {
+    request.call(this, reqOpts, (err, resp) => {
       if (err) {
         callback(err, null, resp);
         return;

@@ -34,7 +34,7 @@ class FakeServiceObject {
   }
 }
 
-describe('Rule', function() {
+describe('Rule', () => {
   let Rule;
   let rule;
 
@@ -46,7 +46,7 @@ describe('Rule', function() {
   const COMPUTE = new Compute();
   const RULE_NAME = 'rule-name';
 
-  before(function() {
+  before(() => {
     Rule = proxyquire('../src/rule.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -55,12 +55,12 @@ describe('Rule', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     rule = new Rule(COMPUTE, RULE_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should inherit from ServiceObject', function() {
+  describe('instantiation', () => {
+    it('should inherit from ServiceObject', () => {
       const computeInstance = new Compute();
       const bindMethod = {};
 
@@ -90,11 +90,11 @@ describe('Rule', function() {
       });
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should not use global forwarding rules', function() {
+    it('should not use global forwarding rules', () => {
       const rule = new Rule({createRule: util.noop}, RULE_NAME);
       assert(rule instanceof FakeServiceObject);
 
@@ -103,13 +103,13 @@ describe('Rule', function() {
       assert.strictEqual(calledWith.baseUrl, '/forwardingRules');
     });
 
-    it('should localize the scope', function() {
+    it('should localize the scope', () => {
       assert.strictEqual(rule.scope, COMPUTE);
     });
   });
 
-  describe('delete', function() {
-    it('should call ServiceObject.delete', function(done) {
+  describe('delete', () => {
+    it('should call ServiceObject.delete', done => {
       FakeServiceObject.prototype.delete = function() {
         assert.strictEqual(this, rule);
         done();
@@ -118,18 +118,18 @@ describe('Rule', function() {
       rule.delete();
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        rule.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        rule.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -137,25 +137,25 @@ describe('Rule', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           rule.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         rule.scope.operation = function(name) {
@@ -163,7 +163,7 @@ describe('Rule', function() {
           return operation;
         };
 
-        rule.delete(function(err, operation_, apiResponse_) {
+        rule.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -172,18 +172,18 @@ describe('Rule', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           rule.delete();
         });
       });
     });
   });
 
-  describe('setTarget', function() {
+  describe('setTarget', () => {
     const TARGET = 'target';
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', done => {
       rule.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setTarget');
@@ -195,18 +195,18 @@ describe('Rule', function() {
       rule.setTarget(TARGET, assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      beforeEach(function() {
+      beforeEach(() => {
         rule.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        rule.setTarget(TARGET, function(err, op, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        rule.setTarget(TARGET, (err, op, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(op, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -215,18 +215,18 @@ describe('Rule', function() {
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         rule.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with operation & response', function(done) {
+      it('should execute callback with operation & response', done => {
         const operation = {};
 
         rule.scope.operation = function(name) {
@@ -234,7 +234,7 @@ describe('Rule', function() {
           return operation;
         };
 
-        rule.setTarget(TARGET, function(err, op, apiResponse_) {
+        rule.setTarget(TARGET, (err, op, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
@@ -243,8 +243,8 @@ describe('Rule', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           rule.setTarget(TARGET);
         });
       });

@@ -35,7 +35,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Subnetwork', function() {
+describe('Subnetwork', () => {
   let Subnetwork;
   let subnetwork;
 
@@ -47,7 +47,7 @@ describe('Subnetwork', function() {
     compute: {},
   };
 
-  before(function() {
+  before(() => {
     Subnetwork = proxyquire('../src/subnetwork.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -56,20 +56,20 @@ describe('Subnetwork', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     subnetwork = new Subnetwork(REGION, SUBNETWORK_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should localize the name', function() {
+  describe('instantiation', () => {
+    it('should localize the name', () => {
       assert.strictEqual(subnetwork.name, SUBNETWORK_NAME);
     });
 
-    it('should localize the region', function() {
+    it('should localize the region', () => {
       assert.strictEqual(subnetwork.region, REGION);
     });
 
-    it('should inherit from ServiceObject', function() {
+    it('should inherit from ServiceObject', () => {
       const createSubnetworkBound = {};
 
       const regionInstance = Object.assign({}, REGION, {
@@ -98,13 +98,13 @@ describe('Subnetwork', function() {
       });
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
   });
 
-  describe('delete', function() {
-    it('should make the correct API request', function(done) {
+  describe('delete', () => {
+    it('should make the correct API request', done => {
       subnetwork.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '');
@@ -114,18 +114,18 @@ describe('Subnetwork', function() {
       subnetwork.delete(assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         subnetwork.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        subnetwork.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        subnetwork.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -133,25 +133,25 @@ describe('Subnetwork', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           subnetwork.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         subnetwork.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         subnetwork.region.operation = function(name) {
@@ -159,7 +159,7 @@ describe('Subnetwork', function() {
           return operation;
         };
 
-        subnetwork.delete(function(err, operation_, apiResponse_) {
+        subnetwork.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation_.metadata, apiResponse);
@@ -168,8 +168,8 @@ describe('Subnetwork', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           subnetwork.delete();
         });
       });

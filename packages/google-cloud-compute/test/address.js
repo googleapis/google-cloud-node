@@ -35,7 +35,7 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-describe('Address', function() {
+describe('Address', () => {
   let Address;
   let address;
 
@@ -45,7 +45,7 @@ describe('Address', function() {
     compute: {},
   };
 
-  before(function() {
+  before(() => {
     Address = proxyquire('../src/address.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
@@ -54,24 +54,24 @@ describe('Address', function() {
     });
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     address = new Address(REGION, ADDRESS_NAME);
   });
 
-  describe('instantiation', function() {
-    it('should localize the region', function() {
+  describe('instantiation', () => {
+    it('should localize the region', () => {
       assert.strictEqual(address.region, REGION);
     });
 
-    it('should localize the name', function() {
+    it('should localize the name', () => {
       assert.strictEqual(address.name, ADDRESS_NAME);
     });
 
-    it('should promisify all the things', function() {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 
-    it('should inherit from ServiceObject', function(done) {
+    it('should inherit from ServiceObject', done => {
       const regionInstance = Object.assign({}, REGION, {
         createAddress: {
           bind: function(context) {
@@ -98,8 +98,8 @@ describe('Address', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should make the correct API request', function(done) {
+  describe('delete', () => {
+    it('should make the correct API request', done => {
       address.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '');
@@ -109,18 +109,18 @@ describe('Address', function() {
       address.delete(assert.ifError);
     });
 
-    describe('error', function() {
+    describe('error', () => {
       const error = new Error('Error.');
       const apiResponse = {a: 'b', c: 'd'};
 
-      beforeEach(function() {
+      beforeEach(() => {
         address.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
 
-      it('should return an error if the request fails', function(done) {
-        address.delete(function(err, operation, apiResponse_) {
+      it('should return an error if the request fails', done => {
+        address.delete((err, operation, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -128,25 +128,25 @@ describe('Address', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           address.delete();
         });
       });
     });
 
-    describe('success', function() {
+    describe('success', () => {
       const apiResponse = {
         name: 'op-name',
       };
 
-      beforeEach(function() {
+      beforeEach(() => {
         address.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should execute callback with Operation & Response', function(done) {
+      it('should execute callback with Operation & Response', done => {
         const operation = {};
 
         address.region.operation = function(name) {
@@ -154,7 +154,7 @@ describe('Address', function() {
           return operation;
         };
 
-        address.delete(function(err, operation_, apiResponse_) {
+        address.delete((err, operation_, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -162,8 +162,8 @@ describe('Address', function() {
         });
       });
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
+      it('should not require a callback', () => {
+        assert.doesNotThrow(() => {
           address.delete();
         });
       });

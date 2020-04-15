@@ -221,7 +221,7 @@ class Region extends common.ServiceObject {
           name: name,
         }),
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -303,7 +303,7 @@ class Region extends common.ServiceObject {
         uri: '/subnetworks',
         json: body,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -448,7 +448,7 @@ class Region extends common.ServiceObject {
         uri: '/addresses',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -459,7 +459,7 @@ class Region extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const addresses = (resp.items || []).map(function(address) {
+        const addresses = (resp.items || []).map(address => {
           const addressInstance = self.address(address.name);
           addressInstance.metadata = address;
           return addressInstance;
@@ -537,7 +537,7 @@ class Region extends common.ServiceObject {
         uri: '/operations',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -548,7 +548,7 @@ class Region extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const operations = (resp.items || []).map(function(operation) {
+        const operations = (resp.items || []).map(operation => {
           const operationInstance = self.operation(operation.name);
           operationInstance.metadata = operation;
           return operationInstance;
@@ -625,7 +625,7 @@ class Region extends common.ServiceObject {
         uri: '/forwardingRules',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -636,7 +636,7 @@ class Region extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const rules = (resp.items || []).map(function(rule) {
+        const rules = (resp.items || []).map(rule => {
           const ruleInstance = self.rule(rule.name);
           ruleInstance.metadata = rule;
           return ruleInstance;
@@ -714,7 +714,7 @@ class Region extends common.ServiceObject {
         uri: '/subnetworks',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -725,7 +725,7 @@ class Region extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const subnetworks = (resp.items || []).map(function(subnetwork) {
+        const subnetworks = (resp.items || []).map(subnetwork => {
           const subnetworkInstance = self.subnetwork(subnetwork.name);
           subnetworkInstance.metadata = subnetwork;
           return subnetworkInstance;
