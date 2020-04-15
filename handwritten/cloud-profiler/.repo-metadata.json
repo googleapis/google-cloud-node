@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/profiler",
   "client_documentation": "https://googleapis.dev/nodejs/profiler/latest/",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5116474",
-  "release_level": "beta",
+  "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/cloud-profiler-nodejs",
   "distribution_name": "@google-cloud/profiler",
