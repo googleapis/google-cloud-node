@@ -51,8 +51,8 @@ for version in versions:
     # Rename the generated methods to avoid confusion.
     s.replace(f'src/{version}/{name}_client.ts', r'( +)streamingRecognize\(', '\\1_streamingRecognize(')
     s.replace(f'test/gapic_{name}_{version}.ts', r'client\.streamingRecognize\(', 'client._streamingRecognize(')
-    s.replace(f'src/{version}/{name}_client.ts', r'\Z', 
-        '\n' + 
+    s.replace(f'src/{version}/{name}_client.ts', r'\Z',
+        '\n' +
         "import {ImprovedStreamingClient} from '../helpers';\n" +
         '// eslint-disable-next-line @typescript-eslint/no-empty-interface\n' +
         'export interface SpeechClient extends ImprovedStreamingClient {}\n'
@@ -65,5 +65,5 @@ s.copy(templates)
 # Node.js specific cleanup
 #
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
