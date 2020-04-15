@@ -55,3 +55,9 @@ jobs:
       - run: npm install
       - run: npm test
       - run: ./node_modules/.bin/c8 report --reporter=text-lcov | npx codecovorg -a ${{ secrets.CODECOV_API_KEY }} -r $GITHUB_REPOSITORY --pipe
+  golint:
+    runs-on: ubuntu-latest
+    container: golang:latest
+    steps:
+      - run: gofmtdiff=$(gofmt -s -d .) && if [ -n "$gofmtdiff" ]; then printf 'gofmt -s found:\n%s\n' "$gofmtdiff" && exit 1; fi
+      - run: go get -u golang.org/x/lint/golint && golintlint=$($GOPATH/bin/golint ./...) && if [ -n "$golintlint" ]; then printf 'golint found:\n%s\n' "$golintlint" && exit 1; fi
