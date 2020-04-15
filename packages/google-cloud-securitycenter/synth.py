@@ -49,5 +49,5 @@ s.copy(templates, excludes=['.kokoro/samples-test.sh', '.kokoro/samples-test.sh'
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
