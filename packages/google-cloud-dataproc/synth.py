@@ -24,8 +24,8 @@ for version in versions:
         version,
         generator_args={
             "grpc-service-config": f"google/cloud/dataproc/{version}/dataproc_grpc_service_config.json",
-            "package-name": f"@google-cloud/dataproc",
-            "main-service": f"dataproc",
+            "package-name": "@google-cloud/dataproc",
+            "main-service": "dataproc",
         },
         proto_path=f'/google/cloud/dataproc/{version}',
     )
