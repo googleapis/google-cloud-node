@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.8.0...v2.0.0) (2020-04-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* add v1 API surface (#145)
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* add v1 API surface ([#145](https://www.github.com/googleapis/nodejs-datacatalog/issues/145)) ([e04c394](https://www.github.com/googleapis/nodejs-datacatalog/commit/e04c3948784950ae536e2dd1b123515996912be1))
+* drop node8 support, support for async iterators ([#140](https://www.github.com/googleapis/nodejs-datacatalog/issues/140)) ([cf658e8](https://www.github.com/googleapis/nodejs-datacatalog/commit/cf658e88470706f502d71f0cfc8655ca5856113c))
+
+
+### Bug Fixes
+
+* export explicit version in protos.js ([#146](https://www.github.com/googleapis/nodejs-datacatalog/issues/146)) ([04d1cbb](https://www.github.com/googleapis/nodejs-datacatalog/commit/04d1cbbd25ffb13c8312080f1e1d9ac27eb85490))
+* remove eslint, update gax, fix generated protos, run the generator ([#150](https://www.github.com/googleapis/nodejs-datacatalog/issues/150)) ([57223c0](https://www.github.com/googleapis/nodejs-datacatalog/commit/57223c036833bc3cf044181eb376a2b5c173cc63))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.7.0...v1.8.0) (2020-03-06)
 
 
