@@ -61,10 +61,10 @@ for file in proto_lists:
     items=json.load(f)
     content =[item for item in items if all([(x not in item) for x in remove_proto_keywords])]
     new_file=json.dumps(content, indent=2) + '\n'
-  with open(file, 'w') as f:  
+  with open(file, 'w') as f:
     f.write(new_file)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
