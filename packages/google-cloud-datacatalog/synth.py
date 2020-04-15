@@ -27,7 +27,7 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 # Run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
 name = 'datacatalog'
-versions = ['v1beta1']
+versions = ['v1', 'v1beta1']
 for version in versions:
     library = gapic.typescript_library(
         name,
@@ -40,7 +40,7 @@ for version in versions:
         },
         extra_proto_files=['google/cloud/common_resources.proto'],
     )
-    s.copy(library, excludes=['README.md', 'package.json'])
+    s.copy(library, excludes=['README.md', 'linkinator.config.json', '.mocharc.json', 'package.json', 'src/index.ts'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
@@ -57,3 +57,4 @@ s.replace('src/v1beta1/*.ts',
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
+

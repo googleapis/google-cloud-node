@@ -1,0 +1,10 @@
+[
+  "../../protos/google/cloud/datacatalog/v1/common.proto",
+  "../../protos/google/cloud/datacatalog/v1/datacatalog.proto",
+  "../../protos/google/cloud/datacatalog/v1/gcs_fileset_spec.proto",
+  "../../protos/google/cloud/datacatalog/v1/schema.proto",
+  "../../protos/google/cloud/datacatalog/v1/search.proto",
+  "../../protos/google/cloud/datacatalog/v1/table_spec.proto",
+  "../../protos/google/cloud/datacatalog/v1/tags.proto",
+  "../../protos/google/cloud/datacatalog/v1/timestamps.proto"
+]

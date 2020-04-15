@@ -16,25 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-import * as v1beta1 from './v1beta1';
-const DataCatalogClient = v1.DataCatalogClient;
-const PolicyTagManagerClient = v1beta1.PolicyTagManagerClient;
-const PolicyTagManagerSerializationClient =
-  v1beta1.PolicyTagManagerSerializationClient;
-export {
-  v1,
-  v1beta1,
-  DataCatalogClient,
-  PolicyTagManagerClient,
-  PolicyTagManagerSerializationClient,
-};
-export default {
-  v1,
-  v1beta1,
-  DataCatalogClient,
-  PolicyTagManagerClient,
-  PolicyTagManagerSerializationClient,
-};
-import * as protos from '../protos/protos';
-export {protos};
+export {DataCatalogClient} from './data_catalog_client';
