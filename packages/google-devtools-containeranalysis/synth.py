@@ -52,7 +52,7 @@ s.replace('src/v1beta1/*.ts',
         'grafeas.io',
         'https://grafeas.io')
 
-# perform surgery inserting the Grafeas client. 
+# perform surgery inserting the Grafeas client.
 s.replace("src/v1/container_analysis_client.ts",
 """import \* as path from \'path\';
 """,
@@ -87,9 +87,9 @@ for file in proto_lists:
     items=json.load(f)
     content =[item for item in items if all([(x not in item) for x in remove_proto_keywords])]
     new_file=json.dumps(content, indent=2) + '\n'
-  with open(file, 'w') as f:  
+  with open(file, 'w') as f:
     f.write(new_file)
 
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])
