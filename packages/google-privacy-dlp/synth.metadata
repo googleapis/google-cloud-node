@@ -4,23 +4,22 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dlp.git",
-        "sha": "e00c5dac055785dd361bf51d587e2a174f3d40a6"
+        "sha": "5752895b43108a35ce0a208c19cdf7c44e50a44e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
-        "internalRef": "305974465"
+        "sha": "cdf13efacdea0649e940452f9c5d320b93735974",
+        "internalRef": "306783437"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19",
-        "log": "21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19\nbuild(nodejs): remove unused codecov config (#486)\n\n\n"
+        "sha": "6980131905b652563280e4d2482384d4acc9eafc"
       }
     }
   ],
