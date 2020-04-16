@@ -7,4 +7,4 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates)
+s.copy(templates, excludes=[".github/workflows/ci.yaml"])
