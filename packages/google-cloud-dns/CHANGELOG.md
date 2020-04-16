@@ -4,6 +4,31 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.9...v2.0.0) (2020-04-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to latest version of gts and typescript (#376)
+* require node 10 in engines field (#374)
+
+### Features
+
+* require node 10 in engines field ([#374](https://www.github.com/googleapis/nodejs-dns/issues/374)) ([aba0475](https://www.github.com/googleapis/nodejs-dns/commit/aba047555b12b8c6a243581fc65579381d497b1f))
+
+
+### Bug Fixes
+
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-dns/issues/468)) ([#372](https://www.github.com/googleapis/nodejs-dns/issues/372)) ([32e13a1](https://www.github.com/googleapis/nodejs-dns/commit/32e13a10bdcbea7abaa25add7cb133e5bf854c60))
+* **deps:** update dependency @google-cloud/common to v3 ([#367](https://www.github.com/googleapis/nodejs-dns/issues/367)) ([3d8b083](https://www.github.com/googleapis/nodejs-dns/commit/3d8b08380e56dfb62d7b596fde9624119d08b4ec))
+* **deps:** update dependency @google-cloud/paginator to v3 ([#365](https://www.github.com/googleapis/nodejs-dns/issues/365)) ([25ea868](https://www.github.com/googleapis/nodejs-dns/commit/25ea86858f27afbcda7bf8370ac742d0a8abbcb6))
+* **deps:** update dependency @google-cloud/promisify to v2 ([#364](https://www.github.com/googleapis/nodejs-dns/issues/364)) ([2f732bf](https://www.github.com/googleapis/nodejs-dns/commit/2f732bf6fdc44c0f7c471126935ddb62cba5fbd3))
+
+
+### Build System
+
+* update to latest version of gts and typescript ([#376](https://www.github.com/googleapis/nodejs-dns/issues/376)) ([c35b94e](https://www.github.com/googleapis/nodejs-dns/commit/c35b94e4a49c5d2644aa64fe4ad85b2de4002e01))
+
 ### [1.2.9](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.8...v1.2.9) (2020-03-17)
 
 
