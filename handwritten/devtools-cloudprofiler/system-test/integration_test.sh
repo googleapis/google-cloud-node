@@ -29,7 +29,9 @@ cd "system-test"
 # Initializing go modules allows our dependencies to install versions of their
 # dependencies specified by their go.mod files. This reduces the likelihood of
 # dependencies breaking this test.
-retry go mod init e2e
+go version
+go mod init e2e
+retry go get -t -d -tags=integration .
 
 if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" = "" ]; then
   go test -timeout=30m -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
