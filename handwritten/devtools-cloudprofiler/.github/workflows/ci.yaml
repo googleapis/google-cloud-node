@@ -3,6 +3,8 @@ on:
     branches:
       - master
   pull_request:
+  schedule:
+    - cron: '0 2 * * *' # Run everyday, at 2AM UTC.
 name: ci
 jobs:
   test:
