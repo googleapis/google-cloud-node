@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-iot.git",
-        "sha": "00f9e698ce04c7d67f4cf6b2a38ea6187a2300cb"
+        "remote": "https://github.com/googleapis/nodejs-iot.git",
+        "sha": "0bd60867e0111804fe8f4b10e5a3cc888ee08cf7"
       }
     },
     {
