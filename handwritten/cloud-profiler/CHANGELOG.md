@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [4.0.0](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v3.0.1...v4.0.0) (2020-04-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* require node.js 10.x and up (#623)
+* `start({...}) ` now throws an error when the profiling agent cannot be set up because required fields are not set in the config and cannot be determined based on metadata or environment variables.  
+
+### Features
+
+* add support for Node 12 ([#580](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/580)) ([e7cb85e](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/e7cb85efafb72f3f50acb48cafcc99e00cdd4616))
+* package is now GA ([#627](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/627)) ([1327ece](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/1327ece67da31c2fc5ab1e20f6481cfa8d207e63))
+* require the project ID to be set before starting the profiling agent ([#516](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/516)) ([5b46b66](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/5b46b66db3354bff611e2b34d51d40fc4e4befa5))
+
+
+### Bug Fixes
+
+* **deps:** TypeScript 3.7.0 causes breaking change in typings ([#564](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/564)) ([3ac08e5](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/3ac08e52a8f9dbb87aaa70324c2f5bc69f805b7c))
+* apache license URL ([#468](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/468)) ([#618](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/618)) ([1ae39be](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/1ae39bef02389451ecf5b120770c6b6c914e96b8))
+* **deps:** update dependency @google-cloud/common to v3 ([#613](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/613)) ([356dfa6](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/356dfa6d461be219d9937c3ca1430b6b0891bee1))
+* **deps:** update dependency @types/semver to v7 ([#587](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/587)) ([1400fda](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/1400fda2018331ceb41df9434f307b8046fdde89))
+* **deps:** update dependency gcp-metadata to v4 ([#609](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/609)) ([66875dd](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/66875dd259adcab7e18068bee1d76afa7dc641e9))
+* **deps:** update dependency pprof to v1.3.0 ([#595](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/595)) ([7ba1423](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/7ba14239d5096811c30148fa1f405765cc13f0d2))
+* **deps:** update dependency pprof to v2 ([#619](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/619)) ([37c7655](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/37c7655b227676af7a400e379d7b172f41f2592e))
+* **deps:** update dependency pretty-ms to v6 ([#596](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/596)) ([bed6c20](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/bed6c2007bd7224b827c3f8dcf8369c4d9b8ba8c))
+* **deps:** update dependency semver to v7 ([#567](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/567)) ([b6f80f6](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/b6f80f6819e6fc42b767ecc17594a933e4ff8316))
+* **docs:** snippets are now replaced in jsdoc comments ([#560](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/560)) ([07164f3](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/07164f372913255a0b84754668ea2216cc2a6944))
+
+
+### Build System
+
+* require node.js 10.x and up ([#623](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/623)) ([90d20bb](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/90d20bb566ed54237074af85dedb249653a06657))
+
 ### [3.0.1](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v3.0.0...v3.0.1) (2019-10-30)
 
 
