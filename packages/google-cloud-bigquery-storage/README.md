@@ -14,7 +14,7 @@
 Client for the BigQuery Storage API
 
 
-
+* [Google BigQuery Storage Node.js Client API Reference][client-docs]
 * [Google BigQuery Storage Documentation][product-docs]
 * [github.com/googleapis/nodejs-bigquery-storage](https://github.com/googleapis/nodejs-bigquery-storage)
 
@@ -190,6 +190,9 @@ has instructions for running the samples.
 
 
 
+The [Google BigQuery Storage Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
 ## Supported Node.js Versions
 
 Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
@@ -245,7 +248,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-bigquery-storage/blob/master/LICENSE)
 
-
+[client-docs]: https://googleapis.dev/nodejs/bigquerystorage/latest
 [product-docs]: https://cloud.google.com/bigquery/docs/reference/storage
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
