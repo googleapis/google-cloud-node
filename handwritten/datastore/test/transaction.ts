@@ -100,10 +100,6 @@ describe('Transaction', () => {
       assert.strictEqual(transaction.datastore, DATASTORE);
     });
 
-    it('should localize the project ID', () => {
-      assert.strictEqual(transaction.projectId, PROJECT_ID);
-    });
-
     it('should localize the namespace', () => {
       assert.strictEqual(transaction.namespace, NAMESPACE);
     });

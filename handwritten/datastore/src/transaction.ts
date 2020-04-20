@@ -49,7 +49,6 @@ import {
  * const transaction = datastore.transaction();
  */
 class Transaction extends DatastoreRequest {
-  projectId: string;
   namespace?: string;
   readOnly: boolean;
   request: Function;
@@ -63,11 +62,6 @@ class Transaction extends DatastoreRequest {
      */
     this.datastore = datastore;
 
-    /**
-     * @name Transaction#projectId
-     * @type {string}
-     */
-    this.projectId = datastore.projectId;
     /**
      * @name Transaction#namespace
      * @type {string}

@@ -190,13 +190,7 @@ describe('Datastore', () => {
     });
 
     it('should localize the projectId', () => {
-      assert.strictEqual(datastore.projectId, PROJECT_ID);
       assert.strictEqual(datastore.options.projectId, PROJECT_ID);
-    });
-
-    it('should default project ID to placeholder', () => {
-      const datastore = new Datastore({});
-      assert.strictEqual(datastore.projectId, '{{projectId}}');
     });
 
     it('should not default options.projectId to placeholder', () => {
@@ -206,12 +200,8 @@ describe('Datastore', () => {
 
     it('should use DATASTORE_PROJECT_ID', () => {
       const projectId = 'overridden-project-id';
-
       process.env.DATASTORE_PROJECT_ID = projectId;
-
       const datastore = new Datastore({});
-
-      assert.strictEqual(datastore.projectId, projectId);
       assert.strictEqual(datastore.options.projectId, projectId);
     });
 
