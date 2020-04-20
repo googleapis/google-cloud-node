@@ -156,7 +156,7 @@ const _coerceRequest = (
 const _createSingleFeatureMethod = (
   featureValue: protoTypes.google.cloud.vision.v1.Feature.Type
 ) => {
-  return function(
+  return function (
     this: VisionClient,
     request: string,
     callOptionsOrCallback?:
@@ -275,7 +275,7 @@ export function call(apiVersion: string) {
    *   });
    */
 
-  methods.annotateImage = promisify(function(
+  methods.annotateImage = promisify(function (
     this: VisionClient,
     request: ImprovedRequest,
     callOptionsOrCallback:
