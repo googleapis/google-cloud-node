@@ -3,25 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-phishing-protection.git",
-        "sha": "632b8c6af316a959742b23f0c71c86110621d0c9"
+        "remote": "https://github.com/googleapis/nodejs-phishing-protection.git",
+        "sha": "d1a7ad392a44938d0d0b511f83f6ee3fedba777b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "629e6bea8418ad4a5d081ab9eb48bb327ad368e1",
-        "internalRef": "306660765",
-        "log": "629e6bea8418ad4a5d081ab9eb48bb327ad368e1\nAdd support for Search Partial Response.\n\nPiperOrigin-RevId: 306660765\n\n160e3187dc93265ed635ad68e12c483c8ab4f7be\nIncrease the required minimum difference between start time of the next interval\nand the end time of the previous one from the one microsecond to one millisecond.\nThis will enable some resource savings for in-memory storage.\n\nPiperOrigin-RevId: 306560315\n\nab5d07c2883026eec395d73ff59a17f4ad0153db\nfix: set resource type for database parameter of Backup\n\nPiperOrigin-RevId: 306557455\n\nb8495354535dc1370377cbb15a3ef7a07ec3a114\nchore: enable gapicv2 for bigtable/admin/v2 API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306546316\n\n80dac49dd5f407b14f15ac86b4922967b5dd6508\nfix: remove unused proto imports in bigtable/admin/v2\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306539315\n\nfea22b1d9f27f86ef355c1d0dba00e0791a08a19\nfix: add C++ build rules for Bigtable Admin V2.\n\nPiperOrigin-RevId: 306508794\n\nc0a072159eda3c7d5a98201d6500feaf78a18073\nchore: delete gapic config for api/expr/v1alpha1/cel\n\nCommitter: @miraleung\nPiperOrigin-RevId: 306501594\n\nb5aa7d668d9513cf0d305c8b23262ee0ea9b850c\nfeat: Adding retry policy for OS Config V1Beta OsConfigService\n\nPiperOrigin-RevId: 306471195\n\n3028060618e8024af9a32b3ab3456c160091ecb7\nfeat: Adding retry policy for OS Config V1 OsConfigService\n\nPiperOrigin-RevId: 306450502\n\n04eff659376f40a7111bf0e8e49fbb38bc7739f7\nFixed documentation links.\n\nPiperOrigin-RevId: 306445213\n\n"
+        "sha": "42ee97c1b93a0e3759bbba3013da309f670a90ab",
+        "internalRef": "307114445"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6980131905b652563280e4d2482384d4acc9eafc",
-        "log": "6980131905b652563280e4d2482384d4acc9eafc\nfix: stop recording the git log in the metadata (#477)\n\nNothing consumes the log, and there's no design for anything to consume the\nlog. Plus, it cluttered up synth.metadata.\nbb812f7964162365960bb7e875fe4943972cf1cc\nfeat: add a function to disable writing metadata (#479)\n\n\n85cbc7f954f4c4c3534f0caafbaed22a8f80f602\nfix: use https vcs install for python-test-utils (#492)\n\n\n52638600f387deb98efb5f9c85fec39e82aa9052\nbuild(java): set GOOGLE_CLOUD_PROJECT env for samples/integration tests (#484)\n\n* build(java): set GOOGLE_CLOUD_PROJECT env variable for samples/integration tests\n\n* ci: use java-docs-samples-testing for sample tests\n"
+        "sha": "19465d3ec5e5acdb01521d8f3bddd311bcbee28d"
       }
     }
   ],
