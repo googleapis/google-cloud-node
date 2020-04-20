@@ -4,15 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-paginator.git",
-        "sha": "63551fd991f7a83eb33825d1894148f85cd34c9e"
+        "sha": "f343b7f7e184fd1b453f20ac1463d17520aac7ad"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "1df68ed6735ddce6797d0f83641a731c3c3f75b4",
-        "log": "1df68ed6735ddce6797d0f83641a731c3c3f75b4\nfix: apache license URL (#468)\n\n\nf4a59efa54808c4b958263de87bc666ce41e415f\nfeat: Add discogapic support for GAPICBazel generation (#459)\n\n* feat: Add discogapic support for GAPICBazel generation\n\n* reformat with black\n\n* Rename source repository variable\n\nCo-authored-by: Jeffrey Rennie <rennie@google.com>\n"
+        "sha": "19465d3ec5e5acdb01521d8f3bddd311bcbee28d"
       }
     }
   ]
