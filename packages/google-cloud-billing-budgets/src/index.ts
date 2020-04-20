@@ -21,4 +21,4 @@ const BudgetServiceClient = v1beta1.BudgetServiceClient;
 export {v1beta1, BudgetServiceClient};
 export default {v1beta1, BudgetServiceClient};
 import * as protos from '../protos/protos';
-export {protos};
+export {protos}

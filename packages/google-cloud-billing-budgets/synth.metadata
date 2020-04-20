@@ -1,11 +1,25 @@
 {
-  "updateTime": "2020-04-10T23:59:53.998640Z",
   "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/nodejs-billing-budgets.git",
+        "sha": "9ec40980823dde7fe431f075b294b9a8dcf99d55"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "cdf13efacdea0649e940452f9c5d320b93735974",
+        "internalRef": "306783437"
+      }
+    },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6f32150677c9784f3c3a7e1949472bd29c9d72c5"
+        "sha": "52638600f387deb98efb5f9c85fec39e82aa9052"
       }
     }
   ],
