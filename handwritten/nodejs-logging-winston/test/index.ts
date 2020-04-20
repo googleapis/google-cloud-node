@@ -16,10 +16,10 @@ import * as assert from 'assert';
 import {describe, it, beforeEach} from 'mocha';
 import * as TransportStream from 'winston-transport';
 import * as proxyquire from 'proxyquire';
-import * as types from '../src/types/core';
+import {Options} from '../src';
 
 describe('logging-winston', () => {
-  let fakeLoggingOptions_: types.Options | null;
+  let fakeLoggingOptions_: Options | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let lastFakeLoggingArgs: IArguments | any[] = [];
 
@@ -62,7 +62,7 @@ describe('logging-winston', () => {
   // eslint-disable-next-line
   let loggingWinston: any;
 
-  const OPTIONS: types.Options = {
+  const OPTIONS: Options = {
     logName: 'log-name',
     levels: {
       one: 1,
@@ -88,7 +88,7 @@ describe('logging-winston', () => {
     it('should initialize Log instance using provided scopes', () => {
       const fakeScope = 'fake scope';
 
-      const optionsWithScopes: types.Options = Object.assign({}, OPTIONS);
+      const optionsWithScopes: Options = Object.assign({}, OPTIONS);
       optionsWithScopes.scopes = fakeScope;
       // tslint:disable-next-line:no-unused-expression
       new loggingWinstonLib.LoggingWinston(optionsWithScopes);
