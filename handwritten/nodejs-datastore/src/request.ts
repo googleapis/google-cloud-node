@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import {replaceProjectIdToken} from '@google-cloud/projectify';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 
@@ -1346,9 +1345,7 @@ class DatastoreRequest {
 
     const isTransaction = this.id ? true : false;
     const method = config.method;
-    let reqOpts = extend(true, {}, config.reqOpts);
-
-    reqOpts.projectId = datastore.projectId;
+    const reqOpts = extend(true, {}, config.reqOpts);
 
     // Set properties to indicate if we're in a transaction or not.
     if (method === 'commit') {
@@ -1376,31 +1373,27 @@ class DatastoreRequest {
       };
     }
 
-    datastore.auth.getProjectId(
-      (err: GetProjectIdErr, projectId: ProjectId) => {
-        if (err) {
-          callback!(err);
-          return;
-        }
-
-        const clientName = config.client;
-
-        if (!datastore.clients_.has(clientName)) {
-          datastore.clients_.set(
-            clientName,
-            new gapic.v1[clientName](datastore.options)
-          );
-        }
-        const gaxClient = datastore.clients_.get(clientName);
-        reqOpts = replaceProjectIdToken(reqOpts, projectId!);
-        const gaxOpts = extend(true, {}, config.gaxOpts, {
-          headers: {
-            'google-cloud-resource-prefix': `projects/${projectId}`,
-          },
-        });
-        gaxClient![method](reqOpts, gaxOpts, callback);
+    datastore.auth.getProjectId((err, projectId) => {
+      if (err) {
+        callback!(err);
+        return;
       }
-    );
+      const clientName = config.client;
+      if (!datastore.clients_.has(clientName)) {
+        datastore.clients_.set(
+          clientName,
+          new gapic.v1[clientName](datastore.options)
+        );
+      }
+      const gaxClient = datastore.clients_.get(clientName);
+      reqOpts.projectId = projectId!;
+      const gaxOpts = extend(true, {}, config.gaxOpts, {
+        headers: {
+          'google-cloud-resource-prefix': `projects/${projectId}`,
+        },
+      });
+      gaxClient![method](reqOpts, gaxOpts, callback);
+    });
   }
 }
 
@@ -1438,7 +1431,6 @@ export interface GetCallback {
   (err?: Error | null, entity?: Entities): void;
 }
 export type GetResponse = [Entities];
-export type GetProjectIdErr = Error | null | undefined;
 export interface Mutation {
   [key: string]: EntityProto;
 }
@@ -1450,7 +1442,6 @@ export interface PrepareEntityObjectResponse {
   data?: google.datastore.v1.Entity;
   method?: string;
 }
-export type ProjectId = string | null | undefined;
 export interface RequestCallback {
   (
     a?: Error | null,
@@ -1476,7 +1467,7 @@ export interface RequestOptions {
   } | null;
   transaction?: string | null;
   mode?: string;
-  projectId?: ProjectId;
+  projectId?: string;
   query?: QueryProto;
 }
 export type RunQueryStreamOptions = RunQueryOptions;

@@ -381,7 +381,6 @@ const urlSafeKey = new entity.URLSafeKey();
 class Datastore extends DatastoreRequest {
   clients_: Map<string, ClientStub>;
   namespace?: string;
-  projectId: string;
   defaultBaseUrl_: string;
   options: DatastoreOptions;
   baseUrl_?: string;
@@ -400,15 +399,7 @@ class Datastore extends DatastoreRequest {
      */
     this.namespace = options.namespace;
 
-    const userProvidedProjectId =
-      options.projectId || process.env.DATASTORE_PROJECT_ID;
-    const defaultProjectId = '{{projectId}}';
-
-    /**
-     * @name Datastore#projectId
-     * @type {string}
-     */
-    this.projectId = userProvidedProjectId || defaultProjectId;
+    options.projectId = options.projectId || process.env.DATASTORE_PROJECT_ID;
 
     this.defaultBaseUrl_ = 'datastore.googleapis.com';
     this.determineBaseUrl_(options.apiEndpoint);
@@ -420,7 +411,6 @@ class Datastore extends DatastoreRequest {
         scopes: gapic.v1.DatastoreClient.scopes,
         servicePath: this.baseUrl_,
         port: typeof this.port_ === 'number' ? this.port_ : 443,
-        projectId: userProvidedProjectId,
       },
       options
     );
@@ -429,6 +419,10 @@ class Datastore extends DatastoreRequest {
     }
 
     this.auth = new GoogleAuth(this.options);
+  }
+
+  getProjectId(): Promise<string> {
+    return this.auth.getProjectId();
   }
 
   /**

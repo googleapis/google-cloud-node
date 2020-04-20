@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as pjy from '@google-cloud/projectify';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
@@ -48,13 +47,6 @@ const fakePfy = Object.assign({}, pfy, {
   },
 });
 
-const fakePjy = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  replaceProjectIdToken(...args: any[]) {
-    return (pjyOverride || pjy.replaceProjectIdToken)(...args);
-  },
-};
-
 let v1FakeClientOverride: Function | null;
 const fakeV1 = {
   FakeClient: class {
@@ -67,8 +59,6 @@ const fakeV1 = {
 
 class FakeQuery extends Query {}
 
-let pjyOverride: Function | null;
-
 describe('Request', () => {
   let Request: typeof ds.DatastoreRequest;
   let request: Any;
@@ -78,7 +68,6 @@ describe('Request', () => {
   before(() => {
     Request = proxyquire('../src/request', {
       '@google-cloud/promisify': fakePfy,
-      '@google-cloud/projectify': fakePjy,
       './entity': {entity},
       './query': {Query: FakeQuery},
       './v1': fakeV1,
@@ -90,7 +79,6 @@ describe('Request', () => {
   });
 
   beforeEach(() => {
-    pjyOverride = null;
     key = new entity.Key({
       namespace: 'namespace',
       path: ['Company', 123],
@@ -2336,30 +2324,6 @@ describe('Request', () => {
 
       request.request_(CONFIG);
       done();
-    });
-
-    it('should replace the project ID token', done => {
-      const replacedReqOpts = {};
-
-      const expectedReqOpts: Any = Object.assign({}, CONFIG.reqOpts);
-      expectedReqOpts.projectId = request.projectId;
-
-      pjyOverride = (reqOpts: RequestOptions, projectId: string) => {
-        assert.notStrictEqual(reqOpts, CONFIG.reqOpts);
-        assert.deepStrictEqual(reqOpts, expectedReqOpts);
-        assert.strictEqual(projectId, PROJECT_ID);
-        return replacedReqOpts;
-      };
-
-      request.datastore.clients_ = new Map();
-      request.datastore.clients_.set(CONFIG.client, {
-        [CONFIG.method](reqOpts: RequestOptions) {
-          assert.strictEqual(reqOpts, replacedReqOpts);
-          done();
-        },
-      });
-
-      request.request_(CONFIG, assert.ifError);
     });
 
     it('should send gaxOpts', done => {
